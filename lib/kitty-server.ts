@@ -13,12 +13,15 @@ export class HttpError extends Error {
   }
 }
 export function setting(key: string) {
-  const value = process.env[key];
-  if (!value)
+  const value = process.env[key]?.trim();
+  if (!value) {
+    // Log the missing key name only. Never log its configured value.
+    console.error(`[Kitty Corp] Missing required server setting: ${key}`);
     throw new HttpError(
       "The studio is temporarily unavailable. Please try again later.",
       503,
     );
+  }
   return value;
 }
 export function database(token?: string) {

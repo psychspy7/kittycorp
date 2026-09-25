@@ -21,7 +21,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-The Sites preview runs on port 5173. For native Next.js development, use `npm run dev:next` on port 3000. The original workspace's `.env.local` contains the existing Supabase settings. The ZIP includes `.env.example`; create and configure your own `.env.local` after extracting it.
+The Sites preview runs on port 5173. For native Next.js development, use `npm run dev:next` on port 3000. The ZIP includes `.env.example`; create and configure your own `.env.local` after extracting it.
 
 ```sh
 npm run typecheck
@@ -46,34 +46,30 @@ All application configuration is server-only. No `NEXT_PUBLIC_` secrets are used
 
 Keep `.env.local` out of Git. Set production variables in your hosting dashboard. Mark the gateway token as a secret. The original admin password is held by Supabase Auth, which hashes passwords; it is never embedded in application code or stored in the website environment.
 
+If a backend route returns “The studio is temporarily unavailable,” check the hosting provider's runtime logs for the name of a missing server setting. The application logs the missing variable name only; it never logs a configured value.
+
 ## Supabase setup
 
-This site's existing backend is configured with separate `kitty_website_*` tables in the selected project. The pre-existing private-chat tables are unchanged. Do not rerun the schema on that project.
+The dedicated Supabase project for this website is already created in the KITTY CORP organization (`mgkghnblbisubympudaa`, Mumbai region). It keeps website data and its administrator separate from the private-chat project. Its database is initialized with both SQL files below. Do not run them again; these are first-install schema snapshots.
 
-To connect a **new** Supabase project:
+To connect the created project:
 
-1. Enable the `pgcrypto` extension in the `extensions` schema if it is not already enabled.
-2. Run `supabase/schema.sql`, then `supabase/auth-and-limits.sql`, in the SQL editor. These are first-install schema snapshots, not repeatable migrations.
-3. Create a dedicated admin with Supabase Dashboard → Authentication → Users, or run `scripts/setup-admin.mjs` locally with `SUPABASE_SECRET_KEY` and `ADMIN_PASSWORD` supplied through a private environment. Run with `node --env-file=.env.local scripts/setup-admin.mjs`. Remove those two provisioning variables afterward; the running website does not need them.
-4. Set the administrator's email and UUID in the website environment. Add the UUID to the database allowlist:
+1. The `pgcrypto` extension, website tables, RLS policies, rate-limit functions, and feedback gateway hash are already installed.
+2. The admin Auth account has been created and allowlisted in this project. Set `ADMIN_EMAIL` to that account's email and `ADMIN_USER_ID` to its UUID in your website environment; find the UUID under Supabase Dashboard → Authentication → Users. To provision a replacement later, use the dashboard or `scripts/setup-admin.mjs` locally with `SUPABASE_SECRET_KEY` and `ADMIN_PASSWORD` supplied through a private environment. Remove those provisioning variables afterward; the running website does not need them.
+3. The gateway token and matching SHA-256 hash are already configured locally and in the new database. Keep the token private and configure it in the hosting provider's environment.
 
-```sql
-insert into kitty_website_private.admins(user_id)
-values ('YOUR_ADMIN_USER_UUID');
-```
-
-5. Generate `FEEDBACK_GATEWAY_TOKEN` with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Save it privately in the environment. Compute its SHA-256 hash, then store **only the hash**:
+To provision a different project later, generate one `FEEDBACK_GATEWAY_TOKEN` with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Save it privately in `.env.local` and your host's environment. Compute its SHA-256 hash, then store **only the hash** in the project's settings table:
 
 ```sql
 insert into kitty_website_private.settings(key, value)
 values ('feedback_gateway_hash', 'SHA256_HEX_OF_YOUR_GATEWAY_TOKEN');
 ```
 
-For token rotation, update both the environment secret and this database hash, then redeploy. No database service-role key is required by the live website.
+For token rotation, update both the environment secret and this database hash together, then redeploy. No database service-role key is required by the live website.
 
 ## Admin and security behavior
 
-- Sign in at `/admins` with the configured ID and your Supabase Auth password. The account provisioned for this build uses the credentials supplied in the original brief.
+- Sign in at `/admins` with the configured ID (`Kitty`) and the password for the Supabase Auth account associated with the configured email and UUID.
 - Sessions use HTTP-only, SameSite=Strict cookies, with Secure enabled in production and a maximum lifetime of one hour. Re-authentication is required after expiry.
 - Every admin page/API request verifies the user with Supabase, the explicit administrator UUID, database allowlist membership, and the live `auth.sessions` record. Sign-out revokes the session; replaying its old cookie does not restore access.
 - Notices can be saved as drafts, published, edited, unpublished, and deleted. Only published notices appear publicly. Destructive deletion requires confirmation.
@@ -81,7 +77,7 @@ For token rotation, update both the environment secret and this database hash, t
 - Form handling includes validation, a honeypot, minimum completion time, body-size limits, same-origin checks, and durable database throttling. Messages are limited to 3 per hour per email/fingerprint and 1,000 per day globally. Sign-ins are limited to 5 per 15 minutes per fingerprint and 30 per hour globally.
 - Names, messages, and notices render as escaped React text. HTML is not interpreted.
 - The deployment proxy should overwrite client IP forwarding headers. A deliberately strict global rate limit provides a fallback when those headers are absent or untrusted.
-- The one-time `kitty-website-setup` function used during initial provisioning has been disabled and returns HTTP 410.
+- No one-time admin-setup function is deployed. Provision the account directly through Supabase Dashboard or the local setup script.
 
 ## Assets and presentation
 
@@ -95,7 +91,7 @@ SEO includes per-page titles/descriptions, Open Graph and Twitter metadata, the 
 
 ## Deploy
 
-**Vercel:** Import the repository, use the Next.js preset, and add every runtime environment value. `vercel.json` selects `npm run build:next`. Set `SITE_URL` to the actual domain and redeploy after changing it.
+**Vercel:** Import the repository, use the Next.js preset, and set all seven server variables above in the **Production** environment: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `ADMIN_LOGIN_ID`, `ADMIN_EMAIL`, `ADMIN_USER_ID`, `FEEDBACK_GATEWAY_TOKEN`, and `SITE_URL`. Keep `FEEDBACK_GATEWAY_TOKEN` secret. Use the Supabase project URL and its current publishable key, the same admin values used by Supabase Auth, and the matching gateway token whose SHA-256 hash is stored in `kitty_website_private.settings`. Set `SITE_URL` to the actual domain. Redeploy after changing any values so the production functions receive them. `vercel.json` selects `npm run build:next`.
 
 **Netlify:** Import the repository with Next.js framework support enabled. `netlify.toml` selects the native build and Node.js 24. Add the same runtime environment values to the functions/build environment. Netlify's Next.js adapter handles server routes. Do not use static export: the contact and studio routes need a server.
 

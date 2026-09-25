@@ -5,7 +5,7 @@ import { SiteHeader, SiteFooter } from "@/components/kitty/site";
 export const metadata: Metadata = {
   title: "Let’s talk",
   description:
-    "An idea, some feedback, a question. Talk to the people building Kitty Corp.",
+    "An idea, some feedback, a question. Talk to the solo founder building Kitty Corp.",
 };
 export default async function ContactPage({
   searchParams,
@@ -32,12 +32,12 @@ export default async function ContactPage({
               <em>All welcome.</em>
             </h1>
             <p>
-              Tell us what you’re thinking. A possibility we haven’t seen.
-              Something we could do better. Or just a hello.
+              Tell me what you’re thinking. A possibility I haven’t seen.
+              Something I could do better. Or just a hello.
             </p>
             <p>There’s a real person on the other side.</p>
             <a href="/#kitty-ai" className="text-link">
-              See what we’re building <ArrowUpRight size={17} />
+              See what I’m building <ArrowUpRight size={17} />
             </a>
           </div>
           <ContactForm subject={subject === "Kitty AI" ? "Kitty AI" : ""} />

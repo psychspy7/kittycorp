@@ -1,3 +1,8 @@
+param(
+  [ValidatePattern('^[A-Za-z0-9][A-Za-z0-9._-]*\.zip$')]
+  [string]$ArchiveName = 'Kitty-Corp-Website-Fresh.zip'
+)
+
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
@@ -7,7 +12,7 @@ if (-not $outputRoot.StartsWith($projectRoot + [System.IO.Path]::DirectorySepara
   throw 'The release output must stay inside this project.'
 }
 [System.IO.Directory]::CreateDirectory($outputRoot) | Out-Null
-$archivePath = Join-Path $outputRoot 'Kitty-Corp-Website.zip'
+$archivePath = Join-Path $outputRoot $ArchiveName
 
 $directories = @('app', 'build', 'components', 'db', 'drizzle', 'hooks', 'lib', 'public', 'scripts', 'supabase', 'vendor')
 $rootFiles = @('.env.example', '.gitignore', '.npmrc', '.openai/hosting.json', 'START-HERE.md', 'README.md', 'VERIFICATION.md', 'cloudflare-env.d.ts', 'components.json', 'drizzle.config.ts', 'eslint.config.mjs', 'netlify.toml', 'next.config.ts', 'package-lock.json', 'package.json', 'postcss.config.mjs', 'tsconfig.json', 'vercel.json', 'vite.config.ts')
@@ -55,5 +60,6 @@ try {
 } finally { $verify.Dispose() }
 
 $hash = (Get-FileHash -LiteralPath $archivePath -Algorithm SHA256).Hash.ToLowerInvariant()
-[System.IO.File]::WriteAllText((Join-Path $outputRoot 'Kitty-Corp-Website.sha256'), "$hash  Kitty-Corp-Website.zip`n")
+$hashFileName = [System.IO.Path]::GetFileNameWithoutExtension($ArchiveName) + '.sha256'
+[System.IO.File]::WriteAllText((Join-Path $outputRoot $hashFileName), "$hash  $ArchiveName`n")
 [pscustomobject]@{ File = $archivePath; Entries = $count; Bytes = (Get-Item -LiteralPath $archivePath).Length; SHA256 = $hash } | ConvertTo-Json

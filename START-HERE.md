@@ -21,8 +21,12 @@ Run `npm run build:next` for the native Next.js production build. Vercel and Net
 
 See `README.md` for Supabase setup, secure environment variables, admin provisioning, wallet QR codes, and deployment instructions. See `VERIFICATION.md` for completed checks and the remaining live-service verification.
 
-## Current connection status
+## Fresh Supabase setup
 
-The website code builds successfully. At the last live check, the previously configured Supabase project hostname did not resolve, and the Sites connector was unavailable. Contact storage, live notices, and admin sign-in need a reachable, configured Supabase project. A published website URL has not been verified.
+The ZIP intentionally excludes `.env.local` and every credential. A dedicated Supabase project for Kitty Corp Website already exists in the KITTY CORP organization (`mgkghnblbisubympudaa`); its website tables and gateway hash are installed. Keep the existing private-chat project separate.
 
-The archive includes the full source and media. Installable dependencies and generated build caches are recreated by `npm ci` and the build commands. Private credentials remain in the original workspace's ignored `.env.local`; the ZIP includes a configuration template.
+The admin Auth account and database allowlist are ready. Set the seven server variables from `.env.example` in the hosting provider and redeploy before verifying `/api/notices`, contact submission, and `/admins` sign-in. Use the UUID recorded in **Supabase setup** in `README.md`.
+
+Never put `.env.local`, the gateway token, the admin password, or Supabase service-role keys in GitHub or this ZIP. `.env.example` is a template only and will not connect until you supply the new project's values.
+
+The archive includes the full source and media. Dependencies and generated build files are recreated by `npm ci` and the build commands. `.env.example` is a template only; it will not connect to Supabase until you fill in your own values.

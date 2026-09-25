@@ -7,11 +7,11 @@ export const metadata: Metadata = {
     template: "%s · Kitty Corp",
   },
   description:
-    "Two builders. Big ideas. Kitty Corp is an independent home for ambitious products, experiments, and whatever comes next.",
+    "One founder. Big ideas. Kitty Corp is an independent home for ambitious products, experiments, and whatever comes next.",
   icons: { icon: "/brand/monogram.png", apple: "/brand/monogram.png" },
   openGraph: {
     title: "Kitty Corp — Building what comes next.",
-    description: "Small team. Big vision. Real work in progress.",
+    description: "Solo founder. Big vision. Real work in progress.",
     type: "website",
     siteName: "Kitty Corp",
   },

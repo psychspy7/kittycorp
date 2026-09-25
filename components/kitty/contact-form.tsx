@@ -60,10 +60,10 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         <span className="success-circle">
           <Check size={28} />
         </span>
-        <h2>You’re in our inbox.</h2>
+        <h2>You’re in my inbox.</h2>
         <p>
-          Thanks for taking the time. We’ll read your message and get back to
-          you when we can.
+          Thanks for taking the time. I’ll read your message and get back to
+          you when I can.
         </p>
         <button
           className="button button-outline"
@@ -79,7 +79,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
   return (
     <form className="contact-form" onSubmit={submit}>
       <div className="form-heading">
-        <h2>Tell us what’s on your mind.</h2>
+        <h2>Tell me what’s on your mind.</h2>
         <span>01 — START A CONVERSATION</span>
       </div>
       <div className="form-field">
@@ -87,7 +87,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         <input
           id="contact-name"
           name="name"
-          placeholder="What should we call you?"
+          placeholder="What should I call you?"
           autoComplete="name"
           required
           minLength={2}
@@ -115,7 +115,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         <textarea
           id="contact-message"
           name="message"
-          placeholder="An idea, some feedback, a question. We’re listening."
+          placeholder="An idea, some feedback, a question. I’m listening."
           required
           minLength={10}
           maxLength={5000}
@@ -142,9 +142,9 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
       )}
       <div className="form-submit-row">
         <p>
-          Your message goes straight to the two of us.
+          Your message goes straight to me.
           <br />
-          We’ll only use your email to reply.
+          I’ll only use your email to reply.
         </p>
         <button className="button button-gold" type="submit" disabled={busy}>
           {busy ? "Sending…" : "Send message"}

@@ -71,7 +71,7 @@ export function StorySection() {
       <div className="story-grid">
         <Reveal>
           <h2>
-            Two people.
+            One person.
             <br />A thousand
             <br />
             <em>“what ifs.”</em>
@@ -83,26 +83,26 @@ export function StorySection() {
         </Reveal>
         <Reveal className="story-copy">
           <p className="lead">
-            We’re at the beginning.
+            I’m at the beginning.
             <br />
-            And we’re not pretending otherwise.
+            And I’m not pretending otherwise.
           </p>
           <p>
-            Right now, it’s just the two of us. Building, testing, breaking,
-            fixing. Following the ideas we can’t stop thinking about.
+            Right now, it’s just me. I’m building, testing, breaking, fixing,
+            and following the ideas I can’t stop thinking about.
           </p>
           <p>
-            Kitty Corp is our place to turn those ideas into something real.
-            Some will become products. Some will teach us what to try next. All
-            of them start with doing the work.
+            Kitty Corp is my place to turn those ideas into something real.
+            Some will become products. Others will show me what to try next. It
+            all starts with doing the work.
           </p>
           <p className="story-ending">
             Not a finished story. The start of one.
           </p>
           <div className="story-facts">
             <div>
-              <strong>02</strong>
-              <span>Independent builders</span>
+              <strong>01</strong>
+              <span>Independent founder</span>
             </div>
             <div>
               <strong>∞</strong>
@@ -128,7 +128,7 @@ export function VisionSection() {
           <em>Many possibilities.</em>
         </h2>
         <p>
-          These are the directions we’re exploring.
+          These are the directions I’m exploring.
           <br />A little ambitious. Deliberately open-ended.
         </p>
       </Reveal>
@@ -152,7 +152,7 @@ export function FlagshipSection() {
   return (
     <section id="kitty-ai" className="section flagship-section">
       <div className="section-kicker">
-        <span>03 / OUR FLAGSHIP</span>
+        <span>03 / MY FLAGSHIP</span>
         <span className="kicker-line" />
       </div>
       <div className="flagship-panel">
@@ -169,11 +169,11 @@ export function FlagshipSection() {
             With a life beyond the screen.
           </p>
           <p>
-            Our vision for fully uncensored, physical AI. Something you can work
+            My vision for fully uncensored, physical AI. Something you can work
             with, shape, and customize around yourself.
           </p>
           <p>
-            Personal by nature. Adaptable by design. We’re working toward
+            Personal by nature. Adaptable by design. I’m working toward
             something that feels truly yours.
           </p>
           <div className="product-traits">
@@ -251,7 +251,7 @@ export function UpdatesSection() {
           <em>One update at a time.</em>
         </h2>
         <p>
-          What we’re working on, what we’re learning,
+          What I’m working on, what I’m learning,
           <br />
           and the occasional small win.
         </p>
@@ -268,7 +268,7 @@ export function UpdatesSection() {
           </div>
         ) : notices.length === 0 ? (
           <p className="empty-message">
-            Heads down, building. Our first studio note is on its way.
+            Heads down, building. My first studio note is on its way.
           </p>
         ) : (
           notices.map((notice, i) => (
@@ -336,14 +336,14 @@ export function SupportSection() {
       <Reveal className="support-intro">
         <Heart size={25} strokeWidth={1.3} />
         <h2>
-          Back the people
+          Back the person
           <br />
           <em>behind the possibilities.</em>
         </h2>
         <p>
           Independent building takes time, late nights, and a little belief.
           <br />
-          If you like where we’re headed, you can help us keep going.
+          If you like where I’m headed, you can help me keep going.
         </p>
       </Reveal>
       <div className="wallet-grid">
@@ -390,7 +390,7 @@ export function SupportSection() {
         ))}
       </div>
       <p className="support-note">
-        Support is optional, but it helps us keep building.
+        Support is optional, but it helps me keep building.
       </p>
     </section>
   );

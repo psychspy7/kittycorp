@@ -21,7 +21,7 @@ export function SiteHeader() {
         aria-label="Main navigation"
       >
         <a onClick={() => setOpen(false)} href="/#story">
-          Our story
+          My story
         </a>
         <a onClick={() => setOpen(false)} href="/#vision">
           The vision
@@ -63,7 +63,7 @@ export function FilmButton({ className = "" }: { className?: string }) {
       </DialogTrigger>
       <DialogContent className="film-dialog">
         <DialogTitle>The beginning of Kitty Corp.</DialogTitle>
-        <DialogDescription>Our identity, in motion.</DialogDescription>
+        <DialogDescription>The Kitty Corp identity, in motion.</DialogDescription>
         <video
           controls
           autoPlay
@@ -99,7 +99,7 @@ export function Hero() {
           </span>
         </h1>
         <p className="hero-description">
-          A small team with a restless imagination.
+          A solo founder with a restless imagination.
           <br />
           Turning bold ideas into things that matter.
         </p>
@@ -133,7 +133,7 @@ export function Hero() {
           <ArrowDown size={16} /> SCROLL TO DISCOVER
         </a>
         <span className="hero-note">
-          Small team. Big vision. <span>Real work in progress.</span>
+          One founder. Big vision. <span>Real work in progress.</span>
         </span>
         <span className="edition">EST. 2026</span>
       </div>
