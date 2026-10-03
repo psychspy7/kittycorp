@@ -14,7 +14,6 @@ import {
   ArrowUpRight,
   Check,
   Eye,
-  FileText,
   LoaderCircle,
   LogOut,
   Mail,
@@ -113,15 +112,15 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
         <ArrowLeft size={15} /> Back to Kitty Corp
       </Link>
       <div className="login-card">
-        <Image unoptimized
+        <Image unoptimized loading="eager"
           src="/brand/monogram-v1.webp"
           alt="Kitty Corp"
           width="78"
           height="78"
         />
-        <span className="micro-label">THE PRIVATE SIDE OF THE STUDIO</span>
-        <h1>Welcome back.</h1>
-        <p>Good things are a work in progress.</p>
+        <span className="micro-label">KITTY CORP STUDIO</span>
+        <h1>Sign in.</h1>
+        <p>Manage products, people and project enquiries.</p>
         {unavailable ? (
           <p className="form-error" role="alert">
             Studio access is temporarily unavailable. Please try again shortly.
@@ -182,6 +181,7 @@ const emptyDraft: Draft = {
   published: false,
 };
 export function AdminDashboard() {
+  const [tab, setTab] = useState("overview");
   const [notices, setNotices] = useState<Notice[]>([]);
   const [feedback, setFeedback] = useState<Feedback[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
@@ -321,9 +321,9 @@ export function AdminDashboard() {
       <main id="main" className="admin-main">
         <div className="admin-title">
           <div>
-            <span className="micro-label">YOUR WORK, IN ONE PLACE</span>
-            <h1>Inside the studio.</h1>
-            <p>A little housekeeping. Then back to building.</p>
+            <span className="micro-label">WEBSITE MANAGEMENT</span>
+            <h1>Studio</h1>
+            <p>Publish updates, manage your team and respond to project enquiries.</p>
           </div>
         </div>
         {loadError && (
@@ -333,35 +333,43 @@ export function AdminDashboard() {
         )}
         <div className="admin-stats">
           <div>
-            <FileText size={22} />
-            <strong>{notices.filter((n) => n.published).length}</strong>
-            <span>Published notices</span>
+            <Mail size={22} />
+            <strong>{loading ? "…" : feedback.filter(f=>f.message.startsWith("PROJECT ENQUIRY\n")).length}</strong>
+            <span>Project enquiries in recent inbox</span>
           </div>
           <div>
-            <Pencil size={22} />
-            <strong>{notices.filter((n) => !n.published).length}</strong>
-            <span>Drafts in progress</span>
+            <Eye size={22} />
+            <strong>Studio</strong>
+            <span>Save, then refresh the public page</span>
           </div>
           <div>
             <Mail size={22} />
             <strong>
-              {feedback.length}
+              {loading ? "…" : feedback.length}
               {nextCursor ? "+" : ""}
             </strong>
-            <span>Messages from people</span>
+            <span>Recent inbox messages</span>
           </div>
         </div>
-        <Tabs defaultValue="journal">
+        <Tabs value={tab} onValueChange={setTab} className="studio-workspace">
           <TabsList className="admin-tabs">
-            <TabsTrigger value="journal">Build journal</TabsTrigger>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
             <TabsTrigger value="launches">Apps & launches</TabsTrigger>
 <TabsTrigger value="products">Products</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
 <TabsTrigger value="company">Company & socials</TabsTrigger>
+            <TabsTrigger value="journal">Build log & updates</TabsTrigger>
             <TabsTrigger value="early-access">Early access</TabsTrigger>
-            <TabsTrigger value="feedback">Inbox</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
+          <TabsContent value="overview" className="admin-panel">
+            <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
+            <div className="studio-overview-grid">
+              {[["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & launches","Upload an APK, replace an app icon separately, and publish a release or launch announcement."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows the CEO and co-founder; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+            </div>
+            <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
+          </TabsContent>
           <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
 <TabsContent value="team" className="admin-panel"><AdminTeam /></TabsContent>
 <TabsContent value="company" className="admin-panel"><AdminCompany /></TabsContent>
@@ -373,7 +381,7 @@ export function AdminDashboard() {
             <button className="button button-outline" onClick={() => edit()}><Plus size={17} /> New legacy notice</button>
             <div className="panel-heading">
               <h2>The studio notebook</h2>
-              <p>Published notes appear on the website immediately.</p>
+              <p>Archived notice tools. Publish new public content through Build log & updates.</p>
             </div>
             {loading ? (
               <Skeleton className="h-40 w-full" />

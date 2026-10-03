@@ -23,7 +23,7 @@ export const companyTeam=cache(async():Promise<TeamMember[]>=>{
 export const companySettings=cache(async():Promise<CompanySettings>=>{
   try{const {data,error}=await database().from("kitty_website_company").select("*").eq("id","company").single();if(error)throw error;return data as CompanySettings;}catch{return defaultSettings;}
 });
-export function refreshCompany(){for(const path of ["/","/kitty-ai","/lisa-ai","/sentinel","/secretchat","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
+export function refreshCompany(){for(const path of ["/","/products","/company","/team","/kitty-ai","/lisa-ai","/sentinel","/secretchat","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
 export async function verifyImage(db:ReturnType<typeof database>,path:string|null,kind:"icons"|"portraits"){
   if(!path)return;
   if(!mediaPathPattern.test(path)||!path.startsWith(kind+"/"))throw new HttpError("Choose an image uploaded for this field.",400);

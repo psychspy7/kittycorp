@@ -4,7 +4,11 @@ A restrained company website for an early-stage team, with product pages, an eng
 
 ## Pages
 
-- `/`: company, products, development feed, founders and early access.
+- `/`: services, concise product summaries, founders and early access.
+- `/services`: website and app development, process and private project-brief form.
+- `/products`: full product directory and Android releases.
+- `/company`: company background, approach, research link and identity film.
+- `/team`: every published team member, including biographies and profile links.
 - `/kitty-ai`, `/sentinel`, `/lisa-ai`: product directions and development notes.
 - `/build-log` and `/build-log/[slug]`: category-filtered journal and full articles.
 - `/research`: current areas of exploration.
@@ -23,7 +27,7 @@ Use Node.js 24 and the committed lockfile. Run `npm ci`, copy `.env.example` to 
 
 ## Manage the build journal and early list
 
-Open **Build journal** to write a full article or a short development update. Add a title, address, summary, body, category, status and date. Optional covers use public HTTPS image addresses and require an image description. Separate body paragraphs with blank lines; `## ` starts a section heading. HTML is displayed as text. Keep published work factual; prototypes and plans should be labeled clearly.
+Open **Build log & updates** to write a full article or a short development update. Add a title, address, summary, body, category, status and date. Optional covers use public HTTPS image addresses and require an image description. Separate body paragraphs with blank lines; `## ` starts a section heading. HTML is displayed as text. Keep published work factual; prototypes and plans should be labeled clearly.
 
 Unpublished entries are private. Entries dated in the future stay hidden until that UTC date. Updates appear in **Currently at KITTY**; full articles get their own pages. Publishing and editing update the website without a code deployment. The journal stores up to 20,000 body characters, within the form service's 32 KB request limit.
 
@@ -53,7 +57,7 @@ Files under `supabase/` document schema and access policies. They are first-inst
 
 ## Presentation and verification
 
-Original brand artwork and video remain in `public/brand/`. Display images use smaller WebP copies. Geist fonts are self-hosted under the included SIL Open Font License. The reveal video loads only when opened. Keyboard-accessible dialogs, reduced-motion handling, responsive layouts and metadata are included. Founder photos and unreleased product demos remain explicitly labeled placeholders. Only verified social addresses are linked.
+Original brand artwork and video remain in `public/brand/`. Display images use smaller WebP copies. Dirtyline 36D is self-hosted for display headings under the supplied commercial web license. Geist remains the readable interface and body font under its included SIL Open Font License. The reveal video loads only when opened. Keyboard-accessible dialogs, reduced-motion handling, responsive layouts and metadata are included. Founder initials are used until real portraits are uploaded; unreleased product pages reserve space for real demos. Only verified social addresses are linked.
 
 See `VERIFICATION.md` for completed checks. The release ZIP excludes credentials, dependencies, Git data, and generated build output.
 
@@ -64,3 +68,9 @@ The existing website backend has been updated with `supabase/company-publishing.
 Studio’s **Products** tab edits the three development-stage products. **Apps & launches** retains APK publishing and now accepts separate app icons. Uploaded website images are resized, stripped of metadata, and saved as WebP under unique filenames. **Team** manages real profiles and the complete suggested role list, with custom roles, visibility and order. **Company & socials** controls company links and team copy. Image uploads are intentionally public website assets; private APK drafts remain in the separate releases bucket.
 
 The services form posts validated briefs to the existing private Studio inbox. It uses the same server-only gateway, timing checks, origin validation and submission rate limits as contact messages. The public site shows no invented clients, completed commissions or prices.
+
+## Final interface update
+
+The public site uses a light ivory and graphite theme with restrained gold details. Services and Start a project are visible immediately. Secondary company, research, product and team content lives on dedicated pages. The homepage includes the first published Founder & CEO and Co-Founder profiles in that order; every published member appears on `/team`. Removing or hiding a founder profile removes it from the homepage as well. Roles, images, biographies and links remain editable in Studio.
+
+Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Release announcements are small dismissible notices; they do not block the homepage or move keyboard focus. The current backend, accounts and hosting environment remain compatible. No new secrets, project or database migration are needed.

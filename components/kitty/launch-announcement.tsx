@@ -1,38 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { SecretChatDownload, AppIcon } from "./secretchat";
-import { fileSize, launchHref, type Launch } from "@/lib/launches";
+import { useEffect, useId, useState } from "react";
+import Link from "next/link";
+import { X, ArrowUpRight } from "lucide-react";
+import { AppIcon } from "./secretchat";
+import { downloadHref, launchHref, type Launch } from "@/lib/launches";
 
 export function LaunchAnnouncement({ launch }: { launch: Launch }) {
   const [open, setOpen] = useState(false);
+  const titleId=useId();
   const visitKey = `kitty-launch-${launch.id}-${launch.updated_at}`;
-
   useEffect(() => {
-    try { if (sessionStorage.getItem(visitKey)) return; } catch { /* The announcement also works with storage disabled. */ }
+    try { if (sessionStorage.getItem(visitKey)) return; } catch { /* Optional session memory. */ }
     const timer = window.setTimeout(() => {
-      // Do not interrupt a film, notice, or menu already opened by the visitor.
-      if (document.querySelector('[role="dialog"], .navigation.is-open') || document.activeElement?.matches('input, textarea, select')) return;
+      if (document.querySelector('[role="dialog"]') || document.activeElement?.matches('input, textarea, select')) return;
       setOpen(true);
-      try { sessionStorage.setItem(visitKey, "seen"); } catch { /* No storage is required to download. */ }
+      try { sessionStorage.setItem(visitKey, "seen"); } catch { /* Downloads work without storage. */ }
     }, 7000);
     return () => window.clearTimeout(timer);
   }, [visitKey]);
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="launch-dialog" onCloseAutoFocus={(event) => { event.preventDefault(); document.getElementById("secretchat-launch-link")?.focus({ preventScroll: true }); }}>
-        <span className="micro-label">CHECK OUT OUR NEW LAUNCH</span>
-        <AppIcon launch={launch} size={88} />
-        <DialogTitle>Meet <em>{launch.name}.</em></DialogTitle>
-        <DialogDescription>{launch.description}</DialogDescription>
-        <SecretChatDownload launch={launch} />
-        <span className="download-meta">v{launch.version} · {fileSize(launch.apk_bytes)} · {launch.android}</span>
-        <a className="text-link" href={launchHref(launch)}>Explore the app & installation guide <ArrowUpRight size={16} /></a>
-        <DialogClose asChild><button className="launch-dismiss">Keep exploring Kitty Corp</button></DialogClose>
-      </DialogContent>
-    </Dialog>
-  );
+  useEffect(()=>{if(!open)return;const dismiss=(event:KeyboardEvent)=>{if(event.key==="Escape")setOpen(false);};window.addEventListener("keydown",dismiss);return()=>window.removeEventListener("keydown",dismiss);},[open]);
+  if(!open)return null;
+  return <aside className="launch-toast" aria-labelledby={titleId} aria-live="polite"><button className="launch-toast-close" onClick={()=>setOpen(false)} aria-label="Dismiss launch announcement"><X size={17}/></button><div className="launch-toast-heading"><AppIcon launch={launch} size={44}/><div><span className="micro-label">NEW RELEASE · ANDROID</span><h2 id={titleId}>{launch.name}</h2></div></div><p>{launch.tagline} <span>v{launch.version}</span></p><div className="launch-toast-actions"><Link href={launchHref(launch)} className="text-link">View the app <ArrowUpRight size={14}/></Link><a href={downloadHref(launch)} className="text-link" download>Download APK <ArrowUpRight size={14}/></a></div></aside>;
 }

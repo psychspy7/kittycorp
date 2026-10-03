@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, Play } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, Menu, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-const navigation = [["Products", "/#products"], ["Research", "/research"], ["Build Log", "/build-log"], ["About", "/#about"]];
+const navigation = [["Services", "/services"], ["Products", "/products"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
 export function SiteHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -14,11 +16,11 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   return <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-    <Link href="/" className="brand" aria-label="KITTY CORP home"><Image unoptimized src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link>
-    <nav className="navigation" aria-label="Main navigation">{navigation.map(([label, href]) => <Link href={href} key={label}>{label}</Link>)}</nav>
-    <Link className="header-cta" href="/#early-access">Join early access</Link>
+    <Link href="/" className="brand" aria-label="KITTY CORP home"><Image unoptimized loading="eager" src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link>
+    <nav className="navigation" aria-label="Main navigation">{navigation.map(([label, href]) => <Link href={href} key={label} aria-current={pathname === href ? "page" : undefined}>{label}</Link>)}</nav>
+    <Link className="header-cta" href="/services#project-enquiry">Start a project <ArrowUpRight size={15}/></Link>
     <Dialog open={open} onOpenChange={setOpen}><DialogTrigger asChild><button className="menu-toggle" aria-label="Open navigation"><Menu size={22} /></button></DialogTrigger>
-      <DialogContent className="mobile-navigation"><DialogTitle>KITTY CORP</DialogTitle><DialogDescription>Explore the company and our work.</DialogDescription><nav aria-label="Mobile navigation">{navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label}>{label}</Link>)}<Link onClick={() => setOpen(false)} href="/#early-access">Join early access</Link></nav></DialogContent>
+      <DialogContent className="mobile-navigation"><DialogTitle>KITTY CORP</DialogTitle><DialogDescription>Services, products and the people behind them.</DialogDescription><nav aria-label="Mobile navigation">{navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label} aria-current={pathname === href ? "page" : undefined}>{label}</Link>)}<Link onClick={() => setOpen(false)} href="/team">Full team</Link><Link onClick={() => setOpen(false)} href="/#early-access">Join early access</Link></nav></DialogContent>
     </Dialog>
   </header>;
 }
@@ -26,9 +28,8 @@ export function FilmButton({ className = "" }: { className?: string }) {
   return <Dialog><DialogTrigger asChild><button className={`film-button ${className}`}><Play size={13} /> Watch the identity film</button></DialogTrigger><DialogContent className="film-dialog"><DialogTitle>KITTY, in motion.</DialogTitle><DialogDescription>A short look at the KITTY CORP identity.</DialogDescription><video controls autoPlay playsInline preload="metadata" poster="/brand/wordmark-v1.webp"><source src="/brand/reveal.mp4" type="video/mp4" />Your browser cannot play this video. <a href="/brand/reveal.mp4">Download the film</a>.</video></DialogContent></Dialog>;
 }
 export function Hero() {
-  return <section className="company-hero wrap" aria-labelledby="hero-title">
-    <div className="hero-topline"><span className="eyebrow">INDEPENDENT TECHNOLOGY COMPANY</span><span className="hero-location">Ideas into working things.</span></div>
-    <div className="company-hero-grid"><div><h1 id="hero-title">We build technology<br className="desktop-break" /> we actually<br className="desktop-break" /> <span>want to use.</span></h1><p className="hero-description">KITTY CORP is an independent technology company working on personal AI, autonomous systems and intelligent software.</p><div className="hero-actions"><Link className="button button-gold" href="#products">Explore what we’re building</Link><Link className="button button-outline" href="#currently">Follow our progress</Link></div><p className="hero-small-note">Built by a small team. Still early. Shipping constantly.</p></div><div className="company-mark" aria-hidden="true"><Image unoptimized src="/brand/silver-mark-v1.webp" alt="" width={800} height={800} preload /><span>KEEP BUILDING.</span></div></div>
-    <div className="hero-baseline"><span>AI / AUTONOMOUS SYSTEMS / INTELLIGENT SOFTWARE</span><FilmButton /></div>
+  return <section className="home-hero wrap" aria-labelledby="hero-title">
+    <div className="home-hero-copy"><span className="eyebrow">KITTY CORP / INDEPENDENT TECHNOLOGY</span><h1 id="hero-title">Websites. Apps.<br/><span>And what’s next.</span></h1><p>We build websites and applications for businesses and people with an idea. Alongside client work, we’re developing our own AI and robotics products.</p><div className="hero-actions"><Link className="button button-gold" href="/services#project-enquiry">Start a project <ArrowUpRight size={17}/></Link><Link className="text-link" href="#products">Explore our products <ArrowUpRight size={16}/></Link></div><p className="hero-small-note">A small team. Direct conversations. Thoughtful work.</p></div>
+    <aside className="hero-services" aria-labelledby="hero-services-title"><div className="hero-services-heading"><span className="micro-label">WORK WITH KITTY</span><span aria-hidden="true">↗</span></div><h2 id="hero-services-title">What can we<br/>build for you?</h2><div className="hero-service-links">{[["01","Websites","Business sites, portfolios & product pages","/services#websites"],["02","Web applications","Tools, dashboards & a first version of your idea","/services#applications"],["03","Android apps","Useful software, built for mobile","/services#applications"]].map(([number,title,description,href])=><Link key={number} href={href}><span>{number}</span><div><h3>{title}</h3><p>{description}</p></div><ArrowUpRight size={17}/></Link>)}</div><Link className="hero-service-contact" href="/services#project-enquiry">Tell us about your project <ArrowUpRight size={17}/></Link></aside>
   </section>;
 }
