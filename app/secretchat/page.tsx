@@ -1,20 +1,27 @@
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight, Download } from "lucide-react";
-import { SiteHeader, SiteFooter } from "@/components/kitty/site";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
 import { SecretChatDownload, SecretChatMark, secretChatFeatures } from "@/components/kitty/secretchat";
 import { secretChat } from "@/lib/secretchat";
 import { publishedLaunch } from "@/lib/launches-server";
 import { fileSize } from "@/lib/launches";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { mediaHref } from "@/lib/company-content";
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: "SecretChat — Private conversations for Android",
   description: "Download SecretChat by Kitty Corp. Invitation-only rooms, encrypted messages, device-encrypted history, and an optional fingerprint lock. Android 7.0+.",
   alternates: { canonical: "/secretchat" },
   openGraph: { title: "SecretChat · Private by intention.", description: "Kitty Corp’s new Android app. Your people. Your private space.", url: "/secretchat", images: [{ url: "/secretchat/icon-v1.png", width: 192, height: 192, alt: "SecretChat" }] },
 };
+export async function generateMetadata(): Promise<Metadata> {
+  const launch = await publishedLaunch("secretchat");
+  if (!launch) return { title: "Launch unavailable", robots: { index: false } };
+  return { ...defaultMetadata, title: `${launch.name} — ${launch.tagline}`, description: launch.description, openGraph: { title: launch.name, description: launch.description, url: "/secretchat", images: [{ url: launch.icon_path ? mediaHref(launch.icon_path) : "/secretchat/icon-v1.png", width: 512, height: 512, alt: `${launch.name} icon` }] } };
+}
 
 export default async function SecretChatPage() {
   const launch = await publishedLaunch("secretchat");
@@ -34,7 +41,7 @@ export default async function SecretChatPage() {
               <p className="download-meta">v{launch.version} · {fileSize(launch.apk_bytes)} · {launch.android}</p>
               <a className="text-link" href="#install">How to install <ArrowUpRight size={16} /></a>
             </div>
-            <div className="secretchat-product-art"><SecretChatMark size={192} /><span>SECRETCHAT<span>BY KITTY CORP</span></span><div className="secretchat-art-ring" aria-hidden="true" /></div>
+            <div className="secretchat-product-art"><SecretChatMark size={192} iconPath={launch.icon_path} /><span>SECRETCHAT<span>BY KITTY CORP</span></span><div className="secretchat-art-ring" aria-hidden="true" /></div>
           </div>
         </section>
 

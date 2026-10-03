@@ -1,4 +1,5 @@
-import { SiteHeader, SiteFooter } from "@/components/kitty/site";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
 export default function NotFound() {
   return (
     <>

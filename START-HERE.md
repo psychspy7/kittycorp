@@ -15,3 +15,7 @@ SecretChat's download page is `/secretchat`. Sign in at `/admins`, then open **A
 **Build journal** manages full articles and development-feed updates, including dates, categories, status and cover images. **Early access** manages the private email list and export. Existing Studio credentials are unchanged. See the README for the publication workflow and privacy behavior.
 
 Use trusted signed APKs and keep original app signing keys backed up privately. Never put filled-in environment files, administrator passwords, signing keys, or server credentials in GitHub.
+
+**Products** edits KITTY AI, LISA AI and Sentinel: separate icons, descriptions, stages and product notes. **Team** adds, edits, hides or removes real people, with photographs, roles and profile links. **Company & socials** edits official company links and the team introduction. Uploaded PNG, JPEG and WebP images (up to 3 MB) are optimized; save the entry, then refresh the website to see the newest image.
+
+The **Websites & applications** page lets visitors send project briefs. These appear as **Project enquiry** messages in the private **Inbox**, including the requested service, business name, budget, timing and message.

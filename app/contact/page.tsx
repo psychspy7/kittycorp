@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, MessageSquare } from "lucide-react";
 import { ContactForm } from "@/components/kitty/contact-form";
-import { SiteHeader, SiteFooter } from "@/components/kitty/site";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
 export const metadata: Metadata = {
   title: "Let’s talk",
   description:
@@ -36,7 +37,7 @@ export default async function ContactPage({
               Tell us what you’re thinking. Feedback on something we’re building.
               A possible collaboration. Or just a hello.
             </p>
-            <p>Virat and Sarthak read the messages here.</p>
+            <p>The KITTY team reads the messages here.</p><Link href="/services#project-enquiry" className="text-link">Need a website or app? Share a project brief.</Link>
             <Link href="/#products" className="text-link">
               See what we’re building <ArrowUpRight size={17} />
             </Link>

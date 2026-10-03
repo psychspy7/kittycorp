@@ -1,9 +1,14 @@
-import { ArrowUpRight, Download, Fingerprint, KeyRound, LockKeyhole, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Download, Fingerprint, KeyRound, LockKeyhole, ShieldCheck, Rocket } from "lucide-react";
 import { downloadHref, fileSize, type Launch } from "@/lib/launches";
 import Image from "next/image";
+import { mediaHref } from "@/lib/company-content";
 
-export function SecretChatMark({ size = 72 }: { size?: number }) {
-  return <Image className="secretchat-icon" src="/secretchat/icon-v1.webp" alt="SecretChat app icon" width={size} height={size} unoptimized />;
+export function SecretChatMark({ size = 72, iconPath }: { size?: number; iconPath?: string | null }) {
+  return <Image className="secretchat-icon" src={iconPath ? mediaHref(iconPath) : "/secretchat/icon-v1.webp"} alt="SecretChat app icon" width={size} height={size} unoptimized />;
+}
+export function AppIcon({ launch, size=72 }: { launch: Pick<Launch,"name"|"slug"|"icon_path">; size?:number }) {
+  if(launch.icon_path)return <Image className="secretchat-icon" unoptimized src={mediaHref(launch.icon_path)} alt={`${launch.name} icon`} width={size} height={size}/>;
+  return launch.slug==="secretchat"?<SecretChatMark size={size}/>:<Rocket width={size} height={size} strokeWidth={1} aria-hidden="true"/>;
 }
 
 export function SecretChatDownload({ launch, className = "" }: { launch: Launch; className?: string }) {
@@ -28,7 +33,7 @@ export function SecretChatSection({ launch }: { launch: Launch }) {
         </div>
         <div className="secretchat-preview">
           <div className="secretchat-orbit" aria-hidden="true" />
-          <SecretChatMark size={140} />
+          <SecretChatMark size={140} iconPath={launch.icon_path} />
           <span className="secretchat-wordmark">SecretChat<span>PRIVATE BY INTENTION.</span></span>
           <div className="secretchat-preview-facts"><span><LockKeyhole size={15} /> Encrypted conversations</span><span><KeyRound size={15} /> Invite-only rooms</span><span><Fingerprint size={15} /> Optional fingerprint lock</span></div>
           <a className="text-link" href="/secretchat#privacy">How your privacy works <ArrowUpRight size={15} /></a>

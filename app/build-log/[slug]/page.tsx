@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteHeader,SiteFooter } from "@/components/kitty/site";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
 import { ArticleBody } from "@/components/kitty/journal";
 import { publicArticle } from "@/lib/journal-server";
 import { entryDate } from "@/lib/journal";

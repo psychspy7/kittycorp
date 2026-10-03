@@ -34,9 +34,10 @@ export function database(token?: string) {
         autoRefreshToken: false,
         detectSessionInUrl: false,
       },
-      global: token
-        ? { headers: { Authorization: `Bearer ${token}` } }
-        : undefined,
+      global: {
+        fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }),
+        ...(token ? { headers: { Authorization: `Bearer ${token}` } } : {}),
+      },
     },
   );
 }

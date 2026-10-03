@@ -6,10 +6,11 @@ import { toast } from "sonner";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Switch } from "@/components/ui/switch";
+import { ImageUpload } from "./studio-content-helpers";
 import { fileSize, launchHref, MAX_APK_BYTES, type Launch } from "@/lib/launches";
 
-type Draft = Pick<Launch, "slug" | "name" | "tagline" | "description" | "release_notes" | "version" | "android" | "apk_path" | "apk_sha256" | "apk_bytes" | "published" | "show_popup">;
-const emptyDraft: Draft = { slug: "", name: "", tagline: "", description: "", release_notes: "", version: "1.0.0", android: "Android 7.0+", apk_path: null, apk_sha256: null, apk_bytes: null, published: false, show_popup: true };
+type Draft = Pick<Launch, "icon_path" | "slug" | "name" | "tagline" | "description" | "release_notes" | "version" | "android" | "apk_path" | "apk_sha256" | "apk_bytes" | "published" | "show_popup">;
+const emptyDraft: Draft = { icon_path: null, slug: "", name: "", tagline: "", description: "", release_notes: "", version: "1.0.0", android: "Android 7.0+", apk_path: null, apk_sha256: null, apk_bytes: null, published: false, show_popup: true };
 async function api(url: string, method = "GET", value?: unknown) {
   const res = await fetch(url, { method, ...(value !== undefined ? { headers: { "Content-Type": "application/json" }, body: JSON.stringify(value) } : {}) });
   if (res.status === 401) { window.location.reload(); throw new Error("Please sign in again."); }
@@ -62,7 +63,7 @@ export default function AdminLaunches() {
     if (path) { try { await api("/api/admin/launches/upload", "DELETE", { path }); } catch { toast.error("An unused upload remains in storage. You can retry deleting it later."); } }
   }
   function edit(launch?: Launch) {
-    setDraft(launch ? { slug: launch.slug, name: launch.name, tagline: launch.tagline, description: launch.description, release_notes: launch.release_notes, version: launch.version, android: launch.android, apk_path: launch.apk_path, apk_sha256: launch.apk_sha256, apk_bytes: launch.apk_bytes, published: launch.published, show_popup: launch.show_popup } : { ...emptyDraft });
+    setDraft(launch ? { icon_path: launch.icon_path, slug: launch.slug, name: launch.name, tagline: launch.tagline, description: launch.description, release_notes: launch.release_notes, version: launch.version, android: launch.android, apk_path: launch.apk_path, apk_sha256: launch.apk_sha256, apk_bytes: launch.apk_bytes, published: launch.published, show_popup: launch.show_popup } : { ...emptyDraft });
     setFormError(""); setEditor(launch || "new");
   }
   async function pickApk(file?: File) {
@@ -105,7 +106,7 @@ export default function AdminLaunches() {
     <div className="launch-admin-heading"><div className="panel-heading"><h2>From your studio to their phone.</h2><p>Upload an APK, write the announcement, and publish. No GitHub update needed. The newest published launch with its popup enabled appears when visitors open your homepage.</p></div><button className="button button-gold" onClick={() => edit()}><Plus size={17} /> New launch</button></div>
     {loadError && <p className="form-error" role="alert">{loadError} <button onClick={() => void load()}>Try again</button></p>}
     {loading ? <p className="empty-message">Opening your launches…</p> : !launches.length ? <p className="empty-message">Your next app starts here. Add a launch to get its own download page.</p> : <div className="admin-launch-list">{launches.map((launch) => <article key={launch.id}><Rocket size={25} /><div><span className={`admin-status ${launch.published ? "published" : ""}`}>{launch.published ? "Published" : "Private draft"}{launch.show_popup ? " · Popup enabled" : ""}</span><h3>{launch.name} <small>v{launch.version}</small></h3><p>{launch.tagline}</p><span className="download-meta">{fileSize(launch.apk_bytes)} · {launch.android}</span></div><div className="table-actions">{launch.published && <a href={launchHref(launch)} target="_blank" rel="noreferrer" aria-label={`View ${launch.name}`}><ArrowUpRight size={18} /></a>}<button onClick={() => edit(launch)} aria-label={`Edit launch ${launch.name}`}><Pencil size={17} /></button><button onClick={() => setRemove(launch)} aria-label={`Delete launch ${launch.name}`}><Trash2 size={17} /></button></div></article>)}</div>}
-    <Dialog open={!!editor} onOpenChange={(open) => { if (!open && !busy && !uploading) { setEditor(null); void discardUpload(); } }}><DialogContent className="editor-dialog launch-editor" showCloseButton={!busy && !uploading}><DialogTitle>{editor === "new" ? "A new launch." : "Update your launch."}</DialogTitle><DialogDescription>Drafts and their APKs stay private until published. Use a signed release APK you trust, and test it on a phone before publishing.</DialogDescription><form onSubmit={save}>
+    <Dialog open={!!editor} onOpenChange={(open) => { if (!open && !busy && !uploading) { setEditor(null); void discardUpload(); } }}><DialogContent className="editor-dialog launch-editor" showCloseButton={!busy && !uploading}><DialogTitle>{editor === "new" ? "A new launch." : "Update your launch."}</DialogTitle><DialogDescription>Drafts and their APKs stay private until published. Use a signed release APK you trust, and test it on a phone before publishing.</DialogDescription><form onSubmit={save}><ImageUpload label="App icon" kind="icons" path={draft.icon_path} disabled={busy} onBusyChange={setUploading} onChange={path=>setDraft({...draft,icon_path:path})}/>
       {field("name", "App name", 80, 2)}{field("slug", "Page address (lowercase, e.g. my-new-app)", 60, 3)}{field("tagline", "Short headline", 140, 3)}
       <div className="form-field"><label htmlFor="launch-description">Announcement & app description</label><textarea id="launch-description" value={draft.description} onChange={(event) => setDraft({ ...draft, description: event.target.value })} minLength={10} maxLength={2000} required rows={4} disabled={busy || uploading} /></div>
       <div className="launch-form-grid">{field("version", "Version", 40)}{field("android", "Android requirement", 60, 3)}</div>

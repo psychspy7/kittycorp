@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Rocket } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { SecretChatDownload, SecretChatMark } from "./secretchat";
+import { SecretChatDownload, AppIcon } from "./secretchat";
 import { fileSize, launchHref, type Launch } from "@/lib/launches";
 
 export function LaunchAnnouncement({ launch }: { launch: Launch }) {
@@ -25,7 +25,7 @@ export function LaunchAnnouncement({ launch }: { launch: Launch }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="launch-dialog" onCloseAutoFocus={(event) => { event.preventDefault(); document.getElementById("secretchat-launch-link")?.focus({ preventScroll: true }); }}>
         <span className="micro-label">CHECK OUT OUR NEW LAUNCH</span>
-        {launch.slug === "secretchat" ? <SecretChatMark size={88} /> : <span className="launch-generic-icon"><Rocket size={42} /></span>}
+        <AppIcon launch={launch} size={88} />
         <DialogTitle>Meet <em>{launch.name}.</em></DialogTitle>
         <DialogDescription>{launch.description}</DialogDescription>
         <SecretChatDownload launch={launch} />

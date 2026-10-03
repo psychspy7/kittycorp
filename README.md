@@ -56,3 +56,11 @@ Files under `supabase/` document schema and access policies. They are first-inst
 Original brand artwork and video remain in `public/brand/`. Display images use smaller WebP copies. Geist fonts are self-hosted under the included SIL Open Font License. The reveal video loads only when opened. Keyboard-accessible dialogs, reduced-motion handling, responsive layouts and metadata are included. Founder photos and unreleased product demos remain explicitly labeled placeholders. Only verified social addresses are linked.
 
 See `VERIFICATION.md` for completed checks. The release ZIP excludes credentials, dependencies, Git data, and generated build output.
+
+## Publishing company content
+
+The existing website backend has been updated with `supabase/company-publishing.sql`. This is a one-time schema snapshot for a new setup; do not reapply it to the configured project. No additional environment settings are needed.
+
+Studio’s **Products** tab edits the three development-stage products. **Apps & launches** retains APK publishing and now accepts separate app icons. Uploaded website images are resized, stripped of metadata, and saved as WebP under unique filenames. **Team** manages real profiles and the complete suggested role list, with custom roles, visibility and order. **Company & socials** controls company links and team copy. Image uploads are intentionally public website assets; private APK drafts remain in the separate releases bucket.
+
+The services form posts validated briefs to the existing private Studio inbox. It uses the same server-only gateway, timing checks, origin validation and submission rate limits as contact messages. The public site shows no invented clients, completed commissions or prices.

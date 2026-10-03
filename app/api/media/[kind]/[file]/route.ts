@@ -1,0 +1,3 @@
+import { MEDIA_BUCKET, mediaPathPattern } from "@/lib/company-content";
+import { database, failure, HttpError } from "@/lib/kitty-server";
+export async function GET(_request:Request,context:{params:Promise<{kind:string;file:string}>}){try{const {kind,file}=await context.params;const path=`${kind}/${file}`;if(!mediaPathPattern.test(path))throw new HttpError("Image not found.",404);const {data}=database().storage.from(MEDIA_BUCKET).getPublicUrl(path);return new Response(null,{status:302,headers:{Location:data.publicUrl,"Cache-Control":"public, max-age=31536000, immutable"}});}catch(e){return failure(e);}}

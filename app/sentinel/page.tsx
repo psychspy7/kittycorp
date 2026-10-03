@@ -1,4 +1,4 @@
-import { ProductPage } from "@/components/kitty/product-page";
-export const metadata={title:"KITTY Sentinel",description:"An early robotics and computer-vision prototype from KITTY CORP."};
+import { ProductPage,productMetadata } from "@/components/kitty/product-page";
 export const dynamic="force-dynamic";
+export async function generateMetadata(){return productMetadata("sentinel");}
 export default function Page(){return <ProductPage slug="sentinel"/>;}

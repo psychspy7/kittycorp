@@ -1,4 +1,5 @@
-import { SiteHeader,SiteFooter } from "@/components/kitty/site";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
 import { JournalCards } from "@/components/kitty/journal";
 import { publicJournal } from "@/lib/journal-server";
 export const dynamic="force-dynamic";

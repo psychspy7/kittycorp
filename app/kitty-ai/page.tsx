@@ -1,4 +1,4 @@
-import { ProductPage } from "@/components/kitty/product-page";
-export const metadata={title:"KITTY AI",description:"Personal AI built around memory, voice, privacy and user control. In active development at KITTY CORP."};
+import { ProductPage,productMetadata } from "@/components/kitty/product-page";
 export const dynamic="force-dynamic";
+export async function generateMetadata(){return productMetadata("kitty-ai");}
 export default function Page(){return <ProductPage slug="kitty-ai"/>;}

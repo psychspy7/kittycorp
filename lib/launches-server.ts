@@ -1,12 +1,15 @@
 import "server-only";
+import { cache } from "react";
 import { database, HttpError } from "./kitty-server";
 import { MAX_APK_BYTES, RELEASE_BUCKET, type Launch } from "./launches";
 import { createHash } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { secretChat } from "./secretchat";
 import { z } from "zod";
+import { mediaPathPattern } from "./company-content";
 
 export const launchSchema = z.object({
+  icon_path: z.string().regex(mediaPathPattern).nullable().optional(),
   slug: z.string().trim().min(3).max(60).regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "Use lowercase letters, numbers, and hyphens for the page address."),
   name: z.string().trim().min(2).max(80),
   tagline: z.string().trim().min(3).max(140),
@@ -21,16 +24,16 @@ export const launchSchema = z.object({
   show_popup: z.boolean(),
 });
 
-export async function publishedLaunches(): Promise<Launch[]> {
+export const publishedLaunches = cache(async (): Promise<Launch[]> => {
   const { data, error } = await database().from("kitty_website_launches").select("*").eq("published", true).lte("published_at", new Date().toISOString()).order("published_at", { ascending: false }).limit(20);
   if (error) throw new HttpError("Launches are temporarily unavailable.", 503);
   return data as Launch[];
-}
-export async function publishedLaunch(slug: string): Promise<Launch | null> {
+});
+export const publishedLaunch = cache(async (slug: string): Promise<Launch | null> => {
   const { data, error } = await database().from("kitty_website_launches").select("*").eq("slug", slug).eq("published", true).lte("published_at", new Date().toISOString()).maybeSingle();
   if (error) throw new HttpError("This launch is temporarily unavailable.", 503);
   return data as Launch | null;
-}
+});
 export function refreshLaunchPages() {
   revalidatePath("/");
   revalidatePath("/secretchat");

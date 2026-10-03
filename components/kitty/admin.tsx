@@ -1,6 +1,11 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import Image from "next/image";
+const AdminProducts = dynamic(() => import("./admin-products"));
+const AdminTeam = dynamic(() => import("./admin-team"));
+const AdminCompany = dynamic(() => import("./admin-company"));
 const AdminLaunches = dynamic(() => import("./admin-launches"), { loading: () => <p className="empty-message">Opening launches…</p> });
 const AdminJournal = dynamic(() => import("./admin-journal"), { loading: () => <p className="empty-message">Opening journal…</p> });
 const AdminEarlyAccess = dynamic(() => import("./admin-early-access"), { loading: () => <p className="empty-message">Opening early access…</p> });
@@ -64,7 +69,7 @@ async function request(url: string, options?: RequestInit) {
   };
   if (!res.ok) {
     if (res.status === 401 && url !== "/api/admin/login")
-      window.location.assign("/admins");
+      window.location.reload();
     throw Error(data.error || "The request failed. Try again.");
   }
   return data;
@@ -96,7 +101,7 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
           password: form.get("password"),
         }),
       );
-      window.location.assign("/admins");
+      window.location.reload();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign-in failed.");
       setBusy(false);
@@ -104,12 +109,12 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
   }
   return (
     <main id="main" className="admin-login">
-      <a href="/" className="back-link">
+      <Link href="/" className="back-link">
         <ArrowLeft size={15} /> Back to Kitty Corp
-      </a>
+      </Link>
       <div className="login-card">
-        <img
-          src="/brand/monogram.png"
+        <Image unoptimized
+          src="/brand/monogram-v1.webp"
           alt="Kitty Corp"
           width="78"
           height="78"
@@ -207,8 +212,20 @@ export function AdminDashboard() {
     }
   }, []);
   useEffect(() => {
-    void load();
-  }, [load]);
+    let active = true;
+    void Promise.all([request("/api/admin/notices"), request("/api/admin/feedback")])
+      .then(([a, b]) => {
+        if (!active) return;
+        setNotices(a.notices);
+        setFeedback(b.feedback);
+        setNextCursor(b.nextCursor);
+      })
+      .catch((err) => {
+        if (active) setLoadError(err instanceof Error ? err.message : "Couldn’t load studio data.");
+      })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, []);
   const edit = (notice?: Notice) => {
     setDraft(
       notice
@@ -262,7 +279,7 @@ export function AdminDashboard() {
     setBusy(true);
     try {
       await request("/api/admin/logout", { method: "POST" });
-      window.location.assign("/admins");
+      window.location.reload();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Couldn’t sign out.");
       setBusy(false);
@@ -286,12 +303,12 @@ export function AdminDashboard() {
   return (
     <>
       <header className="admin-header">
-        <a className="brand" href="/">
-          <img src="/brand/monogram.png" width="40" height="40" alt="" />
+        <Link className="brand" href="/">
+          <Image unoptimized src="/brand/monogram-small-v1.webp" width="40" height="40" alt="" />
           <span>
             KITTY CORP <small>STUDIO</small>
           </span>
-        </a>
+        </Link>
         <div>
           <a href="/" target="_blank" rel="noreferrer">
             View website <ArrowUpRight size={15} />
@@ -338,11 +355,17 @@ export function AdminDashboard() {
           <TabsList className="admin-tabs">
             <TabsTrigger value="journal">Build journal</TabsTrigger>
             <TabsTrigger value="launches">Apps & launches</TabsTrigger>
+<TabsTrigger value="products">Products</TabsTrigger>
+<TabsTrigger value="team">Team</TabsTrigger>
+<TabsTrigger value="company">Company & socials</TabsTrigger>
             <TabsTrigger value="early-access">Early access</TabsTrigger>
             <TabsTrigger value="feedback">Inbox</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
-          <TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
+          <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
+<TabsContent value="team" className="admin-panel"><AdminTeam /></TabsContent>
+<TabsContent value="company" className="admin-panel"><AdminCompany /></TabsContent>
+<TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
           <TabsContent value="journal" className="admin-panel"><AdminJournal /></TabsContent>
           <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
           <TabsContent value="notices" className="admin-panel">
@@ -413,7 +436,7 @@ export function AdminDashboard() {
           <TabsContent value="feedback" className="admin-panel">
             <div className="panel-heading">
               <h2>From the other side of the screen</h2>
-              <p>Messages are visible only in your studio.</p>
+              <p>Contact messages and website or app enquiries are visible only in your studio.</p>
             </div>
             {loading ? (
               <Skeleton className="h-40 w-full" />
@@ -439,7 +462,7 @@ export function AdminDashboard() {
                         <span className="table-email">{f.email}</span>
                       </TableCell>
                       <TableCell className="message-excerpt">
-                        {f.message.slice(0, 90)}
+                        {f.message.startsWith("PROJECT ENQUIRY\n") && <span className="enquiry-badge">Project enquiry</span>}{f.message.slice(0, 90)}
                         {f.message.length > 90 ? "…" : ""}
                       </TableCell>
                       <TableCell className="table-date">
@@ -599,7 +622,7 @@ export function AdminDashboard() {
         }}
       >
         <DialogContent className="notice-dialog">
-          <span className="micro-label">A MESSAGE FOR KITTY CORP</span>
+          <span className="micro-label">{message?.message.startsWith("PROJECT ENQUIRY\n") ? "WEBSITE & APP PROJECT ENQUIRY" : "A MESSAGE FOR KITTY CORP"}</span>
           <DialogTitle>{message?.name}</DialogTitle>
           <DialogDescription>
             {message?.email} · {message ? date(message.created_at) : ""}

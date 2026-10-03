@@ -12,7 +12,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef(0);
   const trap = useRef<HTMLInputElement>(null);
   useEffect(() => {
     startedAt.current = Date.now();
@@ -115,7 +115,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         <textarea
           id="contact-message"
           name="message"
-          placeholder="An idea, some feedback, a question. I’m listening."
+          placeholder="An idea, some feedback, a question. We’re listening."
           required
           minLength={10}
           maxLength={5000}
@@ -142,9 +142,9 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
       )}
       <div className="form-submit-row">
         <p>
-          Your message goes straight to me.
+          Your message goes straight to the KITTY team.
           <br />
-          I’ll only use your email to reply.
+          We’ll only use your email to reply.
         </p>
         <button className="button button-gold" type="submit" disabled={busy}>
           {busy ? "Sending…" : "Send message"}

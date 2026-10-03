@@ -1,4 +1,4 @@
-import { ProductPage } from "@/components/kitty/product-page";
-export const metadata={title:"LISA AI",description:"An upcoming on-screen interactive anime AI from KITTY CORP. Early exploration, with real demos to follow."};
+import { ProductPage,productMetadata } from "@/components/kitty/product-page";
 export const dynamic="force-dynamic";
+export async function generateMetadata(){return productMetadata("lisa-ai");}
 export default function Page(){return <ProductPage slug="lisa-ai"/>;}

@@ -1,0 +1,2 @@
+import { failure, privateJson, requireAdmin } from "@/lib/kitty-server";
+export async function GET(){try{const {db}=await requireAdmin();const results=await Promise.all([db.from("kitty_website_products").select("*").order("sort_order"),db.from("kitty_website_team").select("*").order("sort_order").order("created_at"),db.from("kitty_website_company").select("*").eq("id","company").single()]);for(const r of results)if(r.error)throw r.error;return privateJson({products:results[0].data,team:results[1].data,settings:results[2].data});}catch(e){return failure(e);}}

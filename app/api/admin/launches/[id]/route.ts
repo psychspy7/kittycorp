@@ -2,6 +2,7 @@ import { z } from "zod";
 import { failure, HttpError, privateJson, readBody, requireAdmin, verifyOrigin } from "@/lib/kitty-server";
 import { launchSchema, refreshLaunchPages, verifyRelease } from "@/lib/launches-server";
 import { RELEASE_BUCKET, type Launch } from "@/lib/launches";
+import { verifyImage } from "@/lib/company-server";
 export const maxDuration = 60;
 type Context = { params: Promise<{ id: string }> };
 export async function PATCH(request: Request, context: Context) {
@@ -13,6 +14,7 @@ export async function PATCH(request: Request, context: Context) {
     const { data: existing, error: lookupError } = await db.from("kitty_website_launches").select("*").eq("id", id).maybeSingle();
     if (lookupError) throw lookupError;
     if (!existing) throw new HttpError("This launch no longer exists.", 404);
+    if (value.icon_path !== undefined && value.icon_path !== existing.icon_path) await verifyImage(db, value.icon_path, "icons");
     if (existing.slug === "secretchat" && value.slug !== "secretchat") throw new HttpError("Keep SecretChat’s page address so existing links continue to work.", 400);
     const release = await verifyRelease(db, value, existing as Launch);
     const { data, error } = await db.from("kitty_website_launches").update({ ...value, ...release, published_at: value.published ? (existing.published_at ?? new Date().toISOString()) : null, updated_at: new Date().toISOString() }).eq("id", id).select().single();

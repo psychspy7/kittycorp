@@ -15,6 +15,7 @@ export type Launch = {
   published_at: string | null;
   created_at: string;
   updated_at: string;
+  icon_path: string | null;
 };
 export const RELEASE_BUCKET = "kitty-website-releases";
 export const MAX_APK_BYTES = 50 * 1024 * 1024;

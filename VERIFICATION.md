@@ -17,3 +17,5 @@
 Checks verify the website and release-delivery flow. They do not constitute an independent security audit of the Android app.
 
 The refined site was verified on the live deployment: desktop and mobile typography, product layouts, mobile navigation, anchor links and early-access confirmation. Geist loaded from the website, with no horizontal overflow at the checked mobile sizes. The live backend integration checks passed; temporary records were removed.
+
+Company publishing update: production build and TypeScript passed. Integration checks verified optimized image uploads, immutable replacement addresses, public product icons, separate launch icons, team creation/editing/visibility/removal, portraits and profile links, company socials, private project enquiries, input validation, draft visibility and origin protection. Synthetic profiles, enquiries and image objects were removed; the original product, launch and company data were restored. No new environment secrets are required.

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { SiteHeader,SiteFooter } from "@/components/kitty/site";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
 import { JournalCards, Currently } from "@/components/kitty/journal";
 import { publicJournal } from "@/lib/journal-server";
 import { journalCategories } from "@/lib/journal";
