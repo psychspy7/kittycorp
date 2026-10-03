@@ -1,0 +1,23 @@
+export type Launch = {
+  id: string;
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  release_notes: string;
+  version: string;
+  android: string;
+  apk_path: string | null;
+  apk_sha256: string | null;
+  apk_bytes: number | null;
+  published: boolean;
+  show_popup: boolean;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+export const RELEASE_BUCKET = "kitty-website-releases";
+export const MAX_APK_BYTES = 50 * 1024 * 1024;
+export const launchHref = (launch: Pick<Launch, "slug">) => launch.slug === "secretchat" ? "/secretchat" : `/launches/${launch.slug}`;
+export const downloadHref = (launch: Pick<Launch, "slug">) => `/api/downloads/${launch.slug}`;
+export const fileSize = (bytes: number | null) => bytes ? `${(bytes / 1_000_000).toFixed(1)} MB` : "Android APK";

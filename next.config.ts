@@ -17,6 +17,13 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      { source: "/downloads/:file*.apk", headers: [
+        { key: "Content-Type", value: "application/vnd.android.package-archive" },
+        { key: "Content-Disposition", value: "attachment" },
+        { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+      ] },
+      { source: "/brand/:file*.webp", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      { source: "/secretchat/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
     ];
   },
 };

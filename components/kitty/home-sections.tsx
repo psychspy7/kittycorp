@@ -187,7 +187,7 @@ export function FlagshipSection() {
         </Reveal>
         <div className="flagship-art">
           <img
-            src="/brand/silver-mark.png"
+            src="/brand/silver-mark-v1.webp"
             alt="Kitty Corp’s silver cat monogram"
             width="1254"
             height="1254"
@@ -206,7 +206,7 @@ export function FlagshipSection() {
           <p>Every story starts with a mark.</p>
         </div>
         <img
-          src="/brand/wordmark.png"
+          src="/brand/wordmark-v1.webp"
           width="2048"
           height="768"
           alt="Kitty Corp"

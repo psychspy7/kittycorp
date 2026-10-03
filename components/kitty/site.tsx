@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ArrowDown, ArrowUpRight, Menu, Play, X } from "lucide-react";
+import { launchHref, type Launch } from "@/lib/launches";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +14,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <a href="/" className="brand" aria-label="Kitty Corp home">
-        <img src="/brand/monogram.png" alt="" width="44" height="44" />
+        <img src="/brand/monogram-small-v1.webp" alt="" width="44" height="44" />
         <span>KITTY CORP</span>
       </a>
       <nav
@@ -26,8 +27,11 @@ export function SiteHeader() {
         <a onClick={() => setOpen(false)} href="/#vision">
           The vision
         </a>
+        <a onClick={() => setOpen(false)} href="/#launches">
+          Our apps <span className="nav-tag">NEW</span>
+        </a>
         <a onClick={() => setOpen(false)} href="/#kitty-ai">
-          Kitty AI <span className="nav-tag">IN THE MAKING</span>
+          Kitty AI
         </a>
         <a onClick={() => setOpen(false)} href="/#updates">
           Updates
@@ -69,7 +73,7 @@ export function FilmButton({ className = "" }: { className?: string }) {
           autoPlay
           playsInline
           preload="metadata"
-          poster="/brand/wordmark.png"
+          poster="/brand/wordmark-v1.webp"
         >
           <source src="/brand/reveal.mp4" type="video/mp4" />
           Your browser cannot play this video.{" "}
@@ -79,7 +83,7 @@ export function FilmButton({ className = "" }: { className?: string }) {
     </Dialog>
   );
 }
-export function Hero() {
+export function Hero({ featured }: { featured?: Launch }) {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-aura" aria-hidden="true" />
@@ -104,8 +108,8 @@ export function Hero() {
           Turning bold ideas into things that matter.
         </p>
         <div className="hero-actions">
-          <a className="button button-gold" href="#kitty-ai">
-            Explore what’s next <ArrowUpRight size={18} />
+          <a className="button button-gold" href={featured ? launchHref(featured) : "#kitty-ai"}>
+            {featured ? `Meet ${featured.name}` : "Explore what’s next"} <ArrowUpRight size={18} />
           </a>
           <FilmButton />
         </div>
@@ -118,7 +122,7 @@ export function Hero() {
         <div className="monogram-stage">
           <img
             className="hero-monogram"
-            src="/brand/monogram.png"
+            src="/brand/monogram-v1.webp"
             alt=""
             width="1024"
             height="1024"
@@ -145,7 +149,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="footer-top">
         <a className="brand" href="/">
-          <img src="/brand/monogram.png" alt="" width="40" height="40" />
+          <img src="/brand/monogram-small-v1.webp" alt="" width="40" height="40" />
           <span>KITTY CORP</span>
         </a>
         <p>Curiosity is the starting point.</p>

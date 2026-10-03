@@ -1,5 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+const AdminLaunches = dynamic(() => import("./admin-launches"), { loading: () => <p className="empty-message">Opening launches…</p> });
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -336,8 +338,10 @@ export function AdminDashboard() {
         <Tabs defaultValue="notices">
           <TabsList className="admin-tabs">
             <TabsTrigger value="notices">Notices & updates</TabsTrigger>
+            <TabsTrigger value="launches">Apps & launches</TabsTrigger>
             <TabsTrigger value="feedback">Inbox</TabsTrigger>
           </TabsList>
+          <TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
           <TabsContent value="notices" className="admin-panel">
             <div className="panel-heading">
               <h2>The studio notebook</h2>

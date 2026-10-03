@@ -1,23 +1,14 @@
-# Verification — package prepared 25 September 2026
+# Verification — 3 October 2026
 
-## Passed
+- TypeScript checks and the Next.js production build passed.
+- The new launch code passed targeted lint checks.
+- SecretChat 1.5.0 build 6 passed Android `apksigner` verification, package/label checks, release-mode checks, and the private-credential scan. SHA-256: `b32be6a4ac9555a1fe23943a90507a6e9d4583f9522e018162240268ca9de53b`.
+- HTTP checks passed for the homepage, SecretChat page, Studio, sitemap, and exact APK download. Download responses use the APK MIME type, attachment header, and immutable caching.
+- Administrator sign-in was verified without logging credentials.
+- A temporary launch exercised direct 5.3 MB upload, server-side SHA-256 verification, private drafts, public publishing, exact storage download, unpublishing, deletion, and logout. The temporary launch and file were removed afterward.
+- Anonymous requests cannot use launch management or upload endpoints. Cross-origin writes are blocked. Row-level security hides draft rows and APKs from anonymous visitors.
+- Browser preview verified the launch popup, product page, installation instructions, and mobile layout. No browser errors were recorded.
+- Brand display images total about 77 KB, compared with about 2.6 MB for the original displayed PNGs. The opening loader was removed. Original artwork is retained.
+- The package excludes private environment files, credentials, dependencies, Git data, and generated builds.
 
-- TypeScript checks pass.
-- Vercel production build for commit `8b59b1e` is Ready.
-- Live `/admins` renders the studio sign-in page.
-- Live `/api/notices` returns HTTP 200.
-- Live `/api/admin/feedback` returns HTTP 401 without an admin session, as expected.
-- The ZIP contains 126 files and excludes `.env.local`, Git data, and generated build files.
-
-## Backend status
-
-- New project `Kitty Corp Website` (`mgkghnblbisubympudaa`) is active in `ap-south-1`. `supabase/schema.sql` and `supabase/auth-and-limits.sql` have been applied, and its gateway hash is configured.
-- Supabase security advisors found no critical errors. They report informational warnings for RLS-protected private tables without client policies, and two `SECURITY DEFINER` gateway RPCs that require the private gateway token. The notices table also has overlapping admin/public read policies by design.
-- The Supabase Auth admin account exists and its UUID is in the database allowlist.
-- Vercel Production and Preview now use the new project's URL and publishable key, the matching admin email and UUID, and `https://kittycorp.vercel.app` as `SITE_URL`. The existing gateway token remains configured and its hash is installed in Supabase.
-- Admin password sign-in was not submitted during the live check; use the password set on the Supabase Auth account.
-
-## Private files
-
-- `.env.local` and credentials are excluded from the ZIP. The package script checks that the local gateway token is not present in packaged source.
-- Do not place an admin password or Supabase service-role key in the repository or ZIP.
+Checks verify the website and release-delivery flow. They do not constitute an independent security audit of the Android app.

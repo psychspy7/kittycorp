@@ -15,7 +15,7 @@ if (-not $outputRoot.StartsWith($projectRoot + [System.IO.Path]::DirectorySepara
 $archivePath = Join-Path $outputRoot $ArchiveName
 
 $directories = @('app', 'build', 'components', 'db', 'drizzle', 'hooks', 'lib', 'public', 'scripts', 'supabase', 'vendor')
-$rootFiles = @('.env.example', '.gitignore', '.npmrc', '.openai/hosting.json', 'START-HERE.md', 'README.md', 'VERIFICATION.md', 'cloudflare-env.d.ts', 'components.json', 'drizzle.config.ts', 'eslint.config.mjs', 'netlify.toml', 'next.config.ts', 'package-lock.json', 'package.json', 'postcss.config.mjs', 'tsconfig.json', 'vercel.json', 'vite.config.ts')
+$rootFiles = @('.env.example', '.gitignore', '.npmrc', '.openai/hosting.json', 'AGENTS.md', 'CLAUDE.md', 'START-HERE.md', 'README.md', 'VERIFICATION.md', 'cloudflare-env.d.ts', 'components.json', 'drizzle.config.ts', 'eslint.config.mjs', 'netlify.toml', 'next.config.ts', 'package-lock.json', 'package.json', 'postcss.config.mjs', 'tsconfig.json', 'vercel.json', 'vite.config.ts')
 $sourceFiles = [System.Collections.Generic.List[string]]::new()
 foreach ($directory in $directories) {
   Get-ChildItem -LiteralPath (Join-Path $projectRoot $directory) -Recurse -File | ForEach-Object { $sourceFiles.Add($_.FullName) }
@@ -30,7 +30,7 @@ $privateEnvPath = Join-Path $projectRoot '.env.local'
 $privateEnv = if (Test-Path -LiteralPath $privateEnvPath) { [System.IO.File]::ReadAllText($privateEnvPath) } else { '' }
 $gatewaySecret = [regex]::Match($privateEnv, '(?m)^FEEDBACK_GATEWAY_TOKEN=(.+)$').Groups[1].Value.Trim()
 foreach ($file in $sourceFiles) {
-  if ([System.IO.Path]::GetExtension($file) -in @('.png', '.mp4')) { continue }
+  if ([System.IO.Path]::GetExtension($file) -in @('.png', '.webp', '.mp4', '.apk')) { continue }
   $content = [System.IO.File]::ReadAllText($file)
   if ($gatewaySecret.Length -gt 20 -and $content.Contains($gatewaySecret)) { throw "A private credential was found in release source: $file" }
 }
