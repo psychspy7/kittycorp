@@ -15,3 +15,5 @@
 - The package excludes private environment files, credentials, dependencies, Git data, and generated builds.
 
 Checks verify the website and release-delivery flow. They do not constitute an independent security audit of the Android app.
+
+The refined site was verified on the live deployment: desktop and mobile typography, product layouts, mobile navigation, anchor links and early-access confirmation. Geist loaded from the website, with no horizontal overflow at the checked mobile sizes. The live backend integration checks passed; temporary records were removed.
