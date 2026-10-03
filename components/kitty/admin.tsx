@@ -2,6 +2,8 @@
 import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 const AdminLaunches = dynamic(() => import("./admin-launches"), { loading: () => <p className="empty-message">Opening launches…</p> });
+const AdminJournal = dynamic(() => import("./admin-journal"), { loading: () => <p className="empty-message">Opening journal…</p> });
+const AdminEarlyAccess = dynamic(() => import("./admin-early-access"), { loading: () => <p className="empty-message">Opening early access…</p> });
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -306,9 +308,6 @@ export function AdminDashboard() {
             <h1>Inside the studio.</h1>
             <p>A little housekeeping. Then back to building.</p>
           </div>
-          <button className="button button-gold" onClick={() => edit()}>
-            <Plus size={17} /> New notice
-          </button>
         </div>
         {loadError && (
           <div className="form-error" role="alert">
@@ -335,14 +334,20 @@ export function AdminDashboard() {
             <span>Messages from people</span>
           </div>
         </div>
-        <Tabs defaultValue="notices">
+        <Tabs defaultValue="journal">
           <TabsList className="admin-tabs">
-            <TabsTrigger value="notices">Notices & updates</TabsTrigger>
+            <TabsTrigger value="journal">Build journal</TabsTrigger>
             <TabsTrigger value="launches">Apps & launches</TabsTrigger>
+            <TabsTrigger value="early-access">Early access</TabsTrigger>
             <TabsTrigger value="feedback">Inbox</TabsTrigger>
+            <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
           <TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
+          <TabsContent value="journal" className="admin-panel"><AdminJournal /></TabsContent>
+          <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
           <TabsContent value="notices" className="admin-panel">
+            <p className="public-note">Existing notices are kept here. Use Build journal for the new homepage development feed and full articles.</p>
+            <button className="button button-outline" onClick={() => edit()}><Plus size={17} /> New legacy notice</button>
             <div className="panel-heading">
               <h2>The studio notebook</h2>
               <p>Published notes appear on the website immediately.</p>

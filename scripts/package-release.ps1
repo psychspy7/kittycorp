@@ -30,7 +30,7 @@ $privateEnvPath = Join-Path $projectRoot '.env.local'
 $privateEnv = if (Test-Path -LiteralPath $privateEnvPath) { [System.IO.File]::ReadAllText($privateEnvPath) } else { '' }
 $gatewaySecret = [regex]::Match($privateEnv, '(?m)^FEEDBACK_GATEWAY_TOKEN=(.+)$').Groups[1].Value.Trim()
 foreach ($file in $sourceFiles) {
-  if ([System.IO.Path]::GetExtension($file) -in @('.png', '.webp', '.mp4', '.apk')) { continue }
+  if ([System.IO.Path]::GetExtension($file) -in @('.png', '.webp', '.mp4', '.apk', '.woff2')) { continue }
   $content = [System.IO.File]::ReadAllText($file)
   if ($gatewaySecret.Length -gt 20 -and $content.Contains($gatewaySecret)) { throw "A private credential was found in release source: $file" }
 }

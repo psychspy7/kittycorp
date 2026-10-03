@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { publishedLaunches } from "@/lib/launches-server";
 import { launchHref } from "@/lib/launches";
+import { publicJournal } from "@/lib/journal-server";
 export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = process.env.SITE_URL;
@@ -9,5 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: origin, changeFrequency: "weekly", priority: 1 },
     ...(await publishedLaunches()).map((launch) => ({ url: `${origin}${launchHref(launch)}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${origin}/contact`, changeFrequency: "monthly", priority: 0.6 },
+    ...["kitty-ai","sentinel","lisa-ai","research","build-log","investors","privacy"].map(page=>({url:`${origin}/${page}`,changeFrequency:"weekly" as const,priority:0.7})),
+    ...(await publicJournal()).filter(e=>e.kind==="article").map(e=>({url:`${origin}/build-log/${e.slug}`,lastModified:e.updated_at,changeFrequency:"monthly" as const,priority:0.6})),
   ];
 }

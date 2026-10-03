@@ -1,169 +1,37 @@
 "use client";
-import { useState } from "react";
-import { ArrowDown, ArrowUpRight, Menu, Play, X } from "lucide-react";
-import { launchHref, type Launch } from "@/lib/launches";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, Play } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+const navigation = [["Products", "/#products"], ["Research", "/research"], ["Build Log", "/build-log"], ["About", "/#about"]];
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  return (
-    <header className="site-header">
-      <a href="/" className="brand" aria-label="Kitty Corp home">
-        <img src="/brand/monogram-small-v1.webp" alt="" width="44" height="44" />
-        <span>KITTY CORP</span>
-      </a>
-      <nav
-        className={open ? "navigation is-open" : "navigation"}
-        aria-label="Main navigation"
-      >
-        <a onClick={() => setOpen(false)} href="/#story">
-          My story
-        </a>
-        <a onClick={() => setOpen(false)} href="/#vision">
-          The vision
-        </a>
-        <a onClick={() => setOpen(false)} href="/#launches">
-          Our apps <span className="nav-tag">NEW</span>
-        </a>
-        <a onClick={() => setOpen(false)} href="/#kitty-ai">
-          Kitty AI
-        </a>
-        <a onClick={() => setOpen(false)} href="/#updates">
-          Updates
-        </a>
-      </nav>
-      <a className="header-cta" href="/contact">
-        Let’s talk <ArrowUpRight size={16} />
-      </a>
-      <button
-        className="menu-toggle"
-        aria-label={open ? "Close menu" : "Open menu"}
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-      >
-        {open ? <X /> : <Menu />}
-      </button>
-    </header>
-  );
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 24);
+    update(); window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  return <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+    <Link href="/" className="brand" aria-label="KITTY CORP home"><Image unoptimized src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link>
+    <nav className="navigation" aria-label="Main navigation">{navigation.map(([label, href]) => <Link href={href} key={label}>{label}</Link>)}</nav>
+    <Link className="header-cta" href="/#early-access">Join early access</Link>
+    <Dialog open={open} onOpenChange={setOpen}><DialogTrigger asChild><button className="menu-toggle" aria-label="Open navigation"><Menu size={22} /></button></DialogTrigger>
+      <DialogContent className="mobile-navigation"><DialogTitle>KITTY CORP</DialogTitle><DialogDescription>Explore the company and our work.</DialogDescription><nav aria-label="Mobile navigation">{navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label}>{label}</Link>)}<Link onClick={() => setOpen(false)} href="/#early-access">Join early access</Link></nav></DialogContent>
+    </Dialog>
+  </header>;
 }
 export function FilmButton({ className = "" }: { className?: string }) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button className={`film-button ${className}`}>
-          <span className="play-circle">
-            <Play size={13} fill="currentColor" />
-          </span>
-          <span>
-            Watch the reveal
-            <span className="film-caption">A FIRST LOOK AT KITTY CORP</span>
-          </span>
-        </button>
-      </DialogTrigger>
-      <DialogContent className="film-dialog">
-        <DialogTitle>The beginning of Kitty Corp.</DialogTitle>
-        <DialogDescription>The Kitty Corp identity, in motion.</DialogDescription>
-        <video
-          controls
-          autoPlay
-          playsInline
-          preload="metadata"
-          poster="/brand/wordmark-v1.webp"
-        >
-          <source src="/brand/reveal.mp4" type="video/mp4" />
-          Your browser cannot play this video.{" "}
-          <a href="/brand/reveal.mp4">Download the reveal film</a>.
-        </video>
-      </DialogContent>
-    </Dialog>
-  );
+  return <Dialog><DialogTrigger asChild><button className={`film-button ${className}`}><Play size={13} /> Watch the identity film</button></DialogTrigger><DialogContent className="film-dialog"><DialogTitle>KITTY, in motion.</DialogTitle><DialogDescription>A short look at the KITTY CORP identity.</DialogDescription><video controls autoPlay playsInline preload="metadata" poster="/brand/wordmark-v1.webp"><source src="/brand/reveal.mp4" type="video/mp4" />Your browser cannot play this video. <a href="/brand/reveal.mp4">Download the film</a>.</video></DialogContent></Dialog>;
 }
-export function Hero({ featured }: { featured?: Launch }) {
-  return (
-    <section className="hero" aria-labelledby="hero-title">
-      <div className="hero-aura" aria-hidden="true" />
-      <div className="hero-copy">
-        <div className="eyebrow">
-          <span className="tiny-star">✳</span> INDEPENDENT MINDS. UNLIMITED
-          POSSIBILITIES.
-        </div>
-        <h1 id="hero-title">
-          Building
-          <br />
-          what comes
-          <br />
-          <em>next.</em>
-          <span className="heading-star" aria-hidden="true">
-            ✳
-          </span>
-        </h1>
-        <p className="hero-description">
-          A solo founder with a restless imagination.
-          <br />
-          Turning bold ideas into things that matter.
-        </p>
-        <div className="hero-actions">
-          <a className="button button-gold" href={featured ? launchHref(featured) : "#kitty-ai"}>
-            {featured ? `Meet ${featured.name}` : "Explore what’s next"} <ArrowUpRight size={18} />
-          </a>
-          <FilmButton />
-        </div>
-      </div>
-      <div className="hero-art" aria-hidden="true">
-        <div className="orbital orbital-one" />
-        <div className="orbital orbital-two" />
-        <span className="art-cross cross-one">+</span>
-        <span className="art-cross cross-two">+</span>
-        <div className="monogram-stage">
-          <img
-            className="hero-monogram"
-            src="/brand/monogram-v1.webp"
-            alt=""
-            width="1024"
-            height="1024"
-            fetchPriority="high"
-          />
-        </div>
-        <span className="art-coordinate">KC—001 / AN IDEA TAKES SHAPE</span>
-        <span className="art-side">BUILT ON CURIOSITY.</span>
-      </div>
-      <div className="hero-bottom">
-        <a href="#story" className="scroll-cue">
-          <ArrowDown size={16} /> SCROLL TO DISCOVER
-        </a>
-        <span className="hero-note">
-          One founder. Big vision. <span>Real work in progress.</span>
-        </span>
-        <span className="edition">EST. 2026</span>
-      </div>
-    </section>
-  );
+export function Hero() {
+  return <section className="company-hero wrap" aria-labelledby="hero-title">
+    <div className="hero-topline"><span className="eyebrow">INDEPENDENT TECHNOLOGY COMPANY</span><span className="hero-location">Ideas into working things.</span></div>
+    <div className="company-hero-grid"><div><h1 id="hero-title">We build technology<br className="desktop-break" /> we actually<br className="desktop-break" /> <span>want to use.</span></h1><p className="hero-description">KITTY CORP is an independent technology company working on personal AI, autonomous systems and intelligent software.</p><div className="hero-actions"><Link className="button button-gold" href="#products">Explore what we’re building</Link><Link className="button button-outline" href="#currently">Follow our progress</Link></div><p className="hero-small-note">Built by a small team. Still early. Shipping constantly.</p></div><div className="company-mark" aria-hidden="true"><Image unoptimized src="/brand/silver-mark-v1.webp" alt="" width={800} height={800} preload /><span>KEEP BUILDING.</span></div></div>
+    <div className="hero-baseline"><span>AI / AUTONOMOUS SYSTEMS / INTELLIGENT SOFTWARE</span><FilmButton /></div>
+  </section>;
 }
 export function SiteFooter() {
-  return (
-    <footer className="site-footer">
-      <div className="footer-top">
-        <a className="brand" href="/">
-          <img src="/brand/monogram-small-v1.webp" alt="" width="40" height="40" />
-          <span>KITTY CORP</span>
-        </a>
-        <p>Curiosity is the starting point.</p>
-        <a href="/contact">
-          Say hello <ArrowUpRight size={16} />
-        </a>
-      </div>
-      <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Kitty Corp</span>
-        <span>Independently built. Always in progress.</span>
-        <a href="/admins">
-          Studio access <ArrowUpRight size={12} />
-        </a>
-      </div>
-    </footer>
-  );
+  return <footer className="site-footer"><div className="wrap"><div className="footer-grid"><div className="footer-identity"><Link className="brand" href="/"><Image unoptimized src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link><p>Independent technology company<br />building AI and autonomous systems.</p></div><div className="footer-links"><span className="micro-label">EXPLORE</span><Link href="/#about">Company</Link><Link href="/kitty-ai">KITTY AI</Link><Link href="/sentinel">KITTY Sentinel</Link><Link href="/lisa-ai">LISA AI</Link><Link href="/secretchat">SecretChat</Link></div><div className="footer-links"><span className="micro-label">FOLLOW THE WORK</span><Link href="/build-log">Build Log</Link><Link href="/research">Research</Link><Link href="/contact">Contact</Link><Link href="/investors">Investors & Partnerships</Link></div><div className="footer-links"><span className="micro-label">ELSEWHERE</span><a href="https://github.com/psychspy7" target="_blank" rel="noreferrer">GitHub</a><span className="social-pending">LinkedIn / X / Instagram / YouTube<span>Official profiles to follow.</span></span></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} KITTY CORP</span><span>Small team. Real work.</span><Link href="/admins">Studio</Link></div></div></footer>;
 }

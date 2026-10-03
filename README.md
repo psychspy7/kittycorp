@@ -1,14 +1,19 @@
 # Kitty Corp
 
-A responsive brand website with a protected Studio, contact inbox, notices, and Android app launches. Built with Next.js, TypeScript, React, Tailwind CSS, and Supabase.
+A restrained company website for an early-stage team, with product pages, an engineering journal, an early-access list and protected Studio. Built with Next.js, TypeScript, React, Tailwind CSS and Supabase.
 
 ## Pages
 
-- `/`: brand story, products, launches, public updates, and support.
+- `/`: company, products, development feed, founders and early access.
+- `/kitty-ai`, `/sentinel`, `/lisa-ai`: product directions and development notes.
+- `/build-log` and `/build-log/[slug]`: category-filtered journal and full articles.
+- `/research`: current areas of exploration.
+- `/investors`: company overview and partnership conversations.
+- `/privacy`: website form and email-list privacy.
 - `/secretchat`: Android download, installation guide, and privacy explanation.
 - `/launches/[slug]`: download pages for apps published from Studio.
 - `/contact`: contact form.
-- `/admins`: private Studio, including **Apps & launches**.
+- `/admins`: private Studio for the build journal, apps, early access, contact inbox and legacy notices.
 
 ## Run locally
 
@@ -16,7 +21,17 @@ Use Node.js 24 and the committed lockfile. Run `npm ci`, copy `.env.example` to 
 
 `npm run typecheck` checks TypeScript. `npm run build:next` creates the native production build. Vercel and Netlify configuration files are included. The alternative Sites build uses `npm run build`.
 
-## Publish apps from Studio
+## Manage the build journal and early list
+
+Open **Build journal** to write a full article or a short development update. Add a title, address, summary, body, category, status and date. Optional covers use public HTTPS image addresses and require an image description. Separate body paragraphs with blank lines; `## ` starts a section heading. HTML is displayed as text. Keep published work factual; prototypes and plans should be labeled clearly.
+
+Unpublished entries are private. Entries dated in the future stay hidden until that UTC date. Updates appear in **Currently at KITTY**; full articles get their own pages. Publishing and editing update the website without a code deployment. The journal stores up to 20,000 body characters, within the form service's 32 KB request limit.
+
+Open **Early access** to view signups, selected interests, export loaded entries or remove someone from the list. Load every page before exporting the complete list. The website records signups; it does not automatically send email campaigns. Public visitors cannot read the email list. Submissions use the existing server-only gateway, rate limiting and spam checks.
+
+**Legacy notices** preserves the earlier notice manager. Use the build journal for the redesigned public feed.
+
+## Android launches
 
 Sign in to Studio and open **Apps & launches**. Choose **New launch**, or edit an existing app. Add its name, page address, headline, description, version, Android requirement, and release notes. Upload a trusted signed release APK, enable **Publish on the website**, and save. These content updates require no GitHub push or redeployment.
 
@@ -38,6 +53,6 @@ Files under `supabase/` document schema and access policies. They are first-inst
 
 ## Presentation and verification
 
-Original brand artwork and video remain in `public/brand/`. Display images use smaller WebP copies. The reveal video loads when opened. Keyboard-accessible dialogs, reduced-motion handling, responsive layouts, and metadata are included.
+Original brand artwork and video remain in `public/brand/`. Display images use smaller WebP copies. Geist fonts are self-hosted under the included SIL Open Font License. The reveal video loads only when opened. Keyboard-accessible dialogs, reduced-motion handling, responsive layouts and metadata are included. Founder photos and unreleased product demos remain explicitly labeled placeholders. Only verified social addresses are linked.
 
 See `VERIFICATION.md` for completed checks. The release ZIP excludes credentials, dependencies, Git data, and generated build output.

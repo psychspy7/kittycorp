@@ -14,16 +14,16 @@ export function LaunchAnnouncement({ launch }: { launch: Launch }) {
     try { if (sessionStorage.getItem(visitKey)) return; } catch { /* The announcement also works with storage disabled. */ }
     const timer = window.setTimeout(() => {
       // Do not interrupt a film, notice, or menu already opened by the visitor.
-      if (document.querySelector('[role="dialog"], .navigation.is-open')) return;
+      if (document.querySelector('[role="dialog"], .navigation.is-open') || document.activeElement?.matches('input, textarea, select')) return;
       setOpen(true);
       try { sessionStorage.setItem(visitKey, "seen"); } catch { /* No storage is required to download. */ }
-    }, 1200);
+    }, 7000);
     return () => window.clearTimeout(timer);
   }, [visitKey]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="launch-dialog" onCloseAutoFocus={(event) => { event.preventDefault(); document.getElementById("secretchat-launch-link")?.focus(); }}>
+      <DialogContent className="launch-dialog" onCloseAutoFocus={(event) => { event.preventDefault(); document.getElementById("secretchat-launch-link")?.focus({ preventScroll: true }); }}>
         <span className="micro-label">CHECK OUT OUR NEW LAUNCH</span>
         {launch.slug === "secretchat" ? <SecretChatMark size={88} /> : <span className="launch-generic-icon"><Rocket size={42} /></span>}
         <DialogTitle>Meet <em>{launch.name}.</em></DialogTitle>

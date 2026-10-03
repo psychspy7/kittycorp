@@ -60,10 +60,10 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         <span className="success-circle">
           <Check size={28} />
         </span>
-        <h2>You’re in my inbox.</h2>
+        <h2>Your message is with us.</h2>
         <p>
-          Thanks for taking the time. I’ll read your message and get back to
-          you when I can.
+          Thanks for taking the time. We’ll read your message and get back to
+          you when we can.
         </p>
         <button
           className="button button-outline"
@@ -79,7 +79,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
   return (
     <form className="contact-form" onSubmit={submit}>
       <div className="form-heading">
-        <h2>Tell me what’s on your mind.</h2>
+        <h2>Tell us what’s on your mind.</h2>
         <span>01 — START A CONVERSATION</span>
       </div>
       <div className="form-field">
@@ -87,7 +87,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         <input
           id="contact-name"
           name="name"
-          placeholder="What should I call you?"
+          placeholder="What should we call you?"
           autoComplete="name"
           required
           minLength={2}

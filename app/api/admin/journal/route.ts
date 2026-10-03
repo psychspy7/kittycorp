@@ -1,0 +1,4 @@
+import { failure, HttpError, privateJson, readBody, requireAdmin, verifyOrigin } from "@/lib/kitty-server";
+import { entrySchema, refreshJournal } from "@/lib/journal-server";
+export async function GET(){try{const {db}=await requireAdmin();const {data,error}=await db.from("kitty_website_journal").select("*").order("entry_date",{ascending:false}).order("created_at",{ascending:false}).limit(200);if(error)throw error;return privateJson({entries:data});}catch(e){return failure(e);}}
+export async function POST(request:Request){try{verifyOrigin(request);const {db}=await requireAdmin();const value=entrySchema.parse(await readBody(request));const {data,error}=await db.from("kitty_website_journal").insert(value).select().single();if(error){if(error.code==="23505")throw new HttpError("That page address is already in use.",409);throw error;}refreshJournal();return privateJson({entry:data});}catch(e){return failure(e);}}

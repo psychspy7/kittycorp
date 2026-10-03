@@ -1,0 +1,14 @@
+import { SiteHeader,SiteFooter } from "@/components/kitty/site";
+import { JournalCards } from "@/components/kitty/journal";
+import { publicJournal } from "@/lib/journal-server";
+export const dynamic="force-dynamic";
+export const metadata={title:"Research",description:"The questions KITTY CORP is exploring across AI, autonomy, robotics, computer vision and cybersecurity."};
+const areas=[
+  ["Personal AI","How can memory and voice make AI more useful without reducing the user’s control? We’re exploring context, interaction and privacy together."],
+  ["Autonomous systems","Software that can take on bounded tasks, with clear limits and a way for a person to step in. We’re interested in reliability before breadth."],
+  ["Robotics","Our Sentinel prototype is a starting point for learning how intelligent systems behave outside the screen."],
+  ["Computer vision","How systems perceive their surroundings, notice obstacles and make sense of visual information. These are experiments, not finished capabilities."],
+  ["Cybersecurity","On-device encryption, private communication and practical user control. SecretChat is one way we’re putting those interests into a product."],
+  ["Intelligent software","Interfaces that feel responsive and personal. LISA AI is an early exploration of presence and expressive interaction."],
+];
+export default async function Research(){const entries=(await publicJournal().catch(()=>[])).filter(e=>e.kind==="article"&&e.category==="Research");return <><SiteHeader/><main id="main" className="public-page wrap"><div className="page-heading"><span className="eyebrow">QUESTIONS BEFORE ANSWERS</span><h1>What we’re exploring.</h1><p>Six areas that keep pulling us back to the workbench. We’re a small team; these are directions we’re investigating, not a list of breakthroughs.</p></div><div className="research-rows">{areas.map(([title,copy],i)=><article className="research-row" key={title}><span>0{i+1}</span><h2>{title}</h2><p>{copy}</p></article>)}</div><p className="public-note">We’ll publish experiments, observations and technical notes as they become useful. We don’t have formal research papers or independent product audits to share yet.</p>{entries.length>0&&<section className="product-development"><h2>Research notes</h2><JournalCards entries={entries}/></section>}</main><SiteFooter/></>;}

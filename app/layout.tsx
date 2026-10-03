@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import "./globals.css";
+import "./refined.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
   title: {
-    default: "Kitty Corp — Building what comes next.",
+    default: "KITTY CORP — Technology we actually want to use.",
     template: "%s · Kitty Corp",
   },
   description:
-    "One founder. Big ideas. Meet SecretChat for Android: private rooms and encrypted conversations. Discover Kitty Corp’s products, experiments, and what comes next.",
+    "KITTY CORP is an independent technology company building personal AI, autonomous systems and intelligent software. Small team. Real work in progress.",
   icons: { icon: "/brand/monogram.png", apple: "/brand/monogram.png" },
   openGraph: {
-    title: "Kitty Corp — Building what comes next.",
-    description: "Solo founder. Big vision. Real work in progress.",
+    title: "KITTY CORP — Technology we actually want to use.",
+    description: "Personal AI, autonomous systems and intelligent software, built by a small team.",
     type: "website",
     siteName: "Kitty Corp",
   },
   twitter: {
     card: "summary",
     title: "Kitty Corp",
-    description: "Building what comes next.",
+    description: "Still early. Still building.",
   },
 };
 export default function RootLayout({
@@ -27,6 +28,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="dark">
+      <head><link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /></head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

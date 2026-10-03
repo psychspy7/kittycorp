@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowUpRight, MessageSquare } from "lucide-react";
 import { ContactForm } from "@/components/kitty/contact-form";
 import { SiteHeader, SiteFooter } from "@/components/kitty/site";
 export const metadata: Metadata = {
   title: "Let’s talk",
   description:
-    "An idea, some feedback, a question. Talk to the solo founder building Kitty Corp.",
+    "An idea, some feedback, a question. Talk to the founders building KITTY CORP.",
 };
 export default async function ContactPage({
   searchParams,
@@ -25,22 +26,22 @@ export default async function ContactPage({
           <div className="contact-copy">
             <MessageSquare size={29} strokeWidth={1.1} />
             <h1>
-              Big ideas.
+              A good place
               <br />
-              Small hellos.
+              to start a
               <br />
-              <em>All welcome.</em>
+              <em>conversation.</em>
             </h1>
             <p>
-              Tell me what you’re thinking. A possibility I haven’t seen.
-              Something I could do better. Or just a hello.
+              Tell us what you’re thinking. Feedback on something we’re building.
+              A possible collaboration. Or just a hello.
             </p>
-            <p>There’s a real person on the other side.</p>
-            <a href="/#kitty-ai" className="text-link">
-              See what I’m building <ArrowUpRight size={17} />
-            </a>
+            <p>Virat and Sarthak read the messages here.</p>
+            <Link href="/#products" className="text-link">
+              See what we’re building <ArrowUpRight size={17} />
+            </Link>
           </div>
-          <ContactForm subject={subject === "Kitty AI" ? "Kitty AI" : ""} />
+          <ContactForm subject={["Kitty AI", "KITTY AI", "Partnership", "Privacy"].includes(subject || "") ? subject : ""} />
         </div>
       </main>
       <SiteFooter />

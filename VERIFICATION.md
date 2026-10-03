@@ -1,6 +1,9 @@
 # Verification — 3 October 2026
 
 - TypeScript checks and the Next.js production build passed.
+- The redesign's company, product, research, investor, privacy, journal and article routes passed HTTP checks. Both founders appear in the homepage copy.
+- Studio sign-in, journal creation/editing/deletion, private drafts and future-dated publication were verified against the website backend. Temporary test entries were removed.
+- Early-access submissions, selected interests, duplicate handling, validation, private list access, anti-spam timing, cross-origin blocking and gateway authorization passed integration checks. The temporary signup was removed.
 - The new launch code passed targeted lint checks.
 - SecretChat 1.5.0 build 6 passed Android `apksigner` verification, package/label checks, release-mode checks, and the private-credential scan. SHA-256: `b32be6a4ac9555a1fe23943a90507a6e9d4583f9522e018162240268ca9de53b`.
 - HTTP checks passed for the homepage, SecretChat page, Studio, sitemap, and exact APK download. Download responses use the APK MIME type, attachment header, and immutable caching.
