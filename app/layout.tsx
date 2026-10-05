@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
+import { GoogleAnalytics } from "@/components/kitty/google-analytics";
+import { googleAnalyticsId } from "@/lib/analytics-config";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
@@ -35,6 +38,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
         <Toaster theme="light" position="bottom-right" richColors />
       </body>
     </html>
