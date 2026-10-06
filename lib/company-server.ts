@@ -3,7 +3,7 @@ import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { database, HttpError } from "./kitty-server";
-import { defaultProducts, defaultSettings, defaultTeam, MEDIA_BUCKET, mediaPathPattern, type CompanyProduct, type CompanySettings, type TeamMember } from "./company-content";
+import { defaultProducts, defaultSettings, defaultTeam, MEDIA_BUCKET, mediaPathPattern, type CompanyProduct, type CompanySettings, type MediaKind, type TeamMember } from "./company-content";
 
 const publicLink = z.string().trim().max(1000).refine(value => {
   if (!value) return true;
@@ -24,7 +24,7 @@ export const companySettings=cache(async():Promise<CompanySettings>=>{
   try{const {data,error}=await database().from("kitty_website_company").select("*").eq("id","company").single();if(error)throw error;return data as CompanySettings;}catch{return defaultSettings;}
 });
 export function refreshCompany(){for(const path of ["/","/products","/company","/team","/kitty-ai","/lisa-ai","/sentinel","/secretchat","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
-export async function verifyImage(db:ReturnType<typeof database>,path:string|null,kind:"icons"|"portraits"){
+export async function verifyImage(db:ReturnType<typeof database>,path:string|null,kind:MediaKind){
   if(!path)return;
   if(!mediaPathPattern.test(path)||!path.startsWith(kind+"/"))throw new HttpError("Choose an image uploaded for this field.",400);
   const {data,error}=await db.storage.from(MEDIA_BUCKET).download(path);
