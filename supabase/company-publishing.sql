@@ -56,7 +56,7 @@ create policy "Website admins edit company" on public.kitty_website_company for 
 -- New UUID filenames make replacements immediately visible, with immutable caching.
 insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types)
 values('kitty-website-media','kitty-website-media',true,3145728,array['image/webp']);
-create policy "Website admins upload public media" on storage.objects for insert to authenticated with check(bucket_id='kitty-website-media' and name ~ '^(icons|portraits|screenshots)/[0-9a-f-]{36}\.webp and (select kitty_website_private.is_admin()));
+create policy "Website admins upload public media" on storage.objects for insert to authenticated with check(bucket_id='kitty-website-media' and name ~ '^(icons|portraits|screenshots)/[0-9a-f-]{36}\.webp$' and (select kitty_website_private.is_admin()));
 create policy "Website admins inspect public media" on storage.objects for select to authenticated using(bucket_id='kitty-website-media' and (select kitty_website_private.is_admin()));
 create policy "Website admins remove public media" on storage.objects for delete to authenticated using(bucket_id='kitty-website-media' and (select kitty_website_private.is_admin()));
 
