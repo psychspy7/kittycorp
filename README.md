@@ -15,7 +15,7 @@ A restrained company website for an early-stage team, with product pages, an eng
 - `/investors`: company overview and partnership conversations.
 - `/privacy`: website form and email-list privacy.
 - `/secretchat`: Android download, installation guide, and privacy explanation.
-- `/launches/[slug]`: download pages for apps published from Studio.
+- `/launches/[slug]`: launch pages for Android apps and websites published from Studio.
 - `/contact`: contact form.
 - `/admins`: private Studio for the build journal, apps, early access, contact inbox and legacy notices.
 
@@ -35,11 +35,11 @@ Open **Early access** to view signups, selected interests, export loaded entries
 
 **Legacy notices** preserves the earlier notice manager. Use the build journal for the redesigned public feed.
 
-## Android launches
+## App and website launches
 
-Sign in to Studio and open **Apps & launches**. Choose **New launch**, or edit an existing app. Add its name, page address, headline, description, version, Android requirement, and release notes. Upload a trusted signed release APK, enable **Publish on the website**, and save. These content updates require no GitHub push or redeployment.
+Sign in to Studio and open **Apps & websites**. Choose **New launch** and select either **Android app** or **Website**. Android launches keep the existing signed-APK flow. Website launches accept a live HTTPS URL, separate icon, one optimized screenshot, description and optional extra details. Enable **Publish on the website** and save. These content updates require no GitHub push or redeployment.
 
-The newest published launch with **Show launch popup** enabled is announced once per browser session. Published apps also have persistent homepage entries and download pages. Turning publishing off hides the page, announcement, and download link. Files already downloaded by visitors cannot be recalled.
+The newest published launch with **Show launch popup** enabled is announced once per browser session. Published apps and websites also have persistent homepage entries and their own launch pages. Website actions open the configured live HTTPS address; app actions keep the APK download. Turning publishing off hides the page, announcement, and download link. Files already downloaded by visitors cannot be recalled.
 
 APKs may be up to 50 MB. Uploads go directly to private storage through a temporary URL, avoiding the hosting provider's request-body limit. Drafts and unpublished uploads are restricted to the signed-in administrator.
 
@@ -65,7 +65,7 @@ See `VERIFICATION.md` for completed checks. The release ZIP excludes credentials
 
 The existing website backend has been updated with `supabase/company-publishing.sql`. This is a one-time schema snapshot for a new setup; do not reapply it to the configured project. No additional environment settings are needed.
 
-Studio’s **Products** tab edits the three development-stage products. **Apps & launches** retains APK publishing and now accepts separate app icons. Uploaded website images are resized, stripped of metadata, and saved as WebP under unique filenames. **Team** manages real profiles and the complete suggested role list, with custom roles, visibility and order. **Company & socials** controls company links and team copy. Image uploads are intentionally public website assets; private APK drafts remain in the separate releases bucket.
+Studio’s **Products** tab edits the three development-stage products. **Apps & websites** supports APK publishing plus website launches with separate icons and screenshots. Uploaded website images are resized, stripped of metadata, and saved as WebP under unique filenames. **Team** manages real profiles and the complete suggested role list, with custom roles, visibility and order. **Company & socials** controls company links and team copy. Image uploads are intentionally public website assets; private APK drafts remain in the separate releases bucket.
 
 The services form posts validated briefs to the existing private Studio inbox. It uses the same server-only gateway, timing checks, origin validation and submission rate limits as contact messages. The public site shows no invented clients, completed commissions or prices.
 
