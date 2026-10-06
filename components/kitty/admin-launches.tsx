@@ -194,8 +194,12 @@ export default function AdminLaunches() {
               setDraft(current => ({
                 ...current,
                 launch_type,
-                version: launch_type === "website" && current.version === "1.0.0" ? "Live" : current.version,
-                android: launch_type === "website" && current.android === "Android 7.0+" ? "Web" : current.android,
+                version: launch_type === "website"
+                  ? (current.version === "1.0.0" ? "Live" : current.version)
+                  : (current.version === "Live" ? "1.0.0" : current.version),
+                android: launch_type === "website"
+                  ? (current.android === "Android 7.0+" ? "Web" : current.android)
+                  : (current.android === "Web" ? "Android 7.0+" : current.android),
               }));
             }}>
               <option value="app">Android app</option>
