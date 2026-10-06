@@ -4,8 +4,8 @@ import { AppIcon, SecretChatDownload } from "./secretchat";
 export function LaunchGrid({ launches }: { launches: Launch[] }) {
   if (!launches.length) return null;
   return <section className="section launch-catalog" aria-labelledby="launch-catalog-title">
-    <div className="section-kicker"><span>FROM THE STUDIO / AVAILABLE NOW</span><span className="kicker-line" /></div>
-    <h2 id="launch-catalog-title">Ideas you can <em>take with you.</em></h2>
+    <div className="section-kicker"><span>FROM THE STUDIO / LIVE NOW</span><span className="kicker-line" /></div>
+    <h2 id="launch-catalog-title">Things you can <em>use right now.</em></h2>
     <div className="launch-card-grid">{launches.map((launch) => {
       const website = launch.launch_type === "website";
       return <article className="launch-card" key={launch.id}>
