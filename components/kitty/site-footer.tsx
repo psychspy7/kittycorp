@@ -17,6 +17,6 @@ export async function SiteFooter() {
       <div className="footer-links"><span className="micro-label">WORK WITH US</span><Link href="/services">Websites & applications</Link><Link href="/build-log">Build Log</Link><Link href="/research">Research</Link><Link href="/contact">Contact</Link><Link href="/investors">Investors & Partnerships</Link></div>
       <div className="footer-links"><span className="micro-label">ELSEWHERE</span>{links.length ? links.map(([key, url]) => <a href={url} key={key} target="_blank" rel="noopener noreferrer">{socialLabels[key as keyof SocialLinks]}</a>) : <span className="social-pending">Official profiles to follow.</span>}</div>
     </div>
-    <div className="footer-bottom"><span>© {new Date().getFullYear()} KITTY CORP</span><span>Independent technology company.</span><Link href="/privacy">Privacy</Link><AnalyticsSettingsButton enabled={!!googleAnalyticsId()}/><a href="/admins">Studio</a></div>
+    <div className="footer-bottom"><span>© {new Date().getFullYear()} KITTY CORP</span><span>Independent technology company.</span><Link href="/privacy">Privacy</Link><AnalyticsSettingsButton measurementId={googleAnalyticsId()}/><a href="/admins">Studio</a></div>
   </div></footer>;
 }

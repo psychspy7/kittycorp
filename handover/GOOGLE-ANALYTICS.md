@@ -4,11 +4,11 @@ The website uses GA4 property **557240548** (`kittycorp.vercel.app`) and website
 
 ## Where to view visits
 
-Open [Google Analytics](https://analytics.google.com/), select **kittycorp.vercel.app**, and open **Reports → Realtime** for recent visitors. Standard reports need time to process new data; do not expect them to update instantly. Only visitors who allow analytics are measured, and blockers can prevent collection.
+Open [Google Analytics](https://analytics.google.com/), select **kittycorp.vercel.app**, and open **Reports → Realtime** for recent visitors. Standard reports need time to process new data; do not expect them to update instantly. Visitors with a saved opt-out are excluded, and blockers can prevent collection.
 
 ## Visitor choice and privacy
 
-The Google script loads after a visitor chooses **Allow analytics**. **No thanks** keeps it off. The footer's **Analytics settings** button lets visitors change their choice. Permission is remembered locally for 180 days. Advertising consent stays denied; Google signals are disabled. Declining again disables collection and clears the website's GA cookies.
+Analytics starts automatically on public pages after hydration, unless this browser has a saved opt-out. There is no acceptance banner. The footer's **Disable analytics** button stops collection and clears the website's GA cookies; it becomes **Enable analytics** to resume. Previous saved declines are respected. Preferences are remembered locally for 180 days. Advertising consent stays denied; Google signals are disabled. The privacy page describes this behavior.
 
 Only known public pages send manual page views, including navigation between pages without a reload. Studio, API routes, query strings, fragments and form field contents are excluded. Studio's footer link opens a fresh document so its session does not inherit the public-page Google tag. New public routes must be added deliberately to `lib/site-analytics.ts`.
 
@@ -20,6 +20,6 @@ The public default is in `lib/analytics-config.ts`. An optional server environme
 
 Files involved: `app/layout.tsx`, `components/kitty/google-analytics.tsx`, `lib/site-analytics.ts`, `lib/analytics-config.ts`, `components/kitty/site-footer.tsx`, `app/final.css`, `app/privacy/page.tsx`, and `.env.example`.
 
-Run `node scripts/test-analytics.mjs`, `npm run typecheck`, and `npm run build:next` after changes. Check consent controls on mobile and desktop and confirm public visits in Realtime. Do not add a second copy of the Google tag or store private credentials in any analytics event.
+Run `node scripts/test-analytics.mjs`, `npm run typecheck`, and `npm run build:next` after changes. Check automatic loading and the footer opt-out on mobile and desktop, and confirm public visits in Realtime. Do not add a second copy of the Google tag or store private credentials in any analytics event.
 
 Reference: [Google's page-view guidance](https://developers.google.com/analytics/devguides/collection/ga4/views), [consent guidance](https://developers.google.com/tag-platform/security/guides/consent), and [collection opt-out](https://developers.google.com/tag-platform/security/guides/privacy).

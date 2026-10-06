@@ -1,6 +1,5 @@
 export const ANALYTICS_CHOICE_KEY = "kitty-analytics-consent-v1";
 export const ANALYTICS_CHOICE_EVENT = "kitty:analytics-choice";
-export const ANALYTICS_SETTINGS_EVENT = "kitty:analytics-settings";
 export type AnalyticsChoice = "accepted" | "declined";
 
 type AnalyticsWindow = Window & {
@@ -83,7 +82,7 @@ export function pauseAnalytics(id: string) {
 
 export function configureAnalytics(id: string, pathname: string) {
   const target = analyticsWindow();
-  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() !== "accepted") return false;
+  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() === "declined") return false;
   target.dataLayer ||= [];
   target.gtag ||= function (...args: unknown[]) {
     // Google's command queue uses the function's Arguments object.
@@ -111,7 +110,7 @@ export function configureAnalytics(id: string, pathname: string) {
 
 export function trackPageView(id: string, pathname: string, previous: string) {
   const target = analyticsWindow();
-  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() !== "accepted" || target[`ga-disable-${id}`]) return;
+  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() === "declined" || target[`ga-disable-${id}`]) return;
   const pageLocation = window.location.origin + pathname;
   target.gtag?.("set", { page_location: pageLocation, page_referrer: analyticsReferrer(previous || document.referrer, window.location.origin) });
   target.gtag?.("event", "page_view", {
