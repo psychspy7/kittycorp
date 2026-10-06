@@ -2,7 +2,8 @@ import { productPages } from "./products";
 
 export const MEDIA_BUCKET = "kitty-website-media";
 export const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
-export const mediaPathPattern = /^(icons|portraits)\/[0-9a-f-]{36}\.webp$/;
+export type MediaKind = "icons" | "portraits" | "screenshots";
+export const mediaPathPattern = /^(icons|portraits|screenshots)\/[0-9a-f-]{36}\.webp$/;
 export const mediaHref = (path: string) => `/api/media/${path}`;
 export const socialLabels = { github: "GitHub", linkedin: "LinkedIn", x: "X", instagram: "Instagram", youtube: "YouTube", website: "Website" } as const;
 export type SocialLinks = Partial<Record<keyof typeof socialLabels, string>>;

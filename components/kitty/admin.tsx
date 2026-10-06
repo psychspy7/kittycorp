@@ -355,7 +355,7 @@ export function AdminDashboard() {
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
-            <TabsTrigger value="launches">Apps & launches</TabsTrigger>
+            <TabsTrigger value="launches">Apps & websites</TabsTrigger>
 <TabsTrigger value="products">Products</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
 <TabsTrigger value="company">Company & socials</TabsTrigger>
@@ -366,7 +366,7 @@ export function AdminDashboard() {
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
-              {[["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & launches","Upload an APK, replace an app icon separately, and publish a release or launch announcement."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows the CEO and co-founder; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows the CEO and co-founder; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>

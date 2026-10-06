@@ -1,6 +1,7 @@
 -- Website launches and private release files. Apply once with the Supabase migration tool.
 create table public.kitty_website_launches (
   id uuid primary key default gen_random_uuid(),
+  launch_type text not null default 'app' check (launch_type in ('app','website')),
   slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$' and char_length(slug) between 3 and 60),
   name text not null check (char_length(name) between 2 and 80),
   tagline text not null check (char_length(tagline) between 3 and 140),
@@ -8,6 +9,8 @@ create table public.kitty_website_launches (
   release_notes text not null default '' check (char_length(release_notes) <= 4000),
   version text not null check (char_length(version) between 1 and 40),
   android text not null default 'Android 7.0+' check (char_length(android) between 3 and 60),
+  website_url text check (website_url is null or website_url ~ '^https://[^[:space:]]+$'),
+  screenshot_path text check (screenshot_path is null or screenshot_path ~ '^screenshots/[0-9a-f-]{36}\.webp$'),
   apk_path text check (apk_path = '/downloads/SecretChat-1.5.0-build6.apk' or apk_path ~ '^releases/[0-9a-f-]{36}/[0-9a-f-]{36}\.apk$'),
   apk_sha256 text check (apk_sha256 ~ '^[a-f0-9]{64}$'),
   apk_bytes bigint check (apk_bytes between 1 and 52428800),
@@ -16,7 +19,15 @@ create table public.kitty_website_launches (
   published_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  constraint published_launch_has_apk check (not published or (apk_path is not null and apk_sha256 is not null and apk_bytes is not null and published_at is not null))
+  constraint published_launch_requirements check (
+    not published or (
+      published_at is not null and (
+        (launch_type='app' and apk_path is not null and apk_sha256 is not null and apk_bytes is not null)
+        or
+        (launch_type='website' and website_url is not null and screenshot_path is not null)
+      )
+    )
+  )
 );
 alter table public.kitty_website_launches enable row level security;
 grant select on public.kitty_website_launches to anon, authenticated;
