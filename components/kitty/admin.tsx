@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 const AdminProducts = dynamic(() => import("./admin-products"));
+const AdminMaintenance = dynamic(() => import("./admin-maintenance"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
@@ -363,12 +364,13 @@ export function AdminDashboard() {
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
             <TabsTrigger value="journal">Build log & updates</TabsTrigger>
             <TabsTrigger value="early-access">Early access</TabsTrigger>
+            <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
-              {[["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows the CEO and co-founder; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["maintenance","Site controls","Take the public website offline for maintenance or bring it back online."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows the CEO and co-founder; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>
@@ -379,6 +381,7 @@ export function AdminDashboard() {
 <TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
           <TabsContent value="journal" className="admin-panel"><AdminJournal /></TabsContent>
           <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
+          <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
           <TabsContent value="notices" className="admin-panel">
             <p className="public-note">Existing notices are kept here. Use Build journal for the new homepage development feed and full articles.</p>
             <button className="button button-outline" onClick={() => edit()}><Plus size={17} /> New legacy notice</button>
