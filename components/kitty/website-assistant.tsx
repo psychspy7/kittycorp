@@ -39,7 +39,7 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
     if (conversation.current) conversation.current.scrollTop = conversation.current.scrollHeight;
   }, [messages, busy]);
 
-  if (!settings.enabled || pathname.startsWith("/admins") || pathname.startsWith("/auth/")) return null;
+  if (!settings.enabled || pathname.startsWith("/admins") || pathname.startsWith("/kitten") || pathname.startsWith("/auth/")) return null;
 
   function close() { setOpen(false); trigger.current?.focus(); }
   function reset() { if (busy) return; setMessages([]); setError(""); setInput(""); field.current?.focus(); }

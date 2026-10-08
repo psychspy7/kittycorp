@@ -45,7 +45,9 @@ export async function setStudioSession(token: string, expiresIn: number) {
   (await cookies()).set(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    // OAuth returns through another site. Lax sends this cookie on the final
+    // top-level GET; sensitive writes still require our same-origin checks.
+    sameSite: "lax",
     path: "/",
     maxAge: Math.max(0, Math.min(expiresIn, 3600)),
   });

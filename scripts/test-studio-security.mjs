@@ -27,6 +27,10 @@ const sql = readFileSync("supabase/studio-google-security.sql","utf8");
 assert.equal((sql.match(/language sql(?: stable)? security invoker set search_path='' as \$\$select kitty_website_private\.studio_/g)||[]).length,4);
 const publicHeaders=sql.match(/create or replace function public\.kitty_website_studio_[a-z]+\([^;]*?as \$\$/g)||[];
 assert.equal(publicHeaders.length,4); assert(publicHeaders.every(header=>header.includes("security invoker")&&!header.includes("security definer")));
+const googleOnlySql=readFileSync("supabase/studio-google-only.sql","utf8");
+assert.match(googleOnlySql,/language sql security invoker/);
+assert.match(googleOnlySql,/i\.provider='google' and i\.provider_id=p_google_subject/);
+assert.match(googleOnlySql,/m->>'method'='oauth'/);
 const jar = new Map();
 const cookieWrites = [];
 const cookieStore = { get: name => jar.has(name) ? { name, value: jar.get(name) } : undefined,
@@ -46,6 +50,7 @@ let lastFlow;
 let issuedSession;
 let codeUsed = false;
 let completions = 0;
+let grantFails = false;
 class HttpError extends Error { constructor(message,status) { super(message); this.status = status; } }
 function database(token) {
   return {
@@ -56,17 +61,10 @@ function database(token) {
     rpc: async (name,args) => {
       if (name === "kitty_website_studio_security") return { data: { google_enforced: true }, error: null };
       if (name === "kitty_website_admin_status") return { data: live.has(token) && granted.has(token), error: null };
-      if (name === "kitty_website_studio_begin") {
-        assert.equal(token,passwordToken); assert(live.has(token));
-        challenges.set(args.p_challenge_id,{ ...args, expiresAt: Date.now()+300000, consumed: false });
-        return { error: null };
-      }
-      if (name === "kitty_website_studio_complete") {
-        const pending = challenges.get(args.p_challenge_id);
-        if (token !== googleToken || !pending || pending.consumed || pending.expiresAt <= Date.now() || !live.has(passwordToken)
-          || args.p_challenge_token !== pending.p_challenge_token || args.p_flow_hash !== pending.p_flow_hash || args.p_fingerprint !== pending.p_fingerprint
+      if (name === "kitty_website_studio_google_grant") {
+        if (token !== googleToken || !live.has(token) || grantFails || args.p_google_subject!=="123456789012345678901"
           || args.p_google_email !== env.ADMIN_EMAIL || args.p_gateway_token !== env.FEEDBACK_GATEWAY_TOKEN) return { error: { message: "Unauthorized" } };
-        pending.consumed = true; completions++; granted.add(token); return { error: null };
+        completions++; granted.add(token); return { error: null };
       }
       throw Error("Unexpected RPC: "+name);
     },
@@ -101,19 +99,19 @@ const google = source("lib/studio-google.ts", { "@supabase/supabase-js":sdk,"nex
 function reset() {
   jar.clear(); cookieWrites.length=0; challenges.clear(); granted.clear(); live.clear(); live.add(passwordToken);
   googleUserId=env.ADMIN_USER_ID; identity={email:env.ADMIN_EMAIL,email_verified:true,sub:"123456789012345678901"};
-  providerToken="fixture-google-provider-token"; issuedSession=undefined; codeUsed=false;
+  providerToken="fixture-google-provider-token"; issuedSession=undefined; codeUsed=false; grantFails=false;
 }
 const request = () => new Request(env.SITE_URL+"/api/admin/login");
 const callback = () => new Request(env.SITE_URL+"/api/admin/google/callback?flow="+lastFlow+"&code=fresh-code");
-async function start() { await google.beginStudioGoogle(request(),passwordToken,env.ADMIN_USER_ID); assert.equal(issuedSession,undefined); }
+async function start() { await google.beginStudioGoogle(request()); assert.equal(issuedSession,undefined); }
 async function rejects(fn,status) { await assert.rejects(fn, error => error.status===status); assert.equal(issuedSession,undefined); }
 
 reset(); await start();
 assert.equal(cookieWrites[0].options.httpOnly,true); assert.equal(cookieWrites[0].options.sameSite,"lax");
 assert.equal(cookieWrites[0].options.path,"/api/admin"); assert.equal(cookieWrites[0].options.maxAge,300);
 const originalCookie = [...jar][0];
-assert.equal(await google.finishStudioGoogle(callback()),env.SITE_URL+"/admins");
-assert.equal(issuedSession,googleToken); assert.equal(live.has(passwordToken),false);
+assert.equal(await google.finishStudioGoogle(callback()),env.SITE_URL+"/kitten");
+assert.equal(issuedSession,googleToken);
 const beforeReplay = completions;
 issuedSession=undefined; jar.set(...originalCookie);
 await rejects(()=>google.finishStudioGoogle(callback()),401); assert.equal(completions,beforeReplay);
@@ -126,6 +124,10 @@ reset(); await start(); googleUserId="ffffffff-ffff-4fff-bfff-ffffffffffff";
 await rejects(()=>google.finishStudioGoogle(callback()),403);
 reset(); await start(); providerToken=undefined;
 await rejects(()=>google.finishStudioGoogle(callback()),403);
+reset(); await start(); identity.sub="different-google-subject";
+await rejects(()=>google.finishStudioGoogle(callback()),403); assert.equal(live.has(googleToken),false);
+reset(); await start(); grantFails=true;
+await rejects(()=>google.finishStudioGoogle(callback()),403); assert.equal(live.has(googleToken),false);
 reset(); await start();
 const [name,value]=[...jar][0]; const payload=cryptoHelpers.openStudioPayload(value,env.FEEDBACK_GATEWAY_TOKEN);
 payload.expiresAt=Date.now()-1; jar.set(name,cryptoHelpers.sealStudioPayload(payload,env.FEEDBACK_GATEWAY_TOKEN));
@@ -140,12 +142,14 @@ await rejects(()=>google.finishStudioGoogle(callback()),401);
 assert.equal(jar.size,1); assert.equal(live.has(passwordToken),true);
 reset(); await start(); jar.set("kitty_studio_session",googleToken);
 await google.cancelStudioGoogleFlow("not-a-valid-flow"); assert.equal(jar.get("kitty_studio_session"),googleToken);
-await google.cancelStudioGoogleFlow(lastFlow); assert.equal(jar.get("kitty_studio_session"),googleToken); assert.equal(live.has(passwordToken),false);
-reset(); await start(); await google.clearStudioGoogleCookies(); assert.equal(jar.size,0); assert.equal(live.has(passwordToken),false);
-reset(); await rejects(()=>google.beginStudioGoogle(new Request("https://attacker.example/api/admin/login"),passwordToken,env.ADMIN_USER_ID),403);
+await google.cancelStudioGoogleFlow(lastFlow); assert.equal(jar.get("kitty_studio_session"),googleToken);
+reset(); await start(); await google.clearStudioGoogleCookies(); assert.equal(jar.size,0);
+reset(); await rejects(()=>google.beginStudioGoogle(new Request("https://attacker.example/api/admin/login")),403);
 
 // The real adminSession must reject raw password sessions and direct Google sessions.
 const kitty = source("lib/kitty-server.ts", { "@supabase/supabase-js": { createClient: (_url,_key,options) => database(options.global.headers?.Authorization?.replace("Bearer ","")) }, "next/headers":{cookies:async()=>cookieStore} });
+await kitty.setStudioSession(googleToken,7200);
+const finalCookie=cookieWrites.at(-1);assert.equal(finalCookie.options.sameSite,"lax");assert.equal(finalCookie.options.httpOnly,true);assert.equal(finalCookie.options.secure,true);assert.equal(finalCookie.options.maxAge,3600);
 reset(); jar.set("kitty_studio_session",passwordToken); assert.equal(await kitty.adminSession(),null);
 await assert.rejects(()=>kitty.requireAdmin(),error=>error.status===401);
 live.add(googleToken); jar.set("kitty_studio_session",googleToken); assert.equal(await kitty.adminSession(),null);
@@ -172,4 +176,4 @@ outcome={success:true,hostname:"attacker.example",action:"assistant"};
 await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-host","assistant"),e=>e.status===400);
 outcome={success:true,hostname:"kittycorp.vercel.app",action:"contact"};
 await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-action","assistant"),e=>e.status===400);
-console.log("PASS: password-first Google flow, allowlist, verified email, missing proof, expiry, tamper, replay, canonical callback, Studio bypass/revocation and Turnstile fail-closed/host/action/replay checks.");
+console.log("PASS: Google-only PKCE flow, owner UUID/email/subject checks, missing proof, expired/tampered cookies, code replay, canonical callback, Lax session handoff, direct-session rejection/revocation and Turnstile fail-closed/host/action/replay checks.");

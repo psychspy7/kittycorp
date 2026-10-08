@@ -11,8 +11,10 @@ export type MaintenanceReply = {
 export function recoveryPath(pathname: string) {
   return pathname === "/abcdefghijklmnopqrstuvwxyz" ||
     pathname === "/admins" || pathname.startsWith("/admins/") ||
+    pathname === "/kitten" || pathname.startsWith("/kitten/") ||
     pathname === "/api/emergency" || pathname === "/api/site-status" ||
     pathname === "/api/security/turnstile" ||
+    pathname === "/ecosystem/google-v1.svg" ||
     pathname === "/api/admin" || pathname.startsWith("/api/admin/") ||
     pathname === "/maintenance" ||
     pathname.startsWith("/_next/static/") || pathname === "/_next/image" ||

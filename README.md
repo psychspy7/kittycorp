@@ -19,7 +19,7 @@ See **OWNER-GUIDE.md** for the complete owner handover. The `handover/` folder i
 - `/secretchat`: Android download, installation guide, and privacy explanation.
 - `/launches/[slug]`: launch pages for Android apps and websites published from Studio.
 - `/contact`: contact form.
-- `/admins`: private Studio for the build journal, apps, early access, contact inbox and legacy notices.
+- `/kitten`: private Google-only Studio for the build journal, apps, early access, contact inbox and legacy notices. The former `/admins` address is retired.
 
 ## Run locally
 
@@ -93,10 +93,10 @@ KITTY AI is a lazy-loaded website guide using a separate stateless route on the 
 
 Managed Cloudflare Turnstile protects Studio sign-in, forms and assistant requests. Server verification checks the action and hostname and fails closed when protection is configured. This does not put the shared Vercel hostname behind Cloudflare WAF.
 
-Studio uses password-first Google account verification. See **GOOGLE_STUDIO_SETUP.md** for provider setup and the real-login activation check. After enforcement, only a live session granted by the completed password-plus-Google flow can use Studio or its database policies.
+Studio uses Google-only sign-in for the existing approved owner account. See **GOOGLE_STUDIO_SETUP.md** for provider setup and recovery. Only a live session granted by the server-verified Google flow can use Studio or its database policies. The website has no ID/password login or public Studio hyperlink. HttpOnly, Secure, SameSite=Lax cookies support the return from Google; sensitive writes still require same-origin validation.
 
 The current production AI and Turnstile credentials are stored as encrypted runtime configuration. The existing private `FEEDBACK_GATEWAY_TOKEN` decrypts it on the server. Do not replace that token without re-encrypting the configuration and updating its private database hash. Environment overrides are documented in `.env.example`. No secret belongs in GitHub.
 
 The KITTY AI backend must retain `/api/website/chat` and its `WEBSITE_GATEWAY_TOKEN` binding on future deployments. Reference implementation and integration tests are under `integrations/kitty-ai/`; deployment instructions are in that folder’s README. Website proxy and security checks run with `node scripts/check-website-assistant.mjs` and `node scripts/test-studio-security.mjs`.
 
-Studio → **Site controls** manages the maintenance page. Its emergency recovery route is preserved. Maintenance changes use revision checks so a stale browser cannot silently overwrite a newer change. `/admins` remains accessible during maintenance.
+Studio → **Site controls** manages the maintenance page. Its emergency recovery route is preserved. Maintenance changes use revision checks so a stale browser cannot silently overwrite a newer change. `/kitten` remains accessible during maintenance.

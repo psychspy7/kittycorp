@@ -94,15 +94,8 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
   const [error, setError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
   const [verificationAttempt, setVerificationAttempt] = useState(0);
-  const [googleRequired, setGoogleRequired] = useState(false);
   useEffect(() => {
     let active = true;
-    fetch("/api/admin/security", { cache: "no-store" })
-      .then((response) => response.json() as Promise<{ googleRequired?: boolean }>)
-      .then((value: { googleRequired?: boolean }) => {
-        if (active) setGoogleRequired(value.googleRequired === true);
-      })
-      .catch(() => {});
     const params = new URLSearchParams(window.location.search);
     if (params.has("signin")) {
       Promise.resolve().then(() => { if (active) setError("Google verification did not finish. Sign in again with the approved account."); });
@@ -114,18 +107,15 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
     e.preventDefault();
     setError("");
     setBusy(true);
-    const form = new FormData(e.currentTarget);
     try {
       const result = await request(
         "/api/admin/login",
         jsonOptions("POST", {
-          username: form.get("username"),
-          password: form.get("password"),
           turnstileToken,
         }),
       );
       if (result.googleUrl) window.location.assign(result.googleUrl);
-      else window.location.reload();
+      else throw Error("Google sign-in could not start. Please try again.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign-in failed.");
       setBusy(false);
@@ -148,42 +138,22 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
         <span className="micro-label">KITTY CORP STUDIO</span>
         <h1>Sign in.</h1>
         <p>Manage products, people and project enquiries.</p>
-        {googleRequired && <p className="privacy-note">After your password, verify your approved Google account to open the Studio.</p>}
+        <p className="privacy-note">Sign in with the approved KITTY CORP Google account.</p>
         {unavailable ? (
           <p className="form-error" role="alert">
             Studio access is temporarily unavailable. Please try again shortly.
           </p>
         ) : (
           <form onSubmit={login}>
-            <div className="form-field">
-              <label htmlFor="admin-id">Admin ID</label>
-              <input
-                id="admin-id"
-                name="username"
-                autoComplete="username"
-                required
-                maxLength={100}
-              />
-            </div>
             <Turnstile action="studio-login" onToken={setTurnstileToken} resetKey={verificationAttempt} />
-            <div className="form-field">
-              <label htmlFor="admin-password">Password</label>
-              <input
-                id="admin-password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                maxLength={200}
-              />
-            </div>
             {error && (
               <p className="form-error" role="alert">
                 {error}
               </p>
             )}
-            <button className="button button-gold" disabled={busy}>
-              {busy ? "Verifying…" : googleRequired ? "Continue to Google" : "Enter the studio"}
+            <button className="button button-gold" disabled={busy || !turnstileToken}>
+              {!busy && <Image unoptimized src="/ecosystem/google-v1.svg" alt="" width={18} height={18} />}
+              {busy ? "Opening Google…" : "Sign in with Google"}
               {busy ? (
                 <LoaderCircle size={18} className="animate-spin" />
               ) : (

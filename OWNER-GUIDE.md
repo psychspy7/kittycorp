@@ -7,7 +7,7 @@ Updated on 8 October 2026 for the current website. Start here when you want to c
 | Item | Current location |
 | --- | --- |
 | Public website | https://kittycorp.vercel.app/ |
-| Private Studio | https://kittycorp.vercel.app/admins |
+| Private Studio | https://kittycorp.vercel.app/kitten |
 | Website repository | https://github.com/psychspy7/kittycorp |
 | Production branch | `main` |
 | Hosting project | `kittycorp` in Vercel |
@@ -15,7 +15,7 @@ Updated on 8 October 2026 for the current website. Start here when you want to c
 | Website database dashboard | https://supabase.com/dashboard/project/mgkghnblbisubympudaa |
 | Website version | Business homepage, KITTY AI guide, Google Studio verification and Cloudflare form protection, 8 October 2026. See the [latest source history](https://github.com/psychspy7/kittycorp/commits/main). |
 
-The Studio ID and password are unchanged. They are deliberately absent from this guide and ZIP. Keep them in your private password manager. Your website database is separate from the private-chat project. Website maintenance should use the project above.
+Studio now uses **Sign in with Google** for the approved owner account, `viratanand1221@gmail.com`. The old ID/password form and `/admins` address are retired. No Studio link is displayed on public pages; bookmark the address above. Your website database is separate from the private-chat project. Website maintenance should use the project above.
 
 ## Choose the right way to update
 
@@ -91,7 +91,7 @@ Open **KITTY AI & security** to turn the website guide on or off, edit its name 
 
 The website guide uses the real KITTY AI backend through a separate stateless endpoint. It cannot read Android users’ memories or conversations. Browser conversations clear on refresh. Server limits cap requests at 12 per visitor per hour, 30 per day and 150 total per day. These fixed limits also protect the model allowance; the browser conversation setting does not replace them. AI replies can still be inaccurate.
 
-Google verification follows the existing Studio ID and password. Use the approved owner Google account when prompted. Google setup and recovery are documented in **GOOGLE_STUDIO_SETUP.md**. The provider client secret stays in Supabase. After the verified-flow enforcement flag is enabled, password-only and direct Google sessions cannot edit the website database. A team profile does not grant Studio access.
+Open `/kitten` and choose **Sign in with Google**. Use the approved owner Google account. Google setup and recovery are documented in **GOOGLE_STUDIO_SETUP.md**. The provider client secret stays in Supabase. Password-only sessions and raw Google sessions outside the verified website flow cannot edit the website database. A team profile does not grant Studio access.
 
 Cloudflare Turnstile protects sign-in, enquiries, email signups, contact forms and assistant requests. Its widget usually verifies automatically, but may request interaction. On the shared `vercel.app` hostname this is application protection, not whole-site Cloudflare WAF.
 
@@ -165,7 +165,7 @@ Your original local file is `.env.local` beside `package.json` in the project fo
 
 If Studio says it is temporarily unavailable, check the seven exact names in `.env.example`, that Vercel applies them to **Production**, that the website Supabase project is active, and that you deployed again after any environment change. The gateway token must match the hash configured in the database. A new random token in Vercel alone will break login and forms.
 
-If login fails, verify the configured login ID, Auth email, Auth user UUID and database admin allowlist agree. Wait 15 minutes after too many failed attempts rather than repeatedly retrying. A session expires after at most one hour; sign in again when asked. Full diagnosis and recovery steps are in the handover folder.
+If login fails, verify the approved Google account, configured Auth email/UUID, pinned Google identity and database admin allowlist agree. Check Google provider configuration and the fixed callback address. Wait 15 minutes after too many failed attempts rather than repeatedly retrying. A session expires after at most one hour; sign in again when asked. Full diagnosis and recovery steps are in the handover folder.
 
 ## Keep a useful backup
 

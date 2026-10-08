@@ -5,6 +5,6 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const google = await studioGoogleStatus();
-    return privateJson({ googleRequired: google.required, googleReady: google.providerReady, turnstile: await turnstilePublicConfig() });
+    return privateJson({ googleRequired: true, googleReady: google.providerReady, signInMethod: "google", turnstile: await turnstilePublicConfig() });
   } catch (error) { return failure(error); }
 }

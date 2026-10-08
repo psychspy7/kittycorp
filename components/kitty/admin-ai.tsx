@@ -34,6 +34,6 @@ export default function AdminAI() {
       <label>Response variation<input type="number" required min={.1} max={.8} step={.05} value={settings.temperature} onChange={event=>setSettings({...settings,temperature:Number(event.target.value)})}/><small>Lower values give more consistent replies.</small></label>
       <button type="submit" className="button button-gold wide" disabled={saving}>{saving?"Saving…":"Save KITTY AI settings"}</button>
     </form>
-    <div className="studio-ai-security"><h3>Studio security</h3><p>Google account verification: <strong>{security.googleReady?(security.googleRequired?"Required after your password":"Ready for final activation") : "Google setup needed"}</strong></p><p>The website assistant has no access to Studio, private app memories or unpublished content. Its usage is limited separately from the Android app.</p></div>
+    <div className="studio-ai-security"><h3>Studio security</h3><p>Google sign-in: <strong>{security.googleReady?"Approved owner account only" : "Google setup needed"}</strong></p><p>The website assistant has no access to Studio, private app memories or unpublished content. Its usage is limited separately from the Android app.</p></div>
   </section>;
 }

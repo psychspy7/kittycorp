@@ -54,7 +54,7 @@ try {
 $verify = [System.IO.Compression.ZipFile]::OpenRead($archivePath)
 try {
   $entries = @($verify.Entries.FullName)
-  foreach ($required in @('app/page.tsx','app/admins/page.tsx','app/contact/page.tsx','public/brand/reveal.mp4','public/brand/monogram.png','supabase/schema.sql','supabase/auth-and-limits.sql','package.json','package-lock.json','.env.example','START-HERE.md')) {
+  foreach ($required in @('app/page.tsx','app/kitten/page.tsx','app/contact/page.tsx','public/brand/reveal.mp4','public/brand/monogram.png','supabase/schema.sql','supabase/auth-and-limits.sql','supabase/studio-google-only.sql','package.json','package-lock.json','.env.example','START-HERE.md')) {
     if ($entries -notcontains "kitty-corp/$required") { throw "Archive verification failed: $required" }
   }
   if ($entries | Where-Object { $_ -match '(^|/)(node_modules|\.git|\.next|\.env\.local)(/|$)' }) { throw 'Archive contains private or generated files.' }

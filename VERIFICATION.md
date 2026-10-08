@@ -44,6 +44,14 @@ Final interface update: targeted ESLint checks, the Next.js production build and
 - Twenty isolated website proxy cases passed, along with the backend’s gateway and existing security suites. Private Android histories are not queried by the website guide. Separate visitor and global quotas protect website usage.
 - Actual anonymous database reads could not retrieve assistant settings or encrypted runtime data. Incorrect capabilities could not fetch configuration or reserve model usage. The configured ciphertext round-tripped without displaying credentials.
 - Live Studio APIs returned 401 to anonymous requests. Sign-in without a Turnstile token was rejected. An invalid Google callback redirected safely to sign-in with private, no-store caching. Provider settings and the authorization redirect confirmed Google readiness.
-- Password-plus-Google grant enforcement still requires one real owner login check before activation. The setup guide explains that final step. This is Google account verification, not native Authenticator MFA.
+- The owner subsequently completed Google verification and received two real Studio grants. The sign-in flow was then simplified to Google only at `/kitten`, as requested. Google account verification is not native Authenticator MFA.
 - Private table access was revoked and explicit deny policies added. Legacy public gateway wrappers now use SECURITY INVOKER around private capability-protected helpers. Supabase security advisors subsequently reported only the existing disabled leaked-password protection notice.
 - The separate private-chat Supabase project was untouched. Maintenance recovery controls were preserved. All published source passed the private-credential scan.
+
+## Google-only Studio at /kitten — 8 October 2026
+
+- Removed ID/password fields and password authentication from the login API. Public footer links to Studio were removed. `/admins` returns 404; `/kitten` is private, unindexed, excluded from analytics and accessible during maintenance.
+- The return cookie changed to SameSite=Lax with Secure and HttpOnly retained. An isolated real-browser test reproduced the failure with Strict after an external-site sign-in navigation, and succeeded immediately with Lax. This test used local fixture servers, not a personal Google account.
+- The new grant RPC checks the fresh OAuth method, live session, owner allowlist, verified account email, Google provider identity and pinned immutable subject. The public wrapper uses SECURITY INVOKER. Google grant enforcement is enabled.
+- A transaction against the actual website database confirmed password sessions and direct OAuth without a grant are denied. Incorrect capability, account and subject were rejected; the approved Google owner grant could read Studio settings. The fixture changes were rolled back, preserving real sessions and encrypted configuration.
+- Production build, TypeScript, lint, isolated OAuth/security checks and read-only HTTP checks passed. Google-only login accepts no legacy credential fields. Callback errors return to `/kitten` with private, no-store caching.

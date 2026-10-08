@@ -45,7 +45,7 @@ const event = commands().find(row => row[0] === "event")[2];
 assert.equal(event.page_location, "https://kittycorp.vercel.app/services");
 assert.equal(event.page_referrer, "https://kittycorp.vercel.app/contact");
 assert.equal(JSON.stringify(commands()).includes("private@example.com"), false, "Query and fragment values stay out of tracking");
-for (const pathname of ["/admins", "/admins/settings", "/api/contact", "/unknown", "/build-log/unsafe%20slug"]) {
+for (const pathname of ["/admins", "/admins/settings", "/kitten", "/kitten/settings", "/api/contact", "/unknown", "/build-log/unsafe%20slug"]) {
   const before = commands().length;
   assert.equal(api.configureAnalytics(id, pathname), false);
   api.trackPageView(id, pathname, "");

@@ -21,7 +21,3 @@ export const noticeSchema = z.object({
   category: z.enum(categories),
   published: z.boolean(),
 });
-export const loginSchema = z.object({
-  username: z.string().trim().min(1).max(100),
-  password: z.string().min(1).max(200),
-});
