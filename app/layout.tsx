@@ -3,10 +3,12 @@ import { Toaster } from "sonner";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/kitty/google-analytics";
 import { googleAnalyticsId } from "@/lib/analytics-config";
+import { LogoMotionProvider } from "@/components/kitty/logo-motion";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
 import "./credibility.css";
+import "./ecosystem.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
   title: {
@@ -38,7 +40,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        {children}
+        <LogoMotionProvider>{children}</LogoMotionProvider>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
         <Toaster theme="light" position="bottom-right" richColors />
       </body>
