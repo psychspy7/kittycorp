@@ -38,7 +38,7 @@ export default async function ContactPage({
               A possible collaboration. Or just a hello.
             </p>
             <p>The KITTY team reads the messages here.</p><Link href="/services#project-enquiry" className="text-link">Need a website or app? Share a project brief.</Link>
-            <Link href="/#products" className="text-link">
+            <Link href="/products" className="text-link">
               See what we’re building <ArrowUpRight size={17} />
             </Link>
           </div>

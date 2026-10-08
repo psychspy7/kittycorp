@@ -12,6 +12,7 @@ export function recoveryPath(pathname: string) {
   return pathname === "/abcdefghijklmnopqrstuvwxyz" ||
     pathname === "/admins" || pathname.startsWith("/admins/") ||
     pathname === "/api/emergency" || pathname === "/api/site-status" ||
+    pathname === "/api/security/turnstile" ||
     pathname === "/api/admin" || pathname.startsWith("/api/admin/") ||
     pathname === "/maintenance" ||
     pathname.startsWith("/_next/static/") || pathname === "/_next/image" ||

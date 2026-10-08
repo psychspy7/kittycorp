@@ -2,6 +2,9 @@ import "server-only";
 import type { MaintenanceState } from "./maintenance";
 
 export async function maintenanceState(): Promise<MaintenanceState> {
+  // Explicit local QA configuration cannot be activated by a visitor request.
+  if (process.env.KITTY_LOCAL_PREVIEW === "true" && /^http:\/\/(localhost|127\.0\.0\.1):\d+\/?$/.test(process.env.SITE_URL || ""))
+    return {enabled:false,revision:0,updated_at:new Date(0).toISOString()};
   const url = process.env.SUPABASE_URL?.trim();
   const key = process.env.SUPABASE_PUBLISHABLE_KEY?.trim();
   if (!url || !key) throw new Error("Maintenance state unavailable");

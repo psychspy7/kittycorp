@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import {
   database,
   failure,
@@ -6,15 +5,22 @@ import {
   HttpError,
   privateJson,
   readBody,
-  SESSION_COOKIE,
+  setStudioSession,
   setting,
   verifyOrigin,
 } from "@/lib/kitty-server";
 import { loginSchema } from "@/lib/kitty-validation";
+import { beginStudioGoogle, studioGoogleStatus } from "@/lib/studio-google";
+import { verifyTurnstile } from "@/lib/turnstile-server";
 export async function POST(request: Request) {
   try {
     verifyOrigin(request);
-    const value = loginSchema.parse(await readBody(request));
+    const body = await readBody(request);
+    const value = loginSchema.parse(body);
+    await verifyTurnstile(request, (body as Record<string, unknown>).turnstileToken, "studio-login");
+    const google = await studioGoogleStatus();
+    if (google.required && !google.providerReady)
+      throw new HttpError("Google verification is being configured. Please try again shortly.", 503);
     const db = database();
     const { error: limited } = await db.rpc("kitty_website_login_attempt", {
       p_fingerprint: await fingerprint(request),
@@ -39,15 +45,16 @@ export async function POST(request: Request) {
     });
     if (error || data.user?.id !== setting("ADMIN_USER_ID") || !data.session)
       throw new HttpError("That ID and password don’t match.", 401);
-    await (
-      await cookies()
-    ).set(SESSION_COOKIE, data.session.access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
-      maxAge: Math.min(data.session.expires_in, 3600),
-    });
+    if (google.required) {
+      try {
+        const googleUrl = await beginStudioGoogle(request, data.session.access_token, data.user.id);
+        return privateJson({ ok: true, googleUrl });
+      } catch (error) {
+        await database().auth.admin.signOut(data.session.access_token, "local").catch(() => {});
+        throw error;
+      }
+    }
+    await setStudioSession(data.session.access_token, data.session.expires_in);
     return privateJson({ ok: true });
   } catch (error) {
     return failure(error);

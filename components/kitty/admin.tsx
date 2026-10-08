@@ -3,11 +3,13 @@ import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
+import { Turnstile } from "./turnstile";
 const AdminProducts = dynamic(() => import("./admin-products"));
-const AdminMaintenance = dynamic(() => import("./admin-maintenance"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
+const AdminAI = dynamic(() => import("./admin-ai"));
+const AdminMaintenance = dynamic(() => import("./admin-maintenance"));
 const AdminLaunches = dynamic(() => import("./admin-launches"), { loading: () => <p className="empty-message">Opening launches…</p> });
 const AdminJournal = dynamic(() => import("./admin-journal"), { loading: () => <p className="empty-message">Opening journal…</p> });
 const AdminEarlyAccess = dynamic(() => import("./admin-early-access"), { loading: () => <p className="empty-message">Opening early access…</p> });
@@ -64,6 +66,7 @@ async function request(url: string, options?: RequestInit) {
   const res = await fetch(url, options);
   const data = (await res.json()) as {
     error?: string;
+    googleUrl?: string;
     notices: Notice[];
     feedback: Feedback[];
     nextCursor: string | null;
@@ -89,23 +92,45 @@ const date = (value: string) =>
 export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [verificationAttempt, setVerificationAttempt] = useState(0);
+  const [googleRequired, setGoogleRequired] = useState(false);
+  useEffect(() => {
+    let active = true;
+    fetch("/api/admin/security", { cache: "no-store" })
+      .then((response) => response.json() as Promise<{ googleRequired?: boolean }>)
+      .then((value: { googleRequired?: boolean }) => {
+        if (active) setGoogleRequired(value.googleRequired === true);
+      })
+      .catch(() => {});
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("signin")) {
+      Promise.resolve().then(() => { if (active) setError("Google verification did not finish. Sign in again with the approved account."); });
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    return () => { active = false; };
+  }, []);
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     setBusy(true);
     const form = new FormData(e.currentTarget);
     try {
-      await request(
+      const result = await request(
         "/api/admin/login",
         jsonOptions("POST", {
           username: form.get("username"),
           password: form.get("password"),
+          turnstileToken,
         }),
       );
-      window.location.reload();
+      if (result.googleUrl) window.location.assign(result.googleUrl);
+      else window.location.reload();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign-in failed.");
       setBusy(false);
+      setTurnstileToken("");
+      setVerificationAttempt((value) => value + 1);
     }
   }
   return (
@@ -123,6 +148,7 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
         <span className="micro-label">KITTY CORP STUDIO</span>
         <h1>Sign in.</h1>
         <p>Manage products, people and project enquiries.</p>
+        {googleRequired && <p className="privacy-note">After your password, verify your approved Google account to open the Studio.</p>}
         {unavailable ? (
           <p className="form-error" role="alert">
             Studio access is temporarily unavailable. Please try again shortly.
@@ -139,6 +165,7 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
                 maxLength={100}
               />
             </div>
+            <Turnstile action="studio-login" onToken={setTurnstileToken} resetKey={verificationAttempt} />
             <div className="form-field">
               <label htmlFor="admin-password">Password</label>
               <input
@@ -156,7 +183,7 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
               </p>
             )}
             <button className="button button-gold" disabled={busy}>
-              {busy ? "Signing in…" : "Enter the studio"}
+              {busy ? "Verifying…" : googleRequired ? "Continue to Google" : "Enter the studio"}
               {busy ? (
                 <LoaderCircle size={18} className="animate-spin" />
               ) : (
@@ -356,6 +383,8 @@ export function AdminDashboard() {
         <Tabs value={tab} onValueChange={setTab} className="studio-workspace">
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="maintenance">Site controls</TabsTrigger>
+            <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
             <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
             <TabsTrigger value="launches">Apps & websites</TabsTrigger>
 <TabsTrigger value="products">Products</TabsTrigger>
@@ -364,24 +393,24 @@ export function AdminDashboard() {
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
             <TabsTrigger value="journal">Build log & updates</TabsTrigger>
             <TabsTrigger value="early-access">Early access</TabsTrigger>
-            <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
-              {[["maintenance","Site controls","Take the public website offline for maintenance or bring it back online."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows the CEO and co-founder; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>
           <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
+          <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
+          <TabsContent value="assistant" className="admin-panel"><AdminAI /></TabsContent>
 <TabsContent value="team" className="admin-panel"><AdminTeam /></TabsContent>
 <TabsContent value="company" className="admin-panel"><AdminCompany /></TabsContent>
           <TabsContent value="reviews" className="admin-panel"><AdminTestimonials /></TabsContent>
 <TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
           <TabsContent value="journal" className="admin-panel"><AdminJournal /></TabsContent>
           <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
-          <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
           <TabsContent value="notices" className="admin-panel">
             <p className="public-note">Existing notices are kept here. Use Build journal for the new homepage development feed and full articles.</p>
             <button className="button button-outline" onClick={() => edit()}><Plus size={17} /> New legacy notice</button>

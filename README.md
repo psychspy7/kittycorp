@@ -6,7 +6,7 @@ See **OWNER-GUIDE.md** for the complete owner handover. The `handover/` folder i
 
 ## Pages
 
-- `/`: services, concise product summaries, founders and early access.
+- `/`: website/app services, six months of maintenance, product/lab destinations, Virat Anand and early access.
 - `/services`: website and app development, process and private project-brief form.
 - `/products`: full product directory and Android releases.
 - `/company`: company background, approach, research link and identity film.
@@ -41,7 +41,7 @@ Open **Early access** to view signups, selected interests, export loaded entries
 
 Sign in to Studio and open **Apps & websites**. Choose **New launch** and select either **Android app** or **Website**. Android launches keep the existing signed-APK flow. Website launches accept a live HTTPS URL, separate icon, one optimized screenshot, description and optional extra details. Enable **Publish on the website** and save. These content updates require no GitHub push or redeployment.
 
-The newest published launch with **Show launch popup** enabled is announced once per browser session. Published apps and websites also have persistent homepage entries and their own launch pages. Website actions open the configured live HTTPS address; app actions keep the APK download. Turning publishing off hides the page, announcement, and download link. Files already downloaded by visitors cannot be recalled.
+Published apps and websites appear on `/products`, on Services as proof of work, and on their own launch pages. The business homepage links to the product directory instead of opening a release popup. Website actions open the configured live HTTPS address; app actions keep the APK download. Turning publishing off hides the page and download link. Files already downloaded by visitors cannot be recalled.
 
 APKs may be up to 50 MB. Uploads go directly to private storage through a temporary URL, avoiding the hosting provider's request-body limit. Drafts and unpublished uploads are restricted to the signed-in administrator.
 
@@ -73,16 +73,30 @@ The services form posts validated briefs to the existing private Studio inbox. I
 
 ## Final interface update
 
-The public site uses a light ivory and graphite theme with restrained gold details. Services and Start a project are visible immediately. Secondary company, research, product and team content lives on dedicated pages. The homepage includes the first published Founder & CEO and Co-Founder profiles in that order; every published member appears on `/team`. Removing or hiding a founder profile removes it from the homepage as well. Roles, images, biographies and links remain editable in Studio.
+The public site uses a light ivory and graphite theme with restrained gold details. Services and Start a project are visible immediately. Secondary company, research, product and team content lives on dedicated pages. The homepage shows the first published Founder & CEO profile with a prominent See full team button; every published member appears on `/team`. Removing or hiding the CEO profile removes it from the homepage as well. Roles, images, biographies and links remain editable in Studio.
 
 Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Release announcements are small dismissible notices; they do not block the homepage or move keyboard focus. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; no new environment secrets are needed.
 
 ## Shipped work and genuine reviews
 
-The homepage and Services page show published website launches with their real screenshots and live links, and Android releases with APK downloads and details. Development-stage products are shown separately. Launch content still comes from Studio; new releases appear after saving and refreshing.
+The Products and Services pages show published website launches with their real screenshots and live links, and Android releases with APK downloads and details. Research experiments have their own page. Launch content still comes from Studio; new releases appear after saving and refreshing.
 
 Studio → **Reviews** manages attributed testimonials. Add the reviewer’s actual words, name, optional role/company and an optional HTTPS public source. Confirm the feedback is genuine and the reviewer has permitted publication before enabling **Publish on the website**. Save drafts, change display order, edit, unpublish or remove entries without a redeployment. The first six approved published entries appear on the homepage and Services page. Both pages omit the review section when no entries are published. No reviews, ratings or client claims are seeded.
 
 `supabase/testimonials.sql` documents the one-time extension already applied to the dedicated website backend. Do not rerun it against that project. Public reads require both publication and permission confirmation; all writes and private drafts require the live website admin session. No changes were made to the separate private-chat project.
 
 The header and footer technology marquees identify tools/platforms the owner reports using, alongside clearly labelled innovation initiative references. They do not claim client relationships, partnerships, sponsorship or government recognition. Brand entries and official links are in `lib/technology-ecosystem.ts`; locally hosted logo sources are documented in `public/ecosystem/README.md`. A shared pause control stops both strips. Reduced-motion preferences disable scrolling and show a static footer grid. The original KITTY CORP artwork is preserved.
+
+## Website AI and security
+
+KITTY AI is a lazy-loaded website guide using a separate stateless route on the existing KITTY AI Worker. It reads published website information, never private Android histories, Studio records or unpublished drafts. Open Studio → **KITTY AI & security** to change visibility, name, greeting, guidance and reply limits. These are instructions, not model training. Conversations clear on refresh. Fixed privacy and accuracy rules remain in place.
+
+Managed Cloudflare Turnstile protects Studio sign-in, forms and assistant requests. Server verification checks the action and hostname and fails closed when protection is configured. This does not put the shared Vercel hostname behind Cloudflare WAF.
+
+Studio uses password-first Google account verification. See **GOOGLE_STUDIO_SETUP.md** for provider setup and the real-login activation check. After enforcement, only a live session granted by the completed password-plus-Google flow can use Studio or its database policies.
+
+The current production AI and Turnstile credentials are stored as encrypted runtime configuration. The existing private `FEEDBACK_GATEWAY_TOKEN` decrypts it on the server. Do not replace that token without re-encrypting the configuration and updating its private database hash. Environment overrides are documented in `.env.example`. No secret belongs in GitHub.
+
+The KITTY AI backend must retain `/api/website/chat` and its `WEBSITE_GATEWAY_TOKEN` binding on future deployments. Reference implementation and integration tests are under `integrations/kitty-ai/`; deployment instructions are in that folder’s README. Website proxy and security checks run with `node scripts/check-website-assistant.mjs` and `node scripts/test-studio-security.mjs`.
+
+Studio → **Site controls** manages the maintenance page. Its emergency recovery route is preserved. Maintenance changes use revision checks so a stale browser cannot silently overwrite a newer change. `/admins` remains accessible during maintenance.

@@ -41,6 +41,15 @@ export function database(token?: string) {
     },
   );
 }
+export async function setStudioSession(token: string, expiresIn: number) {
+  (await cookies()).set(SESSION_COOKIE, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+    maxAge: Math.max(0, Math.min(expiresIn, 3600)),
+  });
+}
 export async function adminSession() {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;

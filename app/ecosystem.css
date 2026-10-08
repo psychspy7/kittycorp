@@ -1,15 +1,16 @@
-.site-header { display: block; padding: 0; }
+.site-header { display: block; padding: 0; height: 92px; }
 .site-header-navigation { width: min(1200px,88%); height: 60px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .technology-marquee-region { position: relative; }
 .technology-marquee-viewport { overflow: hidden; min-width: 0; mask-image: linear-gradient(to right,transparent,#000 4%,#000 96%,transparent); }
-.technology-marquee-track { display: flex; width: max-content; animation: ecosystem-scroll 115s linear infinite; }
+.technology-marquee-track { display: flex; width: max-content; animation: ecosystem-scroll 75s linear infinite; }
+.technology-marquee-track.is-reversed { animation-direction: reverse; }
 .technology-marquee-track.is-visible { will-change: transform; }
 .technology-marquee-track.is-paused { animation-play-state: paused; }
-.technology-marquee-group { display: flex; align-items: center; flex-shrink: 0; gap: 52px; padding-inline-end: 52px; }
-.technology-logo { width: 205px; flex: 0 0 205px; min-height: 72px; display: flex; align-items: center; justify-content: center; gap: 13px; border-radius: 5px; white-space: nowrap; }
-.technology-logo-image { display: block; height: 36px; width: auto; max-width: 88px; object-fit: contain; filter: grayscale(1) brightness(.65); opacity: .76; transition: filter .3s ease,opacity .3s ease,transform .3s ease; }
-.technology-logo.is-wordmark .technology-logo-image { max-width: 190px; }
-.technology-logo-name { color: #52554b; font: 500 16px/1.4 Geist,sans-serif; letter-spacing: -.4px; }
+.technology-marquee-group { display: flex; align-items: center; flex-shrink: 0; gap: 36px; padding-inline-end: 36px; }
+.technology-logo { width: 174px; flex: 0 0 174px; min-height: 72px; display: flex; align-items: center; justify-content: center; gap: 11px; border-radius: 5px; white-space: nowrap; }
+.technology-logo-image { display: block; height: 36px; width: auto; max-width: 88px; object-fit: contain; filter: grayscale(1) brightness(.65); opacity: .88; transition: filter .3s ease,opacity .3s ease,transform .3s ease; }
+.technology-logo.is-wordmark .technology-logo-image { max-width: 163px; }
+.technology-logo-name { color: #3f433a; font: 500 14px/1.4 Geist,sans-serif; letter-spacing: -.3px; }
 .technology-logo.is-kitty .technology-logo-name { font-size: 13px; letter-spacing: .8px; font-weight: 600; }
 .technology-logo:hover .technology-logo-image,.technology-logo:focus-visible .technology-logo-image { filter: none; opacity: 1; transform: scale(1.055); }
 .technology-logo:hover .technology-logo-name { color: #252720; }
@@ -20,19 +21,23 @@
 .logo-motion-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; padding: 8px 12px; border: 1px solid #25272025; border-radius: 5px; font: 400 11px/1.5 Geist,sans-serif; color: #62645d; background: transparent; cursor: pointer; }
 .logo-motion-button:hover { color: #252720; background: #ece9e1; }
 .logo-motion-button:focus-visible { outline: 2px solid #87672f; outline-offset: 3px; }
-.technology-marquee-mini { width: min(1200px,88%); height: 24px; margin-inline: auto; display: grid; grid-template-columns: minmax(0,1fr) 24px; align-items: center; gap: 8px; border-bottom: 1px solid #2527200b; }
-.technology-marquee-mini .technology-marquee-viewport { height: 23px; }
-.technology-marquee-mini .technology-marquee-track { animation-duration: 135s; }
-.technology-marquee-mini .technology-marquee-group { gap: 28px; padding-inline-end: 28px; }
-.technology-marquee-mini .technology-logo { width: 110px; flex-basis: 110px; min-height: 23px; gap: 7px; }
-.technology-marquee-mini .technology-logo-image { height: 15px; max-width: 38px; opacity: .62; }
-.technology-marquee-mini .is-wordmark .technology-logo-image { max-width: 95px; }
-.technology-marquee-mini .technology-logo-name { font: 500 9px/1 Geist,sans-serif; letter-spacing: 0; color: #62645d; }
-.technology-marquee-mini .is-kitty .technology-logo-name { font-size: 8px; letter-spacing: .4px; }
-.technology-marquee-mini .technology-logo:hover .technology-logo-image { filter: grayscale(1) brightness(.65); transform: none; opacity: .85; }
+.technology-marquee-mini { width: min(1200px,88%); height: 32px; margin-inline: auto; display: grid; grid-template-columns: minmax(0,1fr) 26px; align-items: center; gap: 8px; border-bottom: 1px solid #2527200b; }
+.technology-marquee-mini .technology-marquee-viewport { height: 31px; }
+.technology-marquee-mini .technology-marquee-track { animation-duration: 65s; }
+.technology-marquee-mini .technology-marquee-group { gap: 24px; padding-inline-end: 24px; }
+.technology-marquee-mini .technology-logo { width: 116px; flex-basis: 116px; min-height: 31px; gap: 7px; }
+.technology-marquee-mini .technology-logo-image { height: 18px; max-width: 46px; opacity: .95; filter: none; }
+.technology-marquee-mini .is-wordmark .technology-logo-image { max-width: 103px; }
+.technology-marquee-mini .technology-logo-name { font: 500 10px/1 Geist,sans-serif; letter-spacing: 0; color: #52554b; }
+.technology-marquee-mini .is-kitty .technology-logo-name { font-size: 9px; letter-spacing: .4px; }
+.technology-marquee-mini .technology-logo:hover .technology-logo-image { filter: none; transform: none; opacity: 1; }
 .technology-marquee-mini .logo-motion-button { width: 24px; min-height: 24px; padding: 0; border: 0; color: #7b7d73; }
-.technology-marquee-full { margin: 38px 0 23px; }
+.technology-marquee-full { margin: 30px 0 19px; }
+.technology-marquee-full+.technology-marquee-full { margin-top: 0; }
 .technology-marquee-full .logo-motion-button { display: flex; margin: 16px auto 0; }
+.ecosystem-tracks { display: flex; flex-direction: column; gap: 9px; position: relative; margin: 27px 0 23px; padding-bottom: 52px; }
+.ecosystem-tracks .technology-marquee-full { margin: 0; position: static; }
+.ecosystem-tracks .logo-motion-button { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); margin: 0; white-space: nowrap; }
 .technology-ecosystem { border-top: 1px solid var(--border); padding: 63px 0 38px; background: #f3f1eb; }
 .ecosystem-intro { text-align: center; max-width: 740px; margin-inline: auto; }
 .ecosystem-signature { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font: 10px/1.5 "Geist Mono",monospace; color: #705524; letter-spacing: .7px; }
@@ -53,13 +58,18 @@
 .ecosystem-disclosure { max-width: 790px; text-align: center; margin: 20px auto 0; font-size: 10px; color: #6b6d65; line-height: 1.85; }
 @keyframes ecosystem-scroll { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 @media (max-width: 1100px) { .site-header-navigation { gap: 15px; } }
+@media (min-width: 761px) and (max-width: 860px) {
+  .site-header-navigation .navigation { display: none; }
+  .site-header-navigation .menu-toggle { display: flex; height: 44px; width: 36px; align-items: center; justify-content: end; padding: 0; flex-shrink: 0; }
+}
 @media (max-width: 760px) {
+  .site-header { height: 80px; }
   .site-header-navigation { height: 48px; gap: 10px; }
   .site-header-navigation .menu-toggle { display: flex; height: 44px; width: 36px; align-items: center; justify-content: end; padding: 0; flex-shrink: 0; }
   .site-header-navigation .header-cta { margin-right: 0; min-height: 38px; align-items: center; }
   .technology-ecosystem { padding-top: 45px; }
-  .technology-marquee-full .technology-marquee-group { gap: 32px; padding-inline-end: 32px; }
-  .technology-marquee-full .technology-logo { width: 190px; flex-basis: 190px; }
+  .technology-marquee-full .technology-marquee-group { gap: 28px; padding-inline-end: 28px; }
+  .technology-marquee-full .technology-logo { width: 174px; flex-basis: 174px; }
   .ecosystem-intro>p { font-size: 14px; }
   .ecosystem-category-grid { grid-template-columns: 1fr; gap: 23px; }
 }
@@ -81,4 +91,5 @@
   .technology-marquee-full .technology-marquee-group:first-child { flex-wrap: wrap; justify-content: center; gap: 15px 22px; padding: 0; }
   .technology-marquee-full .technology-marquee-group[aria-hidden] { display: none; }
   .technology-marquee-full .technology-logo { flex-basis: 165px; width: 165px; min-height: 65px; }
+  .ecosystem-tracks { padding-bottom: 0; gap: 15px; }
 }

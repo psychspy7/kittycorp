@@ -30,7 +30,7 @@ export function homepageFounders(members: TeamMember[]) {
 export type CompanySettings = { id: string; socials: SocialLinks; team_heading: string; team_intro: string; team_body: string; updated_at?: string };
 export const defaultProducts: CompanyProduct[] = Object.entries(productPages).map(([slug, value], index) => ({...value, slug, principles: value.principles.map(([a,b]) => [a,b]), icon_path: null, sort_order: index, published: true}));
 export const defaultTeam: TeamMember[] = [
-  {id:"virat",name:"Virat",role:"Founder & CEO",bio:"",photo_path:null,links:{},sort_order:0,published:true},
+  {id:"virat",name:"Virat Anand",role:"Founder & CEO",bio:"",photo_path:null,links:{},sort_order:0,published:true},
   {id:"sarthak",name:"Sarthak",role:"Co-Founder",bio:"",photo_path:null,links:{},sort_order:1,published:true},
 ];
 export const defaultSettings: CompanySettings = {id:"company",socials:{github:"https://github.com/psychspy7"},team_heading:"A small team.\nPlenty to figure out.",team_intro:"We’re a small team interested in AI, robotics, cybersecurity and building things from scratch.",team_body:"KITTY CORP started from experiments, prototypes and a lot of curiosity. We’re still early, and we’re building the company alongside the technology."};

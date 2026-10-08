@@ -3,13 +3,19 @@ import { Toaster } from "sonner";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/kitty/google-analytics";
 import { googleAnalyticsId } from "@/lib/analytics-config";
-import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { LogoMotionProvider } from "@/components/kitty/logo-motion";
+import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
+import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
+import { getAssistantSettings, assistantConnectionConfigured } from "@/lib/assistant-settings-server";
+import { publicAssistantSettings } from "@/lib/assistant-settings";
+import { turnstilePublicConfig } from "@/lib/turnstile-server";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
 import "./credibility.css";
 import "./ecosystem.css";
+import "./business.css";
+import "@/components/kitty/website-assistant.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
   title: {
@@ -31,9 +37,11 @@ export const metadata: Metadata = {
     description: "Websites, applications and independent technology.",
   },
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const [assistant,verification,connected] = await Promise.all([getAssistantSettings(),turnstilePublicConfig(),assistantConnectionConfigured()]);
+  const visibleAssistant = publicAssistantSettings({...assistant,enabled:assistant.enabled && connected && verification.enabled && Boolean(verification.siteKey)});
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head><link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /><link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /></head>
@@ -41,7 +49,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <LogoMotionProvider>{children}</LogoMotionProvider>
+        <LogoMotionProvider>{children}<AssistantLauncher settings={visibleAssistant} siteKey={verification.siteKey}/></LogoMotionProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
         <Toaster theme="light" position="bottom-right" richColors />

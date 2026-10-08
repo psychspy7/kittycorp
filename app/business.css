@@ -1,0 +1,81 @@
+.business-home .home-hero { padding-bottom: 60px; }
+.business-home .home-hero-copy>p:not(.hero-small-note) { max-width: 550px; }
+.business-home .hero-small-note { max-width: 420px; }
+.business-home .working-together { padding-top: 56px; padding-bottom: 58px; border-top: 1px solid var(--border); }
+.delivery-support { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10%; padding: 42px 0 54px; border-top: 1px solid var(--border); }
+.delivery-support-heading { align-self: center; }
+.delivery-support h2 { font: 400 clamp(34px,3.6vw,46px)/1.15 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -.9px; margin: 18px 0 0; }
+.support-number { display: flex; align-items: baseline; gap: 9px; font: 400 54px/1 Geist,sans-serif; letter-spacing: -2px; color: #87672f; }
+.support-number>span { font-size: 17px; letter-spacing: -.2px; color: #62645d; }
+.delivery-support-detail h3 { font: 500 19px/1.4 Geist,sans-serif; letter-spacing: -.4px; margin: 15px 0 11px; }
+.delivery-support-detail p { color: #62645d; font-size: 14px; line-height: 1.85; margin: 0 0 19px; max-width: 550px; }
+.business-destinations { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; padding: 12px 0 18px; }
+.business-destination { display: flex; flex-direction: column; background: #f0eee7; border: 1px solid #2527201c; border-radius: 7px; padding: 31px 33px 27px; transition: background .25s ease,border-color .25s ease; }
+.business-destination:hover { background: #eae7de; border-color: #87672f60; }
+.business-destination:focus-visible { outline: 2px solid #87672f; outline-offset: 4px; }
+.destination-topline { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.destination-topline>svg { color: #87672f; flex-shrink: 0; transition: transform .25s ease; }
+.business-destination:hover .destination-topline>svg { transform: translate(2px,-2px); }
+.business-destination h2 { font: 400 clamp(35px,3.8vw,48px)/1.13 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -1px; margin: 28px 0 18px; }
+.business-destination>p { font-size: 15px; line-height: 1.8; color: #62645d; margin: 0 0 27px; max-width: 470px; }
+.destination-products { display: flex; flex-wrap: wrap; gap: 14px 19px; margin: auto 0 23px; }
+.destination-products>span { display: inline-flex; align-items: center; gap: 8px; font: 500 11px/1.5 Geist,sans-serif; color: #52554b; }
+.destination-products .secretchat-icon { flex-shrink: 0; width: 30px; height: 30px; object-fit: contain; }
+.destination-product-icon { display: inline-flex; width: 30px; height: 30px; flex-shrink: 0; align-items: center; justify-content: center; color: #87672f; }
+.destination-product-icon>img { width: 30px; height: 30px; object-fit: contain; }
+.destination-product-icon>svg { width: 24px; height: 24px; }
+.destination-action { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 500; color: #705524; border-top: 1px solid #2527201a; padding-top: 18px; }
+.business-founder { padding-top: 66px; padding-bottom: 65px; }
+.business-founder .section-heading { margin-bottom: 33px; }
+.business-founder .home-team-grid { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: 9%; max-width: 980px; }
+.business-founder .home-team-grid>.team-profiles { grid-template-columns: minmax(0,1fr); max-width: 340px; }
+.business-founder .founder-photo { aspect-ratio: 1/1.08; border-radius: 6px; overflow: hidden; }
+.business-founder .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
+.business-founder .founder-caption { flex-wrap: wrap; gap: 7px; }
+.business-founder .founder-caption h3 { font-size: 25px; }
+.business-founder .team-copy { display: flex; flex-direction: column; align-items: start; gap: 18px; padding: 0; }
+.business-founder .team-copy p { font-size: 16px; line-height: 1.85; margin: 0; }
+.business-founder .team-copy .full-team-link { min-height: 50px; margin-top: 5px; padding: 14px 22px; background: #87672f; border-color: #87672f; color: #fffefa; }
+.business-founder .team-copy .full-team-link:hover { background: #705524; border-color: #705524; }
+.business-founder .team-copy .text-link { margin: 1px 0 0; }
+.business-home .progress-link { padding-block: 28px; }
+.business-home .progress-link h2 { font-size: 30px; margin: 11px 0; }
+.business-home .early-access { padding-top: 48px; padding-bottom: 58px; border-top: 0; }
+.business-home .early-access h2 { font-size: clamp(32px,3.4vw,42px); margin: 15px 0 18px; }
+.business-home .early-access p { font-size: 14px; }
+.business-home .early-form-area fieldset { gap: 8px; margin-top: 19px; }
+.business-home .interest-choice { padding: 6px 8px; }
+.business-home .early-access .privacy-note { font-size: 11px; margin-top: 16px; }
+.lab-products { padding: 18px 0 55px; }
+.lab-products h2 { font: 400 clamp(32px,3.5vw,44px)/1.2 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -.8px; margin: 18px 0 15px; }
+.lab-products .section-heading p { font-size: 15px; line-height: 1.8; color: #62645d; }
+@media (max-width: 900px) {
+  .business-destination { padding: 27px 26px 25px; }
+  .delivery-support { gap: 6%; }
+  .business-founder .home-team-grid { gap: 6%; }
+}
+@media (max-width: 760px) {
+  .business-home .home-hero { padding-bottom: 42px; }
+  .business-home .hero-small-note { max-width: 340px; }
+  .business-home .working-together { padding-block: 38px; }
+  .delivery-support { grid-template-columns: minmax(0,1fr); gap: 24px; padding: 36px 0 39px; }
+  .delivery-support h2 { font-size: 34px; }
+  .delivery-support-heading h2 br { display: none; }
+  .support-number { font-size: 45px; }
+  .business-destinations { grid-template-columns: minmax(0,1fr); gap: 17px; padding-top: 0; }
+  .business-destination { padding: 25px; }
+  .business-destination h2 { margin-top: 24px; font-size: 37px; }
+  .business-destination>p { margin-bottom: 24px; font-size: 14px; }
+  .business-founder { padding-top: 46px; padding-bottom: 45px; }
+  .business-founder .home-team-grid { grid-template-columns: minmax(0,1fr); gap: 27px; }
+  .business-founder .home-team-grid>.team-profiles { max-width: 360px; }
+  .business-founder .team-copy { gap: 15px; }
+  .business-founder .team-copy p { font-size: 15px; }
+  .business-home .progress-link { gap: 20px; padding-block: 26px; }
+  .business-home .early-access { gap: 24px; padding-top: 36px; padding-bottom: 42px; }
+  .business-home .early-access h2 { font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .business-destination,.destination-topline>svg { transition: none; }
+  .business-destination:hover .destination-topline>svg { transform: none; }
+}

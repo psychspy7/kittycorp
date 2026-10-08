@@ -9,10 +9,12 @@ import {
   verifyOrigin,
 } from "@/lib/kitty-server";
 import { feedbackSchema } from "@/lib/kitty-validation";
+import { verifyTurnstile } from "@/lib/turnstile-server";
 export async function POST(request: Request) {
   try {
     verifyOrigin(request);
-    const value = feedbackSchema.parse(await readBody(request));
+    const body = await readBody(request);
+    const value = feedbackSchema.parse(body);
     if (value.website) return privateJson({ ok: true });
     const elapsed = Date.now() - value.startedAt;
     if (elapsed < 2000 || elapsed > 86400000)
@@ -20,6 +22,7 @@ export async function POST(request: Request) {
         "Please take a moment, then send your message again.",
         400,
       );
+    await verifyTurnstile(request, (body as Record<string, unknown>).turnstileToken, "contact");
     const { data, error } = await database().rpc(
       "kitty_website_submit_feedback",
       {

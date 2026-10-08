@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { feedbackSchema } from "@/lib/kitty-validation";
+import { Turnstile } from "./turnstile";
 
 export function ContactForm({ subject = "" }: { subject?: string }) {
   const [values, setValues] = useState({
@@ -12,6 +13,8 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [verificationAttempt, setVerificationAttempt] = useState(0);
   const startedAt = useRef(0);
   const trap = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -24,6 +27,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
       ...values,
       website: trap.current?.value || "",
       startedAt: startedAt.current,
+      turnstileToken,
     };
     const valid = feedbackSchema.safeParse(payload);
     if (!valid.success) {
@@ -52,6 +56,8 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
       );
     } finally {
       setBusy(false);
+      setTurnstileToken("");
+      setVerificationAttempt((value) => value + 1);
     }
   }
   if (sent)
@@ -140,6 +146,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
           {error}
         </p>
       )}
+      <Turnstile action="contact" onToken={setTurnstileToken} resetKey={verificationAttempt} />
       <div className="form-submit-row">
         <p>
           Your message goes straight to the KITTY team.
