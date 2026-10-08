@@ -29,7 +29,7 @@ export function LaunchAnnouncement({ launch }: { launch: Launch }) {
     <div className="launch-toast-actions">
       <Link href={launchHref(launch)} className="text-link">View details <ArrowUpRight size={14}/></Link>
       {website
-        ? <a href={launch.website_url || "#"} className="text-link" target="_blank" rel="noreferrer">Visit website <ArrowUpRight size={14}/></a>
+        ? <a href={launch.website_url || launchHref(launch)} className="text-link" target="_blank" rel="noopener noreferrer">Go to website <ArrowUpRight size={14}/></a>
         : <a href={downloadHref(launch)} className="text-link" download>Download APK <ArrowUpRight size={14}/></a>}
     </div>
   </aside>;
