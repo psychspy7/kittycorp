@@ -75,7 +75,7 @@ The services form posts validated briefs to the existing private Studio inbox. I
 
 The public site uses a light ivory and graphite theme with restrained gold details. Services and Start a project are visible immediately. Secondary company, research, product and team content lives on dedicated pages. The homepage shows the first published Founder & CEO profile with a prominent See full team button; every published member appears on `/team`. Removing or hiding the CEO profile removes it from the homepage as well. Roles, images, biographies and links remain editable in Studio.
 
-Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Release announcements are small dismissible notices; they do not block the homepage or move keyboard focus. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; no new environment secrets are needed.
+Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Releases remain accessible from the product directory without interrupting the business homepage. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; the encrypted integration setup uses the existing private deployment gateway.
 
 ## Shipped work and genuine reviews
 

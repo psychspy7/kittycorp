@@ -33,3 +33,17 @@ Final interface update: targeted ESLint checks, the Next.js production build and
 - An uncommitted database fixture confirmed public reads see approved/published rows but not drafts; the transaction was rolled back. The separate Studio QA draft was deleted, and its isolated session signed out. No review was published for testing.
 - The new table has RLS, restricted grants, live-admin policies, a database permission constraint and a partial public-order index. No new table warning was reported by security advisors. Existing gateway/auth advisories remain documented through the [Supabase advisor guidance](https://supabase.com/docs/guides/database/database-linter).
 - Toolkit labels describe tools, not customers or endorsements. GitHub’s official unmodified mark is vendored with source notes; other companies use plain-text references.
+
+## Business homepage, website AI and Studio security — 8 October 2026
+
+- Next.js production build, TypeScript and targeted lint passed. The remote Vercel build also deployed successfully.
+- Isolated browser checks passed at 320, 390, 768, 861, 1440 and 2560 pixels. There was no horizontal overflow or browser error. The homepage shows Virat Anand only, with a prominent full-team link and separate Products and Research destinations.
+- Three actual releases remain available on Products, and two lab directions appear on Research. The Services page retains real shipped work. No customer counts, commissions, testimonials or affiliations were invented.
+- Header logos are colored, 18 pixels tall and move on a 65-second loop. Both footer tracks share the pause control. Reduced motion disables scrolling. Mobile navigation and chat open, close, reset, source links and Escape handling passed.
+- Chat interface tests used isolated fixtures for Turnstile and replies. They do not count as a completed human CAPTCHA or Google login. Separate real Worker requests returned 401 without the gateway and 200 with the authorized gateway, with an accurate service response.
+- Twenty isolated website proxy cases passed, along with the backend’s gateway and existing security suites. Private Android histories are not queried by the website guide. Separate visitor and global quotas protect website usage.
+- Actual anonymous database reads could not retrieve assistant settings or encrypted runtime data. Incorrect capabilities could not fetch configuration or reserve model usage. The configured ciphertext round-tripped without displaying credentials.
+- Live Studio APIs returned 401 to anonymous requests. Sign-in without a Turnstile token was rejected. An invalid Google callback redirected safely to sign-in with private, no-store caching. Provider settings and the authorization redirect confirmed Google readiness.
+- Password-plus-Google grant enforcement still requires one real owner login check before activation. The setup guide explains that final step. This is Google account verification, not native Authenticator MFA.
+- Private table access was revoked and explicit deny policies added. Legacy public gateway wrappers now use SECURITY INVOKER around private capability-protected helpers. Supabase security advisors subsequently reported only the existing disabled leaked-password protection notice.
+- The separate private-chat Supabase project was untouched. Maintenance recovery controls were preserved. All published source passed the private-credential scan.

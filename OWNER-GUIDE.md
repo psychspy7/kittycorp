@@ -67,7 +67,7 @@ The Products editor currently manages three existing development products. Their
 6. The business homepage no longer opens launch announcements. Visitors can find all published releases in **Products & shipped work**. The announcement field is retained for compatibility.
 7. Save, open the public app page, and check the download.
 
-The app’s usual public page is `/launches/<page-address>`; SecretChat also has `/secretchat`. The announcement appears once per updated launch in a browser session. A visitor may have already dismissed it; the app page and download remain reachable.
+The app’s usual public page is `/launches/<page-address>`; SecretChat also has `/secretchat`. The product directory, app page and download remain reachable without an announcement.
 
 Keep the original Android signing key backed up privately. Existing installations generally need updates signed with that same key. Studio checks size, checksum and APK structure; it does not perform a full malware review. Installed copies cannot be recalled by hiding the website entry.
 
