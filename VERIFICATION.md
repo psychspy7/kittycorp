@@ -21,3 +21,15 @@ The refined site was verified on the live deployment: desktop and mobile typogra
 Company publishing update: production build and TypeScript passed. Integration checks verified optimized image uploads, immutable replacement addresses, public product icons, separate launch icons, team creation/editing/visibility/removal, portraits and profile links, company socials, private project enquiries, input validation, draft visibility and origin protection. Synthetic profiles, enquiries and image objects were removed; the original product, launch and company data were restored. No new environment secrets are required.
 
 Final interface update: targeted ESLint checks, the Next.js production build and TypeScript passed. Public route checks covered the lighter homepage, services, products, company, full team and existing detail pages. The self-hosted Dirtyline font returned the expected 15,456 bytes. Studio login and overview, private team drafts, separate release-icon replacement, optimized WebP delivery and project-enquiry delivery were verified against the configured backend. Desktop and mobile layouts, mobile menu and direct project-form navigation were reviewed in the browser. Temporary images, drafts and enquiry records were cleaned up.
+
+
+## Shipped work and Studio reviews — 8 October 2026
+
+- Preserved the latest website-launch publishing flow and live/explore actions from GitHub.
+- Production build, TypeScript check and targeted lint passed. Archived source copies in `outputs/` and handover material are excluded from compilation.
+- Isolated browser checks passed on desktop (1440px) and mobile (390px): real EXAMIFY screenshot/live URL, Android release actions, two founder positions, tool links, mobile navigation, enquiry anchor, native FAQ and no client-side errors. Reduced motion was enabled for public-page checks.
+- Studio sign-in and review draft create/list/edit/delete passed against the dedicated website backend. Publication without permission and unsafe source URLs returned 400. Unauthenticated reads/writes returned 401; cross-origin mutations returned 403.
+- Direct anonymous database insertion was denied with 42501. Private drafts were invisible to anonymous reads and the public homepage.
+- An uncommitted database fixture confirmed public reads see approved/published rows but not drafts; the transaction was rolled back. The separate Studio QA draft was deleted, and its isolated session signed out. No review was published for testing.
+- The new table has RLS, restricted grants, live-admin policies, a database permission constraint and a partial public-order index. No new table warning was reported by security advisors. Existing gateway/auth advisories remain documented through the [Supabase advisor guidance](https://supabase.com/docs/guides/database/database-linter).
+- Toolkit labels describe tools, not customers or endorsements. GitHub’s official unmodified mark is vendored with source notes; other companies use plain-text references.

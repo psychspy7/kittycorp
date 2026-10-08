@@ -6,6 +6,7 @@ import { googleAnalyticsId } from "@/lib/analytics-config";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
+import "./credibility.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
   title: {
@@ -13,11 +14,11 @@ export const metadata: Metadata = {
     template: "%s · Kitty Corp",
   },
   description:
-    "Websites and applications for clients. Independent work in personal AI, robotics and intelligent software. Meet KITTY CORP.",
+    "Need a business website, web application or Android app? Work directly with KITTY CORP. Explore our live websites and released products, then tell us what you want to build.",
   icons: { icon: "/brand/monogram.png", apple: "/brand/monogram.png" },
   openGraph: {
     title: "KITTY CORP — Software & independent technology.",
-    description: "Websites, applications and independent work in AI and autonomous systems.",
+    description: "Business websites, web applications and Android apps. See our shipped work and discuss your project with the team building it.",
     type: "website",
     siteName: "Kitty Corp",
   },

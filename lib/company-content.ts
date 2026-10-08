@@ -20,7 +20,10 @@ export type TeamMember = {
 // The homepage has two founder positions. Every published profile belongs on /team.
 export function homepageFounders(members: TeamMember[]) {
   return ["founder & ceo", "co-founder"].flatMap(role => {
-    const person = members.find(member => member.published && member.role.trim().toLowerCase() === role);
+    const person = members.find(member => {
+      const label = member.role.trim().toLowerCase();
+      return member.published && (label === role || (label.startsWith(role) && [" ", ",", "|", "·", "—", "–", "("].includes(label.charAt(role.length))));
+    });
     return person ? [person] : [];
   });
 }

@@ -2,6 +2,8 @@
 
 A restrained company website for an early-stage team, with product pages, an engineering journal, an early-access list and protected Studio. Built with Next.js, TypeScript, React, Tailwind CSS and Supabase.
 
+See **OWNER-GUIDE.md** for the complete owner handover. The `handover/` folder includes configuration, a source map, another-AI handoff prompt, recovery guidance, current structural/public-content references and checksum-verified copies of current public assets. These references do not include private records or secrets and are not a full Supabase backup.
+
 ## Pages
 
 - `/`: services, concise product summaries, founders and early access.
@@ -73,4 +75,14 @@ The services form posts validated briefs to the existing private Studio inbox. I
 
 The public site uses a light ivory and graphite theme with restrained gold details. Services and Start a project are visible immediately. Secondary company, research, product and team content lives on dedicated pages. The homepage includes the first published Founder & CEO and Co-Founder profiles in that order; every published member appears on `/team`. Removing or hiding a founder profile removes it from the homepage as well. Roles, images, biographies and links remain editable in Studio.
 
-Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Release announcements are small dismissible notices; they do not block the homepage or move keyboard focus. The current backend, accounts and hosting environment remain compatible. No new secrets, project or database migration are needed.
+Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Release announcements are small dismissible notices; they do not block the homepage or move keyboard focus. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; no new environment secrets are needed.
+
+## Shipped work and genuine reviews
+
+The homepage and Services page show published website launches with their real screenshots and live links, and Android releases with APK downloads and details. Development-stage products are shown separately. Launch content still comes from Studio; new releases appear after saving and refreshing.
+
+Studio → **Reviews** manages attributed testimonials. Add the reviewer’s actual words, name, optional role/company and an optional HTTPS public source. Confirm the feedback is genuine and the reviewer has permitted publication before enabling **Publish on the website**. Save drafts, change display order, edit, unpublish or remove entries without a redeployment. The first six approved published entries appear on the homepage and Services page. Both pages omit the review section when no entries are published. No reviews, ratings or client claims are seeded.
+
+`supabase/testimonials.sql` documents the one-time extension already applied to the dedicated website backend. Do not rerun it against that project. Public reads require both publication and permission confirmation; all writes and private drafts require the live website admin session. No changes were made to the separate private-chat project.
+
+The toolkit identifies tools/platforms the owner reports using. It does not claim client relationships, partnerships or endorsements. GitHub’s unmodified official logo is in `public/toolkit/github-v1.svg`; other companies are referenced by name. Sources and usage notes are in `public/toolkit/README.md`.
