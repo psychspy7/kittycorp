@@ -1,0 +1,38 @@
+name: Verify Kitty Corp
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-kittycorp-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Offline analytics privacy tests
+        run: node scripts/test-analytics.mjs
+      - name: Offline Studio authorization tests
+        run: node scripts/test-studio-security.mjs
+      - name: Offline assistant proxy security tests
+        run: node scripts/check-website-assistant.mjs
+      - name: Production Next.js build
+        run: npm run build:next
