@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 export default function NotFound() {
@@ -12,9 +13,9 @@ export default function NotFound() {
           taken shape yet.
         </h1>
         <p>The page you’re looking for isn’t here.</p>
-        <a className="button button-gold" href="/">
+        <Link className="button button-gold" href="/">
           Back to the beginning ↗
-        </a>
+        </Link>
       </main>
       <SiteFooter />
     </>
