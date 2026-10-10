@@ -44,7 +44,7 @@ export default async function RootLayout({
   const visibleAssistant = publicAssistantSettings({...assistant,enabled:assistant.enabled && connected && verification.enabled && Boolean(verification.siteKey)});
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <head><link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /><link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /></head>
+      <head><meta name="google-adsense-account" content="ca-pub-3607548169127113" /><link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /><link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /></head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
