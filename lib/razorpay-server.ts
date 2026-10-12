@@ -13,6 +13,8 @@ export const orderIdSchema = z.string().regex(/^order_[A-Za-z0-9]{6,64}$/, "Inva
 export const createOrderSchema = z.object({
   amount: z.number().int("Amount must be an integer in paise.").min(100, "The minimum payment is 100 paise.").max(MAX_AMOUNT),
   currency: z.literal("INR"),
+  quoteToken: z.string().regex(/^[a-f0-9]{64}$/).optional(),
+  paymentChoice: z.enum(["full","split","after_review"]).optional(),
   receipt: z.string().trim().min(1).max(40).regex(/^[A-Za-z0-9_-]+$/, "Invalid receipt.").optional(),
   turnstileToken: z.string().max(2048).optional(),
   purpose: z.enum(["checkout", "project", "donation"]).optional().default("checkout"),
