@@ -11,7 +11,7 @@ create table public.kitty_website_launches (
   android text not null default 'Android 7.0+' check (char_length(android) between 3 and 60),
   website_url text check (website_url is null or website_url ~ '^https://[^[:space:]]+$'),
   screenshot_path text check (screenshot_path is null or screenshot_path ~ '^screenshots/[0-9a-f-]{36}\.webp$'),
-  apk_path text check (apk_path = '/downloads/SecretChat-1.5.0-build6.apk' or apk_path ~ '^releases/[0-9a-f-]{36}/[0-9a-f-]{36}\.apk$'),
+  apk_path text check (apk_path in ('/downloads/SecretChat-1.5.0-build6.apk','/downloads/kitty-ai-1.8.0.apk') or apk_path ~ '^releases/[0-9a-f-]{36}/[0-9a-f-]{36}\.apk$'),
   apk_sha256 text check (apk_sha256 ~ '^[a-f0-9]{64}$'),
   apk_bytes bigint check (apk_bytes between 1 and 52428800),
   published boolean not null default false,
