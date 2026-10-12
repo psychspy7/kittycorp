@@ -40,3 +40,7 @@ Database security advisor reports the intended deny-all RLS design for private q
 6. Before access, customers can request a full refund from their private reservation link. The owner processes the full INR amount through the original Razorpay payment in the dashboard. The processed-refund webhook updates the status. This release does not automatically send money or refund on an anonymous button click.
 
 The website webhook is active for `payment.captured`, `order.paid`, and `refund.processed`; its existing secret was preserved. The separate membership webhook and KITTY provider vault are distinct. Never put provider secrets into client code or source archives. Run the additional `scripts/test-lisa-preorders.mjs` check through `npm run check:website`.
+
+## Current app download
+
+`/kitty-ai` links the verified current 1.8.0 Android release and Plus plans. The website bundles the already published APK under `public/downloads/kitty-ai-1.8.0.apk`; it preserves the same package/signing certificate. Future APKs can still be published through Studio. Bundled APK hashes must match their release metadata.

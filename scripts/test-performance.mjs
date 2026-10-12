@@ -60,7 +60,9 @@ assert.equal((await company.companyProducts())[0].name,"Updated icon and product
 clock+=61000;await company.companyProducts();assert.equal(tableCalls.get("kitty_website_products"),3);
 company.refreshCompany();failureTable="kitty_website_products";await company.companyProducts();failureTable=undefined;
 assert.equal((await company.companyProducts())[0].name,"Updated icon and product","Failures must not persist fallback data");
-const launches=source("lib/launches-server.ts",{...common,"./launches":{MAX_APK_BYTES:50e6,RELEASE_BUCKET:"fixture"},"./secretchat":{secretChat:{}},"./company-content":content});
+const appRelease=source("lib/kitty-app-release.ts");
+const launches=source("lib/launches-server.ts",{...common,"./kitty-app-release":appRelease,"./launches":{MAX_APK_BYTES:50e6,RELEASE_BUCKET:"fixture"},"./secretchat":{secretChat:{}},"./company-content":content});
+const bundled=await launches.verifyRelease({}, {slug:"kitty-ai",apk_path:appRelease.kittyAppRelease.apk,published:true});assert.equal(bundled.apk_sha256,appRelease.kittyAppRelease.sha256);assert.equal(bundled.apk_bytes,4479005);
 await launches.publishedLaunches();fixture.kitty_website_launches[0].published=false;
 assert.equal(await launches.publishedLaunch("released-app"),null,"Downloads must see current publication status even with a warm listing cache");
 launches.refreshLaunchPages();assert.equal((await launches.publishedLaunches()).length,0);

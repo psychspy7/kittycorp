@@ -5,6 +5,7 @@ import { database, HttpError } from "./kitty-server";
 import { MAX_APK_BYTES, RELEASE_BUCKET, type Launch } from "./launches";
 import { createHash } from "node:crypto";
 import { revalidatePath } from "next/cache";
+import {kittyAppRelease} from "./kitty-app-release";
 import { secretChat } from "./secretchat";
 import { z } from "zod";
 import { mediaPathPattern } from "./company-content";
@@ -74,6 +75,7 @@ export async function verifyRelease(db: ReturnType<typeof database>, value: z.in
     if (value.published) throw new HttpError("Upload an APK before publishing.", 400);
     return { apk_path: null, apk_sha256: null, apk_bytes: null };
   }
+  if (value.slug === "kitty-ai" && value.apk_path === kittyAppRelease.apk) return {apk_path:kittyAppRelease.apk,apk_sha256:kittyAppRelease.sha256,apk_bytes:kittyAppRelease.bytes};
   if (value.apk_path === secretChat.apk) {
     return { apk_path: secretChat.apk, apk_sha256: secretChat.sha256, apk_bytes: 5256093 };
   }
