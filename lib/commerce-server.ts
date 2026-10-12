@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { commerceSchema,defaultCommerce,type PaymentProvider,type PublicProvider } from "./commerce";
+import { commerceSchema,defaultCommerce,type PaymentProvider,type PublicProvider,type ProviderReadiness } from "./commerce";
 import { getRuntimeConfiguration } from "./runtime-configuration";
 import { HttpError } from "./kitty-server";
 export const getCommerce=cache(async()=>{const runtime=await getRuntimeConfiguration();let settings=structuredClone(defaultCommerce);if(runtime.WEBSITE_COMMERCE_SETTINGS){try{settings=commerceSchema.parse(JSON.parse(runtime.WEBSITE_COMMERCE_SETTINGS));}catch{/* Fail closed: all provider modes remain off. */}}return {settings,runtime};});
@@ -16,3 +16,19 @@ export async function providerConfiguration(provider:PaymentProvider,reconcileEn
  return {provider,clientId,secret,webhook:webhook||"",testMode:configured.mode==="sandbox",currency:provider==="paypal"?"USD" as const:"INR" as const,amount:configured.projectAmountMinor,mode:configured.mode};
 }
 export async function publicPaymentProviders(){const options:PublicProvider[]=[];for(const provider of ["razorpay","paypal","cashfree"] as const){try{const config=await providerConfiguration(provider);options.push({provider,name:{razorpay:"Razorpay",paypal:"PayPal",cashfree:"Cashfree"}[provider],currency:config.currency,testMode:config.testMode,amount:config.amount,clientId:config.clientId});}catch{/* Only explicitly configured providers appear. */}}return options;}
+
+export async function paymentProviderReadiness() {
+ const {settings,runtime}=await getCommerce();
+ const result={} as Record<PaymentProvider,ProviderReadiness>;
+ for(const provider of ["razorpay","paypal","cashfree"] as const) {
+  const mode=settings.providers[provider].mode;
+  const names=provider==="razorpay"?["RAZORPAY_KEY_ID","RAZORPAY_KEY_SECRET"]:provider==="paypal"?["PAYPAL_CLIENT_ID","PAYPAL_CLIENT_SECRET"]:["CASHFREE_CLIENT_ID","CASHFREE_CLIENT_SECRET"];
+  try {
+   const config=await providerConfiguration(provider);
+   result[provider]={available:true,mode,projectReady:config.amount>=100,message:config.amount>=100?"Contributions and the configured client project amount are ready.":"Contributions are ready. No client project amount is set; product pricing is separate."};
+  } catch(error) {
+   result[provider]={available:false,mode,projectReady:false,message:mode==="off"?"Disabled in Studio.":names.some(key=>!runtime[key as keyof typeof runtime])?"Save both the provider ID and secret, then reload this panel.":error instanceof HttpError?error.message:"Payment configuration could not be checked. Reload and try again."};
+  }
+ }
+ return result;
+}

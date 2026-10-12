@@ -1,0 +1,8 @@
+import Link from "next/link";
+import {SiteHeader} from "@/components/kitty/site";
+import {SiteFooter} from "@/components/kitty/site-footer";
+import {ProjectEnquiry} from "@/components/kitty/project-enquiry";
+import {pageMetadata} from "@/lib/site-metadata";
+export const dynamic="force-dynamic";
+export const metadata=pageMetadata("Start a project","Describe your website or app, refine the brief with KITTY AI and receive a private quote with flexible payment choices.","/projects");
+export default function Page(){return <><SiteHeader/><main id="main" className="public-page wrap projects-page"><div className="page-heading"><span className="eyebrow">BUILD WITH KITTY CORP</span><h1>Your idea.<br/>A clear next step.</h1><p>Describe the website or app you want to build. KITTY AI can help refine the brief. We’ll confirm the scope and price in your private quote.</p></div><div className="project-flow"><span>01 · Share your brief</span><span>02 · Review the scope & quote</span><span>03 · Choose how to pay</span></div><section className="project-start-grid"><aside><h2>Choose the arrangement<br/>that works for you.</h2><ul><li><strong>Full advance</strong><span>2.5% off your agreed project total.</span></li><li><strong>Half now, half after review</strong><span>1.2% off the total, split into two payments.</span></li><li><strong>Review first</strong><span>Send your brief for free. Pay after your agreed preview is ready.</span></li></ul><p>Sending a brief is free. We confirm what the preview includes and when it can be ready. New features, third-party costs and delivery terms are agreed in the scope.</p><Link className="text-link" href="/services">Explore our services</Link></aside><ProjectEnquiry/></section></main><SiteFooter/></>;}

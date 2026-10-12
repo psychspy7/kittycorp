@@ -7,6 +7,7 @@ const checks=[
   ["scripts/check-website-assistant.mjs"],
   ["scripts/test-razorpay.mjs"],
   ["scripts/test-commerce.mjs"],
+  ["scripts/test-project-quotes.mjs"],
   ["scripts/test-memberships.mjs"],
   ["scripts/test-email-notifications.mjs"],
   ["scripts/verify-hosting.mjs","--static"],

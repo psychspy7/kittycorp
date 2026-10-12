@@ -1,0 +1,3 @@
+import {priceEstimate,priceEstimateSchema} from "@/lib/currency-server";
+export const runtime="nodejs";
+export async function GET(request:Request){const value=priceEstimateSchema.safeParse(Object.fromEntries(new URL(request.url).searchParams));if(!value.success)return Response.json({error:"Invalid currency estimate."},{status:400});try{return Response.json(await priceEstimate(value.data),{headers:{"Cache-Control":"public, max-age=3600, stale-while-revalidate=86400"}});}catch{return Response.json({error:"Local-currency estimate is temporarily unavailable. The original price remains valid."},{status:503,headers:{"Cache-Control":"no-store"}});}}

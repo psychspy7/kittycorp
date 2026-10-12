@@ -25,6 +25,18 @@ keys.PAYPAL_WEBHOOK_ID="fixture-webhook";assert.equal((await governance.provider
 settings.providers.razorpay.mode="sandbox";keys.RAZORPAY_KEY_ID="rzp_live_fixture";keys.RAZORPAY_KEY_SECRET="fixture-secret";await assert.rejects(governance.providerConfiguration("razorpay"),e=>e.status===503);keys.RAZORPAY_KEY_ID="rzp_test_fixture";assert.equal((await governance.providerConfiguration("razorpay")).testMode,true);
 settings.providers.cashfree.mode="off";keys.CASHFREE_CLIENT_ID="fixture-cashfree";keys.CASHFREE_CLIENT_SECRET="fixture-cashfree-secret";await assert.rejects(governance.providerConfiguration("cashfree"));assert.equal((await governance.providerConfiguration("cashfree","sandbox")).testMode,true);
 assert(!JSON.stringify(await governance.publicPaymentProviders()).includes("fixture-secret"));
+// A configured provider with no client quote still allows donations.
+let readyOptions=await governance.publicPaymentProviders();
+assert.equal(commerce.paymentOptionsForPurpose(readyOptions,"project").length,0);
+assert.equal(commerce.paymentOptionsForPurpose(readyOptions,"donation").length,readyOptions.length);
+let readiness=await governance.paymentProviderReadiness();
+assert.equal(readiness.razorpay.available,true);assert.equal(readiness.razorpay.projectReady,false);
+assert.equal(readiness.cashfree.available,false);assert(!JSON.stringify(readiness).includes("fixture-secret"));
+settings.providers.razorpay.projectAmountMinor=10000;
+assert.equal(commerce.paymentOptionsForPurpose(await governance.publicPaymentProviders(),"project").length,1);
+assert.equal((await governance.paymentProviderReadiness()).razorpay.projectReady,true);
+settings.providers.razorpay.projectAmountMinor=0;
+
 assert(!commerce.commerceSchema.safeParse({...commerce.defaultCommerce,entitlements:true}).success);
 assert(!commerce.gallerySchema.safeParse({path:"https://evil.example/pixel",title:"Preview",caption:"Long enough caption"}).success);
 const ledger=[];let providerCalls=[];let scenario="created";let captured=false;
@@ -64,7 +76,7 @@ const metadata=load("lib/site-metadata.ts");assert(metadata.jsonLd({text:"</scri
 let adminAllowed=true, storedRow={ciphertext:encrypted,updated_at:"2026-10-11T00:00:00Z"}, written=null, loseRace=false;
 const adminDb={from:()=>{let operation="read",payload=null;const chain={select:()=>chain,eq:()=>chain,update:value=>{operation="update";payload=value;return chain;},insert:value=>{operation="insert";payload=value;return chain;},maybeSingle:async()=>{if(operation==="read")return {data:storedRow,error:null};if(loseRace)return {data:null,error:null};written=payload;storedRow=payload;return {data:{updated_at:payload.updated_at},error:null};},single:async()=>chain.maybeSingle()};return chain;}};
 const adminServer={...server,requireAdmin:async()=>{if(!adminAllowed)throw new HttpError("Sign in",401);return {db:adminDb};},readBody:request=>request.json(),verifyOrigin:request=>{if(request.headers.get("origin")!=="https://kitty.example")throw new HttpError("Invalid origin",403);}};
-const admin=load("app/api/admin/commerce/route.ts",{"next/cache":{revalidatePath:()=>{}},"@/lib/commerce":commerce,"@/lib/commerce-server":{getCommerce:async()=>({settings:commerce.defaultCommerce,runtime:original})},"@/lib/runtime-configuration":runtime,"@/lib/kitty-server":adminServer});
+const admin=load("app/api/admin/commerce/route.ts",{"next/cache":{revalidatePath:()=>{}},"@/lib/commerce":commerce,"@/lib/commerce-server":{getCommerce:async()=>({settings:commerce.defaultCommerce,runtime:original}),paymentProviderReadiness:async()=>({razorpay:{available:false,mode:"off",projectReady:false,message:"Disabled"}})},"@/lib/runtime-configuration":runtime,"@/lib/kitty-server":adminServer});
 adminAllowed=false;assert.equal((await admin.GET()).status,401);adminAllowed=true;
 const visible=await (await admin.GET()).json();assert.equal(visible.configured.PAYPAL_CLIENT_SECRET,true);assert(!JSON.stringify(visible).includes("fixture-paypal-secret"));
 const payload={settings:commerce.defaultCommerce,version:storedRow.updated_at,credentials:{PAYPAL_CLIENT_SECRET:"new-private-fixture",CASHFREE_CLIENT_SECRET:"fixture-new-cashfree"}};

@@ -211,3 +211,14 @@ The homepage now links to real published work: website screenshots/live URLs and
 The tools section lists the platforms you reported using, including GitHub, Microsoft, Google, IBM, Claude and OpenAI. It is a toolkit, not a customer/partner list. Do not rename it to imply endorsement or add invented testimonials, clients, achievements or results. The source notes are in `public/toolkit/README.md`.
 
 The dedicated website project has the `kitty_website_testimonials` table and access policies already applied. `supabase/testimonials.sql` records this one-time extension. Do not rerun it against the current project. The private-chat project is unchanged.
+
+
+## Per-client quotes and payment schedules (12 October 2026)
+
+`/projects` is the direct project brief page. Optional KITTY AI analysis helps refine scope without inventing a price. A submission appears in the existing inbox and creates a private quote link for the customer.
+
+In Studio → **Project quotes**, confirm scope, enter the agreed full price in INR, choose Approved and save. The customer refreshes their private quote link to pay. Full advance receives 2.5% off; 50/50 receives 1.2% off the total. For review-first or the split balance, mark the preview ready once it can be reviewed. Prices lock after checkout starts. See **PROJECT-PAYMENTS-GUIDE.md** for retry recovery and privacy.
+
+The legacy client invoice amount can remain 0; this does not close donation checkout. The homepage donation form is near the bottom and loads payment scripts only after it is opened. Product plans remain separate from services and contributions. The footer currency selector controls approximate local-price displays, while checkout states the actual charged currency.
+
+KITTY AI membership uses the app's own account, provider configuration and paid-access checks. LISA's planned US$100 access offer shows early-update and testing perks; paid preorders require delivery/refund terms before activation. Neither becomes active just by saving the service/donation Razorpay keys.

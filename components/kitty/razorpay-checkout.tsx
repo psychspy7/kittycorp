@@ -1,5 +1,6 @@
 "use client";
 
+import {LocalPrice} from "./local-currency";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { Check, CreditCard, LoaderCircle, ShieldCheck } from "lucide-react";
@@ -39,7 +40,8 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return data;
 }
 
-export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", onLockChange }: {
+export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, onLockChange }: {
+  quote?: {token:string;choice:"full"|"split"|"after_review";reference:string};
   keyId: string; amount: number; currency?: string; testMode: boolean; securityEnabled: boolean; purpose?: PaymentPurpose; onLockChange?: (locked:boolean)=>void;
 }) {
   const [scriptReady, setScriptReady] = useState(false);
@@ -88,11 +90,11 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     if (!window.Razorpay) { setError("Checkout is still loading. Please wait a moment or refresh this page."); return; }
     if (securityEnabled && !token) { setError("Please complete the security check first."); return; }
     if (purpose === "donation" && !validAmount) { setError("Enter an amount between ₹1 and ₹10,000, with up to two decimal places."); return; }
-    if (purpose === "project" && !testMode && !reference.trim()) { setError("Enter your project or invoice reference first."); return; }
+    if (purpose === "project" && !testMode && !reference.trim() && !quote) { setError("Enter your project or invoice reference first."); return; }
     lock.current = true; callbackStarted.current = false;
     setPhase("creating"); setError(""); setMessage("");
     try {
-      const order = await post<Order>("/api/create-order", { amount: selectedAmount, currency, purpose, reference, turnstileToken: token });
+      const order = await post<Order>("/api/create-order", { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(quote?{quoteToken:quote.token,paymentChoice:quote.choice}:{}), turnstileToken: token });
       if (!/^order_[A-Za-z0-9]{6,64}$/.test(order.order_id) || order.amount !== selectedAmount || order.currency !== currency) {
         throw new Error("The order details could not be verified. Refresh the page and try again.");
       }
@@ -131,12 +133,13 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
     <h2 id="checkout-title">{purpose === "donation" ? "Choose your contribution." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
     <p>{testMode ? "This checkout is in test mode. No real money changes hands." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
-    {purpose === "project" && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
+    {purpose === "project" && !quote && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Contribution in rupees</label><div className="donation-presets">{[100, 250, 500].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="1" max="10000" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>Any amount from ₹1 to ₹10,000. Entirely optional.</span></div>}
     <div className="checkout-total"><span>{testMode ? "Test amount" : "Payment amount"}</span><strong>{formattedAmount}</strong></div>
-    <p className="checkout-methods">Choose UPI, cards or another available method in checkout.</p>
+    <LocalPrice amount={Number.isFinite(selectedAmount)?selectedAmount:0}/><p className="checkout-methods">Choose UPI, cards or another available method in checkout.</p>
     {testMode && <p className="checkout-upi-note">UPI QR and payment-app options depend on Razorpay’s account settings and may not appear in test mode.</p>}
     {securityEnabled && (phase === "idle" || phase === "creating" || phase === "open") && <Turnstile action="payment-order" onToken={setToken} resetKey={attempt}/>}
+    {phase === "idle" && !scriptError && (!scriptReady || (securityEnabled && !token)) && <p className="checkout-loading-status" role="status">{!scriptReady ? "Loading Razorpay securely…" : "Checking your connection securely… This usually takes a moment."}</p>}
     {scriptError && <p className="checkout-error" role="alert">{scriptError}</p>}
     {error && <p className="checkout-error" role="alert">{error}</p>}
     {message && <p className={phase === "paid" ? "checkout-success" : "checkout-message"} role="status">{phase === "paid" && <Check size={17} aria-hidden="true"/>}{message}</p>}
@@ -145,7 +148,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       : <button className="button button-gold checkout-button" onClick={() => void pay()}
         disabled={!scriptReady || Boolean(scriptError) || busy || phase === "paid" || (securityEnabled && !token) || (purpose === "donation" && !validAmount)}>
         {busy && <LoaderCircle size={17} className="checkout-spinner" aria-hidden="true"/>}
-        {phase === "paid" ? "Payment complete" : phase === "creating" ? "Preparing checkout…" : phase === "open" ? "Checkout open…" : phase === "verifying" ? "Verifying payment…" : !scriptReady ? "Loading checkout…" : `${testMode ? "Pay test" : "Pay"} ${formattedAmount}`}
+        {phase === "paid" ? "Payment complete" : phase === "creating" ? "Preparing checkout…" : phase === "open" ? "Checkout open…" : phase === "verifying" ? "Verifying payment…" : !scriptReady ? "Loading checkout…" : securityEnabled && !token ? "Checking security…" : `${testMode ? "Pay test" : "Pay"} ${formattedAmount}`}
       </button>}
     <p className="checkout-security"><ShieldCheck size={14} aria-hidden="true"/>Payment details are handled by Razorpay.</p>
   </section>;

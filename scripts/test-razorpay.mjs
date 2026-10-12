@@ -35,9 +35,9 @@ class Provider {
     if (input.notes.purpose !== "donation") assert.equal(input.amount, 100);
     assert.equal(input.currency, "INR"); assert.equal(input.partial_payment, false);
     assert(input.receipt.length <= 40);
-    createdOrder = { id: `order_Fixture${String(++serial).padStart(6, "0")}`, amount: badOrder ? 200 : input.amount, currency: input.currency };
+    createdOrder = { id: `order_Fixture${String(++serial).padStart(6, "0")}`, amount: badOrder ? 200 : input.amount, currency: input.currency,receipt:input.receipt,notes:input.notes };
     return createdOrder;
-  } };
+  },fetch:async id=>{assert.equal(id,createdOrder.id);return createdOrder;},all:async params=>{assert.equal(params.receipt,createdOrder.receipt);return {items:quoteMissing?[]:[createdOrder]};} };
   payments = { fetch: async id => { fetches++; if (paymentError) throw paymentError; assert.equal(id, "pay_Fixture000001"); return payment; } };
 }
 const helpers = source("lib/razorpay-server.ts", { razorpay: Provider, "./kitty-server": server });
@@ -45,7 +45,9 @@ const helpers = source("lib/razorpay-server.ts", { razorpay: Provider, "./kitty-
 helpers.resolvedRazorpayConfiguration = async () => helpers.paymentConfiguration();
 const ledger = new Map();
 const paymentLedger = { recordPayment: async order => {const old=ledger.get(order.order_id);if(old && (old.amount_minor!==order.amount_minor || old.purpose!==order.purpose))throw new server.HttpError("Order mismatch",400);ledger.set(order.order_id,{...old,...order});},storedPayment:async (_provider,id)=>ledger.get(id)||null };
-const dependencies = { "@/lib/payment-ledger":paymentLedger, "next/headers": headers, "@/lib/kitty-server": server, "@/lib/razorpay-server": helpers,
+let quoteMissing=false,quoteState=null;const quoteActions=[];
+const quoteBridge={reserveQuote:async(token,choice,reservation,amount)=>{assert.equal(token,"a".repeat(64));if(amount!==100)throw new server.HttpError("Stale quote",409);quoteState||={id:"11111111-1111-4111-8111-111111111111",reservation_id:reservation,order_id:null};return {quote:quoteState,amount:100,reference:`Q-${quoteState.id}-${choice}`};},quoteAction:async(action,_token,value)=>{quoteActions.push(action);if(action==="attach"){assert.equal(value.reservation,quoteState.reservation_id);quoteState.order_id=value.orderId;}if(action==="release")quoteState=null;}};
+const dependencies = { "@/lib/project-quotes-server":quoteBridge, "@/lib/payment-ledger":paymentLedger, "next/headers": headers, "@/lib/kitty-server": server, "@/lib/razorpay-server": helpers,
   "@/lib/turnstile-server": { verifyTurnstile: async (_request, token, action) => {
     assert.equal(action, "payment-order");
     if (turnstileRequired && token !== "valid-widget-fixture") throw new server.HttpError("Security check required", 400);
@@ -137,7 +139,17 @@ const donationCallback = { ...callback, razorpay_order_id: donation.order_id,
 assert.equal((await expectStatus(verify, "verify-payment", donationCallback, 200)).purpose, "donation");
 env.RAZORPAY_KEY_ID = env.NEXT_PUBLIC_RAZORPAY_KEY_ID = "rzp_live_fixture";
 await expectStatus(create, "create-order", { ...valid, purpose: "project" }, 400);
+await expectStatus(create,"create-order",{...valid,purpose:"project",reference:"Q-11111111-1111-4111-8111-111111111111-full"},400);
 const project = await expectStatus(create, "create-order", { ...valid, purpose: "project", reference: "KITTY-01" }, 200);
 const projectContext = helpers.readOrder(jar.get(helpers.orderCookieName(project.order_id)), env.RAZORPAY_KEY_SECRET, env.RAZORPAY_KEY_ID);
 assert.equal(projectContext.purpose, "project"); assert.equal(projectContext.reference, "KITTY-01");
+// A private quote reuses its order on retry; an uncertain concurrent creation
+// queries the unique receipt and never blindly submits another order.
+const quoteBody={...valid,purpose:"project",quoteToken:"a".repeat(64),paymentChoice:"full"};
+await expectStatus(create,"create-order",{...quoteBody,amount:200},409);
+let beforeQuotes=calls;const quoteOrder=await expectStatus(create,"create-order",quoteBody,200);assert.equal(calls,beforeQuotes+1);assert.equal(quoteActions.at(-1),"attach");
+const quoteRetry=await expectStatus(create,"create-order",quoteBody,200);assert.equal(quoteRetry.order_id,quoteOrder.order_id);assert.equal(calls,beforeQuotes+1);
+quoteState.order_id=null;quoteMissing=true;await expectStatus(create,"create-order",quoteBody,409);assert.equal(calls,beforeQuotes+1);quoteMissing=false;
+const recovered=await expectStatus(create,"create-order",quoteBody,200);assert.equal(recovered.order_id,quoteOrder.order_id);assert.equal(calls,beforeQuotes+1);
+const savedNotes=createdOrder.notes;createdOrder={...createdOrder,notes:{...savedNotes,project_reference:"OTHER-QUOTE"}};await expectStatus(create,"create-order",quoteBody,409);createdOrder={...createdOrder,notes:savedNotes};
 console.log("Razorpay checks passed: original safeguards, server-controlled project totals/references, bounded voluntary contributions and signed purpose binding.");

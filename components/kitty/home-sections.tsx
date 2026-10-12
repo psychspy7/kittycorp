@@ -10,7 +10,7 @@ function ProductIcon({product}:{product:CompanyProduct}) {
   return product.icon_path?<Image unoptimized src={mediaHref(product.icon_path)} alt={`${product.name} icon`} width={56} height={56}/>:<Icon size={28} strokeWidth={1.4} aria-hidden="true"/>;
 }
 export function HomeDestinations({launches,products}:{launches:Launch[];products:CompanyProduct[]}) {
-  const experiments = products.filter(product => !launches.some(launch => launch.slug === product.slug));
+  const experiments = products.filter(product => product.slug !== "sentinel" && !launches.some(launch => launch.slug === product.slug));
   return <section id="work" className="business-destinations wrap" aria-label="Explore KITTY CORP’s work">
     <Link href="/products" className="business-destination">
       <div className="destination-topline"><span className="eyebrow">OUR OWN WORK</span><ArrowUpRight size={23} aria-hidden="true"/></div>
@@ -25,6 +25,14 @@ export function HomeDestinations({launches,products}:{launches:Launch[];products
       <span className="destination-action">Visit the lab <ArrowUpRight size={16} aria-hidden="true"/></span>
     </Link>
   </section>;
+}
+export function FlagshipProducts({launches,products}:{launches:Launch[];products:CompanyProduct[]}) {
+ const kitty=launches.find(launch=>launch.slug==="kitty-ai");
+ const lisa=products.find(product=>product.slug==="lisa-ai");
+ return <section className="flagship-products wrap" aria-labelledby="flagship-heading"><div className="section-heading"><div><span className="eyebrow">OUR FLAGSHIP PRODUCTS</span><h2 id="flagship-heading">Meet KITTY AI & LISA AI.</h2></div><p>Personal AI on your phone. An interactive character on your screen. Two products we’re building with care.</p></div><div className="flagship-grid">
+  <article className="flagship-product"><div className="flagship-product-heading">{kitty&&<AppIcon launch={kitty} size={48}/>}<span className="quiet-status">{kitty?"AVAILABLE ON ANDROID":"IN DEVELOPMENT"}</span></div><h3>KITTY AI</h3><p>Chat, voice and personal memory in an Android app. Start with the free daily window, then explore the Plus plan for more room.</p><div className="flagship-actions"><Link href={kitty?launchHref(kitty):"/kitty-ai"} className="button button-outline">Explore KITTY AI <ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/memberships" className="text-link">Membership plans <ArrowUpRight size={16} aria-hidden="true"/></Link></div></article>
+  <article className="flagship-product flagship-lisa"><div className="flagship-product-heading">{lisa&&<ProductIcon product={lisa}/>}<span className="quiet-status">IN DEVELOPMENT</span></div><h3>LISA AI</h3><p>An on-screen AI character, with an interactive room, 3D movement and expressive 2D artwork. Follow the real build and explore the planned early-access offer.</p><div className="flagship-actions"><Link href="/lisa-ai" className="button button-outline">Explore LISA AI <ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/lisa-ai#lisa-plans-heading" className="text-link">Early-access offer <ArrowUpRight size={16} aria-hidden="true"/></Link></div></article>
+ </div></section>;
 }
 export function DeliverySupport() {
   return <section className="delivery-support wrap" aria-labelledby="delivery-support-heading">

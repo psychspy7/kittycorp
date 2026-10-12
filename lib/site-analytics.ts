@@ -14,7 +14,7 @@ const choiceLifetime = 180 * 24 * 60 * 60 * 1000;
 const publicPages = new Set([
   "/", "/services", "/products", "/company", "/team", "/kitty-ai",
   "/lisa-ai", "/sentinel", "/secretchat", "/build-log", "/research",
-  "/investors", "/contact", "/privacy",
+  "/investors", "/contact", "/privacy", "/projects",
 ]);
 
 export function analyticsPublicPath(pathname: string | null) {

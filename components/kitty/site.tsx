@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TechnologyMarquee } from "./technology-marquee";
-const navigation = [["Services", "/services"], ["Products", "/products"], ["Memberships", "/memberships"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
+const navigation = [["Services", "/services"], ["Products", "/products"], ["Payments", "/payments"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ export function SiteHeader() {
     <div className="site-header-navigation">
     <Link href="/" className="brand" aria-label="KITTY CORP home"><Image unoptimized loading="eager" src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link>
     <nav className="navigation" aria-label="Main navigation">{navigation.map(([label, href]) => <Link href={href} key={label} aria-current={pathname === href ? "page" : undefined}>{label}</Link>)}</nav>
-    <Link className="header-cta" href="/services#project-enquiry">Start a project <ArrowUpRight size={15}/></Link>
+    <Link className="header-cta" href="/projects">Start a project <ArrowUpRight size={15}/></Link>
     <Dialog open={open} onOpenChange={setOpen}><DialogTrigger asChild><button className="menu-toggle" aria-label="Open navigation"><Menu size={22} /></button></DialogTrigger>
       <DialogContent className="mobile-navigation"><DialogTitle>KITTY CORP</DialogTitle><DialogDescription>Services, products and the people behind them.</DialogDescription><nav aria-label="Mobile navigation">{navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label} aria-current={pathname === href ? "page" : undefined}>{label}</Link>)}<Link onClick={() => setOpen(false)} href="/team">Full team</Link><Link onClick={() => setOpen(false)} href="/#early-access">Join early access</Link></nav></DialogContent>
     </Dialog>

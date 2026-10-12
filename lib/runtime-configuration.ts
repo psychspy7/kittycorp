@@ -1,7 +1,7 @@
 import "server-only";
 import { cache } from "react";
 import { database, setting } from "./kitty-server";
-export const runtimeFields=["TURNSTILE_SITE_KEY","TURNSTILE_SECRET_KEY","KITTY_AI_WEBSITE_URL","KITTY_AI_GATEWAY_TOKEN","RAZORPAY_KEY_ID","RAZORPAY_KEY_SECRET","RAZORPAY_WEBHOOK_SECRET","PAYPAL_CLIENT_ID","PAYPAL_CLIENT_SECRET","PAYPAL_WEBHOOK_ID","CASHFREE_CLIENT_ID","CASHFREE_CLIENT_SECRET","WEBSITE_COMMERCE_SETTINGS"] as const;
+export const runtimeFields=["TURNSTILE_SITE_KEY","TURNSTILE_SECRET_KEY","KITTY_AI_WEBSITE_URL","KITTY_AI_GATEWAY_TOKEN","KITTY_MEMBERSHIP_BACKEND","KITTY_COMMERCE_GATEWAY_TOKEN","RAZORPAY_KEY_ID","RAZORPAY_KEY_SECRET","RAZORPAY_WEBHOOK_SECRET","PAYPAL_CLIENT_ID","PAYPAL_CLIENT_SECRET","PAYPAL_WEBHOOK_ID","CASHFREE_CLIENT_ID","CASHFREE_CLIENT_SECRET","WEBSITE_COMMERCE_SETTINGS"] as const;
 export type RuntimeConfiguration=Partial<Record<typeof runtimeFields[number],string>>;
 export async function decodeRuntimeConfiguration(ciphertext:string):Promise<RuntimeConfiguration>{
  const envelope=JSON.parse(ciphertext) as {v:number;iv:string;data:string};

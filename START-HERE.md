@@ -48,3 +48,5 @@ Read `HOSTING-AND-PERFORMANCE.md` for native Next.js hosting, safe public cachin
 ## Professional website and payment setup
 
 Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and the separate KITTY/LISA product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.
+
+Read **PROJECT-PAYMENTS-GUIDE.md** for the latest per-client quote workflow, discounts, local-currency display and product-payment activation limits.

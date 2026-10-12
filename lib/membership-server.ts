@@ -1,4 +1,5 @@
 import "server-only";
+import {getRuntimeConfiguration} from "./runtime-configuration";
 import {createHmac} from "node:crypto";
 import {z} from "zod";
 import {HttpError} from "./kitty-server";
@@ -7,15 +8,16 @@ import {draftMemberships,type MembershipCatalog} from "./membership-types";
 const uuid=z.string().uuid();
 const providerSchema=z.object({keyId:z.string().regex(/^rzp_(test|live)_[A-Za-z0-9]+$/),keySecret:z.string().min(8),webhookSecret:z.string().min(16),previousWebhookSecret:z.string().optional(),testMode:z.boolean(),enabled:z.boolean()});
 type Intent={id:string;uid:string;product:string;plan_id:string;provider_order_id?:string;provider_key_id:string;status:string;terms:{amount:number;months:number;chatLimit:number;speechLimit:number}};
-function endpoint() {
- const value=process.env.KITTY_MEMBERSHIP_BACKEND?.trim(),token=process.env.KITTY_COMMERCE_GATEWAY_TOKEN?.trim();
+async function endpoint() {
+ const runtime=await getRuntimeConfiguration();
+ const value=runtime.KITTY_MEMBERSHIP_BACKEND?.trim(),token=runtime.KITTY_COMMERCE_GATEWAY_TOKEN?.trim();
  if(!value||!token||token.length<32)throw new HttpError("Membership checkout is being prepared. Please try later.",503);
  const url=new URL(value);
  if(url.origin!=="https://kitty-ai-v2.kitty-ai.workers.dev"&&!(process.env.MEMBERSHIP_LOCAL_PREVIEW==="1"&&url.hostname==="127.0.0.1"&&url.protocol==="http:"))throw new HttpError("Membership connection needs setup.",503);
  return {url:url.origin,token};
 }
 export async function commerce<T=Record<string,unknown>>(path:string,method="GET",payload?:unknown,userToken?:string):Promise<T> {
- const {url,token}=endpoint();
+ const {url,token}=await endpoint();
  const r=await fetch(url+"/api/"+path,{method,cache:"no-store",redirect:"error",signal:AbortSignal.timeout(15000),headers:{"Content-Type":"application/json","X-Kitty-Commerce-Token":token,...(userToken?{Authorization:"Bearer "+userToken}:{})},body:payload?JSON.stringify(payload):undefined});
  const text=await r.text();if(text.length>128000)throw new HttpError("Membership response was too large.",502);
  let data;try{data=JSON.parse(text);}catch{throw new HttpError("Membership service is temporarily unavailable.",502);}
@@ -23,7 +25,6 @@ export async function commerce<T=Record<string,unknown>>(path:string,method="GET
  return data as T;
 }
 export async function membershipCatalog():Promise<MembershipCatalog> {
- if(!process.env.KITTY_MEMBERSHIP_BACKEND||!process.env.KITTY_COMMERCE_GATEWAY_TOKEN)return draftMemberships;
  try {return await commerce<MembershipCatalog>("memberships/catalog");}catch{return draftMemberships;}
 }
 export function customerToken(request:Request) {

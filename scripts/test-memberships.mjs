@@ -49,7 +49,7 @@ async function bridge(url,options){
 function source(file,mocks={}){
  const code=ts.transpileModule(readFileSync(file,"utf8"),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
  const mod={exports:{}};
- vm.runInNewContext(code,{module:mod,exports:mod.exports,require:name=>name==="server-only"?{}:Object.hasOwn(mocks,name)?mocks[name]:require(name),process:{env},fetch:bridge,Buffer,URL,AbortSignal,crypto:webcrypto,Response,Request,TextDecoder,console},{filename:file});
+ vm.runInNewContext(code,{module:mod,exports:mod.exports,require:name=>name==="./runtime-configuration"?{getRuntimeConfiguration:async()=>env}:name==="server-only"?{}:Object.hasOwn(mocks,name)?mocks[name]:require(name),process:{env},fetch:bridge,Buffer,URL,AbortSignal,crypto:webcrypto,Response,Request,TextDecoder,console},{filename:file});
  return mod.exports;
 }
 const helpers=source("lib/razorpay-server.ts",{razorpay:Provider,"./kitty-server":{HttpError}});

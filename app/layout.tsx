@@ -1,3 +1,5 @@
+import {headers} from "next/headers";
+import {LocalCurrencyProvider} from "@/components/kitty/local-currency";
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
@@ -42,9 +44,10 @@ async function PublicAssistant() {
   const {settings,siteKey} = await publicAssistantPresentation();
   return <AssistantLauncher settings={settings} siteKey={siteKey}/>;
 }
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const country=(await headers()).get("x-vercel-ip-country")||"";
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
@@ -56,7 +59,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider>
+        <LocalCurrencyProvider country={country}><LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider></LocalCurrencyProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
         <Toaster theme="light" position="bottom-right" richColors />

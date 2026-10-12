@@ -15,3 +15,9 @@ export type CommerceCredential=typeof commerceCredentialFields[number];
 export const credentialLabels:Record<CommerceCredential,string>={RAZORPAY_KEY_ID:"Razorpay Key ID",RAZORPAY_KEY_SECRET:"Razorpay Key Secret",RAZORPAY_WEBHOOK_SECRET:"Razorpay Webhook Secret",PAYPAL_CLIENT_ID:"PayPal Client ID",PAYPAL_CLIENT_SECRET:"PayPal Client Secret",PAYPAL_WEBHOOK_ID:"PayPal Webhook ID",CASHFREE_CLIENT_ID:"Cashfree App / Client ID",CASHFREE_CLIENT_SECRET:"Cashfree Secret Key"};
 export const providerFields:Record<PaymentProvider,CommerceCredential[]>={razorpay:["RAZORPAY_KEY_ID","RAZORPAY_KEY_SECRET","RAZORPAY_WEBHOOK_SECRET"],paypal:["PAYPAL_CLIENT_ID","PAYPAL_CLIENT_SECRET","PAYPAL_WEBHOOK_ID"],cashfree:["CASHFREE_CLIENT_ID","CASHFREE_CLIENT_SECRET"]};
 export type PublicProvider={provider:PaymentProvider;name:string;currency:"INR"|"USD";testMode:boolean;amount:number;clientId:string};
+
+// A zero client quote closes only project checkout, never voluntary contributions.
+export function paymentOptionsForPurpose(options: PublicProvider[], purpose: "project" | "donation") {
+  return purpose === "donation" ? options : options.filter(option => option.amount >= 100);
+}
+export type ProviderReadiness = { available: boolean; mode: "off" | "sandbox" | "live"; projectReady: boolean; message: string };

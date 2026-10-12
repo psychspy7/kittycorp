@@ -1,6 +1,8 @@
+import { randomBytes } from "node:crypto";
+import { quoteAction } from "@/lib/project-quotes-server";
 import { after } from "next/server";
-import { database, failure, fingerprint, HttpError, privateJson, readBody, setting, verifyOrigin } from "@/lib/kitty-server";
-import { enquirySchema, PROJECT_ENQUIRY_PREFIX } from "@/lib/enquiries";
+import { failure, fingerprint, HttpError, privateJson, readBody, verifyOrigin } from "@/lib/kitty-server";
+import { enquirySchema } from "@/lib/enquiries";
 import { verifyTurnstile } from "@/lib/turnstile-server";
 import { drainEmailQueue } from "@/lib/email-notifications";
 export const runtime = "nodejs";
@@ -14,16 +16,9 @@ export async function POST(request: Request) {
     const elapsed = Date.now() - value.startedAt;
     if (elapsed < 2000 || elapsed > 86400000) throw new HttpError("Take a moment, then try sending your project again.", 400);
     await verifyTurnstile(request, (body as Record<string, unknown>).turnstileToken, "project-enquiry");
-    const message = PROJECT_ENQUIRY_PREFIX + `Service: ${value.service}\nBusiness / project: ${value.organization || "Not provided"}\nBudget: ${value.budget || "To discuss"}\nTimeline: ${value.timeline || "To discuss"}\n\n${value.message}`;
-    const { error } = await database().rpc("kitty_website_submit_feedback", {
-      p_name: value.name, p_email: value.email, p_message: message,
-      p_fingerprint: await fingerprint(request), p_gateway_token: setting("FEEDBACK_GATEWAY_TOKEN"),
-    });
-    if (error) {
-      if (error.message.includes("Rate limit")) throw new HttpError("You’ve sent a few messages. Please try again in an hour.", 429);
-      throw error;
-    }
+    const quoteToken = randomBytes(32).toString("hex");
+    await quoteAction("submit",quoteToken,{name:value.name,email:value.email,service:value.service,organization:value.organization,budget:value.budget,timeline:value.timeline,scope:value.message,preference:value.paymentChoice,fingerprint:await fingerprint(request)});
     after(async () => { await drainEmailQueue(); });
-    return privateJson({ ok: true });
+    return privateJson({ ok: true, quoteToken });
   } catch (error) { return failure(error); }
 }

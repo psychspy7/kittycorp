@@ -7,7 +7,7 @@ import { technologyBrands } from "./technology-ecosystem";
 import type { WebsiteAssistantSource } from "./website-assistant-types";
 
 const publicPages: WebsiteAssistantSource[] = [
-  { label: "Start a project", href: "/services#project-enquiry" },
+  { label: "Start a project", href: "/projects" },
   { label: "Our products", href: "/products" },
   { label: "KITTY AI", href: "/kitty-ai" },
   { label: "Meet the team", href: "/team" },
@@ -28,12 +28,12 @@ export async function websiteAssistantContext() {
   // early-access list, auth records, admin configuration or the AI app database.
   const context = {
     company: "KITTY CORP is an independent early-stage technology company. It builds websites and applications for clients while developing its own AI software and robotics experiments. Do not infer company registration, partnerships or customer counts.",
-    services: { website: "/services", enquiry: "/services#project-enquiry", offer: "Website and application development, from planning to launch. Six months of maintenance are included after delivery. Scope and support terms are agreed per project; maintenance is not unlimited new features. Pricing and timelines are discussed after reviewing a brief.", contact: "/contact" },
+    services: { website: "/services", enquiry: "/projects", offer: "Website and application development, from planning to launch. Six months of maintenance are included after delivery. Scope and support terms are agreed per project; maintenance is not unlimited new features. KITTY AI can help refine a brief; it must not invent a payable amount. Pricing rules are awaiting owner input. Confirmed quotes offer full advance with 2.5% off, half now/half after review with 1.2% off the total, or review-first with no advance and no discount. Project checkout uses the private quote link; contributions and product plans are separate.", contact: "/contact" },
     overview: { intro: company.team_intro.slice(0, 1000), body: company.team_body.slice(0, 2000) },
     products: products.slice(0, 10).map(product => ({ name: product.name, status: product.status, description: product.description.slice(0, 1000), intro: product.intro.slice(0, 1000), href: `/${product.slug}` })),
     shipped: releases.slice(0, 10).map(release => ({ name: release.name, version: release.version, type: release.launch_type, description: release.description.slice(0, 800), href: launchHref(release) })),
     team: team.slice(0, 20).map(member => ({ name: member.name, role: member.role })),
-    ecosystem: { tools_and_platforms: technologyBrands.filter(brand => !["kitty", "digital-india", "startup-india"].includes(brand.id)).map(brand => brand.name), initiatives: ["Digital India", "Startup India"], relationship: "Tools and platform references describe our workflow. Innovation initiatives are shown for reference. Inclusion does not imply partnership, endorsement, recognition, sponsorship or official affiliation.", href: "/#technology-ecosystem" },
+    ecosystem: { tools_and_platforms: technologyBrands.filter(brand => !["kitty", "digital-india", "startup-india"].includes(brand.id)).map(brand => brand.name), initiatives: ["Digital India", "Startup India"], relationship: "Tools and platform references describe our workflow. Innovation initiatives are shown for reference. Inclusion does not imply partnership, endorsement, recognition, sponsorship or official affiliation.", href: "/company" },
     development: updates.slice(0, 6).map(update => ({ title: update.title, summary: update.summary.slice(0, 300), date: update.entry_date, status: update.status })),
     pages: publicPages,
   };
