@@ -119,3 +119,7 @@ Read `HOSTING-AND-PERFORMANCE.md` for native Next.js hosting, safe public cachin
 ## Professional website and payment setup
 
 Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and the separate KITTY/LISA product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.
+
+## Approved Razorpay activation
+
+The October website refinement is published through the existing GitHub/Vercel connection. Read [RAZORPAY-LIVE-ACTIVATION.md](RAZORPAY-LIVE-ACTIVATION.md) to configure the approved merchant account privately. Live credentials and a matching webhook secret are required before enabling real payments. Read [WEBSITE-REFINEMENT-STATUS.md](WEBSITE-REFINEMENT-STATUS.md) for the verified release and remaining setup.
