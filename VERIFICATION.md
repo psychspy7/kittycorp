@@ -55,3 +55,23 @@ Final interface update: targeted ESLint checks, the Next.js production build and
 - The new grant RPC checks the fresh OAuth method, live session, owner allowlist, verified account email, Google provider identity and pinned immutable subject. The public wrapper uses SECURITY INVOKER. Google grant enforcement is enabled.
 - A transaction against the actual website database confirmed password sessions and direct OAuth without a grant are denied. Incorrect capability, account and subject were rejected; the approved Google owner grant could read Studio settings. The fixture changes were rolled back, preserving real sessions and encrypted configuration.
 - Production build, TypeScript, lint, isolated OAuth/security checks and read-only HTTP checks passed. Google-only login accepts no legacy credential fields. Callback errors return to `/kitten` with private, no-store caching.
+# Contact, payments and email alerts — 9 October 2026
+
+- Native Next.js production build, TypeScript and targeted lint passed.
+- Contact displays the company email and the supplied founder LinkedIn profile;
+  the mobile layout has no horizontal overflow. Public review submissions stay
+  private in Studio until publication is separately approved.
+- Services connects to separate project and voluntary-support checkout pages.
+  Server tests cover project totals/references, contribution limits and signed
+  purpose binding, alongside the existing Razorpay verification safeguards.
+- Email queue installed in website project `mgkghnblbisubympudaa`. Real database
+  tests passed for atomic queue creation, gateway rejection, claim binding,
+  retries and deletion cascades. All fixtures were rolled back; no email sent.
+- Anonymous visitors receive 401 from the email administration endpoint.
+- Email transport tests use isolated fixtures: fixed Gmail recipient, safe
+  Reply-To, bounded batches and failures without private logging passed.
+- Gmail sending is pending the owner's app password and an actual inbox test.
+  Credentials are not in source or the release ZIP. See EMAIL_NOTIFICATIONS.md.
+- Razorpay remains in test mode. A real sandbox card checkout was captured and
+  verified earlier. UPI requires a separate provider-enabled test.
+- This contact/payment update is a local preview, not a GitHub/Vercel deployment.

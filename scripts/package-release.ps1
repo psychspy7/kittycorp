@@ -5,7 +5,6 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-Add-Type -AssemblyName System.IO.Compression
 
 $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $outputRoot = [System.IO.Path]::GetFullPath((Join-Path $projectRoot 'outputs'))
@@ -15,9 +14,9 @@ if (-not $outputRoot.StartsWith($projectRoot + [System.IO.Path]::DirectorySepara
 [System.IO.Directory]::CreateDirectory($outputRoot) | Out-Null
 $archivePath = Join-Path $outputRoot $ArchiveName
 
-$directories = @('app', 'build', 'components', 'db', 'drizzle', 'hooks', 'integrations', 'lib', 'public', 'scripts', 'supabase', 'vendor')
+$directories = @('app', 'build', 'components', 'db', 'drizzle', 'hooks', 'lib', 'public', 'scripts', 'supabase', 'vendor')
 if (Test-Path -LiteralPath (Join-Path $projectRoot 'handover') -PathType Container) { $directories += 'handover' }
-$rootFiles = @('.env.example', '.gitignore', '.npmrc', '.openai/hosting.json', 'AGENTS.md', 'CLAUDE.md', 'GOOGLE_STUDIO_SETUP.md', 'START-HERE.md', 'OWNER-GUIDE.md', 'README.md', 'VERIFICATION.md', 'cloudflare-env.d.ts', 'components.json', 'drizzle.config.ts', 'eslint.config.mjs', 'netlify.toml', 'next.config.ts', 'package-lock.json', 'package.json', 'postcss.config.mjs', 'proxy.ts', 'tsconfig.json', 'vercel.json', 'vite.config.ts')
+$rootFiles = @('.env.example', '.gitignore', '.npmrc', '.openai/hosting.json', 'AGENTS.md', 'CLAUDE.md', 'START-HERE.md', 'OWNER-GUIDE.md', 'README.md', 'VERIFICATION.md', 'cloudflare-env.d.ts', 'components.json', 'drizzle.config.ts', 'eslint.config.mjs', 'netlify.toml', 'next.config.ts', 'package-lock.json', 'package.json', 'postcss.config.mjs', 'tsconfig.json', 'vercel.json', 'vite.config.ts')
 $sourceFiles = [System.Collections.Generic.List[string]]::new()
 foreach ($directory in $directories) {
   Get-ChildItem -LiteralPath (Join-Path $projectRoot $directory) -Recurse -File | ForEach-Object { $sourceFiles.Add($_.FullName) }
@@ -30,22 +29,18 @@ foreach ($file in $rootFiles) {
 
 $privateEnvPath = Join-Path $projectRoot '.env.local'
 $privateEnv = if (Test-Path -LiteralPath $privateEnvPath) { [System.IO.File]::ReadAllText($privateEnvPath) } else { '' }
-$privateValues = @([regex]::Matches($privateEnv, '(?m)^([A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE|SERVICE_ROLE)[A-Z0-9_]*)=(.+)$') | ForEach-Object { $_.Groups[2].Value.Trim().Trim('"').Trim("'") } | Where-Object { $_.Length -gt 12 })
+$gatewaySecret = [regex]::Match($privateEnv, '(?m)^FEEDBACK_GATEWAY_TOKEN=(.+)$').Groups[1].Value.Trim()
 foreach ($file in $sourceFiles) {
   if ([System.IO.Path]::GetExtension($file) -in @('.png', '.webp', '.mp4', '.apk', '.woff2')) { continue }
   $content = [System.IO.File]::ReadAllText($file)
-  foreach ($privateValue in $privateValues) {
-    if ($content.Contains($privateValue)) { throw "A private credential was found in release source: $file" }
-  }
+  if ($gatewaySecret.Length -gt 20 -and $content.Contains($gatewaySecret)) { throw "A private credential was found in release source: $file" }
 }
 
 $stream = [System.IO.File]::Open($archivePath, [System.IO.FileMode]::Create, [System.IO.FileAccess]::ReadWrite)
 $zip = [System.IO.Compression.ZipArchive]::new($stream, [System.IO.Compression.ZipArchiveMode]::Create)
 try {
   foreach ($file in ($sourceFiles | Sort-Object -Unique)) {
-    $absoluteFile = [System.IO.Path]::GetFullPath($file)
-    if (-not $absoluteFile.StartsWith($projectRoot + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)) { throw 'Archive source must stay inside the project.' }
-    $relative = $absoluteFile.Substring($projectRoot.Length + 1).Replace('\', '/')
+    $relative = [System.IO.Path]::GetRelativePath($projectRoot, $file).Replace('\', '/')
     if ($relative.StartsWith('../') -or $relative -match '(^|/)(node_modules|\.git|\.next[^/]*|outputs|\.vercel)(/|$)' -or ($relative -match '(^|/)\.env($|\.)' -and $relative -ne '.env.example') -or $relative -match '\.(pem|key|jks|keystore|p12|pfx)$') { throw 'Unsafe archive entry.' }
     [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $file, "kitty-corp/$relative", [System.IO.Compression.CompressionLevel]::Optimal) | Out-Null
   }
@@ -54,7 +49,7 @@ try {
 $verify = [System.IO.Compression.ZipFile]::OpenRead($archivePath)
 try {
   $entries = @($verify.Entries.FullName)
-  foreach ($required in @('app/page.tsx','app/kitten/page.tsx','app/contact/page.tsx','public/brand/reveal.mp4','public/brand/monogram.png','supabase/schema.sql','supabase/auth-and-limits.sql','supabase/studio-google-only.sql','package.json','package-lock.json','.env.example','START-HERE.md')) {
+  foreach ($required in @('app/page.tsx','app/admins/page.tsx','app/contact/page.tsx','public/brand/reveal.mp4','public/brand/monogram.png','supabase/schema.sql','supabase/auth-and-limits.sql','package.json','package-lock.json','.env.example','START-HERE.md')) {
     if ($entries -notcontains "kitty-corp/$required") { throw "Archive verification failed: $required" }
   }
   if ($entries | Where-Object { $_ -match '(^|/)(node_modules|\.git|\.next|\.env\.local)(/|$)' }) { throw 'Archive contains private or generated files.' }

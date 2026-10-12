@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
@@ -5,7 +6,7 @@ import { JournalCards, Currently } from "@/components/kitty/journal";
 import { publicJournal } from "@/lib/journal-server";
 import { journalCategories } from "@/lib/journal";
 export const dynamic="force-dynamic";
-export const metadata={title:"Build Log",description:"Notes on AI, robotics, engineering and building KITTY CORP. Decisions, experiments and work in progress."};
+export const metadata=pageMetadata('Build Log','Notes on AI, robotics, engineering and building KITTY CORP. Decisions, experiments and work in progress.','/build-log');
 export default async function BuildLog({searchParams}:{searchParams:Promise<{category?:string}>}){
   const {category}=await searchParams;
   const selected=journalCategories.find(c=>c===category);

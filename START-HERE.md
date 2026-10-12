@@ -40,3 +40,11 @@ The **Websites & applications** page lets visitors send project briefs. These ap
 The homepage now leads with website and app services. Company background is at `/company`, full product information at `/products`, and the complete published team at `/team`. Studio’s **Overview** explains every publishing task. Use the exact suggested roles **Founder & CEO** and **Co-Founder** for the two homepage founder positions. Other published roles appear on the full team page.
 
 The supplied Dirtyline 36D font is included with its commercial web license. Geist is used for readable forms, navigation and body copy.
+
+## Performance and hosting checks
+
+Read `HOSTING-AND-PERFORMANCE.md` for native Next.js hosting, safe public caching, Studio refresh behavior and isolated load testing. Run `npm run check:website` before a release; `npm run check:hosting` checks local setup without printing credentials. See `PERFORMANCE-REPORT.md` for the latest verified results and deployment status.
+
+## Professional website and payment setup
+
+Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and the separate KITTY/LISA product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.

@@ -1,7 +1,9 @@
 import "server-only";
 import type { MaintenanceState } from "./maintenance";
+import { singleFlight } from "./single-flight";
 
-export async function maintenanceState(): Promise<MaintenanceState> {
+// Concurrent reads can share one request; no settled status is cached.
+export const maintenanceState = singleFlight(async (): Promise<MaintenanceState> => {
   // Explicit local QA configuration cannot be activated by a visitor request.
   if (process.env.KITTY_LOCAL_PREVIEW === "true" && /^http:\/\/(localhost|127\.0\.0\.1):\d+\/?$/.test(process.env.SITE_URL || ""))
     return {enabled:false,revision:0,updated_at:new Date(0).toISOString()};
@@ -20,4 +22,4 @@ export async function maintenanceState(): Promise<MaintenanceState> {
   if (typeof state.enabled !== "boolean" || !Number.isSafeInteger(state.revision))
     throw new Error("Invalid maintenance state");
   return state;
-}
+});

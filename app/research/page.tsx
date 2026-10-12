@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site-metadata";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { JournalCards } from "@/components/kitty/journal";
@@ -6,7 +7,7 @@ import { companyProducts } from "@/lib/company-server";
 import { publishedLaunches } from "@/lib/launches-server";
 import { publicJournal } from "@/lib/journal-server";
 export const dynamic="force-dynamic";
-export const metadata={title:"Research",description:"The questions KITTY CORP is exploring across AI, autonomy, robotics, computer vision and cybersecurity."};
+export const metadata=pageMetadata('Research','The questions KITTY CORP is exploring across AI, autonomy, robotics, computer vision and cybersecurity.','/research');
 const areas=[
   ["Personal AI","How can memory and voice make AI more useful without reducing the user’s control? We’re exploring context, interaction and privacy together."],
   ["Autonomous systems","Software that can take on bounded tasks, with clear limits and a way for a person to step in. We’re interested in reliability before breadth."],

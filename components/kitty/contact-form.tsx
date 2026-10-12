@@ -5,10 +5,11 @@ import { feedbackSchema } from "@/lib/kitty-validation";
 import { Turnstile } from "./turnstile";
 
 export function ContactForm({ subject = "" }: { subject?: string }) {
+  const [kind, setKind] = useState<"message" | "review">(subject === "Review" ? "review" : "message");
   const [values, setValues] = useState({
     name: "",
     email: "",
-    message: subject ? `I’d love to hear more about ${subject}. ` : "",
+    message: subject && subject !== "Review" ? `I’d love to hear more about ${subject}. ` : "",
   });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -25,6 +26,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
     setError("");
     const payload = {
       ...values,
+      kind,
       website: trap.current?.value || "",
       startedAt: startedAt.current,
       turnstileToken,
@@ -85,9 +87,10 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
   return (
     <form className="contact-form" onSubmit={submit}>
       <div className="form-heading">
-        <h2>Tell us what’s on your mind.</h2>
+        <h2>{kind === "review" ? "Share your experience." : "Tell us what’s on your mind."}</h2>
         <span>01 — START A CONVERSATION</span>
       </div>
+      <div className="form-field"><label htmlFor="contact-kind">What would you like to send?</label><select id="contact-kind" value={kind} onChange={event => setKind(event.target.value as "message" | "review")}><option value="message">A message or question</option><option value="review">A review or feedback</option></select>{kind === "review" && <p className="contact-review-note">Your feedback goes privately to the team. We’ll ask before publishing your words or name.</p>}</div>
       <div className="form-field">
         <label htmlFor="contact-name">Your name</label>
         <input
@@ -124,12 +127,12 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
           placeholder="An idea, some feedback, a question. We’re listening."
           required
           minLength={10}
-          maxLength={5000}
+          maxLength={kind === "review" ? 4993 : 5000}
           rows={6}
           value={values.message}
           onChange={(e) => setValues({ ...values, message: e.target.value })}
         />
-        <span className="field-count">{values.message.length} / 5,000</span>
+        <span className="field-count">{values.message.length} / {kind === "review" ? "4,993" : "5,000"}</span>
       </div>
       <div className="honeypot" aria-hidden="true">
         <label htmlFor="website">Leave this empty</label>

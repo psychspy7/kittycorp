@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { PUBLIC_CONTENT_TAGS, publicContentCache, refreshPublicContent } from "./public-content-cache";
 import { database, HttpError } from "./kitty-server";
 import { MAX_APK_BYTES, RELEASE_BUCKET, type Launch } from "./launches";
 import { createHash } from "node:crypto";
@@ -45,17 +46,20 @@ export const launchSchema = z.object({
   ? { ...value, apk_path: null, apk_sha256: null, apk_bytes: null }
   : { ...value, website_url: null, screenshot_path: null });
 
-export const publishedLaunches = cache(async (): Promise<Launch[]> => {
+const readLaunches = publicContentCache("launches", PUBLIC_CONTENT_TAGS.launches, async (): Promise<Launch[]> => {
   const { data, error } = await database().from("kitty_website_launches").select("*").eq("published", true).lte("published_at", new Date().toISOString()).order("published_at", { ascending: false }).limit(20);
   if (error) throw new HttpError("Launches are temporarily unavailable.", 503);
   return data as Launch[];
 });
+export const publishedLaunches = cache(readLaunches);
+// Download authorization must see an unpublished release immediately.
 export const publishedLaunch = cache(async (slug: string): Promise<Launch | null> => {
   const { data, error } = await database().from("kitty_website_launches").select("*").eq("slug", slug).eq("published", true).lte("published_at", new Date().toISOString()).maybeSingle();
   if (error) throw new HttpError("This launch is temporarily unavailable.", 503);
   return data as Launch | null;
 });
 export function refreshLaunchPages() {
+  refreshPublicContent(PUBLIC_CONTENT_TAGS.launches);
   revalidatePath("/");
   revalidatePath("/products");
   revalidatePath("/secretchat");

@@ -1,3 +1,4 @@
+import { refreshNotices } from "@/lib/notices-server";
 import {
   failure,
   privateJson,
@@ -34,6 +35,7 @@ export async function POST(request: Request) {
       .select()
       .single();
     if (error) throw error;
+    refreshNotices();
     return privateJson({ notice: data });
   } catch (error) {
     return failure(error);

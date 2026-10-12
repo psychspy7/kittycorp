@@ -1,0 +1,40 @@
+{
+  "format": 1,
+  "prepared_at": "2026-10-05T18:23:56.562Z",
+  "website": "https://kittycorp.vercel.app/",
+  "studio": "https://kittycorp.vercel.app/admins",
+  "repository": "https://github.com/psychspy7/kittycorp",
+  "production_branch": "main",
+  "source_baseline_commit": "764c2bd182f9a03700b7c622e7ce151c377765ee",
+  "note": "The source baseline is the tested and deployed website. This archive additionally includes owner handover documentation, public reference copies and a packaging-script update. Those handover additions were not deployed as website functionality.",
+  "website_supabase_project": "mgkghnblbisubympudaa",
+  "source_files_listed": 214,
+  "checksum_file": "handover/SOURCE-SHA256SUMS.txt",
+  "checksum_file_sha256": "60207e20a4a098ecfa203197545bdc3b7eb27608d109ff926709aaa8069eff21",
+  "checksum_scope": "Every packaged file except this manifest and SOURCE-SHA256SUMS.txt. The outer ZIP checksum also covers both.",
+  "latest_published_apk": "handover/public-assets/releases/secretchat-1.6.1.apk",
+  "included": [
+    "website source and lockfile",
+    "public bundled assets and font licences",
+    "hosting configuration",
+    "schema snapshots",
+    "owner and technical guides",
+    "live structural inventory without private row data",
+    "public-content reference",
+    "current published APK and uploaded website icons"
+  ],
+  "excluded": [
+    "filled environment files",
+    "passwords and private server keys",
+    "Android signing keys",
+    "private enquiries and subscribers",
+    "unpublished drafts",
+    "Auth records",
+    "private settings values",
+    "full database and Storage backups",
+    "dependencies",
+    "build output",
+    "Git metadata",
+    "temporary verification files"
+  ]
+}

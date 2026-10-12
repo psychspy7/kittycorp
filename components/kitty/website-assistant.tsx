@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowUp, MessageCircle, RotateCcw, X } from "lucide-react";
 import { Turnstile } from "@/components/kitty/turnstile";
 import { websiteAssistantSuggestions, type WebsiteAssistantMessage, type WebsiteAssistantPublic, type WebsiteAssistantReply, type WebsiteAssistantSource } from "@/lib/website-assistant-types";
+
+function subscribeFeedbackPreference() { return () => {}; }
+function feedbackPreference() { try { return sessionStorage.getItem("kitty-feedback-dismissed") === "yes"; } catch { return false; } }
 
 type DisplayMessage = WebsiteAssistantMessage & { id: string; sources?: WebsiteAssistantSource[] };
 
@@ -17,6 +20,8 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [feedbackDismissed,setFeedbackDismissed]=useState(false);
+  const savedFeedbackDismissed=useSyncExternalStore(subscribeFeedbackPreference,feedbackPreference,()=>false);
   const [turnstileToken, setTurnstileToken] = useState("");
   const [verificationRevision, setVerificationRevision] = useState(0);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -39,7 +44,7 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
     if (conversation.current) conversation.current.scrollTop = conversation.current.scrollHeight;
   }, [messages, busy]);
 
-  if (!settings.enabled || pathname.startsWith("/admins") || pathname.startsWith("/kitten") || pathname.startsWith("/auth/")) return null;
+  if (!settings.enabled || pathname.startsWith("/admins") || pathname.startsWith("/kitten") || pathname.startsWith("/auth/") || pathname === "/payments") return null;
 
   function close() { setOpen(false); trigger.current?.focus(); }
   function reset() { if (busy) return; setMessages([]); setError(""); setInput(""); field.current?.focus(); }
@@ -89,6 +94,7 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
       </header>
       <div ref={conversation} className="website-assistant-conversation" role="log" aria-label="Conversation with KITTY AI" aria-live="polite" aria-relevant="additions">
         <div className="website-assistant-message is-assistant"><span className="website-assistant-speaker">KITTY AI</span><p>{settings.greeting}</p></div>
+        {!feedbackDismissed && !savedFeedbackDismissed && messages.length===0 && <div className="website-assistant-message is-assistant"><p>Enjoying KITTY AI? Visit KITTY CORP and tell us what you think. Your feedback helps us improve.</p><a href="/contact?subject=Review" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">Visit KITTY CORP &amp; share feedback</a><button type="button" className="website-assistant-icon" aria-label="Dismiss feedback invitation" onClick={()=>{setFeedbackDismissed(true);try{sessionStorage.setItem("kitty-feedback-dismissed","yes");}catch{/* Session storage can be unavailable in private browsers. */}}}><X size={16}/></button></div>}
         {messages.length === 0 && <div className="website-assistant-suggestions" aria-label="Suggested questions">{websiteAssistantSuggestions.map(question => <button type="button" key={question} disabled={busy || !!(turnstileSiteKey && !turnstileToken)} onClick={() => void send(question)}>{question}<span aria-hidden="true">↗</span></button>)}</div>}
         {messages.map(message => <div key={message.id} className={`website-assistant-message is-${message.role}`}><span className="website-assistant-speaker">{message.role === "assistant" ? "KITTY AI" : "You"}</span><p>{message.content}</p>{message.sources && message.sources.length > 0 && <div className="website-assistant-sources">{message.sources.map(source => <Link key={source.href} href={source.href} onClick={close}>{source.label}<span aria-hidden="true">↗</span></Link>)}</div>}</div>)}
         {busy && <p className="website-assistant-thinking" role="status"><span aria-hidden="true" />KITTY is thinking…</p>}
@@ -96,7 +102,7 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
       <div className="website-assistant-compose">
         <Turnstile action="assistant" onToken={setTurnstileToken} resetKey={verificationRevision} siteKey={turnstileSiteKey} />
         {error && <p className="website-assistant-error" role="alert">{error}</p>}
-        {limitReached && <p className="website-assistant-error" role="status">That’s the limit for this conversation. <Link href="/contact" onClick={close}>Talk to the team</Link> if you need more help.</p>}
+        {limitReached && <p className="website-assistant-error" role="status">That’s the website guide’s limit for this conversation. <a href="/contact?subject=Review" target="_blank" rel="noopener noreferrer">Share honest feedback</a> or <a href="/memberships" target="_blank" rel="noopener noreferrer">view KITTY app plans</a>. App memberships do not increase this website guide’s allowance.</p>}
         <form onSubmit={event => { event.preventDefault(); void send(input); }}>
           <label htmlFor="kitty-assistant-input" className="sr-only">Your question for KITTY AI</label>
           <textarea ref={field} id="kitty-assistant-input" value={input} onChange={event => setInput(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(input); } }} rows={2} maxLength={800} placeholder="Ask about products or your project…" disabled={busy || limitReached} />

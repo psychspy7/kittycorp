@@ -8,6 +8,8 @@ const AdminProducts = dynamic(() => import("./admin-products"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
+const AdminCommerce = dynamic(() => import("./admin-commerce"), { loading: () => <p className="empty-message">Opening payment setup…</p> });
+const AdminEmail = dynamic(() => import("./admin-email"));
 const AdminAI = dynamic(() => import("./admin-ai"));
 const AdminMaintenance = dynamic(() => import("./admin-maintenance"));
 const AdminLaunches = dynamic(() => import("./admin-launches"), { loading: () => <p className="empty-message">Opening launches…</p> });
@@ -356,6 +358,8 @@ export function AdminDashboard() {
             <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
             <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
+            <TabsTrigger value="email">Email alerts</TabsTrigger>
+            <TabsTrigger value="commerce">Payments & plans</TabsTrigger>
             <TabsTrigger value="launches">Apps & websites</TabsTrigger>
 <TabsTrigger value="products">Products</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
@@ -365,6 +369,8 @@ export function AdminDashboard() {
             <TabsTrigger value="early-access">Early access</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
+          <TabsContent value="commerce" className="admin-panel"><AdminCommerce/></TabsContent>
+          <TabsContent value="email" className="admin-panel"><AdminEmail/></TabsContent>
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
@@ -635,7 +641,7 @@ export function AdminDashboard() {
         }}
       >
         <DialogContent className="notice-dialog">
-          <span className="micro-label">{message?.message.startsWith("PROJECT ENQUIRY\n") ? "WEBSITE & APP PROJECT ENQUIRY" : "A MESSAGE FOR KITTY CORP"}</span>
+          <span className="micro-label">{message?.message.startsWith("PROJECT ENQUIRY\n") ? "WEBSITE & APP PROJECT ENQUIRY" : message?.message.startsWith("REVIEW\n") ? "PRIVATE VISITOR REVIEW" : "A MESSAGE FOR KITTY CORP"}</span>
           <DialogTitle>{message?.name}</DialogTitle>
           <DialogDescription>
             {message?.email} · {message ? date(message.created_at) : ""}

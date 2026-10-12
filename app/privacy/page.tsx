@@ -1,18 +1,19 @@
+import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 
-export const metadata = {
-  title: "Website privacy",
-  description: "How KITTY CORP uses website forms, early-access email addresses and website analytics.",
-};
+export const metadata=pageMetadata('Website privacy','How KITTY CORP uses website forms, early-access email addresses and website analytics.','/privacy');
 
 export default function Privacy() {
   return <><SiteHeader/><main id="main" className="public-page wrap">
     <div className="article-header"><span className="eyebrow">WEBSITE PRIVACY</span><h1>Your information.<br/>A clear purpose.</h1><p>How our website forms, early list and analytics work.</p></div>
     <div className="article-main article-body">
       <h2>The early list</h2><p>We save the email address and product interests you choose, along with the time you joined. We use them for development updates and invitations to test KITTY products. Joining does not guarantee access or a release date. We do not sell the list or use it for third-party advertising.</p>
-      <h2>Contact messages</h2><p>We save your name, email address and message so the team can read and respond. If you send a website or app enquiry, this includes the business name, budget, timeline and project details you choose to share. The forms are stored in our website’s Supabase project and are accessible through our private Studio.</p>
+      <h2>Contact messages</h2><p>We save your name, email address and message so the team can read and respond. If you send a website or app enquiry, this includes the business name, budget, timeline and project details you choose to share. The forms are stored in our website’s Supabase project and are accessible through our private Studio. When email alerts are connected, a copy also goes to KITTY CORP’s Gmail inbox through Google’s email service. New early-access signups are included in these alerts. A failed email does not remove the saved submission.</p>
+      <h2>Visitor reviews</h2><p>Reviews submitted through our contact form stay private in Studio and email. Sending a review does not automatically publish it. We ask for permission before using your words and name on the public website.</p>
+      <h2>Payments and contributions</h2><p>The payment provider you choose — Razorpay, PayPal or Cashfree — processes your payment details. Our server stores order and payment references, amount, currency, purpose, environment and verification status in a private payment ledger. Project references are included in payment orders. Cashfree checkout also shares the email and phone number you enter with Cashfree. Voluntary contributions are separate from project payments and product access. Pages marked Test mode do not charge real money.</p>
+      <h2>Product accounts and planned access</h2><p>KITTY AI memberships use the KITTY AI service and its Firebase customer account. Signing in to a customer account does not grant Studio access. Verified product purchases and usage allowances are managed by the separate KITTY AI backend. LISA’s displayed planned pricing does not open a preorder checkout or collect payment.</p>
       <h2>Abuse prevention and hosting</h2><p>Our form service creates a keyed hash of the request’s IP address to limit repeated submissions. Form records store this hash, rather than a raw IP address. Our hosting and database providers may process IP addresses and request information in their operational logs.</p>
       <h2>KITTY AI website guide</h2><p>If you use the website assistant, your question and a limited number of recent messages are sent through our website server to KITTY AI’s Cloudflare AI service. This helps it answer using published KITTY CORP information. The website does not save the conversation to your KITTY AI app account or read its private memories. Chat history stays in the current browser session’s memory and clears when you refresh or start a new conversation.</p><p>Please do not send passwords, financial details or other private information. We keep a keyed visitor hash and usage counters to limit abuse; website counters expire after a day and the separate AI service’s counters are removed after seven days. Provider operational logs may have separate retention. Studio instructions adjust the assistant’s responses; they do not train model weights.</p>
       <h2>Security verification</h2><p>Cloudflare Turnstile checks requests to our forms, Studio sign-in and assistant when protection is enabled. Your browser communicates with Cloudflare to complete that check, and our server verifies the result before accepting the request. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare’s privacy policy</a>.</p>

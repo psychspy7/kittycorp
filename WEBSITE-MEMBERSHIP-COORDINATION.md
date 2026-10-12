@@ -1,0 +1,19 @@
+# Membership integration coordination — 11 October 2026
+
+This task owns the KITTY Android/backend/admin membership integration, website app/memberships/page.tsx, app/api/memberships/**, components/kitty/memberships.tsx, lib/membership-{server,types}.ts, lib/kitty-customer.ts, public/kitty-firebase-config.json and scripts/test-memberships.mjs. Customer identity is KITTY Firebase, not Studio Supabase. D1 migration 0005 is local only, not applied to production.
+
+KITTY terms approved in this conversation: five elapsed free minutes per UTC day from first chat request, INR99 per calendar month; owner delegated finite limits, selected 100 chat and 10 cloud-speech requests/day with existing service-wide quota preserved. No automatic debits. Purchases remain paused. Credentials entered in KITTY owner console are encrypted; separate server commerce gateway is required. Razorpay provider status and signatures verified on website; Worker enforces ownership and idempotent entitlement reconciliation.
+
+The other website task owns service/donation providers, their payment ledger, professional site refinement and LISA presentation. Those files are preserved. Membership page now uses its ProductPlans only=lisa/getCommerce presentation. KITTY catalogue remains authoritative for KITTY limits and pricing. LISA checkout/access enforcement stays disabled in this task; its supplied planned pricing is presentation only.
+
+The two reported Firebase/client JSON type errors are fixed. Existing lib/razorpay-server.ts exposes optional config to razorpayClient; membership reuses that client and signature utilities without changing service/donation fulfillment. Do not overwrite membership files with older copies.
+
+Feedback invitation added to Android and public website guide. External link uses /contact?subject=Review, opens separately and sends no transcripts/UID. Reward proposal is DISABLED: five extra messages after a verified submission, once per 30 days, any sentiment. No reward is granted by a click or normal form submission.
+
+Pending: finish membership provider/ledger/Android checks and local visual preview. No production migration, account-setting changes or deployments authorized before preview approval. Do not refresh website ZIP until combined website validation; the website task owns that refresh. KITTY source archive will be refreshed after its own checks. Preserve both repositories and all private configurations.
+
+## 12 October checkpoint
+The missing scripts/test-memberships.mjs now exists and PASSES against real server modules with isolated bridge/provider fixtures. Coverage includes immutable price, order retry reuse, ownership, callback HMAC, fetched capture/refund status, cancellation recovery, raw-body webhook signature, previous webhook secret, ignored service orders and trusted bridge destination. No real provider calls. Combined website typecheck also passes on this checkout. Website-owned membership source is stable for the website task's combined build/preview; no separate website archive/deployment performed. Android build and fresh backend expiry regressions are still running. KITTY setup guide: ../KITTY AI/docs/MEMBERSHIPS-SETUP.md.
+Preview on localhost:3075 visually inspected 12 October. Found inherited --muted was near-white on the light membership page; fixed scoped lead text to #626858 and changed the two KITTY cards to a two-column desktop grid. Please include this final CSS correction in combined preview/build. No other website UI source changed.
+
+Final website metadata merge complete: /memberships uses pageMetadata with canonical and social card. All website membership-owned files are stable as of this checkpoint; only Android/backend reports remain. Please include the final scoped subtitle color/two-card desktop grid change in the final build. Backend now passes 72 tests, including real expiry/future-grant status regressions.

@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { PUBLIC_CONTENT_TAGS, refreshPublicContent } from "@/lib/public-content-cache";
 import { assistantSettingsSchema } from "@/lib/assistant-settings";
 import { assistantConnectionConfigured } from "@/lib/assistant-settings-server";
 import { failure, HttpError, privateJson, readBody, requireAdmin, verifyOrigin } from "@/lib/kitty-server";
@@ -21,6 +22,7 @@ export async function PATCH(request: Request) {
       throw new HttpError("Complete the KITTY AI connection and security verification setup before enabling the assistant.",409);
     const {data,error} = await db.from("kitty_website_assistant").update({...settings, updated_at:new Date().toISOString()}).eq("id","assistant").select("*").single();
     if (error) throw error;
+    refreshPublicContent(PUBLIC_CONTENT_TAGS.assistant);
     revalidatePath("/", "layout"); return privateJson({settings:data});
   } catch (error) { return failure(error); }
 }

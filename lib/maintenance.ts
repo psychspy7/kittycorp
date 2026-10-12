@@ -14,7 +14,12 @@ export function recoveryPath(pathname: string) {
     pathname === "/kitten" || pathname.startsWith("/kitten/") ||
     pathname === "/api/emergency" || pathname === "/api/site-status" ||
     pathname === "/api/security/turnstile" ||
-    pathname === "/ecosystem/google-v1.svg" ||
+    // Finish verification for an in-flight payment even if maintenance starts.
+    pathname === "/api/verify-payment" ||
+    ["/api/memberships/verify", "/api/memberships/status", "/api/memberships/webhook", "/api/memberships/cancel"].includes(pathname) ||
+    pathname.startsWith("/api/payments/webhooks/") ||
+    /^\/api\/payments\/(paypal|cashfree)\/verify$/.test(pathname) ||
+    pathname.startsWith("/ecosystem/") ||
     pathname === "/api/admin" || pathname.startsWith("/api/admin/") ||
     pathname === "/maintenance" ||
     pathname.startsWith("/_next/static/") || pathname === "/_next/image" ||

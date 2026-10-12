@@ -1,0 +1,31 @@
+{
+  "captured_at": "2026-10-03T18:14:04.012Z",
+  "notice": "Copies of the published website assets only. These files do not restore database records or upload themselves to Supabase.",
+  "files": [
+    {
+      "source_url": "https://kittycorp.vercel.app/api/media/icons/4cc795d5-a311-48e5-a916-fccff1d2cfd1.webp",
+      "file": "handover/public-assets/icons/4cc795d5-a311-48e5-a916-fccff1d2cfd1.webp",
+      "bytes": 20928,
+      "sha256": "a92569597690d6ebebed68a3f79f8391cef394ed9fbeb4cdcef32b495630f064"
+    },
+    {
+      "source_url": "https://kittycorp.vercel.app/api/media/icons/df4112f1-509c-4025-9ec7-63e65eff9ec5.webp",
+      "file": "handover/public-assets/icons/df4112f1-509c-4025-9ec7-63e65eff9ec5.webp",
+      "bytes": 9748,
+      "sha256": "d972b8d53c1677510dc907ba7e7d3ba2222f99f8437e1d02f0142e1b17f6ca6b"
+    },
+    {
+      "source_url": "https://kittycorp.vercel.app/api/downloads/secretchat",
+      "file": "handover/public-assets/releases/secretchat-1.6.1.apk",
+      "bytes": 5333489,
+      "sha256": "7a7f0df07e3e897e569921336f5ec22b63e33d0d0af82dfee7a9973da3c29d69"
+    }
+  ],
+  "external_cover_references": [
+    {
+      "slug": "lisa-ai-exploration",
+      "url": "https://kommodo.ai/i/3nksJr1O50v2HBzlrIKD",
+      "note": "External cover remains a URL reference; original media is not bundled."
+    }
+  ]
+}

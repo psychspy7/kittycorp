@@ -1,0 +1,1769 @@
+{
+  "notice": "Read-only structural reference from the existing website project. Do not execute or reapply this JSON. No row data from private tables, Auth records or credential values is included.",
+  "project_ref": "mgkghnblbisubympudaa",
+  "edge_functions": [],
+  "columns": [
+    {
+      "data_type": "uuid",
+      "table_name": "admins",
+      "column_name": "user_id",
+      "is_nullable": "NO",
+      "table_schema": "kitty_website_private",
+      "column_default": null,
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "bigint",
+      "table_name": "login_attempts",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "kitty_website_private",
+      "column_default": null,
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "login_attempts",
+      "column_name": "fingerprint",
+      "is_nullable": "NO",
+      "table_schema": "kitty_website_private",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "login_attempts",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "kitty_website_private",
+      "column_default": "now()",
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "settings",
+      "column_name": "key",
+      "is_nullable": "NO",
+      "table_schema": "kitty_website_private",
+      "column_default": null,
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "settings",
+      "column_name": "value",
+      "is_nullable": "NO",
+      "table_schema": "kitty_website_private",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_company",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "jsonb",
+      "table_name": "kitty_website_company",
+      "column_name": "socials",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "'{}'::jsonb",
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_company",
+      "column_name": "team_heading",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_company",
+      "column_name": "team_intro",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_company",
+      "column_name": "team_body",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_company",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "uuid",
+      "table_name": "kitty_website_early_access",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "gen_random_uuid()",
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_early_access",
+      "column_name": "email",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "ARRAY",
+      "table_name": "kitty_website_early_access",
+      "column_name": "interests",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "ARRAY['KITTY CORP updates'::text]",
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_early_access",
+      "column_name": "fingerprint",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_early_access",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "uuid",
+      "table_name": "kitty_website_feedback",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "gen_random_uuid()",
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_feedback",
+      "column_name": "name",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_feedback",
+      "column_name": "email",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_feedback",
+      "column_name": "message",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_feedback",
+      "column_name": "fingerprint",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_feedback",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "uuid",
+      "table_name": "kitty_website_journal",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "gen_random_uuid()",
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "slug",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "title",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "summary",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "body",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "category",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "kind",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 7
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "status",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "'In progress'::text",
+      "ordinal_position": 8
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "cover_url",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "''::text",
+      "ordinal_position": 9
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_journal",
+      "column_name": "cover_alt",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "''::text",
+      "ordinal_position": 10
+    },
+    {
+      "data_type": "date",
+      "table_name": "kitty_website_journal",
+      "column_name": "entry_date",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "CURRENT_DATE",
+      "ordinal_position": 11
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "kitty_website_journal",
+      "column_name": "published",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "false",
+      "ordinal_position": 12
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_journal",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 13
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_journal",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 14
+    },
+    {
+      "data_type": "uuid",
+      "table_name": "kitty_website_launches",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "gen_random_uuid()",
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "slug",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "name",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "tagline",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "description",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "release_notes",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "''::text",
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "version",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 7
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "android",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "'Android 7.0+'::text",
+      "ordinal_position": 8
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "apk_path",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 9
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "apk_sha256",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 10
+    },
+    {
+      "data_type": "bigint",
+      "table_name": "kitty_website_launches",
+      "column_name": "apk_bytes",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 11
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "kitty_website_launches",
+      "column_name": "published",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "false",
+      "ordinal_position": 12
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "kitty_website_launches",
+      "column_name": "show_popup",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "true",
+      "ordinal_position": 13
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_launches",
+      "column_name": "published_at",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 14
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_launches",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 15
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_launches",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 16
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_launches",
+      "column_name": "icon_path",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 17
+    },
+    {
+      "data_type": "uuid",
+      "table_name": "kitty_website_notices",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "gen_random_uuid()",
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_notices",
+      "column_name": "title",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_notices",
+      "column_name": "body",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_notices",
+      "column_name": "category",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "'Studio note'::text",
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "kitty_website_notices",
+      "column_name": "published",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "false",
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_notices",
+      "column_name": "published_at",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_notices",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 7
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_notices",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 8
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "slug",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "name",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "label",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "status",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "description",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "intro",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "category",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 7
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "media",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 8
+    },
+    {
+      "data_type": "jsonb",
+      "table_name": "kitty_website_products",
+      "column_name": "principles",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 9
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_products",
+      "column_name": "icon_path",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 10
+    },
+    {
+      "data_type": "integer",
+      "table_name": "kitty_website_products",
+      "column_name": "sort_order",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "0",
+      "ordinal_position": 11
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "kitty_website_products",
+      "column_name": "published",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "false",
+      "ordinal_position": 12
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_products",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 13
+    },
+    {
+      "data_type": "uuid",
+      "table_name": "kitty_website_team",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "gen_random_uuid()",
+      "ordinal_position": 1
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_team",
+      "column_name": "name",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 2
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_team",
+      "column_name": "role",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 3
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_team",
+      "column_name": "bio",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "''::text",
+      "ordinal_position": 4
+    },
+    {
+      "data_type": "text",
+      "table_name": "kitty_website_team",
+      "column_name": "photo_path",
+      "is_nullable": "YES",
+      "table_schema": "public",
+      "column_default": null,
+      "ordinal_position": 5
+    },
+    {
+      "data_type": "jsonb",
+      "table_name": "kitty_website_team",
+      "column_name": "links",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "'{}'::jsonb",
+      "ordinal_position": 6
+    },
+    {
+      "data_type": "integer",
+      "table_name": "kitty_website_team",
+      "column_name": "sort_order",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "0",
+      "ordinal_position": 7
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "kitty_website_team",
+      "column_name": "published",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "false",
+      "ordinal_position": 8
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_team",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 9
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "kitty_website_team",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "table_schema": "public",
+      "column_default": "now()",
+      "ordinal_position": 10
+    }
+  ],
+  "indexes": [
+    {
+      "indexdef": "CREATE UNIQUE INDEX admins_pkey ON kitty_website_private.admins USING btree (user_id)",
+      "indexname": "admins_pkey",
+      "tablename": "admins",
+      "schemaname": "kitty_website_private",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_login_attempts_time_idx ON kitty_website_private.login_attempts USING btree (created_at)",
+      "indexname": "kitty_website_login_attempts_time_idx",
+      "tablename": "login_attempts",
+      "schemaname": "kitty_website_private",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX login_attempts_pkey ON kitty_website_private.login_attempts USING btree (id)",
+      "indexname": "login_attempts_pkey",
+      "tablename": "login_attempts",
+      "schemaname": "kitty_website_private",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX settings_pkey ON kitty_website_private.settings USING btree (key)",
+      "indexname": "settings_pkey",
+      "tablename": "settings",
+      "schemaname": "kitty_website_private",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_company_pkey ON public.kitty_website_company USING btree (id)",
+      "indexname": "kitty_website_company_pkey",
+      "tablename": "kitty_website_company",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_early_access_created_idx ON public.kitty_website_early_access USING btree (created_at DESC)",
+      "indexname": "kitty_website_early_access_created_idx",
+      "tablename": "kitty_website_early_access",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_early_access_email_key ON public.kitty_website_early_access USING btree (email)",
+      "indexname": "kitty_website_early_access_email_key",
+      "tablename": "kitty_website_early_access",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_early_access_fingerprint_idx ON public.kitty_website_early_access USING btree (fingerprint, created_at DESC)",
+      "indexname": "kitty_website_early_access_fingerprint_idx",
+      "tablename": "kitty_website_early_access",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_early_access_pkey ON public.kitty_website_early_access USING btree (id)",
+      "indexname": "kitty_website_early_access_pkey",
+      "tablename": "kitty_website_early_access",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_feedback_created_idx ON public.kitty_website_feedback USING btree (created_at DESC)",
+      "indexname": "kitty_website_feedback_created_idx",
+      "tablename": "kitty_website_feedback",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_feedback_email_idx ON public.kitty_website_feedback USING btree (email, created_at DESC)",
+      "indexname": "kitty_website_feedback_email_idx",
+      "tablename": "kitty_website_feedback",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_feedback_fingerprint_idx ON public.kitty_website_feedback USING btree (fingerprint, created_at DESC)",
+      "indexname": "kitty_website_feedback_fingerprint_idx",
+      "tablename": "kitty_website_feedback",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_feedback_pkey ON public.kitty_website_feedback USING btree (id)",
+      "indexname": "kitty_website_feedback_pkey",
+      "tablename": "kitty_website_feedback",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_journal_pkey ON public.kitty_website_journal USING btree (id)",
+      "indexname": "kitty_website_journal_pkey",
+      "tablename": "kitty_website_journal",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_journal_public_idx ON public.kitty_website_journal USING btree (entry_date DESC, created_at DESC) WHERE published",
+      "indexname": "kitty_website_journal_public_idx",
+      "tablename": "kitty_website_journal",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_journal_slug_key ON public.kitty_website_journal USING btree (slug)",
+      "indexname": "kitty_website_journal_slug_key",
+      "tablename": "kitty_website_journal",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_launches_pkey ON public.kitty_website_launches USING btree (id)",
+      "indexname": "kitty_website_launches_pkey",
+      "tablename": "kitty_website_launches",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_launches_published_idx ON public.kitty_website_launches USING btree (published_at DESC) WHERE published",
+      "indexname": "kitty_website_launches_published_idx",
+      "tablename": "kitty_website_launches",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_launches_slug_key ON public.kitty_website_launches USING btree (slug)",
+      "indexname": "kitty_website_launches_slug_key",
+      "tablename": "kitty_website_launches",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_notices_pkey ON public.kitty_website_notices USING btree (id)",
+      "indexname": "kitty_website_notices_pkey",
+      "tablename": "kitty_website_notices",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE INDEX kitty_website_notices_published_idx ON public.kitty_website_notices USING btree (published_at DESC) WHERE (published = true)",
+      "indexname": "kitty_website_notices_published_idx",
+      "tablename": "kitty_website_notices",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_products_pkey ON public.kitty_website_products USING btree (slug)",
+      "indexname": "kitty_website_products_pkey",
+      "tablename": "kitty_website_products",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX kitty_website_team_pkey ON public.kitty_website_team USING btree (id)",
+      "indexname": "kitty_website_team_pkey",
+      "tablename": "kitty_website_team",
+      "schemaname": "public",
+      "tablespace": null
+    }
+  ],
+  "policies": [
+    {
+      "cmd": "SELECT",
+      "qual": "true",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "tablename": "kitty_website_company",
+      "permissive": "PERMISSIVE",
+      "policyname": "Public company links",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_company",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins edit company",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_early_access",
+      "permissive": "PERMISSIVE",
+      "policyname": "Only website admins delete early access",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_early_access",
+      "permissive": "PERMISSIVE",
+      "policyname": "Only website admins read early access",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_feedback",
+      "permissive": "PERMISSIVE",
+      "policyname": "Only website admins read feedback",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((published AND (entry_date <= CURRENT_DATE)) OR ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_journal",
+      "permissive": "PERMISSIVE",
+      "policyname": "Members read published journal and admins read drafts",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(published AND (entry_date <= CURRENT_DATE))",
+      "roles": [
+        "anon"
+      ],
+      "tablename": "kitty_website_journal",
+      "permissive": "PERMISSIVE",
+      "policyname": "Visitors read published journal",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_journal",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins delete journal",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_journal",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins insert journal",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_journal",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins update journal",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((published AND (published_at <= now())) OR ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_launches",
+      "permissive": "PERMISSIVE",
+      "policyname": "Members see published launches and admins see drafts",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(published AND (published_at <= now()))",
+      "roles": [
+        "anon"
+      ],
+      "tablename": "kitty_website_launches",
+      "permissive": "PERMISSIVE",
+      "policyname": "Visitors see published launches",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_launches",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins delete launches",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_launches",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins insert launches",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_launches",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins update launches",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((published = true) AND (published_at <= now()))",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "tablename": "kitty_website_notices",
+      "permissive": "PERMISSIVE",
+      "policyname": "Published website notices",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "ALL",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_notices",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins manage notices",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "published",
+      "roles": [
+        "anon"
+      ],
+      "tablename": "kitty_website_products",
+      "permissive": "PERMISSIVE",
+      "policyname": "Public product content",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(published OR ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_products",
+      "permissive": "PERMISSIVE",
+      "policyname": "Published products or website admin",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_products",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins edit products",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "published",
+      "roles": [
+        "anon"
+      ],
+      "tablename": "kitty_website_team",
+      "permissive": "PERMISSIVE",
+      "policyname": "Public team profiles",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(published OR ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_team",
+      "permissive": "PERMISSIVE",
+      "policyname": "Published team or website admin",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_team",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins add team",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_team",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins edit team",
+      "schemaname": "public",
+      "with_check": "( SELECT kitty_website_private.is_admin() AS is_admin)"
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "( SELECT kitty_website_private.is_admin() AS is_admin)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "kitty_website_team",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins remove team",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((bucket_id = 'kitty-website-releases'::text) AND (EXISTS ( SELECT 1\n   FROM kitty_website_launches l\n  WHERE ((l.apk_path = objects.name) AND l.published AND (l.published_at <= now())))))",
+      "roles": [
+        "anon"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "Visitors download published website APKs",
+      "schemaname": "storage",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((bucket_id = 'kitty-website-media'::text) AND ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins inspect public media",
+      "schemaname": "storage",
+      "with_check": null
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "((bucket_id = 'kitty-website-media'::text) AND ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins remove public media",
+      "schemaname": "storage",
+      "with_check": null
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "((bucket_id = 'kitty-website-releases'::text) AND ( SELECT kitty_website_private.is_admin() AS is_admin))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins remove release APKs",
+      "schemaname": "storage",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins upload public media",
+      "schemaname": "storage",
+      "with_check": "((bucket_id = 'kitty-website-media'::text) AND (name ~ '^(icons|portraits)/[0-9a-f-]{36}\\.webp$'::text) AND ( SELECT kitty_website_private.is_admin() AS is_admin))"
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "Website admins upload release APKs",
+      "schemaname": "storage",
+      "with_check": "((bucket_id = 'kitty-website-releases'::text) AND (name ~ '^releases/[0-9a-f-]{36}/[0-9a-f-]{36}\\.apk$'::text) AND ( SELECT kitty_website_private.is_admin() AS is_admin))"
+    }
+  ],
+  "functions": [
+    {
+      "name": "is_admin",
+      "schema": "kitty_website_private",
+      "definition": "CREATE OR REPLACE FUNCTION kitty_website_private.is_admin()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select auth.uid() is not null and exists (\n   select 1 from kitty_website_private.admins a\n   join auth.users u on u.id=a.user_id\n   join auth.sessions s on s.user_id=u.id\n   where a.user_id=auth.uid()\n     and s.id=(auth.jwt()->>'session_id')::uuid\n     and (u.banned_until is null or u.banned_until<now())\n     and (s.not_after is null or s.not_after>now())\n );\n$function$\n"
+    },
+    {
+      "name": "kitty_website_admin_status",
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.kitty_website_admin_status()\n RETURNS boolean\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$select kitty_website_private.is_admin();$function$\n"
+    },
+    {
+      "name": "kitty_website_join_early_access",
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.kitty_website_join_early_access(p_email text, p_interests text[], p_fingerprint text, p_gateway_token text)\n RETURNS boolean\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n  select kitty_website_private.submit_early_access(p_email,p_interests,p_fingerprint,p_gateway_token);\n$function$\n"
+    },
+    {
+      "name": "kitty_website_login_attempt",
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.kitty_website_login_attempt(p_fingerprint text, p_gateway_token text)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if not exists(select 1 from kitty_website_private.settings where key='feedback_gateway_hash' and value=encode(extensions.digest(p_gateway_token,'sha256'),'hex'))\n then raise exception 'Unauthorized' using errcode='42501'; end if;\n if p_fingerprint !~ '^[a-f0-9]{64}$' then raise exception 'Invalid fingerprint'; end if;\n perform pg_catalog.pg_advisory_xact_lock(761210);\n delete from kitty_website_private.login_attempts where created_at < now()-interval '1 hour';\n if (select count(*) from kitty_website_private.login_attempts where fingerprint=p_fingerprint and created_at>now()-interval '15 minutes')>=5\n or (select count(*) from kitty_website_private.login_attempts)>=30\n then raise exception 'Rate limit exceeded'; end if;\n insert into kitty_website_private.login_attempts(fingerprint) values(p_fingerprint);\nend;$function$\n"
+    },
+    {
+      "name": "kitty_website_submit_feedback",
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.kitty_website_submit_feedback(p_name text, p_email text, p_message text, p_fingerprint text, p_gateway_token text)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare result_id uuid;\nbegin\n  if not exists (\n    select 1 from kitty_website_private.settings\n    where key='feedback_gateway_hash'\n      and value=encode(extensions.digest(p_gateway_token,'sha256'),'hex')\n  ) then raise exception 'Unauthorized' using errcode='42501'; end if;\n  if char_length(trim(p_name)) not between 2 and 100\n    or char_length(p_email) > 254 or p_email !~ '^[^[:space:]@]+@[^[:space:]@]+[.][^[:space:]@]+$'\n    or char_length(trim(p_message)) not between 10 and 5000\n    or p_fingerprint !~ '^[a-f0-9]{64}$'\n  then raise exception 'Invalid submission' using errcode='22023'; end if;\n  perform pg_catalog.pg_advisory_xact_lock(761209);\n  if (select count(*) from public.kitty_website_feedback where created_at>now()-interval '1 hour' and (email=lower(trim(p_email)) or fingerprint=p_fingerprint))>=3\n    or (select count(*) from public.kitty_website_feedback where created_at>now()-interval '24 hours')>=1000\n  then raise exception 'Rate limit exceeded' using errcode='P0001'; end if;\n  insert into public.kitty_website_feedback(name,email,message,fingerprint)\n  values(trim(p_name),lower(trim(p_email)),trim(p_message),p_fingerprint) returning id into result_id;\n  return result_id;\nend;\n$function$\n"
+    }
+  ],
+  "captured_at": "2026-10-03T18:11:15.143984+00:00",
+  "constraints": [
+    {
+      "name": "admins_pkey",
+      "table": "admins",
+      "schema": "kitty_website_private",
+      "definition": "PRIMARY KEY (user_id)"
+    },
+    {
+      "name": "admins_user_id_fkey",
+      "table": "admins",
+      "schema": "kitty_website_private",
+      "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+    },
+    {
+      "name": "login_attempts_pkey",
+      "table": "login_attempts",
+      "schema": "kitty_website_private",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "settings_pkey",
+      "table": "settings",
+      "schema": "kitty_website_private",
+      "definition": "PRIMARY KEY (key)"
+    },
+    {
+      "name": "kitty_website_company_id_check",
+      "table": "kitty_website_company",
+      "schema": "public",
+      "definition": "CHECK ((id = 'company'::text))"
+    },
+    {
+      "name": "kitty_website_company_pkey",
+      "table": "kitty_website_company",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_company_socials_check",
+      "table": "kitty_website_company",
+      "schema": "public",
+      "definition": "CHECK ((jsonb_typeof(socials) = 'object'::text))"
+    },
+    {
+      "name": "kitty_website_company_team_body_check",
+      "table": "kitty_website_company",
+      "schema": "public",
+      "definition": "CHECK (((char_length(team_body) >= 10) AND (char_length(team_body) <= 2000)))"
+    },
+    {
+      "name": "kitty_website_company_team_heading_check",
+      "table": "kitty_website_company",
+      "schema": "public",
+      "definition": "CHECK (((char_length(team_heading) >= 3) AND (char_length(team_heading) <= 140)))"
+    },
+    {
+      "name": "kitty_website_company_team_intro_check",
+      "table": "kitty_website_company",
+      "schema": "public",
+      "definition": "CHECK (((char_length(team_intro) >= 10) AND (char_length(team_intro) <= 1000)))"
+    },
+    {
+      "name": "kitty_website_early_access_email_check",
+      "table": "kitty_website_early_access",
+      "schema": "public",
+      "definition": "CHECK (((char_length(email) <= 254) AND (email ~ '^[^[:space:]@]+@[^[:space:]@]+[.][^[:space:]@]+$'::text)))"
+    },
+    {
+      "name": "kitty_website_early_access_email_key",
+      "table": "kitty_website_early_access",
+      "schema": "public",
+      "definition": "UNIQUE (email)"
+    },
+    {
+      "name": "kitty_website_early_access_fingerprint_check",
+      "table": "kitty_website_early_access",
+      "schema": "public",
+      "definition": "CHECK ((fingerprint ~ '^[a-f0-9]{64}$'::text))"
+    },
+    {
+      "name": "kitty_website_early_access_interests_check",
+      "table": "kitty_website_early_access",
+      "schema": "public",
+      "definition": "CHECK (((interests <@ ARRAY['KITTY AI'::text, 'KITTY Sentinel'::text, 'LISA AI'::text, 'KITTY CORP updates'::text]) AND ((cardinality(interests) >= 1) AND (cardinality(interests) <= 4))))"
+    },
+    {
+      "name": "kitty_website_early_access_pkey",
+      "table": "kitty_website_early_access",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_feedback_email_check",
+      "table": "kitty_website_feedback",
+      "schema": "public",
+      "definition": "CHECK (((char_length(email) >= 3) AND (char_length(email) <= 254)))"
+    },
+    {
+      "name": "kitty_website_feedback_message_check",
+      "table": "kitty_website_feedback",
+      "schema": "public",
+      "definition": "CHECK (((char_length(message) >= 10) AND (char_length(message) <= 5000)))"
+    },
+    {
+      "name": "kitty_website_feedback_name_check",
+      "table": "kitty_website_feedback",
+      "schema": "public",
+      "definition": "CHECK (((char_length(name) >= 2) AND (char_length(name) <= 100)))"
+    },
+    {
+      "name": "kitty_website_feedback_pkey",
+      "table": "kitty_website_feedback",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_journal_body_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((char_length(body) >= 10) AND (char_length(body) <= 20000)))"
+    },
+    {
+      "name": "kitty_website_journal_category_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK ((category = ANY (ARRAY['AI'::text, 'Robotics'::text, 'Engineering'::text, 'Research'::text, 'Company'::text])))"
+    },
+    {
+      "name": "kitty_website_journal_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((cover_url = ''::text) OR (char_length(cover_alt) > 0)))"
+    },
+    {
+      "name": "kitty_website_journal_cover_alt_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK ((char_length(cover_alt) <= 200))"
+    },
+    {
+      "name": "kitty_website_journal_cover_url_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((cover_url = ''::text) OR ((cover_url ~ '^https://[^[:space:]]+$'::text) AND (char_length(cover_url) <= 1000))))"
+    },
+    {
+      "name": "kitty_website_journal_kind_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK ((kind = ANY (ARRAY['article'::text, 'update'::text])))"
+    },
+    {
+      "name": "kitty_website_journal_pkey",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_journal_slug_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text) AND ((char_length(slug) >= 3) AND (char_length(slug) <= 90))))"
+    },
+    {
+      "name": "kitty_website_journal_slug_key",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "UNIQUE (slug)"
+    },
+    {
+      "name": "kitty_website_journal_status_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((char_length(status) >= 2) AND (char_length(status) <= 40)))"
+    },
+    {
+      "name": "kitty_website_journal_summary_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((char_length(summary) >= 10) AND (char_length(summary) <= 500)))"
+    },
+    {
+      "name": "kitty_website_journal_title_check",
+      "table": "kitty_website_journal",
+      "schema": "public",
+      "definition": "CHECK (((char_length(title) >= 3) AND (char_length(title) <= 140)))"
+    },
+    {
+      "name": "kitty_website_launches_android_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((char_length(android) >= 3) AND (char_length(android) <= 60)))"
+    },
+    {
+      "name": "kitty_website_launches_apk_bytes_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((apk_bytes >= 1) AND (apk_bytes <= 52428800)))"
+    },
+    {
+      "name": "kitty_website_launches_apk_path_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((apk_path = '/downloads/SecretChat-1.5.0-build6.apk'::text) OR (apk_path ~ '^releases/[0-9a-f-]{36}/[0-9a-f-]{36}\\.apk$'::text)))"
+    },
+    {
+      "name": "kitty_website_launches_apk_sha256_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK ((apk_sha256 ~ '^[a-f0-9]{64}$'::text))"
+    },
+    {
+      "name": "kitty_website_launches_description_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((char_length(description) >= 10) AND (char_length(description) <= 2000)))"
+    },
+    {
+      "name": "kitty_website_launches_icon_path_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((icon_path IS NULL) OR (icon_path ~ '^icons/[0-9a-f-]{36}\\.webp$'::text)))"
+    },
+    {
+      "name": "kitty_website_launches_name_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((char_length(name) >= 2) AND (char_length(name) <= 80)))"
+    },
+    {
+      "name": "kitty_website_launches_pkey",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_launches_release_notes_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK ((char_length(release_notes) <= 4000))"
+    },
+    {
+      "name": "kitty_website_launches_slug_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text) AND ((char_length(slug) >= 3) AND (char_length(slug) <= 60))))"
+    },
+    {
+      "name": "kitty_website_launches_slug_key",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "UNIQUE (slug)"
+    },
+    {
+      "name": "kitty_website_launches_tagline_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((char_length(tagline) >= 3) AND (char_length(tagline) <= 140)))"
+    },
+    {
+      "name": "kitty_website_launches_version_check",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((char_length(version) >= 1) AND (char_length(version) <= 40)))"
+    },
+    {
+      "name": "published_launch_has_apk",
+      "table": "kitty_website_launches",
+      "schema": "public",
+      "definition": "CHECK (((NOT published) OR ((apk_path IS NOT NULL) AND (apk_sha256 IS NOT NULL) AND (apk_bytes IS NOT NULL) AND (published_at IS NOT NULL))))"
+    },
+    {
+      "name": "kitty_website_notices_body_check",
+      "table": "kitty_website_notices",
+      "schema": "public",
+      "definition": "CHECK (((char_length(body) >= 10) AND (char_length(body) <= 4000)))"
+    },
+    {
+      "name": "kitty_website_notices_category_check",
+      "table": "kitty_website_notices",
+      "schema": "public",
+      "definition": "CHECK ((category = ANY (ARRAY['Studio note'::text, 'Development'::text, 'Launch note'::text, 'Community'::text])))"
+    },
+    {
+      "name": "kitty_website_notices_pkey",
+      "table": "kitty_website_notices",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_notices_title_check",
+      "table": "kitty_website_notices",
+      "schema": "public",
+      "definition": "CHECK (((char_length(title) >= 3) AND (char_length(title) <= 120)))"
+    },
+    {
+      "name": "kitty_website_products_category_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK ((category = ANY (ARRAY['AI'::text, 'Robotics'::text, 'Engineering'::text, 'Research'::text, 'Company'::text])))"
+    },
+    {
+      "name": "kitty_website_products_description_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((char_length(description) >= 10) AND (char_length(description) <= 1000)))"
+    },
+    {
+      "name": "kitty_website_products_icon_path_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((icon_path IS NULL) OR (icon_path ~ '^icons/[0-9a-f-]{36}\\.webp$'::text)))"
+    },
+    {
+      "name": "kitty_website_products_intro_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((char_length(intro) >= 10) AND (char_length(intro) <= 2000)))"
+    },
+    {
+      "name": "kitty_website_products_label_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((char_length(label) >= 2) AND (char_length(label) <= 100)))"
+    },
+    {
+      "name": "kitty_website_products_media_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((char_length(media) >= 3) AND (char_length(media) <= 120)))"
+    },
+    {
+      "name": "kitty_website_products_name_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((char_length(name) >= 2) AND (char_length(name) <= 80)))"
+    },
+    {
+      "name": "kitty_website_products_pkey",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "PRIMARY KEY (slug)"
+    },
+    {
+      "name": "kitty_website_products_principles_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((jsonb_typeof(principles) = 'array'::text) AND (jsonb_array_length(principles) = 3)))"
+    },
+    {
+      "name": "kitty_website_products_slug_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK ((slug = ANY (ARRAY['kitty-ai'::text, 'sentinel'::text, 'lisa-ai'::text])))"
+    },
+    {
+      "name": "kitty_website_products_sort_order_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((sort_order >= 0) AND (sort_order <= 1000)))"
+    },
+    {
+      "name": "kitty_website_products_status_check",
+      "table": "kitty_website_products",
+      "schema": "public",
+      "definition": "CHECK (((char_length(status) >= 2) AND (char_length(status) <= 60)))"
+    },
+    {
+      "name": "kitty_website_team_bio_check",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "CHECK ((char_length(bio) <= 1200))"
+    },
+    {
+      "name": "kitty_website_team_links_check",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "CHECK ((jsonb_typeof(links) = 'object'::text))"
+    },
+    {
+      "name": "kitty_website_team_name_check",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "CHECK (((char_length(name) >= 2) AND (char_length(name) <= 100)))"
+    },
+    {
+      "name": "kitty_website_team_photo_path_check",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "CHECK (((photo_path IS NULL) OR (photo_path ~ '^portraits/[0-9a-f-]{36}\\.webp$'::text)))"
+    },
+    {
+      "name": "kitty_website_team_pkey",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "kitty_website_team_role_check",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "CHECK (((char_length(role) >= 2) AND (char_length(role) <= 100)))"
+    },
+    {
+      "name": "kitty_website_team_sort_order_check",
+      "table": "kitty_website_team",
+      "schema": "public",
+      "definition": "CHECK (((sort_order >= 0) AND (sort_order <= 1000)))"
+    }
+  ],
+  "storage_buckets": [
+    {
+      "id": "kitty-website-releases",
+      "name": "kitty-website-releases",
+      "public": false,
+      "file_size_limit": 52428800,
+      "allowed_mime_types": [
+        "application/vnd.android.package-archive"
+      ]
+    },
+    {
+      "id": "kitty-website-media",
+      "name": "kitty-website-media",
+      "public": true,
+      "file_size_limit": 3145728,
+      "allowed_mime_types": [
+        "image/webp"
+      ]
+    }
+  ]
+}

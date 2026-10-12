@@ -19,6 +19,7 @@ See **OWNER-GUIDE.md** for the complete owner handover. The `handover/` folder i
 - `/secretchat`: Android download, installation guide, and privacy explanation.
 - `/launches/[slug]`: launch pages for Android apps and websites published from Studio.
 - `/contact`: contact form.
+- `/payments`: Razorpay test checkout. See **PAYMENTS_SETUP.md** for testing, environment settings and production steps.
 - `/kitten`: private Google-only Studio for the build journal, apps, early access, contact inbox and legacy notices. The former `/admins` address is retired.
 
 ## Run locally
@@ -77,6 +78,16 @@ The public site uses a light ivory and graphite theme with restrained gold detai
 
 Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Releases remain accessible from the product directory without interrupting the business homepage. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; the encrypted integration setup uses the existing private deployment gateway.
 
+## Gmail alerts and payments
+
+Contact shows kittycorp.info@gmail.com and the supplied founder LinkedIn profile.
+Visitor reviews can be sent through Contact and stay private in Studio’s inbox.
+See [EMAIL_NOTIFICATIONS.md](EMAIL_NOTIFICATIONS.md) for Gmail setup and retries.
+Studio → Email alerts shows setup/queue status and sends tests or queued alerts.
+Services links to project checkout and a separate voluntary-support checkout.
+Both remain in Razorpay test mode until live credentials are configured.
+See [PAYMENTS_SETUP.md](PAYMENTS_SETUP.md) before accepting live payments.
+
 ## Shipped work and genuine reviews
 
 The Products and Services pages show published website launches with their real screenshots and live links, and Android releases with APK downloads and details. Research experiments have their own page. Launch content still comes from Studio; new releases appear after saving and refreshing.
@@ -100,3 +111,11 @@ The current production AI and Turnstile credentials are stored as encrypted runt
 The KITTY AI backend must retain `/api/website/chat` and its `WEBSITE_GATEWAY_TOKEN` binding on future deployments. Reference implementation and integration tests are under `integrations/kitty-ai/`; deployment instructions are in that folder’s README. Website proxy and security checks run with `node scripts/check-website-assistant.mjs` and `node scripts/test-studio-security.mjs`.
 
 Studio → **Site controls** manages the maintenance page. Its emergency recovery route is preserved. Maintenance changes use revision checks so a stale browser cannot silently overwrite a newer change. `/kitten` remains accessible during maintenance.
+
+## Performance and hosting checks
+
+Read `HOSTING-AND-PERFORMANCE.md` for native Next.js hosting, safe public caching, Studio refresh behavior and isolated load testing. Run `npm run check:website` before a release; `npm run check:hosting` checks local setup without printing credentials. See `PERFORMANCE-REPORT.md` for the latest verified results and deployment status.
+
+## Professional website and payment setup
+
+Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and the separate KITTY/LISA product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.

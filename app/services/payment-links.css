@@ -1,0 +1,8 @@
+.service-payment-links { display: grid; border-block: 1px solid #25272020; margin-top: 65px; }
+.service-payment-links article { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 40px 0; }
+.service-payment-links article+article { border-top: 1px solid #25272014; }
+.service-payment-links h2 { font-size: 25px; letter-spacing: -.6px; margin: 12px 0; }
+.service-payment-links p { max-width: 600px; line-height: 1.8; font-size: 15px; color: #62645d; }
+.service-payment-links .button { flex-shrink: 0; white-space: nowrap; }
+.service-feedback-link { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding: 35px 0 0; color: #62645d; font-size: 14px; }
+@media(max-width:700px) { .service-payment-links article { align-items: flex-start; flex-direction: column; gap: 15px; } .service-feedback-link { flex-direction: column; align-items: flex-start; gap: 12px; } }

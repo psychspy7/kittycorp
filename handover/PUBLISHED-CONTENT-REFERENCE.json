@@ -1,0 +1,231 @@
+{
+  "notice": "Public content reference only; not a full backup or an import script. Private drafts, contacts, subscriber emails, Auth records, settings values and credentials are excluded.",
+  "project_ref": "mgkghnblbisubympudaa",
+  "team": [
+    {
+      "id": "cdf8949a-8f50-4c45-bfa3-744ae5d8495d",
+      "bio": "",
+      "name": "Virat",
+      "role": "Founder & CEO",
+      "links": {},
+      "published": true,
+      "created_at": "2026-10-03T11:15:20.581793+00:00",
+      "photo_path": null,
+      "sort_order": 0,
+      "updated_at": "2026-10-03T11:15:20.581793+00:00"
+    },
+    {
+      "id": "48429faa-b44f-4f9b-bb30-699cab0f82dc",
+      "bio": "",
+      "name": "Sarthak",
+      "role": "Co-Founder",
+      "links": {},
+      "published": true,
+      "created_at": "2026-10-03T11:15:20.581793+00:00",
+      "photo_path": null,
+      "sort_order": 1,
+      "updated_at": "2026-10-03T11:15:20.581793+00:00"
+    }
+  ],
+  "company": {
+    "id": "company",
+    "socials": {
+      "github": "https://github.com/KITTY-CORP-0-1"
+    },
+    "team_body": "KITTY CORP started from experiments, prototypes and a lot of curiosity. We’re still early, and we’re building the company alongside the technology.",
+    "team_intro": "We’re a small team interested in AI, robotics, cybersecurity and building things from scratch.",
+    "updated_at": "2026-10-03T12:40:47.03+00:00",
+    "team_heading": "A small team. Plenty to figure out."
+  },
+  "journal": [
+    {
+      "id": "b17075be-3c9a-4b6f-ae27-d9a7acb2470e",
+      "body": "KITTY CORP is Virat and Sarthak. We’re interested in personal AI, autonomous systems and intelligent software. We’re still early, and the website should say that clearly.\n\nWe don’t want a page that sounds like a much larger company. It should show what exists, what’s being developed and what we’re still figuring out.\n\n## What belongs here\n\nSecretChat is available on Android. KITTY AI is in active development. Sentinel is an experimental robotics and computer-vision prototype. LISA AI is an early exploration of an on-screen interactive anime AI.\n\nThose stages are different. We’ll keep them visible rather than using the same launch language for everything.\n\n## Real material, when it’s ready\n\nThe product pages have space for application screenshots, test footage and photographs. We’re leaving that space honest until there’s real material to share.\n\nThe same goes for the team. No invented credentials. No implied partnerships. Just the people building this, and the work as it develops.\n\n## A journal, not a press room\n\nThe build log is a place for decisions, experiments and mistakes. Some notes will be technical. Some will be about the company. They don’t have to sound polished to be useful.\n\nIf you’d like to follow along or try future products, the early list is open. We’ll share something when there’s something worth sharing.",
+      "kind": "article",
+      "slug": "a-more-honest-home-for-kitty",
+      "title": "A more honest home for KITTY",
+      "status": "Company note",
+      "summary": "A clearer public home for a small team, a launched app, and the products we’re still building.",
+      "category": "Company",
+      "cover_alt": "",
+      "cover_url": "",
+      "published": true,
+      "created_at": "2026-10-03T05:41:22.646135+00:00",
+      "entry_date": "2026-10-03",
+      "updated_at": "2026-10-03T05:41:22.646135+00:00"
+    },
+    {
+      "id": "a3455672-99b8-42f1-9aec-ab56524c9da9",
+      "body": "Personal AI is the direction we’re working toward. Memory, voice, privacy and user control are the starting points. This is a note about the questions behind KITTY AI, not a description of a finished release.\n\n## Useful memory\n\nAn assistant that forgets every conversation makes you repeat yourself. An assistant that remembers everything without a clear way to review it creates a different problem.\n\nWe’re interested in the space between those extremes: context that is useful, understandable and manageable. What should be remembered? How would you correct it? What should happen when you ask it to forget?\n\n## Voice without ceremony\n\nWe want voice interaction to feel less like filling in a form. That means considering continuity, interruptions and how an assistant makes its state clear.\n\nThose are development questions. A smooth conversation in a demonstration isn’t enough to establish how it will behave in everyday use.\n\n## Control before claims\n\nPrivacy is part of the design direction. We’re considering local processing and explicit controls, but we’re not claiming an unreleased product has solved those problems.\n\nAs the work develops, we’ll share real interfaces, demonstrations and the decisions behind them. There isn’t a public release date yet.",
+      "kind": "article",
+      "slug": "what-we-want-kitty-ai-to-remember",
+      "title": "What we want KITTY AI to remember",
+      "status": "Design direction",
+      "summary": "Our starting questions about useful memory, natural voice and giving people control over their own context.",
+      "category": "AI",
+      "cover_alt": "",
+      "cover_url": "",
+      "published": true,
+      "created_at": "2026-10-03T05:41:22.646135+00:00",
+      "entry_date": "2026-10-03",
+      "updated_at": "2026-10-03T05:41:22.646135+00:00"
+    },
+    {
+      "id": "cc48e7a5-fc7a-4665-938c-5c43aa8676e0",
+      "body": "SecretChat is available on Android. It’s built around private rooms and messages encrypted on participants’ devices before transmission.\n\nWe care about privacy, but a strong label is not evidence. Calling something the most secure app would require a comparison and independent scrutiny that we don’t have.\n\n## What the app does\n\nMessages use AES-256-GCM encryption before transmission. Received history is encrypted locally with Android Keystore. The mobile service keeps no cloud chat archive or administrator decryption key.\n\nPrivate room invitations unlock the conversation. Optional biometric locking adds another barrier at the device.\n\n## What that doesn’t mean\n\nThe service still handles operational and account information. An administrator can see account and room metadata. Providers may process request metadata. A compromised device or someone sharing a room invitation changes the situation.\n\nOffline phones can miss live messages. Clearing application data or uninstalling the app removes local history. Signing back in does not restore a cloud message archive.\n\n## Keep the limits visible\n\nSecretChat is a beta product without an independent security audit. On-device encryption is a concrete feature. Complete anonymity or immunity from every threat is not a promise we can make.\n\nThe product page includes installation instructions, the release checksum and a fuller explanation of message handling. We’ll keep that explanation alongside the download.",
+      "kind": "article",
+      "slug": "privacy-needs-more-than-a-label",
+      "title": "Privacy needs more than a label",
+      "status": "Product note",
+      "summary": "Why we describe SecretChat’s actual protections and limits instead of calling it the most secure app.",
+      "category": "Engineering",
+      "cover_alt": "",
+      "cover_url": "",
+      "published": true,
+      "created_at": "2026-10-03T05:41:22.646135+00:00",
+      "entry_date": "2026-10-03",
+      "updated_at": "2026-10-03T05:41:22.646135+00:00"
+    },
+    {
+      "id": "b52b0550-ae5e-4f07-b86f-31ed6b173e7c",
+      "body": "We’re rebuilding the public website around the work, the two founders and the stages of each product. The new build journal and early-access list can be managed in Studio.",
+      "kind": "update",
+      "slug": "website-public-home",
+      "title": "Website — a clearer public home",
+      "status": "Shipped",
+      "summary": "The refined company site is live, with product stages, a build journal and private early access.",
+      "category": "Company",
+      "cover_alt": "",
+      "cover_url": "",
+      "published": true,
+      "created_at": "2026-10-03T05:41:22.646135+00:00",
+      "entry_date": "2026-10-03",
+      "updated_at": "2026-10-03T06:10:49.277635+00:00"
+    },
+    {
+      "id": "1e0c6074-13ab-447b-9d9a-55f7d6334e9e",
+      "body": "LISA AI is in early exploration. There isn’t a public demo or release date yet; we’ll share the work when there’s something meaningful to try.",
+      "kind": "update",
+      "slug": "lisa-ai-exploration",
+      "title": "LISA AI — exploring on-screen interaction",
+      "status": "Exploration",
+      "summary": "An early look at expressive character, presence and interaction for an on-screen anime AI.",
+      "category": "AI",
+      "cover_alt": "Lisa Ai",
+      "cover_url": "https://kommodo.ai/i/3nksJr1O50v2HBzlrIKD",
+      "published": true,
+      "created_at": "2026-10-03T05:41:22.646135+00:00",
+      "entry_date": "2026-10-03",
+      "updated_at": "2026-10-03T06:43:26.827+00:00"
+    }
+  ],
+  "notices": [],
+  "launches": [
+    {
+      "id": "a9d8ad76-d526-45de-a5a4-6242a1e447ad",
+      "name": "SecretChat",
+      "slug": "secretchat",
+      "android": "Android 7.0+",
+      "tagline": "Private by intention.",
+      "version": "1.6.1",
+      "apk_path": "releases/a387f28e-8b70-4f98-8193-badb24a7db75/8dfc31ca-62c8-467c-b2e2-b9b36861c1fe.apk",
+      "apk_bytes": 5333489,
+      "icon_path": "icons/df4112f1-509c-4025-9ec7-63e65eff9ec5.webp",
+      "published": true,
+      "apk_sha256": "7a7f0df07e3e897e569921336f5ec22b63e33d0d0af82dfee7a9973da3c29d69",
+      "created_at": "2026-10-02T18:41:34.949024+00:00",
+      "show_popup": true,
+      "updated_at": "2026-10-03T12:30:24.631+00:00",
+      "description": "Private rooms. Encrypted conversations. A new space for you and your people, now on Android.",
+      "published_at": "2026-10-02T18:41:34.949024+00:00",
+      "release_notes": "Android beta with invitation-only rooms, participant-side message encryption, device-encrypted history, optional fingerprint lock, and room alerts."
+    }
+  ],
+  "products": [
+    {
+      "name": "KITTY AI",
+      "slug": "kitty-ai",
+      "intro": "We want an assistant that can keep context without taking control away from you. Memory that you can understand. Voice that feels natural. Privacy that is considered from the start.",
+      "label": "PERSONAL ARTIFICIAL INTELLIGENCE",
+      "media": "Application screenshots & voice demos",
+      "status": "IN ACTIVE DEVELOPMENT",
+      "category": "AI",
+      "icon_path": null,
+      "published": true,
+      "principles": [
+        [
+          "Memory you can manage",
+          "We’re exploring how an assistant can remember useful context, while letting you review, change and remove it."
+        ],
+        [
+          "A more natural conversation",
+          "Continuous voice interaction is part of the direction. We want talking to an assistant to feel less like operating a form."
+        ],
+        [
+          "Your context, your choice",
+          "We’re considering local processing and explicit user controls. These are design goals, not promises about an unreleased product."
+        ]
+      ],
+      "sort_order": 0,
+      "updated_at": "2026-10-03T11:15:20.581793+00:00",
+      "description": "Personal AI built around memory, voice, privacy and user control."
+    },
+    {
+      "name": "KITTY Sentinel",
+      "slug": "sentinel",
+      "intro": "Sentinel is our workbench for systems that see, move and respond. It’s an early prototype, with a lot of testing ahead. We’ll share what works and what needs another attempt.",
+      "label": "ROBOTICS & COMPUTER VISION",
+      "media": "Prototype photographs & test footage",
+      "status": "PROTOTYPE V1",
+      "category": "Robotics",
+      "icon_path": null,
+      "published": true,
+      "principles": [
+        [
+          "Understanding a scene",
+          "Computer vision is one part of the experiment: how a system notices objects, distances and changes around it."
+        ],
+        [
+          "Useful autonomy",
+          "We’re interested in small, bounded tasks before broad claims. Predictable behavior matters more than an impressive demo."
+        ],
+        [
+          "Learning in the physical world",
+          "Real tests have constraints that software alone doesn’t reveal. Our build log will make room for those lessons."
+        ]
+      ],
+      "sort_order": 1,
+      "updated_at": "2026-10-03T11:15:20.581793+00:00",
+      "description": "An experimental autonomous robotics and computer-vision platform built to understand and interact with the physical world."
+    },
+    {
+      "name": "LISA AI",
+      "slug": "lisa-ai",
+      "intro": "LISA is an exploration of character, presence and interaction on your screen. We’re figuring out how an AI companion could feel expressive while keeping the person using it in control.",
+      "label": "INTERACTIVE AI",
+      "media": "On-screen interaction demos",
+      "status": "UPCOMING · EARLY EXPLORATION",
+      "category": "AI",
+      "icon_path": "icons/4cc795d5-a311-48e5-a916-fccff1d2cfd1.webp",
+      "published": true,
+      "principles": [
+        [
+          "A visible presence",
+          "An interactive anime character is the starting point. We’ll test how visual responses can complement conversation."
+        ],
+        [
+          "Interaction with intention",
+          "We want the experience to feel responsive without becoming distracting. How much presence is useful is part of the experiment."
+        ],
+        [
+          "Working on it",
+          "There isn’t a public demo or release date yet. We’ll share the work when there’s something meaningful to try........"
+        ]
+      ],
+      "sort_order": 2,
+      "updated_at": "2026-10-03T12:32:00.185+00:00",
+      "description": "An on-screen interactive anime AI. A more expressive way to spend time with personal software."
+    }
+  ],
+  "captured_at": "2026-10-03T18:11:07.086713+00:00"
+}

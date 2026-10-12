@@ -1,0 +1,7 @@
+.contact-direct-links { display: grid; gap: 10px; margin: 30px 0; max-width: 400px; }
+.contact-direct-links a { display: flex; align-items: center; gap: 14px; padding: 17px 18px; border: 1px solid #25272020; border-radius: 8px; background: #fffefa; transition: border-color .2s, background .2s; }
+.contact-direct-links a:hover { border-color: #87672f70; background: #f7f5ef; }
+.contact-direct-links a>span { flex: 1; min-width: 0; font-size: 14px; overflow-wrap: anywhere; }
+.contact-direct-links small { display: block; font-size: 9px; color: #74766c; letter-spacing: 1px; margin-bottom: 7px; }
+.contact-form select { width: 100%; background: #fffefa; padding: 13px 14px; border: 1px solid #25272026; border-radius: 4px; font: inherit; color: #252720; }
+.contact-form .contact-review-note { font-size: 12px; color: #62645d; line-height: 1.7; margin-top: 10px; }

@@ -1,0 +1,42 @@
+.payments-page { display: grid; grid-template-columns: 1fr 430px; align-items: start; gap: 10%; padding-top: 90px; padding-bottom: 100px; min-height: 70svh; }
+.payments-intro>.text-link { display: inline-flex; gap: 8px; align-items: center; margin-bottom: 36px; }
+.payments-intro>.eyebrow { display: block; }
+.payments-intro h1 { font: 400 clamp(40px,4.1vw,60px)/1.12 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -1px; margin: 22px 0; }
+.payments-intro>p { color: #62645d; line-height: 1.8; font-size: 16px; max-width: 540px; }
+.payments-intro .payments-note { margin-top: 26px; padding-top: 23px; border-top: 1px solid #25272024; font-size: 13px; }
+.checkout-card { background: #fffefa; border: 1px solid #25272024; border-radius: 12px; padding: 32px; box-shadow: 0 12px 40px #25272005; }
+.checkout-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 29px; }
+.checkout-mode { color: #765826; background: #87672f0b; border: 1px solid #87672f30; padding: 5px 9px; border-radius: 4px; font-size: 10px; letter-spacing: .8px; }
+.checkout-card h2 { font-size: 25px; font-weight: 500; line-height: 1.3; letter-spacing: -.7px; margin-bottom: 12px; }
+.checkout-card>p { color: #62645d; font-size: 14px; line-height: 1.7; }
+.checkout-total { display: flex; justify-content: space-between; align-items: center; border-block: 1px solid #25272018; margin-block: 27px; padding-block: 20px; }
+.checkout-total>span { color: #62645d; font-size: 13px; }
+.checkout-total>strong { font-size: 28px; font-weight: 500; letter-spacing: -1px; }
+.checkout-card .checkout-methods { font-size: 12px; margin-top: -8px; }
+.checkout-card .checkout-upi-note { font-size: 11px; color: #765826; margin-top: 8px; }
+.checkout-button { width: 100%; display: flex; gap: 9px; align-items: center; justify-content: center; margin-top: 17px; }
+.checkout-button:disabled { opacity: .55; cursor: default; }
+.checkout-card .checkout-error { color: #9c2c2c; background: #b8323208; border-radius: 5px; padding: 12px; margin-top: 14px; }
+.checkout-card .checkout-success { color: #2f623e; display: flex; align-items: start; gap: 8px; }
+.checkout-success svg { flex-shrink: 0; margin-top: 4px; }
+.checkout-card .checkout-message { background: #87672f08; padding: 12px; border-radius: 5px; }
+.checkout-card .checkout-reference { font-size: 12px; margin-top: 17px; }
+.checkout-reference code { display: block; overflow-wrap: anywhere; color: #252720; margin-top: 4px; }
+.checkout-card .checkout-security { display: flex; justify-content: center; align-items: center; gap: 7px; font-size: 11px; margin-top: 18px; margin-bottom: 0; }
+.checkout-spinner { animation: checkout-spin 1s linear infinite; }
+.payment-purpose-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px; }
+.payment-purpose-nav a { border: 1px solid #25272024; padding: 10px 15px; border-radius: 6px; font-size: 13px; }
+.payment-purpose-nav a[aria-current="page"] { background: #252720; color: #fffefa; }
+.checkout-field { margin-top: 24px; }
+.checkout-field label { display: block; font-size: 12px; margin-bottom: 10px; }
+.checkout-field input { width: 100%; min-width: 0; padding: 12px 14px; font: inherit; border: 1px solid #25272030; border-radius: 5px; background: #fff; }
+.checkout-field>span { display: block; color: #62645d; font-size: 11px; margin-top: 8px; line-height: 1.7; }
+.donation-presets { display: flex; gap: 8px; margin-bottom: 10px; }
+.donation-presets button { flex: 1; padding: 10px; border: 1px solid #25272026; border-radius: 5px; color: #252720; font-size: 13px; }
+.donation-presets button[aria-pressed="true"] { border-color: #87672f; background: #87672f0d; }
+@keyframes checkout-spin { to { transform: rotate(360deg); } }
+@media(max-width:850px) { .payments-page { grid-template-columns: 1fr; gap: 35px; padding-top: 45px; padding-bottom: 60px; } .checkout-card { width: 100%; max-width: 520px; } }
+@media(max-width:450px) { .checkout-card { padding: 23px; } .payments-intro h1 { font-size: 39px; } }
+@media(prefers-reduced-motion:reduce) { .checkout-spinner { animation: none; } }
+
+.provider-selector{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}.provider-selector button{flex:1;min-width:100px;min-height:50px;background:#fffefa;border:1px solid var(--border);border-radius:7px;padding:10px;font-size:13px}.provider-selector button[aria-pressed=true]{background:#eee7d8;border-color:#80632f80}.provider-selector small{display:block;font-size:10px;color:#62645d;margin-top:4px}.paypal-buttons{margin-block:18px}.paypal-buttons.is-hidden{display:none}.payment-purpose-nav a{min-height:44px}.payments-intro h1{font-family:Geist,sans-serif;font-weight:500;letter-spacing:-1.7px}.checkout-field input{font-size:16px;min-height:48px}

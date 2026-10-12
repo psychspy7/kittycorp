@@ -10,6 +10,10 @@ import {
 } from "@/lib/kitty-server";
 import { feedbackSchema } from "@/lib/kitty-validation";
 import { verifyTurnstile } from "@/lib/turnstile-server";
+import { after } from "next/server";
+import { drainEmailQueue } from "@/lib/email-notifications";
+export const runtime = "nodejs";
+export const maxDuration = 60;
 export async function POST(request: Request) {
   try {
     verifyOrigin(request);
@@ -28,7 +32,7 @@ export async function POST(request: Request) {
       {
         p_name: value.name,
         p_email: value.email,
-        p_message: value.message,
+        p_message: value.kind === "review" ? `REVIEW\n${value.message}` : value.message,
         p_fingerprint: await fingerprint(request),
         p_gateway_token: setting("FEEDBACK_GATEWAY_TOKEN"),
       },
@@ -41,6 +45,7 @@ export async function POST(request: Request) {
         );
       throw error;
     }
+    after(async () => { await drainEmailQueue(); });
     return privateJson({ ok: true, id: data });
   } catch (error) {
     return failure(error);

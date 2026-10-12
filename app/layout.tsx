@@ -6,15 +6,14 @@ import { googleAnalyticsId } from "@/lib/analytics-config";
 import { LogoMotionProvider } from "@/components/kitty/logo-motion";
 import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
-import { getAssistantSettings, assistantConnectionConfigured } from "@/lib/assistant-settings-server";
-import { publicAssistantSettings } from "@/lib/assistant-settings";
-import { turnstilePublicConfig } from "@/lib/turnstile-server";
+import { publicAssistantPresentation } from "@/lib/assistant-presentation";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
 import "./credibility.css";
 import "./ecosystem.css";
 import "./business.css";
+import "./professional.css";
 import "@/components/kitty/website-assistant.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
@@ -23,33 +22,41 @@ export const metadata: Metadata = {
     template: "%s · Kitty Corp",
   },
   description:
-    "Need a business website, web application or Android app? Work directly with KITTY CORP. Explore our live websites and released products, then tell us what you want to build.",
+    "KITTY CORP builds business websites, web applications and Android apps. Explore our products and work directly with the team building them.",
   icons: { icon: "/brand/monogram.png", apple: "/brand/monogram.png" },
   openGraph: {
     title: "KITTY CORP — Software & independent technology.",
     description: "Business websites, web applications and Android apps. See our shipped work and discuss your project with the team building it.",
     type: "website",
     siteName: "Kitty Corp",
+    images: [{url: "/opengraph-image",width:1200,height:630,alt:"KITTY CORP"}],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: ["/opengraph-image"],
     title: "Kitty Corp",
     description: "Websites, applications and independent technology.",
   },
 };
-export default async function RootLayout({
+async function PublicAssistant() {
+  const {settings,siteKey} = await publicAssistantPresentation();
+  return <AssistantLauncher settings={settings} siteKey={siteKey}/>;
+}
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const [assistant,verification,connected] = await Promise.all([getAssistantSettings(),turnstilePublicConfig(),assistantConnectionConfigured()]);
-  const visibleAssistant = publicAssistantSettings({...assistant,enabled:assistant.enabled && connected && verification.enabled && Boolean(verification.siteKey)});
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <head><meta name="google-adsense-account" content="ca-pub-3607548169127113" /><link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /><link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /></head>
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-3607548169127113" />
+        <link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <LogoMotionProvider>{children}<AssistantLauncher settings={visibleAssistant} siteKey={verification.siteKey}/></LogoMotionProvider>
+        <LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
         <Toaster theme="light" position="bottom-right" richColors />

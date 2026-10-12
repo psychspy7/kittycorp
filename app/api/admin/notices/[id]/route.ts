@@ -1,3 +1,4 @@
+import { refreshNotices } from "@/lib/notices-server";
 import { z } from "zod";
 import {
   failure,
@@ -38,6 +39,7 @@ export async function PATCH(request: Request, context: Context) {
       .select()
       .single();
     if (error) throw error;
+    refreshNotices();
     return privateJson({ notice: data });
   } catch (error) {
     return failure(error);
@@ -59,6 +61,7 @@ export async function DELETE(request: Request, context: Context) {
       .maybeSingle();
     if (error) throw error;
     if (!data) throw new HttpError("This notice no longer exists.", 404);
+    refreshNotices();
     return privateJson({ ok: true });
   } catch (error) {
     return failure(error);

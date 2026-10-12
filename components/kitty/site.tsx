@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TechnologyMarquee } from "./technology-marquee";
-const navigation = [["Services", "/services"], ["Products", "/products"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
+const navigation = [["Services", "/services"], ["Products", "/products"], ["Memberships", "/memberships"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -30,10 +30,4 @@ export function SiteHeader() {
 }
 export function FilmButton({ className = "" }: { className?: string }) {
   return <Dialog><DialogTrigger asChild><button className={`film-button ${className}`}><Play size={13} /> Watch the identity film</button></DialogTrigger><DialogContent className="film-dialog"><DialogTitle>KITTY, in motion.</DialogTitle><DialogDescription>A short look at the KITTY CORP identity.</DialogDescription><video controls autoPlay playsInline preload="metadata" poster="/brand/wordmark-v1.webp"><source src="/brand/reveal.mp4" type="video/mp4" />Your browser cannot play this video. <a href="/brand/reveal.mp4">Download the film</a>.</video></DialogContent></Dialog>;
-}
-export function Hero() {
-  return <section className="home-hero wrap" aria-labelledby="hero-title">
-    <div className="home-hero-copy"><span className="eyebrow">WEBSITES · WEB APPS · ANDROID / KITTY CORP</span><h1 id="hero-title">Your business.<br/><span>Built for the web.</span></h1><p>Make your business easier to find, your service easier to use, or your next idea ready to launch. We design and build websites and applications with a clear scope and a direct conversation.</p><div className="hero-actions"><Link className="button button-gold" href="/services#project-enquiry">Discuss your project <ArrowUpRight size={17}/></Link><Link className="text-link" href="/services">Explore our services <ArrowUpRight size={16}/></Link></div><p className="hero-small-note">Work directly with the builders. Six months of maintenance included after delivery.</p></div>
-    <aside className="hero-services" aria-labelledby="hero-services-title"><div className="hero-services-heading"><span className="micro-label">SMALL TEAM. DIRECT ACCESS.</span><span aria-hidden="true">↗</span></div><h2 id="hero-services-title">What do you<br/>need to build?</h2><div className="hero-service-links">{[["01","A business website","Make your offer clear. Give visitors a next step.","/services#websites"],["02","A web application","Replace a manual process or test a product idea.","/services#applications"],["03","An Android app","Bring a useful service to your customers’ phones.","/services#applications"]].map(([number,title,description,href])=><Link key={number} href={href}><span>{number}</span><div><h3>{title}</h3><p>{description}</p></div><ArrowUpRight size={17}/></Link>)}</div><Link className="hero-service-contact" href="/services#project-enquiry">Tell us what you have in mind <ArrowUpRight size={17}/></Link></aside>
-  </section>;
 }

@@ -26,13 +26,7 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-      - name: TypeScript
-        run: npm run typecheck
-      - name: Offline analytics privacy tests
-        run: node scripts/test-analytics.mjs
-      - name: Offline Studio authorization tests
-        run: node scripts/test-studio-security.mjs
-      - name: Offline assistant proxy security tests
-        run: node scripts/check-website-assistant.mjs
+      - name: Website, payment and authorization checks
+        run: npm run check:website
       - name: Production Next.js build
         run: npm run build:next

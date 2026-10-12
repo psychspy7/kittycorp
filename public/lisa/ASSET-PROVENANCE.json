@@ -1,0 +1,27 @@
+{
+  "verified_on": "2026-10-12",
+  "transformation": "WebP quality 84, maximum width 1500; original project inputs preserved",
+  "assets": [
+    {
+      "source": "LISA AI/2026-10-02/hi/outputs/LISA-3D-Interaction-Review/renders/immersive-room.png",
+      "source_sha256": "e502fda7c4f96b5f5a16e3cd71c3c10b60aa1649880ad6f28c3dfa0cd7113371",
+      "website_asset": "room-preview-v1.webp",
+      "asset_sha256": "90e0b372e714f30ff565b8e5a07ba7aeb8157e1f852080fe91bee93fa6b03add",
+      "bytes": 49632
+    },
+    {
+      "source": "LISA AI/2026-10-02/hi/outputs/LISA-3D-Interaction-Review/renders/first-rig-review.jpg",
+      "source_sha256": "e13d388bc4685cd82a3197aeaae7adf3f0a1f18601ee53a851542f0842baa3d9",
+      "website_asset": "rig-review-v1.webp",
+      "asset_sha256": "9255ad277cc3e35897ff9e1af2fcc9557caa079ac46714002d72f88cf45a84bf",
+      "bytes": 55026
+    },
+    {
+      "source": "LISA AI/2026-10-02/hi/outputs/LISA-3D-Interaction-Review/references/lisa-expressions.png",
+      "source_sha256": "8bdae15406d07430dbe13acc3e18afd732911f5be0d5f8b6711539eb338dd4f0",
+      "website_asset": "expressions-v1.webp",
+      "asset_sha256": "a111ec6f036bb7ab4d6a3f817e6e2fe6a07d49d608e416d2d301bc2d53173bcd",
+      "bytes": 306462
+    }
+  ]
+}
