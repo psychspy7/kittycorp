@@ -5,7 +5,7 @@ create table if not exists kitty_website_private.payment_orders(
  provider text not null check(provider in ('razorpay','paypal','cashfree')),
  order_id text not null check(length(order_id) between 3 and 100),
  environment text not null check(environment in ('sandbox','live')),
- purpose text not null check(purpose in ('project','donation','checkout')),
+ purpose text not null check(purpose in ('project','donation','checkout','lisa_preorder')),
  reference text not null default '' check(length(reference)<=80),
  amount_minor bigint not null check(amount_minor between 100 and 100000000),
  currency text not null check(currency in ('INR','USD')),

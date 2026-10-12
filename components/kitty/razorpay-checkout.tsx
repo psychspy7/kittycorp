@@ -40,7 +40,8 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return data;
 }
 
-export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, onLockChange }: {
+export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, preorderToken, onLockChange }: {
+  preorderToken?: string;
   quote?: {token:string;choice:"full"|"split"|"after_review";reference:string};
   keyId: string; amount: number; currency?: string; testMode: boolean; securityEnabled: boolean; purpose?: PaymentPurpose; onLockChange?: (locked:boolean)=>void;
 }) {
@@ -74,7 +75,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       if (result.verified !== true) throw new Error("The payment could not be verified.");
       if (result.paid === true && result.success === true && result.status === "captured") {
         setPhase("paid"); pending.current = null;
-        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Thank you for supporting KITTY CORP. Your contribution was received." : "Payment received. Please keep your payment reference.");
+        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Thank you for supporting KITTY CORP. Your contribution was received." : purpose === "lisa_preorder" ? "LISA preorder payment received. Keep your private reservation link, then refresh its status. This does not provide early access yet." : "Payment received. Please keep your payment reference.");
       } else if (result.paid === false && result.status === "authorized") {
         setPhase("pending");
         setMessage("Your payment is authorized and awaiting capture. Please don’t pay again. You can check its status below.");
@@ -94,13 +95,13 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     lock.current = true; callbackStarted.current = false;
     setPhase("creating"); setError(""); setMessage("");
     try {
-      const order = await post<Order>("/api/create-order", { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(quote?{quoteToken:quote.token,paymentChoice:quote.choice}:{}), turnstileToken: token });
+      const order = await post<Order>(preorderToken ? "/api/lisa-preorders/order" : "/api/create-order", preorderToken ? {token:preorderToken,amount:selectedAmount,turnstileToken:token} : { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(quote?{quoteToken:quote.token,paymentChoice:quote.choice}:{}), turnstileToken: token });
       if (!/^order_[A-Za-z0-9]{6,64}$/.test(order.order_id) || order.amount !== selectedAmount || order.currency !== currency) {
         throw new Error("The order details could not be verified. Refresh the page and try again.");
       }
       const checkout = new window.Razorpay({
         key: keyId, order_id: order.order_id, amount: order.amount, currency: order.currency,
-        name: "KITTY CORP", description: `${testMode ? "Test: " : ""}${purpose === "donation" ? "Voluntary contribution" : purpose === "project" ? `Project payment${reference ? ` · ${reference}` : ""}` : "KITTY CORP payment"}`,
+        name: "KITTY CORP", description: `${testMode ? "Test: " : ""}${purpose === "donation" ? "Voluntary contribution" : purpose === "project" ? `Project payment${reference ? ` · ${reference}` : ""}` : purpose === "lisa_preorder" ? "LISA AI refundable preorder" : "KITTY CORP payment"}`,
         image: `${window.location.origin}/brand/monogram-small-v1.webp`, theme: { color: "#252720" },
         retry: { enabled: true },
         config: paymentDisplay,
@@ -131,7 +132,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       onReady={() => { setScriptReady(true); setScriptError(""); }}
       onError={() => setScriptError("Checkout could not load. Check your connection and refresh this page.")} />
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
-    <h2 id="checkout-title">{purpose === "donation" ? "Choose your contribution." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
+    <h2 id="checkout-title">{purpose === "donation" ? "Choose your contribution." : purpose === "project" ? "Your project payment." : purpose === "lisa_preorder" ? "Your LISA preorder." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
     <p>{testMode ? "This checkout is in test mode. No real money changes hands." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
     {purpose === "project" && !quote && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Contribution in rupees</label><div className="donation-presets">{[100, 250, 500].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="1" max="10000" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>Any amount from ₹1 to ₹10,000. Entirely optional.</span></div>}

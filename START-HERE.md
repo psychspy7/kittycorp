@@ -50,3 +50,5 @@ Read `HOSTING-AND-PERFORMANCE.md` for native Next.js hosting, safe public cachin
 Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and the separate KITTY/LISA product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.
 
 Read **PROJECT-PAYMENTS-GUIDE.md** for the latest per-client quote workflow, discounts, local-currency display and product-payment activation limits.
+
+The 12 October payment release includes live KITTY Plus setup and separate refundable LISA preorders. Read **PROJECT-PAYMENTS-GUIDE.md** and **RELEASE-2026-10-12.md** before continuing. Source archives exclude private configuration, live customer records and Git history; restore them only from their original services/backups.

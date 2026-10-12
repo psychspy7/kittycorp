@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { Turnstile } from "./turnstile";
+const AdminLisaPreorders = dynamic(() => import("./admin-lisa-preorders"));
 const AdminProjectQuotes = dynamic(() => import("./admin-project-quotes"));
 const AdminProducts = dynamic(() => import("./admin-products"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
@@ -360,6 +361,7 @@ export function AdminDashboard() {
             <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
             <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
             <TabsTrigger value="email">Email alerts</TabsTrigger>
+            <TabsTrigger value="lisa-preorders">LISA preorders</TabsTrigger>
             <TabsTrigger value="project-quotes">Project quotes</TabsTrigger>
             <TabsTrigger value="commerce">Payments & plans</TabsTrigger>
             <TabsTrigger value="launches">Apps & websites</TabsTrigger>
@@ -371,6 +373,7 @@ export function AdminDashboard() {
             <TabsTrigger value="early-access">Early access</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
+          <TabsContent value="lisa-preorders" className="admin-panel"><AdminLisaPreorders/></TabsContent>
           <TabsContent value="project-quotes" className="admin-panel"><AdminProjectQuotes/></TabsContent>
           <TabsContent value="commerce" className="admin-panel"><AdminCommerce/></TabsContent>
           <TabsContent value="email" className="admin-panel"><AdminEmail/></TabsContent>

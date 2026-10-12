@@ -222,3 +222,13 @@ In Studio → **Project quotes**, confirm scope, enter the agreed full price in 
 The legacy client invoice amount can remain 0; this does not close donation checkout. The homepage donation form is near the bottom and loads payment scripts only after it is opened. Product plans remain separate from services and contributions. The footer currency selector controls approximate local-price displays, while checkout states the actual charged currency.
 
 KITTY AI membership uses the app's own account, provider configuration and paid-access checks. LISA's planned US$100 access offer shows early-update and testing perks; paid preorders require delivery/refund terms before activation. Neither becomes active just by saving the service/donation Razorpay keys.
+
+## Latest payment release — 12 October 2026
+
+The homepage highlights KITTY AI and LISA AI, with a direct Payments section and optional contributions at the bottom. EXAMIFY is a compact project link. The lower technology marquee is removed; the colored header strip remains.
+
+KITTY Plus is enabled at ₹99/calendar month, with manual renewal. LISA’s separate refundable preorder is at `/lisa-ai/preorder`: no delivery date is promised, and a full refund is available before early access. See Studio → **LISA preorders** for reservations and refund requests. Process actual refunds through Razorpay, then let the signed webhook reconcile the record. Do not mark early access provided until it has actually been supplied.
+
+Use Studio → **Project quotes** for per-client pricing, scope approval and preview-ready status. KITTY AI can help analyze a brief, but automatic pricing waits for your actual base prices and rules. Leave the legacy project amount 0 when using individual quotes. Read **PROJECT-PAYMENTS-GUIDE.md** for discounts, exchange-rate estimates, exact charged currency and recovery.
+
+Before advertising paid plans widely, complete your own real payment and fresh-phone membership test. No real charge was made during development. Gmail delivery still needs its private sending credential and a delivery test; existing inbox/outbox records remain available.

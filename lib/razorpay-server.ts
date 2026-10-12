@@ -6,7 +6,7 @@ import { HttpError } from "./kitty-server";
 
 const MAX_AMOUNT = 100_000_000;
 export const MAX_DONATION_PAISE = 1_000_000;
-export type PaymentPurpose = "checkout" | "project" | "donation";
+export type PaymentPurpose = "checkout" | "project" | "donation" | "lisa_preorder";
 export const ORDER_LIFETIME_SECONDS = 3600;
 export const ORDER_COOKIE_PREFIX = "kitty_rzp_";
 export const orderIdSchema = z.string().regex(/^order_[A-Za-z0-9]{6,64}$/, "Invalid order ID.");
@@ -32,7 +32,7 @@ const contextSchema = z.object({
   currency: z.literal("INR"),
   keyId: z.string(),
   expires: z.number().int().positive(),
-  purpose: z.enum(["checkout", "project", "donation"]).optional().default("checkout"),
+  purpose: z.enum(["checkout", "project", "donation", "lisa_preorder"]).optional().default("checkout"),
   reference: z.string().max(80).optional().default(""),
 }).strict();
 export type OrderContext = z.infer<typeof contextSchema>;
