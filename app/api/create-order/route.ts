@@ -1,3 +1,5 @@
+import {optionalCustomer,customerAction} from "@/lib/customer-account-server";
+import {quoteAmountDue,type ProjectQuote} from "@/lib/project-quotes";
 import { randomUUID } from "node:crypto";
 import { reserveQuote,quoteAction } from "@/lib/project-quotes-server";
 import { recordPayment } from "@/lib/payment-ledger";
@@ -15,20 +17,25 @@ export async function POST(request: Request) {
   try {
     verifyOrigin(request);
     const value = createOrderSchema.parse(await readBody(request));
-    if(value.purpose==="project"&&!value.quoteToken&&/^Q-/i.test(value.reference))throw new HttpError("Use your private quote link for this project payment.",400);
+    const customer=await optionalCustomer(request);
+    if(value.quoteToken&&value.accountQuoteId)throw new HttpError("Choose one quote access method.",400);
+    const hasQuote=!!(value.quoteToken||value.accountQuoteId);
+    if(value.purpose==="project"&&!hasQuote&&/^Q-/i.test(value.reference))throw new HttpError("Use your private quote link for this project payment.",400);
     let config = await resolvedRazorpayConfiguration();
     let reserved:Awaited<ReturnType<typeof reserveQuote>>|null=null;
     const reservation=randomUUID();
-    if(value.quoteToken) {
+    async function action(name:string,payload:Record<string,unknown>){return value.accountQuoteId&&customer?customerAction(customer,"project",{id:value.accountQuoteId,action:name,...payload}):quoteAction(name,value.quoteToken!,payload);}
+    if(hasQuote) {
       if(value.purpose!=="project"||!value.paymentChoice||config.testMode)throw new HttpError("A project quote requires live checkout and a payment schedule.",400);
       await verifyTurnstile(request,value.turnstileToken,"payment-order");
-      reserved=await reserveQuote(value.quoteToken,value.paymentChoice,reservation,value.amount);
+      if(value.accountQuoteId){if(!customer)throw new HttpError("Sign in to open your project payment.",401);const owned=await action("read",{})as ProjectQuote;let due;try{due=quoteAmountDue(owned,value.paymentChoice);}catch(e){throw new HttpError(e instanceof Error?e.message:"Quote not ready.",409);}if(due!==value.amount)throw new HttpError("Your quote changed. Refresh before paying.",409);reserved={quote:await action("reserve",{choice:value.paymentChoice,reservation,amount:due})as ProjectQuote,amount:due,reference:`Q-${owned.id}-${value.paymentChoice}`};}
+      else reserved=await reserveQuote(value.quoteToken!,value.paymentChoice,reservation,value.amount);
       config={...config,amount:reserved.amount};value.reference=reserved.reference;
     }
     // Project totals are server controlled. A voluntary contribution may be selected
     // by the visitor; it never settles an invoice or triggers project delivery.
     const amount = checkoutAmount(value, config);
-    if(!value.quoteToken)await verifyTurnstile(request, value.turnstileToken, "payment-order");
+    if(!hasQuote)await verifyTurnstile(request, value.turnstileToken, "payment-order");
     let order;
     const quoteReservation=reserved?.quote.reservation_id;
     const quoteReceipt=quoteReservation?`quote_${quoteReservation.replaceAll("-","")}`:"";
@@ -48,15 +55,15 @@ export async function POST(request: Request) {
       // may have created an order; leave it locked for owner reconciliation.
       if(error instanceof HttpError)throw error;
       const status=error&&typeof error==="object"&&"statusCode" in error?Number(error.statusCode):0;
-      if(value.quoteToken&&reserved&&!reserved.quote.order_id&&status>=400&&status<500)await quoteAction("release",value.quoteToken,{reservation});
+      if(hasQuote&&reserved&&!reserved.quote.order_id&&status>=400&&status<500)await action("release",{reservation});
       providerFailure(error);
     }
     if (!orderIdSchema.safeParse(order.id).success || Number(order.amount) !== amount || order.currency !== config.currency) {
       throw new HttpError("The payment provider returned an invalid order. Please try again.", 500);
     }
     if(reserved&&(order.receipt!==quoteReceipt||order.notes?.quote_reservation!==quoteReservation||order.notes?.project_reference!==reserved.reference||(reserved.quote.order_id&&order.id!==reserved.quote.order_id)))throw new HttpError("The provider order does not match this project quote. Contact KITTY CORP before paying.",409);
-    await recordPayment({provider:"razorpay",order_id:order.id,environment:config.testMode?"sandbox":"live",purpose:value.purpose,reference:value.purpose==="project"?value.reference:"",amount_minor:amount,currency:config.currency,status:"created",payment_id:null});
-    if(value.quoteToken&&reserved&&!reserved.quote.order_id)await quoteAction("attach",value.quoteToken,{reservation:quoteReservation,orderId:order.id});
+    await recordPayment({provider:"razorpay",order_id:order.id,environment:config.testMode?"sandbox":"live",purpose:value.purpose,reference:value.purpose==="project"?value.reference:"",amount_minor:amount,currency:config.currency,status:"created",payment_id:null},customer);
+    if(hasQuote&&reserved&&!reserved.quote.order_id)await action("attach",{reservation:quoteReservation,orderId:order.id});
     const jar = await cookies();
     // Keep up to five concurrent checkouts without allowing cookies to grow unbounded.
     const previous = jar.getAll().filter(cookie => cookie.name.startsWith(ORDER_COOKIE_PREFIX))

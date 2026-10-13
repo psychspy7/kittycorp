@@ -1,3 +1,4 @@
+import {optionalCustomer} from "@/lib/customer-account-server";
 import {randomBytes} from "node:crypto";
 import {failure,fingerprint,HttpError,privateJson,readBody,verifyOrigin} from "@/lib/kitty-server";
 import {getCommerce,providerConfiguration} from "@/lib/commerce-server";
@@ -13,6 +14,7 @@ export async function POST(request:Request){try{
  await verifyTurnstile(request,value.turnstileToken,"lisa-preorder");
  let estimate;try{estimate=await priceEstimate({amount:settings.plans.lisa.priceMinor,base:"USD",currency:"INR"});}catch{throw new HttpError("We couldn’t obtain a current checkout exchange rate. Please try again later.",503);}
  const amount=Math.round(estimate.amount*100);if(!Number.isSafeInteger(amount)||amount<100||amount>100000000||!estimate.date)throw new HttpError("Checkout pricing is temporarily unavailable.",503);
- const token=randomBytes(32).toString("hex");const preorder=await preorderAction("submit",token,{name:value.name,email:value.email,amount_minor:amount,price_usd_minor:settings.plans.lisa.priceMinor,rate_date:estimate.date,terms_version:LISA_TERMS_VERSION,terms:LISA_TERMS,fingerprint:await fingerprint(request)});
+ const customer=await optionalCustomer(request);if(customer&&customer.email.toLowerCase()!==value.email.toLowerCase())throw new HttpError("Use your Google account email for tracking, or sign out to submit as a guest.",400);
+ const token=randomBytes(32).toString("hex");const preorder=await preorderAction("submit",token,{name:value.name,email:value.email,amount_minor:amount,price_usd_minor:settings.plans.lisa.priceMinor,rate_date:estimate.date,terms_version:LISA_TERMS_VERSION,terms:LISA_TERMS,fingerprint:await fingerprint(request),...(customer?{customer_uid:customer.uid,customer_email:customer.email}:{})});
  return privateJson({token,preorder});
 }catch(error){return failure(error);}}

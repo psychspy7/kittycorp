@@ -1,5 +1,7 @@
 "use client";
 
+import {CustomerSignIn} from "./customer-sign-in";
+import {customerAuthorization} from "@/lib/customer-request";
 import {LocalPrice} from "./local-currency";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
@@ -30,7 +32,7 @@ declare global { interface Window { Razorpay?: new (options: Options) => Checkou
 
 async function post<T>(path: string, body: unknown): Promise<T> {
   const response = await fetch(path, {
-    method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
+    method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json",...(path === "/api/create-order" || path === "/api/lisa-preorders/order" ? await customerAuthorization(Boolean(body && typeof body === "object" && ("accountQuoteId" in body || "id" in body))) : {}) },
     body: JSON.stringify(body), signal: AbortSignal.timeout(30_000),
   });
   let data: T & { error?: string };
@@ -40,9 +42,9 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return data;
 }
 
-export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, preorderToken, onLockChange }: {
-  preorderToken?: string;
-  quote?: {token:string;choice:"full"|"split"|"after_review";reference:string};
+export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, preorderToken, preorderId, onLockChange }: {
+  preorderToken?: string; preorderId?:string;
+  quote?: {token?:string;id?:string;choice:"full"|"split"|"after_review";reference:string};
   keyId: string; amount: number; currency?: string; testMode: boolean; securityEnabled: boolean; purpose?: PaymentPurpose; onLockChange?: (locked:boolean)=>void;
 }) {
   const [scriptReady, setScriptReady] = useState(false);
@@ -95,7 +97,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     lock.current = true; callbackStarted.current = false;
     setPhase("creating"); setError(""); setMessage("");
     try {
-      const order = await post<Order>(preorderToken ? "/api/lisa-preorders/order" : "/api/create-order", preorderToken ? {token:preorderToken,amount:selectedAmount,turnstileToken:token} : { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(quote?{quoteToken:quote.token,paymentChoice:quote.choice}:{}), turnstileToken: token });
+      const order = await post<Order>((preorderToken||preorderId) ? "/api/lisa-preorders/order" : "/api/create-order", (preorderToken||preorderId) ? {...(preorderId?{id:preorderId}:{token:preorderToken}),amount:selectedAmount,turnstileToken:token} : { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(quote?{...(quote.id?{accountQuoteId:quote.id}:{quoteToken:quote.token}),paymentChoice:quote.choice}:{}), turnstileToken: token });
       if (!/^order_[A-Za-z0-9]{6,64}$/.test(order.order_id) || order.amount !== selectedAmount || order.currency !== currency) {
         throw new Error("The order details could not be verified. Refresh the page and try again.");
       }
@@ -131,6 +133,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive"
       onReady={() => { setScriptReady(true); setScriptError(""); }}
       onError={() => setScriptError("Checkout could not load. Check your connection and refresh this page.")} />
+    {!quote?.id&&!preorderId&&phase==="idle"&&<CustomerSignIn disabled={busy}/>}
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
     <h2 id="checkout-title">{purpose === "donation" ? "Choose your contribution." : purpose === "project" ? "Your project payment." : purpose === "lisa_preorder" ? "Your LISA preorder." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
     <p>{testMode ? "This checkout is in test mode. No real money changes hands." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>

@@ -15,6 +15,7 @@ export function recoveryPath(pathname: string) {
     pathname === "/api/emergency" || pathname === "/api/site-status" ||
     pathname === "/api/security/turnstile" ||
     // Finish verification for an in-flight payment even if maintenance starts.
+    pathname === "/account" || /^\/account\/(projects|preorders)\/[a-f0-9-]{36}$/.test(pathname) || pathname === "/api/account" || /^\/api\/account\/(projects|preorders)\/[a-f0-9-]{36}$/.test(pathname) ||
     pathname === "/api/verify-payment" || pathname === "/api/lisa-preorders/status" ||
     ["/api/memberships/verify", "/api/memberships/status", "/api/memberships/webhook", "/api/memberships/cancel"].includes(pathname) ||
     pathname.startsWith("/api/payments/webhooks/") ||

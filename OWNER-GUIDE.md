@@ -232,3 +232,8 @@ KITTY Plus is enabled at ₹99/calendar month, with manual renewal. LISA’s sep
 Use Studio → **Project quotes** for per-client pricing, scope approval and preview-ready status. KITTY AI can help analyze a brief, but automatic pricing waits for your actual base prices and rules. Leave the legacy project amount 0 when using individual quotes. Read **PROJECT-PAYMENTS-GUIDE.md** for discounts, exchange-rate estimates, exact charged currency and recovery.
 
 Before advertising paid plans widely, complete your own real payment and fresh-phone membership test. No real charge was made during development. Gmail delivery still needs its private sending credential and a delivery test; existing inbox/outbox records remain available.
+
+
+## Customer Google accounts — 13 October 2026
+
+The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, separate LISA reservations and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.

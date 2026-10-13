@@ -52,3 +52,8 @@ Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approv
 Read **PROJECT-PAYMENTS-GUIDE.md** for the latest per-client quote workflow, discounts, local-currency display and product-payment activation limits.
 
 The 12 October payment release includes live KITTY Plus setup and separate refundable LISA preorders. Read **PROJECT-PAYMENTS-GUIDE.md** and **RELEASE-2026-10-12.md** before continuing. Source archives exclude private configuration, live customer records and Git history; restore them only from their original services/backups.
+
+
+## Customer Google accounts — 13 October 2026
+
+The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, separate LISA reservations and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.

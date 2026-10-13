@@ -27,6 +27,7 @@ begin
   if (select count(*)from kitty_website_private.lisa_preorders where fingerprint=p_value->>'fingerprint' and created_at>now()-interval '1 hour')>=5 then raise exception 'Rate limit';end if;
   insert into kitty_website_private.lisa_preorders(access_hash,name,email,amount_minor,price_usd_minor,rate_date,terms_version,terms,fingerprint)
   values(p_hash,p_value->>'name',p_value->>'email',(p_value->>'amount_minor')::bigint,(p_value->>'price_usd_minor')::bigint,(p_value->>'rate_date')::date,p_value->>'terms_version',p_value->>'terms',p_value->>'fingerprint')returning * into p;
+  if coalesce(p_value->>'customer_uid','')<>''then perform kitty_website_private.customer_attach(p_value->>'customer_uid',p_value->>'customer_email','preorder',p.id::text);end if;
  else
   select * into p from kitty_website_private.lisa_preorders where access_hash=p_hash for update;
   if not found then return null;end if;

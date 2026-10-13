@@ -23,6 +23,7 @@ begin
  if p_action='submit' then
   perform public.kitty_website_submit_feedback(p_value->>'name',p_value->>'email','PROJECT ENQUIRY'||chr(10)||'Service: '||(p_value->>'service')||chr(10)||'Payment preference: '||(p_value->>'preference')||chr(10)||'Business: '||coalesce(p_value->>'organization','')||chr(10)||'Budget: '||coalesce(p_value->>'budget','')||chr(10)||'Timeline: '||coalesce(p_value->>'timeline','')||chr(10)||chr(10)||(p_value->>'scope'),p_value->>'fingerprint',p_gateway_token);
   insert into kitty_website_private.project_quotes(access_hash,name,email,service,scope) values(p_hash,p_value->>'name',p_value->>'email',p_value->>'service',p_value->>'scope') returning * into q;
+  if coalesce(p_value->>'customer_uid','')<>''then perform kitty_website_private.customer_attach(p_value->>'customer_uid',p_value->>'customer_email','project',q.id::text);end if;
  else
   select * into q from kitty_website_private.project_quotes where access_hash=p_hash for update;
   if not found then return null;end if;

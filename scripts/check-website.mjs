@@ -8,6 +8,7 @@ const checks=[
   ["scripts/test-razorpay.mjs"],
   ["scripts/test-commerce.mjs"],
   ["scripts/test-project-quotes.mjs"],
+  ["scripts/test-customer-accounts.mjs"],
   ["scripts/test-lisa-preorders.mjs"],
   ["scripts/test-memberships.mjs"],
   ["scripts/test-email-notifications.mjs"],
