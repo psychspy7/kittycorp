@@ -2,6 +2,7 @@ import { z } from "zod";
 import { categories } from "./kitty-types";
 export const feedbackSchema = z.object({
   kind: z.enum(["message", "review"]).optional().default("message"),
+  subject: z.string().trim().max(120).optional().default(""),
   name: z.string().trim().min(2, "Please enter your name.").max(100),
   email: z.string().trim().email("Enter a valid email address.").max(254),
   message: z

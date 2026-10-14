@@ -10,7 +10,7 @@ import {
 } from "@/lib/kitty-server";
 import { feedbackSchema } from "@/lib/kitty-validation";
 import { verifyTurnstile } from "@/lib/turnstile-server";
-import { after } from "next/server";
+
 import { drainEmailQueue } from "@/lib/email-notifications";
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -26,13 +26,19 @@ export async function POST(request: Request) {
         "Please take a moment, then send your message again.",
         400,
       );
-    await verifyTurnstile(request, (body as Record<string, unknown>).turnstileToken, "contact");
+    await verifyTurnstile(
+      request,
+      (body as Record<string, unknown>).turnstileToken,
+      "contact",
+    );
     const { data, error } = await database().rpc(
-      "kitty_website_submit_feedback",
+      "kitty_website_submit_communication",
       {
+        p_kind: value.kind,
+        p_subject: value.subject,
         p_name: value.name,
         p_email: value.email,
-        p_message: value.kind === "review" ? `REVIEW\n${value.message}` : value.message,
+        p_message: value.message,
         p_fingerprint: await fingerprint(request),
         p_gateway_token: setting("FEEDBACK_GATEWAY_TOKEN"),
       },
@@ -45,7 +51,7 @@ export async function POST(request: Request) {
         );
       throw error;
     }
-    after(async () => { await drainEmailQueue(); });
+    await drainEmailQueue(2, { feedback_id: data });
     return privateJson({ ok: true, id: data });
   } catch (error) {
     return failure(error);

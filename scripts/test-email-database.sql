@@ -1,0 +1,62 @@
+-- Run this entire batch only as a website-database administrator. Never run individual statements or replace ROLLBACK with COMMIT.
+-- Temporary fixtures, gateway setting and simulated send receipts are rolled back. No actual email is sent.
+begin;
+set local lock_timeout='5s';
+set local statement_timeout='30s';
+update kitty_website_private.settings set value=encode(extensions.digest('kitty_email_transaction_qa','sha256'),'hex') where key='feedback_gateway_hash';
+do $qa$
+declare token text:='kitty_email_transaction_qa'; message_id uuid; review_id uuid; held_id uuid; qa_signup_id uuid; nonce uuid; project jsonb; job jsonb; report jsonb; result jsonb; checkpoint bigint;
+begin
+ begin
+  perform public.kitty_website_email_worker('wrong-token','claim','{}');
+  raise exception 'Unauthorized gateway accepted';
+ exception when insufficient_privilege then null;end;
+ if exists(select 1 from kitty_website_private.automation_reports where accepted_at is null)then raise exception 'Requires no pending real report';end if;
+ select coalesce(max(id),0)into checkpoint from kitty_website_private.communication_events;
+ update kitty_website_private.automation_state set last_event=checkpoint where id;
+ message_id:=public.kitty_website_submit_communication('message','Email QA','Automation QA','contact-qa@example.invalid','Temporary contact test, rolled back without sending email.',repeat('a',64),token);
+ if (select count(*)from kitty_website_private.email_outbox o where o.feedback_id=message_id and o.template in('admin','ack'))<>2 then raise exception 'Contact outbox';end if;
+ project:=public.kitty_website_project_quote_action(token,'submit',repeat('c',64),jsonb_build_object('name','Project QA','email','project-qa@example.invalid','service','Website','preference','after_review','scope','Temporary website project test, rolled back.','fingerprint',repeat('b',64)));
+ if not exists(select 1 from kitty_website_private.project_quotes q where q.id=(project->>'id')::uuid and q.feedback_id is not null)or not exists(select 1 from public.kitty_website_feedback f where f.id=(project->>'feedback_id')::uuid and f.communication_kind='project')then raise exception 'Project linkage';end if;
+ review_id:=public.kitty_website_submit_communication('review','Review QA','Reviewer QA','review-qa@example.invalid','Temporary private review test, rolled back.',repeat('d',64),token);
+ if (select count(*)from kitty_website_private.email_outbox o where o.feedback_id=review_id and o.template='review_thanks')<>1 then raise exception 'Review thanks';end if;
+ result:=public.kitty_website_newsletter_action(token,'request',jsonb_build_object('email','newsletter-qa@example.invalid','fingerprint',repeat('e',64),'interests',jsonb_build_array('KITTY AI')));
+ qa_signup_id:=(result->>'id')::uuid;
+ select a.verification_nonce into nonce from public.kitty_website_early_access a where a.id=qa_signup_id and a.status='pending';
+ if nonce is null then raise exception 'Pending subscription';end if;
+ perform public.kitty_website_newsletter_action(token,'confirm',jsonb_build_object('id',qa_signup_id,'nonce',nonce));
+ perform public.kitty_website_newsletter_action(token,'confirm',jsonb_build_object('id',qa_signup_id,'nonce',nonce));
+ if (select count(*)from kitty_website_private.email_outbox o where o.signup_id=qa_signup_id and o.template='welcome')<>1 then raise exception 'Duplicate welcome';end if;
+ perform public.kitty_website_newsletter_action(token,'unsubscribe',jsonb_build_object('id',qa_signup_id,'nonce',nonce));
+ if not exists(select 1 from public.kitty_website_early_access a where a.id=qa_signup_id and a.status='unsubscribed')or exists(select 1 from kitty_website_private.email_outbox o where o.signup_id=qa_signup_id and o.template in('confirm','welcome')and o.status<>'skipped')then raise exception 'Unsubscribe';end if;
+ job:=public.kitty_website_email_worker(token,'claim',jsonb_build_object('feedback_id',message_id));
+ if job->>'template'<>'admin' then raise exception 'Admin priority';end if;
+ perform public.kitty_website_email_worker(token,'finish',jsonb_build_object('id',job->>'id','claim_token',job->>'claim_token','result','transient'));
+ if not exists(select 1 from kitty_website_private.email_outbox o where o.id=(job->>'id')::uuid and o.status='retry' and o.next_attempt>clock_timestamp())then raise exception 'Retry backoff';end if;
+ update kitty_website_private.email_outbox o set next_attempt=clock_timestamp()where o.id=(job->>'id')::uuid;
+ job:=public.kitty_website_email_worker(token,'claim',jsonb_build_object('feedback_id',message_id));
+ perform public.kitty_website_email_worker(token,'finish',jsonb_build_object('id',job->>'id','claim_token',job->>'claim_token','result','accepted'));
+ job:=public.kitty_website_email_worker(token,'claim',jsonb_build_object('feedback_id',message_id));
+ if job->>'template'<>'ack' then raise exception 'Customer acknowledgement';end if;
+ perform public.kitty_website_email_worker(token,'finish',jsonb_build_object('id',job->>'id','claim_token',job->>'claim_token','result','accepted'));
+ held_id:=public.kitty_website_submit_communication('message','Held QA','Held QA','held-qa@example.invalid','Ambiguous outcome test, rolled back.',repeat('f',64),token);
+ job:=public.kitty_website_email_worker(token,'claim',jsonb_build_object('feedback_id',held_id));
+ perform public.kitty_website_email_worker(token,'finish',jsonb_build_object('id',job->>'id','claim_token',job->>'claim_token','result','uncertain'));
+ update public.kitty_website_feedback f set created_at=clock_timestamp()-interval'73 hours'where f.id in(message_id,held_id,review_id);
+ result:=public.kitty_website_email_worker(token,'cleanup',jsonb_build_object('dry_run',true,'retention_hours',1));
+ if (result->>'retention_hours')::integer<>72 or(result->>'eligible_submissions')::integer<>0 then raise exception 'Retention/report guard';end if;
+ report:=public.kitty_website_email_worker(token,'report',jsonb_build_object('day','2099-01-01'));
+ job:=public.kitty_website_email_worker(token,'claim',jsonb_build_object('report_id',report->>'id'));
+ if job->>'template'<>'report' then raise exception 'Report job';end if;
+ perform public.kitty_website_email_worker(token,'finish',jsonb_build_object('id',job->>'id','claim_token',job->>'claim_token','result','transient'));
+ if exists(select 1 from kitty_website_private.communication_events e where e.feedback_id=message_id and e.reported_at is not null)then raise exception 'Failed report consumed events';end if;
+ update kitty_website_private.email_outbox o set next_attempt=clock_timestamp()where o.id=(job->>'id')::uuid;
+ job:=public.kitty_website_email_worker(token,'claim',jsonb_build_object('report_id',report->>'id'));
+ perform public.kitty_website_email_worker(token,'finish',jsonb_build_object('id',job->>'id','claim_token',job->>'claim_token','result','accepted'));
+ result:=public.kitty_website_email_worker(token,'cleanup',jsonb_build_object('dry_run',true,'retention_hours',72));
+ if (result->>'eligible_submissions')::integer<>1 then raise exception 'Cleanup eligibility';end if;
+ result:=public.kitty_website_email_worker(token,'cleanup',jsonb_build_object('retention_hours',72));
+ if exists(select 1 from public.kitty_website_feedback f where f.id=message_id)or not exists(select 1 from public.kitty_website_feedback f where f.id=held_id)or not exists(select 1 from public.kitty_website_feedback f where f.id=review_id)or not exists(select 1 from kitty_website_private.project_quotes q where q.id=(project->>'id')::uuid)or not exists(select 1 from public.kitty_website_early_access a where a.id=qa_signup_id)then raise exception 'Cleanup preservation';end if;
+end;$qa$;
+select 'PASS: gateway, contact, project, review, newsletter, retries, uncertain hold, failed-report recovery, cleanup and record preservation. ROLLBACK applied; no real mail sent.' as result;
+rollback;

@@ -57,3 +57,7 @@ The 12 October payment release includes live KITTY Plus setup and separate refun
 ## Customer Google accounts — 13 October 2026
 
 The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, separate LISA reservations and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.
+
+## Website email automation
+
+Read **EMAIL-AUTOMATION-GUIDE.md** before deploying the new project/contact acknowledgements, review thank-you emails, double opt-in early list, daily report and guarded temporary-data cleanup. The website Supabase migration, private Gmail/cron settings, Studio verification and live mailbox check are required together.

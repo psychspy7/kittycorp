@@ -9,7 +9,7 @@ export type MaintenanceReply = {
   status?: number;
 };
 export function recoveryPath(pathname: string) {
-  return pathname === "/abcdefghijklmnopqrstuvwxyz" ||
+  return pathname === "/api/automation/daily" || pathname.startsWith("/api/newsletter/") || pathname.startsWith("/newsletter/") || pathname === "/abcdefghijklmnopqrstuvwxyz" ||
     pathname === "/admins" || pathname.startsWith("/admins/") ||
     pathname === "/kitten" || pathname.startsWith("/kitten/") ||
     pathname === "/api/emergency" || pathname === "/api/site-status" ||
