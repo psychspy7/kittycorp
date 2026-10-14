@@ -27,6 +27,10 @@ In the existing Vercel website project, set these as **server environment variab
 
 `ADMIN_EMAIL` in this repository controls **Studio owner sign-in**. Do not change it to the notification mailbox. Use the existing website `FEEDBACK_GATEWAY_TOKEN` and database variables unchanged. Never add a `NEXT_PUBLIC_` prefix to any email or database secret.
 
+## Current verified release
+
+Both listed migrations are already applied to the existing production website database. Do not replay the first migration there; inspect current schema and migration history before any future restore or change. See **EMAIL-AUTOMATION-VERIFICATION.md** for the deployed commit, real Gmail delivery, transactional database tests and remaining verification limits.
+
 ## Safe deployment order
 
 1. Review and apply `supabase/migrations/20261013080633_website_communication_automation.sql` followed by `supabase/migrations/20261014044402_website_email_worker_aliases.sql` to website project `mgkghnblbisubympudaa` using the Supabase migration tool. Do not apply it to the private-chat project. The migration is additive for business records, retains old feedback and subscribers, and temporarily retires the old sender during the rolling deployment.
