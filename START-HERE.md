@@ -61,3 +61,7 @@ The header now offers customer Google sign-in at `/account`, using the existing 
 ## Website email automation
 
 Read **EMAIL-AUTOMATION-GUIDE.md** before deploying the new project/contact acknowledgements, review thank-you emails, double opt-in early list, daily report and guarded temporary-data cleanup. The website Supabase migration, private Gmail/cron settings, Studio verification and live mailbox check are required together.
+
+## Daily Cloudflare database check
+
+The separate `kitty-corp-database-health` Worker runs a small read-only website database check at **08:30 AM IST daily**. Read **integrations/supabase-health/README.md** for Cloudflare logs, testing, deployment, disabling the schedule and Supabase Free-plan limitations. Private credentials are excluded from source archives.
