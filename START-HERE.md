@@ -1,3 +1,7 @@
+## Latest website release — 14 October 2026
+
+Read `FINAL-WEBSITE-HANDOVER-2026-10-14.md` for the current homepage, AI automations, website health, KITTY AI 2.0 release, verification and study-break operations. Give `handover/CONTINUATION-PROMPT-2026-10-14.txt` to another AI app along with the latest clean source ZIP. Older handover manifests are historical snapshots.
+
 # Kitty Corp website
 
 Read **OWNER-GUIDE.md** first for detailed instructions on every Studio task, updating the code yourself, handing work to another AI app, deployment and recovery.
