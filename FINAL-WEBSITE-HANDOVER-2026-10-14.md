@@ -6,7 +6,7 @@ This document describes the website source and its operational limits. Read `AGE
 
 The homepage leads with websites, apps and personal AI. It offers a visible project request, published KITTY AI and developing LISA AI, product plans, project payments, a real founder profile, build notes and voluntary support. AI agents and n8n-style business automations are an offered service on `/services#automation` and an accepted project request type. Scope, price, hosting, model usage and sensitive-action approvals are agreed for each client; this is not a claim that every workflow has already shipped.
 
-The KITTY AI website guide opens from the homepage and prefills a selected question. A visitor must choose to send it and pass the existing bot check. Studio controls its enabled state and guidance. The Android app is a separate product and account. Existing receipts, memberships, refunds, customer account tracking, launch records and Studio authorization remain on their own backend paths.
+The published KITTY AI 2.0 product profile is available at `/kitty-ai`. If its separate profile is hidden in Studio while the signed launch remains published, that address redirects to the release details instead of failing. The KITTY AI website guide opens from the homepage and prefills a selected question. A visitor must choose to send it and pass the existing bot check. Studio controls its enabled state and guidance. The Android app is a separate product and account. Existing receipts, memberships, refunds, customer account tracking, launch records and Studio authorization remain on their own backend paths.
 
 ## Source and deployment
 
