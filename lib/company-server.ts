@@ -16,15 +16,15 @@ export const productSchema=z.object({name:z.string().trim().min(2).max(80),label
 export const teamSchema=z.object({name:z.string().trim().min(2).max(100),role:z.string().trim().min(2).max(100),bio:z.string().trim().max(1200),photo_path:imagePath,links:linksSchema,sort_order:z.number().int().min(0).max(1000),published:z.boolean()});
 export const settingsSchema=z.object({socials:linksSchema,team_heading:z.string().trim().min(3).max(140),team_intro:z.string().trim().min(10).max(1000),team_body:z.string().trim().min(10).max(2000)});
 const readProducts = publicContentCache("products", PUBLIC_CONTENT_TAGS.company, async () => {
-  const {data,error}=await database().from("kitty_website_products").select("*").eq("published",true).order("sort_order").order("slug");
+  const {data,error}=await database().from("kitty_website_products").select("*").abortSignal(AbortSignal.timeout(5000)).eq("published",true).order("sort_order").order("slug");
   if(error) throw error; return data as CompanyProduct[];
 });
 const readTeam = publicContentCache("team", PUBLIC_CONTENT_TAGS.company, async () => {
-  const {data,error}=await database().from("kitty_website_team").select("*").eq("published",true).order("sort_order").order("created_at");
+  const {data,error}=await database().from("kitty_website_team").select("*").abortSignal(AbortSignal.timeout(5000)).eq("published",true).order("sort_order").order("created_at");
   if(error) throw error; return data as TeamMember[];
 });
 const readCompany = publicContentCache("company", PUBLIC_CONTENT_TAGS.company, async () => {
-  const {data,error}=await database().from("kitty_website_company").select("*").eq("id","company").single();
+  const {data,error}=await database().from("kitty_website_company").select("*").abortSignal(AbortSignal.timeout(5000)).eq("id","company").single();
   if(error) throw error; return data as CompanySettings;
 });
 // Failures are handled outside the persistent cache; fallback content is not saved.

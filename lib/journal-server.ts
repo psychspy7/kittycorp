@@ -13,13 +13,13 @@ export const entrySchema = z.object({
   cover_alt: z.string().trim().max(200), entry_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(v => !Number.isNaN(Date.parse(v)), "Choose a valid date."), published: z.boolean(),
 }).refine(v => !v.cover_url || v.cover_alt.length > 0, { message: "Describe the cover image for readers using a screen reader.", path: ["cover_alt"] });
 const readJournal = publicContentCache("journal", PUBLIC_CONTENT_TAGS.journal, async (): Promise<JournalSummary[]> => {
-  const { data, error } = await database().from("kitty_website_journal").select("id,slug,title,summary,category,kind,status,cover_url,cover_alt,entry_date,published,created_at,updated_at").eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).order("entry_date", { ascending: false }).order("created_at", { ascending: false }).limit(100);
+  const { data, error } = await database().from("kitty_website_journal").select("id,slug,title,summary,category,kind,status,cover_url,cover_alt,entry_date,published,created_at,updated_at").abortSignal(AbortSignal.timeout(5000)).eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).order("entry_date", { ascending: false }).order("created_at", { ascending: false }).limit(100);
   if (error) throw new HttpError("The build log is temporarily unavailable.", 503);
   return data as JournalSummary[];
 });
 export const publicJournal = cache(readJournal);
 export const publicArticle = cache(async (slug: string): Promise<JournalEntry | null> => {
-  const { data, error } = await database().from("kitty_website_journal").select("*").eq("slug", slug).eq("kind", "article").eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).maybeSingle();
+  const { data, error } = await database().from("kitty_website_journal").select("*").abortSignal(AbortSignal.timeout(5000)).eq("slug", slug).eq("kind", "article").eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).maybeSingle();
   if(error) throw new HttpError("This article is temporarily unavailable.", 503);
   return data as JournalEntry | null;
 });

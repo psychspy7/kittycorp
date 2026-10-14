@@ -16,6 +16,7 @@ import "./credibility.css";
 import "./ecosystem.css";
 import "./business.css";
 import "./professional.css";
+import "./final-refinement.css";
 import "@/components/kitty/website-assistant.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
@@ -24,11 +25,11 @@ export const metadata: Metadata = {
     template: "%s · Kitty Corp",
   },
   description:
-    "KITTY CORP builds business websites, web applications and Android apps. Explore our products and work directly with the team building them.",
+    "KITTY CORP builds websites, apps and AI automations for businesses, alongside personal AI products. Explore our work and talk directly with the people building it.",
   icons: { icon: "/brand/monogram.png", apple: "/brand/monogram.png" },
   openGraph: {
     title: "KITTY CORP — Software & independent technology.",
-    description: "Business websites, web applications and Android apps. See our shipped work and discuss your project with the team building it.",
+    description: "Websites, apps and AI automations for businesses. Explore our products and discuss your project with the team building it.",
     type: "website",
     siteName: "Kitty Corp",
     images: [{url: "/opengraph-image",width:1200,height:630,alt:"KITTY CORP"}],
@@ -37,12 +38,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/opengraph-image"],
     title: "Kitty Corp",
-    description: "Websites, applications and independent technology.",
+    description: "Websites, AI automations and personal AI products.",
   },
 };
 async function PublicAssistant() {
-  const {settings,siteKey} = await publicAssistantPresentation();
-  return <AssistantLauncher settings={settings} siteKey={siteKey}/>;
+  const presentation = await publicAssistantPresentation().catch(() => null);
+  if (!presentation) return null;
+  return <AssistantLauncher settings={presentation.settings} siteKey={presentation.siteKey} />;
 }
 export default async function RootLayout({
   children,

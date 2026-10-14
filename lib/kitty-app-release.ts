@@ -1,2 +1,2 @@
-// Already published, owner-signed release; public download metadata only.
-export const kittyAppRelease={apk:"/downloads/kitty-ai-1.8.0.apk",version:"1.8.0",android:"Android 8.0+",bytes:4479005,sha256:"4b003f225a22a5e3072d380645ff6b58f35bec98d7d9dec4dabe4137bd8f1ba0"} as const;
+// Verified existing owner-signed release. Public download metadata only.
+export const kittyAppRelease={apk:"/downloads/kitty-ai-2.0.0.apk",version:"2.0.0",android:"Android 8.0+",bytes:4495385,sha256:"3bc61fa51b7afd6a51d9464d931cda9bccd27c4dd7b12cbd62bd18092e8159cd"} as const;

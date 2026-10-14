@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ASSISTANT_OPEN_EVENT, takeAssistantIntent } from "@/lib/assistant-events";
 import { usePathname } from "next/navigation";
 import { ArrowUp, MessageCircle, RotateCcw, X } from "lucide-react";
 import { Turnstile } from "@/components/kitty/turnstile";
@@ -30,6 +31,17 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
   const request = useRef<AbortController | null>(null);
   const limitReached = messages.filter(message => message.role === "user").length >= settings.max_messages;
 
+  useEffect(() => {
+    const receive = () => {
+      const question = takeAssistantIntent();
+      if (question === null) return;
+      setOpen(true);
+      if (question) setInput(question);
+    };
+    window.addEventListener(ASSISTANT_OPEN_EVENT, receive);
+    receive();
+    return () => window.removeEventListener(ASSISTANT_OPEN_EVENT, receive);
+  }, []);
   useEffect(() => () => request.current?.abort(), []);
   useEffect(() => {
     if (!open) return;
@@ -94,7 +106,7 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
       </header>
       <div ref={conversation} className="website-assistant-conversation" role="log" aria-label="Conversation with KITTY AI" aria-live="polite" aria-relevant="additions">
         <div className="website-assistant-message is-assistant"><span className="website-assistant-speaker">KITTY AI</span><p>{settings.greeting}</p></div>
-        {!feedbackDismissed && !savedFeedbackDismissed && messages.length===0 && <div className="website-assistant-message is-assistant"><p>Enjoying KITTY AI? Visit KITTY CORP and tell us what you think. Your feedback helps us improve.</p><a href="/contact?subject=Review" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">Visit KITTY CORP &amp; share feedback</a><button type="button" className="website-assistant-icon" aria-label="Dismiss feedback invitation" onClick={()=>{setFeedbackDismissed(true);try{sessionStorage.setItem("kitty-feedback-dismissed","yes");}catch{/* Session storage can be unavailable in private browsers. */}}}><X size={16}/></button></div>}
+        {!feedbackDismissed && !savedFeedbackDismissed && messages.some(message => message.role === "assistant") && <div className="website-assistant-message is-assistant"><p>Enjoying KITTY AI? Visit KITTY CORP and tell us what you think. Your feedback helps us improve.</p><a href="/contact?subject=Review" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">Visit KITTY CORP &amp; share feedback</a><button type="button" className="website-assistant-icon" aria-label="Dismiss feedback invitation" onClick={()=>{setFeedbackDismissed(true);try{sessionStorage.setItem("kitty-feedback-dismissed","yes");}catch{/* Session storage can be unavailable in private browsers. */}}}><X size={16}/></button></div>}
         {messages.length === 0 && <div className="website-assistant-suggestions" aria-label="Suggested questions">{websiteAssistantSuggestions.map(question => <button type="button" key={question} disabled={busy || !!(turnstileSiteKey && !turnstileToken)} onClick={() => void send(question)}>{question}<span aria-hidden="true">↗</span></button>)}</div>}
         {messages.map(message => <div key={message.id} className={`website-assistant-message is-${message.role}`}><span className="website-assistant-speaker">{message.role === "assistant" ? "KITTY AI" : "You"}</span><p>{message.content}</p>{message.sources && message.sources.length > 0 && <div className="website-assistant-sources">{message.sources.map(source => <Link key={source.href} href={source.href} onClick={close}>{source.label}<span aria-hidden="true">↗</span></Link>)}</div>}</div>)}
         {busy && <p className="website-assistant-thinking" role="status"><span aria-hidden="true" />KITTY is thinking…</p>}

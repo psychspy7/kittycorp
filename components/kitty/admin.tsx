@@ -11,6 +11,7 @@ const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loadin
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
 const AdminCommerce = dynamic(() => import("./admin-commerce"), { loading: () => <p className="empty-message">Opening payment setup…</p> });
+const AdminHealth = dynamic(() => import("./admin-health"));
 const AdminEmail = dynamic(() => import("./admin-email"));
 const AdminAI = dynamic(() => import("./admin-ai"));
 const AdminMaintenance = dynamic(() => import("./admin-maintenance"));
@@ -357,6 +358,7 @@ export function AdminDashboard() {
         <Tabs value={tab} onValueChange={setTab} className="studio-workspace">
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="health">Health & handover</TabsTrigger>
             <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
             <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
@@ -376,11 +378,12 @@ export function AdminDashboard() {
           <TabsContent value="lisa-preorders" className="admin-panel"><AdminLisaPreorders/></TabsContent>
           <TabsContent value="project-quotes" className="admin-panel"><AdminProjectQuotes/></TabsContent>
           <TabsContent value="commerce" className="admin-panel"><AdminCommerce/></TabsContent>
+          <TabsContent value="health" className="admin-panel"><AdminHealth/></TabsContent>
           <TabsContent value="email" className="admin-panel"><AdminEmail/></TabsContent>
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
-              {[["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["assistant","KITTY AI & security","Adjust your website guide, its greeting and published context. Private app chats stay separate."],["commerce","Payments & plans","Configure providers and manage product plans without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>

@@ -48,14 +48,14 @@ export const launchSchema = z.object({
   : { ...value, website_url: null, screenshot_path: null });
 
 const readLaunches = publicContentCache("launches", PUBLIC_CONTENT_TAGS.launches, async (): Promise<Launch[]> => {
-  const { data, error } = await database().from("kitty_website_launches").select("*").eq("published", true).lte("published_at", new Date().toISOString()).order("published_at", { ascending: false }).limit(20);
+  const { data, error } = await database().from("kitty_website_launches").select("*").abortSignal(AbortSignal.timeout(5000)).eq("published", true).lte("published_at", new Date().toISOString()).order("published_at", { ascending: false }).limit(20);
   if (error) throw new HttpError("Launches are temporarily unavailable.", 503);
   return data as Launch[];
 });
 export const publishedLaunches = cache(readLaunches);
 // Download authorization must see an unpublished release immediately.
 export const publishedLaunch = cache(async (slug: string): Promise<Launch | null> => {
-  const { data, error } = await database().from("kitty_website_launches").select("*").eq("slug", slug).eq("published", true).lte("published_at", new Date().toISOString()).maybeSingle();
+  const { data, error } = await database().from("kitty_website_launches").select("*").abortSignal(AbortSignal.timeout(5000)).eq("slug", slug).eq("published", true).lte("published_at", new Date().toISOString()).maybeSingle();
   if (error) throw new HttpError("This launch is temporarily unavailable.", 503);
   return data as Launch | null;
 });

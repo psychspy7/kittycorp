@@ -28,7 +28,7 @@ export async function encryptRuntimeConfiguration(value:RuntimeConfiguration){
 export const getRuntimeConfiguration = cache(async (): Promise<RuntimeConfiguration> => {
   const stored: RuntimeConfiguration = {};
   try {
-    const {data,error} = await database().rpc("kitty_website_runtime_configuration", {p_gateway_token:setting("FEEDBACK_GATEWAY_TOKEN")});
+    const {data,error} = await database().rpc("kitty_website_runtime_configuration", {p_gateway_token:setting("FEEDBACK_GATEWAY_TOKEN")}).abortSignal(AbortSignal.timeout(5000));
     if (error || typeof data !== "string") throw new Error("Runtime configuration unavailable");
     Object.assign(stored,await decodeRuntimeConfiguration(data));
   } catch { /* Missing configuration keeps features disabled until setup. */ }

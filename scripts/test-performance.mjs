@@ -41,7 +41,7 @@ const fixture={
 };
 const database=(token)=>{assert.equal(token,undefined,"Public caches must use an anonymous client");return{from:table=>{
   const filters=[];let one=false,columns="*";
-  const query={select:cols=>{columns=cols;return query;},eq:(key,value)=>{filters.push(row=>row[key]===value);return query;},lte:(key,value)=>{filters.push(row=>row[key]<=value);return query;},order:()=>query,limit:()=>query,single:()=>{one=true;return query;},maybeSingle:()=>{one=true;return query;},then:(resolve,reject)=>{
+  const query={abortSignal:signal=>{assert(signal instanceof AbortSignal);return query;},select:cols=>{columns=cols;return query;},eq:(key,value)=>{filters.push(row=>row[key]===value);return query;},lte:(key,value)=>{filters.push(row=>row[key]<=value);return query;},order:()=>query,limit:()=>query,single:()=>{one=true;return query;},maybeSingle:()=>{one=true;return query;},then:(resolve,reject)=>{
     tableCalls.set(table,(tableCalls.get(table)||0)+1);
     if(failureTable===table)return Promise.resolve({data:null,error:Error("temporary")}).then(resolve,reject);
     const rows=structuredClone(fixture[table]).filter(row=>filters.every(filter=>filter(row))).map(row=>columns==="*"?row:Object.fromEntries(columns.split(",").map(key=>[key,row[key]])));
@@ -62,7 +62,7 @@ company.refreshCompany();failureTable="kitty_website_products";await company.com
 assert.equal((await company.companyProducts())[0].name,"Updated icon and product","Failures must not persist fallback data");
 const appRelease=source("lib/kitty-app-release.ts");
 const launches=source("lib/launches-server.ts",{...common,"./kitty-app-release":appRelease,"./launches":{MAX_APK_BYTES:50e6,RELEASE_BUCKET:"fixture"},"./secretchat":{secretChat:{}},"./company-content":content});
-const bundled=await launches.verifyRelease({}, {slug:"kitty-ai",apk_path:appRelease.kittyAppRelease.apk,published:true});assert.equal(bundled.apk_sha256,appRelease.kittyAppRelease.sha256);assert.equal(bundled.apk_bytes,4479005);
+const bundled=await launches.verifyRelease({}, {slug:"kitty-ai",apk_path:appRelease.kittyAppRelease.apk,published:true});assert.equal(bundled.apk_sha256,appRelease.kittyAppRelease.sha256);assert.equal(bundled.apk_bytes,appRelease.kittyAppRelease.bytes);
 await launches.publishedLaunches();fixture.kitty_website_launches[0].published=false;
 assert.equal(await launches.publishedLaunch("released-app"),null,"Downloads must see current publication status even with a warm listing cache");
 launches.refreshLaunchPages();assert.equal((await launches.publishedLaunches()).length,0);
