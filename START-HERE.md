@@ -1,6 +1,7 @@
 ## Latest website release — 14 October 2026
 
 Read `FINAL-WEBSITE-HANDOVER-2026-10-14.md` for the current homepage, AI automations, website health, KITTY AI 2.0 release, verification and study-break operations. Give `handover/CONTINUATION-PROMPT-2026-10-14.txt` to another AI app along with the latest clean source ZIP. Older handover manifests are historical snapshots.
+Read `handover/FINAL-STATUS-2026-10-15.md` for the verified SecretChat 2.0 website listing, current public links and remaining owner checks.
 
 # Kitty Corp website
 
