@@ -45,7 +45,7 @@ export function SecretChatSection({ launch }: { launch: Launch }) {
 
 export const secretChatFeatures = [
   { icon: LockKeyhole, title: "Encrypted before it leaves.", text: "Messages use AES-256-GCM encryption on participants’ devices before transmission. Private room invitations unlock the conversation." },
-  { icon: ShieldCheck, title: "History stays on your device.", text: "Received history is encrypted using Android Keystore. The mobile service keeps no cloud chat archive or administrator decryption key." },
+  { icon: ShieldCheck, title: "Private history stays on your device.", text: "Received private-room history is encrypted using Android Keystore. Private rooms have no cloud chat archive or administrator decryption key. Optional research rooms work differently." },
   { icon: Fingerprint, title: "An extra layer at the door.", text: "Enable fingerprint or strong biometric unlock, with device PIN or password recovery. Screenshot protection is enabled for normal accounts." },
   { icon: KeyRound, title: "An invitation, not a feed.", text: "Create a private room for 1–24 hours and share its code with your people. Extensions need approval; administrator groups can stay open." },
 ];
