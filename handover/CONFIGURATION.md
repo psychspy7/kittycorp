@@ -21,7 +21,7 @@ Studio at `/kitten` uses Google-only sign-in. `ADMIN_LOGIN_ID` is no longer read
 
 In the original workspace it lives beside `package.json`:
 
-`C:\Users\HP\OneDrive\Documents\ChatGPT\KITTY CORP STARTUP WEBSITE\.env.local`
+`C:\Users\HP\Downloads\Project (Kitty-Corp)\KITTY CORP STARTUP WEBSITE\.env.local`
 
 The file is intentionally excluded from this ZIP. In a new local folder, copy `.env.example` to `.env.local`, then fill in the values from your existing private configuration. Keep an encrypted private backup of them. Vercel’s production settings and your local file are independent; editing one does not change the other.
 
