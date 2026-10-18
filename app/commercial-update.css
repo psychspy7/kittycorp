@@ -87,3 +87,5 @@
 @media(max-width:680px){.lisa-purchase{grid-template-columns:1fr;gap:23px;padding-block:40px}.lisa-purchase-card{padding:22px}}
 @media(max-width:680px){.service-price-card:nth-child(5){grid-column:auto}}
 @media(prefers-reduced-motion:reduce){.cookie-banner *{animation:none!important;transition:none!important}}
+
+.service-price-card:nth-child(5) .local-price,.service-price-card:nth-child(5) .local-price span,.service-price-card:nth-child(5) .local-price a,.service-price-card:nth-child(5) .service-price-amount span{color:#cbd2c4}

@@ -29,3 +29,6 @@ A pre-existing leaked-password-protection warning remains in Supabase Auth; Stud
 - Supply actual seller, address and tax details where applicable before relying on legal pages or invoices. No details were invented.
 - $200 bundle scope and access are agreed manually for 30 days and two Premium websites once; LISA is excluded.
 - Source archive is credential-free and is not a live customer/database backup. Preserve private configuration and provider accounts separately.
+
+## Final visual correction
+The live mobile review also identified low contrast on the dark bundle card local-currency estimate. The final stylesheet gives that estimate light text, and service cards distinguish a quoted price from an unavailable planned product. Type checking, scoped lint and production build were repeated for the affected UI.

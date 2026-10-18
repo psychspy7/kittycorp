@@ -21,7 +21,7 @@ export function ServicePricing({ compact = false }: { compact?: boolean }) {
       <span className="micro-label">{item.price === 0 ? "START HERE" : "STARTING AT"}</span>
       <h3>{item.name}</h3>
       <div className="service-price-amount">{item.price ? <><strong>${item.price}</strong><span>USD</span></> : <strong>Free</strong>}</div>
-      {item.price > 0 && <LocalPrice amount={item.price * 100} base="USD" charged={false}/>}
+      {item.price > 0 && <LocalPrice amount={item.price * 100} base="USD" charged={false} quoteOnly/>}
       <p>{item.summary}</p>
       {!compact && <ul>{item.details.map(detail => <li key={detail}>{detail}</li>)}</ul>}
       <Link className="text-link" href={item.price === 0 ? "/appointments" : "/projects"}>{item.price === 0 ? "Request a conversation" : "Tell us about your project"} <ArrowUpRight size={15}/></Link>
