@@ -217,7 +217,7 @@ The dedicated website project has the `kitty_website_testimonials` table and acc
 
 `/projects` is the direct project brief page. Optional KITTY AI analysis helps refine scope without inventing a price. A submission appears in the existing inbox and creates a private quote link for the customer.
 
-In Studio → **Project quotes**, confirm scope, enter the agreed full price in INR, choose Approved and save. The customer refreshes their private quote link to pay. Full advance receives 2.5% off; 50/50 receives 1.2% off the total. For review-first or the split balance, mark the preview ready once it can be reviewed. Prices lock after checkout starts. See **PROJECT-PAYMENTS-GUIDE.md** for retry recovery and privacy.
+In Studio → **Project quotes**, confirm scope, enter the agreed full price in INR, choose Approved and save. The customer refreshes their private quote link to pay. Full advance receives 2.5% off; 50/50 receives 1% off the total. For review-first or the split balance, mark the preview ready once it can be reviewed. Prices lock after checkout starts. See **PROJECT-PAYMENTS-GUIDE.md** for retry recovery and privacy.
 
 The legacy client invoice amount can remain 0; this does not close donation checkout. The homepage donation form is near the bottom and loads payment scripts only after it is opened. Product plans remain separate from services and contributions. The footer currency selector controls approximate local-price displays, while checkout states the actual charged currency.
 
@@ -237,3 +237,6 @@ Before advertising paid plans widely, complete your own real payment and fresh-p
 ## Customer Google accounts — 13 October 2026
 
 The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, separate LISA reservations and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.
+
+## 18 October 2026 commercial update
+Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read LISA-DISTRIBUTION-GUIDE.md before enabling instant LISA delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.

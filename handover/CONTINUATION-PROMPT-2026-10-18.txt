@@ -1,0 +1,14 @@
+Continue KITTY CORP website work from the latest source, not an old preview.
+Canonical workspace: C:\Users\HP\Downloads\Project (Kitty-Corp)
+Website: KITTY CORP STARTUP WEBSITE; repository https://github.com/psychspy7/kittycorp.git.
+Read root AGENTS.md, START-HERE.md, PROJECT-INTEGRATION.md, website AGENTS.md, OWNER-GUIDE.md and handover/UPDATE-2026-10-18.md first. Preserve each project's independent Git history and all private configuration. Never work in old OneDrive copies.
+
+Website stack: Next.js 16.3.4, React 19, Vercel, Supabase website project mgkghnblbisubympudaa. Studio /kitten uses approved Google sign-in. Customer /account uses the separate existing identity flow. Do not modify the Private Chat backend.
+New public pages: /pricing /appointments /play /terms /refunds. Core service quotes retain private references, server-side totals and verified payment signatures. Provider secrets stay on the server.
+$200 bundle: 30 days, two scoped Premium websites plus KITTY AI access, LISA excluded. Not an automatic recurring subscription. Local currency display is an estimate until a quote/payment currency is confirmed.
+Quote split policy is stored per row. Read the SQL migration rollout order. Preserve earlier quotes, payments and refunds. Never recalculate an existing paid order using new terms.
+The maze reward is server-verified, one use, 5% or 7%; Studio applies it to an unlocked service quote. Product redemption remains assisted through the relevant product system, not automatically provisioned by the website.
+LISA is a separate app. The website uses approved 2D artwork and $99 assisted purchase requests; new preorders are closed while existing records/refund access remain. The ~839 MiB installer is local and public release/automatic licence delivery are unfinished. Read LISA-DISTRIBUTION-GUIDE.md. Do not publish private activation CSVs or put installers into the website repository.
+Owner-provided reviews may use the first three approved names/quotes only. Do not invent client organisations, countries, statistics, affiliations, ratings or zero complaints.
+Legal seller registration/address/GST are unknown. Use known facts only. Analytics is opt-in with Essential only and footer Cookie choices. Do not promise legal immunity.
+Run npm run check:website, appropriate lint and npm run build:next. Verify affected pages and real backend responses without charging customers or sending unsolicited mail. Record limitations honestly. After verified changes sync canonical source safely, refresh only Source File Zip/website using its updater, and include a new continuation note. Source ZIPs exclude secrets, customer data and Git history.

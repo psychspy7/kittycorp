@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { ProjectEnquiry } from "@/components/kitty/project-enquiry";
+import { ServicePricing } from "@/components/kitty/service-pricing";
 import { Reviews, ShippedWork } from "@/components/kitty/credibility-sections";
 import { publishedLaunches } from "@/lib/launches-server";
 import { publicTestimonials } from "@/lib/testimonials-server";
@@ -20,6 +21,7 @@ export default async function ServicesPage() {
       <article id="applications"><span className="micro-label">02 / WEB & ANDROID APPLICATIONS</span><h2>Make the task easier.</h2><p>A focused first version that solves a specific problem and is ready to put in front of real users.</p><ul><li>Dashboards, internal tools and customer apps</li><li>Accounts, databases and admin controls</li><li>A working preview you can test and review</li><li>Release planning and an agreed handover</li></ul><a className="text-link" href="#project-enquiry">Talk about your app <ArrowUpRight size={14}/></a></article>
       <article id="automation"><span className="micro-label">03 / AI AGENTS &amp; AUTOMATION</span><h2>Give repetitive work a better workflow.</h2><p>We design business automations with tools such as n8n, connecting the apps you use with practical AI agents and clear rules.</p><ul><li>Lead capture, sorting and customer follow-ups</li><li>Connected CRM, email, spreadsheets and internal tools</li><li>AI assistants for research, support and everyday operations</li><li>Human approval for sensitive actions, plus useful logs and handover</li></ul><p>We review your workflow first. Hosting, model usage and third-party subscriptions are quoted separately; we don’t promise unattended accuracy.</p><Link className="text-link" href="/projects">Plan an automation project <ArrowUpRight size={14}/></Link></article>
     </section>
+    <ServicePricing/>
     <ShippedWork launches={launches}/>
     <section id="how-we-work" className="service-process"><div><span className="eyebrow">HOW WE WORK</span><h2>Know the plan.<br/>See the progress.</h2><p>You’ll speak to the people building your project. We keep the first version focused and make the work visible as it develops.</p></div><ol><li><h3>Start with your brief.</h3><p>Tell us who it’s for, what it needs to do and what you have already. You don’t need a finished specification.</p></li><li><h3>Agree the scope and quote.</h3><p>We discuss features, deliverables, budget and timing before development starts. Any extra work is discussed before it’s added.</p></li><li><h3>Build, review and release.</h3><p>Review a working preview, share feedback and agree on the release. We’ll define source files, hosting and ongoing support in the project scope.</p></li></ol></section>
     <Reviews reviews={reviews}/>
@@ -27,7 +29,7 @@ export default async function ServicesPage() {
       <details><summary>How much will my project cost?</summary><p>It depends on the scope, features and content. Send a short brief and we’ll discuss a quote before you commit to development.</p></details>
       <details><summary>Can you improve an existing website?</summary><p>Yes. Share the link and tell us what isn’t working. We’ll review it with you and suggest a focused next step.</p></details>
       <details><summary>What do I need to send?</summary><p>Your goal, the people who’ll use it and any examples you like. A rough budget or launch date helps, but both are optional.</p></details>
-      <details><summary>What happens after launch?</summary><p>Six months of maintenance are included after delivery, covering the bug fixes, routine updates and support agreed in your project scope. New features and third-party hosting or API costs are quoted separately.</p></details>
+      <details><summary>What happens after launch?</summary><p>Eligible projects include free maintenance for the period written into your quote. A successful paid referral adds three months to that agreed maintenance term. New features, domain, hosting and third-party API costs are quoted separately.</p></details>
     </div></section>
     <section id="project-enquiry" className="project-enquiry"><div><span className="eyebrow">LET’S TALK ABOUT THE WORK</span><h2>What would you<br/>like to build?</h2><p>Tell us a little about your business or idea. We’ll read your brief and reply with questions and a sensible next step.</p><Link href="/contact" className="text-link">Have a different question? Contact us <ArrowUpRight size={14}/></Link></div><ProjectEnquiry/></section>
     <section className="service-payment-links" aria-label="Project payments and support">

@@ -13,6 +13,7 @@ export const testimonialSchema = z.object({
   reviewer_role: z.string().trim().max(120),
   company: z.string().trim().max(160),
   quote: z.string().trim().min(20).max(1500),
+  rating: z.number().int().min(1).max(5).nullable().optional().default(null),
   source_url: sourceLink,
   permission_confirmed: z.boolean(),
   published: z.boolean(),

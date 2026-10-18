@@ -7,7 +7,7 @@ import type { Testimonial } from "./testimonials";
 
 const readTestimonials = publicContentCache("testimonials", PUBLIC_CONTENT_TAGS.testimonials, async (): Promise<Testimonial[]> => {
   const {data, error} = await database().from("kitty_website_testimonials")
-    .select("id,reviewer_name,reviewer_role,company,quote,source_url,permission_confirmed,published,sort_order").abortSignal(AbortSignal.timeout(5000))
+    .select("id,reviewer_name,reviewer_role,company,quote,rating,source_url,permission_confirmed,published,sort_order").abortSignal(AbortSignal.timeout(5000))
     .eq("published", true).eq("permission_confirmed", true)
     .order("sort_order").order("created_at", {ascending: false}).limit(6);
   if (error) throw error;

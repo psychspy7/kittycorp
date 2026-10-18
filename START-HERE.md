@@ -70,3 +70,6 @@ Read **EMAIL-AUTOMATION-GUIDE.md** before deploying the new project/contact ackn
 ## Daily Cloudflare database check
 
 The separate `kitty-corp-database-health` Worker runs a small read-only website database check at **08:30 AM IST daily**. Read **integrations/supabase-health/README.md** for Cloudflare logs, testing, deployment, disabling the schedule and Supabase Free-plan limitations. Private credentials are excluded from source archives.
+
+## Commercial update — 18 October 2026
+Read handover/UPDATE-2026-10-18.md and handover/CONTINUATION-PROMPT-2026-10-18.txt for the current packages, appointments, game rewards, consent and LISA delivery limits.

@@ -7,7 +7,7 @@ The homepage and `/payments` now separate product plans, client quotes and volun
 1. Customer submits a brief for free. The same transaction places the message in the existing Studio inbox and creates a private quote.
 2. The response shows `/projects/quote#quote=...`. Keep this private access link. Tokens are random 256-bit values and only SHA-256 hashes are stored. Fragments are not sent as referrers or Analytics page URLs. Quote responses omit the name, email and token hash.
 3. Studio → Project quotes shows briefs. Confirm the scope and project price in INR, then change Draft to Approved and save. No automatic AI price is invented: the owner has said they will provide pricing rules. Optional AI analysis summarizes the brief; it is not a binding quote.
-4. Customer refreshes the same private quote link and chooses full advance (2.5% off), 50/50 (1.2% off the total), or review-first (no advance, no discount). Discounts are calculated on the agreed total in integer minor units, with the second installment retaining any rounding remainder.
+4. Customer refreshes the same private quote link and chooses full advance (2.5% off), 50/50 (1% off the total), or review-first (no advance, no discount). Discounts are calculated on the agreed total in integer minor units, with the second installment retaining any rounding remainder.
 5. Studio can mark the preview ready. This opens the remaining split balance or the review-first payment. Sending a brief does not promise a free unlimited build or transfer finished source before payment; agree the actual preview/delivery scope with the customer.
 6. Captured, verified live ledger records determine paid amounts. Price and scope are locked once an order starts. The selected schedule is immutable during payment. Retries reuse the known Razorpay order; a concurrent or uncertain creation is recovered by its unique receipt rather than blindly creating another order.
 
@@ -44,3 +44,6 @@ The website webhook is active for `payment.captured`, `order.paid`, and `refund.
 ## Current app download
 
 `/kitty-ai` links the verified current 1.8.0 Android release and Plus plans. The website bundles the already published APK under `public/downloads/kitty-ai-1.8.0.apk`; it preserves the same package/signing certificate. Future APKs can still be published through Studio. Bundled APK hashes must match their release metadata.
+
+## 18 October 2026 commercial update
+Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read LISA-DISTRIBUTION-GUIDE.md before enabling instant LISA delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.

@@ -5,7 +5,7 @@ import {cookies} from "next/headers";
 import {z} from "zod";
 import {failure,HttpError,privateJson,readBody,verifyOrigin} from "@/lib/kitty-server";
 import {verifyTurnstile} from "@/lib/turnstile-server";
-import {preorderTokenSchema} from "@/lib/lisa-preorders";
+import {preorderTokenSchema,LISA_PREORDERS_OPEN} from "@/lib/lisa-preorders";
 import {preorderAction} from "@/lib/lisa-preorders-server";
 import {getCommerce} from "@/lib/commerce-server";
 import {recordPayment} from "@/lib/payment-ledger";
@@ -14,6 +14,7 @@ export const runtime="nodejs";
 export async function POST(request:Request){try{
  verifyOrigin(request);const value=z.object({token:preorderTokenSchema.optional(),id:z.string().uuid().optional(),amount:z.number().int().min(100).max(100000000),turnstileToken:z.string().max(2048).optional()}).strict().refine(v=>!!v.token!==!!v.id,"Choose one reservation access method.").parse(await readBody(request));
  const customer=await optionalCustomer(request);if(value.id&&!customer)throw new HttpError("Sign in to open this reservation.",401);
+ if(!LISA_PREORDERS_OPEN)throw new HttpError("New LISA preorder payments are closed. Existing paid reservations and refund requests remain available.",503);
  const action=async(name:string,payload:Record<string,unknown>={})=>value.id&&customer?await customerAction(customer,"preorder",{id:value.id,action:name,...payload})as LisaPreorder:preorderAction(name,value.token!,payload);
  const [config,{settings}]=await Promise.all([resolvedRazorpayConfiguration(),getCommerce()]);if(config.testMode||!settings.plans.lisa.published)throw new HttpError("LISA preorders are not available right now.",503);
  await verifyTurnstile(request,value.turnstileToken,"payment-order");

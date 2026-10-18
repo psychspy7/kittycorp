@@ -4,20 +4,14 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
-  analyticsPublicPath, configureAnalytics, declineAnalytics,
-  pauseAnalytics, readAnalyticsChoice, saveAnalyticsChoice, subscribeAnalyticsChoice,
+  analyticsPublicPath, configureAnalytics,
+  pauseAnalytics, readAnalyticsChoice, subscribeAnalyticsChoice,
   trackPageView,
 } from "@/lib/site-analytics";
 
 export function AnalyticsSettingsButton({ measurementId }: { measurementId: string }) {
-  const choice = useSyncExternalStore(subscribeAnalyticsChoice, readAnalyticsChoice, () => null);
   if (!measurementId) return null;
-  const optedOut = choice === "declined";
-  function toggle() {
-    if (!optedOut) declineAnalytics(measurementId);
-    saveAnalyticsChoice(optedOut ? "accepted" : "declined");
-  }
-  return <button className="analytics-settings-link" type="button" onClick={toggle}>{optedOut ? "Enable analytics" : "Disable analytics"}</button>;
+  return <button className="analytics-settings-link" type="button" onClick={() => window.dispatchEvent(new Event("kitty:cookie-settings"))}>Cookie choices</button>;
 }
 
 const subscribeHydration = () => () => {};
@@ -33,7 +27,7 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
   const previousPage = useRef("");
   const lastTracked = useRef("");
   const publicPage = analyticsPublicPath(pathname);
-  const enabled = hydrated && !!measurementId && publicPage && choice !== "declined";
+  const enabled = hydrated && !!measurementId && publicPage && choice === "accepted";
 
   useEffect(() => {
     const protectPrivateNavigation = (event: MouseEvent) => {

@@ -14,7 +14,7 @@ const choiceLifetime = 180 * 24 * 60 * 60 * 1000;
 const publicPages = new Set([
   "/", "/services", "/products", "/company", "/team", "/kitty-ai",
   "/lisa-ai", "/sentinel", "/secretchat", "/build-log", "/research",
-  "/investors", "/contact", "/privacy", "/projects",
+  "/investors", "/contact", "/privacy", "/projects", "/pricing", "/appointments", "/terms", "/refunds", "/play",
 ]);
 
 export function analyticsPublicPath(pathname: string | null) {
@@ -82,7 +82,7 @@ export function pauseAnalytics(id: string) {
 
 export function configureAnalytics(id: string, pathname: string) {
   const target = analyticsWindow();
-  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() === "declined") return false;
+  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() !== "accepted") return false;
   target.dataLayer ||= [];
   target.gtag ||= function (...args: unknown[]) {
     // Google's command queue uses the function's Arguments object.
@@ -110,7 +110,7 @@ export function configureAnalytics(id: string, pathname: string) {
 
 export function trackPageView(id: string, pathname: string, previous: string) {
   const target = analyticsWindow();
-  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() === "declined" || target[`ga-disable-${id}`]) return;
+  if (!analyticsPublicPath(pathname) || readAnalyticsChoice() !== "accepted" || target[`ga-disable-${id}`]) return;
   const pageLocation = window.location.origin + pathname;
   target.gtag?.("set", { page_location: pageLocation, page_referrer: analyticsReferrer(previous || document.referrer, window.location.origin) });
   target.gtag?.("event", "page_view", {
@@ -123,6 +123,10 @@ export function trackPageView(id: string, pathname: string, previous: string) {
 
 export function declineAnalytics(id: string) {
   pauseAnalytics(id);
+  analyticsWindow().gtag?.("consent", "update", {
+    analytics_storage: "denied", ad_storage: "denied",
+    ad_user_data: "denied", ad_personalization: "denied",
+  });
   // Remove this website's GA cookies. The Studio session cookie is untouched.
   const names = document.cookie.split(";").map(cookie => cookie.trim().split("=")[0]).filter(name => /^_ga(?:_|$)/.test(name));
   const parts = window.location.hostname.split(".");

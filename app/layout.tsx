@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/kitty/google-analytics";
+import { CookieBanner } from "@/components/kitty/cookie-banner";
 import { googleAnalyticsId } from "@/lib/analytics-config";
 import { LogoMotionProvider } from "@/components/kitty/logo-motion";
 import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
@@ -17,6 +18,7 @@ import "./ecosystem.css";
 import "./business.css";
 import "./professional.css";
 import "./final-refinement.css";
+import "./commercial-update.css";
 import "@/components/kitty/website-assistant.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
@@ -64,6 +66,7 @@ export default async function RootLayout({
         <LocalCurrencyProvider country={country}><LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider></LocalCurrencyProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
+        <Suspense fallback={null}><CookieBanner measurementId={googleAnalyticsId()} /></Suspense>
         <Toaster theme="light" position="bottom-right" richColors />
       </body>
     </html>

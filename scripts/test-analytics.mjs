@@ -30,7 +30,7 @@ const api = context.exports;
 const id = "G-TEST123456";
 assert.equal(api.readAnalyticsChoice(), null);
 assert.equal(window.dataLayer, undefined, "No queue before configuration");
-assert.equal(api.configureAnalytics(id, "/"), true, "Public-page analytics starts without a banner");
+assert.equal(api.configureAnalytics(id, "/"), false, "No analytics before visitor consent");
 api.saveAnalyticsChoice("declined");
 assert.equal(api.configureAnalytics(id, "/"), false);
 api.saveAnalyticsChoice("accepted");
@@ -73,4 +73,4 @@ assert.equal(api.readAnalyticsChoice(), "declined", "Blocked storage still respe
 assert.equal(notifications, 2, "Choices update across tabs and in the same tab");
 unsubscribe();
 assert.equal(listeners.get(api.ANALYTICS_CHOICE_EVENT).size, 0);
-console.log("PASS: automatic public tracking, saved opt-out, expiry, blocked storage, private routes, sanitized URLs, tag configuration and Studio-cookie protection.");
+console.log("PASS: explicit opt-in, saved choices, expiry, blocked storage, private routes, sanitized URLs, tag configuration and Studio-cookie protection.");

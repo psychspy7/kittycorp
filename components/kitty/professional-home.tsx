@@ -13,7 +13,7 @@ export function ProfessionalHero({ launches }: { launches: Launch[] }) {
         <Link className="button button-gold" href="/projects">Start a project <ArrowUpRight size={17} aria-hidden="true"/></Link>
         <a className="text-link" href="#services">Explore our services <ArrowUpRight size={16} aria-hidden="true"/></a>
       </div>
-      <div className="hero-reassurance"><span><Check size={14} aria-hidden="true"/>Work directly with the builders</span><span><Check size={14} aria-hidden="true"/>6 months of maintenance included</span></div>
+      <div className="hero-reassurance"><span><Check size={14} aria-hidden="true"/>Work directly with the builders</span><span><Check size={14} aria-hidden="true"/>Maintenance agreed in your quote</span></div>
     </div>
     <aside className="hero-work hero-work-compact" aria-label="Selected KITTY CORP projects">
       <div className="hero-work-label"><span className="micro-label">OUR OWN PRODUCTS</span><Link href="/products">View all <ArrowUpRight size={13} aria-hidden="true"/></Link></div>

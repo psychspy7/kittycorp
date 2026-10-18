@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(await publishedLaunches()).map((launch) => ({ url: `${origin}${launchHref(launch)}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${origin}/contact`, changeFrequency: "monthly", priority: 0.6 },
     ...(await companyProducts()).map(p=>({url:`${origin}/${p.slug}`,lastModified:p.updated_at,changeFrequency:"weekly" as const,priority:0.7})),
-    ...["memberships","products","company","team","research","build-log","services","projects","investors","privacy"].map(page=>({url:`${origin}/${page}`,changeFrequency:"weekly" as const,priority:0.7})),
+    ...["memberships","products","company","team","research","build-log","services","pricing","appointments","play","projects","investors","privacy","terms","refunds"].map(page=>({url:`${origin}/${page}`,changeFrequency:"weekly" as const,priority:0.7})),
     ...(await publicJournal()).filter(e=>e.kind==="article").map(e=>({url:`${origin}/build-log/${e.slug}`,lastModified:e.updated_at,changeFrequency:"monthly" as const,priority:0.6})),
   ];
 }

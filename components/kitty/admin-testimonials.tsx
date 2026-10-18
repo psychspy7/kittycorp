@@ -6,7 +6,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { testimonialSchema, type Testimonial } from "@/lib/testimonials";
 import { studioRequest } from "./studio-content-helpers";
 
-const blank: Testimonial = {id: "new", reviewer_name: "", reviewer_role: "", company: "", quote: "", source_url: "", permission_confirmed: false, published: false, sort_order: 0};
+const blank: Testimonial = {id: "new", reviewer_name: "", reviewer_role: "", company: "", quote: "", rating: null, source_url: "", permission_confirmed: false, published: false, sort_order: 0};
 
 export default function AdminTestimonials() {
   const [reviews, setReviews] = useState<Testimonial[]>([]);
@@ -57,6 +57,7 @@ export default function AdminTestimonials() {
     <Dialog open={!!draft} onOpenChange={open => { if (!open && !busy) { setDraft(null); setError(""); } }}><DialogContent className="editor-dialog studio-content-editor"><DialogTitle>{draft?.id === "new" ? "Add a genuine review" : "Edit review"}</DialogTitle><DialogDescription>Use the reviewer’s actual words and only publish with their permission.</DialogDescription>{draft && <form onSubmit={save}>
       <div className="form-field"><label htmlFor="review-quote">Their review</label><textarea id="review-quote" rows={6} required minLength={20} maxLength={1500} value={draft.quote} disabled={busy} onChange={e => setDraft({...draft, quote: e.target.value})}/></div>
       {field("reviewer_name", "Reviewer’s name", 100)}{field("reviewer_role", "Role (optional)", 120)}{field("company", "Company or product used (optional)", 160)}{field("source_url", "Public source link (optional)", 1000)}
+      <div className="form-field"><label htmlFor="review-rating">Rating the reviewer actually gave (optional)</label><select id="review-rating" value={draft.rating ?? ""} disabled={busy} onChange={event => setDraft({...draft, rating: event.target.value ? Number(event.target.value) : null})}><option value="">No rating provided</option>{[1,2,3,4,5].map(value => <option key={value} value={value}>{value} / 5</option>)}</select></div>
       <p className="studio-field-help">Link to the original public review or case study when available. Keep private messages and email addresses out of the quote.</p>
       <div className="form-field"><label htmlFor="review-order">Display order (lower appears first)</label><input id="review-order" type="number" required min={0} max={1000} value={draft.sort_order} disabled={busy} onChange={e => setDraft({...draft, sort_order: Number(e.target.value)})}/></div>
       <label className="studio-check"><input type="checkbox" checked={draft.permission_confirmed} disabled={busy} onChange={e => setDraft({...draft, permission_confirmed: e.target.checked, published: e.target.checked && draft.published})}/>This is genuine feedback, and I have the reviewer’s permission to publish it.</label>

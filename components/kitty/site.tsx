@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Play, UserRound } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TechnologyMarquee } from "./technology-marquee";
-const navigation = [["Services", "/services"], ["Products", "/products"], ["Payments", "/payments"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
+const navigation = [["Services", "/services"], ["Pricing", "/pricing"], ["Products", "/products"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
 export function SiteHeader() {
   const pathname = usePathname();
   const signedIn=useSyncExternalStore(subscribeCustomerSession,customerSignedIn,()=>false);

@@ -3,12 +3,13 @@ import {randomBytes} from "node:crypto";
 import {failure,fingerprint,HttpError,privateJson,readBody,verifyOrigin} from "@/lib/kitty-server";
 import {getCommerce,providerConfiguration} from "@/lib/commerce-server";
 import {priceEstimate} from "@/lib/currency-server";
-import {preorderRequestSchema,LISA_TERMS,LISA_TERMS_VERSION} from "@/lib/lisa-preorders";
+import {preorderRequestSchema,LISA_TERMS,LISA_TERMS_VERSION,LISA_PREORDERS_OPEN} from "@/lib/lisa-preorders";
 import {preorderAction} from "@/lib/lisa-preorders-server";
 import {verifyTurnstile} from "@/lib/turnstile-server";
 export const runtime="nodejs";
 export async function POST(request:Request){try{
  verifyOrigin(request);const value=preorderRequestSchema.parse(await readBody(request));
+ if(!LISA_PREORDERS_OPEN)throw new HttpError("New LISA preorders are closed. Visit the LISA page for purchase and delivery details.",503);
  const [{settings},provider]=await Promise.all([getCommerce(),providerConfiguration("razorpay")]);
  if(provider.testMode||!settings.plans.lisa.published||settings.plans.lisa.currency!=="USD"||settings.plans.lisa.period!=="version_lifetime"||settings.plans.lisa.priceMinor<100)throw new HttpError("LISA preorders are not available right now.",503);
  await verifyTurnstile(request,value.turnstileToken,"lisa-preorder");

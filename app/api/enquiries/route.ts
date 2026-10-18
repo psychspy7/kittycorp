@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       2,
       saved?.feedback_id ? { feedback_id: saved.feedback_id } : {},
     );
-    return privateJson({ ok: true, quoteToken, accountLinked: !!customer });
+    return privateJson({ ok: true, quoteToken, reference: saved?.id ? `Q-${saved.id}` : "", accountLinked: !!customer });
   } catch (error) {
     return failure(error);
   }

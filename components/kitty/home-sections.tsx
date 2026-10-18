@@ -37,7 +37,7 @@ export function FlagshipProducts({launches,products}:{launches:Launch[];products
 export function DeliverySupport() {
   return <section className="delivery-support wrap" aria-labelledby="delivery-support-heading">
     <div className="delivery-support-heading"><span className="eyebrow">AFTER WE SHIP</span><h2 id="delivery-support-heading">We stay with<br/>the work.</h2></div>
-    <div className="delivery-support-detail"><span className="support-number">6 <span>months</span></span><h3>Free maintenance after delivery.</h3><p>Bug fixes, routine updates and support for the website or app we build. We agree on the maintenance scope before starting; new features and third-party hosting or API costs are quoted separately.</p><Link className="text-link" href="/services#project-enquiry">Plan your project <ArrowUpRight size={16}/></Link></div>
+    <div className="delivery-support-detail"><span className="support-number">6 <span>months</span></span><h3>Free maintenance on eligible projects.</h3><p>Bug fixes, routine updates and support within the scope written in your quote. A successful paid referral adds three months to an eligible term. New features, domains, hosting and API usage are separate.</p><Link className="text-link" href="/projects">Plan your project <ArrowUpRight size={16}/></Link></div>
   </section>;
 }
 export function LabProducts({launches,products}:{launches:Launch[];products:CompanyProduct[]}) {
