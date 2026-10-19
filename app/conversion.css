@@ -60,3 +60,51 @@
 @media(prefers-reduced-motion:reduce){.conversion-home *{scroll-behavior:auto}}
 
 .enquiry-direct-fallback{font-size:11px!important;color:#61675c;line-height:1.8;margin-top:17px}.enquiry-direct-fallback a{text-decoration:underline;overflow-wrap:anywhere}
+
+/* Keep the homepage founder introduction editorial; portraits belong on /team. */
+.business-founder .home-founder-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  padding: 32px 0;
+  border-top: 1px solid #d9dacd;
+  border-bottom: 1px solid #d9dacd;
+}
+.business-founder .home-founder-profile .founder-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  margin: 0;
+}
+.business-founder .home-founder-profile .founder-caption h3 {
+  font-size: clamp(25px, 3vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -.8px;
+}
+.business-founder .home-founder-profile .founder-caption > span {
+  font-size: 13px;
+  margin-top: 2px;
+}
+.business-founder .home-founder-profile .founder-bio { margin-top: 16px; }
+.business-founder .home-founder-profile .founder-socials { margin-top: 20px; }
+.business-founder .home-founder-profile .full-team-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 50px;
+  margin-top: 28px;
+  padding: 14px 22px;
+  background: #87672f;
+  border-color: #87672f;
+  color: #fffefa;
+}
+.business-founder .home-founder-profile .full-team-link:hover {
+  background: #705524;
+  border-color: #705524;
+}
+@media (max-width: 760px) {
+  .business-founder .home-founder-profile { padding: 25px 0 27px; }
+}
