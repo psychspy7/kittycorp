@@ -30,10 +30,10 @@ export function ServicePricing({ compact = false }: { compact?: boolean }) {
       <p><strong>Need a different fit?</strong> Custom work is welcome. Final features, timeline, charged currency, hosting, domain, AI usage and any recurring costs are confirmed in your quote. Free maintenance applies to eligible projects as agreed in writing; a successful paid referral adds three months to an eligible maintenance term.</p>
       {compact && <Link className="text-link" href="/pricing">See all packages and payment choices <ArrowUpRight size={16}/></Link>}
     </div>
-    <Link className="text-link pricing-game-link" href="/play">A little challenge: solve our circuit and earn 5–7% off an eligible order <ArrowUpRight size={15}/></Link>
+    <Link className="text-link pricing-game-link" href="/play">A little challenge: play Snake and earn 5–7% off an eligible order <ArrowUpRight size={15}/></Link>
   </section>;
 }
 
 export function PricingTeaser() {
-  return <section className="pricing-teaser wrap" aria-labelledby="pricing-teaser-heading"><div><span className="eyebrow">START SMALL. BUILD IT PROPERLY.</span><h2 id="pricing-teaser-heading">Website packages from $50.</h2><p>A free planning conversation, a written quote and a clear next step.</p></div><div><Link className="button button-gold" href="/pricing">See packages <ArrowUpRight size={16}/></Link><Link className="text-link" href="/play">Play a puzzle. Earn a discount. <ArrowUpRight size={14}/></Link></div></section>;
+  return <section className="pricing-teaser wrap" aria-labelledby="pricing-teaser-heading"><div><span className="eyebrow">START SMALL. BUILD IT PROPERLY.</span><h2 id="pricing-teaser-heading">Website packages from $50.</h2><p>A free planning conversation, a written quote and a clear next step.</p></div><div><Link className="button button-gold" href="/pricing">See packages <ArrowUpRight size={16}/></Link><Link className="text-link" href="/play">Play Snake. Earn a discount. <ArrowUpRight size={14}/></Link></div></section>;
 }

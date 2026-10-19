@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { circuitBoard, scoreCircuit } from "@/lib/discount-game";
+import { GAME_MAX_MOVES, scoreSnake } from "@/lib/discount-game";
 import { createGameChallenge, readGameChallenge, rewardCode, rewardHash } from "@/lib/discount-game-server";
 import { database, failure, fingerprint, HttpError, privateJson, readBody, setting, verifyOrigin } from "@/lib/kitty-server";
 import { verifyTurnstile } from "@/lib/turnstile-server";
@@ -7,7 +7,7 @@ import { verifyTurnstile } from "@/lib/turnstile-server";
 export const runtime = "nodejs";
 const schema = z.discriminatedUnion("action", [
   z.object({ action: z.literal("start"), turnstileToken: z.string().max(2048).optional() }).strict(),
-  z.object({ action: z.literal("claim"), challenge: z.string().max(1000), moves: z.array(z.enum(["U", "D", "L", "R"])).min(1).max(600) }).strict(),
+  z.object({ action: z.literal("claim"), challenge: z.string().max(1000), moves: z.string().min(1).max(GAME_MAX_MOVES).regex(/^[UDLR]+$/), follows: z.object({ instagram: z.literal(true), x: z.literal(true), linkedin: z.literal(true) }).strict() }).strict(),
 ]);
 export async function POST(request: Request) {
   try {
@@ -17,12 +17,12 @@ export async function POST(request: Request) {
     if (value.action === "start") {
       await verifyTurnstile(request, value.turnstileToken, "discount-game");
       const challenge = createGameChallenge(visitor);
-      return privateJson({ ...challenge, perfectMoves: circuitBoard(challenge.seed).perfectMoves });
+      return privateJson(challenge);
     }
     const challenge = readGameChallenge(value.challenge, visitor);
     let score;
-    try { score = scoreCircuit(challenge.seed, value.moves); }
-    catch (error) { throw new HttpError(error instanceof Error ? error.message : "This route is incomplete.", 400); }
+    try { score = scoreSnake(challenge.seed, value.moves); }
+    catch (error) { throw new HttpError(error instanceof Error ? error.message : "This round is incomplete.", 400); }
     const code = rewardCode(challenge.nonce, score.percent);
     const { data, error } = await database().rpc("kitty_website_claim_reward", {
       p_gateway_token: setting("FEEDBACK_GATEWAY_TOKEN"),

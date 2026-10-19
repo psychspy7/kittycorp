@@ -21,3 +21,6 @@ Read handover/UPDATE-2026-10-18.md and handover/VERIFIED-RELEASE-2026-10-18.md b
 
 ## Business conversion release — 19 October 2026
 Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for the latest acquisition flow, Hack in Hills milestone and Suvid research. Use handover/DOMAIN-MIGRATION-CHECKLIST-2026-10-19.md after the new domain is purchased; current provider settings remain unchanged.
+
+## Snake rewards — 19 October 2026
+Read handover/SNAKE-REWARDS-2026-10-19.md for the current /play game, score thresholds, honest social-follow confirmation and unchanged coupon ledger. The maze is retired; already issued codes remain valid.
