@@ -240,3 +240,6 @@ The header now offers customer Google sign-in at `/account`, using the existing 
 
 ## 18 October 2026 commercial update
 Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read LISA-DISTRIBUTION-GUIDE.md before enabling instant LISA delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.
+
+## Business conversion release — 19 October 2026
+Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for the latest acquisition flow, Hack in Hills milestone and Suvid research. Use handover/DOMAIN-MIGRATION-CHECKLIST-2026-10-19.md after the new domain is purchased; current provider settings remain unchanged.

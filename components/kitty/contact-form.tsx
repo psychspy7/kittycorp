@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { feedbackSchema } from "@/lib/kitty-validation";
+import { trackConversion } from "@/lib/site-analytics";
+import { CONTACT_EMAIL } from "@/lib/company-contact";
 import { Turnstile } from "./turnstile";
 
 export function ContactForm({ subject = "" }: { subject?: string }) {
@@ -27,6 +29,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
     const payload = {
       ...values,
       kind,
+      subject: subject === "Review" ? "" : subject.slice(0,120),
       website: trap.current?.value || "",
       startedAt: startedAt.current,
       turnstileToken,
@@ -49,8 +52,10 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
           data.error || "Couldn’t send your message. Please try again.",
         );
       setSent(true);
+      trackConversion(subject==="Partnership" || subject==="Suvid AI research" || subject==="Investors" ? "investor_enquiry_submit" : "enquiry_submit","contact");
       setValues({ name: "", email: "", message: "" });
     } catch (err) {
+      trackConversion("form_error","contact");
       setError(
         err instanceof Error
           ? err.message
@@ -146,7 +151,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
       </div>
       {error && (
         <p className="form-error" role="alert">
-          {error}
+          {error} <a href={`mailto:${CONTACT_EMAIL}`}>Email us instead</a>
         </p>
       )}
       <Turnstile action="contact" onToken={setTurnstileToken} resetKey={verificationAttempt} />

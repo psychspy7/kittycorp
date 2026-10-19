@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       budget: value.budget,
       timeline: value.timeline,
       scope: value.message,
-      preference: value.paymentChoice,
+      preference: value.paymentChoice || "Not discussed; agree after scope and quote",
       fingerprint: await fingerprint(request),
       ...(customer
         ? { customer_uid: customer.uid, customer_email: customer.email }

@@ -1,23 +1,21 @@
-import { FinalHero, FlagshipCollection, QuickDestinations, HelpfulAnswers } from "@/components/kitty/final-home";
-import { PricingTeaser } from "@/components/kitty/service-pricing";
+import { FinalHero, HelpfulAnswers } from "@/components/kitty/final-home";
 import { publicAssistantPresentation } from "@/lib/assistant-presentation";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
-import { ServiceOverview,HomeProcess } from "@/components/kitty/professional-home";
+import { ServiceOverview, HomeProcess } from "@/components/kitty/professional-home";
 import { SiteFooter } from "@/components/kitty/site-footer";
-import { DeliverySupport,Team } from "@/components/kitty/home-sections";
+import { DeliverySupport, Team } from "@/components/kitty/home-sections";
 import { Reviews } from "@/components/kitty/credibility-sections";
-import { EarlyAccess } from "@/components/kitty/early-access";
 import { publishedLaunches } from "@/lib/launches-server";
-import { companyProducts,companySettings,companyTeam } from "@/lib/company-server";
+import { companySettings, companyTeam } from "@/lib/company-server";
 import { publicTestimonials } from "@/lib/testimonials-server";
-import { pageMetadata,websiteOrigin,jsonLd } from "@/lib/site-metadata";
-import { PaymentsOverview,ContributionSection } from "@/components/kitty/payments-overview";
-import { publicPaymentProviders } from "@/lib/commerce-server";
-import { turnstilePublicConfig } from "@/lib/turnstile-server";
-import "./payments/payments.css";
+import { pageMetadata, websiteOrigin, jsonLd } from "@/lib/site-metadata";
 import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
-export const dynamic="force-dynamic";
-export const metadata=pageMetadata("Websites, apps & personal AI","KITTY CORP builds websites, apps and AI automations for businesses, alongside personal AI. Explore our products and discuss your idea directly with the team.","/");
-export default async function Home(){const [launches,products,members,settings,reviews,paymentOptions,security,assistant]=await Promise.all([publishedLaunches().catch(()=>[]),companyProducts(),companyTeam(),companySettings(),publicTestimonials(),publicPaymentProviders(),turnstilePublicConfig(),publicAssistantPresentation().catch(()=>null)]);const sameAs=Object.entries(settings.socials).filter(([key,url])=>!!url&&key!=="website"&&(key!=="linkedin"||!isFounderLinkedIn(url))).map(([,url])=>url);const organization={"@context":"https://schema.org","@type":"Organization",name:"KITTY CORP",url:websiteOrigin(),logo:`${websiteOrigin()}/brand/monogram.png`,description:"Independent technology company building websites, applications, AI and autonomous systems.",email:CONTACT_EMAIL,sameAs};return <><SiteHeader/><main id="main" className="business-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><FinalHero assistantEnabled={assistant?.settings.enabled ?? false}/><ServiceOverview/><PricingTeaser/><FlagshipCollection launches={launches} products={products}/><QuickDestinations/><PaymentsOverview options={paymentOptions} securityEnabled={security.enabled} includeContribution={false}/><HomeProcess/><DeliverySupport/><Reviews reviews={reviews}/><Team members={members} settings={settings}/><HelpfulAnswers/><div className="progress-link wrap"><div><span className="eyebrow">DEVELOPMENT NOTES</span><h2>Follow the work.</h2><p>Product updates, experiments and decisions from the team.</p></div><Link className="button button-outline" href="/build-log">Read the build log <ArrowUpRight size={17}/></Link></div><EarlyAccess/><ContributionSection options={paymentOptions} securityEnabled={security.enabled}/></main><SiteFooter/></>;}
+import { BusinessProof, BusinessEnquiry, LabsSummary, SuvidSummary } from "@/components/kitty/business-conversion";
+export const dynamic = "force-dynamic";
+export const metadata = pageMetadata("Websites, apps & business automation", "Work directly with KITTY CORP to design, build and maintain business websites, applications and practical AI workflows.", "/");
+export default async function Home() {
+  const [launches, members, settings, reviews, assistant] = await Promise.all([publishedLaunches().catch(()=>[]),companyTeam(),companySettings(),publicTestimonials(),publicAssistantPresentation().catch(()=>null)]);
+  const sameAs=Object.entries(settings.socials).filter(([key,url])=>!!url&&key!=="website"&&(key!=="linkedin"||!isFounderLinkedIn(url))).map(([,url])=>url);
+  const organization={"@context":"https://schema.org","@type":"Organization",name:"KITTY CORP",url:websiteOrigin(),logo:websiteOrigin()+"/brand/monogram.png",description:"Independent Indian technology startup building websites, applications and practical AI automation.",email:CONTACT_EMAIL,sameAs};
+  return <><SiteHeader/><main id="main" className="business-home conversion-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><FinalHero assistantEnabled={assistant?.settings.enabled??false}/><ServiceOverview/><BusinessProof launches={launches}/><HomeProcess/><DeliverySupport/><Reviews reviews={reviews}/><BusinessEnquiry/><LabsSummary/><SuvidSummary/><Team members={members} settings={settings}/><HelpfulAnswers/></main><SiteFooter/></>;
+}

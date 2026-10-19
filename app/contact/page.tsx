@@ -51,7 +51,7 @@ export default async function ContactPage({
               See what we’re building <ArrowUpRight size={17} />
             </Link>
           </div>
-          <ContactForm subject={["Kitty AI", "KITTY AI", "Partnership", "Privacy", "Review"].includes(subject || "") ? subject : ""} />
+          <ContactForm subject={["Kitty AI", "KITTY AI", "Partnership", "Privacy", "Review", "LISA AI purchase", "Reward code", "Terms", "Suvid AI research", "Investors"].includes(subject || "") ? subject : ""} />
         </div>
       </main>
       <SiteFooter />

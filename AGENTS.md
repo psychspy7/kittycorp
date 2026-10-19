@@ -18,3 +18,6 @@ Keep credentials, environment files, original signing keys, private user data an
 
 ## Latest commercial update — 18 October 2026
 Read handover/UPDATE-2026-10-18.md and handover/VERIFIED-RELEASE-2026-10-18.md before relying on earlier release notes. The reusable prompt is handover/CONTINUATION-PROMPT-2026-10-18.txt. LISA remains an assisted purchase; see LISA-DISTRIBUTION-GUIDE.md.
+
+## Business conversion release — 19 October 2026
+Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for the latest acquisition flow, Hack in Hills milestone and Suvid research. Use handover/DOMAIN-MIGRATION-CHECKLIST-2026-10-19.md after the new domain is purchased; current provider settings remain unchanged.

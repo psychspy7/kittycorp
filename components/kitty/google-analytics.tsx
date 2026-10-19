@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   analyticsPublicPath, configureAnalytics,
   pauseAnalytics, readAnalyticsChoice, subscribeAnalyticsChoice,
-  trackPageView,
+  trackPageView, trackConversion,
 } from "@/lib/site-analytics";
 
 export function AnalyticsSettingsButton({ measurementId }: { measurementId: string }) {
@@ -32,6 +32,11 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
   useEffect(() => {
     const protectPrivateNavigation = (event: MouseEvent) => {
       const link = event.target instanceof Element ? event.target.closest("a[href]") : null;
+      if (link instanceof HTMLAnchorElement) {
+        const conversion=link.dataset.conversion;
+        if(conversion)trackConversion(conversion,link.dataset.context||"navigation");
+        else if(link.protocol==="mailto:" || (link.hostname.endsWith("linkedin.com") && link.pathname.startsWith("/in/")))trackConversion("contact_click","contact");
+      }
       if (link instanceof HTMLAnchorElement && link.origin === window.location.origin && !analyticsPublicPath(link.pathname) && measurementId) pauseAnalytics(measurementId);
     };
     document.addEventListener("click", protectPrivateNavigation, true);

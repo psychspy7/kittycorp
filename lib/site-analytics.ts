@@ -14,7 +14,7 @@ const choiceLifetime = 180 * 24 * 60 * 60 * 1000;
 const publicPages = new Set([
   "/", "/services", "/products", "/company", "/team", "/kitty-ai",
   "/lisa-ai", "/sentinel", "/secretchat", "/build-log", "/research",
-  "/investors", "/contact", "/privacy", "/projects", "/pricing", "/appointments", "/terms", "/refunds", "/play",
+  "/investors", "/contact", "/privacy", "/projects", "/pricing", "/appointments", "/terms", "/refunds", "/play", "/services/coaching-centres", "/services/agencies", "/research/suvid-ai",
 ]);
 
 export function analyticsPublicPath(pathname: string | null) {
@@ -136,4 +136,22 @@ export function declineAnalytics(id: string) {
       document.cookie = `${name}=; Max-Age=0; Path=/; Domain=${parts.slice(index).join(".")}; SameSite=Lax`;
     }
   }
+}
+
+export const conversionEvents = ["service_cta","project_form_start","enquiry_submit","form_error","contact_click","portfolio_view","investor_cta","investor_enquiry_submit"] as const;
+const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","suvid","investors","appointment","labs","navigation"]);
+const recentConversions = new Map<string,number>();
+export function trackConversion(event: string, context: string) {
+  if(typeof window==="undefined" || readAnalyticsChoice()!=="accepted")return;
+  const path=window.location.pathname;
+  if(!analyticsPublicPath(path) || !conversionEvents.includes(event as typeof conversionEvents[number]) || !conversionContexts.has(context))return;
+  const target=analyticsWindow();
+  const activeIds=[...initializedTags].filter(id=>!target[`ga-disable-${id}`]);
+  if(!target.gtag || !activeIds.length)return;
+  const key=path+":"+event+":"+context,now=Date.now();
+  if(now-(recentConversions.get(key)||0)<1000)return;
+  recentConversions.set(key,now);
+  if(recentConversions.size>100)recentConversions.delete(recentConversions.keys().next().value!);
+  // Fixed labels and public paths only; no form values, query strings or raw errors.
+  for(const id of activeIds)target.gtag("event",event,{send_to:id,context,page_path:path,page_location:window.location.origin+path});
 }
