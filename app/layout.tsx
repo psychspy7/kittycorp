@@ -10,6 +10,7 @@ import { LogoMotionProvider } from "@/components/kitty/logo-motion";
 import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
 import { publicAssistantPresentation } from "@/lib/assistant-presentation";
+import { websiteOrigin } from "@/lib/site-metadata";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
@@ -22,7 +23,7 @@ import "./commercial-update.css";
 import "./conversion.css";
 import "@/components/kitty/website-assistant.css";
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
+  metadataBase: new URL(websiteOrigin()),
   title: {
     default: "KITTY CORP — Software & independent technology.",
     template: "%s · Kitty Corp",
