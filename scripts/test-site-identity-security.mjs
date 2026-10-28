@@ -16,6 +16,6 @@ assert.ok(sitemap.includes("const origin = websiteOrigin();"), "sitemap URLs mus
 assert.ok(nextConfig.includes('key: "X-Content-Type-Options", value: "nosniff"'), "MIME sniffing protection must be set");
 assert.ok(nextConfig.includes('key: "X-Frame-Options", value: "DENY"'), "framing must be blocked to reduce clickjacking risk");
 assert.ok(nextConfig.includes('key: "Strict-Transport-Security", value: "max-age=31536000"'), "HTTPS must be enforced by HSTS");
-assert.ok(nextConfig.includes('value: "https://thekittycorp.com/:path*"'), "legacy Vercel URLs must redirect to the official domain");
+assert.ok(nextConfig.includes('destination: "https://thekittycorp.com/:path*"'), "legacy Vercel URLs must redirect to the official domain");
 
 console.log("Official domain metadata, sitemap, legacy-host redirect and baseline security headers verified.");
