@@ -3,10 +3,10 @@ import { publishedLaunches } from "@/lib/launches-server";
 import { launchHref } from "@/lib/launches";
 import { publicJournal } from "@/lib/journal-server";
 import { companyProducts } from "@/lib/company-server";
+import { websiteOrigin } from "@/lib/site-metadata";
 export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const origin = process.env.SITE_URL;
-  if (!origin) return [];
+  const origin = websiteOrigin();
   return [
     { url: origin, changeFrequency: "weekly", priority: 1 },
     ...(await publishedLaunches()).map((launch) => ({ url: `${origin}${launchHref(launch)}`, changeFrequency: "monthly" as const, priority: 0.9 })),
