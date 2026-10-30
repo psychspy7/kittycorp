@@ -8,10 +8,14 @@
 
 ## 1. Automated Test Suite Execution Summary
 
-All 16 test suites were executed via `npm run check:website`. Every check passed cleanly.
+All CI steps and test suites were executed cleanly:
+- `npm run lint` — **PASS** (Zero ESLint errors)
+- `npm run check:website` — **PASS** (All 16 suites green)
+- `npm run build:next` — **PASS** (All 70 pages prerendered/optimized)
 
 | Test ID | Test Script | Component / Subsystem Tested | Outcome | Execution Details |
 |---|---|---|---|---|
+| **00** | `npm run lint` | ESLint rules & React unescaped entity verification | **PASS** | 0 errors. All JSX entities escaped and clean imports verified. |
 | **01** | `tsc --noEmit` | Whole TypeScript codebase typing & contracts | **PASS** | Zero type errors, strict mode enabled. |
 | **02** | `scripts/test-site-identity-security.mjs` | Canonical metadataBase, sitemap, security headers | **PASS** | Verified official domain (`https://thekittycorp.com`), HSTS, nosniff, and legacy redirects. |
 | **03** | `scripts/test-performance.mjs` | Cache headers, staleness, permissions & single-flight | **PASS** | Concurrent reads coalesced, public cache tags intact, no permission leaks. |
