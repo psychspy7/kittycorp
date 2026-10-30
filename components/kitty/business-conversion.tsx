@@ -94,7 +94,7 @@ export function BusinessEnquiry({ initialService }: { initialService?: typeof en
           <span>worth solving?</span>
         </h2>
         <p>
-          Tell us what you're building. Let's find the right technology and a practical way to bring it to life.
+          Tell us what you&apos;re building. Let&apos;s find the right technology and a practical way to bring it to life.
         </p>
         <div className="enquiry-guarantees">
           <div className="guarantee-item">

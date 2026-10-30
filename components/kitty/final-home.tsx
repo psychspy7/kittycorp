@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Check, AudioLines, Cpu, FolderOpen, FlaskConical, UserRound, ShieldCheck, Layers, Terminal, Sparkles } from "lucide-react";
+import { ArrowUpRight, Check, AudioLines, Cpu, FolderOpen, FlaskConical, UserRound, ShieldCheck } from "lucide-react";
 import { AssistantEntry } from "./assistant-entry";
 import { AppIcon } from "./secretchat";
 import type { Launch } from "@/lib/launches";

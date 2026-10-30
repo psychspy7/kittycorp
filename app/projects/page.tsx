@@ -1,14 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight, CheckCircle2, ShieldCheck, Zap, Layers, Terminal, Sparkles, Lock, Bot } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, ShieldCheck, Zap, Lock } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { ProjectEnquiry } from "@/components/kitty/project-enquiry";
 import { pageMetadata } from "@/lib/site-metadata";
-import { publishedLaunches } from "@/lib/launches-server";
-import { isWebsiteLaunch, launchHref } from "@/lib/launches";
-import { mediaHref } from "@/lib/company-content";
-import { AppIcon } from "@/components/kitty/secretchat";
 
 export const dynamic = "force-dynamic";
 
@@ -18,9 +13,7 @@ export const metadata = pageMetadata(
   "/projects"
 );
 
-export default async function ProjectsPage() {
-  const launches = await publishedLaunches().catch(() => []);
-
+export default function ProjectsPage() {
   const caseStudies = [
     {
       title: "SecretChat — Zero-Knowledge Cryptographic Messaging",
@@ -157,7 +150,7 @@ export default async function ProjectsPage() {
           <div className="section-heading">
             <div>
               <span className="eyebrow">START YOUR ENGAGEMENT</span>
-              <h2>Tell us what you're building.</h2>
+              <h2>Tell us what you&apos;re building.</h2>
             </div>
             <p>
               A conversation first. A clear plan next. Sending an inquiry is free and non-binding. We confirm exact scope, timeline, and fixed costs before committing code.
