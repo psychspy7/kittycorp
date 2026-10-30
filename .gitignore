@@ -49,4 +49,9 @@ next-env.d.ts
 
 /.npm-task-cache/
 
+# firebase app hosting
+.firebase/
+firebase-debug.log*
+firebase-debug.*.log*
+
 /.tooling/

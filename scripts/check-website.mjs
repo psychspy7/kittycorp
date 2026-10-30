@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 const checks=[
   ["node_modules/typescript/lib/tsc.js","--noEmit"],
+  ["scripts/test-site-identity-security.mjs"],
   ["scripts/test-performance.mjs"],
   ["scripts/test-studio-security.mjs"],
   ["scripts/test-analytics.mjs"],

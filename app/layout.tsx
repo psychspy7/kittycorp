@@ -10,6 +10,7 @@ import { LogoMotionProvider } from "@/components/kitty/logo-motion";
 import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
 import { publicAssistantPresentation } from "@/lib/assistant-presentation";
+import { websiteOrigin } from "@/lib/site-metadata";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
@@ -21,8 +22,10 @@ import "./final-refinement.css";
 import "./commercial-update.css";
 import "./conversion.css";
 import "@/components/kitty/website-assistant.css";
+import "./premium.css";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL || "https://kittycorp.vercel.app"),
+  metadataBase: new URL(websiteOrigin()),
   title: {
     default: "KITTY CORP — Software & independent technology.",
     template: "%s · Kitty Corp",
@@ -44,11 +47,13 @@ export const metadata: Metadata = {
     description: "Websites, AI automations and personal AI products.",
   },
 };
+
 async function PublicAssistant() {
   const presentation = await publicAssistantPresentation().catch(() => null);
   if (!presentation) return null;
   return <AssistantLauncher settings={presentation.settings} siteKey={presentation.siteKey} />;
 }
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -56,7 +61,6 @@ export default async function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-3607548169127113" />
         <link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
