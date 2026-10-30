@@ -1,7 +1,7 @@
 import { FinalHero, HelpfulAnswers } from "@/components/kitty/final-home";
 import { publicAssistantPresentation } from "@/lib/assistant-presentation";
 import { SiteHeader } from "@/components/kitty/site";
-import { ServiceOverview, HomeProcess } from "@/components/kitty/professional-home";
+import { ServiceOverview, HomeProcess, WhyKittyCorp } from "@/components/kitty/professional-home";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { DeliverySupport, Team } from "@/components/kitty/home-sections";
 import { Reviews } from "@/components/kitty/credibility-sections";
@@ -15,8 +15,8 @@ import { BusinessProof, BusinessEnquiry, LabsSummary, SuvidSummary } from "@/com
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
-  "Independent Software Studio & Applied Technology",
-  "Partner directly with KITTY CORP to architect, engineer and deploy modern web platforms, native applications and robust workflow automation.",
+  "We Build the Technology Behind Your Next Move",
+  "KITTY CORP designs, engineers and deploys high-performance websites, intelligent AI systems and business automation that help companies move forward.",
   "/"
 );
 
@@ -53,13 +53,14 @@ export default async function Home() {
         <ServiceOverview />
         <BusinessProof launches={launches} />
         <HomeProcess />
+        <WhyKittyCorp />
         <DeliverySupport />
         <Reviews reviews={reviews} />
-        <BusinessEnquiry />
         <LabsSummary />
         <SuvidSummary />
         <Team members={members} settings={settings} />
         <HelpfulAnswers />
+        <BusinessEnquiry />
       </main>
       <SiteFooter />
     </>

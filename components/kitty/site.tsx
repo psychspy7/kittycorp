@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import {customerSignedIn,subscribeCustomerSession} from "@/lib/customer-session";
+import { customerSignedIn, subscribeCustomerSession } from "@/lib/customer-session";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,10 +9,10 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 
 const navigation = [
   ["Services", "/services"],
+  ["Work", "/projects"],
+  ["Products", "/products"],
   ["Pricing", "/pricing"],
-  ["Our work", "/products"],
-  ["Company", "/company"],
-  ["Build Log", "/build-log"],
+  ["About", "/company"],
   ["Contact", "/contact"]
 ];
 
@@ -53,7 +53,7 @@ export function SiteHeader() {
             <span>{signedIn ? "Client Portal" : "Client Portal"}</span>
           </Link>
           <Link className="header-cta button button-gold" href="/projects" data-conversion="service_cta" data-context="navigation">
-            Discuss a Project <ArrowUpRight size={15} />
+            Start a project <ArrowUpRight size={15} />
           </Link>
         </div>
         <Dialog open={open} onOpenChange={setOpen}>

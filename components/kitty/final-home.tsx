@@ -11,26 +11,26 @@ export function FinalHero({ assistantEnabled }: { assistantEnabled: boolean }) {
   return (
     <section className="final-hero wrap" aria-labelledby="hero-title">
       <div className="final-hero-copy">
-        <span className="eyebrow">KITTY CORP / INDEPENDENT SOFTWARE STUDIO</span>
+        <span className="eyebrow">KITTY CORP / INDEPENDENT TECHNOLOGY STUDIO</span>
         <h1 id="hero-title">
-          Better websites.<br />
-          Smarter workflows.<br />
-          <span>Built for your business.</span>
+          We build the technology<br />
+          <span>behind your next move.</span>
         </h1>
         <p>
-          We partner directly with founders and business teams to design, engineer, and deploy high-performance web platforms, bespoke native applications, and reliable AI automations.
+          KITTY CORP designs, engineers and deploys websites, intelligent AI systems and business automation that help businesses move forward.
         </p>
         <div className="hero-actions">
           <Link className="button button-gold" href="/projects" data-conversion="service_cta" data-context="home">
-            Discuss Your Project <ArrowUpRight size={17} aria-hidden="true" />
+            Start a project <ArrowUpRight size={17} aria-hidden="true" />
           </Link>
-          <Link className="button button-outline" href="#work" data-conversion="portfolio_view" data-context="home">
-            View Shipped Work <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
+          <a className="button button-outline" href="#services" data-conversion="service_cta" data-context="home">
+            Explore our capabilities <ArrowUpRight size={17} aria-hidden="true" />
+          </a>
         </div>
         <nav className="hero-quick-links" aria-label="Project planning">
           <Link href="/pricing">View fixed packages <ArrowUpRight size={14} aria-hidden="true" /></Link>
           <Link href="/appointments">Schedule strategy call <ArrowUpRight size={14} aria-hidden="true" /></Link>
+          <Link href="/projects">Inspect client case studies <ArrowUpRight size={14} aria-hidden="true" /></Link>
         </nav>
         <div className="final-hero-notes">
           <span><Check size={15} aria-hidden="true" />Direct engineering access</span>
@@ -46,7 +46,7 @@ export function FinalHero({ assistantEnabled }: { assistantEnabled: boolean }) {
         <div className="hero-guide-brand">
           <Image src="/brand/silver-mark-v1.webp" sizes="145px" alt="KITTY CORP monogram" width={170} height={170} priority />
         </div>
-        <h2>Architected for speed, clarity and reliability.</h2>
+        <h2>Architected for speed, clarity and conversion.</h2>
         <p>
           {assistantEnabled
             ? "Explore technical requirements with KITTY. We clarify architecture and scope; our engineering team validates the final deliverable."
