@@ -22,6 +22,8 @@ import "./final-refinement.css";
 import "./commercial-update.css";
 import "./conversion.css";
 import "@/components/kitty/website-assistant.css";
+import "./premium.css";
+
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
@@ -45,11 +47,13 @@ export const metadata: Metadata = {
     description: "Websites, AI automations and personal AI products.",
   },
 };
+
 async function PublicAssistant() {
   const presentation = await publicAssistantPresentation().catch(() => null);
   if (!presentation) return null;
   return <AssistantLauncher settings={presentation.settings} siteKey={presentation.siteKey} />;
 }
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -57,7 +61,6 @@ export default async function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-3607548169127113" />
         <link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/dirtyline-36d-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
