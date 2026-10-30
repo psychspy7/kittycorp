@@ -8,9 +8,9 @@ async function configuration() {
   const runtime = await getRuntimeConfiguration();
   const siteKey = process.env.TURNSTILE_SITE_KEY?.trim() || runtime.TURNSTILE_SITE_KEY?.trim() || "";
   const secret = process.env.TURNSTILE_SECRET_KEY?.trim() || runtime.TURNSTILE_SECRET_KEY?.trim() || "";
-  const enabled = process.env.TURNSTILE_ENABLED === "false"
-    ? false
-    : process.env.TURNSTILE_ENABLED === "true" || Boolean(siteKey || secret);
+  // TEMPORARY: Turnstile is disabled while the production challenge is being repaired.
+  // Admin authentication and all other authorization checks remain unchanged.
+  const enabled = false;
   const allowTests = process.env.NODE_ENV !== "production" && process.env.TURNSTILE_TEST_MODE === "true";
   const configured = Boolean(siteKey && secret) && (allowTests || (!TEST_KEY.test(siteKey) && !TEST_KEY.test(secret)));
   return { siteKey, secret, enabled, configured };
@@ -23,8 +23,8 @@ export async function turnstilePublicConfig() {
 
 export async function verifyTurnstile(request: Request, token: unknown, action: string) {
   const config = await configuration();
-  // A deployment without a widget remains usable until protection is configured.
-  // Once enabled or partially configured, errors fail closed rather than bypassing it.
+  // Turnstile is temporarily disabled. Keep the real application authentication
+  // and authorization checks in their existing handlers.
   if (!config.enabled) return;
   if (!config.configured)
     throw new HttpError("Security verification is being configured. Please try again shortly.", 503);
