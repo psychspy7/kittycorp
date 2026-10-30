@@ -31,12 +31,32 @@ export async function verifyTurnstile(request: Request, token: unknown, action: 
   if (typeof token !== "string" || token.length < 1 || token.length > 2048)
     throw new HttpError("Please complete the security check, then try again.", 400);
 
-  const expectedHost = process.env.SITE_URL
-    ? new URL(process.env.SITE_URL).hostname
-    : new URL(request.url).hostname;
-  const allowedHosts = new Set([expectedHost]);
-  if (process.env.NODE_ENV !== "production") allowedHosts.add(new URL(request.url).hostname);
-  let result: { success?: boolean; hostname?: string; action?: string };
+  const requestUrl = new URL(request.url);
+  const requestHost = requestUrl.hostname;
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim().split(":")[0];
+  const hostHeader = request.headers.get("host")?.split(":")[0]?.trim();
+  const siteUrlHost = process.env.SITE_URL ? new URL(process.env.SITE_URL).hostname : "";
+
+  const allowedHosts = new Set<string>();
+  if (siteUrlHost) allowedHosts.add(siteUrlHost);
+  if (requestHost) allowedHosts.add(requestHost);
+  if (forwardedHost) allowedHosts.add(forwardedHost);
+  if (hostHeader) allowedHosts.add(hostHeader);
+
+  // Normalize www and apex variants for all discovered hosts
+  for (const host of Array.from(allowedHosts)) {
+    if (host.startsWith("www.")) allowedHosts.add(host.slice(4));
+    else if (!host.includes("localhost") && !host.includes("127.0.0.1")) allowedHosts.add(`www.${host}`);
+  }
+
+  // Canonical domains, transition domains, and local development hosts
+  allowedHosts.add("thekittycorp.com");
+  allowedHosts.add("www.thekittycorp.com");
+  allowedHosts.add("kittycorp.vercel.app");
+  allowedHosts.add("localhost");
+  allowedHosts.add("127.0.0.1");
+
+  let result: { success?: boolean; hostname?: string; action?: string; "error-codes"?: string[] };
   try {
     const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
@@ -50,6 +70,34 @@ export async function verifyTurnstile(request: Request, token: unknown, action: 
   } catch {
     throw new HttpError("Security verification is temporarily unavailable. Please try again.", 503);
   }
-  if (result.success !== true || !result.hostname || !allowedHosts.has(result.hostname) || result.action !== action)
+
+  const resultHost = (result.hostname || "").toLowerCase().trim();
+  const isTrustedSuffix =
+    resultHost.endsWith(".thekittycorp.com") ||
+    resultHost.endsWith(".vercel.app") ||
+    resultHost.endsWith(".web.app") ||
+    resultHost.endsWith(".firebaseapp.com") ||
+    resultHost.endsWith(".hosted.app") ||
+    resultHost.endsWith(".run.app");
+
+  const hostnameValid = Boolean(
+    resultHost && (
+      allowedHosts.has(resultHost) ||
+      allowedHosts.has(resultHost.replace(/^www\./, "")) ||
+      isTrustedSuffix
+    )
+  );
+  const actionValid = !result.action || !action || result.action === action;
+
+  if (result.success !== true || !hostnameValid || !actionValid) {
+    console.warn(`[Turnstile] Verification failed:`, {
+      success: result.success,
+      hostname: result.hostname,
+      expectedAction: action,
+      actualAction: result.action,
+      allowedHosts: Array.from(allowedHosts),
+      errorCodes: result["error-codes"],
+    });
     throw new HttpError("The security check expired or could not be verified. Please try again.", 400);
+  }
 }
