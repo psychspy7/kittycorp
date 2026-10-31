@@ -1,0 +1,22 @@
+.product-research{padding-top:clamp(4.5rem,8vw,8rem);padding-bottom:clamp(4.5rem,8vw,8rem)}
+.product-research-heading{margin-bottom:2rem}
+.product-research-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.research-product-card{position:relative;overflow:hidden;min-height:430px;padding:clamp(1.35rem,3vw,2.4rem);border:1px solid rgba(25,25,25,.12);border-radius:5px;background:#f5f4f0;color:#20201e}
+.agriyaan-card{background:#eeefe8}
+.research-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2.5rem}
+.research-icon{display:grid;place-items:center;width:42px;height:42px;border:1px solid currentColor;border-radius:50%;opacity:.8}
+.research-product-card h3{font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-.055em;line-height:1;margin:0 0 1rem}
+.research-product-lead{max-width:30rem;font-size:1.16rem;line-height:1.45;font-weight:500}
+.research-product-card>p:not(.research-product-lead){max-width:32rem;color:#5b5b55;line-height:1.7;font-size:.94rem}
+.research-product-card>.text-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;color:inherit}
+.buddy-outline{position:absolute;right:2.3rem;bottom:1.5rem;display:flex;align-items:center;gap:1rem;opacity:.52}
+.buddy-device{position:relative;width:56px;height:76px;border:2px solid #555;border-radius:15px;transform:rotate(-9deg)}
+.buddy-device span{position:absolute;left:15px;top:13px;width:24px;height:24px;border:2px solid #555;border-radius:50%}
+.buddy-device i{position:absolute;left:21px;bottom:12px;width:12px;height:2px;background:#555}
+.buddy-device b{position:absolute;right:-8px;bottom:-5px;width:24px;height:10px;border:2px solid #555;border-radius:8px}
+.buddy-caption,.agriyaan-visual>span{font-size:.58rem;letter-spacing:.13em}
+.agriyaan-visual{position:absolute;right:1.1rem;bottom:.7rem;width:min(52%,310px);color:#56614c;opacity:.8}
+.agriyaan-visual svg{display:block;width:100%;height:auto}
+.agriyaan-visual>span{display:block;text-align:right;color:#66705d}
+@media(max-width:760px){.product-research-grid{grid-template-columns:1fr}.research-product-card{min-height:460px}.buddy-outline{right:1.5rem;bottom:1.2rem}.agriyaan-visual{width:62%;right:.6rem}.research-card-top{margin-bottom:2rem}}
+@media(prefers-reduced-motion:reduce){.product-research *{scroll-behavior:auto}}
