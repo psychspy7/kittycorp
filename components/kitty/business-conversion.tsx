@@ -29,13 +29,3 @@ export function BusinessEnquiry({ initialService }: { initialService?: "Website"
 export function SegmentLinks() {
   return <section className="segment-links" aria-labelledby="segment-title"><div><span className="eyebrow">START WITH YOUR BUSINESS</span><h2 id="segment-title">Two places we can help.</h2></div><div>{Object.entries(serviceSegments).map(([slug,item]) => <Link href={"/services/"+slug} key={slug} data-conversion="service_cta" data-context={slug}><h3>{slug==="coaching-centres"?"Coaching & education":"Agencies & service businesses"}</h3><p>{item.description}</p><span className="text-link">See an example workflow <ArrowUpRight size={15}/></span></Link>)}</div></section>;
 }
-export function LabsSummary() {
-  return <section className="labs-summary wrap" aria-labelledby="labs-title"><div className="section-heading"><div><span className="eyebrow">KITTY LABS / OUR INDEPENDENT PRODUCTS</span><h2 id="labs-title">We build for ourselves, too.</h2></div><p>Personal AI and independent software, developed alongside our client services. Each product page explains its actual availability.</p></div><div className="labs-summary-grid">{[
-    ["KITTY AI","Android conversations, voice and personal memory.","/kitty-ai","Published Android app"],
-    ["LISA AI","An illustrated desktop companion with conversation and an interactive room.","/lisa-ai","Assisted Windows purchase"],
-    ["SecretChat","Account-based chat with on-device encryption and local history.","/secretchat","Published Android app"],
-  ].map(([name,copy,href,status]) => <Link href={href} key={href} data-conversion="portfolio_view" data-context="labs"><span className="micro-label">{status}</span><h3>{name}</h3><p>{copy}</p><span className="text-link">Explore product <ArrowUpRight size={15}/></span></Link>)}</div></section>;
-}
-export function SuvidSummary() {
-  return <section className="suvid-summary wrap" aria-labelledby="suvid-title"><div><span className="eyebrow">LONG-TERM RESEARCH / CONCEPT & PROTOTYPE INITIATIVE</span><h2 id="suvid-title">Suvid AI.<br/>A physical assistant, thoughtfully explored.</h2><p>Our long-term direction is a physical AI companion for everyday assistance. We’re defining an initial use case and the evidence a useful, safe prototype would need.</p></div><div><Link className="button button-outline" href="/research/suvid-ai">Read the research direction <ArrowUpRight size={16}/></Link><Link className="text-link" href="/investors" data-conversion="investor_cta" data-context="research">Research, incubation & investor conversations <ArrowUpRight size={15}/></Link></div></section>;
-}

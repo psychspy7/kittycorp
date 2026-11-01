@@ -157,7 +157,7 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
                 {error}
               </p>
             )}
-            <button className="button button-gold" disabled={busy || !turnstileToken}>
+            <button className="button button-gold" disabled={busy}>
               {!busy && <Image unoptimized src="/ecosystem/google-v1.svg" alt="" width={18} height={18} />}
               {busy ? "Opening Google…" : "Sign in with Google"}
               {busy ? (

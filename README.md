@@ -6,7 +6,7 @@ See **OWNER-GUIDE.md** for the complete owner handover. The `handover/` folder i
 
 ## Pages
 
-- `/`: website/app services, six months of maintenance, product/lab destinations, Virat Anand and early access.
+- `/`: the Digital Solutions and Intelligence & Robotics divisions, released work, founders and a direct project enquiry.
 - `/services`: website and app development, process and private project-brief form.
 - `/products`: full product directory and Android releases.
 - `/company`: company background, approach, research link and identity film.
@@ -74,7 +74,7 @@ The services form posts validated briefs to the existing private Studio inbox. I
 
 ## Final interface update
 
-The public site uses a light ivory and graphite theme with restrained gold details. Services and Start a project are visible immediately. Secondary company, research, product and team content lives on dedicated pages. The homepage shows the first published Founder & CEO profile with a prominent See full team button; every published member appears on `/team`. Removing or hiding the CEO profile removes it from the homepage as well. Roles, images, biographies and links remain editable in Studio.
+The homepage uses an obsidian, graphite and warm-metal palette, with Geist for reading and Dirtyline 36D for display headings. It introduces the Digital Solutions and Intelligence & Robotics divisions, then shows verified released work once. The homepage shows Virat and Sarthak when their founder profiles are published, with a See the full team link; every published member appears on `/team`. The old Vercel address redirects to `https://thekittycorp.com`.
 
 Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Releases remain accessible from the product directory without interrupting the business homepage. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; the encrypted integration setup uses the existing private deployment gateway.
 

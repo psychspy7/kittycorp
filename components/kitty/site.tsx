@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Play, UserRound } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TechnologyMarquee } from "./technology-marquee";
-const navigation = [["Services", "/services"], ["Pricing", "/pricing"], ["Our work", "/products"], ["Company", "/company"], ["Build Log", "/build-log"], ["Contact", "/contact"]];
+const navigation = [["Services", "/services"], ["Products", "/products"], ["Research", "/research"], ["Company", "/company"], ["Contact", "/contact"]];
 export function SiteHeader() {
   const pathname = usePathname();
   const signedIn=useSyncExternalStore(subscribeCustomerSession,customerSignedIn,()=>false);
@@ -24,7 +24,7 @@ export function SiteHeader() {
     <Link href="/" className="brand" aria-label="KITTY CORP home"><Image unoptimized loading="eager" src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link>
     <nav className="navigation" aria-label="Main navigation">{navigation.map(([label, href]) => <Link href={href} key={label} aria-current={pathname === href || (href!=="/" && pathname.startsWith(href+"/")) ? "page" : undefined}>{label}</Link>)}</nav>
     <Link className="header-account" href="/account" aria-label="My account — Google sign-in"><UserRound size={16}/><span>{signedIn?"My account":"Sign in"}</span></Link>
-    <Link className="header-cta" href="/projects" data-conversion="service_cta" data-context="navigation">Discuss a project <ArrowUpRight size={15}/></Link>
+    <Link className="header-cta" href="/projects" data-conversion="service_cta" data-context="navigation"><span className="header-cta-label">Discuss a project</span><span className="header-cta-short">Start a project</span><ArrowUpRight size={15}/></Link>
     <Dialog open={open} onOpenChange={setOpen}><DialogTrigger asChild><button className="menu-toggle" aria-label="Open navigation"><Menu size={22} /></button></DialogTrigger>
       <DialogContent className="mobile-navigation"><DialogTitle>KITTY CORP</DialogTitle><DialogDescription>Services, products and the people behind them.</DialogDescription><nav aria-label="Mobile navigation">{navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label} aria-current={pathname === href || (href!=="/" && pathname.startsWith(href+"/")) ? "page" : undefined}>{label}</Link>)}<Link onClick={() => setOpen(false)} href="/account">My account / Google sign-in</Link><Link onClick={() => setOpen(false)} href="/team">Full team</Link><Link onClick={() => setOpen(false)} href="/products#early-access">Join early access</Link></nav></DialogContent>
     </Dialog>

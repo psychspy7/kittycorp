@@ -2,6 +2,7 @@ import "server-only";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 import { CONTACT_EMAIL } from "./company-contact";
+import { websiteOrigin } from "./site-metadata";
 import { database, setting } from "./kitty-server";
 import { renderEmail, type EmailJob } from "./email-templates";
 const jobSchema = z
@@ -61,7 +62,7 @@ function transport() {
 }
 export function emailSite() {
   try {
-    const url = new URL(process.env.SITE_URL || "https://kittycorp.vercel.app");
+    const url = new URL(websiteOrigin());
     if (
       url.protocol !== "https:" &&
       !(
@@ -72,7 +73,7 @@ export function emailSite() {
       throw Error();
     return url.origin;
   } catch {
-    return "https://kittycorp.vercel.app";
+    return "https://thekittycorp.com";
   }
 }
 export async function automationRpc(

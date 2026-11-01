@@ -85,6 +85,7 @@ const templates = load("lib/email-templates.ts", {
 });
 const email = load("lib/email-notifications.ts", {
   "./company-contact": { CONTACT_EMAIL: admin },
+  "./site-metadata": { websiteOrigin: () => env.SITE_URL },
   "./kitty-server": { database, setting: (key) => env[key] },
   "./email-templates": templates,
   nodemailer: {

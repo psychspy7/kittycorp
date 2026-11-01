@@ -27,9 +27,9 @@ Public links:
 
 Configure your production HTTPS URL in each provider dashboard before enabling Live:
 
-- `https://kittycorp.vercel.app/api/payments/webhooks/razorpay` — payment captured event, using the matching webhook secret.
-- `https://kittycorp.vercel.app/api/payments/webhooks/paypal` — payment capture completed event; save that app's webhook ID in Studio.
-- `https://kittycorp.vercel.app/api/payments/webhooks/cashfree` — payment success event; Cashfree verifies timestamp plus raw body with the client secret. Complete the required domain whitelist in its dashboard.
+- `https://thekittycorp.com/api/payments/webhooks/razorpay` — payment captured event, using the matching webhook secret.
+- `https://thekittycorp.com/api/payments/webhooks/paypal` — payment capture completed event; save that app's webhook ID in Studio.
+- `https://thekittycorp.com/api/payments/webhooks/cashfree` — payment success event; Cashfree verifies timestamp plus raw body with the client secret. Complete the required domain whitelist in its dashboard.
 
 Switch to Live only after provider approval, correct live credentials, dashboard webhook setup and a successful sandbox checkout. The approval checkbox records your confirmation; it does not obtain approval from the provider. The code rejects live checkout lacking the required settings.
 

@@ -1,6 +1,7 @@
 import "server-only";
 import { HttpError } from "./kitty-server";
 import { getRuntimeConfiguration } from "./runtime-configuration";
+import { websiteOrigin } from "./site-metadata";
 
 const TEST_KEY = /^[123]x0{20,}(?:AA|BB|FF)$/;
 
@@ -8,9 +9,9 @@ async function configuration() {
   const runtime = await getRuntimeConfiguration();
   const siteKey = process.env.TURNSTILE_SITE_KEY?.trim() || runtime.TURNSTILE_SITE_KEY?.trim() || "";
   const secret = process.env.TURNSTILE_SECRET_KEY?.trim() || runtime.TURNSTILE_SECRET_KEY?.trim() || "";
-  // TEMPORARY: Turnstile is disabled while the production challenge is being repaired.
-  // Admin authentication and all other authorization checks remain unchanged.
-  const enabled = false;
+  // Opt in only after the site and secret keys are configured. If enabled is
+  // explicitly true but the keys are invalid or missing, verification fails closed.
+  const enabled = process.env.TURNSTILE_ENABLED?.trim() === "true";
   const allowTests = process.env.NODE_ENV !== "production" && process.env.TURNSTILE_TEST_MODE === "true";
   const configured = Boolean(siteKey && secret) && (allowTests || (!TEST_KEY.test(siteKey) && !TEST_KEY.test(secret)));
   return { siteKey, secret, enabled, configured };
@@ -23,8 +24,8 @@ export async function turnstilePublicConfig() {
 
 export async function verifyTurnstile(request: Request, token: unknown, action: string) {
   const config = await configuration();
-  // Turnstile is temporarily disabled. Keep the real application authentication
-  // and authorization checks in their existing handlers.
+  // Turnstile remains optional until its widget and keys are configured. Keep
+  // the application authentication and authorization checks in every handler.
   if (!config.enabled) return;
   if (!config.configured)
     throw new HttpError("Security verification is being configured. Please try again shortly.", 503);
@@ -32,7 +33,7 @@ export async function verifyTurnstile(request: Request, token: unknown, action: 
     throw new HttpError("Please complete the security check, then try again.", 400);
 
   const expectedHost = process.env.SITE_URL
-    ? new URL(process.env.SITE_URL).hostname
+    ? new URL(websiteOrigin()).hostname
     : new URL(request.url).hostname;
   const allowedHosts = new Set([expectedHost]);
   if (process.env.NODE_ENV !== "production") allowedHosts.add(new URL(request.url).hostname);

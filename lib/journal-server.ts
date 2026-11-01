@@ -15,10 +15,11 @@ export const entrySchema = z.object({
 const readJournal = publicContentCache("journal", PUBLIC_CONTENT_TAGS.journal, async (): Promise<JournalSummary[]> => {
   const { data, error } = await database().from("kitty_website_journal").select("id,slug,title,summary,category,kind,status,cover_url,cover_alt,entry_date,published,created_at,updated_at").abortSignal(AbortSignal.timeout(5000)).eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).order("entry_date", { ascending: false }).order("created_at", { ascending: false }).limit(100);
   if (error) throw new HttpError("The build log is temporarily unavailable.", 503);
-  return data as JournalSummary[];
+  return (data as JournalSummary[]).filter(entry => !/suvid/i.test(`${entry.slug} ${entry.title} ${entry.summary}`));
 });
 export const publicJournal = cache(readJournal);
 export const publicArticle = cache(async (slug: string): Promise<JournalEntry | null> => {
+  if (/suvid/i.test(slug)) return null;
   const { data, error } = await database().from("kitty_website_journal").select("*").abortSignal(AbortSignal.timeout(5000)).eq("slug", slug).eq("kind", "article").eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).maybeSingle();
   if(error) throw new HttpError("This article is temporarily unavailable.", 503);
   return data as JournalEntry | null;

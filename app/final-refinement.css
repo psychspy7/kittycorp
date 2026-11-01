@@ -1,4 +1,4 @@
-/* Final public presentation. Brand accents use the licensed Dirtyline font; UI stays in Geist. */
+/* Display headings use Runiga; navigation and body copy stay in Geist. */
 :root { --final-paper:#f8f7f3; --final-graphite:#242923; --final-muted:#61675c; --final-gold:#80632f; }
 html { scroll-padding-top:112px; }
 body { color:var(--final-graphite); }
@@ -20,7 +20,7 @@ body { color:var(--final-graphite); }
 .business-home .button-gold:hover { background:#3a4435; border-color:#3a4435; }
 .final-hero { display:grid; grid-template-columns:1.2fr 1fr; gap:8%; padding-block:72px 76px; align-items:center; }
 .final-hero-copy h1 { font:500 clamp(44px,4.6vw,66px)/1.06 Geist,Arial,sans-serif; letter-spacing:-3px; margin:23px 0; }
-.final-hero-copy h1>span { display:inline-block; font:400 .97em/1.2 "Dirtyline 36D",Geist,sans-serif; color:#806b43; letter-spacing:0; padding-top:7px; }
+.final-hero-copy h1>span { display:inline-block; font:400 .97em/1.2 var(--font-display); color:#806b43; letter-spacing:0; padding-top:7px; }
 .final-hero-copy>p { max-width:485px; font-size:16px; line-height:1.9; color:var(--final-muted); margin-bottom:28px; }
 .final-hero .hero-actions { gap:12px; flex-wrap:wrap; }
 .final-hero-notes { display:flex; flex-wrap:wrap; gap:12px 21px; margin-top:23px; font-size:11px; color:#62685d; }
@@ -55,7 +55,7 @@ body { color:var(--final-graphite); }
 .final-product-icon { display:flex; align-items:center; justify-content:center; width:56px; height:56px; background:#fffefa; border-radius:13px; color:#546246; border:1px solid #cad0bf; }
 .final-product-icon img { border-radius:9px; object-fit:contain; }
 .final-product-top .quiet-status { font-size:9px; letter-spacing:.08em; background:transparent; border-color:#bdc5b1; color:#4b5844; }
-.product-index { font:10px/1.6 "Geist Mono",monospace; color:#69745e; }
+.product-index { font:10px/1.6 Geist,Arial,sans-serif; color:#69745e; }
 .final-product h3 { font:500 36px/1.2 Geist,sans-serif; letter-spacing:-1.4px; margin:10px 0 14px; }
 .final-product>p { font-size:14px; line-height:1.8; color:#596151; max-width:470px; margin:0 0 20px; }
 .final-product ul { display:grid; gap:15px; padding:0; list-style:none; margin:12px 0 37px; }
@@ -65,7 +65,7 @@ body { color:var(--final-graphite); }
 .final-release-link { display:inline-flex; gap:8px; align-items:center; min-height:44px; margin-top:8px; color:#5c674f; font-size:11px; }
 .lisa-work-preview { overflow:hidden; border-radius:9px; border:1px solid #d4d0c6; margin:1px 0 23px; }
 .lisa-work-preview img { display:block; width:100%; height:150px; object-fit:cover; object-position:center; background:#e3e0d6; }
-.lisa-work-preview span { display:block; font:8px/1.6 "Geist Mono",monospace; letter-spacing:.08em; padding:9px 12px; color:#686557; background:#f7f4ed; }
+.lisa-work-preview span { display:block; font:8px/1.6 Geist,Arial,sans-serif; letter-spacing:.08em; padding:9px 12px; color:#686557; background:#f7f4ed; }
 .final-destinations { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; padding-block:0 50px; }
 .final-destinations>a { display:flex; gap:14px; align-items:start; border-top:1px solid #d8d9ce; padding:21px 0; min-width:0; transition:border-color .2s; }
 .final-destinations>a:hover { border-color:#80632f; }
