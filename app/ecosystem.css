@@ -40,7 +40,7 @@
 .ecosystem-tracks .logo-motion-button { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); margin: 0; white-space: nowrap; }
 .technology-ecosystem { border-top: 1px solid var(--border); padding: 63px 0 38px; background: #f3f1eb; }
 .ecosystem-intro { text-align: center; max-width: 740px; margin-inline: auto; }
-.ecosystem-signature { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font: 10px/1.5 "Geist Mono",monospace; color: #705524; letter-spacing: .7px; }
+.ecosystem-signature { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font: 10px/1.5 Geist,Arial,sans-serif; color: #705524; letter-spacing: .7px; }
 .ecosystem-signature img { height: 22px; width: 22px; object-fit: contain; }
 .ecosystem-intro h2 { font: 500 clamp(23px,2.6vw,34px)/1.32 Geist,sans-serif; letter-spacing: -.8px; color: #252720; margin: 22px 0 17px; }
 .ecosystem-intro>p { color: #62645d; font-size: 15px; line-height: 1.85; max-width: 640px; margin-inline: auto; }

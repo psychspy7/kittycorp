@@ -10,4 +10,9 @@ const oldLogin=await fetch(origin+"/api/admin/login",{method:"POST",headers:{Ori
 const invalidCallback=await fetch(origin+"/api/admin/google/callback?flow=invalid&code=invalid",{redirect:"manual"});assert.equal(invalidCallback.status,303);assert.equal(invalidCallback.headers.get("location"),origin+"/kitten?signin=verification-failed");
 const security=await fetch(origin+"/api/admin/security").then(r=>r.json());assert.equal(security.signInMethod,"google");assert.equal(security.googleReady,true);
 const home=await fetch(origin+"/").then(r=>r.text());assert.doesNotMatch(home,/<a[^>]+href=["']\/(?:admins|kitten)["']/i,"public page has no Studio hyperlink");
+assert.match(home,/Digital Solutions/i,"homepage introduces the digital division");
+assert.match(home,/Intelligence &amp; Robotics/i,"homepage introduces the robotics division");
+assert.doesNotMatch(home,/Suvid AI/i,"the retired concept does not appear on the homepage");
+assert.doesNotMatch(home,/next-generation technology|occasional brilliance|hopefully/i,"founder profiles do not use informal placeholder copy");
+assert.doesNotMatch(home,/Allow analytics|Essential only|cookie-banner/i,"homepage does not show an analytics consent banner");
 console.log("PASS: public routes, retired Studio address, anonymous API protection, CSRF, removed password login, Google readiness and safe callback redirect.");

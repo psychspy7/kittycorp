@@ -19,7 +19,7 @@ In the existing Vercel website project, set these as **server environment variab
 | `SMTP_APP_PASSWORD` | A Google app password for `kittycorp.info@gmail.com`. The existing `GMAIL_APP_PASSWORD` remains a supported fallback. Keep the value private. |
 | `SMTP_USER` | `kittycorp.info@gmail.com` |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE` | `smtp.gmail.com`, `465`, `true` |
-| `SITE_URL` | `https://kittycorp.vercel.app` |
+| `SITE_URL` | `https://thekittycorp.com` |
 | `CRON_SECRET` | A private random string of at least 32 characters, set in Vercel. Never put it in a public-prefixed variable or source control. |
 | `TEMP_DATA_RETENTION_HOURS` | Default `72`; the server enforces a minimum of 72. |
 | `EMAIL_DAILY_LIMIT` | Default `200` attempts/day; the server caps it at 400. Gmail account-wide limits can still be lower after other sends. |

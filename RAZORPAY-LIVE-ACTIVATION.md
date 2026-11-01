@@ -7,12 +7,12 @@
 1. Sign in at https://dashboard.razorpay.com/ and switch to **Live**.
 2. Open **Account & Settings → API Keys → Generate Key**. Save the live Key ID (starts with `rzp_live_`) and Key Secret in your private password manager. The secret is only displayed at creation. Do not rotate an existing working key without checking pending orders.
 3. Open **Account & Settings → Webhooks → Add New Webhook**.
-4. URL: `https://kittycorp.vercel.app/api/payments/webhooks/razorpay`.
+4. URL: `https://thekittycorp.com/api/payments/webhooks/razorpay`.
 5. Choose a strong unique webhook secret (at least 32 random characters), save it privately and select **payment.captured**. Enable and save the webhook. This secret is separate from the API Key Secret.
 
 ## Save in KITTY Studio
 
-1. Open https://kittycorp.vercel.app/kitten and sign in with the approved Google owner account.
+1. Open https://thekittycorp.com/kitten and sign in with the approved Google owner account.
 2. Choose **Payments & plans**, then **Razorpay**.
 3. Enter the live Key ID, live Key Secret and matching webhook secret in their password fields. Blank fields preserve saved values. Never put credentials in chat, GitHub or a clean source ZIP.
 4. If a field says **Environment override**, the same named Vercel setting takes priority. Replace those production environment values with the live values, or remove only the obsolete Razorpay overrides so Studio can provide them. Relevant names: RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET. Then redeploy. A legacy NEXT_PUBLIC_RAZORPAY_KEY_ID is not used by this checkout; never put a secret under a public prefix.

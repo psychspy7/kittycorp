@@ -5,6 +5,10 @@ const pkg=JSON.parse(readFileSync("package.json","utf8"));
 assert.equal(config.framework,"nextjs");assert.equal(config.buildCommand,"npm run build:next");assert.equal(config.installCommand,"npm ci");assert.equal(config.outputDirectory,".next");assert.deepEqual(config.regions,["bom1"]);
 assert.equal(pkg.scripts["build:next"],"next build");assert.equal(pkg.scripts["start:next"],"next start");
 assert(!readFileSync("next.config.ts","utf8").includes('output: "export"'),"Studio and payments need a server");
+const nextConfig=readFileSync("next.config.ts","utf8");
+assert.match(nextConfig,/type:\s*"host",\s*value:\s*"kittycorp\.vercel\.app"/,"the previous public host redirects to the canonical domain");
+assert.match(nextConfig,/destination:\s*"https:\/\/thekittycorp\.com\/:path\*"/,"the host redirect retains each path");
+assert.match(nextConfig,/source:\s*"\/research\/suvid-ai\/:path\*"[\s\S]*?destination:\s*"\/research"/,"the retired concept URL redirects into current research");
 if(!process.argv.includes("--static")){
   const required=["SUPABASE_URL","SUPABASE_PUBLISHABLE_KEY","FEEDBACK_GATEWAY_TOKEN","ADMIN_USER_ID","SITE_URL"];
   const missing=required.filter(key=>!process.env[key]?.trim());

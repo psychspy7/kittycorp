@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { database, HttpError, SESSION_COOKIE, setting, setStudioSession } from "./kitty-server";
+import { websiteOrigin } from "./site-metadata";
 import { approvedGoogleIdentity, GOOGLE_PENDING_SECONDS, openStudioPayload, randomStudioToken, safeEqual, sealStudioPayload } from "./studio-google-crypto";
 
 const PENDING_PREFIX = "kitty_studio_google_";
@@ -16,7 +17,7 @@ const pendingSchema = z.object({
 function canonicalOrigin(request: Request) {
   const requestOrigin = new URL(request.url).origin;
   if (process.env.NODE_ENV !== "production" && ["localhost", "127.0.0.1"].includes(new URL(request.url).hostname)) return requestOrigin;
-  const site = new URL(setting("SITE_URL"));
+  const site = new URL(websiteOrigin());
   if (site.protocol !== "https:" || requestOrigin !== site.origin)
     throw new HttpError("Open the Studio on the official website to sign in.", 403);
   return site.origin;

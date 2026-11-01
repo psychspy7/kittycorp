@@ -6,6 +6,10 @@ import { database, HttpError } from "./kitty-server";
 import { PUBLIC_CONTENT_TAGS, publicContentCache, refreshPublicContent } from "./public-content-cache";
 import { defaultProducts, defaultSettings, defaultTeam, MEDIA_BUCKET, mediaPathPattern, type CompanyProduct, type CompanySettings, type MediaKind, type TeamMember } from "./company-content";
 
+function isPublicProduct(product: Pick<CompanyProduct,"slug"|"name">) {
+  return !/suvid/i.test(`${product.slug} ${product.name}`);
+}
+
 const publicLink = z.string().trim().max(1000).refine(value => {
   if (!value) return true;
   try {const url=new URL(value);return url.protocol==="https:" && !!url.hostname && !url.username && !url.password;}catch{return false;}
@@ -17,7 +21,7 @@ export const teamSchema=z.object({name:z.string().trim().min(2).max(100),role:z.
 export const settingsSchema=z.object({socials:linksSchema,team_heading:z.string().trim().min(3).max(140),team_intro:z.string().trim().min(10).max(1000),team_body:z.string().trim().min(10).max(2000)});
 const readProducts = publicContentCache("products", PUBLIC_CONTENT_TAGS.company, async () => {
   const {data,error}=await database().from("kitty_website_products").select("*").abortSignal(AbortSignal.timeout(5000)).eq("published",true).order("sort_order").order("slug");
-  if(error) throw error; return data as CompanyProduct[];
+  if(error) throw error; return (data as CompanyProduct[]).filter(isPublicProduct);
 });
 const readTeam = publicContentCache("team", PUBLIC_CONTENT_TAGS.company, async () => {
   const {data,error}=await database().from("kitty_website_team").select("*").abortSignal(AbortSignal.timeout(5000)).eq("published",true).order("sort_order").order("created_at");
@@ -28,7 +32,7 @@ const readCompany = publicContentCache("company", PUBLIC_CONTENT_TAGS.company, a
   if(error) throw error; return data as CompanySettings;
 });
 // Failures are handled outside the persistent cache; fallback content is not saved.
-export const companyProducts=cache(async():Promise<CompanyProduct[]>=>{try{return await readProducts();}catch{return defaultProducts;}});
+export const companyProducts=cache(async():Promise<CompanyProduct[]>=>{try{return await readProducts();}catch{return defaultProducts.filter(isPublicProduct);}});
 export const companyTeam=cache(async():Promise<TeamMember[]>=>{try{return await readTeam();}catch{return defaultTeam;}});
 export const companySettings=cache(async():Promise<CompanySettings>=>{try{return await readCompany();}catch{return defaultSettings;}});
 export function refreshCompany(){refreshPublicContent(PUBLIC_CONTENT_TAGS.company);for(const path of ["/","/products","/company","/team","/kitty-ai","/lisa-ai","/sentinel","/secretchat","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}

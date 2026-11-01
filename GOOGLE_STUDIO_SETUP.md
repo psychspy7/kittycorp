@@ -1,6 +1,6 @@
 # Google-only Studio sign-in
 
-Studio is at **https://kittycorp.vercel.app/kitten**. Choose **Sign in with Google** and use `viratanand1221@gmail.com`. The old ID/password form and `/admins` address are retired. Public pages do not link to Studio.
+Studio is at **https://thekittycorp.com/kitten**. Choose **Sign in with Google** and use `viratanand1221@gmail.com`. The old ID/password form and `/admins` address are retired. Public pages do not link to Studio.
 
 Access is restricted to the existing configured Auth UUID, private administrator allowlist, verified Google email and pinned immutable Google identity. A fresh server-verified Google session receives a one-hour Studio grant. Password sessions and direct OAuth sessions without that grant cannot edit website data. This is Google account sign-in, not Google Authenticator or native Supabase MFA.
 
@@ -11,13 +11,13 @@ The existing Google provider is enabled in website Supabase project **mgkghnblbi
 If provider configuration needs repair:
 
 1. Open [Google Auth Platform](https://console.cloud.google.com/auth/overview) in the account owning the existing OAuth client. Use the existing KITTY CORP Studio Web application client.
-2. Its authorized JavaScript origin is `https://kittycorp.vercel.app`.
+2. Its authorized JavaScript origin is `https://thekittycorp.com`.
 3. Its authorized redirect URI remains `https://mgkghnblbisubympudaa.supabase.co/auth/v1/callback`.
 4. If the Google application is in Testing, the approved owner email must be a test user. Only standard openid, email and profile scopes are needed.
 5. Verify the client ID and secret in [Supabase Google provider settings](https://supabase.com/dashboard/project/mgkghnblbisubympudaa/auth/providers). Leave nonce checking enabled.
-6. In [URL Configuration](https://supabase.com/dashboard/project/mgkghnblbisubympudaa/auth/url-configuration), Site URL is `https://kittycorp.vercel.app`; the application callback is `https://kittycorp.vercel.app/api/admin/google/callback`.
+6. In [URL Configuration](https://supabase.com/dashboard/project/mgkghnblbisubympudaa/auth/url-configuration), Site URL is `https://thekittycorp.com`; the application callback is `https://thekittycorp.com/api/admin/google/callback`.
 
-The callback path is unchanged by the move to `/kitten`. A random per-login flow query and a server-held PKCE verifier bind the return to the same browser. Do not add broad production host wildcards. Website `SITE_URL` must match the canonical origin.
+The callback path is unchanged by the move to `/kitten`. A random per-login flow query and a server-held PKCE verifier bind the return to the same browser. Do not add broad production host wildcards. Set Vercel `SITE_URL` to `https://thekittycorp.com`; old deployment host links redirect to the canonical domain.
 
 ## Session and recovery
 

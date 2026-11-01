@@ -9,7 +9,7 @@ import ts from "typescript";
 // No provider credentials, live users, remote tables or Analytics are used.
 const require = createRequire(import.meta.url);
 const env = {
-  NODE_ENV: "production", SITE_URL: "https://kittycorp.vercel.app",
+  NODE_ENV: "production", SITE_URL: "https://thekittycorp.com",
   SUPABASE_URL: "https://website-project.supabase.co", SUPABASE_PUBLISHABLE_KEY: "fixture-public-key",
   ADMIN_EMAIL: "viratanand1221@gmail.com", ADMIN_USER_ID: "638e886a-45f2-4b04-8347-c80e6598a3fd",
   FEEDBACK_GATEWAY_TOKEN: "ab".repeat(32),
@@ -94,7 +94,7 @@ const sdk = {
 const server = { database, fingerprint: async () => fingerprint, HttpError, SESSION_COOKIE:"kitty_studio_session", setting: key => env[key],
   setStudioSession: async token => { issuedSession=token; jar.set("kitty_studio_session",token); } };
 const google = source("lib/studio-google.ts", { "@supabase/supabase-js":sdk,"next/headers": { cookies:async()=>cookieStore },
-  "./kitty-server":server,"./studio-google-crypto":cryptoHelpers }, { fetch: async url => url.endsWith("/auth/v1/settings")
+  "./kitty-server":server,"./studio-google-crypto":cryptoHelpers,"./site-metadata":{websiteOrigin:()=>new URL(env.SITE_URL).origin} }, { fetch: async url => url.endsWith("/auth/v1/settings")
     ? Response.json({ external:{ google:true } }) : Response.json(identity) });
 function reset() {
   jar.clear(); cookieWrites.length=0; challenges.clear(); granted.clear(); live.clear(); live.add(passwordToken);
@@ -157,9 +157,9 @@ granted.add(googleToken); assert.equal((await kitty.adminSession()).user.id,env.
 live.delete(googleToken); assert.equal(await kitty.adminSession(),null);
 
 // Actual Turnstile validation: setup failures, test-key prohibition, origin/action and replay.
-let outcome={success:true,hostname:"kittycorp.vercel.app",action:"assistant"};
+let outcome={success:true,hostname:"thekittycorp.com",action:"assistant"};
 let verificationCalls=0; const seen=new Set();
-const turnstile=source("lib/turnstile-server.ts", { "./kitty-server":{HttpError}, "./runtime-configuration": { getRuntimeConfiguration: async()=>({}) } }, { fetch: async (_url,options) => {
+const turnstile=source("lib/turnstile-server.ts", { "./kitty-server":{HttpError}, "./runtime-configuration": { getRuntimeConfiguration: async()=>({}) }, "./site-metadata":{websiteOrigin:()=>"https://thekittycorp.com"} }, { fetch: async (_url,options) => {
   verificationCalls++; const body=JSON.parse(options.body); assert.equal(body.secret,env.TURNSTILE_SECRET_KEY);
   if (seen.has(body.response)) return Response.json({success:false}); seen.add(body.response); return Response.json(outcome);
 } });
@@ -174,6 +174,38 @@ await turnstile.verifyTurnstile(request(),"fresh-turnstile","assistant");
 await assert.rejects(()=>turnstile.verifyTurnstile(request(),"fresh-turnstile","assistant"),e=>e.status===400);
 outcome={success:true,hostname:"attacker.example",action:"assistant"};
 await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-host","assistant"),e=>e.status===400);
-outcome={success:true,hostname:"kittycorp.vercel.app",action:"contact"};
+outcome={success:true,hostname:"thekittycorp.com",action:"contact"};
 await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-action","assistant"),e=>e.status===400);
-console.log("PASS: Google-only PKCE flow, owner UUID/email/subject checks, missing proof, expired/tampered cookies, code replay, canonical callback, Lax session handoff, direct-session rejection/revocation and Turnstile fail-closed/host/action/replay checks.");
+
+// The Studio login request accepts an empty proof only while the server policy allows it.
+let turnstileEnabled = false;
+let loginProof;
+const loginRoute = source("app/api/admin/login/route.ts", {
+  "@/lib/kitty-server": {
+    HttpError,
+    verifyOrigin: () => {},
+    readBody: async request => request.json(),
+    database: () => ({ rpc: async name => { assert.equal(name,"kitty_website_login_attempt"); return {error:null}; } }),
+    fingerprint: async () => fingerprint,
+    setting: key => env[key],
+    privateJson: value => Response.json(value,{headers:{"Cache-Control":"private, no-store"}}),
+    failure: error => Response.json({error:error.message},{status:error.status||400}),
+  },
+  "@/lib/studio-google": {
+    beginStudioGoogle: async () => "https://mgkghnblbisubympudaa.supabase.co/auth/v1/authorize?provider=google",
+    studioGoogleStatus: async () => ({providerReady:true}),
+  },
+  "@/lib/turnstile-server": {
+    verifyTurnstile: async (_request,token,action) => {
+      loginProof={token,action};
+      if(turnstileEnabled && !token) throw new HttpError("Please complete the security check.",400);
+    },
+  },
+});
+const startLogin = body => loginRoute.POST(new Request(env.SITE_URL+"/api/admin/login",{method:"POST",headers:{origin:env.SITE_URL,"content-type":"application/json"},body:JSON.stringify(body)}));
+let loginResponse=await startLogin({});
+assert.equal(loginResponse.status,200); assert.equal(loginProof.action,"studio-login"); assert.equal(loginProof.token,undefined);
+turnstileEnabled=true; loginProof=undefined;
+loginResponse=await startLogin({});
+assert.equal(loginResponse.status,400); assert.equal(loginProof.action,"studio-login"); assert.equal(loginProof.token,undefined);
+console.log("PASS: Google-only PKCE flow, owner UUID/email/subject checks, expired/tampered cookies, code replay, canonical callback, Lax session handoff, direct-session rejection/revocation, empty-proof Studio login when allowed, and Turnstile fail-closed/host/action/replay checks.");

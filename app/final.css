@@ -68,7 +68,7 @@ h1,h2,h3,h4 { color: var(--foreground); }
 .hero-services-heading>span:last-child { font-size: 24px; color: #d8c59c; }
 .hero-services h2 { color: #f7f6f2; font-size: 36px; line-height: 1.2; letter-spacing: -1.2px; margin: 23px 0 28px; }
 .hero-service-links>a { display: grid; grid-template-columns: 22px 1fr 17px; gap: 15px; align-items: start; padding: 20px 0; border-top: 1px solid #ffffff23; }
-.hero-service-links>a>span { color: #aaa99b; font: 10px "Geist Mono",monospace; margin-top: 5px; }
+.hero-service-links>a>span { color: #aaa99b; font: 10px Geist,Arial,sans-serif; margin-top: 5px; }
 .hero-service-links h3 { color: #f7f6f2; font-size: 18px; font-weight: 450; letter-spacing: -.3px; margin: 0 0 7px; }
 .hero-service-links p { color: #bcbdb2; font-size: 12px; line-height: 1.7; margin: 0; }
 .hero-service-links svg { color: #c7b387; margin-top: 5px; transition: transform .2s; }
@@ -92,7 +92,7 @@ h1,h2,h3,h4 { color: var(--foreground); }
 .product-summary>p { font-size: 15px; color: #62645d; line-height: 1.75; margin: 0 0 24px; max-width: 450px; }
 .product-summary-bottom { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: auto; }
 .product-summary-bottom .text-link { font-size: 12px; }
-.product-summary-bottom>span { font: 10px "Geist Mono",monospace; color: #62645d; }
+.product-summary-bottom>span { font: 10px Geist,Arial,sans-serif; color: #62645d; }
 .progress-link { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 38px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .progress-link h2 { font-size: 36px; margin: 12px 0; }
 .progress-link p { font-size: 14px; color: #62645d; line-height: 1.8; margin: 0; }
@@ -195,8 +195,6 @@ h1,h2,h3,h4 { color: var(--foreground); }
 .launch-toast>p>span { font-size: 11px; color: #74766e; white-space: nowrap; }
 .launch-toast-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .launch-toast-actions .text-link { font-size: 11px; }
-.analytics-settings-link { background: transparent; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-.analytics-settings-link:hover { color: #765826; }
 .footer-bottom { flex-wrap: wrap; }
 @media(max-width:1100px) {
   .navigation { display: none; }

@@ -1,19 +1,19 @@
 # KITTY CORP — owner’s guide
 
-Updated on 8 October 2026 for the current website. Start here when you want to change something yourself or hand the work to another AI app.
+Updated on 1 November 2026 for the redesign branch under review. The current public domain remains live while this branch is checked. Start here when you want to change something yourself or hand the work to another AI app.
 
 ## Your website and accounts
 
 | Item | Current location |
 | --- | --- |
-| Public website | https://kittycorp.vercel.app/ |
-| Private Studio | https://kittycorp.vercel.app/kitten |
+| Public website | https://thekittycorp.com/ |
+| Private Studio | https://thekittycorp.com/kitten |
 | Website repository | https://github.com/psychspy7/kittycorp |
 | Production branch | `main` |
 | Hosting project | `kittycorp` in Vercel |
 | Website database | **Kitty Corp Website**, Supabase project `mgkghnblbisubympudaa` |
 | Website database dashboard | https://supabase.com/dashboard/project/mgkghnblbisubympudaa |
-| Website version | Business homepage, KITTY AI guide, Google Studio verification and Cloudflare form protection, 8 October 2026. See the [latest source history](https://github.com/psychspy7/kittycorp/commits/main). |
+| Website version | Two-division homepage redesign, custom-domain canonicalization and Google Studio sign-in repair prepared on a feature branch, 1 November 2026. See the [latest source history](https://github.com/psychspy7/kittycorp/commits/main). |
 
 Studio now uses **Sign in with Google** for the approved owner account, `viratanand1221@gmail.com`. The old ID/password form and `/admins` address are retired. No Studio link is displayed on public pages; bookmark the address above. Your website database is separate from the private-chat project. Website maintenance should use the project above.
 
@@ -93,7 +93,7 @@ The website guide uses the real KITTY AI backend through a separate stateless en
 
 Open `/kitten` and choose **Sign in with Google**. Use the approved owner Google account. Google setup and recovery are documented in **GOOGLE_STUDIO_SETUP.md**. The provider client secret stays in Supabase. Password-only sessions and raw Google sessions outside the verified website flow cannot edit the website database. A team profile does not grant Studio access.
 
-Cloudflare Turnstile protects sign-in, enquiries, email signups, contact forms and assistant requests. Its widget usually verifies automatically, but may request interaction. On the shared `vercel.app` hostname this is application protection, not whole-site Cloudflare WAF.
+Turnstile is currently disabled in the production application while its widget configuration is being repaired. Google-only Studio authorization, approved owner identity checks, rate limits and same-origin checks remain active. Enquiries and other public forms keep their existing server validation and spam checks.
 
 AI and Turnstile credentials are encrypted in the dedicated website database using the private deployment gateway. The current production setup does not require copying new secrets into GitHub. If you rotate `FEEDBACK_GATEWAY_TOKEN`, re-encrypt the runtime configuration and update its private database hash in the same planned change. Keep a private configuration backup. `.env.example` contains safe names and optional overrides only.
 
@@ -225,7 +225,7 @@ KITTY AI membership uses the app's own account, provider configuration and paid-
 
 ## Latest payment release — 12 October 2026
 
-The homepage highlights KITTY AI and LISA AI, with a direct Payments section and optional contributions at the bottom. EXAMIFY is a compact project link. The lower technology marquee is removed; the colored header strip remains.
+The redesigned homepage has two divisions: Digital Solutions and Intelligence & Robotics. Publicly listed robotics ideas are clearly labelled as concepts; products and shipped work stay in the Products directory. The former Vercel hostname redirects to the canonical domain, and official source links use `https://thekittycorp.com`.
 
 KITTY Plus is enabled at ₹99/calendar month, with manual renewal. LISA’s separate refundable preorder is at `/lisa-ai/preorder`: no delivery date is promised, and a full refund is available before early access. See Studio → **LISA preorders** for reservations and refund requests. Process actual refunds through Razorpay, then let the signed webhook reconcile the record. Do not mark early access provided until it has actually been supplied.
 
@@ -242,4 +242,4 @@ The header now offers customer Google sign-in at `/account`, using the existing 
 Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read LISA-DISTRIBUTION-GUIDE.md before enabling instant LISA delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.
 
 ## Business conversion release — 19 October 2026
-Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for the latest acquisition flow, Hack in Hills milestone and Suvid research. Use handover/DOMAIN-MIGRATION-CHECKLIST-2026-10-19.md after the new domain is purchased; current provider settings remain unchanged.
+Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for historical acquisition flow and Hack in Hills records. The 1 November redesign replaces the earlier homepage positioning, removes Suvid AI from public pages, and directs the former Vercel host to the canonical domain.

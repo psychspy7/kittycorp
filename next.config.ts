@@ -4,6 +4,21 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   turbopack: { root: process.cwd() },
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "kittycorp.vercel.app" }],
+        destination: "https://thekittycorp.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/research/suvid-ai/:path*",
+        destination: "/research",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -1,6 +1,6 @@
 ## Latest website release — 14 October 2026
 
-Read `FINAL-WEBSITE-HANDOVER-2026-10-14.md` for the current homepage, AI automations, website health, KITTY AI 2.0 release, verification and study-break operations. Give `handover/CONTINUATION-PROMPT-2026-10-14.txt` to another AI app along with the latest clean source ZIP. Older handover manifests are historical snapshots.
+Historical handover files describe earlier releases. The current 1 November branch redesigns the homepage around Digital Solutions and Intelligence & Robotics, removes the duplicate showcase sections and Suvid AI public pages, fixes the Google Studio sign-in gate, and makes `https://thekittycorp.com` canonical. It is still under verification; do not describe these source changes as live until the feature branch is reviewed and deployed.
 Read `handover/FINAL-STATUS-2026-10-15.md` for the verified SecretChat 2.0 website listing, current public links and remaining owner checks.
 
 # Kitty Corp website
@@ -42,7 +42,7 @@ Use trusted signed APKs and keep original app signing keys backed up privately. 
 
 The **Websites & applications** page lets visitors send project briefs. These appear as **Project enquiry** messages in the private **Project enquiries & inbox**, including the requested service, business name, budget, timing and message.
 
-The homepage now leads with website and app services. Company background is at `/company`, full product information at `/products`, and the complete published team at `/team`. Studio’s **Overview** explains every publishing task. Use the exact suggested roles **Founder & CEO** and **Co-Founder** for the two homepage founder positions. Other published roles appear on the full team page.
+The homepage now introduces Digital Solutions and Intelligence & Robotics. Company background is at `/company`, full product information at `/products`, and the complete published team at `/team`. Studio’s **Overview** explains every publishing task. Use the exact suggested roles **Founder & CEO** and **Co-Founder** for the two homepage founder positions. Other published roles appear on the full team page.
 
 The supplied Dirtyline 36D font is included with its commercial web license. Geist is used for readable forms, navigation and body copy.
 
@@ -75,4 +75,4 @@ The separate `kitty-corp-database-health` Worker runs a small read-only website 
 Read handover/UPDATE-2026-10-18.md and handover/CONTINUATION-PROMPT-2026-10-18.txt for the current packages, appointments, game rewards, consent and LISA delivery limits.
 
 ## Business conversion release — 19 October 2026
-Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for the latest acquisition flow, Hack in Hills milestone and Suvid research. Use handover/DOMAIN-MIGRATION-CHECKLIST-2026-10-19.md after the new domain is purchased; current provider settings remain unchanged.
+Older business-conversion and domain-migration handovers are historical snapshots. The current public domain is `https://thekittycorp.com`; use the current Google Studio and payment guides for callback and webhook URLs.

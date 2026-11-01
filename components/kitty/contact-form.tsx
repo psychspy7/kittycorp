@@ -52,7 +52,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
           data.error || "Couldn’t send your message. Please try again.",
         );
       setSent(true);
-      trackConversion(subject==="Partnership" || subject==="Suvid AI research" || subject==="Investors" ? "investor_enquiry_submit" : "enquiry_submit","contact");
+      trackConversion(subject==="Partnership" || subject==="Investors" ? "investor_enquiry_submit" : "enquiry_submit","contact");
       setValues({ name: "", email: "", message: "" });
     } catch (err) {
       trackConversion("form_error","contact");

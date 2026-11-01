@@ -4,7 +4,7 @@ export type TechnologyBrand = {
 
 // Tools/platforms reported by the owner. Initiative references imply no affiliation.
 export const technologyBrands: TechnologyBrand[] = [
-  {id: "kitty", name: "KITTY CORP", href: "https://kittycorp.vercel.app/", src: "/brand/monogram-small-v1.webp", width: 128, height: 128},
+  {id: "kitty", name: "KITTY CORP", href: "/", src: "/brand/monogram-small-v1.webp", width: 128, height: 128},
   {id: "ibm", name: "IBM", href: "https://www.ibm.com/", src: "/ecosystem/ibm-v1.svg", width: 50, height: 21, wordmark: true},
   {id: "github", name: "GitHub", href: "https://github.com/", src: "/ecosystem/github-v1.svg", width: 98, height: 95},
   {id: "microsoft", name: "Microsoft", href: "https://www.microsoft.com/", src: "/ecosystem/microsoft-v1.svg", width: 256, height: 256},

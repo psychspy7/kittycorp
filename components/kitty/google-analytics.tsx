@@ -4,15 +4,8 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
-  analyticsPublicPath, configureAnalytics,
-  pauseAnalytics, readAnalyticsChoice, subscribeAnalyticsChoice,
-  trackPageView, trackConversion,
+  analyticsPublicPath, configureAnalytics, pauseAnalytics, trackPageView, trackConversion,
 } from "@/lib/site-analytics";
-
-export function AnalyticsSettingsButton({ measurementId }: { measurementId: string }) {
-  if (!measurementId) return null;
-  return <button className="analytics-settings-link" type="button" onClick={() => window.dispatchEvent(new Event("kitty:cookie-settings"))}>Cookie choices</button>;
-}
 
 const subscribeHydration = () => () => {};
 const hydratedSnapshot = () => true;
@@ -21,13 +14,12 @@ const serverSnapshot = () => false;
 export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
   const pathname = usePathname();
   const hydrated = useSyncExternalStore(subscribeHydration, hydratedSnapshot, serverSnapshot);
-  const choice = useSyncExternalStore(subscribeAnalyticsChoice, readAnalyticsChoice, () => null);
   const [tagReady, setTagReady] = useState(false);
   const configured = useRef(false);
   const previousPage = useRef("");
   const lastTracked = useRef("");
   const publicPage = analyticsPublicPath(pathname);
-  const enabled = hydrated && !!measurementId && publicPage && choice === "accepted";
+  const enabled = hydrated && !!measurementId && publicPage;
 
   useEffect(() => {
     const protectPrivateNavigation = (event: MouseEvent) => {
@@ -54,7 +46,7 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
     }
     if (!configured.current) configured.current = configureAnalytics(measurementId, pathname);
     if (tagReady && lastTracked.current !== pathname) {
-      // Configuration can be re-applied after a visitor opts back in.
+      // Re-enable the tag after returning from a private route.
       configureAnalytics(measurementId, pathname);
       trackPageView(measurementId, pathname, previousPage.current);
       previousPage.current = window.location.origin + pathname;
