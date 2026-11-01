@@ -578,3 +578,22 @@ html[data-theme="light"] .company-theme {
 .theme-toggle { white-space: nowrap; }
 html[data-theme="light"] .theme-toggle { color: #373830; background: #fffefa; }
 html[data-theme="dark"] .theme-toggle { color: #e6e5df; background: #171a18; }
+
+
+/* Contrast regression fix: light-mode selectors must beat the legacy shared CTA rules. */
+html[data-theme="light"] .company-theme .site-header .header-cta {
+  color: #fffefa;
+  background: #252620;
+  border-color: #252620;
+}
+html[data-theme="light"] .company-theme .company-hero .company-button-light {
+  color: #fffefa;
+  background: #252620;
+  border-color: #252620;
+}
+html[data-theme="light"] .company-theme .company-hero .company-button-light:hover,
+html[data-theme="light"] .company-theme .company-hero .company-button-light:focus-visible {
+  color: #252620;
+  background: transparent;
+  border-color: #252620;
+}
