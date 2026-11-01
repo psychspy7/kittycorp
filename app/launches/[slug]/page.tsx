@@ -39,7 +39,7 @@ export default async function LaunchPage({ params }: Props) {
             <p className="download-meta">Live website · Opens in a new tab</p>
           </div>
           <div className="secretchat-product-art website-launch-art">
-            {launch.screenshot_path ? <Image className="website-launch-screenshot" unoptimized src={mediaHref(launch.screenshot_path)} alt={`${launch.name} website screenshot`} width={1400} height={900} /> : <AppIcon launch={launch} size={130} />}
+            {launch.screenshot_path ? <Image className="website-launch-screenshot" src={mediaHref(launch.screenshot_path)} alt={`${launch.name} website screenshot`} width={1400} height={900} sizes="(max-width: 760px) 92vw, (max-width: 1180px) 44vw, 620px" decoding="async" /> : <AppIcon launch={launch} size={130} />}
           </div>
         </div>
       </section>
