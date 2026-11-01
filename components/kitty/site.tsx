@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Play, UserRound } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { TechnologyMarquee } from "./technology-marquee";
 import { ThemeToggle } from "./theme-toggle";
 const navigation = [["Services", "/services"], ["Products", "/products"], ["Research", "/research"], ["Company", "/company"], ["Contact", "/contact"]];
 export function SiteHeader() {
@@ -20,7 +19,6 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   return <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-    <TechnologyMarquee mini/>
     <div className="site-header-navigation">
     <Link href="/" className="brand" aria-label="KITTY CORP home"><Image unoptimized loading="eager" src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} /><span>KITTY CORP</span></Link>
     <nav className="navigation" aria-label="Main navigation">{navigation.map(([label, href]) => <Link href={href} key={label} aria-current={pathname === href || (href!=="/" && pathname.startsWith(href+"/")) ? "page" : undefined}>{label}</Link>)}</nav>
