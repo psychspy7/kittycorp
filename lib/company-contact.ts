@@ -1,4 +1,9 @@
-export const CONTACT_EMAIL = "kittycorp.info@gmail.com";
+export const SUPPORT_EMAIL = "support@thekittycorp.com";
+export const SOCIAL_EMAIL = "social@thekittycorp.com";
+export const CONTACT_EMAIL = SUPPORT_EMAIL;
 export const FOUNDER_LINKEDIN = "https://www.linkedin.com/in/virat-anand-928460442/";
-export const isFounderLinkedIn = (url?: string) =>
-  !!url && url.replace(/\/+$/, "").toLowerCase() === FOUNDER_LINKEDIN.replace(/\/+$/, "").toLowerCase();
+export const isFounderLinkedIn = (url?: string) => {
+  if (!url) return false;
+  const normalize = (value: string) => value.trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/+$/, "").toLowerCase();
+  return normalize(url) === normalize(FOUNDER_LINKEDIN);
+};

@@ -18,7 +18,7 @@ function BuddyVisual() {
     <path d="M164 103 H146 Q132 103 132 117 V180 Q132 194 146 194 H164" fill="none" stroke="#c3c8cf" strokeWidth="5" strokeLinecap="round"/>
     <path d="M356 105 H373 Q387 105 387 119 V180 Q387 194 373 194 H356" fill="none" stroke="#c3c8cf" strokeWidth="5" strokeLinecap="round"/>
     <path d="M260 25 V10 M251 17 L260 8 L269 17" stroke="#d9c49c" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-    <text x="260" y="316" textAnchor="middle" fill="#8794a5" fontSize="10" letterSpacing="3">KITTY CORE / CONCEPT</text>
+    <text x="260" y="316" textAnchor="middle" fill="#8794a5" fontSize="10" letterSpacing="3">KITTY CORE · CONCEPT</text>
   </svg>;
 }
 function AgriyaanVisual() {
@@ -45,23 +45,23 @@ function AgriyaanVisual() {
       <circle cx="49" cy="122" r="7" fill="#8b9a8d"/><circle cx="144" cy="122" r="7" fill="#8b9a8d"/>
       <path d="M20 84 H4 M170 84 H186" stroke="#c5d3bd" strokeWidth="3" strokeLinecap="round"/>
     </g>
-    <text x="260" y="316" textAnchor="middle" fill="#9aaa91" fontSize="10" letterSpacing="3">AGRIYAAN / CONCEPT</text>
+    <text x="260" y="316" textAnchor="middle" fill="#9aaa91" fontSize="10" letterSpacing="3">AGRIYAAN · CONCEPT</text>
   </svg>;
 }
 
 export function IntelligenceShowcase() {
   return <section className="intelligence-showcase wrap" aria-labelledby="intelligence-title">
     <div className="intelligence-heading">
-      <div><span className="eyebrow">KITTY CORP / INTELLIGENCE & ROBOTICS</span><h2 id="intelligence-title">Building beyond the screen.</h2></div>
+      <div><span className="eyebrow">KITTY CORP · INTELLIGENCE & ROBOTICS</span><h2 id="intelligence-title">Building beyond the screen.</h2></div>
       <p>Alongside our digital products, we are exploring physical AI systems for personal use and practical work in the field.</p>
     </div>
     <div className="intelligence-grid">
       <article className="intelligence-card buddy-card">
-        <div className="intelligence-visual"><BuddyVisual/><span className="visual-note">01 / PRODUCT CONCEPT</span></div>
+        <div className="intelligence-visual"><BuddyVisual/><span className="visual-note">01 · PRODUCT CONCEPT</span></div>
         <div className="intelligence-copy"><div className="intelligence-meta"><span>PERSONAL AI</span><span>IN DEVELOPMENT</span></div><h3>KITTY BUDDY</h3><p>A compact AI companion designed to be carried, worn or placed on a desk. A separate detachable wheel base is being explored to add movement when needed.</p><Link href="/projects" className="text-link">Discuss the project <ArrowUpRight size={15}/></Link></div>
       </article>
       <article className="intelligence-card agriyaan-card">
-        <div className="intelligence-visual"><AgriyaanVisual/><span className="visual-note">02 / RESEARCH CONCEPT</span></div>
+        <div className="intelligence-visual"><AgriyaanVisual/><span className="visual-note">02 · RESEARCH CONCEPT</span></div>
         <div className="intelligence-copy"><div className="intelligence-meta"><span>AGRICULTURAL ROBOTICS</span><span>CONCEPT STAGE</span></div><h3>AGRIYAAN</h3><p>An agricultural AI rover being developed around the needs of farmers. We plan to present the concept to the Government of India and explore a path towards field testing.</p><Link href="/projects" className="text-link">Discuss the project <ArrowUpRight size={15}/></Link></div>
       </article>
     </div>

@@ -20,7 +20,7 @@ export const roboticsProjects = [
   },
   {
     id: "kitty-urjayaan",
-    name: "KITTY URJAYAAN",
+    name: "URJAYAAN",
     field: "SOLAR & ENERGY",
     status: "EARLY CONCEPT",
     description: "Exploring intelligent software and controls for solar generation and energy management.",
@@ -51,6 +51,13 @@ export function CompanyHero() {
       <a href="#digital-solutions"><span>01</span><strong>Digital Solutions</strong><ArrowUpRight size={16} aria-hidden="true" /></a>
       <a href="#intelligence-robotics"><span>02</span><strong>Intelligence &amp; Robotics</strong><ArrowUpRight size={16} aria-hidden="true" /></a>
       <div className="company-index-foot"><span>BUILDING INDEPENDENTLY</span><span>EST. BY A SMALL TEAM</span></div>
+      <svg className="company-motion-graphic" viewBox="0 0 280 64" aria-hidden="true" focusable="false">
+        <path d="M8 21H272M8 43H272" />
+        <circle className="company-motion-anchor" cx="8" cy="21" r="3" />
+        <circle className="company-motion-anchor" cx="272" cy="43" r="3" />
+        <circle className="company-motion-node company-motion-node-one" cx="8" cy="21" r="2.5" />
+        <circle className="company-motion-node company-motion-node-two" cx="272" cy="43" r="2.5" />
+      </svg>
     </aside>
   </section>;
 }
@@ -59,7 +66,7 @@ export function CompanyDivisions() {
   return <section className="company-divisions page-gutter" id="divisions" aria-label="KITTY CORP divisions">
     <article className="division-block digital-division" id="digital-solutions">
       <div className="division-heading">
-        <span className="company-kicker">01 / DIGITAL SOLUTIONS</span>
+        <span className="company-kicker">01 &nbsp; DIGITAL SOLUTIONS</span>
         <h2>Technology for<br /><em>the work you do.</em></h2>
         <p>We design and build digital tools around real business needs, from a first website to software and AI workflows.</p>
       </div>
@@ -75,7 +82,7 @@ export function CompanyDivisions() {
 
     <article className="division-block robotics-division" id="intelligence-robotics">
       <div className="division-heading">
-        <span className="company-kicker">02 / INTELLIGENCE &amp; ROBOTICS</span>
+        <span className="company-kicker">02 &nbsp; INTELLIGENCE &amp; ROBOTICS</span>
         <h2>Ideas moving<br /><em>into the world.</em></h2>
         <p>Our early research looks at how intelligent systems might help people in daily life, agriculture and energy.</p>
       </div>

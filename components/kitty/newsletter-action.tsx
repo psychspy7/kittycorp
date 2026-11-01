@@ -45,7 +45,7 @@ export function NewsletterAction({
   }
   return (
     <div className="page-heading">
-      <span className="eyebrow">KITTY CORP / EMAIL UPDATES</span>
+      <span className="eyebrow">KITTY CORP · EMAIL UPDATES</span>
       <h1>
         {done
           ? action === "confirm"

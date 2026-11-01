@@ -74,13 +74,13 @@ The services form posts validated briefs to the existing private Studio inbox. I
 
 ## Final interface update
 
-The homepage uses an obsidian, graphite and warm-metal palette, with Geist for reading and Dirtyline 36D for display headings. It introduces the Digital Solutions and Intelligence & Robotics divisions, then shows verified released work once. The homepage shows Virat and Sarthak when their founder profiles are published, with a See the full team link; every published member appears on `/team`. The old Vercel address redirects to `https://thekittycorp.com`.
+The homepage uses the visitor’s system light or dark appearance, with Geist for reading and Dirtyline 36D for display headings. It introduces Digital Solutions and Intelligence & Robotics, then shows published work once. The founder section has Virat Anand’s name and contact links, with no portrait; **See the full team** opens `/team`, where published profiles and photos are shown. A compact **Feedback** link opens the review form. The old Vercel address redirects to `https://thekittycorp.com`.
 
 Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Releases remain accessible from the product directory without interrupting the business homepage. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; the encrypted integration setup uses the existing private deployment gateway.
 
 ## Gmail alerts and payments
 
-Contact shows kittycorp.info@gmail.com and the supplied founder LinkedIn profile.
+Contact lists `support@thekittycorp.com` for projects and support, `social@thekittycorp.com` for social and press, and Virat Anand’s LinkedIn profile.
 Visitor reviews can be sent through Contact and stay private in Studio’s inbox.
 See [EMAIL_NOTIFICATIONS.md](EMAIL_NOTIFICATIONS.md) for Gmail setup and retries.
 Studio → Email alerts shows setup/queue status and sends tests or queued alerts.
@@ -92,7 +92,7 @@ See [PAYMENTS_SETUP.md](PAYMENTS_SETUP.md) before accepting live payments.
 
 The Products and Services pages show published website launches with their real screenshots and live links, and Android releases with APK downloads and details. Research experiments have their own page. Launch content still comes from Studio; new releases appear after saving and refreshing.
 
-Studio → **Reviews** manages attributed testimonials. Add the reviewer’s actual words, name, optional role/company and an optional HTTPS public source. Confirm the feedback is genuine and the reviewer has permitted publication before enabling **Publish on the website**. Save drafts, change display order, edit, unpublish or remove entries without a redeployment. The first six approved published entries appear on the homepage and Services page. Both pages omit the review section when no entries are published. No reviews, ratings or client claims are seeded.
+Studio → **Reviews** manages attributed testimonials. Add the reviewer’s actual words, name, optional role/company and an optional HTTPS public source. Confirm the feedback is genuine and the reviewer has permitted publication before enabling **Publish on the website**. Save drafts, change display order, edit, unpublish or remove entries without a redeployment. Published reviews may appear on Services; the homepage stays focused on work and links to the feedback form. No reviews, ratings or client claims are seeded by the source.
 
 `supabase/testimonials.sql` documents the one-time extension already applied to the dedicated website backend. Do not rerun it against that project. Public reads require both publication and permission confirmation; all writes and private drafts require the live website admin session. No changes were made to the separate private-chat project.
 

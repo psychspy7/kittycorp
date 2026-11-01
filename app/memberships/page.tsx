@@ -14,7 +14,7 @@ export default async function MembershipsPage() {
  const catalogue=await membershipCatalog();
  let security=true;try{security=(await turnstilePublicConfig()).enabled;}catch{}
  return <><SiteHeader/><main id="main" className="memberships-page wrap">
- <span className="eyebrow">KITTY CORP / PRODUCT MEMBERSHIPS</span><h1>A little more time<br/>with your companion.</h1>
+ <span className="eyebrow">KITTY CORP · PRODUCT MEMBERSHIPS</span><h1>A little more time<br/>with your companion.</h1>
  <p className="membership-lead">Start with five free minutes a day. Choose KITTY Plus when you want more room to think, plan and create.</p>
  <Memberships catalog={{...catalogue,plans:catalogue.plans.filter(p=>p.product==="kitty")}} securityEnabled={security}/>
  <LisaPurchase/>

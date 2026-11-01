@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ContactForm } from "@/components/kitty/contact-form";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
-import { CONTACT_EMAIL, FOUNDER_LINKEDIN, isFounderLinkedIn } from "@/lib/company-contact";
+import { FOUNDER_LINKEDIN, SOCIAL_EMAIL, SUPPORT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { companySettings } from "@/lib/company-server";
 import "./contact.css";
 export const metadata=pageMetadata('Let’s talk','An idea, some feedback, a question. Talk to the founders building KITTY CORP.','/contact');
@@ -42,7 +42,8 @@ export default async function ContactPage({
             </p>
             <p>The KITTY team reads the messages here.</p>
             <div className="contact-direct-links">
-              <a href={`mailto:${CONTACT_EMAIL}`}><Mail size={18} aria-hidden="true"/><span><small>EMAIL KITTY CORP</small>{CONTACT_EMAIL}</span><ArrowUpRight size={16} aria-hidden="true"/></a>
+              <a href={`mailto:${SUPPORT_EMAIL}`}><Mail size={18} aria-hidden="true"/><span><small>SUPPORT &amp; PROJECTS</small>{SUPPORT_EMAIL}</span><ArrowUpRight size={16} aria-hidden="true"/></a>
+              <a href={`mailto:${SOCIAL_EMAIL}`}><Mail size={18} aria-hidden="true"/><span><small>SOCIAL &amp; PRESS</small>{SOCIAL_EMAIL}</span><ArrowUpRight size={16} aria-hidden="true"/></a>
               <a href={companyLinkedIn || FOUNDER_LINKEDIN} target="_blank" rel="noopener noreferrer"><Image unoptimized src="/ecosystem/linkedin-v1.svg" width={18} height={18} alt=""/><span><small>CONNECT ON LINKEDIN</small>{companyLinkedIn ? "KITTY CORP on LinkedIn" : "Virat Anand · Founder"}</span><ArrowUpRight size={16} aria-hidden="true"/></a>
             </div>
             {companyLinkedIn && <a href={FOUNDER_LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-link">Virat Anand · Founder on LinkedIn</a>}

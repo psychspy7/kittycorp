@@ -10,7 +10,7 @@ import { mediaHref, type CompanyProduct } from "@/lib/company-content";
 export function FinalHero({ assistantEnabled }: { assistantEnabled: boolean }) {
   return <section className="final-hero wrap" aria-labelledby="hero-title">
     <div className="final-hero-copy">
-      <span className="eyebrow">KITTY CORP / INDEPENDENT TECHNOLOGY</span>
+      <span className="eyebrow">KITTY CORP · INDEPENDENT TECHNOLOGY</span>
       <h1 id="hero-title">Better websites.<br />Smarter workflows.<br /><span>Built for your business.</span></h1>
       <p>We work directly with businesses to design, develop and maintain websites, applications and practical AI automation. Tell us what needs to work better; we’ll help you decide what to build.</p>
       <div className="hero-actions"><Link className="button button-gold" href="/projects" data-conversion="service_cta" data-context="home">Discuss Your Project <ArrowUpRight size={17} aria-hidden="true" /></Link><Link className="button button-outline" href="#work" data-conversion="portfolio_view" data-context="home">View our work <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
@@ -36,16 +36,16 @@ export function FlagshipCollection({ launches, products }: { launches: Launch[];
     <div className="section-heading"><div><span className="eyebrow">OUR OWN PRODUCTS</span><h2 id="flagship-heading">Two ways to make AI personal.</h2></div><Link className="text-link" href="/products">All products &amp; shipped work <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
     <div className="final-product-grid">
       <article className="final-product kitty-product">
-        <div className="final-product-top"><span className="final-product-icon">{kitty ? <AppIcon launch={kitty} size={48} /> : icon(kittyProduct, <Cpu size={27} />)}</span><span className="quiet-status">{kitty ? `ANDROID / V${kitty.version}` : "ANDROID APP"}</span></div>
-        <span className="product-index">01 / PERSONAL AI</span><h3>KITTY AI</h3><p>{kittyProduct?.description || "A personal AI app for conversations, voice and the things you want it to remember."}</p>
+        <div className="final-product-top"><span className="final-product-icon">{kitty ? <AppIcon launch={kitty} size={48} /> : icon(kittyProduct, <Cpu size={27} />)}</span><span className="quiet-status">{kitty ? `ANDROID · V${kitty.version}` : "ANDROID APP"}</span></div>
+        <span className="product-index">01 · PERSONAL AI</span><h3>KITTY AI</h3><p>{kittyProduct?.description || "A personal AI app for conversations, voice and the things you want it to remember."}</p>
         <ul><li><Check size={15} />Personal memory and saved context</li><li><Check size={15} />Chat history stays on your device</li><li><Check size={15} />A free daily window to get started</li></ul>
         <div className="final-product-actions"><Link className="button button-gold" href="/kitty-ai">Explore KITTY AI <ArrowUpRight size={16} /></Link><Link className="text-link" href="/memberships">Free &amp; Plus plans <ArrowUpRight size={16} /></Link></div>
         {kitty && <Link className="final-release-link" href={launchHref(kitty)}>Release notes &amp; Android download <ArrowUpRight size={14} /></Link>}
       </article>
       <article className="final-product lisa-product">
         <div className="final-product-top"><span className="final-product-icon">{icon(lisa, <AudioLines size={27} />)}</span><span className="quiet-status">WINDOWS COMPANION</span></div>
-        <span className="product-index">02 / ON-SCREEN AI</span><h3>LISA AI</h3><p>An illustrated AI character for your desktop, with conversation, voice and a room to explore. Meet LISA and see what the current build can do.</p>
-        <div className="lisa-work-preview"><Image src="/lisa/lisa-character-2d-v1.webp" alt="Illustrated LISA character artwork" width={600} height={400} loading="lazy" /><span>LISA / 2D CHARACTER ART</span></div>
+        <span className="product-index">02 · ON-SCREEN AI</span><h3>LISA AI</h3><p>An illustrated AI character for your desktop, with conversation, voice and a room to explore. Meet LISA and see what the current build can do.</p>
+        <div className="lisa-work-preview"><Image src="/lisa/lisa-character-2d-v1.webp" alt="Illustrated LISA character artwork" width={600} height={400} loading="lazy" /><span>LISA · 2D CHARACTER ART</span></div>
         <div className="final-product-actions"><Link className="button button-outline" href="/lisa-ai">Meet LISA <ArrowUpRight size={16} /></Link><Link className="text-link" href="/lisa-ai#lisa-plans-heading">$99 purchase details <ArrowUpRight size={16} /></Link></div>
       </article>
     </div>

@@ -6,7 +6,7 @@ export default function NotFound() {
     <>
       <SiteHeader />
       <main id="main" className="not-found">
-        <span className="micro-label">404 / UNCHARTED TERRITORY</span>
+        <span className="micro-label">404 · UNCHARTED TERRITORY</span>
         <h1>
           This idea hasn’t
           <br />

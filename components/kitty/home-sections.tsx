@@ -2,9 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Cpu, AudioLines, Bot } from "lucide-react";
 import { type Launch, launchHref, fileSize, downloadHref, isWebsiteLaunch } from "@/lib/launches";
-import { homepageFounders, mediaHref, socialLabels, type CompanyProduct, type CompanySettings, type SocialLinks, type TeamMember } from "@/lib/company-content";
+import { homepageFounders, mediaHref, socialLabels, type CompanyProduct, type SocialLinks, type TeamMember } from "@/lib/company-content";
 import { AppIcon } from "./secretchat";
 import { publicSiteHref } from "@/lib/site-metadata";
+import { FOUNDER_LINKEDIN, SUPPORT_EMAIL } from "@/lib/company-contact";
 
 function ProductIcon({product}:{product:CompanyProduct}) {
   const Icon=product.slug==="sentinel"?Bot:product.slug==="lisa-ai"?AudioLines:Cpu;
@@ -38,12 +39,16 @@ export function TeamProfiles({members}:{members:TeamMember[]}){
     <div className="founder-socials">{Object.entries(person.links).filter(([,url])=>!!url).map(([key,url])=><a key={key} href={publicSiteHref(url!)} target="_blank" rel="noopener noreferrer" aria-label={`${person.name} on ${socialLabels[key as keyof SocialLinks]}`}>{socialLabels[key as keyof SocialLinks]} <ArrowUpRight size={12}/></a>)}</div>
   </article>)}</div>;
 }
-export function Team({members,settings}:{members:TeamMember[];settings:CompanySettings}){
+export function Team({members}:{members:TeamMember[]}){
   const founders = homepageFounders(members);
+  const founder = founders[0];
+  const founderLinkedIn = founder?.links.linkedin || FOUNDER_LINKEDIN;
   return <section id="about" className="team-section business-founder wrap" aria-labelledby="founder-heading">
-    <div className="section-heading"><div><span className="eyebrow">THE PEOPLE BUILDING KITTY</span><h2 id="founder-heading">Meet the founders.</h2></div></div>
-    <div className="company-founder-content">{founders.length>0?<TeamProfiles members={founders}/>:<p className="quiet-empty">Founder profiles will be shared here.</p>}
-      <div className="team-copy"><span className="eyebrow">SMALL TEAM. REAL WORK.</span><p>{settings.team_intro}</p><Link href="/team" className="button button-gold full-team-link">See the full team <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
+    <div className="section-heading"><div><span className="eyebrow">THE PEOPLE BUILDING KITTY</span><h2 id="founder-heading">Meet the founder.</h2></div></div>
+    <div className="home-founder-profile">
+      <div className="home-founder-identity"><h3>{founder?.name || "Virat Anand"}</h3><span>{founder?.role || "Founder & CEO"}</span></div>
+      <div className="home-founder-links"><a href={`mailto:${SUPPORT_EMAIL}`}>Email KITTY CORP <ArrowUpRight size={14} aria-hidden="true"/></a><a href={publicSiteHref(founderLinkedIn)} target="_blank" rel="noopener noreferrer">Virat Anand on LinkedIn <ArrowUpRight size={14} aria-hidden="true"/></a></div>
+      <Link href="/team" className="button button-gold full-team-link">See the full team <ArrowUpRight size={18} aria-hidden="true"/></Link>
     </div>
   </section>;
 }
