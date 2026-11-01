@@ -4,6 +4,7 @@ export function canonicalSiteUrl(value: string) {
   try {
     const url = new URL(value);
     if (url.hostname.toLowerCase() === "kittycorp.vercel.app") url.hostname = canonicalHost;
+    if (url.hostname.toLowerCase() === "www.thekittycorp.com") url.hostname = canonicalHost;
     return url.toString().replace(/\/$/, "");
   } catch {
     return `https://${canonicalHost}`;
@@ -15,6 +16,21 @@ export function publicSiteHref(value: string) {
     const url = new URL(value);
     if (url.hostname.toLowerCase() !== "kittycorp.vercel.app") return value;
     url.hostname = canonicalHost;
+    return url.toString();
+  } catch {
+    return value;
+  }
+}
+export function canonicalSocialUrl(value: string) {
+  try {
+    const url = new URL(value);
+    if (url.hostname.toLowerCase().replace(/^www\./, "") === "instagram.com") {
+      url.protocol = "https:";
+      url.hostname = "www.instagram.com";
+      url.search = "";
+      url.hash = "";
+      url.pathname = `${url.pathname.replace(/\/+$/, "")}/`;
+    }
     return url.toString();
   } catch {
     return value;
