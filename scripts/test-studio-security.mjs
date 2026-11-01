@@ -177,9 +177,7 @@ await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-host","assis
 outcome={success:true,hostname:"thekittycorp.com",action:"contact"};
 await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-action","assistant"),e=>e.status===400);
 
-// The Studio login request accepts an empty proof only while the server policy allows it.
-let turnstileEnabled = false;
-let loginProof;
+// Studio Google login remains usable when the public Turnstile widget is unavailable.
 const loginRoute = source("app/api/admin/login/route.ts", {
   "@/lib/kitty-server": {
     HttpError,
@@ -195,17 +193,11 @@ const loginRoute = source("app/api/admin/login/route.ts", {
     beginStudioGoogle: async () => "https://mgkghnblbisubympudaa.supabase.co/auth/v1/authorize?provider=google",
     studioGoogleStatus: async () => ({providerReady:true}),
   },
-  "@/lib/turnstile-server": {
-    verifyTurnstile: async (_request,token,action) => {
-      loginProof={token,action};
-      if(turnstileEnabled && !token) throw new HttpError("Please complete the security check.",400);
-    },
-  },
 });
 const startLogin = body => loginRoute.POST(new Request(env.SITE_URL+"/api/admin/login",{method:"POST",headers:{origin:env.SITE_URL,"content-type":"application/json"},body:JSON.stringify(body)}));
 let loginResponse=await startLogin({});
-assert.equal(loginResponse.status,200); assert.equal(loginProof.action,"studio-login"); assert.equal(loginProof.token,undefined);
-turnstileEnabled=true; loginProof=undefined;
-loginResponse=await startLogin({});
-assert.equal(loginResponse.status,400); assert.equal(loginProof.action,"studio-login"); assert.equal(loginProof.token,undefined);
-console.log("PASS: Google-only PKCE flow, owner UUID/email/subject checks, expired/tampered cookies, code replay, canonical callback, Lax session handoff, direct-session rejection/revocation, empty-proof Studio login when allowed, and Turnstile fail-closed/host/action/replay checks.");
+assert.equal(loginResponse.status,200);
+assert.equal((await loginResponse.json()).googleUrl,"https://mgkghnblbisubympudaa.supabase.co/auth/v1/authorize?provider=google");
+loginResponse=await startLogin({turnstileToken:""});
+assert.equal(loginResponse.status,200);
+console.log("PASS: Google-only PKCE flow, owner UUID/email/subject checks, expired/tampered cookies, code replay, canonical callback, Lax session handoff, direct-session rejection/revocation, Studio login without Turnstile, and Turnstile fail-closed/host/action/replay checks.");

@@ -102,7 +102,7 @@ The header and footer technology marquees identify tools/platforms the owner rep
 
 KITTY AI is a lazy-loaded website guide using a separate stateless route on the existing KITTY AI Worker. It reads published website information, never private Android histories, Studio records or unpublished drafts. Open Studio → **KITTY AI & security** to change visibility, name, greeting, guidance and reply limits. These are instructions, not model training. Conversations clear on refresh. Fixed privacy and accuracy rules remain in place.
 
-Managed Cloudflare Turnstile protects Studio sign-in, forms and assistant requests. Server verification checks the action and hostname and fails closed when protection is configured. This does not put the shared Vercel hostname behind Cloudflare WAF.
+Managed Cloudflare Turnstile protects public forms and assistant requests. Server verification checks the action and hostname and fails closed when protection is configured. Studio sign-in instead relies on same-origin validation, database rate limits, and Google identity verification against the single approved administrator account. This does not put the shared Vercel hostname behind Cloudflare WAF.
 
 Studio uses Google-only sign-in for the existing approved owner account. See **GOOGLE_STUDIO_SETUP.md** for provider setup and recovery. Only a live session granted by the server-verified Google flow can use Studio or its database policies. The website has no ID/password login or public Studio hyperlink. HttpOnly, Secure, SameSite=Lax cookies support the return from Google; sensitive writes still require same-origin validation.
 
