@@ -1,6 +1,6 @@
-## Latest website release — 14 October 2026
+## Current website source — 1 November 2026
 
-Historical handover files describe earlier releases. The current 1 November branch redesigns the homepage around Digital Solutions and Intelligence & Robotics, removes the duplicate showcase sections and Suvid AI public pages, fixes the Google Studio sign-in gate, and makes `https://thekittycorp.com` canonical. It is still under verification; do not describe these source changes as live until the feature branch is reviewed and deployed.
+GitHub `main` contains the premium homepage and the latest responsive light/dark theme control. The site follows the visitor’s system appearance by default, remembers a manual theme choice, and matches Cloudflare Turnstile to the selected theme. `https://thekittycorp.com` is canonical; the former `kittycorp.vercel.app` hostname redirects while preserving paths. The production build, TypeScript check and lint pass; lint reports six existing warnings in untouched files. Confirm the official domain serves the new header before treating a Vercel preview as a production release.
 Read `handover/FINAL-STATUS-2026-10-15.md` for the verified SecretChat 2.0 website listing, current public links and remaining owner checks.
 
 # Kitty Corp website
