@@ -9,11 +9,18 @@ const getClientSnapshot = () => true;
 const getServerSnapshot = () => false;
 
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
 
-  const isDark = mounted && resolvedTheme === "dark";
-  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  const isSystem = !theme || theme === "system";
+  const activeTheme = mounted ? resolvedTheme : "system";
+  const nextTheme = isSystem
+    ? activeTheme === "dark" ? "light" : "dark"
+    : theme === "light" ? "dark" : "system";
+  const label = isSystem
+    ? `System appearance. Switch to ${nextTheme} mode.`
+    : `${theme === "dark" ? "Dark" : "Light"} appearance. Return to system appearance.`;
+  const displayTheme = mounted ? (isSystem ? "System" : theme === "dark" ? "Dark" : "Light") : "System";
 
   return (
     <button
@@ -21,10 +28,10 @@ export function ThemeToggle() {
       className="theme-toggle"
       aria-label={label}
       title={label}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => setTheme(nextTheme)}
     >
-      {isDark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
-      <span>{isDark ? "Light" : "Dark"}</span>
+      {activeTheme === "dark" ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
+      <span>{displayTheme}</span>
     </button>
   );
 }
