@@ -10,10 +10,10 @@ import { serviceSegments } from "@/lib/business-content";
 export function BusinessProof({ launches }: { launches: Launch[] }) {
   const selected = [...launches].sort((a,b) => Number(isWebsiteLaunch(b))-Number(isWebsiteLaunch(a))).slice(0,3);
   return <section id="work" className="business-proof wrap" aria-labelledby="proof-title">
-    <div className="section-heading"><div><span className="eyebrow">PROOF YOU CAN OPEN</span><h2 id="proof-title">Built here. Ready to explore.</h2></div><p>Our own published products demonstrate the work we do. Client work is shown only with permission.</p></div>
+    <div className="section-heading"><div><span className="eyebrow">SELECTED WORK</span><h2 id="proof-title">Open the work. See for yourself.</h2></div><p>Published websites and app releases from KITTY CORP, with links to the real project or product.</p></div>
     <div className="business-proof-grid">{selected.map(item => <article className="business-proof-card" key={item.id}>
       {isWebsiteLaunch(item) && item.screenshot_path && <Link href={launchHref(item)} className="business-proof-image" data-conversion="portfolio_view" data-context="home"><Image unoptimized src={mediaHref(item.screenshot_path)} width={900} height={600} sizes="(max-width: 700px) 92vw, 30vw" loading="lazy" alt={item.name+" published website preview"}/></Link>}
-      <div className="business-proof-copy"><div className="business-proof-label"><AppIcon launch={item} size={36}/><span className="micro-label">INTERNAL PRODUCT · {isWebsiteLaunch(item)?"PUBLISHED WEBSITE":"ANDROID RELEASE"}</span></div><h3>{item.name}</h3><p>{item.tagline}</p><Link className="text-link" href={launchHref(item)} data-conversion="portfolio_view" data-context="home">View the product <ArrowUpRight size={15}/></Link></div>
+      <div className="business-proof-copy"><div className="business-proof-label"><AppIcon launch={item} size={36}/><span className="micro-label">{isWebsiteLaunch(item)?"PUBLISHED WEBSITE":"ANDROID APP RELEASE"}</span></div><h3>{item.name}</h3><p>{item.tagline}</p><Link className="text-link" href={launchHref(item)} data-conversion="portfolio_view" data-context="home">View project <ArrowUpRight size={15}/></Link></div>
     </article>)}</div>
     {!selected.length && <p>Explore our published releases and development notes in the product directory.</p>}
     <Link className="text-link" href="/products" data-conversion="portfolio_view" data-context="home">Explore all our work <ArrowUpRight size={15}/></Link>

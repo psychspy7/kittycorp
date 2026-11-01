@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Bot, Code2, Sprout, Sun, Workflow } from "lucide-react";
 
@@ -38,26 +39,26 @@ export function CompanyHero() {
   return <section className="company-hero page-gutter" aria-labelledby="company-hero-title">
     <div className="company-hero-copy">
       <span className="company-kicker">INDEPENDENT TECHNOLOGY COMPANY · INDIA</span>
-      <h1 id="company-hero-title">We build digital products.<br /><em>And what comes next.</em></h1>
-      <p>KITTY CORP creates websites, software and practical AI systems for businesses, while exploring intelligent products and robotics of our own.</p>
+      <h1 id="company-hero-title">Built for business.<br /><em>Curious about what’s next.</em></h1>
+      <p>We build websites, software and AI workflows for businesses. In our own lab, we explore intelligent systems and robotics.</p>
       <div className="company-hero-actions">
-        <Link className="company-button company-button-light" href="/projects">Discuss a project <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        <Link className="company-text-link" href="#divisions">Explore our divisions <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link className="company-button company-button-light" href="/projects">Start a project <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link className="company-text-link" href="#divisions">Explore what we build <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
-      <p className="company-hero-note">A small team. Real work in progress. No inflated promises.</p>
+      <p className="company-hero-note">Independent by design. Robotics ideas are still early.</p>
     </div>
-    <aside className="company-hero-index" aria-label="KITTY CORP divisions">
-      <span className="company-kicker">TWO AREAS OF WORK</span>
-      <a href="#digital-solutions"><span>01</span><strong>Digital Solutions</strong><ArrowUpRight size={16} aria-hidden="true" /></a>
-      <a href="#intelligence-robotics"><span>02</span><strong>Intelligence &amp; Robotics</strong><ArrowUpRight size={16} aria-hidden="true" /></a>
-      <div className="company-index-foot"><span>BUILDING INDEPENDENTLY</span><span>EST. BY A SMALL TEAM</span></div>
-      <svg className="company-motion-graphic" viewBox="0 0 280 64" aria-hidden="true" focusable="false">
-        <path d="M8 21H272M8 43H272" />
-        <circle className="company-motion-anchor" cx="8" cy="21" r="3" />
-        <circle className="company-motion-anchor" cx="272" cy="43" r="3" />
-        <circle className="company-motion-node company-motion-node-one" cx="8" cy="21" r="2.5" />
-        <circle className="company-motion-node company-motion-node-two" cx="272" cy="43" r="2.5" />
-      </svg>
+    <aside className="company-hero-index" aria-label="KITTY CORP’s two divisions">
+      <div className="company-index-heading"><span className="company-kicker">ONE STUDIO · TWO DIVISIONS</span><span className="company-index-code">KC&nbsp; 01—02</span></div>
+      <div className="company-hero-mark-stage">
+        <span className="company-stage-coordinate">KITTY CORP · INDIA</span>
+        <Image className="company-hero-mark" src="/brand/monogram-v1.webp" width={512} height={512} sizes="(max-width: 850px) 164px, 210px" loading="eager" alt="KITTY CORP blue and gold monogram" />
+        <span className="company-stage-caption">INDEPENDENT TECHNOLOGY</span>
+      </div>
+      <nav className="company-hero-index-links" aria-label="Explore our divisions">
+        <a className="company-index-link" href="#digital-solutions"><span className="company-index-number">01</span><span className="company-index-link-copy"><strong>Digital Solutions</strong><small>Web · software · AI</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>
+        <a className="company-index-link" href="#intelligence-robotics"><span className="company-index-number">02</span><span className="company-index-link-copy"><strong>Intelligence &amp; Robotics</strong><small>KITTY BUDDY · AGRIYAAN · URJAYAAN</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>
+      </nav>
+      <div className="company-index-foot"><span>INDEPENDENT</span><span>BUILT IN INDIA</span></div>
     </aside>
   </section>;
 }

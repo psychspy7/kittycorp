@@ -52,3 +52,47 @@ Keep the gold for small markers, active states and restrained emphasis. Avoid ne
 - Keep only one primary home for each repeated product or idea.
 - Check keyboard focus, mobile line breaks, reduced motion and public links before release.
 - Keep the canonical domain `https://thekittycorp.com`; legacy `kittycorp.vercel.app` URLs should redirect while retaining paths and query parameters.
+
+## Company presence refresh — November 2026
+
+### Typography scale
+
+- Keep Runiga for display headings and Geist for navigation, body copy, controls and labels.
+- Use a 16px base and the 1.25 scale: 16, 20, 25, 31, 39, 49, 61 and 76px.
+- Use `clamp()` for fluid display sizes: hero 56–88px, division headings 39–61px, section headings 31–49px, body 15–18px.
+- Keep body line length near 65 characters and use restrained negative tracking only on large headings.
+
+### Spacing and grid
+
+- Keep the centered 1320px content grid and use `clamp(24px, 6vw, 100px)` horizontal gutters.
+- Use a 12-column editorial grid on wide screens and a single content column below 850px.
+- Section rhythm: `clamp(72px, 9vw, 136px)`; related content: `clamp(20px, 3vw, 40px)`; compact controls: 12–20px.
+- Keep the division boundary structural, with a one-pixel rule and an open layout rather than nested floating cards.
+
+### Color matrix
+
+| Role | Dark system appearance | Light system appearance |
+| --- | --- | --- |
+| Main background | `#0f1211` | `#f6f5f0` |
+| Quiet surface | `#171b19` | `#fffefa` |
+| Raised surface | `#202522` | `#eeece4` |
+| Main text | `#f3f2ec` | `#20231f` |
+| Secondary text | `#a7ada5` | `#646861` |
+| Structural line | `#f3f2ec24` | `#20231f24` |
+| Warm metal accent | `#c8ad79` | `#8b6c3d` |
+
+Use the visitor's system appearance. Keep the gold for small hierarchy cues, state labels and selected links; avoid colored glow, novelty gradients and fake company metrics.
+
+### Homepage hierarchy
+
+- Lead with a concise company promise and two direct paths: start a project or explore the divisions.
+- Present Digital Solutions and Intelligence & Robotics as equally intentional but distinct areas.
+- Use the real KITTY CORP mark as the hero's visual anchor; do not use stock or invented product photography.
+- Label published websites and Android releases accurately. Keep project stage labels for robotics concepts.
+- Keep the feedback link compact, homepage founder details text-only, and the full roster on `/team`.
+
+### Motion and accessibility
+
+- Use the existing organic easing token for hover and navigation transitions, limited to color and two-to-four pixel movement.
+- Keep the existing low-motion identity signal; hide decorative movement for `prefers-reduced-motion`.
+- Maintain visible keyboard focus, usable mobile targets and no layout shifts from the brand image.
