@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Sprout, Radio, MoveUpRight } from "lucide-react";
+import { ArrowUpRight, Radio, MoveUpRight } from "lucide-react";
 import "./intelligence-showcase.css";
 
 function BuddyVisual() {

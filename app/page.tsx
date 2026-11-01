@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { HelpfulAnswers } from "@/components/kitty/final-home";
 import { SiteHeader } from "@/components/kitty/site";
 import { HomeProcess } from "@/components/kitty/professional-home";
@@ -11,7 +12,15 @@ import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { BusinessProof, BusinessEnquiry } from "@/components/kitty/business-conversion";
 import { CompanyDivisions, CompanyHero } from "@/components/kitty/company-home";
 export const dynamic = "force-dynamic";
-export const metadata = pageMetadata("Digital solutions & robotics", "KITTY CORP builds websites, software and practical AI systems for businesses, alongside early research in robotics and intelligent products.", "/");
+const homeMetadata = pageMetadata(
+  "Websites, AI & robotics",
+  "Independent technology company building business websites, apps and AI automation, alongside early robotics concepts KITTY BUDDY, AGRIYAAN and URJAYAAN.",
+  "/",
+);
+export const metadata: Metadata = {
+  ...homeMetadata,
+  title: "KITTY CORP | Websites, AI & robotics",
+};
 export default async function Home() {
   const [launches, members, settings] = await Promise.all([publishedLaunches().catch(()=>[]),companyTeam(),companySettings()]);
   const sameAs=Object.entries(settings.socials).filter(([key,url])=>!!url&&key!=="website"&&(key!=="linkedin"||!isFounderLinkedIn(url))).map(([,url])=>url);

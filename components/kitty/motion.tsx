@@ -1,6 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 export function Reveal({
   children,
   className = "",
@@ -30,7 +31,7 @@ export function BrandLoader() {
   if (!visible) return null;
   return (
     <div className="brand-loader" aria-hidden="true">
-      <img src="/brand/monogram.png" alt="" width="90" height="90" />
+      <Image src="/brand/monogram.png" alt="" width={90} height={90} unoptimized loading="eager" />
       <span>AN IDEA TAKES SHAPE</span>
       <div className="loader-line" />
     </div>

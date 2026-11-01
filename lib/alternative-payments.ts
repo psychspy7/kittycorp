@@ -3,7 +3,6 @@ import { createHash,createHmac,randomUUID,timingSafeEqual } from "node:crypto";
 import { z } from "zod";
 import { HttpError,setting } from "./kitty-server";
 import { providerConfiguration } from "./commerce-server";
-import type { PaymentProvider } from "./commerce";
 import { recordPayment,type LedgerOrder } from "./payment-ledger";
 export const alternativeOrderSchema=z.object({amount:z.number().int().min(100).max(100_000_000),purpose:z.enum(["project","donation"]),reference:z.string().trim().max(80).regex(/^[\p{L}\p{N} ._\/-]*$/u).default(""),turnstileToken:z.string().max(2048).optional(),email:z.string().email().max(254).optional(),phone:z.string().regex(/^\+?[0-9]{10,15}$/).optional()}).strict();
 const contextSchema=z.object({provider:z.enum(["paypal","cashfree"]),orderId:z.string().regex(/^[A-Za-z0-9_-]{3,100}$/),clientHash:z.string().length(64),amount:z.number().int().min(100).max(100_000_000),currency:z.enum(["INR","USD"]),purpose:z.enum(["project","donation"]),reference:z.string().max(80),testMode:z.boolean(),expires:z.number().int()}).strict();

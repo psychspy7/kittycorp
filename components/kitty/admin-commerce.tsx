@@ -2,7 +2,7 @@
 import { useCallback,useEffect,useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { commerceCredentialFields,credentialLabels,providerFields,providerNames,providers,type CommerceCredential,type CommerceSettings,type ProviderReadiness,type PaymentProvider } from "@/lib/commerce";
+import { credentialLabels,providerFields,providerNames,providers,type CommerceCredential,type CommerceSettings,type ProviderReadiness,type PaymentProvider } from "@/lib/commerce";
 import type { LedgerOrder } from "@/lib/payment-ledger";
 import { ImageUpload,studioRequest } from "./studio-content-helpers";
 type Reply={readiness:Record<PaymentProvider,ProviderReadiness>;settings:CommerceSettings;version:string|null;configured:Record<CommerceCredential,boolean>;overridden:CommerceCredential[]};
