@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-import { Turnstile } from "./turnstile";
+import { Turnstile, type TurnstileStatus } from "./turnstile";
 const AdminLisaPreorders = dynamic(() => import("./admin-lisa-preorders"));
 const AdminProjectQuotes = dynamic(() => import("./admin-project-quotes"));
 const AdminRewards = dynamic(() => import("./admin-rewards"));
@@ -99,7 +99,9 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileStatus, setTurnstileStatus] = useState<TurnstileStatus>("loading");
   const [verificationAttempt, setVerificationAttempt] = useState(0);
+  const canSignIn = turnstileStatus === "disabled" || (turnstileStatus === "verified" && turnstileToken.length > 0);
   useEffect(() => {
     let active = true;
     const params = new URLSearchParams(window.location.search);
@@ -111,6 +113,12 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
   }, []);
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!canSignIn) {
+      setError(turnstileStatus === "error"
+        ? "The security check could not load. Refresh the page and try again."
+        : "Complete the security check above before signing in.");
+      return;
+    }
     setError("");
     setBusy(true);
     try {
@@ -151,13 +159,26 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
           </p>
         ) : (
           <form onSubmit={login}>
-            <Turnstile action="studio-login" onToken={setTurnstileToken} resetKey={verificationAttempt} />
+            <Turnstile
+              action="studio-login"
+              appearance="always"
+              onToken={(token) => { setTurnstileToken(token); if (token) setError(""); }}
+              onStatusChange={setTurnstileStatus}
+              resetKey={verificationAttempt}
+            />
+            <p className="privacy-note" role="status" aria-live="polite">
+              {turnstileStatus === "loading" && "Loading the security check…"}
+              {turnstileStatus === "ready" && "Complete the security check above to continue."}
+              {turnstileStatus === "verified" && "Security check complete."}
+              {turnstileStatus === "disabled" && "Google sign-in is protected by the approved account check."}
+              {turnstileStatus === "error" && "The security check could not load. Refresh this page to try again."}
+            </p>
             {error && (
               <p className="form-error" role="alert">
                 {error}
               </p>
             )}
-            <button className="button button-gold" disabled={busy}>
+            <button className="button button-gold" disabled={busy || !canSignIn}>
               {!busy && <Image unoptimized src="/ecosystem/google-v1.svg" alt="" width={18} height={18} />}
               {busy ? "Opening Google…" : "Sign in with Google"}
               {busy ? (

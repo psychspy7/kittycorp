@@ -93,7 +93,7 @@ The website guide uses the real KITTY AI backend through a separate stateless en
 
 Open `/kitten` and choose **Sign in with Google**. Use the approved owner Google account. Google setup and recovery are documented in **GOOGLE_STUDIO_SETUP.md**. The provider client secret stays in Supabase. Password-only sessions and raw Google sessions outside the verified website flow cannot edit the website database. A team profile does not grant Studio access.
 
-Turnstile is currently disabled in the production application while its widget configuration is being repaired. Google-only Studio authorization, approved owner identity checks, rate limits and same-origin checks remain active. Enquiries and other public forms keep their existing server validation and spam checks.
+Turnstile is enabled in production. Studio displays the check before Google sign-in and does not submit until it has returned a token. Google-only Studio authorization, approved owner identity checks, rate limits and same-origin checks remain active. Enquiries and other public forms keep their existing server validation and spam checks.
 
 AI and Turnstile credentials are encrypted in the dedicated website database using the private deployment gateway. The current production setup does not require copying new secrets into GitHub. If you rotate `FEEDBACK_GATEWAY_TOKEN`, re-encrypt the runtime configuration and update its private database hash in the same planned change. Keep a private configuration backup. `.env.example` contains safe names and optional overrides only.
 
