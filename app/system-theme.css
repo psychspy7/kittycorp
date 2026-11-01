@@ -242,3 +242,339 @@ html[data-theme="dark"] .company-theme .theme-toggle { color: var(--company-ink)
   html[data-theme] { transition: none; }
   .theme-toggle { transition: none; }
 }
+
+/* -------------------------------------------------------------------------
+   Cross-site appearance contract
+   Keep legacy page components readable in both modes, not just company-theme.
+   ------------------------------------------------------------------------- */
+
+html[data-theme="light"] {
+  --surface: #fffefa;
+  --surface-soft: #eeede5;
+  --surface-raised: #ffffff;
+  --text-primary: #252620;
+  --text-secondary: #5f6259;
+  --text-tertiary: #73766d;
+  --line: #cfcec3;
+  --line-strong: #aaa99d;
+  --control-bg: #fffefa;
+  --control-text: #252620;
+  --control-border: #aaa99d;
+  --link: #75572b;
+  --focus: #87652f;
+}
+
+html[data-theme="dark"] {
+  --surface: #171a18;
+  --surface-soft: #202421;
+  --surface-raised: #242925;
+  --text-primary: #f0efe9;
+  --text-secondary: #b6bbb2;
+  --text-tertiary: #9ca39a;
+  --line: #454b44;
+  --line-strong: #626a60;
+  --control-bg: #101210;
+  --control-text: #f0efe9;
+  --control-border: #596157;
+  --link: #dfc58f;
+  --focus: #d4b879;
+}
+
+html[data-theme] body {
+  background: var(--ink);
+  color: var(--foreground);
+  transition: background-color .24s ease, color .24s ease;
+}
+
+/* Light mode: cover the older public-page styles as well as the newer homepage. */
+html[data-theme="light"] :is(
+  .public-page, .contact-page, .article-main, .article-header, .article-body,
+  .research-rows, .research-row, .investor-grid, .investor-conversation,
+  .product-page-intro, .product-page-principles, .product-development,
+  .team-page, .account-page, .legal-page, .pricing-page, .payments-page,
+  .projects-page, .services-page, .products-page, .directory-page,
+  .memberships-page, .secretchat-page, .payments-hub-page, .appointments-page,
+  .play-page, .journal-list-page, .journal-article, .article-end
+) {
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+html[data-theme="light"] :is(
+  .page-heading h1, .page-heading h2, .article-header h1, .article-body h2,
+  .research-row h2, .investor-grid h2, .product-editorial h3,
+  .product-description, .product-page-principles h2, .contact-copy h1,
+  .pricing-process h2, .product-plans h2, .lisa-development h2,
+  .preorder-terms h2, .preorder-terms h3, .preorder-form h2,
+  .preorder-reservation h2, .checkout-card h2, .payment-path h3,
+  .quote-summary h2, .secretchat-page h1, .secretchat-page h2,
+  .secretchat-page h3, .directory-page h1, .directory-page h2,
+  .directory-page h3, .form-heading h2, .contact-success h2
+) {
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] :is(
+  .page-heading > p, .article-header > p, .article-body p, .research-row p,
+  .investor-grid p, .investor-grid li, .product-note,
+  .product-page-principles p, .product-development p, .contact-copy > p,
+  .public-note, .back-link, .empty-message, .quiet-empty,
+  .service-price-card > p, .service-price-card ul, .pricing-process p,
+  .pricing-process li span, .appointment-layout aside ol,
+  .appointment-layout aside p, .membership-lead, .membership-card p,
+  .membership-help p, .product-plan > p, .plan-price span,
+  .preorder-terms p, .preorder-form p, .preorder-reservation p,
+  .checkout-card > p, .checkout-card .checkout-methods, .quote-scope,
+  .quote-payment-choices span, .quote-pending p, .quote-payment-ready > p,
+  .project-start-grid aside > p, .project-flow, .project-ai-helper p,
+  .payment-path-label, .payment-path p, .payment-hub-security,
+  .secretchat-page p, .secretchat-page details, .secretchat-page code,
+  .directory-page p, .directory-page .micro-label, .company-intro p,
+  .company-story p, .secretchat-privacy p, .secretchat-section p,
+  .form-submit-row > p, .form-heading > span, .field-count,
+  .contact-success p, .appointment-submit p, .existing-client-note
+) {
+  color: var(--text-secondary);
+}
+
+html[data-theme="light"] :is(
+  .contact-form, .contact-success, .login-card, .admin-header,
+  .admin-stats > div, .admin-panel, .editor-dialog, .contact-card,
+  .project-form, .payment-panel, .pricing-card, .plan-card,
+  .account-panel, .early-access-card, .secretchat-feature-grid article,
+  .secretchat-release, .launch-card, .secretchat-install, .secretchat-panel,
+  .apk-upload, .service-price-card, .product-plan, .lisa-plan,
+  .appointment-form, .appointment-success, .membership-card,
+  .quote-summary, .quote-payment-choices button, .checkout-card,
+  .checkout-loading, .payment-path, .payment-path-contribution,
+  .quote-pending, .quote-payment-ready, .project-ai-helper,
+  .studio-provider-readiness, .preorder-form, .preorder-reservation,
+  .directory-page .product-card, .team-profile, .team-card,
+  .business-proof-card, .quick-enquiry-form, .labs-summary-grid > a,
+  .segment-links a, .project-start-grid aside, .membership-account,
+  .membership-help, .studio-reward-result
+) {
+  color: var(--text-primary);
+  background-color: var(--surface);
+  border-color: var(--line);
+  box-shadow: 0 10px 28px #29271c0a;
+}
+
+html[data-theme="light"] :is(
+  .service-price-card:nth-child(4), .lisa-plan, .membership-paused,
+  .quote-payment-choices button[aria-pressed="true"], .quote-pending,
+  .quote-payment-ready, .project-ai-helper, .payment-path-contribution,
+  .studio-provider-readiness, .product-plan, .appointment-success,
+  .checkout-loading, .membership-help
+) {
+  background-color: var(--surface-soft);
+}
+
+html[data-theme="light"] :is(
+  .site-footer, .technology-ecosystem, .story-section, .updates-section,
+  .vision-section, .film-strip, .research-section, .company-story-section
+) {
+  color: var(--text-primary);
+  background: var(--surface-soft);
+  border-color: var(--line);
+}
+
+html[data-theme="light"] :is(
+  .site-footer p, .site-footer .micro-label, .site-footer .footer-bottom,
+  .site-footer .footer-links a, .technology-ecosystem p,
+  .story-copy > p, .vision-card p, .film-strip p, .footer-top p
+) {
+  color: var(--text-secondary);
+}
+
+html[data-theme="light"] :is(
+  .story-grid h2, .vision-card h3, .flagship-copy h2, .update-info h3,
+  .film-strip h3, .section-heading h2, .business-proof-copy h3,
+  .labs-summary-grid h3, .segment-links h3, .achievement-note h3
+) {
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] :is(
+  .business-proof-card, .labs-summary-grid > a, .segment-links a,
+  .team-card, .team-profile, .research-row, .update-row
+) {
+  border-color: var(--line);
+}
+
+html[data-theme="light"] :is(
+  .text-link, .company-text-link, .footer-links a, .existing-client-note a,
+  .public-page a:not(.button):not(.header-cta), .contact-page a:not(.button)
+) {
+  color: var(--link);
+}
+
+html[data-theme="light"] :is(
+  .button-outline, .header-cta, .membership-account button,
+  .membership-error, .checkout-card .checkout-error,
+  .quote-payment-choices button, .project-form-submit button,
+  .form-submit-row button, .appointment-submit button
+) {
+  color: var(--text-primary);
+  border-color: var(--line-strong);
+}
+
+html[data-theme="light"] :is(.button-outline, .quote-payment-choices button):hover {
+  background-color: var(--surface-soft);
+}
+
+html[data-theme="light"] :is(.button-gold, .button-primary, .project-form-submit button[type="submit"], .form-submit-row button[type="submit"]) {
+  color: #171812;
+  background-color: #d6bd8b;
+  border-color: #b89b62;
+}
+
+html[data-theme="light"] :is(
+  input, textarea, select, option, optgroup,
+  [role="combobox"], [role="listbox"], [role="option"],
+  [data-slot="select-trigger"], [data-slot="select-content"],
+  [data-slot="select-item"], [data-slot="popover-content"]
+) {
+  color: var(--control-text);
+  color-scheme: light;
+}
+
+html[data-theme="light"] :is(input, textarea, select, [data-slot="select-trigger"]) {
+  background-color: var(--control-bg);
+  border-color: var(--control-border);
+}
+
+html[data-theme="light"] :is(select option, select optgroup, [data-slot="select-content"], [data-slot="select-item"], [role="listbox"], [role="option"]) {
+  color: var(--control-text);
+  background-color: var(--surface);
+}
+
+html[data-theme="light"] :is(input, textarea, select)::placeholder {
+  color: #73766d;
+  opacity: 1;
+}
+
+html[data-theme="light"] :is(
+  .form-field label, .form-heading h2, .form-field legend,
+  .quick-enquiry-form .form-field label, .project-form label
+) {
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] :is(
+  .form-field input, .form-field textarea, .form-field select,
+  .quick-enquiry-form .form-field input,
+  .quick-enquiry-form .form-field textarea,
+  .quick-enquiry-form .form-field select
+) {
+  color: var(--control-text);
+  background: var(--control-bg);
+  border-color: var(--control-border);
+  color-scheme: light;
+}
+
+html[data-theme="light"] :is(
+  .form-field input::placeholder, .form-field textarea::placeholder,
+  .quick-enquiry-form input::placeholder, .quick-enquiry-form textarea::placeholder
+) {
+  color: #73766d;
+  opacity: 1;
+}
+
+html[data-theme="light"] :is(
+  .contact-form, .project-form, .quick-enquiry-form,
+  .appointment-form, .preorder-form, .checkout-card
+) :is(button, a[role="button"]) {
+  min-height: 44px;
+}
+
+html[data-theme="dark"] :is(
+  input, textarea, select, option, optgroup,
+  [role="combobox"], [role="listbox"], [role="option"],
+  [data-slot="select-trigger"], [data-slot="select-content"],
+  [data-slot="select-item"], [data-slot="popover-content"]
+) {
+  color: var(--control-text);
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] :is(select option, select optgroup, [data-slot="select-content"], [data-slot="select-item"], [role="listbox"], [role="option"]) {
+  color: var(--control-text);
+  background-color: var(--surface);
+}
+
+html[data-theme="dark"] :is(input, textarea, select, [data-slot="select-trigger"]) {
+  color: var(--control-text);
+  background-color: var(--control-bg);
+  border-color: var(--control-border);
+}
+
+html[data-theme="dark"] :is(input, textarea, select)::placeholder {
+  color: #a7ada5;
+  opacity: 1;
+}
+
+html[data-theme="dark"] :is(
+  .form-field label, .form-heading h2, .form-field legend,
+  .project-form label, .quick-enquiry-form .form-field label
+) {
+  color: var(--text-primary);
+}
+
+html[data-theme="dark"] :is(
+  .contact-form, .project-form, .quick-enquiry-form,
+  .appointment-form, .preorder-form, .checkout-card,
+  .contact-success, .appointment-success
+) :is(button, a[role="button"]) {
+  color: var(--text-primary);
+  border-color: var(--line-strong);
+}
+
+html[data-theme] :is(
+  input, textarea, select, button, [role="button"],
+  [data-slot="select-trigger"], [data-slot="checkbox"],
+  [data-slot="radio-group"], [data-slot="switch"]
+):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 18%, transparent);
+}
+
+html[data-theme] :is(
+  .site-header, .site-footer, .public-page, .contact-page,
+  .contact-form, .project-form, .quick-enquiry-form,
+  .appointment-form, .checkout-card, .theme-toggle,
+  .button, .button-outline, .button-gold
+) {
+  transition: color .22s ease, background-color .22s ease, border-color .22s ease;
+}
+
+html[data-theme="dark"] :is(
+  .button-gold, .button-primary, .project-form-submit button[type="submit"],
+  .form-submit-row button[type="submit"]
+) {
+  color: #171812;
+  background-color: #d6bd8b;
+  border-color: #b89b62;
+}
+
+html[data-theme="dark"] :is(
+  .button-gold, .button-primary, .project-form-submit button[type="submit"],
+  .form-submit-row button[type="submit"]
+):hover {
+  background-color: #e2cca0;
+}
+
+/* Preserve the existing warm, restrained homepage palette in light mode. */
+html[data-theme="light"] .company-theme {
+  --surface: #fffefa;
+  --surface-soft: #eeece5;
+  --text-primary: #252620;
+  --text-secondary: #5f6259;
+  --line: #cfcec3;
+}
+
+/* The theme control cycles System -> opposite system theme -> other theme -> System. */
+.theme-toggle { white-space: nowrap; }
+html[data-theme="light"] .theme-toggle { color: #373830; background: #fffefa; }
+html[data-theme="dark"] .theme-toggle { color: #e6e5df; background: #171a18; }
