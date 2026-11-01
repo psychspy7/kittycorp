@@ -1,7 +1,6 @@
 import {headers} from "next/headers";
 import {LocalCurrencyProvider} from "@/components/kitty/local-currency";
 import type { Metadata } from "next";
-import { Toaster } from "sonner";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/kitty/google-analytics";
 import { googleAnalyticsId } from "@/lib/analytics-config";
@@ -11,6 +10,7 @@ import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
 import { publicAssistantPresentation } from "@/lib/assistant-presentation";
 import { websiteOrigin } from "@/lib/site-metadata";
 import { SiteThemeProvider } from "@/components/kitty/theme-provider";
+import { SiteToaster } from "@/components/kitty/site-toaster";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
@@ -73,7 +73,7 @@ export default async function RootLayout({
         <LocalCurrencyProvider country={country}><LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider></LocalCurrencyProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
-        <Toaster theme="system" position="bottom-right" richColors />
+        <SiteToaster />
         </SiteThemeProvider>
       </body>
     </html>
