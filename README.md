@@ -74,7 +74,7 @@ The services form posts validated briefs to the existing private Studio inbox. I
 
 ## Final interface update
 
-The homepage uses the visitor’s system light or dark appearance, with Geist for reading and Dirtyline 36D for display headings. It introduces Digital Solutions and Intelligence & Robotics, then shows published work once. The founder section has Virat Anand’s name and contact links, with no portrait; **See the full team** opens `/team`, where published profiles and photos are shown. A compact **Feedback** link opens the review form. The old Vercel address redirects to `https://thekittycorp.com`.
+The site follows the visitor’s system light or dark appearance by default; the header switch lets visitors choose and remembers that choice. Geist handles reading and Dirtyline 36D the display headings. The homepage introduces Digital Solutions and Intelligence & Robotics, then shows published work once. The founder section has Virat Anand’s name and contact links, with no portrait; **See the full team** opens `/team`, where published profiles and photos are shown. A compact **Feedback** link opens the review form. The old Vercel address redirects to `https://thekittycorp.com`.
 
 Studio starts with an Overview and direct links to each publishing task. Project briefs are under **Project enquiries & inbox**. Releases remain accessible from the product directory without interrupting the business homepage. The current backend, accounts and hosting environment remain compatible. Publishing extensions are documented below; the encrypted integration setup uses the existing private deployment gateway.
 

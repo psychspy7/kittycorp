@@ -11,7 +11,7 @@ The exact names below come from `.env.example` and the active server code. All a
 | `ADMIN_EMAIL` | Email of the existing Supabase Auth administrator | Existing configuration and Auth user record |
 | `ADMIN_USER_ID` | UUID of that Auth administrator | Existing configuration, Auth record and private database allowlist |
 | `FEEDBACK_GATEWAY_TOKEN` | Private token for login throttling, forms and submission fingerprints | Existing private configuration; its SHA-256 hash must match `kitty_website_private.settings` key `feedback_gateway_hash` |
-| `SITE_URL` | Canonical site/origin setting | `https://kittycorp.vercel.app` for the current public deployment |
+| `SITE_URL` | Canonical site/origin setting | `https://thekittycorp.com` |
 
 Studio at `/kitten` uses Google-only sign-in. `ADMIN_LOGIN_ID` is no longer read by the login route; an existing legacy environment value can be left unused. No administrator password is needed in the website form or hosting environment. Google credentials belong in Supabase provider settings. Do not place `ADMIN_PASSWORD`, `SUPABASE_SECRET_KEY` or a service-role key in the deployed website environment to try to fix a normal login issue. See `GOOGLE_STUDIO_SETUP.md` for the callback, approved account and recovery details.
 

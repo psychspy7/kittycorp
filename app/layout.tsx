@@ -10,6 +10,7 @@ import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
 import { publicAssistantPresentation } from "@/lib/assistant-presentation";
 import { websiteOrigin } from "@/lib/site-metadata";
+import { SiteThemeProvider } from "@/components/kitty/theme-provider";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
@@ -58,20 +59,22 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const country=(await headers()).get("x-vercel-ip-country")||"";
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <meta name="google-adsense-account" content="ca-pub-3607548169127113" />
         <link rel="preload" href="/fonts/geist-latin-v1.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/runiga-v1.otf" as="font" type="font/otf" crossOrigin="anonymous" />
       </head>
       <body>
+        <SiteThemeProvider>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
         <LocalCurrencyProvider country={country}><LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider></LocalCurrencyProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
-        <Toaster theme="light" position="bottom-right" richColors />
+        <Toaster theme="system" position="bottom-right" richColors />
+        </SiteThemeProvider>
       </body>
     </html>
   );

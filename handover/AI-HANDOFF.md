@@ -10,7 +10,7 @@ Copy this into your coding app and replace the last line with the specific work 
 
 ## Context the next maintainer needs
 
-- Public website: `https://kittycorp.vercel.app/`; Studio: `/kitten`, with Google-only owner sign-in. The old `/admins` route is retired. Public pages must not link to Studio.
+- Public website: `https://thekittycorp.com/`; the former `kittycorp.vercel.app` hostname redirects to it. Studio: `https://thekittycorp.com/kitten`, with Google-only owner sign-in. The old `/admins` route is retired. Public pages must not link to Studio.
 - Repository: `https://github.com/psychspy7/kittycorp`; production branch: `main`; Vercel project: `kittycorp`.
 - Website project ref: `mgkghnblbisubympudaa`, name **Kitty Corp Website**, region `ap-south-1`.
 - Private-chat project is separate. Do not pause, migrate or reuse it for website work.

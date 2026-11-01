@@ -96,3 +96,10 @@ Use the visitor's system appearance. Keep the gold for small hierarchy cues, sta
 - Use the existing organic easing token for hover and navigation transitions, limited to color and two-to-four pixel movement.
 - Keep the existing low-motion identity signal; hide decorative movement for `prefers-reduced-motion`.
 - Maintain visible keyboard focus, usable mobile targets and no layout shifts from the brand image.
+
+### Theme control
+
+- Default to the visitor's system appearance and persist an explicit light/dark choice under `kittycorp-theme`.
+- Put the theme control in the primary header; use a compact icon-only control on narrow screens with a 44px target on larger screens.
+- Light mode uses the warm off-white/graphite matrix above; dark mode uses graphite/near-black with warm ivory text and restrained gold details.
+- Set the root theme before paint and synchronize Turnstile's widget theme after a manual change. Keep reduced-motion and keyboard focus behavior intact.

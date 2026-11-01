@@ -15,6 +15,7 @@ function loadScript() {
     const element = document.createElement("script");
     element.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     element.async = true;
+    element.setAttribute("data-cfasync", "false");
     element.onload = () => resolve();
     element.onerror = () => { script = undefined; reject(new Error("Security check could not load.")); };
     document.head.appendChild(element);
@@ -56,21 +57,25 @@ export function Turnstile({ action, onToken, resetKey = 0, siteKey }: Props) {
     let active = true;
     let widget: string | undefined;
     let size: "compact" | "flexible" | undefined;
+    let theme: "light" | "dark" | undefined;
     let observer: ResizeObserver | undefined;
+    let themeObserver: MutationObserver | undefined;
     loadScript().then(() => {
       if (!active || !element.current || !window.turnstile) return;
       setError("");
       const render = () => {
         if (!active || !element.current || !window.turnstile) return;
         const nextSize = element.current.clientWidth < 300 ? "compact" : "flexible";
-        if (widget && nextSize === size) return;
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+        if (widget && nextSize === size && nextTheme === theme) return;
         if (widget) window.turnstile.remove(widget);
         size = nextSize;
+        theme = nextTheme;
         callback.current("");
         widget = window.turnstile.render(element.current, {
         sitekey: effectiveConfig.siteKey,
         action,
-        theme: "light",
+        theme,
         size,
         appearance: "interaction-only",
         callback: (token: string) => { if (active) { setError(""); callback.current(token); } },
@@ -84,10 +89,13 @@ export function Turnstile({ action, onToken, resetKey = 0, siteKey }: Props) {
       render();
       observer = new ResizeObserver(render);
       observer.observe(element.current);
+      themeObserver = new MutationObserver(render);
+      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     }).catch(() => { if (active) setError("Security check could not load. Please refresh and try again."); });
     return () => {
       active = false;
       observer?.disconnect();
+      themeObserver?.disconnect();
       if (widget && window.turnstile) window.turnstile.remove(widget);
     };
   }, [effectiveConfig?.enabled, effectiveConfig?.siteKey, action, resetKey]);
