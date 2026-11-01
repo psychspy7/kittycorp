@@ -22,7 +22,7 @@ export function SecretChatDownload({ launch, className = "" }: { launch: Launch;
 export function SecretChatSection({ launch }: { launch: Launch }) {
   return (
     <section id="secretchat" className="section secretchat-section" aria-labelledby="secretchat-title">
-      <div className="section-kicker"><span>JUST LAUNCHED / SECRETCHAT</span><span className="kicker-line" /></div>
+      <div className="section-kicker"><span>JUST LAUNCHED · SECRETCHAT</span><span className="kicker-line" /></div>
       <div className="secretchat-panel">
         <div className="secretchat-copy">
           <span className="status-pill"><span /> AVAILABLE ON ANDROID · BETA</span>

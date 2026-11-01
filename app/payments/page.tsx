@@ -20,7 +20,7 @@ export default async function PaymentsPage({ searchParams }: { searchParams: Pro
   return <><SiteHeader/><main id="main" className="public-page wrap payments-page">
     <div className="payments-intro">
       <Link href="/payments" className="text-link"><ArrowLeft size={15} aria-hidden="true"/>All plans & payments</Link>
-      <span className="eyebrow">KITTY CORP / {purpose === "donation" ? "SUPPORT" : "PROJECT PAYMENTS"}</span>
+      <span className="eyebrow">KITTY CORP · {purpose === "donation" ? "SUPPORT" : "PROJECT PAYMENTS"}</span>
       <h1>{purpose === "donation" ? "Support the independent work." : "For the work we’re building together."}</h1>
       <p>{purpose === "donation" ? "Make a voluntary contribution towards our products and experiments. Choose your amount, then continue to secure checkout." : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}</p>
       <nav className="payment-purpose-nav" aria-label="Payment type"><Link href="/payments?purpose=project" aria-current={purpose === "project" ? "page" : undefined}>Project payment</Link><Link href="/payments?purpose=donation" aria-current={purpose === "donation" ? "page" : undefined}>Support KITTY</Link><Link href="/memberships">Product plans</Link></nav>

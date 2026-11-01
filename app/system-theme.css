@@ -1,0 +1,95 @@
+/* Use the visitor's OS appearance without adding a client-side theme flash. */
+html { color-scheme: light dark; }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --background: #f6f5f0;
+    --foreground: #252620;
+    --card: #fffefa;
+    --card-foreground: #252620;
+    --popover: #fffefa;
+    --popover-foreground: #252620;
+    --primary: #c9a96c;
+    --primary-foreground: #1d1e1a;
+    --secondary: #ebe9e1;
+    --secondary-foreground: #252620;
+    --muted: #ebe9e1;
+    --muted-foreground: #66675f;
+    --accent: #e9e6dc;
+    --accent-foreground: #252620;
+    --border: #25262024;
+    --input: #25262036;
+    --ring: #997438;
+    --gold: #997438;
+    --ink: #f6f5f0;
+  }
+
+  body { background: var(--ink); color: var(--foreground); }
+  .site-header {
+    color: #252620;
+    background: #f7f6f1ec;
+    border-color: #2526201c;
+  }
+  .site-header.is-scrolled { background: #f7f6f1f7; box-shadow: 0 8px 24px #29271c12; }
+  .site-header .brand,.site-header .navigation,.site-header .navigation a,.site-header .header-account { color: #373830; }
+  .site-header .navigation a:hover,.site-header .header-account:hover { color: #7b5e2c; }
+  .site-header .header-cta { color: #292a24; border-color: #292a2430; }
+  .site-header .menu-toggle { color: #292a24; }
+  .mobile-navigation { color: #252620; background: #fffefa; border-color: #25262024; }
+  .button-outline { color: #252620; border-color: #25262038; }
+  input,textarea,select { color-scheme: light; }
+
+  .company-theme {
+    --company-bg: #f6f5f0;
+    --company-panel: #fffefa;
+    --company-panel-strong: #eeece4;
+    --company-ink: #252620;
+    --company-muted: #66675f;
+    --company-line: #25262022;
+    --company-gold: #8c6b34;
+    color: var(--company-ink);
+    background: var(--company-bg);
+  }
+  .company-theme .site-header { color: var(--company-ink); background: #f7f6f1ec; border-color: var(--company-line); }
+  .company-theme .site-header.is-scrolled { background: #f7f6f1f7; box-shadow: 0 8px 24px #29271c12; }
+  .company-theme .technology-marquee-mini { background: #f7f6f1; border-color: var(--company-line); }
+  .company-theme .technology-marquee-mini .technology-logo-name { color: #55564f; }
+  .company-theme .navigation a,.company-theme .header-account { color: #494a43; }
+  .company-theme .navigation a:hover,.company-theme .header-account:hover { color: #7b5e2c; }
+  .company-theme .header-cta { color: #fffefa; background: #292a24; border-color: #292a24; }
+  .company-theme .menu-toggle { color: var(--company-ink); }
+  .company-theme .company-kicker,.company-theme .eyebrow,.company-theme .micro-label { color: #6c6b62; }
+  .company-theme .company-hero-copy > p:not(.company-hero-note) { color: #55564f; }
+  .company-theme .company-button-light { color: #fffefa; background: #292a24; border-color: #292a24; }
+  .company-theme .company-button-light:hover { color: #292a24; background: transparent; }
+  .company-theme .company-text-link { color: #745928; }
+  .company-theme .company-hero-note,.company-theme .company-index-foot,.company-theme .robotics-foot { color: #77776e; }
+  .company-theme .company-hero-index > a { color: #33342e; }
+  .company-theme .company-hero-index > a svg { color: #77776e; }
+  .company-theme .capability-list svg,.company-theme .robotics-project-icon { color: #8a6c3a; }
+  .company-theme .robotics-project-icon { border-color: #8a6c3a55; }
+  .company-theme .robotics-project-meta { color: #75756d; }
+  .company-theme .robotics-project-meta span:last-child { color: #795e2d; }
+  .company-theme .business-proof-image { background: #e8e6df; }
+  .company-theme .business-proof-label .micro-label { color: #6c6b62; }
+  .company-theme .business-proof-card:hover { border-color: #8c6b3455; }
+  .company-theme .public-feedback-link > a { color: #745928; }
+  .company-theme .home-founder-identity > span { color: var(--company-muted); }
+  .company-theme .home-founder-links a { color: #745928; }
+  .company-theme .home-founder-profile { border-color: var(--company-line); }
+  .company-theme .team-copy .full-team-link { color: #fffefa; background: #292a24; border-color: #292a24; }
+  .company-theme .quick-enquiry-form .form-field label,.company-theme .quick-enquiry-form .project-form-submit p { color: #55564f; }
+  .company-theme .quick-enquiry-form .form-field input,.company-theme .quick-enquiry-form .form-field textarea,.company-theme .quick-enquiry-form .form-field select { color: #252620; border-color: #25262035; background: #fffefa; color-scheme: light; }
+  .company-theme .quick-enquiry-form .form-field input::placeholder,.company-theme .quick-enquiry-form .form-field textarea::placeholder { color: #77776e; }
+  .company-theme .enquiry-optional { color: #44453f; }
+  .company-theme .final-faq summary { color: #33342e; }
+  .company-theme .mobile-navigation { color: #252620; background: #fffefa; border-color: var(--company-line); }
+  .company-theme .site-footer { color: #373830; background: #eeece5; border-color: var(--company-line); }
+  .company-theme .site-footer .brand { color: #252620; }
+  .company-theme .site-footer p,.company-theme .site-footer .micro-label,.company-theme .site-footer .footer-bottom { color: #66675f; }
+  .company-theme .footer-links a { color: #45463f; }
+  .company-theme .site-footer .footer-bottom { border-color: var(--company-line); }
+  .company-theme .site-footer a:hover,.company-theme .site-footer .footer-links a:hover { color: #745928; }
+}
+

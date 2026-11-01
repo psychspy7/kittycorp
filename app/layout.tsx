@@ -24,6 +24,7 @@ import "./product-research.css";
 import "./venture-showcase.css";
 import "./company-home.css";
 import "@/components/kitty/website-assistant.css";
+import "./system-theme.css";
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {

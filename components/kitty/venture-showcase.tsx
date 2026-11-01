@@ -16,7 +16,7 @@ function BuddySketch() {
       <g fill="#e6d5aa"><circle cx="256" cy="151" r="5"/><circle cx="304" cy="151" r="5"/></g>
       <path d="M263 177q17 13 34 0" fill="none" stroke="#e6d5aa" strokeWidth="3" strokeLinecap="round"/>
       <path d="M168 95l-25-16m249 16 25-16M164 226l-27 15m259-15 27 15" stroke="#8296b8" strokeWidth="1.5" opacity=".65"/>
-      <g fill="#9aa9c1" fontSize="10" letterSpacing="2"><text x="36" y="66">KITTY CORE</text><text x="390" y="267">POCKET / DESK</text></g>
+      <g fill="#9aa9c1" fontSize="10" letterSpacing="2"><text x="36" y="66">KITTY CORE</text><text x="390" y="267">POCKET & DESK</text></g>
       <path d="M112 73h67l18 19M388 257h-42l-14-14" fill="none" stroke="#8296b8" strokeWidth="1" opacity=".65"/>
     </svg>
   );
@@ -49,14 +49,14 @@ export function VentureShowcase() {
   return (
     <section className="venture-section" aria-labelledby="venture-heading">
       <div className="venture-wrap">
-        <div className="venture-topline"><span>01 / PRODUCT DEVELOPMENT</span><span>WORK IN PROGRESS</span></div>
+        <div className="venture-topline"><span>01 · PRODUCT DEVELOPMENT</span><span>WORK IN PROGRESS</span></div>
         <div className="venture-heading">
           <div><p className="venture-kicker">BEYOND CLIENT PROJECTS</p><h2 id="venture-heading">Products we’re<br/><em>working on.</em></h2></div>
           <p>Alongside our client work, we are developing our own technology. These projects are at an early stage, and we’ll share more as they take shape.</p>
         </div>
         <div className="venture-grid">
           <article className="venture-card">
-            <div className="venture-visual venture-visual-buddy"><span className="venture-visual-label">CONCEPT VISUAL / 01</span><BuddySketch/></div>
+            <div className="venture-visual venture-visual-buddy"><span className="venture-visual-label">CONCEPT VISUAL · 01</span><BuddySketch/></div>
             <div className="venture-card-body">
               <div className="venture-meta"><span>PERSONAL AI DEVICE</span><span>IN DEVELOPMENT</span></div>
               <h3>KITTY BUDDY</h3>
@@ -65,7 +65,7 @@ export function VentureShowcase() {
             </div>
           </article>
           <article className="venture-card">
-            <div className="venture-visual venture-visual-agriyaan"><span className="venture-visual-label">CONCEPT VISUAL / 02</span><AgriyaanSketch/></div>
+            <div className="venture-visual venture-visual-agriyaan"><span className="venture-visual-label">CONCEPT VISUAL · 02</span><AgriyaanSketch/></div>
             <div className="venture-card-body">
               <div className="venture-meta"><span>AGRICULTURAL ROBOTICS</span><span>EARLY CONCEPT</span></div>
               <h3>AGRIYAAN</h3>

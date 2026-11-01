@@ -17,15 +17,13 @@ export type TeamMember = {
   id: string; name: string; role: string; bio: string; photo_path: string | null;
   links: SocialLinks; sort_order: number; published: boolean; updated_at?: string;
 };
-// The homepage has two founder positions. Every published profile belongs on /team.
+// The homepage introduction focuses on the founder; the full roster lives on /team.
 export function homepageFounders(members: TeamMember[]) {
-  return ["founder & ceo", "co-founder"].flatMap(role => {
-    const person = members.find(member => {
-      const label = member.role.trim().toLowerCase();
-      return member.published && (label === role || (label.startsWith(role) && [" ", ",", "|", "·", "—", "–", "("].includes(label.charAt(role.length))));
-    });
-    return person ? [person] : [];
+  const person = members.find(member => {
+    const role = member.role.trim().toLowerCase();
+    return member.published && (role === "founder & ceo" || (role.startsWith("founder & ceo") && [" ", ",", "|", "·", "—", "–", "("].includes(role.charAt("founder & ceo".length))));
   });
+  return person ? [person] : [];
 }
 export type CompanySettings = { id: string; socials: SocialLinks; team_heading: string; team_intro: string; team_body: string; updated_at?: string };
 export const defaultProducts: CompanyProduct[] = Object.entries(productPages).map(([slug, value], index) => ({...value, slug, principles: value.principles.map(([a,b]) => [a,b]), icon_path: null, sort_order: index, published: true}));

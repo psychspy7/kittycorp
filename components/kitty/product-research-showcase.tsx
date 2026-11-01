@@ -34,7 +34,7 @@ export function ProductResearchShowcase() {
         <p className="research-product-lead">A personal AI companion you can carry, wear or keep on your desk.</p>
         <p>The concept has a compact core device for voice and screen interaction, with an optional detachable wheeled base for movement. A working physical prototype is a next development step.</p>
         <Link className="text-link" href="/contact?subject=KITTY%20BUDDY">Discuss KITTY BUDDY <ArrowUpRight size={15}/></Link>
-        <div className="buddy-outline" aria-hidden="true"><div className="buddy-device"><span/><i/><b/></div><div className="buddy-caption">KITTY CORE / CONCEPT</div></div>
+        <div className="buddy-outline" aria-hidden="true"><div className="buddy-device"><span/><i/><b/></div><div className="buddy-caption">KITTY CORE · CONCEPT</div></div>
       </article>
       <article className="research-product-card agriyaan-card">
         <div className="research-card-top"><span className="research-icon"><Sprout size={21}/></span><span className="quiet-status">RESEARCH · CONCEPT STAGE</span></div>
@@ -42,7 +42,7 @@ export function ProductResearchShowcase() {
         <p className="research-product-lead">An agricultural AI rover being explored with farmers’ field needs in mind.</p>
         <p>We are developing the concept around a mobile rover that could support farmers with field-level tasks and information. We plan to present the idea to the Government of India for consideration and support.</p>
         <Link className="text-link" href="/contact?subject=AGRIYAAN">Discuss AGRIYAAN <ArrowUpRight size={15}/></Link>
-        <div className="agriyaan-visual"><ProductSketch/><span>CONCEPT VISUAL / NOT A PROTOTYPE</span></div>
+        <div className="agriyaan-visual"><ProductSketch/><span>CONCEPT VISUAL · NOT A PROTOTYPE</span></div>
       </article>
     </div>
   </section>;
