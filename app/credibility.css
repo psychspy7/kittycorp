@@ -1,5 +1,5 @@
 .shipped-work { padding: 64px 0 72px; border-top: 1px solid var(--border); scroll-margin-top: 105px; }
-.shipped-work h2,.working-together h2,.public-reviews h2,.service-faq h2 { font: 400 clamp(36px,4vw,54px)/1.13 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -.8px; margin: 17px 0; }
+.shipped-work h2,.working-together h2,.public-reviews h2,.service-faq h2 { font: 400 clamp(36px,4vw,54px)/1.13 var(--font-display); letter-spacing: -.8px; margin: 17px 0; }
 .shipped-work .section-heading { align-items: end; }
 .shipped-work .section-heading p,.home-products .section-heading p { font-size: 15px; line-height: 1.7; color: #62645d; margin: 0; max-width: 540px; }
 .shipped-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }

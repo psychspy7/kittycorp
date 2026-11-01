@@ -4,7 +4,7 @@
 .business-home .working-together { padding-top: 56px; padding-bottom: 58px; border-top: 1px solid var(--border); }
 .delivery-support { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10%; padding: 42px 0 54px; border-top: 1px solid var(--border); }
 .delivery-support-heading { align-self: center; }
-.delivery-support h2 { font: 400 clamp(34px,3.6vw,46px)/1.15 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -.9px; margin: 18px 0 0; }
+.delivery-support h2 { font: 400 clamp(34px,3.6vw,46px)/1.15 var(--font-display); letter-spacing: -.9px; margin: 18px 0 0; }
 .support-number { display: flex; align-items: baseline; gap: 9px; font: 400 54px/1 Geist,sans-serif; letter-spacing: -2px; color: #87672f; }
 .support-number>span { font-size: 17px; letter-spacing: -.2px; color: #62645d; }
 .delivery-support-detail h3 { font: 500 19px/1.4 Geist,sans-serif; letter-spacing: -.4px; margin: 15px 0 11px; }
@@ -16,7 +16,7 @@
 .destination-topline { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .destination-topline>svg { color: #87672f; flex-shrink: 0; transition: transform .25s ease; }
 .business-destination:hover .destination-topline>svg { transform: translate(2px,-2px); }
-.business-destination h2 { font: 400 clamp(35px,3.8vw,48px)/1.13 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -1px; margin: 28px 0 18px; }
+.business-destination h2 { font: 400 clamp(35px,3.8vw,48px)/1.13 var(--font-display); letter-spacing: -1px; margin: 28px 0 18px; }
 .business-destination>p { font-size: 15px; line-height: 1.8; color: #62645d; margin: 0 0 27px; max-width: 470px; }
 .destination-products { display: flex; flex-wrap: wrap; gap: 14px 19px; margin: auto 0 23px; }
 .destination-products>span { display: inline-flex; align-items: center; gap: 8px; font: 500 11px/1.5 Geist,sans-serif; color: #52554b; }
@@ -47,7 +47,7 @@
 .business-home .interest-choice { padding: 6px 8px; }
 .business-home .early-access .privacy-note { font-size: 11px; margin-top: 16px; }
 .lab-products { padding: 18px 0 55px; }
-.lab-products h2 { font: 400 clamp(32px,3.5vw,44px)/1.2 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -.8px; margin: 18px 0 15px; }
+.lab-products h2 { font: 400 clamp(32px,3.5vw,44px)/1.2 var(--font-display); letter-spacing: -.8px; margin: 18px 0 15px; }
 .lab-products .section-heading p { font-size: 15px; line-height: 1.8; color: #62645d; }
 @media (max-width: 900px) {
   .business-destination { padding: 27px 26px 25px; }

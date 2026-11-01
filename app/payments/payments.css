@@ -1,7 +1,7 @@
 .payments-page { display: grid; grid-template-columns: 1fr 430px; align-items: start; gap: 10%; padding-top: 90px; padding-bottom: 100px; min-height: 70svh; }
 .payments-intro>.text-link { display: inline-flex; gap: 8px; align-items: center; margin-bottom: 36px; }
 .payments-intro>.eyebrow { display: block; }
-.payments-intro h1 { font: 400 clamp(40px,4.1vw,60px)/1.12 "Dirtyline 36D",Geist,sans-serif; letter-spacing: -1px; margin: 22px 0; }
+.payments-intro h1 { font: 400 clamp(40px,4.1vw,60px)/1.12 var(--font-display); letter-spacing: -1px; margin: 22px 0; }
 .payments-intro>p { color: #62645d; line-height: 1.8; font-size: 16px; max-width: 540px; }
 .payments-intro .payments-note { margin-top: 26px; padding-top: 23px; border-top: 1px solid #25272024; font-size: 13px; }
 .checkout-card { background: #fffefa; border: 1px solid #25272024; border-radius: 12px; padding: 32px; box-shadow: 0 12px 40px #25272005; }

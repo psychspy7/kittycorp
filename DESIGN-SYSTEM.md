@@ -4,8 +4,9 @@ This is the working visual system for the public company site. Keep future chang
 
 ## Typography
 
-- **Geist** is the interface and body family. Use it for navigation, forms, body copy, labels and the main homepage headings.
-- **Dirtyline 36D** is the display accent for short editorial headings on product pages. Do not use it for paragraphs, buttons, forms or small screen labels.
+- **Geist** is the interface and body family. Use it for navigation, forms, body copy, labels and controls.
+- **Runiga** is the display face for the homepage headline and selected editorial section headings. Do not use it for paragraphs, buttons, forms or small labels.
+- Keep the active site to these two typefaces. The other supplied demo faces are not part of the public interface system.
 - Use a fluid 1.25 modular scale from a 16px base: 16, 20, 25, 31, 39, 49, 61 and 76px. Fluid headings may interpolate between those steps with `clamp()`.
 - Main home headline: `clamp(50px, 5.1vw, 72px)`. Section headings: `clamp(32px, 3.5vw, 46px)`. Body copy: `clamp(15px, 1.4vw, 18px)`.
 - Prefer normal weight and modest negative tracking. Give labels a little tracking, not a novelty font.

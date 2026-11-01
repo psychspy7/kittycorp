@@ -1,4 +1,4 @@
-/* Final public presentation. Brand accents use the licensed Dirtyline font; UI stays in Geist. */
+/* Display headings use Runiga; navigation and body copy stay in Geist. */
 :root { --final-paper:#f8f7f3; --final-graphite:#242923; --final-muted:#61675c; --final-gold:#80632f; }
 html { scroll-padding-top:112px; }
 body { color:var(--final-graphite); }
@@ -20,7 +20,7 @@ body { color:var(--final-graphite); }
 .business-home .button-gold:hover { background:#3a4435; border-color:#3a4435; }
 .final-hero { display:grid; grid-template-columns:1.2fr 1fr; gap:8%; padding-block:72px 76px; align-items:center; }
 .final-hero-copy h1 { font:500 clamp(44px,4.6vw,66px)/1.06 Geist,Arial,sans-serif; letter-spacing:-3px; margin:23px 0; }
-.final-hero-copy h1>span { display:inline-block; font:400 .97em/1.2 "Dirtyline 36D",Geist,sans-serif; color:#806b43; letter-spacing:0; padding-top:7px; }
+.final-hero-copy h1>span { display:inline-block; font:400 .97em/1.2 var(--font-display); color:#806b43; letter-spacing:0; padding-top:7px; }
 .final-hero-copy>p { max-width:485px; font-size:16px; line-height:1.9; color:var(--final-muted); margin-bottom:28px; }
 .final-hero .hero-actions { gap:12px; flex-wrap:wrap; }
 .final-hero-notes { display:flex; flex-wrap:wrap; gap:12px 21px; margin-top:23px; font-size:11px; color:#62685d; }

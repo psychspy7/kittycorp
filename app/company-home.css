@@ -64,9 +64,9 @@
 .company-theme .company-kicker { display: inline-block; font: 600 10px/1.6 Geist, Arial, sans-serif; letter-spacing: .14em; }
 .company-theme .company-hero h1,.company-theme .division-heading h2,.company-theme .research-projects-heading h2 {
   color: var(--company-ink);
-  font-family: Geist, Arial, sans-serif;
-  font-weight: 460;
-  letter-spacing: -.065em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -.035em;
 }
 .company-theme .company-hero h1 { max-width: 900px; margin: 25px 0 20px; font-size: var(--company-type-display); line-height: 1.04; }
 .company-theme .company-hero h1 em,.company-theme .division-heading h2 em,.company-theme .research-projects-heading h2 em { color: var(--company-gold); font-style: normal; }
