@@ -26,6 +26,7 @@ import "./company-home.css";
 import "./system-theme.css";
 import "../src/shaders/threeui.css";
 import "./ui-refresh.css";
+import "./gemini-home.css";
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {

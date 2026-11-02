@@ -44,7 +44,7 @@ export function Team({members}:{members:TeamMember[]}){
   const founders = homepageFounders(members);
   const founder = founders[0];
   const founderLinkedIn = founder?.links.linkedin || FOUNDER_LINKEDIN;
-  return <section id="about" className="team-section business-founder wrap" aria-labelledby="founder-heading">
+  return <section id="about" data-element="fire" className="team-section business-founder wrap" aria-labelledby="founder-heading">
     <div className="section-heading"><div><span className="eyebrow">THE PEOPLE BUILDING KITTY</span><h2 id="founder-heading">Meet the founder.</h2></div></div>
     <div className="home-founder-profile">
       <div className="home-founder-identity"><h3>{founder?.name || "Virat Anand"}</h3><span>{founder?.role || "Founder & CEO"}</span></div>

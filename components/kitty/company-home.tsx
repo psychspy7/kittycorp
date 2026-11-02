@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Bot, Code2, Sprout, Sun, Workflow } from "lucide-react";
 import type { SitePageContent } from "@/lib/site-page-content";
+import { ElementalControls } from "./elemental-background";
 
 export const roboticsProjects = [
   {
@@ -31,7 +32,7 @@ export const roboticsProjects = [
 ] as const;
 
 export function CompanyHero({ copy }: { copy: SitePageContent }) {
-  return <section className="company-hero page-gutter" aria-labelledby="company-hero-title">
+  return <section id="company-hero" data-element="water" className="company-hero page-gutter" aria-labelledby="company-hero-title">
     <div className="company-hero-copy">
       <span className="company-kicker">{copy.heroEyebrow}</span>
       <h1 id="company-hero-title">{copy.heroTitle}<br /><em>{copy.heroAccent}</em></h1>
@@ -40,6 +41,7 @@ export function CompanyHero({ copy }: { copy: SitePageContent }) {
         <Link className="company-button company-button-light" href="/projects">{copy.heroPrimaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
         <Link className="company-text-link" href="#divisions">{copy.heroSecondaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
+      <ElementalControls />
       {copy.heroNote && <p className="company-hero-note">{copy.heroNote}</p>}
     </div>
     <aside className="company-hero-index" aria-label="KITTY CORP’s two divisions">
@@ -58,6 +60,14 @@ export function CompanyHero({ copy }: { copy: SitePageContent }) {
   </section>;
 }
 
+export function GeminiManifesto() {
+  return <section className="gemini-manifesto page-gutter" data-element="water" aria-labelledby="gemini-manifesto-title">
+    <div className="gemini-manifesto-meta"><span className="company-kicker">A NOTE FROM THE STUDIO</span><span>01 / THE WHY</span></div>
+    <h2 id="gemini-manifesto-title">Technology should make the next step <em>feel possible.</em></h2>
+    <p>We design and build digital tools around real business needs — from a first website to custom software and practical AI workflows — while exploring how intelligent systems can help people in daily life, agriculture, and clean energy.</p>
+  </section>;
+}
+
 export function CompanyDivisions({ copy }: { copy: SitePageContent }) {
   const digitalCapabilities = [
     { title: copy.websiteCapabilityTitle, description: copy.websiteCapabilityDescription, icon: Code2 },
@@ -70,7 +80,7 @@ export function CompanyDivisions({ copy }: { copy: SitePageContent }) {
     "kitty-urjayaan": copy.urjayaanDescription,
   };
   return <section className="company-divisions page-gutter" id="divisions" aria-label="KITTY CORP divisions">
-    <article className="division-block digital-division" id="digital-solutions">
+    <article className="division-block digital-division" id="digital-solutions" data-element="lightning">
       <div className="division-heading">
         <span className="company-kicker">01 &nbsp; DIGITAL SOLUTIONS</span>
         <h2>{copy.digitalHeading}<br /><em>{copy.digitalAccent}</em></h2>
@@ -86,7 +96,7 @@ export function CompanyDivisions({ copy }: { copy: SitePageContent }) {
       <Link className="company-text-link" href="/services">Explore digital services <ArrowUpRight size={16} aria-hidden="true" /></Link>
     </article>
 
-    <article className="division-block robotics-division" id="intelligence-robotics">
+    <article className="division-block robotics-division" id="intelligence-robotics" data-element="fire">
       <div className="division-heading">
         <span className="company-kicker">02 &nbsp; INTELLIGENCE &amp; ROBOTICS</span>
         <h2>{copy.roboticsHeading}<br /><em>{copy.roboticsAccent}</em></h2>

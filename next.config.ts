@@ -2,7 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
-  turbopack: { root: process.cwd() },
+  turbopack: {
+    root: process.cwd(),
+    rules: {
+      "*.html": {
+        loaders: ["raw-loader"],
+        as: "*.js",
+      },
+    },
+  },
   poweredByHeader: false,
   async redirects() {
     return [

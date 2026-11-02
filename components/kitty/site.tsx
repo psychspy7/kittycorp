@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ThemeToggle } from "./theme-toggle";
 import { AnimatedTopDock } from "@/src/shaders/animated-top-dock/AnimatedTopDock";
 const navigation = [["Services", "/services"], ["Products", "/products"], ["Research", "/research"], ["Company", "/company"], ["Contact", "/contact"]];
 export function SiteHeader() {
@@ -105,7 +104,6 @@ export function SiteHeader() {
         />
       </div>
       {actionTarget && createPortal(<>
-        <ThemeToggle />
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild><button className="kitty-mobile-menu" aria-label="Open navigation"><Menu size={20} /></button></DialogTrigger>
           <DialogContent className="mobile-navigation">
