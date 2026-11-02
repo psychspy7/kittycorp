@@ -19,6 +19,7 @@ See **OWNER-GUIDE.md** for the complete owner handover. The `handover/` folder i
 - `/secretchat`: Android download, installation guide, and privacy explanation.
 - `/launches/[slug]`: launch pages for Android apps and websites published from Studio.
 - `/contact`: contact form.
+- `/robots.txt` and `/sitemap.xml`: crawler guidance and the current public page index.
 - `/payments`: Razorpay test checkout. See **PAYMENTS_SETUP.md** for testing, environment settings and production steps.
 - `/kitten`: private Google-only Studio for the build journal, apps, early access, contact inbox and legacy notices. The former `/admins` address is retired.
 
@@ -69,6 +70,8 @@ See `VERIFICATION.md` for completed checks. The release ZIP excludes credentials
 The existing website backend has been updated with `supabase/company-publishing.sql`. This is a one-time schema snapshot for a new setup; do not reapply it to the configured project. No additional environment settings are needed.
 
 Studio’s **Products** tab edits the three development-stage products. **Apps & websites** supports APK publishing plus website launches with separate icons and screenshots. Uploaded website images are resized, stripped of metadata, and saved as WebP under unique filenames. **Team** manages real profiles and the complete suggested role list, with custom roles, visibility and order. **Company & socials** controls company links and team copy. Image uploads are intentionally public website assets; private APK drafts remain in the separate releases bucket.
+
+Studio’s **Page content** editor manages the homepage, Services, Company and Contact copy, including search titles and descriptions. Saving publishes the text immediately; the layouts, navigation and page features remain in source code. Install the additive supabase/migrations/202611020001_website_page_content.sql migration once on the existing Kitty Corp Website database before using the editor. Do not rerun it or apply the first-install snapshots to the initialized database.
 
 The services form posts validated briefs to the existing private Studio inbox. It uses the same server-only gateway, timing checks, origin validation and submission rate limits as contact messages. The public site shows no invented clients, completed commissions or prices.
 

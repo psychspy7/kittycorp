@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Bot, Code2, Sprout, Sun, Workflow } from "lucide-react";
+import type { SitePageContent } from "@/lib/site-page-content";
 
 export const roboticsProjects = [
   {
@@ -29,23 +30,17 @@ export const roboticsProjects = [
   },
 ] as const;
 
-const digitalCapabilities = [
-  { title: "Websites", description: "Clear, fast websites that help people understand your business and take the next step.", icon: Code2 },
-  { title: "Apps & software", description: "Customer applications and internal tools designed around the work they need to do.", icon: Code2 },
-  { title: "AI & automation", description: "Useful AI features and connected workflows, with people in control of important actions.", icon: Workflow },
-] as const;
-
-export function CompanyHero() {
+export function CompanyHero({ copy }: { copy: SitePageContent }) {
   return <section className="company-hero page-gutter" aria-labelledby="company-hero-title">
     <div className="company-hero-copy">
-      <span className="company-kicker">INDEPENDENT TECHNOLOGY COMPANY · INDIA</span>
-      <h1 id="company-hero-title">Built for business.<br /><em>Curious about what’s next.</em></h1>
-      <p>We build websites, software and AI workflows for businesses. In our own lab, we explore intelligent systems and robotics.</p>
+      <span className="company-kicker">{copy.heroEyebrow}</span>
+      <h1 id="company-hero-title">{copy.heroTitle}<br /><em>{copy.heroAccent}</em></h1>
+      <p>{copy.heroDescription}</p>
       <div className="company-hero-actions">
-        <Link className="company-button company-button-light" href="/projects">Start a project <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        <Link className="company-text-link" href="#divisions">Explore what we build <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link className="company-button company-button-light" href="/projects">{copy.heroPrimaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link className="company-text-link" href="#divisions">{copy.heroSecondaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
-      <p className="company-hero-note">Independent by design. Robotics ideas are still early.</p>
+      {copy.heroNote && <p className="company-hero-note">{copy.heroNote}</p>}
     </div>
     <aside className="company-hero-index" aria-label="KITTY CORP’s two divisions">
       <div className="company-index-heading"><span className="company-kicker">ONE STUDIO · TWO DIVISIONS</span><span className="company-index-code">KC&nbsp; 01—02</span></div>
@@ -63,13 +58,23 @@ export function CompanyHero() {
   </section>;
 }
 
-export function CompanyDivisions() {
+export function CompanyDivisions({ copy }: { copy: SitePageContent }) {
+  const digitalCapabilities = [
+    { title: copy.websiteCapabilityTitle, description: copy.websiteCapabilityDescription, icon: Code2 },
+    { title: copy.softwareCapabilityTitle, description: copy.softwareCapabilityDescription, icon: Code2 },
+    { title: copy.automationCapabilityTitle, description: copy.automationCapabilityDescription, icon: Workflow },
+  ];
+  const projectDescriptions: Record<string, string> = {
+    "kitty-buddy": copy.buddyDescription,
+    agriyaan: copy.agriyaanDescription,
+    "kitty-urjayaan": copy.urjayaanDescription,
+  };
   return <section className="company-divisions page-gutter" id="divisions" aria-label="KITTY CORP divisions">
     <article className="division-block digital-division" id="digital-solutions">
       <div className="division-heading">
         <span className="company-kicker">01 &nbsp; DIGITAL SOLUTIONS</span>
-        <h2>Technology for<br /><em>the work you do.</em></h2>
-        <p>We design and build digital tools around real business needs, from a first website to software and AI workflows.</p>
+        <h2>{copy.digitalHeading}<br /><em>{copy.digitalAccent}</em></h2>
+        <p>{copy.digitalDescription}</p>
       </div>
       <ul className="capability-list">
         {digitalCapabilities.map(({ title, description, icon: Icon }, index) => <li key={title}>
@@ -84,13 +89,13 @@ export function CompanyDivisions() {
     <article className="division-block robotics-division" id="intelligence-robotics">
       <div className="division-heading">
         <span className="company-kicker">02 &nbsp; INTELLIGENCE &amp; ROBOTICS</span>
-        <h2>Ideas moving<br /><em>into the world.</em></h2>
-        <p>Our early research looks at how intelligent systems might help people in daily life, agriculture and energy.</p>
+        <h2>{copy.roboticsHeading}<br /><em>{copy.roboticsAccent}</em></h2>
+        <p>{copy.roboticsDescription}</p>
       </div>
       <ol className="robotics-project-list" aria-label="Robotics and intelligent systems in development">
         {roboticsProjects.map(({ id, name, field, status, description, icon: Icon }) => <li id={id} key={id}>
           <span className="robotics-project-icon"><Icon size={20} strokeWidth={1.45} aria-hidden="true" /></span>
-          <div className="robotics-project-copy"><div className="robotics-project-meta"><span>{field}</span><span>{status}</span></div><h3>{name}</h3><p>{description}</p></div>
+          <div className="robotics-project-copy"><div className="robotics-project-meta"><span>{field}</span><span>{status}</span></div><h3>{name}</h3><p>{projectDescriptions[id] || description}</p></div>
         </li>)}
       </ol>
       <div className="robotics-foot"><span>EARLY IDEAS · PROTOTYPES AND FIELD VALIDATION ARE PENDING</span><Link className="company-text-link" href="/research">Inside the lab <ArrowUpRight size={16} aria-hidden="true" /></Link></div>

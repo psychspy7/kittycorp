@@ -10,6 +10,7 @@ const AdminProducts = dynamic(() => import("./admin-products"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
+const AdminPages = dynamic(() => import("./admin-pages"), { loading: () => <p className="empty-message">Opening page editor…</p> });
 const AdminCommerce = dynamic(() => import("./admin-commerce"), { loading: () => <p className="empty-message">Opening payment setup…</p> });
 const AdminHealth = dynamic(() => import("./admin-health"));
 const AdminEmail = dynamic(() => import("./admin-email"));
@@ -136,7 +137,7 @@ export function AdminLogin({ unavailable = false }: { unavailable?: boolean }) {
         />
         <span className="micro-label">KITTY CORP STUDIO</span>
         <h1>Sign in.</h1>
-        <p>Manage products, people and project enquiries.</p>
+        <p>Manage website pages, products, people and project enquiries.</p>
         <p className="privacy-note">Sign in with the approved KITTY CORP Google account.</p>
         {unavailable ? (
           <p className="form-error" role="alert">
@@ -351,6 +352,7 @@ export function AdminDashboard() {
         <Tabs value={tab} onValueChange={setTab} className="studio-workspace">
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="pages">Page content</TabsTrigger>
             <TabsTrigger value="health">Health & handover</TabsTrigger>
             <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
@@ -378,10 +380,12 @@ export function AdminDashboard() {
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
+              <button onClick={() => setTab("pages")}><strong>Page content ↗</strong><span>Edit homepage, Services, Company and Contact copy and search previews.</span></button>
               {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["assistant","KITTY AI & security","Adjust your website guide, its greeting and published context. Private app chats stay separate."],["commerce","Payments & plans","Configure providers and manage product plans without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>
+          <TabsContent value="pages" className="admin-panel"><AdminPages /></TabsContent>
           <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
           <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
           <TabsContent value="assistant" className="admin-panel"><AdminAI /></TabsContent>

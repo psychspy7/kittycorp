@@ -11,18 +11,17 @@ import { canonicalSocialUrl, pageMetadata, websiteOrigin, jsonLd } from "@/lib/s
 import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { BusinessProof, BusinessEnquiry } from "@/components/kitty/business-conversion";
 import { CompanyDivisions, CompanyHero } from "@/components/kitty/company-home";
+import { sitePageContent } from "@/lib/site-pages-server";
 export const dynamic = "force-dynamic";
-const homeMetadata = pageMetadata(
-  "Indian AI, software & robotics company",
-  "KITTY CORP is an independent Indian technology company building business websites, custom software and AI workflow automation, with early research in robotics and intelligent systems.",
-  "/",
-);
-export const metadata: Metadata = {
-  ...homeMetadata,
-  title: "KITTY CORP | Indian AI, software & robotics company",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const copy = await sitePageContent("home");
+  return {
+    ...pageMetadata(copy.seoTitle, copy.seoDescription, "/"),
+    title: "KITTY CORP | " + copy.seoTitle,
+  };
+}
 export default async function Home() {
-  const [launches, members, settings] = await Promise.all([publishedLaunches().catch(()=>[]),companyTeam(),companySettings()]);
+  const [launches, members, settings, copy] = await Promise.all([publishedLaunches().catch(()=>[]),companyTeam(),companySettings(),sitePageContent("home")]);
   const sameAs=Array.from(new Set([
     "https://www.instagram.com/kittycorp.ai/",
     ...Object.entries(settings.socials)
@@ -37,11 +36,11 @@ export default async function Home() {
     alternateName:"Kitty Corp",
     url:websiteOrigin(),
     logo:websiteOrigin()+"/brand/monogram.png",
-    description:"Independent Indian technology company building business websites, custom software and AI workflow automation, while exploring intelligent systems and robotics.",
+    description:copy.heroDescription,
     email:CONTACT_EMAIL,
     founder:{"@type":"Person",name:"Virat Anand",jobTitle:"Founder & CEO"},
     knowsAbout:["Business websites","Custom software development","AI workflow automation","AI agents","Robotics research","Agricultural robotics","Intelligent systems"],
     sameAs,
   };
-  return <div className="company-theme"><SiteHeader/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><CompanyHero/><CompanyDivisions/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/></main><SiteFooter/></div>;
+  return <div className="company-theme"><SiteHeader/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><CompanyHero copy={copy}/><CompanyDivisions copy={copy}/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/></main><SiteFooter/></div>;
 }

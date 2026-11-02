@@ -3,16 +3,52 @@ import { publishedLaunches } from "@/lib/launches-server";
 import { launchHref } from "@/lib/launches";
 import { publicJournal } from "@/lib/journal-server";
 import { companyProducts } from "@/lib/company-server";
+import { serviceSegments } from "@/lib/business-content";
 import { websiteOrigin } from "@/lib/site-metadata";
 export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = websiteOrigin();
-  return [
-    { url: origin, changeFrequency: "weekly", priority: 1 },
-    ...(await publishedLaunches()).map((launch) => ({ url: `${origin}${launchHref(launch)}`, changeFrequency: "monthly" as const, priority: 0.9 })),
-    { url: `${origin}/contact`, changeFrequency: "monthly", priority: 0.6 },
-    ...(await companyProducts()).map(p=>({url:`${origin}/${p.slug}`,lastModified:p.updated_at,changeFrequency:"weekly" as const,priority:0.7})),
-    ...["memberships","products","company","team","research","build-log","services","services/coaching-centres","services/agencies","pricing","appointments","play","projects","investors","privacy","terms","refunds"].map(page=>({url:`${origin}/${page}`,changeFrequency:"weekly" as const,priority:0.7})),
-    ...(await publicJournal()).filter(e=>e.kind==="article").map(e=>({url:`${origin}/build-log/${e.slug}`,lastModified:e.updated_at,changeFrequency:"monthly" as const,priority:0.6})),
+  const [launches, products, journal] = await Promise.all([
+    publishedLaunches().catch(() => []),
+    companyProducts().catch(() => []),
+    publicJournal().catch(() => []),
+  ]);
+  const staticPages = [
+    "services",
+    "products",
+    "kitty-ai",
+    "lisa-ai",
+    "sentinel",
+    "company",
+    "team",
+    "research",
+    "build-log",
+    "contact",
+    "projects",
+    "pricing",
+    "appointments",
+    "memberships",
+    "play",
+    "investors",
+    "privacy",
+    "terms",
+    "refunds",
+    "secretchat",
   ];
+  const entries: MetadataRoute.Sitemap = [
+    { url: origin },
+    ...staticPages.map((page) => ({ url: `${origin}/${page}` })),
+    ...Object.keys(serviceSegments).map((segment) => ({ url: `${origin}/services/${segment}` })),
+    ...products.map((product) => ({ url: `${origin}/${product.slug}`, lastModified: product.updated_at })),
+    ...launches.map((launch) => ({ url: `${origin}${launchHref(launch)}` })),
+    ...journal
+      .filter((entry) => entry.kind === "article")
+      .map((entry) => ({ url: `${origin}/build-log/${entry.slug}`, lastModified: entry.updated_at })),
+  ];
+  const seen = new Set<string>();
+  return entries.filter((entry) => {
+    if (seen.has(entry.url)) return false;
+    seen.add(entry.url);
+    return true;
+  });
 }

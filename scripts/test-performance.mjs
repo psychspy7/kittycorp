@@ -84,7 +84,7 @@ assert(!JSON.stringify(publicConfig).includes("private owner instructions"));
 assert.deepEqual(Object.keys(publicConfig.settings).sort(),["enabled","greeting","max_messages","title"]);
 assistantEnabled=false;publicCache.refreshPublicContent(publicCache.PUBLIC_CONTENT_TAGS.assistant);
 assert.equal((await presentation.publicAssistantPresentation()).settings.enabled,false);
-assert.deepEqual(new Set(invalidations),new Set(Object.values(publicCache.PUBLIC_CONTENT_TAGS)));
+assert.deepEqual(new Set(invalidations),new Set(Object.values(publicCache.PUBLIC_CONTENT_TAGS).filter(tag=>tag!==publicCache.PUBLIC_CONTENT_TAGS.pages)));
 assert(registrations.every(entry=>entry.options.revalidate===60&&entry.keys.includes(env.SUPABASE_URL)));
 assert.equal(registrations.length,8);
 let checks=0,maintenance=false,fail=false;

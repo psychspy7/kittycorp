@@ -6,16 +6,17 @@ export const PUBLIC_CONTENT_TAGS = {
   company: "kitty-public-company", launches: "kitty-public-launches",
   journal: "kitty-public-journal", testimonials: "kitty-public-testimonials",
   notices: "kitty-public-notices", assistant: "kitty-public-assistant-presentation",
+  pages: "kitty-public-pages",
 } as const;
 type PublicTag = typeof PUBLIC_CONTENT_TAGS[keyof typeof PUBLIC_CONTENT_TAGS];
-type PublicDataset = "products" | "team" | "company" | "launches" | "journal" | "testimonials" | "notices" | "assistant-presentation";
+type PublicDataset = "products" | "team" | "company" | "launches" | "journal" | "testimonials" | "notices" | "assistant-presentation" | "pages";
 
 // This project retains the non-Cache-Components Next.js model. Do not globally
 // cache database(): authenticated queries, credentials and downloads stay fresh.
 // The public database URL namespaces different deployments and test fixtures.
-export function publicContentCache<T>(dataset: PublicDataset, tag: PublicTag, read: () => Promise<T>) {
+export function publicContentCache<T>(dataset: PublicDataset, tag: PublicTag, read: () => Promise<T>, keyParts: string[] = []) {
   return singleFlight(unstable_cache(read,
-    ["kitty-public-v1", process.env.SUPABASE_URL || "unconfigured", dataset],
+    ["kitty-public-v1", process.env.SUPABASE_URL || "unconfigured", dataset, ...keyParts],
     { tags: [tag], revalidate: 60 }));
 }
 export function refreshPublicContent(tag: PublicTag) {
