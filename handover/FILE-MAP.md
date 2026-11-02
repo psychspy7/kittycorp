@@ -4,7 +4,8 @@ Paths below are relative to the inner `kitty-corp` folder. Keep the folders toge
 
 | Area | Files |
 | --- | --- |
-| Homepage structure and copy | `app/page.tsx`, `components/kitty/home-sections.tsx` |
+| Homepage structure and copy | `app/page.tsx`, `components/kitty/company-home.tsx`, `components/kitty/home-sections.tsx` |
+| Core page copy CMS and protected editor API | `components/kitty/admin-pages.tsx`, `app/api/admin/pages/route.ts`, `lib/site-page-content.ts`, `lib/site-pages-server.ts`, `supabase/migrations/202611020001_website_page_content.sql` |
 | Overall document, fonts and metadata | `app/layout.tsx` |
 | Original styles, shared styles and final light theme | `app/globals.css`, `app/refined.css`, `app/final.css` |
 | Desktop/mobile navigation and reusable identity | `components/kitty/site.tsx` |
@@ -33,7 +34,7 @@ Paths below are relative to the inner `kitty-corp` folder. Keep the folders toge
 | Brand artwork and identity film | `public/brand/` |
 | Fonts and required licence notices | `public/fonts/` |
 | Bundled Android fallback and product screenshots | `public/downloads/`, `public/secretchat/` |
-| Sitemap | `app/sitemap.ts` |
+| Search crawler rules and XML sitemap | `app/robots.ts`, `app/sitemap.ts` |
 | Build commands and pinned installation | `package.json`, `package-lock.json`, `.npmrc` |
 | Native Next.js build/headers | `next.config.ts`, `vercel.json`, `tsconfig.json` |
 | Private-setting template | `.env.example` |

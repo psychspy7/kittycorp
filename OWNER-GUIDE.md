@@ -19,14 +19,15 @@ Studio now uses **Sign in with Google** for the approved owner account, `viratan
 
 ## Choose the right way to update
 
-Use **Studio** for products, app and website launches, images, people, social links, genuine reviews and journal entries. Save the entry, then refresh the public page. No code upload or redeployment is needed.
+Use **Studio** for core page copy, search titles and descriptions, products, app and website launches, images, people, social links, genuine reviews and journal entries. Save the entry, then refresh the public page. No code upload or redeployment is needed.
 
-Use **GitHub + Vercel** for layout, navigation, new page types, main hero text, colours, fonts, forms or new features. Commit the changed source files. Your connected Vercel project builds the production branch automatically.
+Use **GitHub + Vercel** for layout, navigation, new page types, colours, fonts, forms or new features. Commit the changed source files. Your connected Vercel project builds the production branch automatically.
 
-Use **Vercel settings** for private server configuration and your domain. Use **Supabase** for database, authentication, storage, backups or access-policy changes. Ordinary content editing does not require changing either service’s settings.
+Use **Vercel settings** for private server configuration and your domain. Use **Supabase** for database, authentication, storage, backups or access-policy changes. The page editor requires its one-time additive migration before it can save; ordinary content editing does not need further service setting changes.
 
 | What you want to change | Where to do it |
 | --- | --- |
+| Homepage, Services, Company or Contact copy and search preview | Studio → Page content |
 | SecretChat icon, version, APK or announcement | Studio → Apps & websites |
 | KITTY AI, LISA AI or Sentinel icon, details or stage | Studio → Products |
 | Founder photograph, biography or personal links | Studio → Team |
@@ -39,7 +40,7 @@ Use **Vercel settings** for private server configuration and your domain. Use **
 | View or export people who joined early access | Studio → Early access |
 | Project-brief AI helper instructions and reply limits | Studio → KITTY AI & security |
 | Temporarily pause the public website | Studio → Site controls |
-| Homepage headline, services copy, page layout or menu | Website source in GitHub |
+| Page layout, navigation, or copy on pages outside the Page content editor | Website source in GitHub |
 | New development-product type beyond the existing three | Code and a reviewed database change |
 | New Android app/download page | Studio → Apps & websites → New launch |
 | Password, another Studio administrator or security settings | Authentication/configuration work; not the Team editor |
@@ -109,7 +110,9 @@ Portrait uploads accept PNG, JPEG or WebP up to 3 MB and are optimized to a maxi
 
 For official KITTY CORP accounts, use **Company & socials**. For a founder’s or member’s accounts, edit that person in **Team**. Empty social fields stay hidden. Add the actual profile addresses; do not use a platform homepage as your account link.
 
-Company & socials also edits the team note, introduction and story. Homepage hero wording, service offers and most other page headings remain code-controlled. This is a focused content manager, not a drag-and-drop page builder.
+Company & socials also edits the team note, introduction and story. Page content edits the main copy and search previews for the homepage, Services, Company and Contact. Layout, navigation, page structure, and text on other pages remain code-controlled; this editor is not a drag-and-drop page builder.
+
+The Page content editor uses supabase/migrations/202611020001_website_page_content.sql. Apply this additive migration once to the existing **Kitty Corp Website** database after taking the normal private database backup. It creates a public-read page-copy table and keeps writes restricted to the existing approved Studio administrator. Do not rerun the migration.
 
 ## Write an article or development update
 

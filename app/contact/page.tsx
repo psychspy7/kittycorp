@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MessageSquare } from "lucide-react";
@@ -7,15 +8,15 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { FOUNDER_LINKEDIN, SOCIAL_EMAIL, SUPPORT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { companySettings } from "@/lib/company-server";
+import { sitePageContent } from "@/lib/site-pages-server";
 import "./contact.css";
-export const metadata=pageMetadata('Let’s talk','An idea, some feedback, a question. Talk to the founders building KITTY CORP.','/contact');
+export async function generateMetadata():Promise<Metadata>{const copy=await sitePageContent("contact");return pageMetadata(copy.seoTitle,copy.seoDescription,"/contact");}
 export default async function ContactPage({
   searchParams,
 }: {
   searchParams: Promise<{ subject?: string }>;
 }) {
-  const { subject } = await searchParams;
-  const settings = await companySettings();
+  const [{ subject }, settings, copy] = await Promise.all([searchParams, companySettings(), sitePageContent("contact")]);
   const companyLinkedIn = settings.socials.linkedin && !isFounderLinkedIn(settings.socials.linkedin)
     ? settings.socials.linkedin : null;
   return (
@@ -23,24 +24,21 @@ export default async function ContactPage({
       <SiteHeader />
       <main id="main" className="contact-page">
         <div className="section-kicker">
-          <span>CONTACT THE KITTY TEAM</span>
+          <span>{copy.eyebrow}</span>
           <span className="kicker-line" />
         </div>
         <div className="contact-grid">
           <div className="contact-copy">
             <MessageSquare size={29} strokeWidth={1.1} />
             <h1>
-              A good place
+              {copy.titleLineOne}
               <br />
-              to start a
+              {copy.titleLineTwo}
               <br />
-              <em>conversation.</em>
+              <em>{copy.titleAccent}</em>
             </h1>
-            <p>
-              Tell us what you’re thinking. Feedback on something we’re building.
-              A possible collaboration. Or just a hello.
-            </p>
-            <p>The KITTY team reads the messages here.</p>
+            <p>{copy.description}</p>
+            <p>{copy.responseNote}</p>
             <div className="contact-direct-links">
               <a href={`mailto:${SUPPORT_EMAIL}`}><Mail size={18} aria-hidden="true"/><span><small>SUPPORT &amp; PROJECTS</small>{SUPPORT_EMAIL}</span><ArrowUpRight size={16} aria-hidden="true"/></a>
               <a href={`mailto:${SOCIAL_EMAIL}`}><Mail size={18} aria-hidden="true"/><span><small>SOCIAL &amp; PRESS</small>{SOCIAL_EMAIL}</span><ArrowUpRight size={16} aria-hidden="true"/></a>
