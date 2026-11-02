@@ -19,6 +19,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The registered ThreeUI source is checksum-verified vendor code. Keep it
+    // exact and lint Kitty Corp's integration and wrapper instead.
+    "src/shaders/animated-top-dock/**",
+    "src/shaders/threeui.css",
   ]),
   {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
