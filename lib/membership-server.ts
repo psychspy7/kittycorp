@@ -88,7 +88,7 @@ export async function webhookMembership(raw:string,signature:string,eventId:stri
  const {p,client}=await provider();
  const valid=[p.webhookSecret,p.previousWebhookSecret].filter(Boolean).some(secret=>constantTimeHexEqual(createHmac("sha256",secret!).update(raw).digest("hex"),signature));
  if(!valid)throw new HttpError("Webhook signature could not be verified.",400);
- const event=z.object({event:z.string(),payload:z.record(z.unknown())}).passthrough().parse(JSON.parse(raw));
+ const event=z.object({event:z.string(),payload:z.record(z.string(),z.unknown())}).passthrough().parse(JSON.parse(raw));
  if(!["payment.captured","payment.authorized","payment.failed","order.paid","refund.processed","payment.refunded"].includes(event.event))return {received:true,ignored:true};
  const payload=event.payload as {payment?:{entity?:{id?:string}};refund?:{entity?:{payment_id?:string}}};
  const paymentId=payload.payment?.entity?.id||payload.refund?.entity?.payment_id;

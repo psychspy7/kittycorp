@@ -1,7 +1,7 @@
 import "server-only";
 import { z } from "zod";
 export const priceEstimateSchema=z.object({amount:z.coerce.number().int().min(0).max(100000000),base:z.enum(["INR","USD"]),currency:z.string().regex(/^[A-Z]{3}$/)}).strict();
-const rateSchema=z.object({result:z.literal("success"),base_code:z.string(),time_last_update_unix:z.number().int().positive(),rates:z.record(z.number().positive().finite())});
+const rateSchema=z.object({result:z.literal("success"),base_code:z.string(),time_last_update_unix:z.number().int().positive(),rates:z.record(z.string(),z.number().positive().finite())});
 export async function priceEstimate(input:z.infer<typeof priceEstimateSchema>){
  if(input.currency===input.base)return {amount:input.amount/100,currency:input.currency,base:input.base,date:null};
  const response=await fetch(`https://open.er-api.com/v6/latest/${input.base}`,{next:{revalidate:86400},redirect:"error",signal:AbortSignal.timeout(4000)});
