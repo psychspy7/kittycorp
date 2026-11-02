@@ -1,13 +1,12 @@
 import {headers} from "next/headers";
 import {LocalCurrencyProvider} from "@/components/kitty/local-currency";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/kitty/google-analytics";
 import { googleAnalyticsId } from "@/lib/analytics-config";
 import { LogoMotionProvider } from "@/components/kitty/logo-motion";
 import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
-import { AssistantLauncher } from "@/components/kitty/assistant-launcher";
-import { publicAssistantPresentation } from "@/lib/assistant-presentation";
 import { websiteOrigin } from "@/lib/site-metadata";
 import { SiteThemeProvider } from "@/components/kitty/theme-provider";
 import { SiteToaster } from "@/components/kitty/site-toaster";
@@ -24,7 +23,6 @@ import "./conversion.css";
 import "./product-research.css";
 import "./venture-showcase.css";
 import "./company-home.css";
-import "@/components/kitty/website-assistant.css";
 import "./system-theme.css";
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
@@ -49,11 +47,6 @@ export const metadata: Metadata = {
     description: "Digital solutions for business. Intelligent systems and robotics in development.",
   },
 };
-async function PublicAssistant() {
-  const presentation = await publicAssistantPresentation().catch(() => null);
-  if (!presentation) return null;
-  return <AssistantLauncher settings={presentation.settings} siteKey={presentation.siteKey} />;
-}
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -70,9 +63,10 @@ export default async function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <LocalCurrencyProvider country={country}><LogoMotionProvider>{children}<Suspense fallback={null}><PublicAssistant /></Suspense></LogoMotionProvider></LocalCurrencyProvider>
+        <LocalCurrencyProvider country={country}><LogoMotionProvider>{children}</LogoMotionProvider></LocalCurrencyProvider>
         <Suspense fallback={null}><MaintenanceWatcher /></Suspense>
         <Suspense fallback={null}><GoogleAnalytics measurementId={googleAnalyticsId()} /></Suspense>
+        <Script id="thunderbolt-widget" src="https://widget.thunderbolt.com/embed.js" data-id="83f8e69b9311ce4f8e4396a115e7cd14f1820d6d9dc35387b2cdaee634445fde" strategy="lazyOnload" />
         <SiteToaster />
         </SiteThemeProvider>
       </body>

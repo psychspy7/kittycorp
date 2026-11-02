@@ -100,15 +100,15 @@ The header and footer technology marquees identify tools/platforms the owner rep
 
 ## Website AI and security
 
-KITTY AI is a lazy-loaded website guide using a separate stateless route on the existing KITTY AI Worker. It reads published website information, never private Android histories, Studio records or unpublished drafts. Open Studio → **KITTY AI & security** to change visibility, name, greeting, guidance and reply limits. These are instructions, not model training. Conversations clear on refresh. Fixed privacy and accuracy rules remain in place.
+The visitor-facing site guide is the Thunderbolt embed configured in `app/layout.tsx`. Configure its agent and appearance through the Thunderbolt service. The separate KITTY AI project-brief helper still uses `/api/assistant/chat` and the KITTY AI Worker. It reads published website information, not private Android histories, Studio records or unpublished drafts. Studio → **KITTY AI & security** controls that helper’s instructions and reply limits; these are instructions, not model training.
 
-Managed Cloudflare Turnstile protects public forms and assistant requests. Server verification checks the action and hostname and fails closed when protection is configured. Studio sign-in instead relies on same-origin validation, database rate limits, and Google identity verification against the single approved administrator account. This does not put the shared Vercel hostname behind Cloudflare WAF.
+Managed Cloudflare Turnstile protects public forms and project-brief AI requests. Server verification checks the action and hostname and fails closed when protection is configured. Studio sign-in instead relies on same-origin validation, database rate limits, and Google identity verification against the single approved administrator account. This does not put the shared Vercel hostname behind Cloudflare WAF.
 
 Studio uses Google-only sign-in for the existing approved owner account. See **GOOGLE_STUDIO_SETUP.md** for provider setup and recovery. Only a live session granted by the server-verified Google flow can use Studio or its database policies. The website has no ID/password login or public Studio hyperlink. HttpOnly, Secure, SameSite=Lax cookies support the return from Google; sensitive writes still require same-origin validation.
 
 The current production AI and Turnstile credentials are stored as encrypted runtime configuration. The existing private `FEEDBACK_GATEWAY_TOKEN` decrypts it on the server. Do not replace that token without re-encrypting the configuration and updating its private database hash. Environment overrides are documented in `.env.example`. No secret belongs in GitHub.
 
-The KITTY AI backend must retain `/api/website/chat` and its `WEBSITE_GATEWAY_TOKEN` binding on future deployments. Reference implementation and integration tests are under `integrations/kitty-ai/`; deployment instructions are in that folder’s README. Website proxy and security checks run with `node scripts/check-website-assistant.mjs` and `node scripts/test-studio-security.mjs`.
+The KITTY AI backend used by the project-brief helper must retain `/api/website/chat` and its `WEBSITE_GATEWAY_TOKEN` binding on future deployments. Reference implementation and integration tests are under `integrations/kitty-ai/`; deployment instructions are in that folder’s README. Website proxy and security checks run with `node scripts/check-website-assistant.mjs` and `node scripts/test-studio-security.mjs`.
 
 Studio → **Site controls** manages the maintenance page. Its emergency recovery route is preserved. Maintenance changes use revision checks so a stale browser cannot silently overwrite a newer change. `/kitten` remains accessible during maintenance.
 
