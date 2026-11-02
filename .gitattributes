@@ -1,0 +1,3 @@
+/src/shaders/animated-top-dock/*.ts -text
+/src/shaders/animated-top-dock/*.tsx -text
+/src/shaders/threeui.css -text
