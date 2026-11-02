@@ -299,7 +299,7 @@ export const sitePageContentSchemas: Record<SitePageSlug, z.ZodType<SitePageCont
     }
     return [slug, z.object(shape).strict()];
   }),
-) as Record<SitePageSlug, z.ZodType<SitePageContent>>;
+  ) as unknown as Record<SitePageSlug, z.ZodType<SitePageContent>>;
 
 export function isSitePageSlug(value: unknown): value is SitePageSlug {
   return typeof value === "string" && SITE_PAGE_SLUGS.includes(value as SitePageSlug);
