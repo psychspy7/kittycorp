@@ -37,7 +37,7 @@ Use **Vercel settings** for private server configuration and your domain. Use **
 | Full article or development update | Studio → Build log & updates |
 | Read a website/app project brief or contact message | Studio → Project enquiries & inbox |
 | View or export people who joined early access | Studio → Early access |
-| Website AI visibility, greeting, instructions and reply length | Studio → KITTY AI & security |
+| Project-brief AI helper instructions and reply limits | Studio → KITTY AI & security |
 | Temporarily pause the public website | Studio → Site controls |
 | Homepage headline, services copy, page layout or menu | Website source in GitHub |
 | New development-product type beyond the existing three | Code and a reviewed database change |
@@ -85,19 +85,19 @@ The handover includes a checksum-verified copy of the **currently published Secr
 
 The homepage shows the first published **Founder & CEO**, currently Virat Anand, with a highlighted **See full team** button. Use the suggested role name. Matching ignores letter case and surrounding spaces, but a different title such as “CEO” is not the same role. The Co-Founder and other published people appear on the full-team page. Hiding or removing the CEO also removes that homepage profile.
 
-## Manage KITTY AI and Studio security
+## Manage the site guide, project helper and Studio security
 
-Open **KITTY AI & security** to turn the website guide on or off, edit its name and greeting, and set tone instructions. You can adjust conversation length, reply length and response variation. Save, then refresh the website. Published product, release, team and journal changes become the guide’s current context automatically; private Studio data is excluded.
+The visitor-facing site guide uses the Thunderbolt widget configured in `app/layout.tsx`. Its public agent and appearance are managed through the Thunderbolt service; Studio does not control this widget.
 
-The website guide uses the real KITTY AI backend through a separate stateless endpoint. It cannot read Android users’ memories or conversations. Browser conversations clear on refresh. Server limits cap requests at 12 per visitor per hour, 30 per day and 150 total per day. These fixed limits also protect the model allowance; the browser conversation setting does not replace them. AI replies can still be inaccurate.
+The optional project-brief helper still uses the KITTY AI backend. Open **KITTY AI & security** to adjust its instructions, conversation length, reply length and response variation. Published product, release, team and journal changes become its context; private Studio data and Android users’ memories or conversations are excluded. The website server limits project-helper requests to 12 per visitor per hour, 30 per day and 150 total per day. AI replies can still be inaccurate.
 
 Open `/kitten` and choose **Sign in with Google**. Use the approved owner Google account. Google setup and recovery are documented in **GOOGLE_STUDIO_SETUP.md**. The provider client secret stays in Supabase. Password-only sessions and raw Google sessions outside the verified website flow cannot edit the website database. A team profile does not grant Studio access.
 
-Studio sign-in does not depend on the Turnstile widget. Same-origin validation, database rate limits, Google-only Studio authorization and approved owner identity checks remain active. Turnstile continues to protect public forms and assistant requests; those flows keep their server validation and spam checks.
+Studio sign-in does not depend on the Turnstile widget. Same-origin validation, database rate limits, Google-only Studio authorization and approved owner identity checks remain active. Turnstile continues to protect public forms and project-brief assistant requests; those flows keep their server validation and spam checks.
 
 AI and Turnstile credentials are encrypted in the dedicated website database using the private deployment gateway. The current production setup does not require copying new secrets into GitHub. If you rotate `FEEDBACK_GATEWAY_TOKEN`, re-encrypt the runtime configuration and update its private database hash in the same planned change. Keep a private configuration backup. `.env.example` contains safe names and optional overrides only.
 
-When another AI updates the separate KITTY AI Android/backend project, require it to preserve the Worker’s `/api/website/chat` route and `WEBSITE_GATEWAY_TOKEN` secret binding. The reference files in `integrations/kitty-ai/` explain this. Deploying older backend code without that route will break the website guide.
+When another AI updates the separate KITTY AI Android/backend project, require it to preserve the Worker’s `/api/website/chat` route and `WEBSITE_GATEWAY_TOKEN` secret binding. The reference files in `integrations/kitty-ai/` explain this. Deploying older backend code without that route will break the project-brief helper.
 
 Open **Site controls** to show or remove the public maintenance screen. Studio stays accessible. Wait for the save result before navigating away; if a newer change happened, reload the controls instead of retrying stale state. Keep the existing emergency recovery access private.
 
