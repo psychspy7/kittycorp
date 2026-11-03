@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Bot, Code2, Sprout, Sun, Workflow } from "lucide-react";
 import type { SitePageContent } from "@/lib/site-page-content";
-import { ElementalControls } from "./elemental-background";
 
 export const roboticsProjects = [
   {
@@ -41,7 +40,6 @@ export function CompanyHero({ copy }: { copy: SitePageContent }) {
         <Link className="company-button company-button-light" href="/projects">{copy.heroPrimaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
         <Link className="company-text-link" href="#divisions">{copy.heroSecondaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
-      <ElementalControls />
       {copy.heroNote && <p className="company-hero-note">{copy.heroNote}</p>}
     </div>
     <aside className="company-hero-index" aria-label="KITTY CORP’s two divisions">

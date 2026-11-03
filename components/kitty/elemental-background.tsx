@@ -17,19 +17,12 @@ function sendMode(mode: ElementSceneVariant, source: "control" | "scroll") {
   window.dispatchEvent(new CustomEvent(MODE_EVENT, { detail: { mode, source } }));
 }
 
-function sceneAtProgress(progress: number): ElementSceneVariant {
-  if (progress < 0.3) return "water";
-  if (progress < 0.56) return "fire";
-  if (progress < 0.81) return "lightning";
-  return "all";
-}
-
 function sceneLabel(scene: ElementSceneVariant) {
   return scene === "all" ? "All three" : scene[0].toUpperCase() + scene.slice(1);
 }
 
 export function ElementalControls() {
-  const [scene, setScene] = useState<ElementSceneVariant>("water");
+  const [scene, setScene] = useState<ElementSceneVariant>("lightning");
 
   useEffect(() => {
     const update = (event: Event) => {
@@ -56,16 +49,13 @@ export function ElementalControls() {
 }
 
 export function ElementalBackground() {
-  const [layers, setLayers] = useState<SceneLayer[]>([{ id: 0, scene: "water", active: true }]);
+  const [layers, setLayers] = useState<SceneLayer[]>([{ id: 0, scene: "lightning", active: true }]);
   const nextLayerId = useRef(1);
   const pendingLayerIds = useRef(new Set<number>());
   const onLayerReady = useRef<(id: number) => void>(() => {});
 
   useEffect(() => {
-    let manualMode = false;
-    let manualScrollY = 0;
-    let scrollFrame = 0;
-    let activeScene: ElementSceneVariant = "water";
+    let activeScene: ElementSceneVariant = "lightning";
     let transitionTimer: number | undefined;
     const root = document.querySelector<HTMLElement>(".gemini-template");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -106,12 +96,6 @@ export function ElementalBackground() {
         source: "control" | "scroll";
       }>).detail;
       if (!detail?.mode || !SCENES.includes(detail.mode)) return;
-      if (detail.source === "control") {
-        manualMode = true;
-        manualScrollY = window.scrollY;
-      } else {
-        manualMode = false;
-      }
       transitionTo(detail.mode);
     };
 
@@ -119,15 +103,6 @@ export function ElementalBackground() {
       const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
       if (scrollProgress) scrollProgress.style.transform = `scaleX(${progress})`;
-      if (scrollFrame) return;
-      scrollFrame = window.requestAnimationFrame(() => {
-        scrollFrame = 0;
-        if (manualMode && Math.abs(window.scrollY - manualScrollY) > 96) manualMode = false;
-        if (!manualMode) {
-          const next = sceneAtProgress(progress);
-          if (next !== activeScene) sendMode(next, "scroll");
-        }
-      });
     };
 
     const motionObserver = "IntersectionObserver" in window
@@ -160,7 +135,6 @@ export function ElementalBackground() {
     handleScroll();
 
     return () => {
-      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
       if (transitionTimer) window.clearTimeout(transitionTimer);
       onLayerReady.current = () => {};
       motionObserver?.disconnect();

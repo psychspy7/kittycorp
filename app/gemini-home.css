@@ -53,8 +53,8 @@
   height: 100%;
   transform: scaleX(0);
   transform-origin: left center;
-  background: linear-gradient(90deg, #67d8ec, #9b84ff 54%, #ff9b60);
-  box-shadow: 0 0 13px #a294ff8a;
+  background: linear-gradient(90deg, #69dcf2, #9e91ff 55%, #8de4ef);
+  box-shadow: 0 0 13px #69dcf280;
 }
 .gemini-template .company-home { background: transparent; }
 .gemini-template .company-hero,
@@ -171,24 +171,170 @@
 .gemini-template .robotics-project-icon { color: #7bd8eb; }
 .gemini-template .robotics-project-icon { border-color: #70d6ed55; background: #59d3e40d; }
 .gemini-template .robotics-project-meta span:last-child { color: #ffbf78; }
+/* Enterprise Kicker & Eyebrow Frosted Glass Pill Badges */
+.gemini-template .company-kicker,
+.gemini-template .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(169, 158, 255, 0.28);
+  background: rgba(169, 158, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #c8c2ff;
+  font: 600 10px/1.4 Geist, Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.gemini-template .company-kicker::before,
+.gemini-template .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #69dcf2;
+  box-shadow: 0 0 8px #69dcf2;
+  flex-shrink: 0;
+}
+
+/* Unified Glassmorphism Card System */
 .gemini-template .business-proof-card,
 .gemini-template .quick-enquiry-form,
 .gemini-template .home-founder-profile,
-.gemini-template .review-grid figure {
-  border: 1px solid #a99eff39;
-  border-radius: 18px;
-  background: linear-gradient(145deg, #14182adb, #0d1722e8);
-  box-shadow: 0 18px 54px #03040d37, inset 0 1px #ffffff0c;
-  backdrop-filter: blur(12px);
+.gemini-template .review-grid figure,
+.gemini-template .achievement-note {
+  border: 1px solid #a99eff38;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(20, 24, 42, 0.88), rgba(13, 23, 34, 0.92));
+  box-shadow: 0 20px 60px rgba(3, 4, 13, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .gemini-template .business-proof-card { overflow: hidden; transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s ease, box-shadow .35s ease; }
 .gemini-template .business-proof-card:hover { transform: translateY(-5px); border-color: #86dff18a; box-shadow: 0 24px 65px #04071270, 0 0 36px #7c76ff19; }
 .gemini-template .business-proof-image { background: #111b2b; }
 .gemini-template .business-proof-label .micro-label { color: #c1c8dd; }
-.gemini-template .achievement-note { border-color: #a99eff37; border-radius: 16px; background: linear-gradient(110deg, #181a35d9, #10242cd9); }
-.gemini-template .home-process li,
-.gemini-template .final-faq details { border-color: #a8acd52a; }
-.gemini-template .home-process li::before { color: #8de0ed; }
+
+/* Fix horizontal padding defects on achievement note and founder profile */
+.gemini-template .achievement-note {
+  padding: clamp(24px, 3vw, 36px);
+  margin-top: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+}
+.gemini-template .home-founder-profile {
+  padding: clamp(24px, 3.2vw, 38px);
+  margin-top: 24px;
+}
+
+/* Elevate HomeProcess into 4 interactive glass micro-cards with electric cyan step badges and hover lift */
+.gemini-template .home-process ol {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin-top: 28px;
+  counter-reset: delivery;
+}
+.gemini-template .home-process li {
+  counter-increment: delivery;
+  border: 1px solid rgba(169, 158, 255, 0.22);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(18, 22, 40, 0.8), rgba(12, 21, 32, 0.85));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: clamp(20px, 2.2vw, 28px);
+  box-shadow: 0 14px 40px rgba(3, 4, 13, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.gemini-template .home-process li:hover {
+  transform: translateY(-4px);
+  border-color: rgba(105, 220, 242, 0.5);
+  box-shadow: 0 20px 50px rgba(3, 4, 13, 0.6), 0 0 20px rgba(105, 220, 242, 0.12);
+}
+.gemini-template .home-process li::before {
+  content: "0" counter(delivery);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(105, 220, 242, 0.12);
+  border: 1px solid rgba(105, 220, 242, 0.32);
+  color: #69dcf2;
+  font: 600 11px/1 Geist, Arial, sans-serif;
+  margin-bottom: 14px;
+}
+.gemini-template .home-process h3 {
+  color: #f4f5ff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+.gemini-template .home-process li p {
+  color: #c4c9db;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Elevate FAQ into glass accordions with smooth rotating indicators */
+.gemini-template .final-faq details {
+  border: 1px solid rgba(169, 158, 255, 0.18);
+  border-radius: 14px;
+  background: rgba(16, 20, 36, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 22px;
+  margin-bottom: 12px;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.gemini-template .final-faq details:hover {
+  border-color: rgba(169, 158, 255, 0.38);
+  background: rgba(20, 25, 46, 0.8);
+}
+.gemini-template .final-faq details[open] {
+  border-color: rgba(105, 220, 242, 0.45);
+  background: rgba(20, 26, 48, 0.9);
+  box-shadow: 0 10px 30px rgba(3, 4, 13, 0.4);
+}
+.gemini-template .final-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: #f4f5ff;
+  padding: 14px 0;
+}
+.gemini-template .final-faq summary span {
+  display: inline-block;
+  color: #8ce2ef;
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+.gemini-template .final-faq details[open] summary span {
+  transform: rotate(45deg);
+}
+.gemini-template .final-faq details p {
+  color: #c4c9db;
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 0 0 18px;
+  max-width: 640px;
+}
+
 .gemini-template .home-process .text-link,
 .gemini-template .business-proof-copy .text-link,
 .gemini-template .achievement-note .text-link,
@@ -203,6 +349,21 @@
 .gemini-template .quick-enquiry-form .form-field input::placeholder,
 .gemini-template .quick-enquiry-form .form-field textarea::placeholder { color: #939bb4; }
 .gemini-template .enquiry-optional { border-color: #afb8ec35; color: #dce0ee; }
+
+/* Normalize public-feedback-link and site-footer .wrap to 1320px content grid */
+.gemini-template .public-feedback-link,
+.gemini-template .site-footer .wrap {
+  width: min(1320px, calc(100% - 2 * var(--company-gutter)));
+  margin-inline: auto;
+}
+.gemini-template .public-feedback-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 28px;
+  border-top: 1px solid var(--company-line);
+  border-bottom: 1px solid var(--company-line);
+}
 .gemini-template .site-footer { border-color: #a8a3ff32; background: linear-gradient(125deg, #0b0e19, #11142a 56%, #0a1a22); }
 .gemini-template [data-element] { scroll-margin-top: 120px; }
 .gemini-template[data-motion-ready="true"] [data-element]:not([data-revealed="true"]) { opacity: 0; transform: translateY(22px); }
@@ -292,14 +453,52 @@ html[data-theme="light"] .elemental-controls button[aria-pressed="true"] { color
 html[data-theme="light"] .gemini-manifesto { border-color: #6961c733; }
 html[data-theme="light"] .gemini-manifesto-meta { color: #646981; }
 html[data-theme="light"] .gemini-manifesto-meta .company-kicker { color: #584bc4; }
+html[data-theme="light"] .gemini-template .company-kicker,
+html[data-theme="light"] .gemini-template .eyebrow {
+  border-color: rgba(101, 89, 217, 0.28);
+  background: rgba(101, 89, 217, 0.08);
+  color: #584bc4;
+}
+html[data-theme="light"] .gemini-template .company-kicker::before,
+html[data-theme="light"] .gemini-template .eyebrow::before {
+  background: #0ea5e9;
+  box-shadow: 0 0 8px #0ea5e9;
+}
 html[data-theme="light"] .gemini-template .business-proof-card,
 html[data-theme="light"] .gemini-template .quick-enquiry-form,
 html[data-theme="light"] .gemini-template .home-founder-profile,
-html[data-theme="light"] .gemini-template .review-grid figure {
+html[data-theme="light"] .gemini-template .review-grid figure,
+html[data-theme="light"] .gemini-template .achievement-note {
   border-color: #6559d941;
   background: linear-gradient(145deg, #fffffff0, #f6f7ffe8);
   box-shadow: 0 18px 54px #25285b12, inset 0 1px #ffffff;
 }
+html[data-theme="light"] .gemini-template .home-process li {
+  border-color: #6559d933;
+  background: linear-gradient(145deg, #ffffffea, #f5f6ffe8);
+  box-shadow: 0 10px 30px #25285b0d;
+}
+html[data-theme="light"] .gemini-template .home-process li:hover {
+  border-color: #584bc466;
+  box-shadow: 0 16px 40px #25285b1a;
+}
+html[data-theme="light"] .gemini-template .home-process li::before {
+  background: rgba(101, 89, 217, 0.1);
+  border-color: rgba(101, 89, 217, 0.28);
+  color: #584bc4;
+}
+html[data-theme="light"] .gemini-template .home-process h3 { color: #191b2d; }
+html[data-theme="light"] .gemini-template .home-process li p { color: #5d6277; }
+html[data-theme="light"] .gemini-template .final-faq details {
+  border-color: #6559d92e;
+  background: #ffffffc9;
+}
+html[data-theme="light"] .gemini-template .final-faq details[open] {
+  border-color: #6559d966;
+  background: #ffffffe6;
+}
+html[data-theme="light"] .gemini-template .final-faq summary { color: #191b2d; }
+html[data-theme="light"] .gemini-template .final-faq details p { color: #5d6277; }
 html[data-theme="light"] .gemini-template .quick-enquiry-form .form-field label,
 html[data-theme="light"] .gemini-template .quick-enquiry-form .project-form-submit p { color: #484b5e; }
 html[data-theme="light"] .gemini-template .quick-enquiry-form .form-field input,
@@ -315,6 +514,17 @@ html[data-theme="light"] .gemini-template .site-footer .micro-label,
 html[data-theme="light"] .gemini-template .site-footer .footer-bottom,
 html[data-theme="light"] .gemini-template .footer-links a { color: #555a6e; }
 
+@media (max-width: 850px) {
+  .gemini-template .home-process ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .gemini-template .achievement-note {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
 @media (max-width: 760px) {
   .gemini-template .company-hero-index { border-radius: 18px; }
   .gemini-template .elemental-controls { align-items: flex-start; flex-direction: column; gap: 9px; margin-top: 26px; }
@@ -326,7 +536,17 @@ html[data-theme="light"] .gemini-template .footer-links a { color: #555a6e; }
   .gemini-template .business-proof-card,
   .gemini-template .quick-enquiry-form,
   .gemini-template .home-founder-profile,
-  .gemini-template .review-grid figure { border-radius: 15px; }
+  .gemini-template .review-grid figure,
+  .gemini-template .achievement-note { border-radius: 15px; }
+}
+@media (max-width: 650px) {
+  .gemini-template .home-process ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gemini-template .home-founder-profile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
 }
 @media (max-width: 390px) {
   .elemental-controls-options { gap: 5px; }
@@ -336,5 +556,8 @@ html[data-theme="light"] .gemini-template .footer-links a { color: #555a6e; }
   .elemental-scene-layer { transition: none; }
   .gemini-template [data-element] { transition: none; opacity: 1; transform: none; }
   .elemental-controls button,
-  .gemini-template .business-proof-card { transition: none; }
+  .gemini-template .business-proof-card,
+  .gemini-template .home-process li,
+  .gemini-template .final-faq details,
+  .gemini-template .final-faq summary span { transition: none; }
 }
