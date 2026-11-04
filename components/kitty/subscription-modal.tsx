@@ -51,7 +51,7 @@ export function SubscriptionModal() {
         <div className="subscription-modal-content">
           <div className="subscription-modal-badge">
             <Zap size={14} className="subscription-zap-icon" />
-            <span>KITTY ONE · ALL-ACCESS SUBSCRIPTION</span>
+            <span>KITTY ONE · $199 USD ALL-ACCESS</span>
           </div>
 
           <h2 id="sub-modal-title">
@@ -60,7 +60,7 @@ export function SubscriptionModal() {
           </h2>
 
           <p className="subscription-modal-intro">
-            Elevate your company with <strong>KITTY One</strong>: tailored full-stack engineering, complete AI products, and continuous support.
+            Elevate your company with <strong>KITTY One ($199 USD)</strong>: tailored full-stack engineering, complete AI products, and continuous support.
           </p>
 
           <div className="subscription-modal-features">
@@ -101,7 +101,7 @@ export function SubscriptionModal() {
               className="button button-gold subscription-cta-button"
               onClick={dismiss}
             >
-              <span>Explore Kitty One &amp; Plans</span>
+              <span>Explore Kitty One ($199 USD)</span>
               <ArrowUpRight size={17} />
             </Link>
             <button

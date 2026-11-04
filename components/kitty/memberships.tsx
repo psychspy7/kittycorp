@@ -78,8 +78,8 @@ export function Memberships({catalog,securityEnabled}:{catalog:MembershipCatalog
   <div className="kitty-one-badge"><Sparkles size={14}/><span>FLAGSHIP ALL-IN-ONE</span></div>
   <span className="eyebrow">KITTY ONE · ALL-ACCESS</span>
   <h2>KITTY One</h2>
-  <div className="membership-price">₹15,999<small> · full package</small></div>
-  <div className="local-price">≈ $199 USD · All-inclusive bundle</div>
+  <div className="membership-price">$199<small> USD · full package</small></div>
+  <LocalPrice amount={19900} base="USD" charged={false}/>
   <p>Our complete flagship stack: two custom websites, intelligent AI workflows, and continuous technical support.</p>
   <ul>
    <li><Check size={16}/><strong>1 Premium Website</strong> (Tailored UI &amp; backend)</li>
