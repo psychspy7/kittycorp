@@ -1,40 +1,40 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 
-let visitorCount = 94;
-if (typeof window !== "undefined") {
-  visitorCount = Math.floor(Math.random() * 7) + 93;
-}
-
-const listeners = new Set<() => void>();
-
-function subscribe(callback: () => void) {
-  listeners.add(callback);
-  return () => {
-    listeners.delete(callback);
-  };
-}
-
-function getSnapshot() {
-  return visitorCount;
-}
-
-function getServerSnapshot() {
-  return 94;
-}
+const BASE_VIEW_COUNT = 90;
 
 export function LiveVisitorCounter() {
-  const count = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [count, setCount] = useState(BASE_VIEW_COUNT);
+  const eventId = useRef<string | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const delta = Math.floor(Math.random() * 3) - 1;
-      visitorCount = Math.max(90, Math.min(102, visitorCount + delta));
-      listeners.forEach((fn) => fn());
-    }, 11000);
+    // Reuse the same id if React replays the effect in development. The
+    // database also enforces uniqueness, so network retries cannot double-count.
+    eventId.current ??= crypto.randomUUID();
 
-    return () => clearInterval(interval);
+    void fetch("/api/page-view", {
+      method: "POST",
+      credentials: "same-origin",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventId: eventId.current,
+        path: window.location.pathname,
+      }),
+    })
+      .then(async (response) => {
+        if (!response.ok) return null;
+        return (await response.json()) as { count?: number };
+      })
+      .then((result) => {
+        if (result && Number.isSafeInteger(result.count) && (result.count as number) >= BASE_VIEW_COUNT) {
+          setCount(result.count as number);
+        }
+      })
+      .catch(() => {
+        // Keep the base/last known value visible if analytics is unavailable.
+      });
   }, []);
 
   return (
@@ -42,14 +42,14 @@ export function LiveVisitorCounter() {
       className="live-visitor-counter"
       role="status"
       aria-live="polite"
-      aria-label={`${count} active people on website right now`}
+      aria-label={count + " website views"}
     >
       <span className="live-indicator-dot" aria-hidden="true">
         <span className="live-indicator-ping" />
       </span>
       <span className="live-counter-text">
-        <strong className="live-counter-number">{count}</strong>
-        <span> people on site right now</span>
+        <strong className="live-counter-number">{count.toLocaleString("en-IN")}</strong>
+        <span> website views</span>
       </span>
     </div>
   );
