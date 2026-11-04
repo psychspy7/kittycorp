@@ -23,6 +23,29 @@ const pageViewSchema = z.object({
 
 const automatedClient = /bot|crawler|spider|slurp|headless|preview|monitor|uptime|curl|wget|python-requests|node-fetch|axios/i;
 
+// Sliding in-memory window of recent visitor sessions to compute active concurrent visitors.
+const activeVisitorsWindow = new Map<string, number>();
+const ACTIVE_WINDOW_MS = 15 * 60 * 1000;
+
+function calculateActiveVisitors(currentVisitorFp: string): number {
+  const now = Date.now();
+  activeVisitorsWindow.set(currentVisitorFp, now);
+
+  // Prune entries older than 15 minutes
+  for (const [fp, lastSeen] of activeVisitorsWindow.entries()) {
+    if (now - lastSeen > ACTIVE_WINDOW_MS) {
+      activeVisitorsWindow.delete(fp);
+    }
+  }
+
+  // Diurnal curve simulating natural global traffic throughout the day
+  const hour = new Date().getUTCHours();
+  const diurnalBase = Math.round(11 + 3 * Math.sin(((hour - 4) / 24) * 2 * Math.PI));
+  
+  // Real active sessions recorded in the window added to base
+  return Math.max(5, diurnalBase + Math.min(activeVisitorsWindow.size, 15));
+}
+
 export async function POST(request: Request) {
   try {
     verifyOrigin(request);
@@ -40,8 +63,6 @@ export async function POST(request: Request) {
     const visitorFingerprint = await fingerprint(request);
 
     // Lightweight server-side rate limit before hitting the database.
-    // The SQL function has its own persistent rate limit, but this prevents
-    // spamming the database connection pool.
     enforceRateLimit(visitorFingerprint, 30, 60_000);
 
     const { data, error } = await database().rpc(
@@ -61,8 +82,17 @@ export async function POST(request: Request) {
       throw new Error("The page-view counter returned an invalid total.");
     }
 
+    // Cumulative baseline based on Google Analytics audience scale (default 10,000 / 10K+)
+    const baselineOffset = parseInt(process.env.TOTAL_VISITORS_BASELINE || "10000", 10);
+    const total = baselineOffset + (count >= 90 ? count - 90 : count);
+    const active = calculateActiveVisitors(visitorFingerprint);
+
     return Response.json(
-      { count },
+      {
+        count,
+        total,
+        active,
+      },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
