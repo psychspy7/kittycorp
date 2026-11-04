@@ -1,9 +1,10 @@
 "use client";
+import Link from "next/link";
 import {LocalPrice} from "./local-currency";
 import Script from "next/script";
 import {useEffect,useRef,useState} from "react";
 import type {User} from "firebase/auth";
-import {Check,ArrowUpRight,ShieldCheck} from "lucide-react";
+import {Check,ArrowUpRight,ShieldCheck,Sparkles} from "lucide-react";
 import {kittyCustomerAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged} from "@/lib/kitty-customer";
 import type {MembershipCatalog} from "@/lib/membership-types";
 import {Turnstile} from "./turnstile";
@@ -72,7 +73,23 @@ export function Memberships({catalog,securityEnabled}:{catalog:MembershipCatalog
  {catalog.testMode&&catalog.purchasesEnabled&&<p className="membership-paused">TEST MODE · No real money is charged. Test membership access is isolated from production.</p>}
  <div className="membership-grid">
  <article className="membership-card"><span className="eyebrow">KITTY AI · START HERE</span><h2>Free</h2><div className="membership-price">₹0</div><p>Five minutes a day to get acquainted.</p><ul><li><Check size={16}/>Daily five-minute window</li><li><Check size={16}/>Saved chats on your device</li><li><Check size={16}/>Your personal memories</li></ul><a className="button button-outline" href="/kitty-ai">Get KITTY AI <ArrowUpRight size={16}/></a></article>
- {catalog.plans.map(plan=><article key={plan.id} className={"membership-card "+(plan.product==="kitty"?"is-featured":"")}><span className="eyebrow">{plan.product==="kitty"?"KITTY AI · MORE ROOM":"LISA AI · SEPARATE PRODUCT"}</span><h2>{plan.name}</h2><div className="membership-price">{plan.amount===null?"To be confirmed":"₹"+(plan.amount/100).toLocaleString("en-IN")}<small>{plan.amount!==null?"/"+(plan.months===1?"month":plan.months+" months"):""}</small></div>{plan.amount!==null&&<LocalPrice amount={plan.amount}/>}<p>{plan.product==="kitty"?"For longer conversations, with clear daily limits.":"Premium LISA is being prepared separately."}</p><ul>{plan.benefits.map(b=><li key={b}><Check size={16}/>{b}</li>)}</ul><button className={"button "+(plan.product==="kitty"?"button-gold":"button-outline")} disabled={!plan.purchasable||busy||!!pending||!!user&&(!ready||securityEnabled&&!token)} onClick={()=>void pay(plan.id)}>{!plan.purchasable?"Not available yet":busy?"Checkout in progress…":user&&(!ready||securityEnabled&&!token)?"Preparing secure checkout…":user?"Choose "+plan.name:"Sign in to choose"}</button></article>)}
+ {catalog.plans.map(plan=><article key={plan.id} className={"membership-card "+(plan.product==="kitty"?"is-featured":"")}><span className="eyebrow">{plan.product==="kitty"?"KITTY AI · MORE ROOM":"SEPARATE PRODUCT"}</span><h2>{plan.name}</h2><div className="membership-price">{plan.amount===null?"To be confirmed":"₹"+(plan.amount/100).toLocaleString("en-IN")}<small>{plan.amount!==null?"/"+(plan.months===1?"month":plan.months+" months"):""}</small></div>{plan.amount!==null&&<LocalPrice amount={plan.amount}/>}<p>{plan.product==="kitty"?"For longer conversations, with clear daily limits.":"Dedicated product plan."}</p><ul>{plan.benefits.map(b=><li key={b}><Check size={16}/>{b}</li>)}</ul><button className={"button "+(plan.product==="kitty"?"button-gold":"button-outline")} disabled={!plan.purchasable||busy||!!pending||!!user&&(!ready||securityEnabled&&!token)} onClick={()=>void pay(plan.id)}>{!plan.purchasable?"Not available yet":busy?"Checkout in progress…":user&&(!ready||securityEnabled&&!token)?"Preparing secure checkout…":user?"Choose "+plan.name:"Sign in to choose"}</button></article>)}
+ <article className="membership-card is-featured kitty-one-card">
+  <div className="kitty-one-badge"><Sparkles size={14}/><span>FLAGSHIP ALL-IN-ONE</span></div>
+  <span className="eyebrow">KITTY ONE · ALL-ACCESS</span>
+  <h2>KITTY One</h2>
+  <div className="membership-price">₹15,999<small> · full package</small></div>
+  <div className="local-price">≈ $199 USD · All-inclusive bundle</div>
+  <p>Our complete flagship stack: two custom websites, intelligent AI workflows, and continuous technical support.</p>
+  <ul>
+   <li><Check size={16}/><strong>1 Premium Website</strong> (Tailored UI &amp; backend)</li>
+   <li><Check size={16}/><strong>1 Basic Website</strong> (Fast responsive launch)</li>
+   <li><Check size={16}/><strong>KITTY AI Products Access</strong> (Full intelligent tools)</li>
+   <li><Check size={16}/><strong>All Future Updates Included</strong> (Continuous feature upgrades)</li>
+   <li><Check size={16}/><strong>6 Months Free Maintenance</strong> (Dedicated technical upkeep)</li>
+  </ul>
+  <Link className="button button-gold" href="/contact?subject=KITTY%20One%20Subscription">Get KITTY One <ArrowUpRight size={16}/></Link>
+ </article>
  </div>
  {catalog.plans.some(p=>p.purchasable)&&<><Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" onReady={()=>setReady(true)} onError={()=>setError("Razorpay checkout could not load.")}/>{securityEnabled&&<Turnstile action="payment-order" onToken={setToken} resetKey={revision}/>}</>}
  {message&&<p className="membership-result" role="status">{message}</p>}{error&&<p className="membership-error" role="alert">{error}</p>}

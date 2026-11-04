@@ -7,7 +7,7 @@ const packages = [
   { name: "Basic Website", price: 50, summary: "A focused, responsive home for a clear offer.", details: ["Essential pages and contact path", "Mobile and desktop layouts", "Launch handover"] },
   { name: "Premium Website", price: 100, summary: "A fuller site with the frontend and backend your scope needs.", details: ["Custom page structure", "Agreed interactive features", "Backend work defined in the quote"] },
   { name: "AI Website", price: 149, summary: "A site with a useful AI feature or automation, designed around a real task.", details: ["Website design and development", "One scoped AI workflow", "Usage and provider costs explained upfront"] },
-  { name: "KITTY AI Membership", price: 200, summary: "A 30-day bundle: two Premium Website builds and KITTY AI Plus access.", details: ["Two Premium Website scopes agreed before payment", "30 days of KITTY AI Plus access", "LISA AI is not included"] },
+  { name: "KITTY One All-Access", price: 199, summary: "Our flagship bundle: two websites, KITTY AI products, future updates and maintenance.", details: ["1 Premium Website build with custom architecture", "1 Basic Website build for launch or campaign", "Full KITTY AI products & intelligence suite", "All future platform updates included", "6 months free maintenance on both sites"] },
 ] as const;
 
 export function ServicePricing({ compact = false }: { compact?: boolean }) {

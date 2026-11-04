@@ -51,7 +51,7 @@ export function SubscriptionModal() {
         <div className="subscription-modal-content">
           <div className="subscription-modal-badge">
             <Zap size={14} className="subscription-zap-icon" />
-            <span>KITTY ALL-ACCESS SUBSCRIPTION</span>
+            <span>KITTY ONE · ALL-ACCESS SUBSCRIPTION</span>
           </div>
 
           <h2 id="sub-modal-title">
@@ -60,7 +60,7 @@ export function SubscriptionModal() {
           </h2>
 
           <p className="subscription-modal-intro">
-            Elevate your company with continuous digital execution and instant intelligence.
+            Elevate your company with <strong>KITTY One</strong>: tailored full-stack engineering, complete AI products, and continuous support.
           </p>
 
           <div className="subscription-modal-features">
@@ -69,8 +69,8 @@ export function SubscriptionModal() {
                 <Check size={16} />
               </div>
               <div>
-                <strong>Tailored Business Websites</strong>
-                <p>Modern high-speed websites, automated inquiry routing, and ongoing maintenance.</p>
+                <strong>1 Premium Website + 1 Basic Website</strong>
+                <p>Custom full-stack architecture for your brand plus a sleek responsive microsite.</p>
               </div>
             </div>
 
@@ -79,8 +79,18 @@ export function SubscriptionModal() {
                 <Sparkles size={16} />
               </div>
               <div>
-                <strong>KITTY AI Companion &amp; Workflows</strong>
-                <p>Always-on conversational AI friend, task automation, and intelligence tools.</p>
+                <strong>KITTY AI Products &amp; Future Updates</strong>
+                <p>Full suite of intelligent companion &amp; workflow tools with continuous platform upgrades.</p>
+              </div>
+            </div>
+
+            <div className="subscription-feature-item">
+              <div className="feature-icon-wrap">
+                <Check size={16} />
+              </div>
+              <div>
+                <strong>6 Months Free Maintenance</strong>
+                <p>Dedicated technical upkeep, routine performance tuning, and direct founder support.</p>
               </div>
             </div>
           </div>
@@ -91,7 +101,7 @@ export function SubscriptionModal() {
               className="button button-gold subscription-cta-button"
               onClick={dismiss}
             >
-              <span>Explore Kitty Subscription</span>
+              <span>Explore Kitty One &amp; Plans</span>
               <ArrowUpRight size={17} />
             </Link>
             <button
