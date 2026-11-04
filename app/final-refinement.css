@@ -116,3 +116,25 @@ body { color:var(--final-graphite); }
 .business-home .home-services-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 .services-page #automation { scroll-margin-top:112px; grid-column:1/-1; }
 @media(max-width:680px) { .business-home .home-services-grid { grid-template-columns:1fr; } }
+
+
+/* Dark Mode Obsidian Overrides */
+html[data-theme="dark"] :is(
+  .business-home .home-service,
+  .lisa-product,
+  .studio-health-card,
+  .business-home .delivery-support
+) {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .final-product-icon {
+  background: #090d1c !important;
+  border-color: rgba(169, 158, 255, 0.25) !important;
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .lisa-work-preview span {
+  background: #090d1c !important;
+  color: #c4c9db !important;
+}

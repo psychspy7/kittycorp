@@ -79,3 +79,22 @@
   .business-destination,.destination-topline>svg { transition: none; }
   .business-destination:hover .destination-topline>svg { transform: none; }
 }
+
+
+/* Dark Mode Obsidian Overrides */
+html[data-theme="dark"] .business-destination {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .business-destination:hover {
+  background: linear-gradient(150deg, rgba(24, 32, 60, 0.96), rgba(16, 24, 44, 0.98)) !important;
+  border-color: #69dcf2 !important;
+}
+html[data-theme="dark"] .business-destination h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .business-destination p {
+  color: #c4c9db !important;
+}

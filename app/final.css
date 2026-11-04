@@ -423,3 +423,57 @@ h1,h2,h3,h4 { color: var(--foreground); }
   .website-launch-art { min-height: auto; padding: 10px; }
   .website-launch-screenshot { max-height: 360px; }
 }
+
+
+/* Dark Mode Obsidian Theme Overrides */
+html[data-theme="dark"] :is(
+  .product-summary,
+  .service-offerings article,
+  .project-form,
+  .contact-form,
+  .contact-success,
+  .secretchat-feature-grid article,
+  .secretchat-release,
+  .launch-card,
+  .login-card
+) {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] :is(
+  .product-summary,
+  .service-offerings article,
+  .project-form,
+  .contact-form,
+  .contact-success,
+  .secretchat-feature-grid article,
+  .secretchat-release,
+  .launch-card,
+  .login-card
+) :is(h1, h2, h3, h4, strong, b) {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] :is(
+  .product-summary,
+  .service-offerings article,
+  .project-form,
+  .contact-form,
+  .contact-success,
+  .secretchat-feature-grid article,
+  .secretchat-release,
+  .launch-card,
+  .login-card
+) :is(p, li, span:not(.micro-label):not(.quiet-status)) {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .real-media-placeholder {
+  background: #090d1c !important;
+  border: 1px solid rgba(169, 158, 255, 0.22) !important;
+}
+html[data-theme="dark"] .secretchat-product-art,
+html[data-theme="dark"] .secretchat-preview {
+  background: #090d1c !important;
+  border: 1px solid rgba(169, 158, 255, 0.22) !important;
+}

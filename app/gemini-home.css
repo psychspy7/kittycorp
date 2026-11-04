@@ -1291,8 +1291,91 @@ html[data-theme="dark"] .checkout-button.button-gold:hover {
   box-shadow: 0 0 24px rgba(240, 201, 120, 0.45) !important;
 }
 
-/* Universal Obsidian Glass for Account & Secondary Boxes */
+/* =========================================================================
+   Unified Obsidian Glass & High-Contrast Typography for All Pages
+   Eliminates all white-on-white text, light card backgrounds, and contrast flaws
+   ========================================================================= */
+
+/* Root Page Backgrounds in Dark Mode with Premium Obsidian Glow */
 html[data-theme="dark"] :is(
+  .directory-page,
+  .public-page,
+  .contact-page,
+  .team-page,
+  .account-page,
+  .legal-page,
+  .pricing-page,
+  .payments-page,
+  .projects-page,
+  .services-page,
+  .products-page,
+  .memberships-page,
+  .secretchat-page,
+  .payments-hub-page,
+  .appointments-page,
+  .play-page,
+  .journal-list-page,
+  .full-team-page
+) {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(93, 72, 207, 0.12), transparent 38rem),
+    radial-gradient(ellipse at 88% 24%, rgba(22, 125, 157, 0.1), transparent 42rem),
+    #080a13 !important;
+  color: #d1d5e5 !important;
+}
+
+/* Page Headings in Dark Mode */
+html[data-theme="dark"] :is(
+  .page-heading h1,
+  .section-heading h2,
+  .directory-page h1,
+  .directory-page h2,
+  .public-page h1,
+  .public-page h2,
+  .contact-copy h1,
+  .services-page h1,
+  .services-page h2,
+  .pricing-page h1,
+  .pricing-page h2,
+  .appointments-page h1,
+  .appointments-page h2,
+  .memberships-page h1,
+  .memberships-page h2
+) {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] :is(
+  .page-heading > p,
+  .section-heading p,
+  .directory-page > .page-heading p,
+  .public-page > .page-heading p
+) {
+  color: #c4c9db !important;
+}
+
+/* Universal Obsidian Glass for All Directory, Secondary, and Card Modules */
+html[data-theme="dark"] :is(
+  .shipped-card,
+  .shipped-card-copy,
+  .directory-page .product-card,
+  .launched-product,
+  .product-editorial,
+  .home-founder-profile,
+  .founder,
+  .business-proof-card,
+  .business-destination,
+  .review-grid figure,
+  .public-reviews figure,
+  .achievement-note,
+  .working-details > div,
+  .service-offerings article,
+  .conversion-offerings article,
+  .segment-links a,
+  .appointment-layout aside,
+  .appointment-form,
+  .appointment-success,
+  .pricing-teaser,
+  .service-price-card,
   .account-membership,
   .account-empty,
   .account-records article,
@@ -1304,15 +1387,56 @@ html[data-theme="dark"] :is(
   .hero-work-compact,
   .payment-path,
   .payment-path-contribution,
-  .pricing-teaser,
-  .service-price-card,
-  .contact-direct-links a
+  .contact-direct-links a,
+  .contact-form,
+  .contact-card,
+  .quick-enquiry-form,
+  .project-form,
+  .customer-sign-in,
+  .early-success,
+  .lisa-purchase-card,
+  .lisa-product,
+  .studio-health-card,
+  .business-home .home-service,
+  .business-home .delivery-support,
+  .secretchat-feature-grid article,
+  .secretchat-release,
+  .launch-card,
+  .secretchat-panel,
+  .login-card,
+  .product-summary,
+  .product-page-principles article,
+  .quote-summary,
+  .early-access-card
 ) {
   background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
   border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
   color: #d1d5e5 !important;
 }
+
+/* Headings inside cards */
 html[data-theme="dark"] :is(
+  .shipped-card,
+  .launched-product,
+  .product-editorial,
+  .why-kitty,
+  .home-founder-profile,
+  .founder,
+  .business-proof-card,
+  .business-destination,
+  .review-grid figure,
+  .public-reviews figure,
+  .achievement-note,
+  .working-details > div,
+  .service-offerings article,
+  .conversion-offerings article,
+  .segment-links a,
+  .appointment-layout aside,
+  .appointment-form,
+  .appointment-success,
+  .pricing-teaser,
+  .service-price-card,
   .account-membership,
   .account-empty,
   .account-records article,
@@ -1322,11 +1446,42 @@ html[data-theme="dark"] :is(
   .preorder-reservation,
   .hero-work-compact,
   .payment-path,
-  .service-price-card
+  .contact-form,
+  .contact-card,
+  .quick-enquiry-form,
+  .project-form,
+  .customer-sign-in,
+  .early-success,
+  .lisa-purchase-card,
+  .product-summary,
+  .product-page-principles article,
+  .quote-summary
 ) :is(h1, h2, h3, h4, strong, b) {
   color: #ffffff !important;
 }
+
+/* Paragraphs & body copy inside cards */
 html[data-theme="dark"] :is(
+  .shipped-card,
+  .launched-product,
+  .product-editorial,
+  .why-kitty,
+  .home-founder-profile,
+  .founder,
+  .business-proof-card,
+  .business-destination,
+  .review-grid figure,
+  .public-reviews figure,
+  .achievement-note,
+  .working-details > div,
+  .service-offerings article,
+  .conversion-offerings article,
+  .segment-links a,
+  .appointment-layout aside,
+  .appointment-form,
+  .appointment-success,
+  .pricing-teaser,
+  .service-price-card,
   .account-membership,
   .account-empty,
   .account-records article,
@@ -1336,7 +1491,377 @@ html[data-theme="dark"] :is(
   .preorder-reservation,
   .hero-work-compact,
   .payment-path,
-  .service-price-card
-) :is(p, li, span) {
+  .contact-form,
+  .contact-card,
+  .quick-enquiry-form,
+  .project-form,
+  .customer-sign-in,
+  .early-success,
+  .lisa-purchase-card,
+  .product-summary,
+  .product-page-principles article,
+  .quote-summary
+) :is(p, li, blockquote, figcaption span) {
   color: #c4c9db !important;
+}
+
+/* Secondary meta & micro labels */
+html[data-theme="dark"] :is(
+  .micro-label,
+  .work-release,
+  .download-meta,
+  .media-slot-label,
+  .media-slot-footer,
+  .service-boundary,
+  .privacy-note,
+  .toolkit-note,
+  .footer-bottom
+) {
+  color: #8c97b5 !important;
+}
+
+/* Cyan accent badges, links and highlights */
+html[data-theme="dark"] :is(
+  .work-tagline,
+  .shipped-card .quiet-status,
+  .launched-product .quiet-status,
+  .product-editorial .quiet-status,
+  .product-discipline,
+  .founder-caption > span,
+  .home-founder-identity span,
+  .customer-sign-in .text-link,
+  .company-story .text-link,
+  .early-access .privacy-note a
+) {
+  color: #69dcf2 !important;
+}
+
+/* Shipped card browser chrome & screen container on /products and home */
+html[data-theme="dark"] .work-screen {
+  background: #090d1c !important;
+  border: 1px solid rgba(169, 158, 255, 0.22) !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .work-browser-bar {
+  background: rgba(14, 20, 42, 0.98) !important;
+  color: #a5b0cb !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  border-bottom: 0 !important;
+}
+html[data-theme="dark"] .work-browser-bar > span:first-child {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .work-screen img {
+  background: #0c1022 !important;
+  border: 1px solid rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .shipped-card .quiet-status {
+  color: #69dcf2 !important;
+  background: rgba(105, 220, 242, 0.12) !important;
+  border: 1px solid rgba(105, 220, 242, 0.35) !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+}
+html[data-theme="dark"] .live-dot {
+  background: #39e58c !important;
+  box-shadow: 0 0 8px #39e58c !important;
+}
+
+/* Real media placeholder */
+html[data-theme="dark"] .real-media-placeholder {
+  background: #090d1c !important;
+  border: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #c4c9db !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .real-media-placeholder h4 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .real-media-placeholder p {
+  color: #a5b0cb !important;
+}
+
+/* Founder portrait on /team and /company */
+html[data-theme="dark"] .founder-photo {
+  background: #090d1c !important;
+  border: 1px solid rgba(169, 158, 255, 0.22) !important;
+}
+html[data-theme="dark"] .founder-photo > span:first-child {
+  color: #69dcf2 !important;
+}
+
+/* Why KITTY section on /company */
+html[data-theme="dark"] .why-kitty {
+  background: linear-gradient(180deg, rgba(14, 20, 38, 0.8), rgba(9, 13, 26, 0.95)) !important;
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  border-bottom: 1px solid rgba(169, 158, 255, 0.22) !important;
+}
+html[data-theme="dark"] .why-grid h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .why-grid .editorial-copy p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .why-grid .editorial-copy p.lead {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .why-observations {
+  border-left: 2px solid #69dcf2 !important;
+}
+html[data-theme="dark"] .why-observations p {
+  color: #f0f4ff !important;
+}
+
+/* Company Intro & Company Story */
+html[data-theme="dark"] .company-intro h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .company-intro .editorial-copy p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .company-intro .editorial-copy p.lead {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .company-story {
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .company-story p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .company-story .eyebrow {
+  color: #69dcf2 !important;
+}
+
+/* Home Founder Identity on /company and home */
+html[data-theme="dark"] .home-founder-identity h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .home-founder-identity span {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .home-founder-links a {
+  color: #c4c9db !important;
+  border-color: rgba(169, 158, 255, 0.25) !important;
+}
+html[data-theme="dark"] .home-founder-links a:hover {
+  color: #69dcf2 !important;
+  border-color: #69dcf2 !important;
+}
+
+/* Team Page Profiles */
+html[data-theme="dark"] .founder-caption h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .founder-bio {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .founder-socials a {
+  color: #69dcf2 !important;
+}
+
+/* Early Access Section on /products and home */
+html[data-theme="dark"] .early-access {
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .early-access h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .early-access p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .early-form-area label {
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .early-email-row input {
+  background: rgba(12, 17, 34, 0.95) !important;
+  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html[data-theme="dark"] .early-email-row input:focus {
+  border-color: #69dcf2 !important;
+  box-shadow: 0 0 0 3px rgba(105, 220, 242, 0.25) !important;
+}
+html[data-theme="dark"] .early-form-area legend {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .interest-choice {
+  background: rgba(18, 26, 50, 0.8) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #c4c9db !important;
+  border-radius: 6px !important;
+}
+html[data-theme="dark"] .interest-choice:hover {
+  border-color: rgba(105, 220, 242, 0.6) !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .interest-choice:has(input:checked) {
+  background: rgba(105, 220, 242, 0.15) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .interest-choice input {
+  accent-color: #69dcf2 !important;
+}
+
+/* Working Together & Toolkit on /services and home */
+html[data-theme="dark"] .working-together {
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .working-together h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .working-together > div:first-child > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .working-details svg {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .toolkit {
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  border-bottom: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .toolkit-heading h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .toolkit-heading p {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .toolkit-brands a {
+  background: rgba(18, 26, 50, 0.8) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .toolkit-brands span {
+  color: #ffffff !important;
+}
+
+/* Research & Investors Pages */
+html[data-theme="dark"] .research-row {
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .research-row span {
+  color: #69dcf2 !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .research-row h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .research-row p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .investor-grid {
+  border-top: 1px solid rgba(169, 158, 255, 0.22) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .investor-grid h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .investor-grid p,
+html[data-theme="dark"] .investor-grid li {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .investor-grid a {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .journal-card {
+  border-top-color: rgba(169, 158, 255, 0.25) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .journal-cover {
+  background: #090d1c !important;
+  border: 1px solid rgba(169, 158, 255, 0.2) !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .journal-card h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .journal-card > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .journal-meta {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .journal-meta > span {
+  color: #69dcf2 !important;
+}
+
+/* Payment Provider Selector & Customer Sign-In (Razorpay/PayPal/Stripe) */
+html[data-theme="dark"] .provider-selector button {
+  background: linear-gradient(145deg, rgba(20, 28, 52, 0.88), rgba(12, 18, 36, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #f4f5ff !important;
+  cursor: pointer;
+}
+html[data-theme="dark"] .provider-selector button:hover {
+  border-color: rgba(105, 220, 242, 0.5) !important;
+  box-shadow: 0 4px 16px rgba(105, 220, 242, 0.15) !important;
+}
+html[data-theme="dark"] .provider-selector button small {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .provider-selector button[aria-pressed="true"] {
+  background: linear-gradient(145deg, rgba(30, 45, 88, 0.98), rgba(18, 26, 56, 0.98)) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(105, 220, 242, 0.35) !important;
+}
+html[data-theme="dark"] .provider-selector button[aria-pressed="true"] small {
+  color: #69dcf2 !important;
+  font-weight: 500;
+}
+html[data-theme="dark"] .customer-sign-in {
+  background: linear-gradient(145deg, rgba(16, 22, 42, 0.88), rgba(11, 16, 32, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.4) !important;
+}
+html[data-theme="dark"] .customer-sign-in strong {
+  color: #f4f5ff !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .customer-sign-in p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(169, 158, 255, 0.4) !important;
+  color: #f4f5ff !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(105, 220, 242, 0.25) !important;
+}
+
+/* Universal Form Inputs in Dark Mode */
+html[data-theme="dark"] :is(
+  .contact-form,
+  .quick-enquiry-form,
+  .project-form,
+  .appointment-form,
+  .checkout-card,
+  .form-field
+) :is(input, select, textarea) {
+  background: rgba(12, 17, 34, 0.95) !important;
+  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html[data-theme="dark"] :is(
+  .contact-form,
+  .quick-enquiry-form,
+  .project-form,
+  .appointment-form,
+  .checkout-card,
+  .form-field
+) :is(input, select, textarea):focus {
+  border-color: #69dcf2 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(105, 220, 242, 0.25) !important;
 }
