@@ -61,6 +61,41 @@ const nextConfig: NextConfig = {
           { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         ],
       },
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/kitten/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/kitten",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/abcdefghijklmnopqrstuvwxyz/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/abcdefghijklmnopqrstuvwxyz",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
       { source: "/downloads/:file*.apk", headers: [
         { key: "Content-Type", value: "application/vnd.android.package-archive" },
         { key: "Content-Disposition", value: "attachment" },
