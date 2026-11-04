@@ -1,4 +1,5 @@
 import { CurrencySelector } from "./local-currency";
+import { LiveVisitorCounter } from "./live-visitor-counter";
 import Image from "next/image";
 import Link from "next/link";
 import { companySettings } from "@/lib/company-server";
@@ -16,6 +17,10 @@ export async function SiteFooter() {
       <div className="footer-links"><span className="micro-label">WORK WITH US</span><Link href="/services">Websites, apps & AI agents</Link><Link href="/pricing">Pricing & packages</Link><Link href="/appointments">Request an appointment</Link><Link href="/payments?purpose=project">Project payments</Link><Link href="/payments?purpose=donation">Support KITTY CORP</Link><Link href="/contact">Contact</Link><a href={`mailto:${CONTACT_EMAIL}`}>{SUPPORT_EMAIL}</a><a href={`mailto:${SOCIAL_EMAIL}`}>{SOCIAL_EMAIL}</a><Link href="/investors">Investors & Partnerships</Link></div>
       <div className="footer-links"><span className="micro-label">ELSEWHERE</span>{links.length ? links.map(([key, url]) => <a href={canonicalSocialUrl(publicSiteHref(url!))} key={key} target="_blank" rel="noopener noreferrer">{key === "linkedin" && isFounderLinkedIn(url) ? "Founder on LinkedIn" : socialLabels[key as keyof SocialLinks]}</a>) : <span className="social-pending">Official profiles to follow.</span>}{!settings.socials.linkedin&&<a href={FOUNDER_LINKEDIN} target="_blank" rel="noopener noreferrer">Founder on LinkedIn</a>}</div>
     </div>
-    <CurrencySelector/><div className="footer-bottom"><span>© {new Date().getFullYear()} KITTY CORP</span><span>Independent technology company.</span><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/refunds">Refunds</Link></div>
+    <div className="footer-controls-row">
+      <CurrencySelector/>
+      <LiveVisitorCounter/>
+    </div>
+    <div className="footer-bottom"><span>© {new Date().getFullYear()} KITTY CORP</span><span>Independent technology company.</span><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/refunds">Refunds</Link></div>
   </div></footer></>;
 }

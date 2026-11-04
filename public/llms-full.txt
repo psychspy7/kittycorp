@@ -1,0 +1,70 @@
+# KITTY CORP — Comprehensive Knowledge Base & Technical Context
+
+Official URL: https://thekittycorp.com
+Headquarters: India
+Ownership: Independent Technology Studio
+
+## Company Overview
+KITTY CORP is an independent technology company operating across two principal divisions:
+1. **01 Digital Solutions**: Full-stack web development, client applications, cloud infrastructure, and practical AI workflow automation.
+2. **02 Intelligence & Robotics**: Research and early prototyping in agricultural robotics (AGRIYAAN), intelligent clean-energy control systems (URJAYAAN), and companion robotics (KITTY BUDDY).
+
+---
+
+## Products & Commercial Deliverables
+
+### 1. KITTY One All-Access Membership
+- **Price**: $199 USD (one-time flagship package)
+- **Included Deliverables**:
+  - **1 Premium Custom Website**: Bespoke UI/UX, database integration, SEO architecture, high-conversion layouts.
+  - **1 Basic Responsive Website**: Fast deployment microsite or landing page.
+  - **KITTY AI Ecosystem Access**: Full access to intelligent tools and companion workflows.
+  - **Future Upgrades Included**: Continuous platform and version updates without additional license fees.
+  - **6 Months Free Maintenance**: Dedicated technical upkeep, security patch updates, performance tuning, and direct founder support.
+- **Access Flow**: Clients sign in via Google OAuth, choose KITTY One, complete secure payment through Razorpay/UPI/Cards, and have their active plan permanently tied to their customer account dashboard.
+- **URL**: https://thekittycorp.com/memberships
+
+### 2. EXAMIFY
+- **Status**: Live Production Website
+- **URL**: https://examify.thekittycorp.com
+- **Description**: Web application providing exam countdown timers, structured study blocks, and distraction-free focus environments for students preparing for competitive examinations.
+
+### 3. KITTY AI
+- **Status**: Live Android App (v2.0.0, Android 8.0+)
+- **Description**: An empathetic, privacy-conscious conversational companion built to feel less like software and more like an authentic, supportive presence.
+- **Download**: Direct APK download available at https://thekittycorp.com/api/downloads/kitty-ai
+
+### 4. SecretChat
+- **Status**: Live Android App (v2.0.0, Android 7.0+)
+- **Description**: Encrypted, private-by-intention real-time communication platform with client-controlled rooms and ephemeral storage options.
+- **Download**: Direct APK download available at https://thekittycorp.com/api/downloads/secretchat
+
+---
+
+## Client Engagement & Engineering Process
+KITTY CORP follows a transparent four-stage delivery model:
+1. **Goal Discovery**: Rough initial brief submitted through the enquiry pipeline (https://thekittycorp.com/projects).
+2. **Scoping & Agreement**: Fixed scope, timeline, and quote agreed before any code is committed. Full advance includes a 2.5% discount; 50/50 milestone splits are supported.
+3. **Interactive Review**: Working staging previews deployed for client inspection and direct feedback.
+4. **Launch & Handover**: Production DNS routing, SSL provisioning, and agreed maintenance schedule.
+
+---
+
+## Technical & Security Architecture
+- **Rendering & Core Web Vitals**: Interactive WebGL2 simulation running off-main-thread with asynchronous program compilation (`KHR_parallel_shader_compile`), caching DOM bounding boxes in the navigation controller to prevent layout thrashing (INP < 100ms, LCP < 2.0s).
+- **Security & Headers**:
+  - Content Security Policy (CSP) with strict source whitelisting for payment clearing and bot mitigation.
+  - HTTP Strict Transport Security (HSTS) with `max-age=63072000; includeSubDomains; preload`.
+  - Frame sandboxing with `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
+  - Token-bucket sliding-window rate limiting on all public form endpoints.
+- **Database & State**: Supabase backend with Row Level Security (RLS) and strict cryptographic HMAC visitor fingerprinting.
+
+---
+
+## Contact & Corporate Information
+- **Support & Inquiries**: support@thekittycorp.com
+- **Founder & CEO**: Virat Anand (https://linkedin.com/in/virat-anand-928460442)
+- **Legal & Policies**:
+  - Privacy Policy: https://thekittycorp.com/privacy
+  - Terms of Service: https://thekittycorp.com/terms
+  - Refunds Policy: https://thekittycorp.com/refunds

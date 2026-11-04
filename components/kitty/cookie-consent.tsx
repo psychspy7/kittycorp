@@ -1,5 +1,7 @@
 "use client";
 
+import { updateAnalyticsConsent } from "@/lib/site-analytics";
+
 import { useSyncExternalStore, useState } from "react";
 import { ShieldCheck, X } from "lucide-react";
 
@@ -28,6 +30,7 @@ export function CookieConsent() {
     try {
       localStorage.setItem("kitty_cookie_consent_choice", value);
       window.dispatchEvent(new Event("storage"));
+      updateAnalyticsConsent(value === "all");
     } catch {
       // safe fallback
     }

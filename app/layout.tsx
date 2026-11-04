@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/opengraph-image?v=20261103",
+        url: "/opengraph-image?v=20261104-v2",
         width: 1200,
         height: 630,
         alt: "KITTY CORP — Independent technology company building websites, software and AI workflows",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: shareTitle,
     description: shareDescription,
-    images: ["/opengraph-image?v=20261103"],
+    images: ["/opengraph-image?v=20261104-v2"],
   },
 };
 

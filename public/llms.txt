@@ -1,0 +1,45 @@
+# KITTY CORP
+
+> Independent Technology Company & AI Studio based in India.
+> Official Website: https://thekittycorp.com
+
+KITTY CORP builds modern business websites, custom software, and practical AI workflow automation, while conducting early-stage laboratory research into robotics and intelligent autonomous systems.
+
+## Divisions
+
+### 01 Digital Solutions
+- **Websites**: Custom high-performance business websites, marketing hubs, and admissions platforms.
+- **Apps & Software**: Client-facing software, mobile-first architectures, and custom database backends.
+- **AI & Automation**: Practical AI workflows, intelligent companion agents, and task orchestration where humans remain in control.
+- **Flagship Subscription — KITTY One ($199 USD)**: All-access enterprise membership bundling 1 premium custom website, 1 basic responsive website, KITTY AI product suite access, all future upgrades, and 6 months of direct technical maintenance. URL: https://thekittycorp.com/memberships
+
+### 02 Intelligence & Robotics (Lab Research)
+- **AGRIYAAN**: Autonomous agricultural rover exploration for field optimization and crop monitoring.
+- **URJAYAAN**: Intelligent controls and monitoring software for solar generation and clean energy storage.
+- **KITTY BUDDY**: Companion robotics concept for everyday household assistance and personal interactions.
+
+## Shipped Products & Live Work
+- **EXAMIFY** (https://examify.thekittycorp.com): Exam countdown, focus blocks, and study tools for competitive admissions.
+- **KITTY AI** (Android v2.0.0): On-device conversational AI companion.
+- **SecretChat** (Android v2.0.0): Private encrypted real-time messaging application.
+
+## Key Links & Endpoints
+- Homepage: https://thekittycorp.com
+- Products & Shipped Work: https://thekittycorp.com/products
+- Subscriptions & Pricing: https://thekittycorp.com/memberships
+- Digital Services: https://thekittycorp.com/services
+- Research & Lab: https://thekittycorp.com/research
+- Company Story: https://thekittycorp.com/company
+- Project Quotes & Enquiries: https://thekittycorp.com/projects
+- Contact: support@thekittycorp.com
+
+## Technical Stack
+- Next.js (App Router, Turbopack, React 19)
+- WebGL2 physical simulation rendering engine (off-thread worker, KHR_parallel_shader_compile)
+- Cloudflare Turnstile bot verification
+- Razorpay, UPI, and international payment clearing
+- Supabase enterprise database backend
+- Content Security Policy (CSP) & strict HSTS preloading
+
+## Leadership
+- **Virat Anand**: Founder & CEO (support@thekittycorp.com)

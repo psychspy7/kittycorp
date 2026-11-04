@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- Satori's ImageResponse needs an inline data URI; next/image is unavailable in this renderer. */
+/* eslint-disable @next/next/no-img-element -- Satori ImageResponse requires inline data URIs */
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -19,55 +19,96 @@ export default async function Image() {
         flexDirection: "column",
         width: "100%",
         height: "100%",
-        padding: "58px 72px",
-        background: "#f7f6f0",
-        color: "#20251f",
-        fontFamily: "Arial",
+        padding: "54px 70px",
+        background: "#070911",
+        color: "#f4f5ff",
+        fontFamily: "Arial, sans-serif",
+        position: "relative",
       }}
     >
+      {/* Ambient background glow accents */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-80px",
+          right: "-80px",
+          width: "480px",
+          height: "480px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(105, 220, 242, 0.16) 0%, rgba(93, 72, 207, 0.08) 50%, transparent 70%)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-100px",
+          left: "-50px",
+          width: "520px",
+          height: "520px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(93, 72, 207, 0.18) 0%, rgba(105, 220, 242, 0.05) 50%, transparent 70%)",
+        }}
+      />
+
+      {/* Top Header Row */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
+          
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <img src={logoData} alt="" width={58} height={58} />
-          <span style={{ fontSize: 27, fontWeight: 700, letterSpacing: 2.5 }}>
-            KITTY CORP
-          </span>
+          <img src={logoData} alt="" width={62} height={62} />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: 3, color: "#ffffff" }}>
+              KITTY CORP
+            </span>
+            <span style={{ fontSize: 11, letterSpacing: 2, color: "#69dcf2", fontWeight: 600 }}>
+              INDEPENDENT TECHNOLOGY COMPANY
+            </span>
+          </div>
         </div>
+
         <div
           style={{
             display: "flex",
-            border: "1px solid #c9c7b9",
+            alignItems: "center",
+            gap: 10,
+            border: "1px solid rgba(105, 220, 242, 0.4)",
             borderRadius: 99,
-            padding: "11px 18px",
-            color: "#626b5d",
-            fontSize: 14,
-            letterSpacing: 1.5,
+            padding: "9px 18px",
+            background: "rgba(105, 220, 242, 0.08)",
+            color: "#69dcf2",
+            fontSize: 12,
+            letterSpacing: 2,
+            fontWeight: 700,
           }}
         >
-          INDEPENDENT TECHNOLOGY COMPANY
+          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#69dcf2" }} />
+          <span>STUDIO &amp; LABS · INDIA</span>
         </div>
       </div>
 
+      {/* Main Hero Typography */}
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          marginTop: 76,
-          maxWidth: 1000,
+          marginTop: 54,
+          maxWidth: 1060,
+          
         }}
       >
         <span
           style={{
-            fontSize: 76,
-            lineHeight: 1.08,
-            letterSpacing: -3,
-            fontWeight: 700,
+            fontSize: 74,
+            lineHeight: 1.05,
+            letterSpacing: -2.5,
+            fontWeight: 800,
+            color: "#ffffff",
           }}
         >
           Built for business.
@@ -75,44 +116,92 @@ export default async function Image() {
         <span
           style={{
             marginTop: 8,
-            fontSize: 67,
-            lineHeight: 1.1,
-            letterSpacing: -2.5,
-            fontWeight: 500,
-            color: "#7b6848",
+            fontSize: 66,
+            lineHeight: 1.08,
+            letterSpacing: -2,
+            fontWeight: 600,
+            color: "#69dcf2",
           }}
         >
           Curious about what’s next.
         </span>
         <span
           style={{
-            marginTop: 27,
+            marginTop: 24,
             fontSize: 23,
             lineHeight: 1.45,
-            color: "#5c6259",
-            maxWidth: 850,
+            color: "#c4c9db",
+            maxWidth: 920,
           }}
         >
-          Websites, custom software and practical AI workflows, with research
-          into robotics and intelligent systems.
+          Websites, full-stack software and AI workflows for modern business, alongside forward research in robotics and intelligent systems.
         </span>
       </div>
 
+      {/* Division Badges */}
+      <div
+        style={{
+          display: "flex",
+          gap: 20,
+          marginTop: 38,
+          
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            border: "1px solid rgba(169, 158, 255, 0.28)",
+            borderRadius: 12,
+            padding: "12px 20px",
+            background: "rgba(16, 22, 42, 0.8)",
+          }}
+        >
+          <span style={{ fontSize: 11, color: "#a99eff", letterSpacing: 1.5, fontWeight: 700 }}>
+            01 DIGITAL SOLUTIONS
+          </span>
+          <span style={{ fontSize: 14, color: "#f4f5ff", marginTop: 4 }}>
+            Websites · Custom Software · AI Workflows
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            border: "1px solid rgba(105, 220, 242, 0.28)",
+            borderRadius: 12,
+            padding: "12px 20px",
+            background: "rgba(16, 22, 42, 0.8)",
+          }}
+        >
+          <span style={{ fontSize: 11, color: "#69dcf2", letterSpacing: 1.5, fontWeight: 700 }}>
+            02 INTELLIGENCE &amp; ROBOTICS
+          </span>
+          <span style={{ fontSize: 14, color: "#f4f5ff", marginTop: 4 }}>
+            Autonomous Rovers · Companion AI · Solar Systems
+          </span>
+        </div>
+      </div>
+
+      {/* Footer Meta Row */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           marginTop: "auto",
-          borderTop: "1px solid #d4d1c5",
-          paddingTop: 22,
-          color: "#626b5d",
-          fontSize: 17,
-          letterSpacing: 1,
+          borderTop: "1px solid rgba(169, 158, 255, 0.2)",
+          paddingTop: 18,
+          color: "#a5b0cb",
+          fontSize: 14,
+          letterSpacing: 1.5,
+          fontWeight: 600,
+          
         }}
       >
-        <span>WEB · SOFTWARE · AI · ROBOTICS</span>
-        <span>THEKITTYCORP.COM</span>
+        <span>WEB · SOFTWARE · AI AGENTS · ROBOTICS</span>
+        <span style={{ color: "#ffffff" }}>THEKITTYCORP.COM</span>
       </div>
     </div>,
     size,

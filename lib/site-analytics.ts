@@ -6,7 +6,7 @@ type AnalyticsWindow = Window & {
 
 const initializedTags = new Set<string>();
 const publicPages = new Set([
-  "/", "/services", "/products", "/company", "/team", "/kitty-ai",
+  "/", "/services", "/products", "/memberships", "/company", "/team", "/kitty-ai",
   "/lisa-ai", "/sentinel", "/secretchat", "/build-log", "/research",
   "/investors", "/contact", "/privacy", "/projects", "/pricing", "/appointments", "/terms", "/refunds", "/play", "/services/coaching-centres", "/services/agencies",
 ]);
@@ -77,8 +77,8 @@ export function trackPageView(id: string, pathname: string, previous: string) {
   });
 }
 
-export const conversionEvents = ["service_cta","project_form_start","enquiry_submit","form_error","contact_click","portfolio_view","investor_cta","investor_enquiry_submit"] as const;
-const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","investors","appointment","labs","navigation"]);
+export const conversionEvents = ["service_cta","project_form_start","enquiry_submit","form_error","contact_click","portfolio_view","investor_cta","investor_enquiry_submit","subscription_view","subscription_click"] as const;
+const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","investors","appointment","labs","navigation","memberships"]);
 const recentConversions = new Map<string,number>();
 export function trackConversion(event: string, context: string) {
   if(typeof window==="undefined")return;
@@ -93,4 +93,11 @@ export function trackConversion(event: string, context: string) {
   if(recentConversions.size>100)recentConversions.delete(recentConversions.keys().next().value!);
   // Fixed labels and public paths only; no form values, query strings or raw errors.
   for(const id of activeIds)target.gtag("event",event,{send_to:id,context,page_path:path,page_location:window.location.origin+path});
+}
+
+export function updateAnalyticsConsent(granted: boolean) {
+  const target = analyticsWindow();
+  target.gtag?.("consent", "update", {
+    analytics_storage: granted ? "granted" : "denied",
+  });
 }
