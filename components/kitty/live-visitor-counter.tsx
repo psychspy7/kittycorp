@@ -1,41 +1,48 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const BASE_VIEW_COUNT = 90;
 
 export function LiveVisitorCounter() {
+  const pathname = usePathname();
   const [count, setCount] = useState(BASE_VIEW_COUNT);
-  const eventId = useRef<string | null>(null);
+  const event = useRef<{ path: string; id: string } | null>(null);
 
   useEffect(() => {
-    // Reuse the same id if React replays the effect in development. The
-    // database also enforces uniqueness, so network retries cannot double-count.
-    eventId.current ??= crypto.randomUUID();
+    if (!pathname) return;
+
+    // Reuse an id if React replays the effect; a new path gets a new id.
+    if (!event.current || event.current.path !== pathname) {
+      event.current = { path: pathname, id: crypto.randomUUID() };
+    }
+    const eventId = event.current.id;
 
     void fetch("/api/page-view", {
       method: "POST",
       credentials: "same-origin",
       keepalive: true,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        eventId: eventId.current,
-        path: window.location.pathname,
-      }),
+      body: JSON.stringify({ eventId, path: pathname }),
     })
       .then(async (response) => {
         if (!response.ok) return null;
         return (await response.json()) as { count?: number };
       })
       .then((result) => {
-        if (result && Number.isSafeInteger(result.count) && (result.count as number) >= BASE_VIEW_COUNT) {
+        if (
+          result &&
+          Number.isSafeInteger(result.count) &&
+          (result.count as number) >= BASE_VIEW_COUNT
+        ) {
           setCount(result.count as number);
         }
       })
       .catch(() => {
         // Keep the base/last known value visible if analytics is unavailable.
       });
-  }, []);
+  }, [pathname]);
 
   return (
     <div
