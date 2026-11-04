@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       } else {
       order = reserved?.quote.order_id ? await razorpayClient(config).orders.fetch(reserved.quote.order_id) : await razorpayClient(config).orders.create({
         amount, currency: config.currency, receipt: quoteReceipt || value.receipt || createReceipt(), partial_payment: false,
-        notes: { purpose: value.purpose, project_reference: value.purpose === "project" ? value.reference : "",...(quoteReservation?{quote_reservation:quoteReservation}:{}) },
+        notes: { purpose: value.purpose, project_reference: value.purpose === "project" ? value.reference : value.purpose === "subscription" ? "KITTY-ONE" : "",...(quoteReservation?{quote_reservation:quoteReservation}:{}) },
       });
       }
     } catch (error) {
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
       throw new HttpError("The payment provider returned an invalid order. Please try again.", 500);
     }
     if(reserved&&(order.receipt!==quoteReceipt||order.notes?.quote_reservation!==quoteReservation||order.notes?.project_reference!==reserved.reference||(reserved.quote.order_id&&order.id!==reserved.quote.order_id)))throw new HttpError("The provider order does not match this project quote. Contact KITTY CORP before paying.",409);
-    await recordPayment({provider:"razorpay",order_id:order.id,environment:config.testMode?"sandbox":"live",purpose:value.purpose,reference:value.purpose==="project"?value.reference:"",amount_minor:amount,currency:config.currency,status:"created",payment_id:null},customer);
+    await recordPayment({provider:"razorpay",order_id:order.id,environment:config.testMode?"sandbox":"live",purpose:value.purpose,reference:value.purpose==="project"?value.reference:value.purpose==="subscription"?"KITTY-ONE":"",amount_minor:amount,currency:config.currency,status:"created",payment_id:null},customer);
     if(hasQuote&&reserved&&!reserved.quote.order_id)await action("attach",{reservation:quoteReservation,orderId:order.id});
     const jar = await cookies();
     // Keep up to five concurrent checkouts without allowing cookies to grow unbounded.
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     }
     jar.set(orderCookieName(order.id), sealOrder({
       orderId: order.id, amount, currency: config.currency, keyId: config.keyId,
-      purpose: value.purpose, reference: value.purpose === "project" ? value.reference : "",
+      purpose: value.purpose, reference: value.purpose === "project" ? value.reference : value.purpose === "subscription" ? "KITTY-ONE" : "",
       expires: Date.now() + ORDER_LIFETIME_SECONDS * 1000,
     }, config.keySecret), {
       httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/api", maxAge: ORDER_LIFETIME_SECONDS,

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {LocalPrice} from "./local-currency";
 import Script from "next/script";
 import {useEffect,useRef,useState} from "react";
@@ -13,6 +13,7 @@ type AccountStatus={paid:boolean;expiresAt:number;freeRemainingSeconds:number};
 async function accountStatus(user:User,signal:AbortSignal){const bearer=await user.getIdToken();const response=await fetch("/api/memberships/me",{headers:{Authorization:"Bearer "+bearer},cache:"no-store",signal});const data=await response.json() as AccountStatus&{error?:string};if(!response.ok)throw Error(data.error||"Your current membership could not be checked.");return data;}
 type Order={intentId:string;keyId:string;orderId:string;amount:number;currency:string;testMode:boolean};
 export function Memberships({catalog,securityEnabled}:{catalog:MembershipCatalog;securityEnabled:boolean}) {
+ const router = useRouter();
  const [account,setAccount]=useState<AccountStatus|null>(null);
  const [user,setUser]=useState<User|null>(null),[busy,setBusy]=useState(false),[ready,setReady]=useState(false),[message,setMessage]=useState(""),[error,setError]=useState(""),[token,setToken]=useState(""),[revision,setRevision]=useState(0);
  const [pending,setPending]=useState<{id:string;uid:string}|null>(null);
@@ -88,7 +89,7 @@ export function Memberships({catalog,securityEnabled}:{catalog:MembershipCatalog
    <li><Check size={16}/><strong>All Future Updates Included</strong> (Continuous feature upgrades)</li>
    <li><Check size={16}/><strong>6 Months Free Maintenance</strong> (Dedicated technical upkeep)</li>
   </ul>
-  <Link className="button button-gold" href="/contact?subject=KITTY%20One%20Subscription">Get KITTY One <ArrowUpRight size={16}/></Link>
+  <button type="button" className="button button-gold" disabled={busy} onClick={async()=>{try{if(!user){const lib=await import("@/lib/kitty-customer");const auth=await lib.kittyCustomerAuth();await lib.signInWithPopup(auth,new lib.GoogleAuthProvider());}router.push("/payments?purpose=subscription&plan=kitty-one");}catch{setError("Sign-in is required to connect your KITTY One plan. Please try again.");}}}>{user?"Choose KITTY One ($199 USD)":"Sign in & Choose KITTY One ($199)"} <ArrowUpRight size={16}/></button>
  </article>
  </div>
  {catalog.plans.some(p=>p.purchasable)&&<><Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" onReady={()=>setReady(true)} onError={()=>setError("Razorpay checkout could not load.")}/>{securityEnabled&&<Turnstile action="payment-order" onToken={setToken} resetKey={revision}/>}</>}

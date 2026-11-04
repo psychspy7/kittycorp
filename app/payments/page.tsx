@@ -12,19 +12,22 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 export const metadata = { title: "Plans & payments", robots: { index: false, follow: false } };
 
-export default async function PaymentsPage({ searchParams }: { searchParams: Promise<{ purpose?: string | string[] }> }) {
+export default async function PaymentsPage({ searchParams }: { searchParams: Promise<{ purpose?: string | string[]; plan?: string | string[] }> }) {
   const [query, options, security] = await Promise.all([searchParams, publicPaymentProviders(), turnstilePublicConfig()]);
-  const purpose = query.purpose === "donation" ? "donation" : query.purpose === "project" ? "project" : null;
+  const rawPurpose = Array.isArray(query.purpose) ? query.purpose[0] : query.purpose;
+  const rawPlan = Array.isArray(query.plan) ? query.plan[0] : query.plan;
+  const isSubscription = rawPurpose === "subscription" || rawPlan === "kitty-one";
+  const purpose = isSubscription ? "subscription" : rawPurpose === "donation" ? "donation" : rawPurpose === "project" ? "project" : null;
   if (!purpose) return <><SiteHeader/><main id="main" className="public-page payments-hub-page"><PaymentsOverview options={options} securityEnabled={security.enabled}/></main><SiteFooter/></>;
   const available = paymentOptionsForPurpose(options, purpose);
   return <><SiteHeader/><main id="main" className="public-page wrap payments-page">
     <div className="payments-intro">
       <Link href="/payments" className="text-link"><ArrowLeft size={15} aria-hidden="true"/>All plans & payments</Link>
-      <span className="eyebrow">KITTY CORP · {purpose === "donation" ? "SUPPORT" : "PROJECT PAYMENTS"}</span>
-      <h1>{purpose === "donation" ? "Support the independent work." : "For the work we’re building together."}</h1>
-      <p>{purpose === "donation" ? "Make a voluntary contribution towards our products and experiments. Choose your amount, then continue to secure checkout." : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}</p>
-      <nav className="payment-purpose-nav" aria-label="Payment type"><Link href="/payments?purpose=project" aria-current={purpose === "project" ? "page" : undefined}>Project payment</Link><Link href="/payments?purpose=donation" aria-current={purpose === "donation" ? "page" : undefined}>Support KITTY</Link><Link href="/memberships">Product plans</Link></nav>
-      <p className="payments-note">{purpose === "donation" ? "Contributions are optional. They do not purchase a product, membership or ownership in KITTY CORP." : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}</p>
+      <span className="eyebrow">KITTY CORP · {purpose === "subscription" ? "FLAGSHIP ALL-ACCESS" : purpose === "donation" ? "SUPPORT" : "PROJECT PAYMENTS"}</span>
+      <h1>{purpose === "subscription" ? "KITTY One All-Access ($199 USD)" : purpose === "donation" ? "Support the independent work." : "For the work we’re building together."}</h1>
+      <p>{purpose === "subscription" ? "Two websites, complete AI products, and 6 months free maintenance. Complete your subscription below to activate your plan immediately." : purpose === "donation" ? "Make a voluntary contribution towards our products and experiments. Choose your amount, then continue to secure checkout." : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}</p>
+      <nav className="payment-purpose-nav" aria-label="Payment type"><Link href="/payments?purpose=subscription&plan=kitty-one" aria-current={purpose === "subscription" ? "page" : undefined}>KITTY One ($199)</Link><Link href="/payments?purpose=project" aria-current={purpose === "project" ? "page" : undefined}>Project payment</Link><Link href="/payments?purpose=donation" aria-current={purpose === "donation" ? "page" : undefined}>Support KITTY</Link><Link href="/memberships">Product plans</Link></nav>
+      <p className="payments-note">{purpose === "subscription" ? "Your KITTY One plan is registered to your Google account upon payment verification. Access your projects and tools anytime in My Account." : purpose === "donation" ? "Contributions are optional. They do not purchase a product, membership or ownership in KITTY CORP." : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}</p>
     </div>
     {available.length ? <PaymentCheckout options={available} purpose={purpose} securityEnabled={security.enabled}/> : <section className="checkout-card">
       <span className="checkout-mode">{purpose === "project" && options.length ? "QUOTE REQUIRED" : "CHECKOUT UNAVAILABLE"}</span>

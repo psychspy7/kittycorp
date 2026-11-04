@@ -6,7 +6,7 @@ import { HttpError } from "./kitty-server";
 
 const MAX_AMOUNT = 100_000_000;
 export const MAX_DONATION_PAISE = 1_000_000;
-export type PaymentPurpose = "checkout" | "project" | "donation" | "lisa_preorder";
+export type PaymentPurpose = "checkout" | "project" | "donation" | "lisa_preorder" | "subscription";
 export const ORDER_LIFETIME_SECONDS = 3600;
 export const ORDER_COOKIE_PREFIX = "kitty_rzp_";
 export const orderIdSchema = z.string().regex(/^order_[A-Za-z0-9]{6,64}$/, "Invalid order ID.");
@@ -18,7 +18,7 @@ export const createOrderSchema = z.object({
   paymentChoice: z.enum(["full","split","after_review"]).optional(),
   receipt: z.string().trim().min(1).max(40).regex(/^[A-Za-z0-9_-]+$/, "Invalid receipt.").optional(),
   turnstileToken: z.string().max(2048).optional(),
-  purpose: z.enum(["checkout", "project", "donation"]).optional().default("checkout"),
+  purpose: z.enum(["checkout", "project", "donation", "subscription"]).optional().default("checkout"),
   reference: z.string().trim().max(80).regex(/^[\p{L}\p{N} ._\/-]*$/u, "Use letters, numbers, spaces or a simple project reference.").optional().default(""),
 }).strict();
 export const verifyPaymentSchema = z.object({
@@ -33,7 +33,7 @@ const contextSchema = z.object({
   currency: z.literal("INR"),
   keyId: z.string(),
   expires: z.number().int().positive(),
-  purpose: z.enum(["checkout", "project", "donation", "lisa_preorder"]).optional().default("checkout"),
+  purpose: z.enum(["checkout", "project", "donation", "lisa_preorder", "subscription"]).optional().default("checkout"),
   reference: z.string().max(80).optional().default(""),
 }).strict();
 export type OrderContext = z.infer<typeof contextSchema>;
@@ -62,6 +62,9 @@ export function checkoutAmount(value: z.infer<typeof createOrderSchema>, config:
   if (value.purpose === "donation") {
     if (value.amount > MAX_DONATION_PAISE) throw new HttpError("Please choose a contribution between ₹1 and ₹10,000.", 400);
     return value.amount;
+  }
+  if (value.purpose === "subscription") {
+    return value.amount || 1690000;
   }
   if (value.purpose === "project" && !config.testMode && !value.reference) {
     throw new HttpError("Enter the project or invoice reference we gave you.", 400);

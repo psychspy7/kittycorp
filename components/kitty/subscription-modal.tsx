@@ -1,11 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { ArrowUpRight, Check, Sparkles, X, Zap } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowUpRight, Check, LoaderCircle, Sparkles, X, Zap } from "lucide-react";
+import type { User } from "firebase/auth";
 
 export function SubscriptionModal() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [signingIn, setSigningIn] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+    void import("@/lib/kitty-customer").then(async lib => {
+      const auth = await lib.kittyCustomerAuth();
+      if (!alive) return;
+      lib.onAuthStateChanged(auth, u => {
+        if (alive) setUser(u);
+      });
+    }).catch(() => {});
+    return () => { alive = false; };
+  }, []);
 
   useEffect(() => {
     // Only display once per session so returning visitors aren't interrupted repeatedly
@@ -28,6 +45,23 @@ export function SubscriptionModal() {
       sessionStorage.setItem("kitty_subscription_modal_dismissed", "true");
     } catch {
       // fallback safe
+    }
+  }
+
+  async function handleChooseKittyOne() {
+    setSigningIn(true);
+    setLoginError("");
+    try {
+      if (!user) {
+        const lib = await import("@/lib/kitty-customer");
+        const auth = await lib.kittyCustomerAuth();
+        await lib.signInWithPopup(auth, new lib.GoogleAuthProvider());
+      }
+      dismiss();
+      router.push("/payments?purpose=subscription&plan=kitty-one");
+    } catch {
+      setSigningIn(false);
+      setLoginError("Google sign-in is required to register your KITTY One plan. Please try again.");
     }
   }
 
@@ -96,14 +130,17 @@ export function SubscriptionModal() {
           </div>
 
           <div className="subscription-modal-actions">
-            <Link
-              href="/memberships"
+            <button
+              type="button"
               className="button button-gold subscription-cta-button"
-              onClick={dismiss}
+              disabled={signingIn}
+              onClick={() => void handleChooseKittyOne()}
             >
-              <span>Explore Kitty One ($199 USD)</span>
+              {signingIn && <LoaderCircle size={17} className="checkout-spinner" aria-hidden="true" />}
+              <span>{signingIn ? "Connecting Google…" : user ? "Choose Kitty One ($199 USD)" : "Sign in & Choose Kitty One ($199)"}</span>
               <ArrowUpRight size={17} />
-            </Link>
+            </button>
+            {loginError && <p className="form-error" role="alert" style={{ fontSize: "0.825rem", marginTop: "0.5rem" }}>{loginError}</p>}
             <button
               type="button"
               className="subscription-dismiss-text"
