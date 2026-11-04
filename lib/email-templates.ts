@@ -52,6 +52,11 @@ export function renderEmail(job: EmailJob, site: string) {
       job.template === "admin" || job.template === "report"
         ? CONTACT_EMAIL
         : job.email!;
+  const isAppointment =
+    job.kind === "appointment" ||
+    Boolean(job.subject && /appointment/i.test(job.subject)) ||
+    Boolean(job.message && /^APPOINTMENT REQUEST/i.test(job.message));
+
   if (job.template === "admin") {
     const label =
       job.kind === "project"
@@ -60,7 +65,9 @@ export function renderEmail(job: EmailJob, site: string) {
           ? "New Customer Review"
           : job.kind === "newsletter"
             ? "Early-access signup"
-            : "New Contact Message";
+            : isAppointment
+              ? "New Appointment Request"
+              : "New Contact Message";
     subject = `[KITTY CORP] ${label} | ${clean(job.name)}`;
     text = `${label}\n\nName: ${job.name}\nEmail: ${job.email}\n${job.subject ? "Subject: " + job.subject + "\n" : ""}Submitted: ${job.created_at}\n${ref}\n\n${job.message || "Early-access signup"}\n\nReply to client: mailto:${job.email}\nStudio: ${site}/kitten`;
     body =
@@ -74,11 +81,15 @@ export function renderEmail(job: EmailJob, site: string) {
     subject =
       job.kind === "project"
         ? "We've received your project enquiry | KITTY CORP"
-        : "Thanks for contacting KITTY CORP";
+        : isAppointment
+          ? "We've received your appointment request | KITTY CORP"
+          : "Thanks for contacting KITTY CORP";
     text =
       job.kind === "project"
         ? `Hi ${first},\n\nThanks for reaching out to KITTY CORP.\n\nWe've received your project details and will review everything you've shared. If we need any more information, we'll get in touch.\n\nWe're looking forward to hearing more about what you're building.\n\n${ref}\n\nRegards,\nTeam KITTY CORP`
-        : `Hi ${first},\n\nThanks for getting in touch.\n\nYour message has reached us. We'll go through it and get back to you as soon as we can.\n\nIf there's anything else you'd like to add, feel free to reply to this email.\n\n${ref}\n\nRegards,\nTeam KITTY CORP`;
+        : isAppointment
+          ? `Hi ${first},\n\nThanks for requesting an appointment with KITTY CORP.\n\nWe've received your preferred date and time. Our team will review the schedule and send you a calendar invite or confirmation shortly.\n\nIf there's anything else you'd like to share before our discussion, feel free to reply to this email.\n\n${ref}\n\nRegards,\nTeam KITTY CORP`
+          : `Hi ${first},\n\nThanks for getting in touch.\n\nYour message has reached us. We'll go through it and get back to you as soon as we can.\n\nIf there's anything else you'd like to add, feel free to reply to this email.\n\n${ref}\n\nRegards,\nTeam KITTY CORP`;
     body = paragraph(text);
   } else if (job.template === "review_thanks") {
     subject = "Thank you for your review | KITTY CORP";
@@ -115,7 +126,7 @@ export function renderEmail(job: EmailJob, site: string) {
     const totals = job.totals || {},
       health = job.health || {},
       items = job.items || [];
-    const summary = `New project enquiries: ${totals.project || 0}\nNew contact messages: ${totals.message || 0}\nNew reviews: ${totals.review || 0}\nNew confirmed subscribers: ${totals.subscribed || 0}\nUnsubscribes: ${totals.unsubscribed || 0}\nTotal active subscribers: ${job.active_subscribers || 0}`;
+    const summary = `New project enquiries: ${totals.project || 0}\nNew appointment requests: ${totals.appointment || 0}\nNew contact messages: ${totals.message || 0}\nNew reviews: ${totals.review || 0}\nNew confirmed subscribers: ${totals.subscribed || 0}\nUnsubscribes: ${totals.unsubscribed || 0}\nTotal active subscribers: ${job.active_subscribers || 0}`;
     const details = items
       .filter((e) => e.kind !== "newsletter_requested")
       .map((e) =>
@@ -125,11 +136,16 @@ export function renderEmail(job: EmailJob, site: string) {
             ? `REVIEW · ${e.name}\n${e.message}\nTime: ${e.occurred_at}\nModeration: ${e.moderation}\nReference: ${e.reference}`
             : e.kind === "subscribed" || e.kind === "unsubscribed"
               ? `${String(e.kind).toUpperCase()} · ${e.email}\nTime: ${e.occurred_at}`
-              : `CONTACT · ${e.name}\nTime: ${e.occurred_at}\nReference: ${e.reference}`,
+              : e.kind === "appointment"
+                ? `APPOINTMENT · ${e.name}\nTime: ${e.occurred_at}\nReference: ${e.reference}`
+                : `CONTACT · ${e.name}\nTime: ${e.occurred_at}\nReference: ${e.reference}`,
       )
       .join("\n\n");
     const automation = `Emails accepted by SMTP: ${health.accepted || 0}\nFailed attempts: ${health.failed_attempts || 0}\nPending jobs: ${health.pending || 0}\nUnresolved jobs: ${health.unresolved || 0}\nLast successful report: ${health.last_report || "This is the first report"}`;
-    text = `${subject}\n\nActivity since: ${job.from || "Automation was enabled"}\nSnapshot: ${job.as_of}\n\nEXECUTIVE SUMMARY\n${summary}\n\nACTIVITY\n${details || "No new business activity in this interval."}\n\nENGAGEMENT\nProduct likes: tracking is not configured.\nVisitor analytics: not connected to this report.\n\nAUTOMATION HEALTH\n${automation}\n\nSMTP acceptance is not guaranteed inbox delivery.${job.more_pending ? " A bounded reporting batch was used; remaining activity will follow in the next successful report." : ""}`;
+    const gaAnalytics = health.ga_summary
+      ? String(health.ga_summary)
+      : "Visitor analytics: not connected to this report.";
+    text = `${subject}\n\nActivity since: ${job.from || "Automation was enabled"}\nSnapshot: ${job.as_of}\n\nEXECUTIVE SUMMARY\n${summary}\n\nACTIVITY\n${details || "No new business activity in this interval."}\n\nENGAGEMENT\nProduct likes: tracking is not configured.\n${gaAnalytics}\n\nAUTOMATION HEALTH\n${automation}\n\nSMTP acceptance is not guaranteed inbox delivery.${job.more_pending ? " A bounded reporting batch was used; remaining activity will follow in the next successful report." : ""}`;
     body =
       paragraph(
         `Activity since: ${job.from || "Automation was enabled"}\nSnapshot: ${job.as_of}`,
@@ -140,7 +156,7 @@ export function renderEmail(job: EmailJob, site: string) {
       paragraph(details || "No new business activity in this interval.") +
       '<h2 style="font-size:18px">Engagement</h2>' +
       paragraph(
-        "Product likes: tracking is not configured. Visitor analytics: not connected to this report.",
+        `Product likes: tracking is not configured. ${gaAnalytics}`,
       ) +
       '<h2 style="font-size:18px">Automation health</h2>' +
       paragraph(automation) +

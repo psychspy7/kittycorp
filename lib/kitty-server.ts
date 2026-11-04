@@ -159,23 +159,46 @@ export async function fingerprint(request: Request) {
 }
 
 const rateLimiterStore = new Map<string, { tokens: number; lastRefill: number }>();
-const CAPACITY = 20;
-const REFILL_INTERVAL_MS = 60_000;
+const DEFAULT_CAPACITY = 20;
+const DEFAULT_REFILL_INTERVAL_MS = 60_000;
+const MAX_STORE_ENTRIES = 5000;
 
-export function enforceRateLimit(fp: string): void {
+function pruneRateLimitStore(now: number, windowMs: number) {
+  if (rateLimiterStore.size > MAX_STORE_ENTRIES) {
+    for (const [key, val] of rateLimiterStore.entries()) {
+      if (now - val.lastRefill > windowMs * 2) {
+        rateLimiterStore.delete(key);
+      }
+    }
+    if (rateLimiterStore.size > MAX_STORE_ENTRIES) {
+      const keysToDelete = Array.from(rateLimiterStore.keys()).slice(0, 1000);
+      for (const k of keysToDelete) rateLimiterStore.delete(k);
+    }
+  }
+}
+
+export function enforceRateLimit(
+  fp: string,
+  capacity = DEFAULT_CAPACITY,
+  windowMs = DEFAULT_REFILL_INTERVAL_MS,
+): void {
   if (process.env.NODE_ENV === "test" || fp === "fixture-visitor") {
     return;
   }
   const now = Date.now();
-  const entry = rateLimiterStore.get(fp) || { tokens: CAPACITY, lastRefill: now };
+  pruneRateLimitStore(now, windowMs);
+  const entry = rateLimiterStore.get(fp) || { tokens: capacity, lastRefill: now };
   const elapsed = now - entry.lastRefill;
-  if (elapsed > REFILL_INTERVAL_MS) {
-    entry.tokens = CAPACITY;
+  if (elapsed > windowMs) {
+    entry.tokens = capacity;
     entry.lastRefill = now;
   }
   if (entry.tokens <= 0) {
     rateLimiterStore.set(fp, entry);
-    throw new HttpError("Too many submission attempts. Please wait 60 seconds before retrying.", 429);
+    throw new HttpError(
+      `Too many submission attempts. Please wait ${Math.ceil(windowMs / 1000)} seconds before retrying.`,
+      429,
+    );
   }
   entry.tokens -= 1;
   rateLimiterStore.set(fp, entry);

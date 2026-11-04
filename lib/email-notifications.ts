@@ -1,7 +1,11 @@
 import "server-only";
 import nodemailer from "nodemailer";
 import { z } from "zod";
-import { CONTACT_EMAIL } from "./company-contact";
+import {
+  CONTACT_EMAIL,
+  INTERNAL_NOTIFICATION_EMAILS,
+  PRIMARY_ADMIN_EMAIL,
+} from "./company-contact";
 import { websiteOrigin } from "./site-metadata";
 import { database, setting } from "./kitty-server";
 import { renderEmail, type EmailJob } from "./email-templates";
@@ -31,15 +35,26 @@ export function emailConfiguration() {
   const host = process.env.SMTP_HOST || "smtp.gmail.com",
     port = process.env.SMTP_PORT || "465",
     secure = process.env.SMTP_SECURE || "true",
-    user = process.env.SMTP_USER || CONTACT_EMAIL;
+    user = (process.env.SMTP_USER || CONTACT_EMAIL).trim().toLowerCase();
+  const allowedUsers = new Set(
+    [
+      CONTACT_EMAIL ? CONTACT_EMAIL.toLowerCase() : "",
+      PRIMARY_ADMIN_EMAIL ? PRIMARY_ADMIN_EMAIL.toLowerCase() : "",
+      ...(Array.isArray(INTERNAL_NOTIFICATION_EMAILS)
+        ? INTERNAL_NOTIFICATION_EMAILS.map((e) => (e ? e.toLowerCase() : ""))
+        : []),
+      (process.env.SMTP_USER || "").trim().toLowerCase(),
+    ].filter(Boolean),
+  );
   return {
     configured:
       /^[a-zA-Z0-9]{16}$/.test(password) &&
       host === "smtp.gmail.com" &&
       port === "465" &&
       secure === "true" &&
-      user.toLowerCase() === CONTACT_EMAIL,
+      allowedUsers.has(user),
     password,
+    user,
     recipient: CONTACT_EMAIL,
     fromName: "KITTY CORP",
   };
@@ -51,7 +66,7 @@ function transport() {
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
-    auth: { user: CONTACT_EMAIL, pass: c.password },
+    auth: { user: c.user, pass: c.password },
     connectionTimeout: 8000,
     greetingTimeout: 5000,
     socketTimeout: 10000,
@@ -175,9 +190,17 @@ export async function drainEmailQueue(
         /[\r\n]/.test(message.to)
       )
         throw Error("Invalid stored recipient");
+      const isInternal = job.template === "admin" || job.template === "report";
+      const internalBcc =
+        isInternal && Array.isArray(INTERNAL_NOTIFICATION_EMAILS)
+          ? INTERNAL_NOTIFICATION_EMAILS.filter(
+              (addr) => addr && addr.toLowerCase() !== message.to.toLowerCase(),
+            )
+          : undefined;
       const result = await transport().sendMail({
         ...message,
         from: { name: "KITTY CORP", address: CONTACT_EMAIL },
+        ...(internalBcc && internalBcc.length > 0 ? { bcc: [...internalBcc] } : {}),
         messageId: `<${job.id}@${new URL(emailSite()).hostname}>`,
         disableFileAccess: true,
         disableUrlAccess: true,
