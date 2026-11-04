@@ -3,7 +3,7 @@
 .service-pricing .section-heading{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:28px}
 .service-pricing .section-heading p{max-width:430px;color:#5f665b;line-height:1.7}
 .service-pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.service-price-card{display:flex;flex-direction:column;min-width:0;padding:27px 27px 25px;background:#fffefa;border:1px solid #d9ddce;border-radius:12px}
+.service-price-card{display:flex;flex-direction:column;min-width:0;padding:27px 27px 25px;background:linear-gradient(145deg,rgba(20,24,42,0.90),rgba(13,23,34,0.94));border:1px solid rgba(169,158,255,0.22);border-radius:12px;color:#d1d5e5}
 .service-price-card:nth-child(4){background:#eff2e9}
 .service-price-card:nth-child(5){background:#292f28;color:#f7f5eb;border-color:#292f28}
 .service-price-card:nth-child(5){grid-column:span 2}
@@ -40,7 +40,7 @@
 .appointment-layout aside h2{font:500 25px/1.3 Geist,Arial,sans-serif;letter-spacing:-.7px}
 .appointment-layout aside ol{padding-left:20px;font-size:14px;line-height:2;color:#586054}
 .appointment-layout aside p{font-size:13px;line-height:1.8;color:#596052}.appointment-layout aside a{text-decoration:underline}
-.appointment-form,.appointment-success{padding:32px;background:#fffefa;border:1px solid #d9ddce;border-radius:12px}
+.appointment-form,.appointment-success{padding:32px;background:linear-gradient(145deg,rgba(20,24,42,0.90),rgba(13,23,34,0.94));border:1px solid rgba(169,158,255,0.22);border-radius:12px;color:#d1d5e5}
 .appointment-form .project-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .appointment-form .form-field{margin-bottom:17px}
 .appointment-submit{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:20px}

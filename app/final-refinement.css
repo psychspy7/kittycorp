@@ -1,5 +1,5 @@
 /* Display headings use Runiga; navigation and body copy stay in Geist. */
-:root { --final-paper:#f8f7f3; --final-graphite:#242923; --final-muted:#61675c; --final-gold:#80632f; }
+:root { --final-paper:#080b18; --final-graphite:#f5f4ff; --final-muted:#abb0c8; --final-gold:#e4cca0; }
 html { scroll-padding-top:112px; }
 body { color:var(--final-graphite); }
 :focus-visible { outline:2px solid #80632f; outline-offset:4px; }

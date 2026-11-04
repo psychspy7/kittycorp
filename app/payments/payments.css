@@ -32,14 +32,14 @@
 .checkout-field input { width: 100%; min-width: 0; padding: 12px 14px; font: inherit; border: 1px solid #25272030; border-radius: 5px; background: #fff; }
 .checkout-field>span { display: block; color: #62645d; font-size: 11px; margin-top: 8px; line-height: 1.7; }
 .donation-presets { display: flex; gap: 8px; margin-bottom: 10px; }
-.donation-presets button { flex: 1; padding: 10px; border: 1px solid #25272026; border-radius: 5px; color: #252720; font-size: 13px; }
-.donation-presets button[aria-pressed="true"] { border-color: #87672f; background: #87672f0d; }
+.donation-presets button { flex: 1; padding: 10px; border: 1px solid rgba(169,158,255,0.28); border-radius: 5px; color: #f4f5ff; background: rgba(16,22,42,0.85); font-size: 13px; cursor: pointer; }
+.donation-presets button[aria-pressed="true"] { border-color: #69dcf2; background: rgba(105,220,242,0.18); color: #ffffff; }
 @keyframes checkout-spin { to { transform: rotate(360deg); } }
 @media(max-width:850px) { .payments-page { grid-template-columns: 1fr; gap: 35px; padding-top: 45px; padding-bottom: 60px; } .checkout-card { width: 100%; max-width: 520px; } }
 @media(max-width:450px) { .checkout-card { padding: 23px; } .payments-intro h1 { font-size: 39px; } }
 @media(prefers-reduced-motion:reduce) { .checkout-spinner { animation: none; } }
 
-.provider-selector{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}.provider-selector button{flex:1;min-width:100px;min-height:50px;background:#fffefa;border:1px solid var(--border);border-radius:7px;padding:10px;font-size:13px}.provider-selector button[aria-pressed=true]{background:#eee7d8;border-color:#80632f80}.provider-selector small{display:block;font-size:10px;color:#62645d;margin-top:4px}.paypal-buttons{margin-block:18px}.paypal-buttons.is-hidden{display:none}.payment-purpose-nav a{min-height:44px}.payments-intro h1{font-family:Geist,sans-serif;font-weight:500;letter-spacing:-1.7px}.checkout-field input{font-size:16px;min-height:48px}
+.provider-selector{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}.provider-selector button{flex:1;min-width:100px;min-height:50px;background:linear-gradient(145deg,rgba(20,28,52,0.94),rgba(12,18,36,0.98));border:1px solid rgba(169,158,255,0.28);border-radius:7px;padding:10px;font-size:13px;color:#f4f5ff;cursor:pointer;transition:all 0.2s ease}.provider-selector button:hover{border-color:rgba(105,220,242,0.5);box-shadow:0 4px 16px rgba(105,220,242,0.15)}.provider-selector button[aria-pressed=true]{background:linear-gradient(145deg,rgba(30,45,88,0.98),rgba(18,26,56,0.98));border-color:#69dcf2;color:#ffffff;box-shadow:0 0 20px rgba(105,220,242,0.35)}.provider-selector small{display:block;font-size:10px;color:#a5b0cb;margin-top:4px}.provider-selector button[aria-pressed=true] small{color:#69dcf2;font-weight:500}.paypal-buttons{margin-block:18px}.paypal-buttons.is-hidden{display:none}.payment-purpose-nav a{min-height:44px}.payments-intro h1{font-family:Geist,sans-serif;font-weight:500;letter-spacing:-1.7px}.checkout-field input{font-size:16px;min-height:48px}
 
 /* =========================================================================
    Enterprise Obsidian Glassmorphism for Payments in Dark Mode

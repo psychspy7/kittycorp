@@ -91,13 +91,13 @@ html[data-theme="light"] textarea,
 html[data-theme="light"] select { color-scheme: light; }
 
 html[data-theme="light"] .company-theme {
-  --company-bg: #f6f5f0;
-  --company-panel: #fffefa;
-  --company-panel-strong: #eeece4;
-  --company-ink: #252620;
-  --company-muted: #66675f;
-  --company-line: #25262022;
-  --company-gold: #8c6b34;
+  --company-bg: #0f1211;
+  --company-panel: #171b19;
+  --company-panel-strong: #202522;
+  --company-ink: #f3f2ec;
+  --company-muted: #a7ada5;
+  --company-line: #f3f2ec24;
+  --company-gold: #c8ad79;
   color: var(--company-ink);
   background: var(--company-bg);
 }
