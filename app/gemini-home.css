@@ -1934,6 +1934,14 @@ html[data-theme="dark"] :is(
   white-space: nowrap;
 }
 
+.live-counter-divider {
+  display: inline-block;
+  color: rgba(169, 158, 255, 0.4);
+  font-size: 11px;
+  margin: 0 3px;
+  user-select: none;
+}
+
 .live-counter-number {
   color: #ffffff;
   font-weight: 700;
