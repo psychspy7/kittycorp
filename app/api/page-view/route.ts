@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   database,
+  enforceRateLimit,
   failure,
   fingerprint,
   HttpError,
@@ -37,6 +38,12 @@ export async function POST(request: Request) {
     }
 
     const visitorFingerprint = await fingerprint(request);
+
+    // Lightweight server-side rate limit before hitting the database.
+    // The SQL function has its own persistent rate limit, but this prevents
+    // spamming the database connection pool.
+    enforceRateLimit(visitorFingerprint, 30, 60_000);
+
     const { data, error } = await database().rpc(
       "kitty_website_record_page_view",
       {
