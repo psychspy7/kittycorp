@@ -26,6 +26,7 @@ const modules = {
     readBody: async request => request.json(),
     verifyOrigin: request => { if (request.headers.get("origin") !== new URL(request.url).origin) throw new HttpError("Unverified origin.", 403); },
     fingerprint: async () => "a".repeat(64),
+    enforceRateLimit: () => {},
     database: () => ({ rpc: async (name, args) => { state.quotas.push({ name, args }); return { data: state.rpcData, error: state.rpcError }; } }),
     privateJson: data => Response.json(data, { headers: { "Cache-Control": "private, no-store" } }),
     failure: error => Response.json({ error: error instanceof z.ZodError ? "Invalid request." : error instanceof HttpError ? error.message : "Something went wrong." }, { status: error instanceof z.ZodError ? 400 : error instanceof HttpError ? error.status : 500 }),

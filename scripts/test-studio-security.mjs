@@ -17,7 +17,7 @@ const env = {
 function source(file, mocks = {}, extra = {}) {
   const code = ts.transpileModule(readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
   const runtimeModule = { exports: {} };
-  const sandbox = { module: runtimeModule, exports: runtimeModule.exports, require: name => name === "server-only" ? {} : Object.hasOwn(mocks, name) ? mocks[name] : require(name),
+  const sandbox = { module: runtimeModule, exports: runtimeModule.exports, require: name => name === "server-only" ? {} : Object.hasOwn(mocks, name) ? mocks[name] : name === "@/lib/audit-logger" || name === "./audit-logger" ? { recordAuditEvent: () => {} } : require(name),
     process: { env }, Buffer, URL, AbortSignal, crypto: webcrypto, Response, Request, console, setTimeout, clearTimeout, ...extra };
   vm.runInNewContext(code, sandbox, { filename: file });
   return runtimeModule.exports;
@@ -147,7 +147,7 @@ reset(); await start(); await google.clearStudioGoogleCookies(); assert.equal(ja
 reset(); await rejects(()=>google.beginStudioGoogle(new Request("https://attacker.example/api/admin/login")),403);
 
 // The real adminSession must reject raw password sessions and direct Google sessions.
-const kitty = source("lib/kitty-server.ts", { "@supabase/supabase-js": { createClient: (_url,_key,options) => database(options.global.headers?.Authorization?.replace("Bearer ","")) }, "next/headers":{cookies:async()=>cookieStore} });
+const kitty = source("lib/kitty-server.ts", { "@supabase/supabase-js": { createClient: (_url,_key,options) => database(options.global.headers?.Authorization?.replace("Bearer ","")) }, "next/headers":{cookies:async()=>cookieStore}, "./audit-logger": { recordAuditEvent: () => {} } });
 await kitty.setStudioSession(googleToken,7200);
 const finalCookie=cookieWrites.at(-1);assert.equal(finalCookie.options.sameSite,"lax");assert.equal(finalCookie.options.httpOnly,true);assert.equal(finalCookie.options.secure,true);assert.equal(finalCookie.options.maxAge,3600);
 reset(); jar.set("kitty_studio_session",passwordToken); assert.equal(await kitty.adminSession(),null);
@@ -155,6 +155,9 @@ await assert.rejects(()=>kitty.requireAdmin(),error=>error.status===401);
 live.add(googleToken); jar.set("kitty_studio_session",googleToken); assert.equal(await kitty.adminSession(),null);
 granted.add(googleToken); assert.equal((await kitty.adminSession()).user.id,env.ADMIN_USER_ID);
 live.delete(googleToken); assert.equal(await kitty.adminSession(),null);
+googleUserId="customer-user-id"; live.add(googleToken); jar.set("kitty_studio_session",googleToken);
+await assert.rejects(()=>kitty.requireAdmin(),error=>error.status===403);
+googleUserId=env.ADMIN_USER_ID; live.delete(googleToken);
 
 // Actual Turnstile validation: setup failures, test-key prohibition, origin/action and replay.
 let outcome={success:true,hostname:"thekittycorp.com",action:"assistant"};
@@ -181,6 +184,7 @@ await assert.rejects(()=>turnstile.verifyTurnstile(request(),"wrong-action","ass
 const loginRoute = source("app/api/admin/login/route.ts", {
   "@/lib/kitty-server": {
     HttpError,
+    enforceRateLimit: () => {},
     verifyOrigin: () => {},
     readBody: async request => request.json(),
     database: () => ({ rpc: async name => { assert.equal(name,"kitty_website_login_attempt"); return {error:null}; } }),

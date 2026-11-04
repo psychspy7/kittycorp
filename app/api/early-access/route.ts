@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   database,
+  enforceRateLimit,
   failure,
   fingerprint,
   HttpError,
@@ -9,11 +10,13 @@ import {
   setting,
   verifyOrigin,
 } from "@/lib/kitty-server";
+import { recordAuditEvent } from "@/lib/audit-logger";
 import { verifyTurnstile } from "@/lib/turnstile-server";
-
 import { drainEmailQueue } from "@/lib/email-notifications";
+
 export const runtime = "nodejs";
 export const maxDuration = 60;
+
 const signup = z.object({
   email: z.string().trim().email("Enter a valid email address.").max(254),
   interests: z
@@ -24,9 +27,13 @@ const signup = z.object({
   website: z.string().max(300).optional().default(""),
   startedAt: z.number().finite(),
 });
+
 export async function POST(request: Request) {
   try {
     verifyOrigin(request);
+    const fp = await fingerprint(request);
+    enforceRateLimit(`early-access:${fp}`, 10, 60_000);
+
     const body = await readBody(request);
     const value = signup.parse(body);
     if (value.website) return privateJson({ ok: true });
@@ -47,7 +54,7 @@ export async function POST(request: Request) {
           interests: value.interests.length
             ? [...new Set(value.interests)]
             : ["KITTY CORP updates"],
-          fingerprint: await fingerprint(request),
+          fingerprint: fp,
         },
         p_gateway_token: setting("FEEDBACK_GATEWAY_TOKEN"),
       },
@@ -57,6 +64,15 @@ export async function POST(request: Request) {
         throw new HttpError("Please try again in an hour.", 429);
       throw error;
     }
+
+    recordAuditEvent({
+      action: "early_access.signup",
+      severity: "info",
+      status: "success",
+      actor: { type: "anonymous", email: value.email, ipFingerprint: fp },
+      details: { interests: value.interests },
+    });
+
     await drainEmailQueue(1, data?.id ? { signup_id: data.id } : {});
     return privateJson({ ok: true });
   } catch (e) {
