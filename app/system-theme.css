@@ -35,7 +35,7 @@ html[data-theme="dark"] {
   --secondary: #202421;
   --secondary-foreground: #f0efe9;
   --muted: #202421;
-  --muted-foreground: #a7ada5;
+  --muted-foreground: #c4c9db;
   --accent: #292e2a;
   --accent-foreground: #f0efe9;
   --border: #f0efe926;
@@ -223,19 +223,19 @@ html[data-theme="dark"] .company-theme .theme-toggle { color: var(--company-ink)
 @media (max-width: 760px) {
   .site-header-navigation { gap: 8px; }
   .site-header-navigation .header-account { display: none; }
-  .site-header-navigation .header-cta { flex-shrink: 0; gap: 6px; padding-inline: 10px; white-space: nowrap; }
+  .site-header-navigation .header-cta { flex-shrink: 0; gap: 6px; padding-inline: 10px; white-space: nowrap; min-height: 44px; }
   .site-header-navigation .header-cta-label { display: none; }
   .site-header-navigation .header-cta-short { display: inline; }
-  .theme-toggle { min-width: 38px; width: 38px; height: 38px; min-height: 38px; padding: 0; }
+  .theme-toggle { min-width: 44px; width: 44px; height: 44px; min-height: 44px; padding: 0; }
   .theme-toggle span { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 }
 @media (max-width: 380px) {
   .site-header-navigation { width: 100%; gap: 4px; }
   .site-header-navigation .brand { gap: 6px; font-size: 11px; letter-spacing: 1px; }
   .site-header-navigation .brand img { width: 27px; height: 27px; }
-  .site-header-navigation .header-cta { padding-inline: 8px; font-size: 10px; }
-  .site-header-navigation .menu-toggle { width: 32px; padding: 0; }
-  .theme-toggle { min-width: 34px; width: 34px; height: 34px; min-height: 34px; }
+  .site-header-navigation .header-cta { padding-inline: 8px; font-size: 10px; min-height: 44px; }
+  .site-header-navigation .menu-toggle { width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 0; }
+  .theme-toggle { min-width: 44px; width: 44px; height: 44px; min-height: 44px; }
   .company-theme .site-header-navigation { padding-inline: 12px; gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -269,8 +269,8 @@ html[data-theme="dark"] {
   --surface-soft: #202421;
   --surface-raised: #242925;
   --text-primary: #f0efe9;
-  --text-secondary: #b6bbb2;
-  --text-tertiary: #9ca39a;
+  --text-secondary: #c4c9db;
+  --text-tertiary: #a5abbf;
   --line: #454b44;
   --line-strong: #626a60;
   --control-bg: #101210;
@@ -597,3 +597,205 @@ html[data-theme="light"] .company-theme .company-hero .company-button-light:focu
   background: transparent;
   border-color: #252620;
 }
+
+/* -------------------------------------------------------------------------
+   Enterprise Dark Glassmorphism & High-Contrast Typography
+   Cross-route obsidian glass styling and WCAG AAA contrast tokens for dark mode.
+   ------------------------------------------------------------------------- */
+
+/* Unified enterprise obsidian glass cards across all subpage routes */
+html[data-theme="dark"] :is(
+  .service-offerings article,
+  .business-proof-card,
+  .segment-links a,
+  .contact-direct-links a,
+  .service-price-card,
+  .pricing-teaser,
+  .checkout-card,
+  .membership-card,
+  .account-records article,
+  .account-membership,
+  .account-connect,
+  .snake-game
+) {
+  background: linear-gradient(145deg, rgba(20, 24, 42, 0.90), rgba(13, 23, 34, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.22) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgba(2, 6, 23, 0.45);
+  color: #d1d5e5;
+}
+
+html[data-theme="dark"] :is(
+  .service-offerings article,
+  .business-proof-card,
+  .segment-links a,
+  .contact-direct-links a,
+  .service-price-card,
+  .pricing-teaser,
+  .checkout-card,
+  .membership-card,
+  .account-records article,
+  .account-membership,
+  .account-connect,
+  .snake-game
+):hover {
+  border-color: rgba(169, 158, 255, 0.45) !important;
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.65);
+}
+
+/* Card typography hierarchy */
+html[data-theme="dark"] :is(
+  .service-offerings article,
+  .business-proof-card,
+  .segment-links a,
+  .contact-direct-links a,
+  .service-price-card,
+  .pricing-teaser,
+  .checkout-card,
+  .membership-card,
+  .account-records article,
+  .account-membership,
+  .account-connect,
+  .snake-game
+) :is(h1, h2, h3, h4, h5, h6, strong, b) {
+  color: #f4f5ff;
+}
+
+html[data-theme="dark"] :is(
+  .service-offerings article,
+  .business-proof-card,
+  .segment-links a,
+  .contact-direct-links a,
+  .service-price-card,
+  .pricing-teaser,
+  .checkout-card,
+  .membership-card,
+  .account-records article,
+  .account-membership,
+  .account-connect,
+  .snake-game
+) :is(p, li, span, div, label) {
+  color: #d1d5e5;
+}
+
+html[data-theme="dark"] :is(
+  .service-offerings article,
+  .business-proof-card,
+  .segment-links a,
+  .contact-direct-links a,
+  .service-price-card,
+  .pricing-teaser,
+  .checkout-card,
+  .membership-card,
+  .account-records article,
+  .account-membership,
+  .account-connect,
+  .snake-game
+) :is(.micro-label, small, .muted, .meta, .caption, figcaption, .help-text, .studio-field-help) {
+  color: #c4c9db;
+}
+
+/* High-contrast subpage typography: eliminate muted olive and dark green tones */
+html[data-theme="dark"] :is(
+  .public-page p, .public-page li,
+  .directory-page p, .directory-page li,
+  .services-page p, .services-page li,
+  .products-page p, .products-page li,
+  .research-rows p, .research-rows li,
+  .company-intro p, .company-story p,
+  .team-page p, .team-page li,
+  .contact-page p, .contact-page li,
+  .pricing-page p, .pricing-page li,
+  .memberships-page p, .memberships-page li,
+  .payments-page p, .payments-page li,
+  .payments-hub-page p, .payments-hub-page li,
+  .projects-page p, .projects-page li,
+  .account-page p, .account-page li,
+  .legal-page p, .legal-page li,
+  .play-page p, .play-page li,
+  .business-proof-copy p,
+  .achievement-note p,
+  .segment-content p, .segment-content li,
+  .service-pricing-note,
+  .page-heading > p,
+  .hero-work-caption p,
+  .hero-work-description,
+  .hero-reassurance,
+  .hero-reassurance > span,
+  .home-service p,
+  .home-service-details,
+  .home-process li p,
+  .product-plan > p,
+  .plan-price span,
+  .lisa-intro .page-heading > p,
+  .lisa-intro-media figcaption,
+  .lisa-gallery figcaption p,
+  .lisa-workbench p,
+  .lisa-development-note,
+  .preorder-terms p,
+  .preorder-form p,
+  .preorder-reservation p,
+  .studio-commerce-form p,
+  .studio-commerce-form label small,
+  .studio-payment-records article p,
+  .quote-scope,
+  .quote-payment-choices span,
+  .quote-pending p,
+  .quote-payment-ready > p,
+  .project-start-grid aside > p,
+  .project-start-grid aside li span,
+  .project-flow,
+  .project-ai-helper p,
+  .payment-path p,
+  .payment-path-label,
+  .payment-hub-security,
+  .customer-sign-in p,
+  .account-welcome > p,
+  .account-preview-grid p,
+  .account-heading p,
+  .account-membership p,
+  .account-empty,
+  .account-records p,
+  .account-payments p,
+  .account-connect p,
+  .account-privacy-note,
+  .account-loading,
+  .snake-game p,
+  .product-summary > p,
+  .progress-link p,
+  .founder-caption > span,
+  .founder-bio,
+  .team-copy p,
+  .early-access p,
+  .contact-details > div,
+  .contact-details > div > span
+) {
+  color: #c4c9db;
+}
+
+/* Bold accents and highlights under dark theme (>10:1 contrast) */
+html[data-theme="dark"] .service-pricing-note strong,
+html[data-theme="dark"] .business-proof-copy strong,
+html[data-theme="dark"] .achievement-note strong,
+html[data-theme="dark"] .segment-content strong,
+html[data-theme="dark"] .work-availability {
+  color: #69dcf2;
+}
+
+html[data-theme="dark"] :is(
+  .public-page p strong, .public-page li strong,
+  .public-page p b, .public-page li b,
+  .directory-page p strong, .directory-page li strong,
+  .directory-page p b, .directory-page li b,
+  .services-page p strong, .services-page li strong,
+  .products-page p strong, .products-page li strong,
+  .contact-page p strong, .contact-page li strong,
+  .pricing-page p strong, .pricing-page li strong,
+  .account-page p strong, .account-page li strong,
+  .memberships-page p strong, .memberships-page li strong,
+  .payments-page p strong, .payments-page li strong
+) {
+  color: #f4f5ff;
+}
+

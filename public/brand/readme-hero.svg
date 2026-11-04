@@ -1,0 +1,327 @@
+<svg width="100%" height="auto" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#05070e" />
+      <stop offset="50%" stop-color="#0a1022" />
+      <stop offset="100%" stop-color="#050711" />
+    </linearGradient>
+
+    <!-- Animated Ambient Lighting Sweeps -->
+    <radialGradient id="cyanSweep" cx="320" cy="180" r="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.18" />
+      <stop offset="40%" stop-color="#00f0ff" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
+      <animate attributeName="cx" values="240;800;240" dur="14s" repeatCount="indefinite" />
+    </radialGradient>
+
+    <radialGradient id="violetSweep" cx="880" cy="180" r="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8a2be2" stop-opacity="0.16" />
+      <stop offset="45%" stop-color="#8a2be2" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#8a2be2" stop-opacity="0" />
+      <animate attributeName="cx" values="960;400;960" dur="16s" repeatCount="indefinite" />
+    </radialGradient>
+
+    <!-- Typography Gradients -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#f0fdfa" />
+      <stop offset="80%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <linearGradient id="lightningGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.2" />
+      <stop offset="25%" stop-color="#00f0ff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="75%" stop-color="#a855f7" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="streamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#00f0ff" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="neonBloom" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="intenseGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blurWide" />
+      <feGaussianBlur stdDeviation="2" result="blurSharp" />
+      <feMerge>
+        <feMergeNode in="blurWide" />
+        <feMergeNode in="blurSharp" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Subtle Circuit Matrix Grid -->
+    <pattern id="matrixGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.035)" stroke-width="1" />
+      <circle cx="0" cy="0" r="1" fill="rgba(0, 240, 255, 0.12)" />
+    </pattern>
+  </defs>
+
+  <style>
+    .title-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 7px;
+      font-size: 46px;
+    }
+    .sub-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      font-size: 13px;
+    }
+    .desc-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 500;
+      letter-spacing: 2px;
+      font-size: 11.5px;
+    }
+    .mono-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- Deep Obsidian Enclosure Frame -->
+  <rect x="2" y="2" width="1196" height="356" rx="20" fill="url(#bgGrad)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+  
+  <!-- Subtle Matrix Pattern Grid -->
+  <rect x="2" y="2" width="1196" height="356" rx="20" fill="url(#matrixGrid)" />
+
+  <!-- Animated Ambient Atmosphere Sweeps -->
+  <rect x="2" y="2" width="1196" height="356" rx="20" fill="url(#cyanSweep)" />
+  <rect x="2" y="2" width="1196" height="356" rx="20" fill="url(#violetSweep)" />
+
+  <!-- Corner Brackets & Structural Guides -->
+  <g stroke="rgba(0, 240, 255, 0.35)" stroke-width="1.5" fill="none">
+    <path d="M 24 44 L 24 24 L 44 24" />
+    <path d="M 1176 44 L 1176 24 L 1156 24" />
+    <path d="M 24 316 L 24 336 L 44 336" />
+    <path d="M 1176 316 L 1176 336 L 1156 336" />
+  </g>
+
+  <!-- High-Precision Electronic Bus Traces & Grid Connectors -->
+  <g stroke="rgba(0, 240, 255, 0.16)" stroke-width="1" fill="none">
+    <!-- Top Bus Trace -->
+    <path d="M 80 40 L 420 40 L 460 70 L 820 70 L 860 40 L 1120 40" />
+    <!-- Bottom Bus Trace -->
+    <path d="M 80 320 L 340 320 L 380 290 L 800 290 L 840 320 L 1120 320" />
+    <!-- Midline Connectors -->
+    <path d="M 70 120 L 110 120 L 130 140 L 130 220 L 110 240 L 70 240" />
+    <path d="M 1130 120 L 1090 120 L 1070 140 L 1070 220 L 1090 240 L 1130 240" />
+  </g>
+
+  <!-- Circuit Trace Junction Micro-Nodes -->
+  <g fill="rgba(0, 240, 255, 0.45)">
+    <circle cx="420" cy="40" r="2.5" />
+    <circle cx="460" cy="70" r="2.5" />
+    <circle cx="820" cy="70" r="2.5" />
+    <circle cx="860" cy="40" r="2.5" />
+    <circle cx="340" cy="320" r="2.5" />
+    <circle cx="380" cy="290" r="2.5" />
+    <circle cx="800" cy="290" r="2.5" />
+    <circle cx="840" cy="320" r="2.5" />
+  </g>
+
+  <!-- Animated Circuit Data Stream Packets -->
+  <circle r="3" fill="#00f0ff" filter="url(#neonBloom)">
+    <animateMotion path="M 80 40 L 420 40 L 460 70 L 820 70 L 860 40 L 1120 40" dur="7s" repeatCount="indefinite" />
+  </circle>
+  <circle r="2.5" fill="#a855f7" filter="url(#neonBloom)">
+    <animateMotion path="M 1120 320 L 840 320 L 800 290 L 380 290 L 340 320 L 80 320" dur="8.5s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Primary Electric Lightning Contour Path (Pulsing stroke-dashoffset) -->
+  <path d="M 30 185 L 120 155 L 175 195 L 240 145 L 310 190 L 430 135 L 560 200 L 680 140 L 810 195 L 940 140 L 1050 185 L 1170 150"
+        fill="none"
+        stroke="url(#lightningGrad)"
+        stroke-width="2.2"
+        stroke-dasharray="160 380"
+        filter="url(#intenseGlow)">
+    <animate attributeName="stroke-dashoffset" values="0;-1080" dur="3.8s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Secondary Counter-Phase Lightning Filament -->
+  <path d="M 40 170 L 140 210 L 220 160 L 350 215 L 480 160 L 610 210 L 740 155 L 870 215 L 1000 165 L 1160 190"
+        fill="none"
+        stroke="#00f0ff"
+        stroke-width="1.2"
+        stroke-opacity="0.6"
+        stroke-dasharray="90 320"
+        filter="url(#neonBloom)">
+    <animate attributeName="stroke-dashoffset" values="0;820" dur="4.6s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Tertiary Fine Filament Wave -->
+  <path d="M 50 195 L 180 175 L 290 205 L 440 180 L 590 200 L 730 175 L 880 200 L 1020 175 L 1150 190"
+        fill="none"
+        stroke="#c084fc"
+        stroke-width="1"
+        stroke-opacity="0.4"
+        stroke-dasharray="70 260">
+    <animate attributeName="stroke-dashoffset" values="0;-660" dur="5.2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- ================= LEFT: CYBERNETIC EMBLEM ================= -->
+  <g transform="translate(64, 96)">
+    <!-- Ambient Backlight -->
+    <circle cx="70" cy="84" r="70" fill="url(#cyanSweep)" filter="url(#intenseGlow)" opacity="0.8" />
+    
+    <!-- Outer Octagonal Shield -->
+    <polygon points="70,12 124,34 140,84 124,134 70,156 16,134 0,84 16,34" 
+             fill="rgba(8, 14, 30, 0.85)" 
+             stroke="rgba(0, 240, 255, 0.45)" 
+             stroke-width="1.5" />
+    
+    <!-- Inner Rotating Guide Ring -->
+    <circle cx="70" cy="84" r="54" fill="none" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1" stroke-dasharray="14 10">
+      <animateTransform attributeName="transform" type="rotate" from="0 70 84" to="360 70 84" dur="24s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Geometric Cybernetic Feline Silhouette & Lightning Crest -->
+    <!-- Left Ear -->
+    <polygon points="34,44 48,22 62,48" fill="rgba(0, 240, 255, 0.12)" stroke="#00f0ff" stroke-width="1.5" />
+    <!-- Right Ear -->
+    <polygon points="106,44 92,22 78,48" fill="rgba(0, 240, 255, 0.12)" stroke="#00f0ff" stroke-width="1.5" />
+    <!-- Brow & Temples -->
+    <polygon points="48,48 70,62 92,48 84,80 70,96 56,80" fill="rgba(10, 20, 42, 0.9)" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" />
+    <!-- Cheeks & Jaw -->
+    <polygon points="32,74 56,80 70,96 48,124 24,104" fill="rgba(6, 12, 28, 0.85)" stroke="rgba(0, 240, 255, 0.35)" stroke-width="1.2" />
+    <polygon points="108,74 84,80 70,96 92,124 116,104" fill="rgba(6, 12, 28, 0.85)" stroke="rgba(0, 240, 255, 0.35)" stroke-width="1.2" />
+    <!-- Chin -->
+    <polygon points="48,124 70,96 92,124 70,140" fill="rgba(0, 240, 255, 0.2)" stroke="#00f0ff" stroke-width="1.4" />
+    
+    <!-- Neon Optic Lenses (Glowing Eyes) -->
+    <circle cx="54" cy="74" r="3.5" fill="#00f0ff" filter="url(#neonBloom)">
+      <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="86" cy="74" r="3.5" fill="#00f0ff" filter="url(#neonBloom)">
+      <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Forehead Lightning Energy Core -->
+    <path d="M 70 54 L 66 66 L 73 66 L 68 78 L 74 65 L 68 65 Z" fill="#ffffff" filter="url(#neonBloom)">
+      <animate attributeName="fill" values="#ffffff;#00f0ff;#ffffff" dur="2s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- ================= CENTER: ENTERPRISE TYPOGRAPHY ================= -->
+  <g transform="translate(252, 90)">
+    <!-- Category Super-Header Tag -->
+    <g transform="translate(0, 16)">
+      <rect x="0" y="0" width="220" height="22" rx="4" fill="rgba(0, 240, 255, 0.08)" stroke="rgba(0, 240, 255, 0.25)" stroke-width="1" />
+      <text x="10" y="15" fill="#00f0ff" class="mono-badge">ENTERPRISE TECHNOLOGIES</text>
+    </g>
+
+    <!-- Primary Title -->
+    <text x="0" y="72" fill="url(#titleGrad)" class="title-text" filter="url(#neonBloom)">KITTY CORP</text>
+
+    <!-- Subtitle Division Indicator -->
+    <text x="2" y="102" fill="#38bdf8" class="sub-text">HIGH-FIDELITY SIMULATION &amp; APPLIED INTELLIGENCE</text>
+
+    <!-- Descriptive Architecture Line -->
+    <text x="2" y="126" fill="#94a3b8" class="desc-text">AUTONOMOUS SYSTEMS // INDUSTRIAL SIMULATION // TIER-1 SECURITY EDGE</text>
+
+    <!-- Technology Matrix Pills Row -->
+    <g transform="translate(0, 144)">
+      <!-- Pill 1 -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="154" height="24" rx="12" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1" />
+        <circle cx="12" cy="12" r="3" fill="#00f0ff" />
+        <text x="22" y="16" fill="#e2e8f0" class="mono-badge">NEXT.JS 16.4.4</text>
+      </g>
+      <!-- Pill 2 -->
+      <g transform="translate(162, 0)">
+        <rect x="0" y="0" width="102" height="24" rx="12" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(99, 102, 241, 0.3)" stroke-width="1" />
+        <circle cx="12" cy="12" r="3" fill="#818cf8" />
+        <text x="22" y="16" fill="#e2e8f0" class="mono-badge">REACT 19</text>
+      </g>
+      <!-- Pill 3 -->
+      <g transform="translate(272, 0)">
+        <rect x="0" y="0" width="168" height="24" rx="12" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(168, 85, 247, 0.3)" stroke-width="1" />
+        <circle cx="12" cy="12" r="3" fill="#c084fc" />
+        <text x="22" y="16" fill="#e2e8f0" class="mono-badge">WEBGL2 SIMULATION</text>
+      </g>
+      <!-- Pill 4 -->
+      <g transform="translate(448, 0)">
+        <rect x="0" y="0" width="146" height="24" rx="12" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(34, 197, 94, 0.3)" stroke-width="1" />
+        <circle cx="12" cy="12" r="3" fill="#22c55e" />
+        <text x="22" y="16" fill="#e2e8f0" class="mono-badge">WCAG 2.1 AAA</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT: TELEMETRY & LIVE STATUS ================= -->
+  <g transform="translate(876, 76)">
+    <!-- Glass Telemetry Card -->
+    <rect x="0" y="0" width="268" height="208" rx="14" fill="rgba(10, 17, 36, 0.85)" stroke="rgba(0, 240, 255, 0.22)" stroke-width="1.2" />
+
+    <!-- Card Header / Title -->
+    <path d="M 0 14 Q 0 0 14 0 L 254 0 Q 268 0 268 14 L 268 36 L 0 36 Z" fill="rgba(0, 240, 255, 0.05)" />
+    <text x="16" y="24" fill="#94a3b8" class="mono-badge">TELEMETRY &amp; HEALTH</text>
+    <line x1="0" y1="36" x2="268" y2="36" stroke="rgba(0, 240, 255, 0.15)" stroke-width="1" />
+
+    <!-- Pulsating Live Production Status Pill -->
+    <g transform="translate(14, 50)">
+      <rect x="0" y="0" width="240" height="32" rx="16" fill="rgba(34, 197, 94, 0.08)" stroke="rgba(34, 197, 94, 0.4)" stroke-width="1" />
+      
+      <!-- Live Beacon Dot -->
+      <g transform="translate(18, 16)">
+        <circle cx="0" cy="0" r="8" fill="none" stroke="#22c55e" stroke-width="1">
+          <animate attributeName="r" values="4;10;4" dur="2.2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.8;0;0.8" dur="2.2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="0" cy="0" r="4" fill="#22c55e">
+          <animate attributeName="opacity" values="1;0.4;1" dur="2.2s" repeatCount="indefinite" />
+        </circle>
+      </g>
+
+      <text x="32" y="20.5" fill="#22c55e" class="mono-badge">SYSTEM STATUS: PRODUCTION OPERATIONAL</text>
+    </g>
+
+    <!-- Production Telemetry Metrics -->
+    <g transform="translate(16, 102)">
+      <!-- Row 1: Uptime -->
+      <text x="0" y="14" fill="#64748b" class="mono-badge">VERIFIED UPTIME</text>
+      <text x="236" y="14" fill="#f8fafc" text-anchor="end" class="mono-badge">99.99%</text>
+      <line x1="0" y1="22" x2="236" y2="22" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
+
+      <!-- Row 2: Verification Suite -->
+      <text x="0" y="38" fill="#64748b" class="mono-badge">TEST SUITE</text>
+      <text x="236" y="38" fill="#00f0ff" text-anchor="end" class="mono-badge">15 / 15 PASSED</text>
+      <line x1="0" y1="46" x2="236" y2="46" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
+
+      <!-- Row 3: Security & Shaders -->
+      <text x="0" y="62" fill="#64748b" class="mono-badge">GLSL PIPELINE</text>
+      <text x="236" y="62" fill="#a855f7" text-anchor="end" class="mono-badge">13 SHADERS LOCKED</text>
+      <line x1="0" y1="70" x2="236" y2="70" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
+
+      <!-- Row 4: Edge Distribution -->
+      <text x="0" y="86" fill="#64748b" class="mono-badge">EDGE REGION</text>
+      <text x="236" y="86" fill="#38bdf8" text-anchor="end" class="mono-badge">BOM1 // GLOBAL EDGE</text>
+    </g>
+  </g>
+
+  <!-- Bottom Edge Subtle Accent Line -->
+  <line x1="40" y1="358" x2="1160" y2="358" stroke="url(#streamGrad)" stroke-width="1.5" />
+</svg>
