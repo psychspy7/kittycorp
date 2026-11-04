@@ -13,6 +13,8 @@ import { BusinessProof, BusinessEnquiry } from "@/components/kitty/business-conv
 import { CompanyDivisions, CompanyHero, GeminiManifesto } from "@/components/kitty/company-home";
 import { ElementalBackground } from "@/components/kitty/elemental-background";
 import { sitePageContent } from "@/lib/site-pages-server";
+import { BottomSupport } from "@/components/kitty/bottom-support";
+import { SubscriptionModal } from "@/components/kitty/subscription-modal";
 export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const copy = await sitePageContent("home");
@@ -43,5 +45,5 @@ export default async function Home() {
     knowsAbout:["Business websites","Custom software development","AI workflow automation","AI agents","Robotics research","Agricultural robotics","Intelligent systems"],
     sameAs,
   };
-  return <div className="company-theme gemini-template"><ElementalBackground/><SiteHeader/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><CompanyHero copy={copy}/><GeminiManifesto/><CompanyDivisions copy={copy}/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/></main><SiteFooter/></div>;
+  return <div className="company-theme gemini-template"><ElementalBackground/><SiteHeader/><SubscriptionModal/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><CompanyHero copy={copy}/><GeminiManifesto/><CompanyDivisions copy={copy}/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/><BottomSupport/></main><SiteFooter/></div>;
 }

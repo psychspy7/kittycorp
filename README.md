@@ -105,6 +105,8 @@ The platform is engineered across a 5-tier modular topology ensuring rigorous is
 | `/company` | **Corporate Entity** — Organizational trajectory, operating philosophy, cinematic brand presentation | Static Prerendered | Public Editorial |
 | `/team` | **Engineering Leadership** — Technical biographies, executive roster, authenticated public credentials | Static Prerendered | Studio RLS Managed |
 | `/contact` | **Communications Gateway** — Institutional inquiries, executive press contact, secure messaging | Static Prerendered | Cloudflare Turnstile Protected |
+| `/appointments` | **Consultation Appointments** — Direct strategy booking, calendar scheduling, inquiry brief | Static Prerendered | Cloudflare Turnstile Protected |
+| `/support` | **Voluntary Support** — Hardware prototyping contributions, robotics research funding | Static Prerendered | Razorpay Verified Gateway |
 | `/account` | **Customer Portal** — Account management, verified identities, authenticated session state | Dynamic Server-Side | HttpOnly Session Authentication |
 | `/memberships` | **Partner Memberships** — Tiered institutional memberships, access controls, feature entitlements | Dynamic Server-Side | Authenticated RLS Policies |
 | `/payments` | **Financial Clearing** — Project payment processing, retainer settlements, voluntary support | Dynamic Server-Side | Razorpay Test & Production Gateway |

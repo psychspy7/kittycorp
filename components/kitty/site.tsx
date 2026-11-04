@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AnimatedTopDock } from "@/src/shaders/animated-top-dock/AnimatedTopDock";
-const navigation = [["Services", "/services"], ["Products", "/products"], ["Research", "/research"], ["Company", "/company"], ["Contact", "/contact"]];
+const navigation = [["Services", "/services"], ["Products", "/products"], ["Kitty Subscription", "/memberships"], ["Research", "/research"], ["Company", "/company"], ["Contact", "/contact"]];
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();

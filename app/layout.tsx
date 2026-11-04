@@ -10,6 +10,7 @@ import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { websiteOrigin } from "@/lib/site-metadata";
 import { SiteThemeProvider } from "@/components/kitty/theme-provider";
 import { SiteToaster } from "@/components/kitty/site-toaster";
+import { CookieConsent } from "@/components/kitty/cookie-consent";
 import "./globals.css";
 import "./refined.css";
 import "./final.css";
@@ -109,6 +110,7 @@ export default async function RootLayout({
             strategy="lazyOnload"
           />
           <SiteToaster />
+          <CookieConsent />
         </SiteThemeProvider>
       </body>
     </html>

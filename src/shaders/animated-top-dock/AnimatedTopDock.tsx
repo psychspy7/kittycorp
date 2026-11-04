@@ -62,6 +62,7 @@ const ITEMS: readonly DockItem[] = [
 const MODERN_ITEMS: readonly DockItem[] = [
   { id: "product", label: "Product", icon: <><path d="M8 1.9 14.1 5v6L8 14.1 1.9 11V5z" /><path d="M1.9 5 8 8.1 14.1 5M8 8.1v6" /></> },
   { id: "solutions", label: "Solutions", icon: <><path d="M8 1.9 14.4 5.6 8 9.3 1.6 5.6z" /><path d="m2.6 8 5.4 3.1L13.4 8M2.6 10.7 8 13.8l5.4-3.1" /></> },
+  { id: "subscription", label: "Subscription", icon: <><circle cx="8" cy="8" r="5.8" /><path d="m5.5 8 1.8 1.8 3.5-3.5" /></> },
   { id: "docs", label: "Docs", icon: <><path d="M3.4 2.4h5.4l3.8 3.8v7.4H3.4z" /><path d="M8.8 2.4v3.8h3.8M5.9 9h4.2M5.9 11.2h3" /></> },
   { id: "pricing", label: "Pricing", icon: <><path d="M8.6 2.2H13v4.4l-6.6 6.6a1.2 1.2 0 0 1-1.7 0L2.2 10.5a1.2 1.2 0 0 1 0-1.7z" /><circle cx="10.6" cy="4.6" r=".9" /></> },
   { id: "changelog", label: "Changelog", icon: <><circle cx="8" cy="8" r="5.9" /><path d="M8 4.6V8l2.4 1.5" /></> },

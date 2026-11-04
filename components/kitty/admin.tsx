@@ -191,6 +191,7 @@ export function AdminDashboard() {
   const [formError, setFormError] = useState("");
   const [remove, setRemove] = useState<Notice | null>(null);
   const [message, setMessage] = useState<Feedback | null>(null);
+  const [inboxFilter, setInboxFilter] = useState<"all" | "appointments" | "enquiries" | "feedback">("all");
   const load = useCallback(async () => {
     setLoadError("");
     try {
@@ -352,11 +353,11 @@ export function AdminDashboard() {
         <Tabs value={tab} onValueChange={setTab} className="studio-workspace">
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="feedback">Inbox & Enquiries</TabsTrigger>
             <TabsTrigger value="pages">Page content</TabsTrigger>
             <TabsTrigger value="health">Health & handover</TabsTrigger>
             <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
-            <TabsTrigger value="feedback">Project enquiries & inbox</TabsTrigger>
             <TabsTrigger value="email">Email alerts</TabsTrigger>
             <TabsTrigger value="lisa-preorders">LISA preorders</TabsTrigger>
             <TabsTrigger value="project-quotes">Project quotes</TabsTrigger>
@@ -462,59 +463,99 @@ export function AdminDashboard() {
           </TabsContent>
           <TabsContent value="feedback" className="admin-panel">
             <div className="panel-heading">
-              <h2>From the other side of the screen</h2>
-              <p>Contact messages and website or app enquiries are visible only in your studio.</p>
+              <h2>Studio Inbox</h2>
+              <p>Manage all appointment requests, client project enquiries, and visitor messages.</p>
             </div>
-            {loading ? (
-              <Skeleton className="h-40 w-full" />
-            ) : feedback.length === 0 ? (
-              <p className="empty-message">
-                Quiet for now. New contact messages will land here.
-              </p>
-            ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>From</TableHead>
-                    <TableHead>Message</TableHead>
-                    <TableHead>Received</TableHead>
-                    <TableHead className="text-right">Read</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {feedback.map((f) => (
-                    <TableRow key={f.id}>
-                      <TableCell>
-                        <strong className="table-title">{f.name}</strong>
-                        <span className="table-email">{f.email}</span>
-                      </TableCell>
-                      <TableCell className="message-excerpt">
-                        {f.message.startsWith("PROJECT ENQUIRY\n") && <span className="enquiry-badge">Project enquiry</span>}{f.message.slice(0, 90)}
-                        {f.message.length > 90 ? "…" : ""}
-                      </TableCell>
-                      <TableCell className="table-date">
-                        {date(f.created_at)}
-                      </TableCell>
-                      <TableCell>
-                        <div className="table-actions">
-                          <button
-                            onClick={() => setMessage(f)}
-                            aria-label={`Read message from ${f.name}`}
-                          >
-                            <Eye size={17} />
-                          </button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            )}
+            {(() => {
+              const appointments = feedback.filter(f => f.message.startsWith("APPOINTMENT REQUEST") || f.message.toLowerCase().includes("preferred time") || f.message.toLowerCase().includes("appointment"));
+              const enquiries = feedback.filter(f => f.message.startsWith("PROJECT ENQUIRY\n") || f.message.toLowerCase().includes("service needed:"));
+              const generalMessages = feedback.filter(f => !appointments.includes(f) && !enquiries.includes(f));
+              const displayed = inboxFilter === "appointments" ? appointments : inboxFilter === "enquiries" ? enquiries : inboxFilter === "feedback" ? generalMessages : feedback;
+
+              return (
+                <>
+                  <div className="inbox-filter-bar" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "20px" }}>
+                    <button type="button" className={`button ${inboxFilter === "all" ? "button-gold" : "button-outline"}`} style={{ minHeight: "36px", padding: "0 14px", fontSize: "12px" }} onClick={() => setInboxFilter("all")}>
+                      All Messages ({feedback.length})
+                    </button>
+                    <button type="button" className={`button ${inboxFilter === "appointments" ? "button-gold" : "button-outline"}`} style={{ minHeight: "36px", padding: "0 14px", fontSize: "12px" }} onClick={() => setInboxFilter("appointments")}>
+                      Appointments ({appointments.length})
+                    </button>
+                    <button type="button" className={`button ${inboxFilter === "enquiries" ? "button-gold" : "button-outline"}`} style={{ minHeight: "36px", padding: "0 14px", fontSize: "12px" }} onClick={() => setInboxFilter("enquiries")}>
+                      Project Enquiries ({enquiries.length})
+                    </button>
+                    <button type="button" className={`button ${inboxFilter === "feedback" ? "button-gold" : "button-outline"}`} style={{ minHeight: "36px", padding: "0 14px", fontSize: "12px" }} onClick={() => setInboxFilter("feedback")}>
+                      Feedback ({generalMessages.length})
+                    </button>
+                  </div>
+                  {loading ? (
+                    <Skeleton className="h-40 w-full" />
+                  ) : displayed.length === 0 ? (
+                    <p className="empty-message">
+                      {inboxFilter === "appointments" ? "No appointment requests yet." : inboxFilter === "enquiries" ? "No project enquiries yet." : inboxFilter === "feedback" ? "No feedback messages yet." : "Inbox is empty."}
+                    </p>
+                  ) : (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Category</TableHead>
+                          <TableHead>Sender</TableHead>
+                          <TableHead>Summary</TableHead>
+                          <TableHead>Received</TableHead>
+                          <TableHead className="text-right">Action</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {displayed.map((f) => {
+                          const isAppt = f.message.startsWith("APPOINTMENT REQUEST") || f.message.toLowerCase().includes("appointment");
+                          const isEnquiry = f.message.startsWith("PROJECT ENQUIRY\n");
+                          return (
+                            <TableRow key={f.id}>
+                              <TableCell style={{ width: "135px" }}>
+                                {isAppt ? (
+                                  <span className="enquiry-badge" style={{ background: "rgba(105, 220, 242, 0.15)", color: "#69dcf2", borderColor: "rgba(105, 220, 242, 0.4)" }}>Appointment</span>
+                                ) : isEnquiry ? (
+                                  <span className="enquiry-badge">Project</span>
+                                ) : (
+                                  <span className="enquiry-badge" style={{ background: "rgba(168, 159, 255, 0.15)", color: "#c4beff", borderColor: "rgba(168, 159, 255, 0.4)" }}>Feedback</span>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                <strong className="table-title">{f.name}</strong>
+                                <span className="table-email">{f.email}</span>
+                              </TableCell>
+                              <TableCell className="message-excerpt">
+                                {f.message.slice(0, 95)}
+                                {f.message.length > 95 ? "…" : ""}
+                              </TableCell>
+                              <TableCell className="table-date">
+                                {date(f.created_at)}
+                              </TableCell>
+                              <TableCell>
+                                <div className="table-actions">
+                                  <button
+                                    onClick={() => setMessage(f)}
+                                    aria-label={`Read message from ${f.name}`}
+                                  >
+                                    <Eye size={17} />
+                                  </button>
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  )}
+                </>
+              );
+            })()}
             {nextCursor && (
               <button
                 className="button button-outline"
                 disabled={busy}
                 onClick={() => void moreFeedback()}
+                style={{ marginTop: "16px" }}
               >
                 Load earlier messages
               </button>
