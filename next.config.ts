@@ -1,5 +1,22 @@
 import type { NextConfig } from "next";
 
+const cspDirectives = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://challenges.cloudflare.com https://apis.google.com https://*.firebaseapp.com https://widget.thunderbolt.com https://www.googletagmanager.com https://www.google-analytics.com",
+  "style-src 'self' 'unsafe-inline'",
+  "frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com https://challenges.cloudflare.com https://*.firebaseapp.com https://accounts.google.com https://widget.thunderbolt.com",
+  "connect-src 'self' https://mgkghnblbisubympudaa.supabase.co wss://mgkghnblbisubympudaa.supabase.co https://lumberjack.razorpay.com https://api.razorpay.com https://open.er-api.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com https://www.google-analytics.com https://*.thunderbolt.com",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data: https:",
+  "worker-src 'self' blob:",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+
 const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   turbopack: {
@@ -32,14 +49,16 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
+          { key: "Content-Security-Policy", value: cspDirectives },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
-          { key: "Strict-Transport-Security", value: "max-age=31536000" },
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            value: "camera=(), microphone=(), geolocation=(), payment=(self 'https://checkout.razorpay.com')",
           },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         ],
       },
       { source: "/downloads/:file*.apk", headers: [

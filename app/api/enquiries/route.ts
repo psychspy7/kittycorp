@@ -1,8 +1,8 @@
 import { optionalCustomer } from "@/lib/customer-account-server";
 import { randomBytes } from "node:crypto";
 import { quoteAction } from "@/lib/project-quotes-server";
-
 import {
+  enforceRateLimit,
   failure,
   fingerprint,
   HttpError,
@@ -18,6 +18,8 @@ export const maxDuration = 60;
 export async function POST(request: Request) {
   try {
     verifyOrigin(request);
+    const fp = await fingerprint(request);
+    enforceRateLimit(fp);
     const body = await readBody(request);
     const value = enquirySchema.parse(body);
     if (value.website) return privateJson({ ok: true });
@@ -48,7 +50,7 @@ export async function POST(request: Request) {
       timeline: value.timeline,
       scope: value.message,
       preference: value.paymentChoice || "Not discussed; agree after scope and quote",
-      fingerprint: await fingerprint(request),
+      fingerprint: fp,
       ...(customer
         ? { customer_uid: customer.uid, customer_email: customer.email }
         : {}),

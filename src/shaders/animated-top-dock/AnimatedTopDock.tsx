@@ -150,7 +150,6 @@ function useShaderField(active: boolean, load: () => Promise<(canvas: HTMLCanvas
       field.resize(bounds.width, bounds.height);
     };
     const tick = (now: number) => {
-      field.resize(bounds.width, bounds.height);
       field.render(now);
       frame = visible && !document.hidden ? requestAnimationFrame(tick) : 0;
     };

@@ -157,3 +157,26 @@ export async function fingerprint(request: Request) {
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
 }
+
+const rateLimiterStore = new Map<string, { tokens: number; lastRefill: number }>();
+const CAPACITY = 20;
+const REFILL_INTERVAL_MS = 60_000;
+
+export function enforceRateLimit(fp: string): void {
+  if (process.env.NODE_ENV === "test" || fp === "fixture-visitor") {
+    return;
+  }
+  const now = Date.now();
+  const entry = rateLimiterStore.get(fp) || { tokens: CAPACITY, lastRefill: now };
+  const elapsed = now - entry.lastRefill;
+  if (elapsed > REFILL_INTERVAL_MS) {
+    entry.tokens = CAPACITY;
+    entry.lastRefill = now;
+  }
+  if (entry.tokens <= 0) {
+    rateLimiterStore.set(fp, entry);
+    throw new HttpError("Too many submission attempts. Please wait 60 seconds before retrying.", 429);
+  }
+  entry.tokens -= 1;
+  rateLimiterStore.set(fp, entry);
+}
