@@ -40,3 +40,176 @@
 @media(prefers-reduced-motion:reduce) { .checkout-spinner { animation: none; } }
 
 .provider-selector{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}.provider-selector button{flex:1;min-width:100px;min-height:50px;background:#fffefa;border:1px solid var(--border);border-radius:7px;padding:10px;font-size:13px}.provider-selector button[aria-pressed=true]{background:#eee7d8;border-color:#80632f80}.provider-selector small{display:block;font-size:10px;color:#62645d;margin-top:4px}.paypal-buttons{margin-block:18px}.paypal-buttons.is-hidden{display:none}.payment-purpose-nav a{min-height:44px}.payments-intro h1{font-family:Geist,sans-serif;font-weight:500;letter-spacing:-1.7px}.checkout-field input{font-size:16px;min-height:48px}
+
+/* =========================================================================
+   Enterprise Obsidian Glassmorphism for Payments in Dark Mode
+   ========================================================================= */
+html[data-theme="dark"] .payments-page {
+  color: #f4f5ff;
+}
+html[data-theme="dark"] .payments-intro h1 {
+  color: #f4f5ff !important;
+  text-shadow: 0 2px 14px rgba(4, 7, 20, 0.96);
+}
+html[data-theme="dark"] .payments-intro > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .payments-intro .eyebrow {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .payments-intro .payments-note {
+  color: #a5b0cb !important;
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .payment-purpose-nav a {
+  background: rgba(16, 22, 42, 0.85) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .payment-purpose-nav a:hover {
+  border-color: rgba(105, 220, 242, 0.6) !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .payment-purpose-nav a[aria-current="page"] {
+  background: linear-gradient(135deg, rgba(30, 42, 80, 0.95), rgba(18, 26, 52, 0.98)) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(105, 220, 242, 0.3) !important;
+}
+html[data-theme="dark"] .provider-selector button {
+  background: linear-gradient(145deg, rgba(20, 28, 52, 0.88), rgba(12, 18, 36, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #f4f5ff !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+html[data-theme="dark"] .provider-selector button:hover {
+  border-color: rgba(105, 220, 242, 0.5) !important;
+  box-shadow: 0 4px 16px rgba(105, 220, 242, 0.15) !important;
+}
+html[data-theme="dark"] .provider-selector button small {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .provider-selector button[aria-pressed="true"] {
+  background: linear-gradient(145deg, rgba(30, 45, 88, 0.98), rgba(18, 26, 56, 0.98)) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(105, 220, 242, 0.35) !important;
+}
+html[data-theme="dark"] .provider-selector button[aria-pressed="true"] small {
+  color: #69dcf2 !important;
+  font-weight: 500;
+}
+html[data-theme="dark"] .customer-sign-in {
+  background: linear-gradient(145deg, rgba(16, 22, 42, 0.88), rgba(11, 16, 32, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.4) !important;
+}
+html[data-theme="dark"] .customer-sign-in strong {
+  color: #f4f5ff !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .customer-sign-in p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(169, 158, 255, 0.4) !important;
+  color: #f4f5ff !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(105, 220, 242, 0.25) !important;
+}
+html[data-theme="dark"] .customer-sign-in .text-link {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .checkout-card {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(2, 6, 23, 0.65) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .checkout-mode {
+  color: #69dcf2 !important;
+  background: rgba(105, 220, 242, 0.12) !important;
+  border: 1px solid rgba(105, 220, 242, 0.35) !important;
+  font-weight: 600;
+}
+html[data-theme="dark"] .checkout-card h2 {
+  color: #f4f5ff !important;
+  font-weight: 600;
+}
+html[data-theme="dark"] .checkout-card > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .checkout-total {
+  border-block-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .checkout-total > span {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .checkout-total > strong {
+  color: #ffffff !important;
+  text-shadow: 0 0 18px rgba(105, 220, 242, 0.35) !important;
+}
+html[data-theme="dark"] .checkout-field label {
+  color: #f4f5ff !important;
+}
+html[data-theme="dark"] .checkout-field input {
+  background: rgba(12, 17, 32, 0.95) !important;
+  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+}
+html[data-theme="dark"] .checkout-field input:focus {
+  border-color: #69dcf2 !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(105, 220, 242, 0.22) !important;
+}
+html[data-theme="dark"] .checkout-field > span {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .donation-presets button {
+  background: rgba(18, 25, 48, 0.85) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #f4f5ff !important;
+  transition: all 0.2s ease;
+}
+html[data-theme="dark"] .donation-presets button[aria-pressed="true"] {
+  background: rgba(105, 220, 242, 0.18) !important;
+  border-color: #69dcf2 !important;
+  color: #69dcf2 !important;
+  box-shadow: 0 0 14px rgba(105, 220, 242, 0.25) !important;
+}
+html[data-theme="dark"] .checkout-security {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .checkout-security svg {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .checkout-reference code {
+  background: rgba(8, 12, 24, 0.8) !important;
+  color: #69dcf2 !important;
+  border: 1px solid rgba(169, 158, 255, 0.2) !important;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+html[data-theme="dark"] .checkout-upi-note {
+  color: #e4d49d !important;
+}
+html[data-theme="dark"] .checkout-button.button-gold {
+  background: linear-gradient(135deg, #f0c978, #d4a74e) !important;
+  color: #0c0f18 !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 4px 18px rgba(240, 201, 120, 0.25) !important;
+}
+html[data-theme="dark"] .checkout-button.button-gold:hover {
+  background: linear-gradient(135deg, #fce09a, #e2b75e) !important;
+  box-shadow: 0 0 24px rgba(240, 201, 120, 0.45) !important;
+}

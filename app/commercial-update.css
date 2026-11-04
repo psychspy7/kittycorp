@@ -67,3 +67,141 @@
 @media(max-width:680px){.service-price-card:nth-child(5){grid-column:auto}}
 
 .service-price-card:nth-child(5) .local-price,.service-price-card:nth-child(5) .local-price span,.service-price-card:nth-child(5) .local-price a,.service-price-card:nth-child(5) .service-price-amount span{color:#cbd2c4}
+
+
+/* =========================================================================
+   Enterprise Obsidian Glassmorphism for Commercial Update in Dark Mode
+   ========================================================================= */
+html[data-theme="dark"] .service-pricing .section-heading p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .service-price-card {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(2, 6, 23, 0.55) !important;
+}
+html[data-theme="dark"] .service-price-card:nth-child(4) {
+  background: linear-gradient(150deg, rgba(22, 30, 56, 0.94), rgba(13, 20, 38, 0.98)) !important;
+  border-color: rgba(105, 220, 242, 0.4) !important;
+}
+html[data-theme="dark"] .service-price-card:nth-child(5) {
+  background: linear-gradient(150deg, rgba(26, 36, 68, 0.95), rgba(15, 24, 48, 0.98)) !important;
+  border-color: rgba(105, 220, 242, 0.5) !important;
+  box-shadow: 0 16px 48px rgba(105, 220, 242, 0.2) !important;
+}
+html[data-theme="dark"] .service-price-card h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .service-price-card > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .service-price-card ul {
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .service-price-amount strong {
+  color: #ffffff !important;
+  text-shadow: 0 0 18px rgba(105, 220, 242, 0.35) !important;
+}
+html[data-theme="dark"] .service-price-amount span {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .service-pricing-note {
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .service-pricing-note p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .service-pricing-note strong {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .pricing-teaser {
+  background: linear-gradient(150deg, rgba(20, 28, 54, 0.94), rgba(12, 18, 36, 0.98)) !important;
+  border: 1px solid rgba(105, 220, 242, 0.4) !important;
+  box-shadow: 0 16px 48px rgba(2, 6, 23, 0.6) !important;
+}
+html[data-theme="dark"] .pricing-teaser h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .pricing-teaser p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .pricing-process {
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .pricing-process h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .pricing-process p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .pricing-process li {
+  border-bottom-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .pricing-process li strong {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .pricing-process li span {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .appointment-layout aside {
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .appointment-layout aside h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .appointment-layout aside ol {
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .appointment-layout aside p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .appointment-form,
+html[data-theme="dark"] .appointment-success {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(2, 6, 23, 0.6) !important;
+}
+html[data-theme="dark"] .appointment-form .form-field label {
+  color: #f4f5ff !important;
+  font-weight: 500;
+}
+html[data-theme="dark"] .appointment-form input,
+html[data-theme="dark"] .appointment-form textarea,
+html[data-theme="dark"] .appointment-form select {
+  background: rgba(12, 17, 32, 0.95) !important;
+  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .appointment-form input:focus,
+html[data-theme="dark"] .appointment-form textarea:focus,
+html[data-theme="dark"] .appointment-form select:focus {
+  border-color: #69dcf2 !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(105, 220, 242, 0.22) !important;
+}
+html[data-theme="dark"] .appointment-submit p {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .lisa-purchase {
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .lisa-purchase h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .lisa-purchase > div > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .lisa-purchase-card {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(2, 6, 23, 0.6) !important;
+}
+html[data-theme="dark"] .lisa-purchase-card h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .lisa-purchase-card ul {
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .lisa-purchase-card > p {
+  color: #c4c9db !important;
+}

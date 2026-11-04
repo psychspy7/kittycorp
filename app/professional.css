@@ -39,3 +39,105 @@ body{font-family:Geist,Arial,sans-serif}.site-header{height:100px;background:#f8
   display: inline-flex;
   align-items: center;
 }
+
+
+/* =========================================================================
+   Enterprise Obsidian Glassmorphism for Professional Components in Dark Mode
+   ========================================================================= */
+html[data-theme="dark"] .customer-sign-in {
+  background: linear-gradient(145deg, rgba(16, 22, 42, 0.88), rgba(11, 16, 32, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.4) !important;
+}
+html[data-theme="dark"] .customer-sign-in strong {
+  color: #f4f5ff !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .customer-sign-in p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(169, 158, 255, 0.4) !important;
+  color: #f4f5ff !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(105, 220, 242, 0.25) !important;
+}
+html[data-theme="dark"] .customer-sign-in .text-link {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .hero-work-compact {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 12px 36px rgba(2, 6, 23, 0.5) !important;
+}
+html[data-theme="dark"] .hero-work-compact h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .hero-work-description {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .hero-project-list > a {
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .hero-project-list strong {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .hero-project-list small {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .hero-work-footer {
+  border-top-color: rgba(169, 158, 255, 0.2) !important;
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .hero-work-footer a {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .preorder-form,
+html[data-theme="dark"] .preorder-reservation {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(2, 6, 23, 0.6) !important;
+}
+html[data-theme="dark"] .preorder-form h2,
+html[data-theme="dark"] .preorder-reservation h2 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .preorder-form p,
+html[data-theme="dark"] .preorder-reservation p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .payment-path {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+}
+html[data-theme="dark"] .payment-path h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .payment-path p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .payment-path-label {
+  color: #69dcf2 !important;
+}
+html[data-theme="dark"] .payment-path-contribution {
+  background: linear-gradient(150deg, rgba(24, 32, 60, 0.94), rgba(14, 20, 40, 0.98)) !important;
+  border-color: rgba(105, 220, 242, 0.4) !important;
+}
+html[data-theme="dark"] .home-contribution > div > h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .home-contribution > div > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .currency-selector select {
+  background: rgba(12, 17, 32, 0.95) !important;
+  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+  color: #ffffff !important;
+}

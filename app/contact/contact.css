@@ -5,3 +5,29 @@
 .contact-direct-links small { display: block; font-size: 9px; color: #74766c; letter-spacing: 1px; margin-bottom: 7px; }
 .contact-form select { width: 100%; background: #fffefa; padding: 13px 14px; border: 1px solid #25272026; border-radius: 4px; font: inherit; color: #252720; }
 .contact-form .contact-review-note { font-size: 12px; color: #62645d; line-height: 1.7; margin-top: 10px; }
+
+
+/* =========================================================================
+   Enterprise Obsidian Glassmorphism for Contact in Dark Mode
+   ========================================================================= */
+html[data-theme="dark"] .contact-direct-links a {
+  background: linear-gradient(145deg, rgba(20, 28, 52, 0.88), rgba(12, 18, 36, 0.94)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #f4f5ff !important;
+}
+html[data-theme="dark"] .contact-direct-links a:hover {
+  border-color: #69dcf2 !important;
+  background: linear-gradient(145deg, rgba(30, 42, 80, 0.95), rgba(18, 26, 52, 0.98)) !important;
+  box-shadow: 0 0 16px rgba(105, 220, 242, 0.25) !important;
+}
+html[data-theme="dark"] .contact-direct-links small {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .contact-form select {
+  background: rgba(12, 17, 32, 0.95) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+}
+html[data-theme="dark"] .contact-form .contact-review-note {
+  color: #a5b0cb !important;
+}

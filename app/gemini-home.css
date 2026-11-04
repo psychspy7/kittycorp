@@ -1128,3 +1128,215 @@ html[data-theme="dark"] .service-boundary {
 html[data-theme="dark"] .service-starting-price p {
   color: #c4c9db !important;
 }
+
+
+/* =========================================================================
+   Global Enterprise Obsidian Glass & Contrast Overrides (Cross-Site Dark Mode)
+   Eliminates all unreadable light beige containers, low-contrast text,
+   and white-on-white text issues across payments, accounts, services, and forms.
+   ========================================================================= */
+
+/* Customer Account & Google Sign-In Card */
+html[data-theme="dark"] .customer-sign-in {
+  background: linear-gradient(145deg, rgba(16, 22, 44, 0.92), rgba(11, 16, 34, 0.96)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 12px !important;
+}
+html[data-theme="dark"] .customer-sign-in strong {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .customer-sign-in p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(169, 158, 255, 0.45) !important;
+  color: #f4f5ff !important;
+  font-weight: 500 !important;
+}
+html[data-theme="dark"] .customer-sign-in .button.button-outline:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(105, 220, 242, 0.3) !important;
+}
+html[data-theme="dark"] .customer-sign-in .text-link {
+  color: #69dcf2 !important;
+}
+
+/* Payment Provider Selector & Options */
+html[data-theme="dark"] .provider-selector button {
+  background: linear-gradient(145deg, rgba(20, 28, 54, 0.90), rgba(12, 18, 38, 0.96)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #f4f5ff !important;
+  font-weight: 500 !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+}
+html[data-theme="dark"] .provider-selector button:hover {
+  border-color: rgba(105, 220, 242, 0.6) !important;
+  box-shadow: 0 4px 18px rgba(105, 220, 242, 0.2) !important;
+}
+html[data-theme="dark"] .provider-selector button small {
+  color: #a5b0cb !important;
+}
+html[data-theme="dark"] .provider-selector button[aria-pressed="true"] {
+  background: linear-gradient(145deg, rgba(32, 48, 92, 0.98), rgba(18, 28, 60, 0.98)) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(105, 220, 242, 0.35) !important;
+}
+html[data-theme="dark"] .provider-selector button[aria-pressed="true"] small {
+  color: #69dcf2 !important;
+  font-weight: 600 !important;
+}
+
+/* Payment Checkout & Form Fields */
+html[data-theme="dark"] .checkout-card {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.95), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7) !important;
+  border-radius: 16px !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] .checkout-mode {
+  color: #69dcf2 !important;
+  background: rgba(105, 220, 242, 0.12) !important;
+  border: 1px solid rgba(105, 220, 242, 0.4) !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .checkout-card h2 {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .checkout-card > p {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .checkout-total {
+  border-block-color: rgba(169, 158, 255, 0.2) !important;
+}
+html[data-theme="dark"] .checkout-total > span {
+  color: #c4c9db !important;
+}
+html[data-theme="dark"] .checkout-total > strong {
+  color: #ffffff !important;
+  text-shadow: 0 0 20px rgba(105, 220, 242, 0.35) !important;
+}
+html[data-theme="dark"] .checkout-field label {
+  color: #f4f5ff !important;
+  font-weight: 500 !important;
+}
+html[data-theme="dark"] .checkout-field input,
+html[data-theme="dark"] .checkout-field select,
+html[data-theme="dark"] .contact-form select,
+html[data-theme="dark"] .account-connect input,
+html[data-theme="dark"] .account-connect select,
+html[data-theme="dark"] .currency-selector select {
+  background: rgba(12, 17, 34, 0.96) !important;
+  border: 1px solid rgba(169, 158, 255, 0.32) !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .checkout-field input:focus,
+html[data-theme="dark"] .contact-form select:focus,
+html[data-theme="dark"] .account-connect input:focus,
+html[data-theme="dark"] .account-connect select:focus {
+  border-color: #69dcf2 !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(105, 220, 242, 0.22) !important;
+}
+html[data-theme="dark"] .donation-presets button {
+  background: rgba(18, 26, 50, 0.88) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #f4f5ff !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .donation-presets button[aria-pressed="true"] {
+  background: rgba(105, 220, 242, 0.2) !important;
+  border-color: #69dcf2 !important;
+  color: #69dcf2 !important;
+  box-shadow: 0 0 16px rgba(105, 220, 242, 0.3) !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .payment-purpose-nav a {
+  background: rgba(16, 22, 42, 0.85) !important;
+  border: 1px solid rgba(169, 158, 255, 0.25) !important;
+  color: #c4c9db !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .payment-purpose-nav a:hover {
+  border-color: rgba(105, 220, 242, 0.6) !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .payment-purpose-nav a[aria-current="page"] {
+  background: linear-gradient(135deg, rgba(32, 46, 88, 0.95), rgba(18, 28, 56, 0.98)) !important;
+  border-color: #69dcf2 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(105, 220, 242, 0.3) !important;
+  font-weight: 600 !important;
+}
+html[data-theme="dark"] .checkout-button.button-gold {
+  background: linear-gradient(135deg, #f0c978, #d4a74e) !important;
+  color: #0c0f18 !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 4px 18px rgba(240, 201, 120, 0.25) !important;
+}
+html[data-theme="dark"] .checkout-button.button-gold:hover {
+  background: linear-gradient(135deg, #fce09a, #e2b75e) !important;
+  box-shadow: 0 0 24px rgba(240, 201, 120, 0.45) !important;
+}
+
+/* Universal Obsidian Glass for Account & Secondary Boxes */
+html[data-theme="dark"] :is(
+  .account-membership,
+  .account-empty,
+  .account-records article,
+  .account-connect,
+  .membership-card,
+  .membership-paused,
+  .preorder-form,
+  .preorder-reservation,
+  .hero-work-compact,
+  .payment-path,
+  .payment-path-contribution,
+  .pricing-teaser,
+  .service-price-card,
+  .contact-direct-links a
+) {
+  background: linear-gradient(150deg, rgba(18, 24, 46, 0.94), rgba(11, 17, 32, 0.98)) !important;
+  border: 1px solid rgba(169, 158, 255, 0.28) !important;
+  color: #d1d5e5 !important;
+}
+html[data-theme="dark"] :is(
+  .account-membership,
+  .account-empty,
+  .account-records article,
+  .account-connect,
+  .membership-card,
+  .preorder-form,
+  .preorder-reservation,
+  .hero-work-compact,
+  .payment-path,
+  .service-price-card
+) :is(h1, h2, h3, h4, strong, b) {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] :is(
+  .account-membership,
+  .account-empty,
+  .account-records article,
+  .account-connect,
+  .membership-card,
+  .preorder-form,
+  .preorder-reservation,
+  .hero-work-compact,
+  .payment-path,
+  .service-price-card
+) :is(p, li, span) {
+  color: #c4c9db !important;
+}
