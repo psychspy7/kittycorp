@@ -7,15 +7,6 @@ const DEFAULT_ACTIVE = 12;
 const DEFAULT_TOTAL = 10000;
 
 function formatTotalVisitors(val: number): string {
-  if (val >= 1_000_000) {
-    return `${(val / 1_000_000).toFixed(1).replace(/\.0$/, "")}M+`;
-  }
-  if (val >= 10_000) {
-    return `${Math.floor(val / 1_000)}K+`;
-  }
-  if (val >= 1_000) {
-    return `${(val / 1_000).toFixed(1).replace(/\.0$/, "")}K+`;
-  }
   return val.toLocaleString("en-IN");
 }
 
@@ -67,8 +58,8 @@ export function LiveVisitorCounter() {
       className="live-visitor-counter"
       role="status"
       aria-live="polite"
-      aria-label={`${active} visitors active now, ${total.toLocaleString("en-IN")} total visitors`}
-      title={`${active} active online • ${total.toLocaleString("en-IN")} total recorded visits`}
+      aria-label={`${active} visitors active now, ${formattedTotal} total visitors`}
+      title={`${active} active online • ${formattedTotal} total recorded visits`}
     >
       <span className="live-indicator-dot" aria-hidden="true">
         <span className="live-indicator-ping" />
