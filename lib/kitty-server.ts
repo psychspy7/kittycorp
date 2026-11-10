@@ -187,7 +187,10 @@ export function privateJson(data: unknown) {
     headers: { "Cache-Control": "private, no-store" },
   });
 }
-export async function fingerprint(request: Request) {
+export async function fingerprint(
+  request: Request,
+  clientIdentifier?: string,
+): Promise<string> {
   const token =
     process.env.FEEDBACK_GATEWAY_TOKEN?.trim() ||
     "default-gateway-fingerprint-salt";
@@ -207,10 +210,12 @@ export async function fingerprint(request: Request) {
     request.headers.get("x-real-ip") ||
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     "unknown";
+  const userAgent = request.headers.get("user-agent") || "";
+  const rawPayload = `${ip}|${userAgent}|${clientIdentifier?.trim() || ""}`;
   const digest = await crypto.subtle.sign(
     "HMAC",
     key,
-    encode(ip),
+    encode(rawPayload),
   );
   return Array.from(new Uint8Array(digest))
     .map((b) => b.toString(16).padStart(2, "0"))

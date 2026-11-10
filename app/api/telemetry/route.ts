@@ -15,6 +15,7 @@ export const runtime = "nodejs";
 
 const telemetrySchema = z.object({
   sessionId: z.string().trim().min(1).max(128),
+  deviceId: z.string().trim().min(1).max(128).optional(),
   path: z.string().trim().min(1).max(300).refine(
     (value) => value.startsWith("/") && !value.includes("?") && !value.includes("#"),
     "Invalid page path.",
@@ -23,11 +24,6 @@ const telemetrySchema = z.object({
 }).strict();
 
 const automatedClient = /bot|crawler|spider|slurp|headless|preview|monitor|uptime|curl|wget|python-requests|node-fetch|axios/i;
-
-function getBaselineActiveFloor(): number {
-  const hour = new Date().getUTCHours();
-  return Math.round(9 + 3 * Math.sin(((hour - 4) / 24) * 2 * Math.PI));
-}
 
 export async function POST(request: Request) {
   try {
@@ -43,7 +39,7 @@ export async function POST(request: Request) {
       throw new HttpError("This page is not counted as a public view.", 400);
     }
 
-    const visitorFingerprint = await fingerprint(request);
+    const visitorFingerprint = await fingerprint(request, value.deviceId);
 
     // Rate limit: 60 requests per minute per fingerprint
     enforceRateLimit(visitorFingerprint, 60, 60_000);
@@ -64,7 +60,7 @@ export async function POST(request: Request) {
     const rawActive = Number((data as { active?: number })?.active ?? 0);
     const rawTotal = Number((data as { total?: number })?.total ?? 10000);
 
-    const active = Math.max(rawActive, getBaselineActiveFloor());
+    const active = Math.max(1, rawActive);
     const total = Math.max(rawTotal, 10000);
 
     return Response.json(
@@ -94,7 +90,7 @@ export async function GET(request: Request) {
     const rawActive = Number((data as { active?: number })?.active ?? 0);
     const rawTotal = Number((data as { total?: number })?.total ?? 10000);
 
-    const active = Math.max(rawActive, getBaselineActiveFloor());
+    const active = rawActive;
     const total = Math.max(rawTotal, 10000);
 
     return Response.json(
