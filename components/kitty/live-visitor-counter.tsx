@@ -5,6 +5,23 @@ import { usePathname } from "next/navigation";
 
 const HEARTBEAT_INTERVAL_MS = 30_000; // 30-second heartbeat
 const SESSION_STORAGE_KEY = "kc_session_id";
+const DEVICE_STORAGE_KEY = "kc_device_id";
+
+function getOrCreateDeviceId(): string {
+  if (typeof window === "undefined") return "server-device";
+  try {
+    let did = window.localStorage.getItem(DEVICE_STORAGE_KEY);
+    if (!did || did.length < 10) {
+      did = typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : "kcd-" + Date.now() + "-" + Math.random().toString(36).substring(2, 9);
+      window.localStorage.setItem(DEVICE_STORAGE_KEY, did);
+    }
+    return did;
+  } catch {
+    return "kcd-anonymous";
+  }
+}
 
 function getOrCreateSessionId(): string {
   if (typeof window === "undefined") return "server-session";
@@ -27,9 +44,11 @@ export function LiveVisitorCounter() {
   const [active, setActive] = useState<number | null>(null);
   const [total, setTotal] = useState<number | null>(null);
   const sessionIdRef = useRef<string>("");
+  const deviceIdRef = useRef<string>("");
 
   useEffect(() => {
     sessionIdRef.current = getOrCreateSessionId();
+    deviceIdRef.current = getOrCreateDeviceId();
   }, []);
 
   useEffect(() => {
@@ -41,6 +60,9 @@ export function LiveVisitorCounter() {
       if (!sessionIdRef.current) {
         sessionIdRef.current = getOrCreateSessionId();
       }
+      if (!deviceIdRef.current) {
+        deviceIdRef.current = getOrCreateDeviceId();
+      }
 
       try {
         const response = await fetch("/api/telemetry", {
@@ -50,6 +72,7 @@ export function LiveVisitorCounter() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             sessionId: sessionIdRef.current,
+            deviceId: deviceIdRef.current,
             path: pathname,
             heartbeat: isHeartbeat,
           }),
