@@ -1909,10 +1909,11 @@ html[data-theme="dark"] :is(
   border-top: 1px solid rgba(169, 158, 255, 0.18);
 }
 
-.live-visitor-counter {
+.live-visitor-counter,
+.kc-telemetry-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: linear-gradient(145deg, rgba(16, 22, 44, 0.92), rgba(10, 14, 28, 0.96));
   border: 1px solid rgba(105, 220, 242, 0.3);
   border-radius: 99px;
@@ -1922,15 +1923,18 @@ html[data-theme="dark"] :is(
   box-shadow: 0 4px 18px rgba(2, 6, 23, 0.5), 0 0 14px rgba(105, 220, 242, 0.15);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  user-select: none;
 }
 
-.live-visitor-counter:hover {
+.live-visitor-counter:hover,
+.kc-telemetry-badge:hover {
   border-color: #69dcf2;
   box-shadow: 0 4px 20px rgba(2, 6, 23, 0.6), 0 0 22px rgba(105, 220, 242, 0.3);
   color: #ffffff;
 }
 
-.live-indicator-dot {
+.live-indicator-dot,
+.kc-pulse-dot {
   position: relative;
   display: inline-block;
   width: 8px;
@@ -1941,7 +1945,9 @@ html[data-theme="dark"] :is(
   flex-shrink: 0;
 }
 
-.live-indicator-ping {
+.live-indicator-ping,
+.kc-pulse-dot::after {
+  content: "";
   position: absolute;
   inset: -4px;
   border-radius: 50%;
@@ -1962,7 +1968,8 @@ html[data-theme="dark"] :is(
   white-space: nowrap;
 }
 
-.live-counter-divider {
+.live-counter-divider,
+.kc-telemetry-sep {
   display: inline-block;
   color: rgba(169, 158, 255, 0.4);
   font-size: 11px;
@@ -1970,12 +1977,19 @@ html[data-theme="dark"] :is(
   user-select: none;
 }
 
-.live-counter-number {
+.live-counter-number,
+#kc-active-count,
+#kc-total-count {
   color: #ffffff;
   font-weight: 700;
   letter-spacing: -0.3px;
   font-variant-numeric: tabular-nums;
   text-shadow: 0 0 12px rgba(105, 220, 242, 0.4);
+}
+
+.kc-telemetry-label {
+  color: #c4c9db;
+  white-space: nowrap;
 }
 
 @media (max-width: 760px) {
