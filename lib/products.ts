@@ -9,16 +9,6 @@ export const productPages = {
       ["Your context, your choice", "We’re considering local processing and explicit user controls. These are design goals, not promises about an unreleased product."],
     ],
   },
-  sentinel: {
-    name: "KITTY Sentinel", label: "ROBOTICS & COMPUTER VISION", status: "PROTOTYPE V1", category: "Robotics", media: "Prototype photographs & test footage",
-    description: "An experimental autonomous robotics and computer-vision platform built to understand and interact with the physical world.",
-    intro: "Sentinel is our workbench for systems that see, move and respond. It’s an early prototype, with a lot of testing ahead. We’ll share what works and what needs another attempt.",
-    principles: [
-      ["Understanding a scene", "Computer vision is one part of the experiment: how a system notices objects, distances and changes around it."],
-      ["Useful autonomy", "We’re interested in small, bounded tasks before broad claims. Predictable behavior matters more than an impressive demo."],
-      ["Learning in the physical world", "Real tests have constraints that software alone doesn’t reveal. Our build log will make room for those lessons."],
-    ],
-  },
   "lisa-ai": {
     name: "LISA AI", label: "INTERACTIVE AI", status: "UPCOMING · EARLY EXPLORATION", category: "AI", media: "On-screen interaction demos",
     description: "An on-screen interactive anime AI. A more expressive way to spend time with personal software.",
