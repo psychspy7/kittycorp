@@ -55,7 +55,7 @@ const readLaunches = publicContentCache("launches", PUBLIC_CONTENT_TAGS.launches
 export const publishedLaunches = cache(readLaunches);
 // Download authorization must see an unpublished release immediately.
 export const publishedLaunch = cache(async (slug: string): Promise<Launch | null> => {
-  if (/suvid/i.test(slug)) return null;
+  if (/(suvid|sentinel)/i.test(slug)) return null;
   const { data, error } = await database().from("kitty_website_launches").select("*").abortSignal(AbortSignal.timeout(5000)).eq("slug", slug).eq("published", true).lte("published_at", new Date().toISOString()).maybeSingle();
   if (error) throw new HttpError("This launch is temporarily unavailable.", 503);
   return data as Launch | null;
