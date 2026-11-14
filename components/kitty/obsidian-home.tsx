@@ -11,7 +11,6 @@ import {
   Radio,
   Smartphone,
   Sparkles,
-  Sun,
   Workflow,
 } from "lucide-react";
 import type { SitePageContent } from "@/lib/site-page-content";
@@ -47,7 +46,7 @@ const labs = [
     icon: Bot,
     description:
       "A personal AI companion direction focused on natural interaction, useful assistance and a more tangible relationship with software.",
-    detail: "Voice-first companion · assisted availability",
+    detail: "Voice-first interaction · early-stage development",
     tone: "lisa",
   },
 ];
