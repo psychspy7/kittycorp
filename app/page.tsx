@@ -43,6 +43,7 @@ export default async function Home() {
     email:CONTACT_EMAIL,
     founder:{"@type":"Person",name:"Virat Anand",jobTitle:"Founder & CEO"},
     knowsAbout:["Business websites","Custom software development","AI workflow automation","AI agents","Robotics research","Agricultural robotics","Intelligent systems"],
+    subOrganization:[{"@type":"Organization",name:"CALVENTO",url:"https://calvento-vs-projects-0c743cd3.vercel.app/","description":"A contemporary fashion, accessories and lifestyle commerce brand operated as a KITTY CORP enterprise."}],
     sameAs,
   };
   return <div className="company-theme gemini-template"><ElementalBackground/><SiteHeader/><SubscriptionModal/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><ObsidianHero copy={copy}/><ObsidianServices copy={copy}/><ObsidianLab/><ObsidianEcosystem/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/><BottomSupport/></main><SiteFooter/></div>;
