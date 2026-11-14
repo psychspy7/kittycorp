@@ -158,7 +158,6 @@
 
 @media(max-width:1050px) {
   .company-theme .obsidian-hero { grid-template-columns:minmax(0,1fr) minmax(300px,.8fr); gap:35px; }
-  .obsidian-service-grid,.obsidian-ecosystem-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .obsidian-lab-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .obsidian-lab-card:last-child { grid-column:1/-1; }
   .obsidian-lab-card:last-child .obsidian-lab-art { height:210px; }
@@ -170,35 +169,24 @@
   .obsidian-actions { gap:10px; margin-top:25px; }
   .obsidian-button { min-height:49px; padding-inline:15px; font-size:12px; }
   .obsidian-proofline { margin-top:28px; font-size:8px; }
-  .obsidian-hero-console { width:100%; max-width:480px; margin-inline:auto; }
-  .console-orbit { max-width:310px; }
   .obsidian-scroll-note { bottom:25px; font-size:8px; }
   .company-theme .obsidian-section-heading { display:block; margin-bottom:28px; }
   .company-theme .obsidian-section-heading h2 { font-size:clamp(39px,10vw,58px); }
   .obsidian-section-heading>p { margin-top:17px; font-size:13px; }
   .company-theme .obsidian-services,.company-theme .obsidian-lab,.company-theme .obsidian-ecosystem { padding-top:66px; padding-bottom:66px; }
-  .obsidian-service-grid,.obsidian-ecosystem-grid { grid-template-columns:1fr 1fr; gap:9px; }
   .obsidian-service-card { min-height:255px; padding:16px; }
   .obsidian-service-card h3 { font-size:17px; }
-  .obsidian-service-card p,.obsidian-ecosystem-card p { font-size:11px; }
   .obsidian-lab-grid { grid-template-columns:1fr; gap:12px; }
   .obsidian-lab-card:last-child { grid-column:auto; }
   .obsidian-lab-card:last-child .obsidian-lab-art { height:225px; }
   .obsidian-lab-art { height:225px; }
   .obsidian-lab-copy { padding:20px; }
   .obsidian-lab-copy p { min-height:0; }
-  .obsidian-ecosystem-card { min-height:235px; padding:16px; }
-  .obsidian-ecosystem-card h3 { font-size:18px; }
   .obsidian-services-foot,.obsidian-lab-foot { align-items:flex-start; flex-direction:column; gap:10px; font-size:8px; }
 }
 @media(max-width:390px) {
-  .obsidian-service-grid,.obsidian-ecosystem-grid { grid-template-columns:1fr; }
-  .obsidian-service-card,.obsidian-ecosystem-card { min-height:210px; }
-  .console-readouts strong { font-size:11px; }
 }
 @media(prefers-reduced-motion:reduce) {
-  .obsidian-button,.obsidian-service-card,.obsidian-ecosystem-card { transition:none; }
-  .obsidian-button:hover,.obsidian-service-card:hover,.obsidian-ecosystem-card:hover { transform:none; }
 }
 
 @media(max-width:1050px) {
