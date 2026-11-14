@@ -28,6 +28,7 @@ import "./system-theme.css";
 import "../src/shaders/threeui.css";
 import "./ui-refresh.css";
 import "./gemini-home.css";
+import "./obsidian-home.css";
 
 const shareTitle = "KITTY CORP | Independent Technology Company";
 const shareDescription =
