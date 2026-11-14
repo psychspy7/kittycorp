@@ -9,7 +9,7 @@ import { FOUNDER_LINKEDIN, SUPPORT_EMAIL } from "@/lib/company-contact";
 import type { SitePageContent } from "@/lib/site-page-content";
 
 function ProductIcon({product}:{product:CompanyProduct}) {
-  const Icon=product.slug==="sentinel"?Bot:product.slug==="lisa-ai"?AudioLines:Cpu;
+  const Icon=product.slug==="lisa-ai"?AudioLines:Cpu;
   return product.icon_path?<Image unoptimized src={mediaHref(product.icon_path)} alt={`${product.name} icon`} width={56} height={56}/>:<Icon size={28} strokeWidth={1.4} aria-hidden="true"/>;
 }
 export function DeliverySupport() {

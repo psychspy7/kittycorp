@@ -33,7 +33,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "kitty-ai",
     "secretchat",
     "lisa-ai",
-    "sentinel",
     "play",
     "investors",
     "privacy",

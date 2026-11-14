@@ -2,52 +2,51 @@ import Link from "next/link";
 import {
   ArrowDownRight,
   ArrowUpRight,
-  Activity,
   Bot,
   Code2,
-  Cpu,
   Globe2,
   Leaf,
   Radio,
   Smartphone,
   Sparkles,
+  Sun,
   Workflow,
 } from "lucide-react";
 import type { SitePageContent } from "@/lib/site-page-content";
 
-const labs = [
+const projects = [
   {
     number: "01",
     name: "AGRIYAAN",
     discipline: "AGRICULTURAL ROBOTICS",
-    status: "RESEARCH CONCEPT",
+    status: "IN DEVELOPMENT",
     icon: Leaf,
     description:
-      "A field-oriented autonomous rover concept exploring crop monitoring, modular mobility and practical machine intelligence for agriculture.",
-    detail: "3D-printable platform · ESP32 control experiments",
+      "An autonomous field-robotics platform exploring crop monitoring, terrain mobility and practical AI for everyday agricultural work.",
+    detail: "Autonomous rover · crop intelligence",
     tone: "agri",
   },
   {
     number: "02",
-    name: "ULTRALINK",
-    discipline: "ACOUSTIC COMMUNICATION",
-    status: "PROTOCOL R&D",
-    icon: Radio,
+    name: "URJAYAAN",
+    discipline: "SOLAR & ENERGY INTELLIGENCE",
+    status: "CONCEPT DEVELOPMENT",
+    icon: Sun,
     description:
-      "An experimental near-ultrasonic acoustic communication protocol investigating short-range data transfer through sound.",
-    detail: "17–19 kHz research band · experimental",
-    tone: "signal",
+      "An intelligent solar-energy direction focused on monitoring, smarter utilisation and extending the useful life of solar infrastructure.",
+    detail: "Solar monitoring · energy optimisation",
+    tone: "urja",
   },
   {
     number: "03",
-    name: "LISA AI",
-    discipline: "PERSONAL INTELLIGENCE",
+    name: "KITTY BUDDY AI",
+    discipline: "POCKET AI COMPANION",
     status: "IN DEVELOPMENT",
     icon: Bot,
     description:
-      "A personal AI companion direction focused on natural interaction, useful assistance and a more tangible relationship with software.",
-    detail: "Voice-first interaction · early-stage development",
-    tone: "lisa",
+      "A compact, voice-first AI companion that brings useful intelligence beyond the phone through connected hardware and software.",
+    detail: "Pocket device · voice-first interaction",
+    tone: "buddy",
   },
 ];
 
@@ -55,29 +54,33 @@ const ecosystem = [
   {
     name: "Examify",
     type: "EDUCATION",
-    description: "A focused digital learning and exam-preparation experience.",
+    note: "COMPLETELY FREE FOR STUDENTS",
+    description: "A simple place for students to prepare, practise and keep learning.",
     href: "/products",
     icon: Sparkles,
   },
   {
-    name: "SecretChat",
-    type: "PRIVATE COMMUNICATION",
-    description: "A privacy-minded messaging product with a dedicated Android release.",
-    href: "/secretchat",
-    icon: Radio,
-  },
-  {
     name: "KITTY AI",
     type: "AI ASSISTANT",
-    description: "The intelligence layer behind a more useful, conversational KITTY experience.",
+    note: "INTELLIGENCE PLATFORM",
+    description: "A conversational AI assistant built to make everyday digital tasks easier.",
     href: "/kitty-ai",
     icon: Bot,
   },
   {
-    name: "Hydra",
-    type: "DEVELOPER TOOLING",
-    description: "An open-source developer utility maintained by the KITTY CORP ecosystem.",
-    href: "https://github.com/psychspy7/hydra",
+    name: "UltraLink",
+    type: "ACOUSTIC COMMUNICATION",
+    note: "PROTOCOL R&D",
+    description: "Experimental near-ultrasonic communication for short-range data transfer.",
+    href: "/research",
+    icon: Radio,
+  },
+  {
+    name: "SecretChat",
+    type: "PRIVATE COMMUNICATION",
+    note: "MESSAGING PRODUCT",
+    description: "A privacy-minded messaging experience with a dedicated Android release.",
+    href: "/secretchat",
     icon: Code2,
   },
 ];
@@ -86,7 +89,7 @@ export function ObsidianHero({ copy }: { copy: SitePageContent }) {
   return (
     <section className="obsidian-hero page-gutter" aria-labelledby="obsidian-title" data-element="lightning">
       <div className="obsidian-hero-copy">
-        <div className="obsidian-eyebrow"><span className="obsidian-pulse" /> {copy.heroEyebrow}</div>
+        <div className="obsidian-eyebrow"><span className="obsidian-pulse" /> INDEPENDENT TECHNOLOGY COMPANY · EST. 2026</div>
         <h1 id="obsidian-title">{copy.heroTitle}<br /><em>{copy.heroAccent}</em></h1>
         <p>{copy.heroDescription}</p>
         <div className="obsidian-actions">
@@ -94,31 +97,15 @@ export function ObsidianHero({ copy }: { copy: SitePageContent }) {
             Explore services <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
           <Link className="obsidian-button obsidian-button-quiet" href="#intelligence-robotics">
-            Enter the lab <ArrowDownRight size={16} aria-hidden="true" />
+            See what we&apos;re building <ArrowDownRight size={16} aria-hidden="true" />
           </Link>
         </div>
-        <div className="obsidian-proofline">
-          <span><i /> INDEPENDENT TECHNOLOGY COMPANY</span>
-          <span>BUILT IN INDIA · WORKING EVERYWHERE</span>
+        <div className="obsidian-hero-bottomline" aria-label="KITTY CORP focus areas">
+          <span><b>01</b> Software &amp; digital products</span>
+          <span><b>02</b> Applied AI</span>
+          <span><b>03</b> Robotics &amp; energy systems</span>
         </div>
       </div>
-      <aside className="obsidian-hero-console" aria-label="KITTY CORP studio overview">
-        <div className="console-topline"><span>KC / STUDIO OVERVIEW</span><span>EST. 2026</span></div>
-        <div className="console-orbit" aria-hidden="true">
-          <div className="console-orbit-ring console-orbit-ring-one" />
-          <div className="console-orbit-ring console-orbit-ring-two" />
-          <div className="console-core"><span>KC</span><small>INTELLIGENCE<br />IN MOTION</small></div>
-          <span className="console-node console-node-a" />
-          <span className="console-node console-node-b" />
-          <span className="console-node console-node-c" />
-        </div>
-        <div className="console-readouts">
-          <div><span>01 / DIGITAL</span><strong>Software &amp; systems</strong><small><Globe2 size={13} /> Client engineering</small></div>
-          <div><span>02 / RESEARCH</span><strong>AI &amp; robotics</strong><small><Cpu size={13} /> Experimental systems</small></div>
-        </div>
-        <div className="console-footer"><span><Activity size={13} /> STUDIO STATUS</span><strong>ACTIVE <i /></strong></div>
-      </aside>
-      <div className="obsidian-scroll-note" aria-hidden="true"><span>SCROLL TO EXPLORE</span><div /></div>
     </section>
   );
 }
@@ -154,11 +141,11 @@ export function ObsidianLab() {
   return (
     <section id="intelligence-robotics" className="obsidian-lab page-gutter" aria-labelledby="obsidian-lab-title" data-element="fire">
       <div className="obsidian-section-heading">
-        <div><span className="obsidian-label obsidian-label-blue">02 / INTELLIGENCE &amp; ROBOTICS</span><h2 id="obsidian-lab-title">Beyond the screen.<br /><em>Into the physical world.</em></h2></div>
-        <p>Our lab explores how intelligent software can move into devices, machines and environments. We publish the stage honestly: research, concept and prototype are not the same as a shipped product.</p>
+        <div><span className="obsidian-label obsidian-label-blue">02 / PRODUCTS IN DEVELOPMENT</span><h2 id="obsidian-lab-title">Ideas made<br /><em>to leave the screen.</em></h2></div>
+        <p>Three directions we&apos;re actively exploring across agriculture, energy and personal AI. Each project is shown at its current stage — no inflated launch claims.</p>
       </div>
       <div className="obsidian-lab-grid">
-        {labs.map(({ number, name, discipline, status, icon: Icon, description, detail, tone }) => (
+        {projects.map(({ number, name, discipline, status, icon: Icon, description, detail, tone }) => (
           <article className={"obsidian-lab-card " + tone} key={name}>
             <div className="obsidian-lab-art" aria-hidden="true">
               <div className="lab-art-grid" />
@@ -173,12 +160,12 @@ export function ObsidianLab() {
               <h3>{name}</h3>
               <p>{description}</p>
               <span className="obsidian-lab-detail">{detail}</span>
-              <Link href="/research">Explore research <ArrowUpRight size={15} /></Link>
+              <Link href="/research">Project details <ArrowUpRight size={15} /></Link>
             </div>
           </article>
         ))}
       </div>
-      <div className="obsidian-lab-foot"><span>RESEARCH NOTES · ITERATION · VALIDATION</span><Link href="/research">Visit Intelligence &amp; Labs <ArrowUpRight size={15} /></Link></div>
+      <div className="obsidian-lab-foot"><span>BUILDING · TESTING · LEARNING</span><Link href="/research">Explore our research <ArrowUpRight size={15} /></Link></div>
     </section>
   );
 }
@@ -187,17 +174,20 @@ export function ObsidianEcosystem() {
   return (
     <section id="ecosystem" className="obsidian-ecosystem page-gutter" aria-labelledby="obsidian-ecosystem-title" data-element="water">
       <div className="obsidian-section-heading">
-        <div><span className="obsidian-label">03 / ECOSYSTEM</span><h2 id="obsidian-ecosystem-title">Made in the<br /><em>KITTY ecosystem.</em></h2></div>
-        <p>Products and tools shaped by the same curiosity: make technology more useful, more accessible and more thoughtfully built.</p>
+        <div><span className="obsidian-label">03 / DIGITAL ECOSYSTEM</span><h2 id="obsidian-ecosystem-title">Useful tools.<br /><em>Open to everyone.</em></h2></div>
+        <p>A compact collection of products and experiments from across the KITTY ecosystem.</p>
       </div>
-      <div className="obsidian-ecosystem-grid">
-        {ecosystem.map(({ name, type, description, href, icon: Icon }) => (
-          <Link className="obsidian-ecosystem-card" href={href} key={name} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>
-            <div className="obsidian-ecosystem-icon"><Icon size={20} strokeWidth={1.5} /></div>
-            <span className="obsidian-card-meta">{type}</span>
-            <h3>{name}</h3>
-            <p>{description}</p>
-            <span className="obsidian-ecosystem-link">Explore <ArrowUpRight size={15} /></span>
+      <div className="obsidian-ecosystem-list">
+        {ecosystem.map(({ name, type, note, description, href, icon: Icon }) => (
+          <Link className="obsidian-ecosystem-row" href={href} key={name}>
+            <span className="obsidian-ecosystem-icon"><Icon size={19} strokeWidth={1.6} /></span>
+            <span className="obsidian-ecosystem-main">
+              <span className="obsidian-card-meta">{type}</span>
+              <strong>{name}</strong>
+            </span>
+            <span className="obsidian-ecosystem-description">{description}</span>
+            <span className="obsidian-ecosystem-note">{note}</span>
+            <ArrowUpRight className="obsidian-ecosystem-arrow" size={17} />
           </Link>
         ))}
       </div>
