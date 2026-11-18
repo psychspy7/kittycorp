@@ -15,6 +15,14 @@ export const websiteOrigin=()=>canonicalSiteUrl(process.env.SITE_URL||`https://$
 export function publicSiteHref(value: string) {
   try {
     const url = new URL(value);
+    if (url.hostname.toLowerCase().replace(/^www\\./, "") === "instagram.com") {
+      url.protocol = "https:";
+      url.hostname = "www.instagram.com";
+      url.pathname = "/kittycorp.ai/";
+      url.search = "";
+      url.hash = "";
+      return url.toString();
+    }
     if (url.hostname.toLowerCase() !== "kittycorp.vercel.app") return value;
     url.hostname = canonicalHost;
     return url.toString();
