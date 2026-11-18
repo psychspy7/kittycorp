@@ -18,7 +18,7 @@ export default async function PlayPage() {
   }
   const linkedin = profile(settings.socials.linkedin, ["linkedin.com"], FOUNDER_LINKEDIN);
   const socials = [
-    { id: "instagram" as const, label: "Instagram", href: profile(settings.socials.instagram, ["instagram.com"], "https://www.instagram.com/kittycorpHQ/") },
+    { id: "instagram" as const, label: "Instagram", href: profile(settings.socials.instagram, ["instagram.com"], "https://www.instagram.com/kittycorp.ai/") },
     { id: "x" as const, label: "X", href: profile(settings.socials.x, ["x.com", "twitter.com"], "https://x.com/KittyCorphq") },
     { id: "linkedin" as const, label: isFounderLinkedIn(linkedin) ? "Virat Anand on LinkedIn" : "LinkedIn", href: linkedin },
   ];
