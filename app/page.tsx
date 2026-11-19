@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { RoboticsHero } from "@/components/kitty/robotics-hero";
 import { VentureProjects, FounderStorySection } from "@/components/kitty/venture-sections";
+import { BrandRevealLoader } from "@/components/kitty/brand-reveal-loader";
 import { Team } from "@/components/kitty/home-sections";
 import { BusinessEnquiry } from "@/components/kitty/business-conversion";
 import { companyTeam, companySettings } from "@/lib/company-server";
@@ -117,7 +118,8 @@ export default async function Home() {
   };
 
   return (
-    <div className="company-theme gemini-template bg-[#070911] text-[#f4f3f0]">
+    <div className="company-theme gemini-template bg-[#050506] text-[#f8f8f9]">
+      <BrandRevealLoader />
       <SiteHeader />
       <main id="main" className="company-home">
         <script

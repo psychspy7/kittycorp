@@ -8,26 +8,45 @@
 
 
 /* =========================================================================
-   Enterprise Obsidian Glassmorphism for Contact in Dark Mode
+   Obsidian Luxury Dark Palette for Contact
    ========================================================================= */
 html[data-theme="dark"] .contact-direct-links a {
-  background: linear-gradient(145deg, rgba(20, 28, 52, 0.88), rgba(12, 18, 36, 0.94)) !important;
-  border: 1px solid rgba(169, 158, 255, 0.25) !important;
-  color: #f4f5ff !important;
+  background: #0c0d10 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f8f8f9 !important;
+  border-radius: 12px !important;
+  transition: all 0.25s ease !important;
 }
 html[data-theme="dark"] .contact-direct-links a:hover {
-  border-color: #69dcf2 !important;
-  background: linear-gradient(145deg, rgba(30, 42, 80, 0.95), rgba(18, 26, 52, 0.98)) !important;
-  box-shadow: 0 0 16px rgba(105, 220, 242, 0.25) !important;
+  border-color: #c5a880 !important;
+  background: #131418 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
 }
 html[data-theme="dark"] .contact-direct-links small {
-  color: #a5b0cb !important;
+  color: #a1a1aa !important;
 }
-html[data-theme="dark"] .contact-form select {
-  background: rgba(12, 17, 32, 0.95) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(169, 158, 255, 0.3) !important;
+html[data-theme="dark"] .contact-form,
+html[data-theme="dark"] .contact-success {
+  background: #0c0d10 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
+  color: #f8f8f9 !important;
+}
+html[data-theme="dark"] .contact-form select,
+html[data-theme="dark"] .contact-form input,
+html[data-theme="dark"] .contact-form textarea {
+  background: #050506 !important;
+  color: #f8f8f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+}
+html[data-theme="dark"] .contact-form select:focus,
+html[data-theme="dark"] .contact-form input:focus,
+html[data-theme="dark"] .contact-form textarea:focus {
+  border-color: #c5a880 !important;
+  outline: none !important;
 }
 html[data-theme="dark"] .contact-form .contact-review-note {
-  color: #a5b0cb !important;
+  color: #a1a1aa !important;
 }

@@ -36,6 +36,7 @@ export function SiteHeader() {
     // adapt only its fixed demo copy and button destinations for this site.
     const brand = root.querySelector<HTMLElement>(".atd-modern__word");
     brand?.replaceChildren("KITTY CORP");
+    brand?.classList.add("tracking-[0.25em]", "uppercase");
     const brandLink = root.querySelector<HTMLAnchorElement>(".atd-modern__brand");
     brandLink?.setAttribute("href", "/");
     brandLink?.setAttribute("aria-label", "KITTY CORP home");

@@ -79,19 +79,19 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
     const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 100);
     camera.position.set(0, 0.45, 7.2);
 
-    // Lighting
-    const keyLight = new THREE.DirectionalLight(0xf0f9ff, 1.9);
+    // Lighting - Warm Metallic & Obsidian Luxury Specular
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
     keyLight.position.set(4, 6, 5);
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x00e5ff, 2.6);
+    const rimLight = new THREE.DirectionalLight(0xe8e5df, 1.4);
     rimLight.position.set(-5, 4, -4);
     scene.add(rimLight);
 
-    const ambientLight = new THREE.AmbientLight(0x080c18, 0.55);
+    const ambientLight = new THREE.AmbientLight(0x0a0c10, 0.65);
     scene.add(ambientLight);
 
-    const coreLight = new THREE.PointLight(0x00e5ff, 2.4, 4.5);
+    const coreLight = new THREE.PointLight(0xc5a880, 1.8, 4.5);
     coreLight.position.set(0, 0.68, 0.2);
     scene.add(coreLight);
 
@@ -122,17 +122,18 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
       metalness: 0.92,
     });
     const coreGlowMat = new THREE.MeshStandardMaterial({
-      color: 0x00e5ff,
-      emissive: 0x00e5ff,
-      emissiveIntensity: 2.8,
-      roughness: 0.1,
+      color: 0xc5a880,
+      emissive: 0xc5a880,
+      emissiveIntensity: 1.5,
+      roughness: 0.25,
+      metalness: 0.85,
     });
     const axisLineMat = new THREE.LineDashedMaterial({
-      color: 0x38bdf8,
+      color: 0xa1a1aa,
       dashSize: 0.12,
       gapSize: 0.06,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.25,
     });
 
     // Root Group for Entire Robot
@@ -396,7 +397,7 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
   }, [isReducedMotion, webGLFailed]);
 
   return (
-    <section ref={containerRef} id="hero" aria-label="KITTY CORP AI Robotics Showcase" className="relative w-full min-h-[175vh] md:min-h-[220vh] bg-[#070911] text-[#f4f3f0] selection:bg-[#d5ba7d] selection:text-[#070911]">
+    <section ref={containerRef} id="hero" aria-label="KITTY CORP AI Robotics Showcase" className="relative w-full min-h-[175vh] md:min-h-[220vh] bg-[#050506] text-[#f8f8f9] selection:bg-[#c5a880] selection:text-[#050506]">
       {/* Sticky Fullscreen Viewport Layer */}
       <div className="sticky top-0 h-[100svh] w-full overflow-hidden flex flex-col justify-between">
         
@@ -414,32 +415,32 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
         <div className="relative z-10 w-full h-full flex flex-col justify-between px-6 sm:px-10 lg:px-14 pt-[100px] pb-[32px] pointer-events-none">
           {/* Hero Headline & Intro */}
           <div className="max-w-[680px] pointer-events-auto mt-6 md:mt-12">
-            <div className="flex items-center gap-3 text-[11px] font-mono tracking-[0.25em] text-[#94a3b8] uppercase mb-4">
-              <span>AI ROBOTICS</span>
-              <span className="text-[#38bdf8]">•</span>
+            <div className="flex items-center gap-3 text-[11px] font-mono tracking-[0.25em] text-[#a1a1aa] uppercase mb-4">
+              <span>INTELLIGENCE &amp; ROBOTICS</span>
+              <span className="text-[#c5a880]">•</span>
               <span>RESEARCH</span>
-              <span className="text-[#38bdf8]">•</span>
+              <span className="text-[#c5a880]">•</span>
               <span>INNOVATION</span>
-              <div className="h-[1px] w-16 sm:w-24 bg-white/20 hidden sm:block ml-2" />
+              <div className="h-[1px] w-16 sm:w-24 bg-white/[0.08] hidden sm:block ml-2" />
             </div>
 
-            <h1 className="text-[clamp(44px,6.5vw,96px)] font-serif font-normal leading-[0.98] tracking-[-0.03em] mb-6 text-white">
+            <h1 className="text-[clamp(44px,6.5vw,96px)] font-[family-name:var(--font-display)] font-normal leading-[0.98] tracking-[-0.03em] mb-6 text-[#f8f8f9]">
               <span className="sr-only">INTELLIGENCE BEYOND BOUNDARIES</span>
               <span className="block font-normal">INTELLIGENCE</span>
-              <span className="block italic font-light text-zinc-100">BEYOND</span>
+              <span className="block italic font-light text-zinc-300">BEYOND</span>
               <span className="block font-normal">BOUNDARIES.</span>
             </h1>
 
-            <p className="text-[15px] sm:text-[17px] md:text-[18px] leading-[1.65] text-[#94a3b8] max-w-[520px] mb-8 font-light">
+            <p className="text-[15px] sm:text-[17px] md:text-[18px] leading-[1.65] text-[#a1a1aa] max-w-[520px] mb-8 font-light font-[family-name:var(--font-sans)]">
               {heroSubtitle}
             </p>
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 text-[14px] text-white transition-all backdrop-blur-md group shadow-[0_0_20px_rgba(255,255,255,0.05)]"
+                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/[0.12] hover:border-[#c5a880]/50 text-[14px] text-white transition-all backdrop-blur-md group shadow-[0_0_20px_rgba(0,0,0,0.5)]"
               >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#38bdf8]/20 transition-colors">
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#c5a880]/20 transition-colors">
                   <Play className="w-3.5 h-3.5 text-white fill-white ml-0.5" />
                 </div>
                 <span className="font-medium tracking-wide">Explore Our Vision ──→</span>
@@ -449,25 +450,25 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
                 href="https://demo.thekittycorp.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 text-[13px] text-[#94a3b8] hover:text-white hover:border-[#38bdf8]/40 transition-all bg-white/[0.02]"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/[0.1] text-[13px] text-[#a1a1aa] hover:text-white hover:border-[#c5a880]/40 transition-all bg-white/[0.02]"
               >
                 <span>Digital Studio</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#38bdf8]" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#c5a880]" />
               </a>
             </div>
           </div>
 
           {/* Bottom Telemetry & Scroll Cue */}
-          <div className="w-full flex items-center justify-between border-t border-white/10 pt-4 text-[11px] font-mono tracking-wider text-[#64748b] pointer-events-auto">
+          <div className="w-full flex items-center justify-between border-t border-white/[0.08] pt-4 text-[11px] font-mono tracking-wider text-zinc-500 pointer-events-auto">
             <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#c5a880] animate-pulse" />
               <span className="hidden sm:inline">ROBOTICS DIVISION — PROTOTYPE SEQUENCE 01</span>
               <span className="sm:hidden">UNIT-01 ACTIVE</span>
             </div>
 
-            <div className="flex items-center gap-2 text-[#94a3b8]">
+            <div className="flex items-center gap-2 text-[#a1a1aa]">
               <span>SCROLL TO ASSEMBLE</span>
-              <span className="text-[#38bdf8]">[{Math.round(scrollProgress * 100)}%]</span>
+              <span className="text-[#c5a880]">[{Math.round(scrollProgress * 100)}%]</span>
             </div>
           </div>
         </div>
@@ -477,59 +478,43 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
   );
 }
 
-// Technical HUD Blueprint Schematics Overlay
+// Technical Obsidian Telemetry Overlay
 function RoboticsHUD({ progress, isReducedMotion }: { progress: number; isReducedMotion: boolean }) {
   const percent = isReducedMotion ? 100 : Math.round(progress * 100);
   const status = isReducedMotion
-    ? "ASSEMBLED [REDUCED MOTION]"
+    ? "CALIBRATED [REDUCED MOTION]"
     : progress >= 0.95
-    ? "SYSTEM LOCKED · 100% ASSEMBLED"
+    ? "SYSTEM CONVERGED · 100% SPEC"
     : progress <= 0.05
-    ? "EXPLODED SCHEMATIC · READY"
+    ? "EXPANDED CHASSIS · STANDBY"
     : `CONVERGENCE IN PROGRESS [${percent}%]`;
 
   return (
     <div className="absolute inset-0 z-5 pointer-events-none p-6 md:p-10 flex flex-col justify-between">
-      {/* Top Right HUD Telemetry Box */}
-      <div className="self-end max-w-[280px] bg-[#070911]/70 backdrop-blur-md border border-[#38bdf8]/25 rounded-lg p-4 text-[#94a3b8] font-mono text-[10px] space-y-2 hidden md:block">
-        <div className="sr-only">KITTY CORP ROBOTICS DIVISION R&D — 2027</div>
-        <div className="flex items-center justify-between border-b border-white/10 pb-2">
-          <span className="text-[#38bdf8] font-semibold tracking-wider">KITTY CORP</span>
-          <span className="text-[#64748b]">R&amp;D — 2027</span>
+      {/* Top Right Obsidian Telemetry Box */}
+      <div className="self-end max-w-[280px] bg-[#0c0d10]/80 backdrop-blur-md border border-white/[0.08] rounded-xl p-4 text-[#a1a1aa] font-mono text-[10px] space-y-2 hidden md:block shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div className="sr-only">KITTY CORP ROBOTICS DIVISION R&amp;D — 2027</div>
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
+          <span className="text-[#f8f8f9] font-medium tracking-wider">KITTY CORP</span>
+          <span className="text-zinc-500">R&amp;D — 2027</span>
         </div>
-        <p className="text-[11px] text-white font-medium tracking-wider">ROBOTICS DIVISION</p>
-        
-        {/* Hazard striping bar */}
-        <div className="h-1.5 w-full bg-[repeating-linear-gradient(45deg,#38bdf8,#38bdf8_4px,#0f172a_4px,#0f172a_8px)] rounded-sm opacity-70" />
+        <p className="text-[11px] text-white font-medium tracking-wider">PHYSICAL INTELLIGENCE</p>
 
-        <div className="space-y-1 pt-1 text-[9px] text-[#64748b]">
+        <div className="space-y-1.5 pt-1 text-[9px] text-[#a1a1aa]">
           <div className="flex justify-between">
             <span>SEQUENCE:</span>
-            <span className="text-[#38bdf8]">{status}</span>
+            <span className="text-[#c5a880]">{status}</span>
           </div>
           <div className="flex justify-between">
-            <span>TEL-AXIS:</span>
-            <span>10 VECTORS CONVERGED</span>
+            <span>ACTUATORS:</span>
+            <span>10 VECTORS CALIBRATED</span>
           </div>
           <div className="flex justify-between">
-            <span>CORE REACTOR:</span>
-            <span className="text-[#38bdf8]">99.4 MW NOMINAL</span>
+            <span>POWER SYSTEM:</span>
+            <span className="text-[#c5a880]">TITANIUM CORE NOMINAL</span>
           </div>
         </div>
-
-        {/* Blueprint Wireframe Orthographic Graphic */}
-        <svg viewBox="0 0 160 80" className="w-full h-16 stroke-[#38bdf8]/40 fill-none mt-2">
-          <circle cx="80" cy="40" r="30" strokeDasharray="3 3" />
-          <path d="M50 40h60M80 12v56M60 26l40 28M60 54l40-28" strokeWidth="0.75" />
-          <rect x="72" y="32" width="16" height="16" stroke="#38bdf8" strokeWidth="1" />
-        </svg>
       </div>
-
-      {/* Engineering Corner Brackets */}
-      <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-[#38bdf8]/30" />
-      <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-[#38bdf8]/30" />
-      <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-[#38bdf8]/30" />
-      <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-[#38bdf8]/30" />
     </div>
   );
 }
@@ -538,16 +523,23 @@ function RoboticsHUD({ progress, isReducedMotion }: { progress: number; isReduce
 function RoboticsFallback() {
   return (
     <div className="absolute inset-0 z-0 flex items-center justify-center md:justify-end md:pr-24 overflow-hidden pointer-events-none">
-      <div className="relative w-[340px] md:w-[520px] aspect-square flex items-center justify-center">
-        {/* Glow halo */}
-        <div className="absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#38bdf8]/20 via-[#1e3a8a]/10 to-transparent blur-2xl" />
-        {/* Cybernetic Wireframe SVG Silhouette */}
-        <svg viewBox="0 0 400 400" className="w-full h-full stroke-[#38bdf8]/60 fill-none" strokeWidth="1.2">
-          <circle cx="200" cy="120" r="45" strokeDasharray="4 2" />
-          <path d="M175 105h50v30h-50z" fill="#030712" />
-          <path d="M200 165v40M160 190h80M140 205l-35 60M260 205l35 60M165 240h70v80h-70z" />
-          <circle cx="200" cy="225" r="18" stroke="#38bdf8" strokeWidth="2" />
-        </svg>
+      <div className="relative w-[340px] md:w-[500px] aspect-square flex items-center justify-center">
+        {/* Subtle warm champagne ambient aura */}
+        <div className="absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#c5a880]/10 via-transparent to-transparent blur-3xl" />
+        <div className="relative w-72 h-72 rounded-2xl border border-white/[0.08] bg-[#0c0d10]/60 backdrop-blur-md p-6 flex flex-col justify-between shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+          <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+            <span>UNIT-01</span>
+            <span className="text-[#c5a880]">STANDBY</span>
+          </div>
+          <div className="text-center py-8">
+            <span className="font-[family-name:var(--font-display)] text-2xl text-white tracking-widest block">KITTY CORP</span>
+            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1 block">PHYSICAL INTELLIGENCE ARCHITECTURE</span>
+          </div>
+          <div className="flex justify-between items-center text-[9px] font-mono text-zinc-500 border-t border-white/[0.08] pt-2">
+            <span>CHASSIS HARDWARE</span>
+            <span>VERIFIED</span>
+          </div>
+        </div>
       </div>
     </div>
   );
