@@ -40,18 +40,39 @@ export function CompanyHero({ copy }: { copy: SitePageContent }) {
         <Link className="company-button company-button-light" href="/projects">{copy.heroPrimaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
         <Link className="company-text-link" href="#divisions">{copy.heroSecondaryCta} <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
+      <div className="company-hero-demo-callout">
+        <a
+          className="hero-demo-card"
+          href="https://demo.thekittycorp.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-conversion="portfolio_view"
+          data-context="home"
+        >
+          <span className="hero-demo-badge">
+            <span className="hero-demo-dot" /> 18 LIVE DEMOS
+          </span>
+          <span className="hero-demo-title">
+            Explore 18 Live Website Demos <ArrowUpRight size={15} aria-hidden="true" />
+          </span>
+          <p className="hero-demo-copy">
+            Explore industry-specific website concepts and see what KITTY CORP can build for your business.
+          </p>
+        </a>
+      </div>
       {copy.heroNote && <p className="company-hero-note">{copy.heroNote}</p>}
     </div>
-    <aside className="company-hero-index" aria-label="KITTY CORP’s two divisions">
-      <div className="company-index-heading"><span className="company-kicker">ONE STUDIO · TWO DIVISIONS</span><span className="company-index-code">KC&nbsp; 01—02</span></div>
+    <aside className="company-hero-index" aria-label="KITTY CORP’s divisions and demo platform">
+      <div className="company-index-heading"><span className="company-kicker">ONE STUDIO · TWO DIVISIONS</span><span className="company-index-code">KC&nbsp; 01—03</span></div>
       <div className="company-hero-mark-stage">
         <span className="company-stage-coordinate">KITTY CORP · INDIA</span>
         <Image className="company-hero-mark" src="/brand/monogram-v1.webp" width={512} height={512} sizes="(max-width: 850px) 164px, 210px" loading="eager" alt="KITTY CORP blue and gold monogram" />
         <span className="company-stage-caption">INDEPENDENT TECHNOLOGY</span>
       </div>
-      <nav className="company-hero-index-links" aria-label="Explore our divisions">
+      <nav className="company-hero-index-links" aria-label="Explore our work and divisions">
         <a className="company-index-link" href="#digital-solutions"><span className="company-index-number">01</span><span className="company-index-link-copy"><strong>Digital Solutions</strong><small>Web · software · AI</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>
         <a className="company-index-link" href="#intelligence-robotics"><span className="company-index-number">02</span><span className="company-index-link-copy"><strong>Intelligence &amp; Robotics</strong><small>KITTY BUDDY · AGRIYAAN · URJAYAAN</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>
+        <a className="company-index-link company-index-demo-link" href="https://demo.thekittycorp.com/" target="_blank" rel="noopener noreferrer" data-conversion="portfolio_view" data-context="home"><span className="company-index-number">03</span><span className="company-index-link-copy"><strong>Live Demo Studio</strong><small>18 industry-tailored concepts</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>
       </nav>
       <div className="company-index-foot"><span>INDEPENDENT</span><span>BUILT IN INDIA</span></div>
     </aside>
