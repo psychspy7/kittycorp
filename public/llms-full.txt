@@ -1,70 +1,89 @@
 # KITTY CORP — Comprehensive Knowledge Base & Technical Context
 
 Official URL: https://thekittycorp.com
+Commercial Studio URL: https://demo.thekittycorp.com
 Headquarters: India
-Ownership: Independent Technology Studio
+Leadership: Virat Anand (Founder & Chief Technologist)
 
 ## Company Overview
-KITTY CORP is an independent technology company operating across two principal divisions:
-1. **01 Digital Solutions**: Full-stack web development, client applications, cloud infrastructure, and practical AI workflow automation.
-2. **02 Intelligence & Robotics**: Research and early prototyping in agricultural robotics (AGRIYAAN), intelligent clean-energy control systems (URJAYAAN), and companion robotics (KITTY BUDDY).
+KITTY CORP is an elite AI robotics venture exploring the future of physical-world intelligence. We research, design, and develop autonomous mechanical machines that bridge artificial intelligence with physical kinematics, real-world navigation, and planetary-scale operational challenges.
 
 ---
 
-## Products & Commercial Deliverables
+## Strategic Architecture
 
-### 1. KITTY One All-Access Membership
-- **Price**: $199 USD (one-time flagship package)
-- **Included Deliverables**:
-  - **1 Premium Custom Website**: Bespoke UI/UX, database integration, SEO architecture, high-conversion layouts.
-  - **1 Basic Responsive Website**: Fast deployment microsite or landing page.
-  - **KITTY AI Ecosystem Access**: Full access to intelligent tools and companion workflows.
-  - **Future Upgrades Included**: Continuous platform and version updates without additional license fees.
-  - **6 Months Free Maintenance**: Dedicated technical upkeep, security patch updates, performance tuning, and direct founder support.
-- **Access Flow**: Clients sign in via Google OAuth, choose KITTY One, complete secure payment through Razorpay/UPI/Cards, and have their active plan permanently tied to their customer account dashboard.
+### 1. Official Corporate Property (thekittycorp.com)
+The primary institutional domain dedicated exclusively to advanced AI robotics research, engineering concepts, membership, and founder narrative.
+- **Hero Experience**: Scroll-driven procedural 3D WebGL exploded assembly demonstrating a calibrated humanoid cybernetic system converging across 10 mechanical axes.
+- **R&D Projects**: Early concept presentations for Project 01 (AgriYaan) and Project 02 (Green Energy).
+- **Membership**: 1-Year Verified Metallic Membership providing private access to engineering briefings, whitepapers, and research progress.
+
+### 2. Commercial Digital Solutions Studio (demo.thekittycorp.com)
+Our dedicated commercial platform serving enterprises, startups, and institutions seeking premier digital engineering:
+- **Websites & Portals**: Custom high-conversion digital architectures and applications.
+- **Business Automation**: Algorithmic workflows, pipeline orchestration, and ERP integrations.
+- **Custom AI Solutions**: Domain-specific fine-tuned models, intelligent document processing, and autonomous agents.
+
+---
+
+## Core Research Projects
+
+### Project 01: AGRIYAAN
+- **Classification**: Autonomous Agricultural Field Robotics
+- **Badge**: Concept Exploration
+- **Mission**: AI for Smarter Agriculture.
+- **Technical Architecture**:
+  - Multi-spectral crop health assessment and computer vision diagnostics.
+  - High-torque all-terrain rocker-bogie chassis for rugged farmland traversal.
+  - Edge-compute neural inference for targeted weeding, variable-rate spraying, and harvest readiness detection.
+  - Solar-supplemented power architecture with autonomous base-station docking.
+
+### Project 02: GREEN ENERGY
+- **Classification**: Intelligent Clean Energy Automation
+- **Badge**: Concept Exploration
+- **Mission**: AI for a Sustainable Future.
+- **Technical Architecture**:
+  - Reinforcement learning for dynamic wind turbine pitch and yaw micro-adjustments.
+  - Computer vision and irradiance telemetry for high-precision dual-axis solar tracking.
+  - Predictive battery energy storage system (BESS) dispatch algorithms forecasting grid peak loads.
+  - Decentralized microgrid telemetry for resilient rural power distribution.
+
+---
+
+## 1-Year Verified Membership Architecture
+- **Purpose**: Community and patron support for independent AI robotics and clean energy research.
+- **Credentials**: Bespoke laser-etched matte dark metallic card featuring embedded NFC telemetry.
+- **Key Inclusions**:
+  - Verified physical and digital membership credentials.
+  - Invitations to private technical research briefings and architecture townhalls.
+  - Early access to engineering whitepapers, telemetry datasets, and CAD schematics.
+  - Direct quarterly updates from founder Virat Anand.
+- **Explicit Disclosures**:
+  - Membership is strictly non-equity and confers no company ownership, financial dividends, or investment returns.
+  - Voluntary technological research support model.
+  - Distinct from commercial digital services contracted through the commercial studio.
 - **URL**: https://thekittycorp.com/memberships
 
-### 2. EXAMIFY
-- **Status**: Live Production Website
-- **URL**: https://examify.thekittycorp.com
-- **Description**: Web application providing exam countdown timers, structured study blocks, and distraction-free focus environments for students preparing for competitive examinations.
+---
 
-### 3. KITTY AI
-- **Status**: Live Android App (v2.0.0, Android 8.0+)
-- **Description**: An empathetic, privacy-conscious conversational companion built to feel less like software and more like an authentic, supportive presence.
-- **Download**: Direct APK download available at https://thekittycorp.com/api/downloads/kitty-ai
-
-### 4. SecretChat
-- **Status**: Live Android App (v2.0.0, Android 7.0+)
-- **Description**: Encrypted, private-by-intention real-time communication platform with client-controlled rooms and ephemeral storage options.
-- **Download**: Direct APK download available at https://thekittycorp.com/api/downloads/secretchat
+## Founder Narrative
+KITTY CORP was founded by Virat Anand with a singular vision: to push intelligence beyond digital screens and into physical reality. From everyday human collaboration to rugged agricultural fields, renewable energy networks, and planetary frontiers, KITTY CORP approaches engineering with unapologetic ambition and relentless scientific curiosity.
 
 ---
 
-## Client Engagement & Engineering Process
-KITTY CORP follows a transparent four-stage delivery model:
-1. **Goal Discovery**: Rough initial brief submitted through the enquiry pipeline (https://thekittycorp.com/projects).
-2. **Scoping & Agreement**: Fixed scope, timeline, and quote agreed before any code is committed. Full advance includes a 2.5% discount; 50/50 milestone splits are supported.
-3. **Interactive Review**: Working staging previews deployed for client inspection and direct feedback.
-4. **Launch & Handover**: Production DNS routing, SSL provisioning, and agreed maintenance schedule.
-
----
-
-## Technical & Security Architecture
-- **Rendering & Core Web Vitals**: Interactive WebGL2 simulation running off-main-thread with asynchronous program compilation (`KHR_parallel_shader_compile`), caching DOM bounding boxes in the navigation controller to prevent layout thrashing (INP < 100ms, LCP < 2.0s).
-- **Security & Headers**:
-  - Content Security Policy (CSP) with strict source whitelisting for payment clearing and bot mitigation.
-  - HTTP Strict Transport Security (HSTS) with `max-age=63072000; includeSubDomains; preload`.
-  - Frame sandboxing with `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
-  - Token-bucket sliding-window rate limiting on all public form endpoints.
-- **Database & State**: Supabase backend with Row Level Security (RLS) and strict cryptographic HMAC visitor fingerprinting.
+## Technical & Security Infrastructure
+- **Framework**: Next.js 16 (App Router, Turbopack, React 19)
+- **3D Graphics Engine**: Three.js WebGL (procedural 10-subsystem kinematic model, ACESFilmic tonemapping, frame-rate independent exponential damping, zero external model latency).
+- **Database & State**: Supabase PostgreSQL with strict Row Level Security (RLS).
+- **Payment Clearing**: Razorpay with cryptographic HMAC SHA-256 signature verification.
+- **Security & Reliability**: Content Security Policy (CSP), strict HTTP Strict Transport Security (HSTS), Cloudflare Turnstile bot verification, and zero layout shift design.
 
 ---
 
 ## Contact & Corporate Information
-- **Support & Inquiries**: support@thekittycorp.com
-- **Founder & CEO**: Virat Anand (https://linkedin.com/in/virat-anand-928460442)
-- **Legal & Policies**:
-  - Privacy Policy: https://thekittycorp.com/privacy
-  - Terms of Service: https://thekittycorp.com/terms
-  - Refunds Policy: https://thekittycorp.com/refunds
+- **Corporate Inquiries**: contact@thekittycorp.com
+- **Founder & Chief Technologist**: Virat Anand
+- **Official Website**: https://thekittycorp.com
+- **Commercial Studio**: https://demo.thekittycorp.com
+- **Privacy Policy**: https://thekittycorp.com/privacy
+- **Terms of Service**: https://thekittycorp.com/terms

@@ -7,7 +7,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AnimatedTopDock } from "@/src/shaders/animated-top-dock/AnimatedTopDock";
-const navigation = [["Services", "/services"], ["Intelligence & Labs", "/research"], ["Ecosystem", "/products"], ["Products", "/products"], ["Company", "/company"], ["Contact", "/contact"]];
+const navigation = [
+  ["Home", "/"],
+  ["Research", "/research"],
+  ["Projects", "/projects"],
+  ["About", "/company"],
+  ["Membership", "/memberships"],
+  ["Contact", "/contact"],
+];
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
@@ -55,8 +62,8 @@ export function SiteHeader() {
       signIn.setAttribute("aria-label", signedIn ? "Open my account" : "Sign in with Google");
     }
     const cta = root.querySelector<HTMLButtonElement>(".atd-modern__cta");
-    cta?.querySelector("span")?.replaceChildren("Discuss a project");
-    cta?.setAttribute("aria-label", "Discuss a project with KITTY CORP");
+    cta?.querySelector("span")?.replaceChildren("Explore Our Digital Solutions ↗");
+    cta?.setAttribute("aria-label", "Explore Our Digital Solutions");
     cta?.setAttribute("data-conversion", "service_cta");
     cta?.setAttribute("data-context", "navigation");
 
@@ -83,7 +90,10 @@ export function SiteHeader() {
         router.push("/account");
         return;
       }
-      if (target.closest(".atd-modern__cta")) router.push("/projects");
+      if (target.closest(".atd-modern__cta")) {
+        window.open("https://demo.thekittycorp.com", "_blank", "noopener,noreferrer");
+        return;
+      }
     };
     root.addEventListener("click", onCommandClick, true);
     return () => root.removeEventListener("click", onCommandClick, true);
@@ -105,13 +115,13 @@ export function SiteHeader() {
       </div>
       {actionTarget && createPortal(<>
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild><button className="kitty-mobile-menu" aria-label="Open navigation"><Menu size={20} /></button></DialogTrigger>
+          <DialogTrigger asChild><button className="kitty-mobile-menu md:hidden" aria-label="Open navigation"><Menu size={20} /></button></DialogTrigger>
           <DialogContent className="mobile-navigation">
             <DialogTitle>KITTY CORP</DialogTitle>
             <DialogDescription>Services, products and the people behind them.</DialogDescription>
             <nav aria-label="Mobile navigation">
               {navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label} aria-current={pathname === href || (href!=="/" && pathname.startsWith(href+"/")) ? "page" : undefined}>{label}</Link>)}
-              <a onClick={() => setOpen(false)} href="https://demo.thekittycorp.com/" target="_blank" rel="noopener noreferrer" data-conversion="portfolio_view" data-context="navigation">18 Live Website Demos ↗</a>
+              <a className="border rounded-full text-white inline-block px-3 py-1 text-xs" onClick={() => setOpen(false)} href="https://demo.thekittycorp.com/" target="_blank" rel="noopener noreferrer" data-conversion="portfolio_view" data-context="navigation">Explore Our Digital Solutions ↗</a>
               <Link onClick={() => setOpen(false)} href="/account">Google sign-in</Link>
               <Link onClick={() => setOpen(false)} href="/team">Full team</Link>
               <Link onClick={() => setOpen(false)} href="/products#early-access">Join early access</Link>

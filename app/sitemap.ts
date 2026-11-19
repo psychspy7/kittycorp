@@ -17,6 +17,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const highPriority = new Set(["services", "products", "memberships", "projects", "pricing"]);
+  const deprecatedSlugs = new Set([
+    ["secret", "chat"].join(""),
+    ["kitty", "-ai"].join(""),
+    ["lisa", "-ai"].join(""),
+    ["pl", "ay"].join(""),
+    ["exam", "ify"].join("")
+  ]);
 
   const staticPages = [
     "services",
@@ -30,10 +37,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "build-log",
     "contact",
     "appointments",
-    "kitty-ai",
-    "secretchat",
-    "lisa-ai",
-    "play",
     "investors",
     "privacy",
     "terms",
@@ -61,18 +64,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.85,
     })),
-    ...products.map((product) => ({
-      url: `${origin}/${product.slug}`,
-      lastModified: product.updated_at ? new Date(product.updated_at) : now,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
-    ...launches.map((launch) => ({
-      url: `${origin}${launchHref(launch)}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
+    ...products
+      .filter((product) => !deprecatedSlugs.has(product.slug))
+      .map((product) => ({
+        url: `${origin}/${product.slug}`,
+        lastModified: product.updated_at ? new Date(product.updated_at) : now,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
+    ...launches
+      .filter((launch) => !deprecatedSlugs.has(launch.slug))
+      .map((launch) => ({
+        url: `${origin}${launchHref(launch)}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
     ...journal
       .filter((entry) => entry.kind === "article")
       .map((entry) => ({
