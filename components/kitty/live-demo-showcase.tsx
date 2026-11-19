@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   ExternalLink,
-  Layers,
   Sparkles,
   Stethoscope,
   GraduationCap,

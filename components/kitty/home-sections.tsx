@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Cpu, AudioLines, Bot } from "lucide-react";
+import { ArrowUpRight, Cpu, AudioLines } from "lucide-react";
 import { type Launch, launchHref, fileSize, downloadHref, isWebsiteLaunch } from "@/lib/launches";
 import { homepageFounders, mediaHref, socialLabels, type CompanyProduct, type SocialLinks, type TeamMember } from "@/lib/company-content";
 import { AppIcon } from "./secretchat";

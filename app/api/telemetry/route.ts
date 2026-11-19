@@ -76,7 +76,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const { data, error } = await database().rpc(
       "kitty_website_get_telemetry",

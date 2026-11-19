@@ -35,7 +35,6 @@ for (let i = 1; i <= 13; i++) {
   featureStats[`B${i}`] = { passed: 0, total: 0 };
 }
 
-let passedCount = 0;
 let failedCount = 0;
 const failures = [];
 
@@ -65,7 +64,6 @@ async function test(tier, id, description, fn) {
   }
 
   if (status === "PASS") {
-    passedCount++;
     console.log(`[PASS] ${tier.toUpperCase()} - ${id}: ${description} (${duration}ms)`);
   } else {
     failedCount++;

@@ -14,27 +14,38 @@ function getReducedMotionSnapshot(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+function subscribeSession(callback: () => void): () => void {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getSessionSnapshot(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return sessionStorage.getItem("kc_brand_revealed") === "1";
+  } catch {
+    return false;
+  }
+}
+
 export function BrandRevealLoader() {
   const isReducedMotion = useSyncExternalStore(subscribeReducedMotion, getReducedMotionSnapshot, () => false);
+  const alreadyRevealed = useSyncExternalStore(subscribeSession, getSessionSnapshot, () => false);
   const [mounted, setMounted] = useState(false);
   const [counter, setCounter] = useState(0);
   const [isUnmasking, setIsUnmasking] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Check session storage guard to prevent repetitive loader on internal navigation
-    try {
-      if (sessionStorage.getItem("kc_brand_revealed") === "1" || isReducedMotion) {
-        setIsComplete(true);
-        return;
-      }
-    } catch {
-      // Storage failure safety fallback
+    if (alreadyRevealed || isReducedMotion) {
+      return;
     }
 
-    setMounted(true);
-    // Lock body scroll during active loader
-    document.body.style.overflow = "hidden";
+    const t = setTimeout(() => {
+      setMounted(true);
+      document.body.style.overflow = "hidden";
+    }, 0);
 
     const duration = 1250; // ms
     const startTime = performance.now();
@@ -42,17 +53,15 @@ export function BrandRevealLoader() {
     const frame = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(1, elapsed / duration);
-      // Eased counter progression (smooth deceleration)
       const currentVal = Math.round(progress * 100);
       setCounter(currentVal);
 
       if (progress < 1) {
         requestAnimationFrame(frame);
       } else {
-        // Trigger curtain unmasking
         setIsUnmasking(true);
         setTimeout(() => {
-          setIsComplete(true);
+          setIsDismissed(true);
           document.body.style.overflow = "";
           try {
             sessionStorage.setItem("kc_brand_revealed", "1");
@@ -66,14 +75,17 @@ export function BrandRevealLoader() {
     const animId = requestAnimationFrame(frame);
 
     return () => {
+      clearTimeout(t);
       cancelAnimationFrame(animId);
       document.body.style.overflow = "";
     };
-  }, [isReducedMotion]);
+  }, [alreadyRevealed, isReducedMotion]);
 
-  if (isComplete) return null;
-  if (!mounted && !isReducedMotion) {
-    // Initial server / pre-mount SSR placeholder to prevent layout flash
+  if (alreadyRevealed || isReducedMotion || isDismissed) {
+    return null;
+  }
+
+  if (!mounted) {
     return (
       <div
         className="brand-loader fixed inset-0 z-[100] bg-[#050506] flex flex-col items-center justify-center pointer-events-auto"
