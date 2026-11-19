@@ -111,6 +111,7 @@ export function SiteHeader() {
             <DialogDescription>Services, products and the people behind them.</DialogDescription>
             <nav aria-label="Mobile navigation">
               {navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label} aria-current={pathname === href || (href!=="/" && pathname.startsWith(href+"/")) ? "page" : undefined}>{label}</Link>)}
+              <a onClick={() => setOpen(false)} href="https://demo.thekittycorp.com/" target="_blank" rel="noopener noreferrer" data-conversion="portfolio_view" data-context="navigation">18 Live Website Demos ↗</a>
               <Link onClick={() => setOpen(false)} href="/account">Google sign-in</Link>
               <Link onClick={() => setOpen(false)} href="/team">Full team</Link>
               <Link onClick={() => setOpen(false)} href="/products#early-access">Join early access</Link>

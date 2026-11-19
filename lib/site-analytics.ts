@@ -78,7 +78,7 @@ export function trackPageView(id: string, pathname: string, previous: string) {
 }
 
 export const conversionEvents = ["service_cta","project_form_start","enquiry_submit","form_error","contact_click","portfolio_view","investor_cta","investor_enquiry_submit","subscription_view","subscription_click"] as const;
-const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","investors","appointment","labs","navigation","memberships"]);
+const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","investors","appointment","labs","navigation","memberships","footer"]);
 const recentConversions = new Map<string,number>();
 export function trackConversion(event: string, context: string) {
   if(typeof window==="undefined")return;

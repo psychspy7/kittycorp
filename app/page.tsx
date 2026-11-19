@@ -11,6 +11,7 @@ import { canonicalSocialUrl, pageMetadata, websiteOrigin, jsonLd } from "@/lib/s
 import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { BusinessProof, BusinessEnquiry } from "@/components/kitty/business-conversion";
 import { ObsidianEcosystem, ObsidianHero, ObsidianLab, ObsidianServices } from "@/components/kitty/obsidian-home";
+import { LiveDemoShowcase } from "@/components/kitty/live-demo-showcase";
 import { ElementalBackground } from "@/components/kitty/elemental-background";
 import { sitePageContent } from "@/lib/site-pages-server";
 import { BottomSupport } from "@/components/kitty/bottom-support";
@@ -46,5 +47,14 @@ export default async function Home() {
     subOrganization:[{"@type":"Organization",name:"CALVENTO",url:"https://calvento-vs-projects-0c743cd3.vercel.app/","description":"A contemporary fashion, accessories and lifestyle commerce brand operated as a KITTY CORP enterprise."}],
     sameAs,
   };
-  return <div className="company-theme gemini-template"><ElementalBackground/><SiteHeader/><SubscriptionModal/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd(organization)}}/><ObsidianHero copy={copy}/><ObsidianServices copy={copy}/><ObsidianLab/><ObsidianEcosystem/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/><BottomSupport/></main><SiteFooter/></div>;
+  const webSite={
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "@id":websiteOrigin()+"/#website",
+    url:websiteOrigin(),
+    name:"KITTY CORP",
+    alternateName:"Kitty Corp",
+    publisher:{"@id":websiteOrigin()+"/#organization"},
+  };
+  return <div className="company-theme gemini-template"><ElementalBackground/><SiteHeader/><SubscriptionModal/><main id="main" className="company-home"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLd([organization, webSite])}}/><ObsidianHero copy={copy}/><ObsidianServices copy={copy}/><LiveDemoShowcase/><ObsidianLab/><ObsidianEcosystem/><BusinessProof launches={launches}/><HomeProcess/><FeedbackLink/><Team members={members}/><BusinessEnquiry/><HelpfulAnswers/><BottomSupport/></main><SiteFooter/></div>;
 }
