@@ -42,7 +42,11 @@ export default async function Home() {
     logo:websiteOrigin()+"/brand/monogram.png",
     description:copy.heroDescription,
     email:CONTACT_EMAIL,
-    founder:{"@type":"Person",name:"Virat Anand",jobTitle:"Founder & CEO"},
+    founder:[
+      {"@type":"Person",name:"Virat Anand",jobTitle:"Founder & CEO"},
+      {"@type":"Person",name:"Sarthak",jobTitle:"Co-founder"},
+      {"@type":"Person",name:"Aman",jobTitle:"Co-founder"},
+    ],
     knowsAbout:["Business websites","Custom software development","AI workflow automation","AI agents","Robotics research","Agricultural robotics","Intelligent systems"],
     subOrganization:[{"@type":"Organization",name:"CALVENTO",url:"https://calvento-vs-projects-0c743cd3.vercel.app/","description":"A contemporary fashion, accessories and lifestyle commerce brand operated as a KITTY CORP enterprise."}],
     sameAs,
