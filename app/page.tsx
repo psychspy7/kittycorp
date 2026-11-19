@@ -5,9 +5,9 @@ import { RoboticsHero } from "@/components/kitty/robotics-hero";
 import { VentureProjects, FounderStorySection } from "@/components/kitty/venture-sections";
 import { Team } from "@/components/kitty/home-sections";
 import { BusinessEnquiry } from "@/components/kitty/business-conversion";
-import { companyTeam } from "@/lib/company-server";
-import { pageMetadata, websiteOrigin, jsonLd } from "@/lib/site-metadata";
-import { CONTACT_EMAIL } from "@/lib/company-contact";
+import { companyTeam, companySettings } from "@/lib/company-server";
+import { pageMetadata, websiteOrigin, jsonLd, canonicalSocialUrl } from "@/lib/site-metadata";
+import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { sitePageContent } from "@/lib/site-pages-server";
 
 export const dynamic = "force-dynamic";
@@ -27,16 +27,17 @@ export default async function Home() {
   const [members, copy, settings] = await Promise.all([
     companyTeam(),
     sitePageContent("home"),
-    companySettings().catch(() => ({ socials: {} })),
+    companySettings(),
   ]);
 
   const origin = websiteOrigin();
 
+  const socials = settings?.socials ? Object.entries(settings.socials) as [string, string | undefined][] : [];
   const sameAs = Array.from(new Set([
     "https://www.instagram.com/kittycorp.ai/",
-    ...Object.entries(settings?.socials || {})
-      .filter(([key, url]) => !!url && key !== "website" && (key !== "linkedin" || !isFounderLinkedIn(url)))
-      .map(([, url]) => canonicalSocialUrl(url!)),
+    ...socials
+      .filter(([key, url]) => Boolean(url && key !== "website" && (key !== "linkedin" || !isFounderLinkedIn(url as string))))
+      .map(([, url]) => canonicalSocialUrl(url as string)),
   ]));
 
   const organization = {
