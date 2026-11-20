@@ -7,9 +7,9 @@ export function SiteThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       if (typeof window !== "undefined") {
-        document.documentElement.setAttribute("data-theme", "dark");
-        if (localStorage.getItem("kittycorp-theme") !== "dark") {
-          localStorage.setItem("kittycorp-theme", "dark");
+        document.documentElement.setAttribute("data-theme", "warm");
+        if (localStorage.getItem("kittycorp-theme") !== "warm") {
+          localStorage.setItem("kittycorp-theme", "warm");
         }
       }
     } catch {}
@@ -18,8 +18,8 @@ export function SiteThemeProvider({ children }: { children: ReactNode }) {
   return (
     <NextThemesProvider
       attribute="data-theme"
-      defaultTheme="dark"
-      forcedTheme="dark"
+      defaultTheme="warm"
+      forcedTheme="warm"
       storageKey="kittycorp-theme"
       scriptProps={{ "data-cfasync": "false" }}
     >

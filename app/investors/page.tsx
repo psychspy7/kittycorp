@@ -1,10 +1,149 @@
 import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
+import { ArrowUpRight, ArrowRight, Shield, Layers, TrendingUp, Cpu } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
-import { companyProducts,companyTeam } from "@/lib/company-server";
+import { companyProducts, companyTeam } from "@/lib/company-server";
 import { publishedLaunches } from "@/lib/launches-server";
-import { isWebsiteLaunch, launchHref } from "@/lib/launches";
-export const dynamic="force-dynamic";
-export const metadata=pageMetadata('Investors & Partnerships','An introduction to KITTY CORP, our first products and the conversations we’re open to.','/investors');
-export default async function Investors(){const [products,team,launches]=await Promise.all([companyProducts(),companyTeam(),publishedLaunches().catch(()=>[])]);const founders=team.filter(p=>["Founder & CEO","Co-Founder"].includes(p.role));return <><SiteHeader/><main id="main" className="public-page wrap"><div className="page-heading"><span className="eyebrow">INVESTORS & PARTNERSHIPS</span><h1>Start with the work.</h1><p>KITTY CORP is an independent Indian technology company with two divisions: Digital Solutions, and Intelligence & Robotics.{founders.length>0&&` Founded by ${founders.map(p=>`${p.name}, ${p.role}`).join(" and ")}.`}</p></div><div className="investor-grid"><div><h2>Digital Solutions</h2><p>Websites, software, AI solutions and workflow automation shaped around business needs.</p></div><div><ul>{launches.map(l=><li key={l.id}><Link href={launchHref(l)}>{l.name}</Link> — {l.tagline} {isWebsiteLaunch(l)?"Published website.":"Published Android product."}</li>)}</ul></div></div><div className="investor-grid"><div><h2>Intelligence & Robotics</h2><p>Early concepts in personal robotics, agriculture and energy management.</p></div><div><ul>{products.filter(p=>p.category==="Robotics"||p.category==="Research").map(p=><li key={p.slug}><Link href={`/${p.slug}`}>{p.name}</Link> — {p.description} {p.status}.</li>)}</ul><Link className="text-link" href="/research">Read about our approach</Link></div></div><div className="investor-grid"><div><h2>Current stage</h2><p>Early. A small team developing and validating its first products.</p></div><p>We’re building the company alongside the technology. Our focus is getting the first products into people’s hands, learning from actual use and deciding what to build next. Some projects are still concepts. We’re keeping the scope small enough to test properly.</p></div><div className="investor-grid"><div><h2>Demonstrations & conversations</h2><p>Real demonstrations are the best place to begin.</p></div><div><p>Published releases can be explored on the website. Development-stage demonstrations will be shared when ready. If you’re an investor, researcher, incubator or potential technology partner, we’d be happy to talk.</p><Link className="text-link" href="/products">Explore published work</Link></div></div><div className="investor-conversation"><Link className="button button-gold" href="/contact?subject=Partnership" data-conversion="investor_cta" data-context="investors">Start a conversation</Link></div></main><SiteFooter/></>;}
+
+export const dynamic = "force-dynamic";
+
+export const metadata = pageMetadata(
+  "Investors & Institutional Partnerships • KITTY CORP",
+  "An introduction to KITTY CORP's capital philosophy, commercial self-sustainability, and physical robotics research roadmap.",
+  "/investors"
+);
+
+export default async function Investors() {
+  const [products, team, launches] = await Promise.all([
+    companyProducts(),
+    companyTeam(),
+    publishedLaunches().catch(() => []),
+  ]);
+  const founders = team.filter((p) => ["Founder & CEO", "Co-Founder"].includes(p.role));
+
+  return (
+    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
+      <SiteHeader />
+      <main id="main" className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+        
+        {/* Page Heading */}
+        <div className="max-w-4xl mb-16">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-6 max-w-[94vw]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
+            <span className="truncate">05 · Institutional Briefing</span>
+          </div>
+
+          <h1 className="text-[clamp(32px,7.5vw,72px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
+            Building deep technology <br className="hidden sm:block" />
+            <span className="font-light text-[#62676D] block sm:inline mt-1 sm:mt-0">with long-term perspective.</span>
+          </h1>
+
+          <p className="text-[18px] sm:text-[21px] leading-[1.65] text-[#292D31] font-light max-w-2xl">
+            KITTY CORP is an independent technology company founded in India with a global engineering outlook.
+            {founders.length > 0 &&
+              ` Founded by ${founders.map((p) => `${p.name} (${p.role})`).join(" and ")}.`}
+          </p>
+        </div>
+
+        {/* Dual Engine Architecture */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          
+          {/* Engine 01: Digital Solutions Studio */}
+          <div className="p-8 sm:p-10 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">DIVISION 01</span>
+                <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-emerald-300 text-emerald-800 bg-emerald-50">
+                  Cash-Flow Positive
+                </span>
+              </div>
+              <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-4">
+                <TrendingUp className="w-5 h-5" />
+              </div>
+              <h2 className="text-2xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-3">
+                Digital Solutions Studio
+              </h2>
+              <p className="text-[#62676D] font-light leading-relaxed text-[15px] mb-6">
+                Our commercial software studio delivers custom web platforms, cloud architecture, and business automation systems for global clients. This division generates recurring cash flow that independently finances our robotics engineering laboratory.
+              </p>
+            </div>
+            <a
+              href="https://demo.thekittycorp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#2457D6] hover:underline"
+            >
+              <span>Explore Commercial Studio Platform</span>
+              <ArrowUpRight size={15} />
+            </a>
+          </div>
+
+          {/* Engine 02: Physical-World Intelligence */}
+          <div className="p-8 sm:p-10 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">DIVISION 02</span>
+                <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">
+                  Fundamental Research
+                </span>
+              </div>
+              <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-4">
+                <Cpu className="w-5 h-5" />
+              </div>
+              <h2 className="text-2xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-3">
+                Physical-World Intelligence
+              </h2>
+              <p className="text-[#62676D] font-light leading-relaxed text-[15px] mb-6">
+                Pursuing long-term breakthroughs in agricultural robotics (AgriYaan) and clean energy telemetry (Urjaan). We maintain intellectual honesty: research prototypes are carefully benchmarked before committing to large-scale fabrication.
+              </p>
+            </div>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#2457D6] hover:underline"
+            >
+              <span>Review Research Initiatives</span>
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+
+        {/* Capital Philosophy */}
+        <div className="p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm mb-16">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-4">
+            Capital Philosophy
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
+            Honest stage, disciplined allocation.
+          </h2>
+          <div className="space-y-4 text-[#62676D] font-light leading-relaxed text-[16px] max-w-3xl mb-8">
+            <p>
+              We are an early-stage company building durable technology. Rather than seeking vanity valuation rounds that dilute focus before mechanical prototypes are validated, we prioritize capital discipline.
+            </p>
+            <p>
+              We welcome dialogue with long-term institutional partners, university research incubators, agricultural consortiums, and strategic angels who understand that physical-world intelligence requires patient, disciplined engineering.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-[#D9D6CF]">
+            <Link
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[14px] font-medium transition-all shadow-[0_2px_12px_rgba(36,87,214,0.2)]"
+              href="/contact?subject=Partnership"
+            >
+              <span>Start an Institutional Conversation</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/company"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] hover:bg-[#E9E6E0] text-[#191B1D] text-[14px] font-medium transition-colors"
+            >
+              <span>Learn About the Team</span>
+            </Link>
+          </div>
+        </div>
+
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}

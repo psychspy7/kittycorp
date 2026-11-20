@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
-import { RoboticsHero } from "@/components/kitty/robotics-hero";
-import { VentureProjects, FounderStorySection } from "@/components/kitty/venture-sections";
+import { EditorialHome } from "@/components/kitty/editorial-home";
 import { BrandRevealLoader } from "@/components/kitty/brand-reveal-loader";
-import { Team } from "@/components/kitty/home-sections";
-import { BusinessEnquiry } from "@/components/kitty/business-conversion";
-import { companyTeam, companySettings } from "@/lib/company-server";
+import { companySettings } from "@/lib/company-server";
 import { pageMetadata, websiteOrigin, jsonLd, canonicalSocialUrl } from "@/lib/site-metadata";
 import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
-import { sitePageContent } from "@/lib/site-pages-server";
 
 export const dynamic = "force-dynamic";
 
@@ -17,20 +13,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     ...pageMetadata(
       "AI Robotics • Physical-World Intelligence",
-      "Exploring the future of AI robotics — building intelligent autonomous systems for the physical world, agricultural robotics (AgriYaan), and clean energy automation.",
+      "KITTY CORP is an emerging technology company developing intelligent systems for the physical world — agricultural robotics, clean energy automation, and physical intelligence.",
       "/"
     ),
-    title: "KITTY CORP | AI Robotics • Physical-World Intelligence",
+    title: "KITTY CORP | Physical-World Intelligence • AI Robotics",
   };
 }
 
 export default async function Home() {
-  const [members, copy, settings] = await Promise.all([
-    companyTeam(),
-    sitePageContent("home"),
-    companySettings(),
-  ]);
-
+  const settings = await companySettings();
   const origin = websiteOrigin();
 
   const socials = settings?.socials ? Object.entries(settings.socials) as [string, string | undefined][] : [];
@@ -58,7 +49,7 @@ export default async function Home() {
       caption: "KITTY CORP Monogram",
     },
     description:
-      "KITTY CORP is an AI robotics venture exploring the future of physical-world intelligence, building autonomous agricultural systems (AgriYaan) and clean energy automation.",
+      "KITTY CORP is an emerging technology company developing intelligent systems that work alongside humans in physical environments.",
     founder: [
       {
         "@type": "Person",
@@ -76,22 +67,15 @@ export default async function Home() {
       "Agricultural Robotics",
       "AgriYaan Rover",
       "Clean Energy AI Systems",
-      "Autonomous Systems Telemetry",
       "Computer Vision",
     ],
     subOrganization: [
       {
         "@type": "Organization",
-        name: "CALVENTO",
-        url: "https://calvento-vs-projects-0c743cd3.vercel.app/",
-        description: "A contemporary fashion, accessories and lifestyle commerce brand operated as a KITTY CORP enterprise.",
-      },
-      {
-        "@type": "Organization",
         name: "KITTY CORP Digital Solutions",
         url: "https://demo.thekittycorp.com",
         description:
-          "Commercial digital studio delivering bespoke web applications, business automation, and custom AI systems.",
+          "Commercial digital studio delivering bespoke web applications, business automation, and custom digital software.",
       },
     ],
     sameAs,
@@ -114,23 +98,19 @@ export default async function Home() {
     },
     inLanguage: "en-US",
     description:
-      "Official website of KITTY CORP — AI Robotics, Physical-World Intelligence, Research & Innovation.",
+      "Official website of KITTY CORP — Physical-World Intelligence, Agricultural Robotics & Clean Energy Systems.",
   };
 
   return (
-    <div className="company-theme gemini-template bg-[#050506] text-[#f8f8f9]">
+    <div className="bg-[#F5F2EA] text-[#191B1D] min-h-screen">
       <BrandRevealLoader />
       <SiteHeader />
-      <main id="main" className="company-home">
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd([organization, webSite]) }}
         />
-        <RoboticsHero copy={copy} />
-        <VentureProjects />
-        <FounderStorySection />
-        <Team members={members} />
-        <BusinessEnquiry />
+        <EditorialHome />
       </main>
       <SiteFooter />
     </div>

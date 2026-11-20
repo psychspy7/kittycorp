@@ -1,138 +1,254 @@
 "use client";
-import { createPortal } from "react-dom";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import {customerSignedIn,subscribeCustomerSession} from "@/lib/customer-session";
+
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Menu, Play } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { AnimatedTopDock } from "@/src/shaders/animated-top-dock/AnimatedTopDock";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, Play, X, ArrowUpRight } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { customerSignedIn, subscribeCustomerSession } from "@/lib/customer-session";
+
 const navigation = [
   ["Home", "/"],
+  ["About", "/company"],
   ["Research", "/research"],
   ["Projects", "/projects"],
-  ["About", "/company"],
   ["Membership", "/memberships"],
   ["Contact", "/contact"],
 ];
+
 export function SiteHeader() {
   const pathname = usePathname();
-  const router = useRouter();
-  const signedIn=useSyncExternalStore(subscribeCustomerSession,customerSignedIn,()=>false);
+  const signedIn = useSyncExternalStore(subscribeCustomerSession, customerSignedIn, () => false);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [actionTarget, setActionTarget] = useState<HTMLElement | null>(null);
-  const commandBarRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 24);
-    update(); window.addEventListener("scroll", update, { passive: true });
+    const update = () => setScrolled(window.scrollY > 16);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
-  useEffect(() => {
-    const root = commandBarRef.current;
-    if (!root) return;
 
-    // The registered ThreeUI component is intentionally kept byte-for-byte;
-    // adapt only its fixed demo copy and button destinations for this site.
-    const brand = root.querySelector<HTMLElement>(".atd-modern__word");
-    brand?.replaceChildren("KITTY CORP");
-    brand?.classList.add("tracking-[0.25em]", "uppercase");
-    const brandLink = root.querySelector<HTMLAnchorElement>(".atd-modern__brand");
-    brandLink?.setAttribute("href", "/");
-    brandLink?.setAttribute("aria-label", "KITTY CORP home");
+  return (
+    <header
+      className={`site-header sticky top-0 z-50 w-full transition-all duration-200 border-b ${
+        scrolled
+          ? "bg-[#FBFAF7]/95 backdrop-blur-md border-[#D9D6CF] shadow-[0_1px_6px_rgba(0,0,0,0.03)]"
+          : "bg-[#FBFAF7] border-[#D9D6CF]"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+        {/* Brand Identity */}
+        <Link
+          href="/"
+          className="brand flex items-center gap-3 text-[#191B1D] hover:opacity-85 transition-opacity"
+          aria-label="KITTY CORP home"
+        >
+          <div className="relative w-8 h-8 flex-shrink-0">
+            <Image
+              unoptimized
+              src="/brand/monogram-small-v1.webp"
+              alt="KITTY CORP Monogram"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+          </div>
+          <span className="font-[family-name:var(--font-display)] tracking-[0.22em] font-normal uppercase text-[15px] sm:text-[16px] text-[#191B1D]">
+            KITTY CORP
+          </span>
+        </Link>
 
-    const dock = root.querySelector<HTMLElement>(".atd-modern__dock");
-    dock?.setAttribute("aria-label", "Main navigation");
-    const items = dock ? Array.from(dock.querySelectorAll<HTMLButtonElement>("[data-dock-item]")) : [];
-    items.forEach((item, index) => {
-      const destination = navigation[index];
-      if (!destination) return;
-      const [label, href] = destination;
-      item.querySelector("span:last-child")?.replaceChildren(label);
-      item.setAttribute("aria-label", label);
-      item.setAttribute("title", label);
-      const isCurrent = pathname === href || pathname.startsWith(`${href}/`);
-      if (isCurrent) item.setAttribute("aria-current", "page");
-      else item.removeAttribute("aria-current");
-      item.setAttribute("aria-pressed", String(isCurrent));
-    });
+        {/* Desktop Primary Navigation */}
+        <nav className="navigation hidden lg:flex items-center gap-8 text-[13px] font-medium tracking-wide">
+          {navigation.map(([label, href]) => {
+            const isCurrent = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+            return (
+              <Link
+                key={label}
+                href={href}
+                className={`relative py-1 transition-colors ${
+                  isCurrent
+                    ? "text-[#2457D6] font-semibold"
+                    : "text-[#62676D] hover:text-[#191B1D]"
+                }`}
+                aria-current={isCurrent ? "page" : undefined}
+              >
+                {label}
+                {isCurrent && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#2457D6] rounded-full" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
 
-    const signIn = root.querySelector<HTMLButtonElement>(".atd-modern__ghost");
-    if (signIn) {
-      signIn.replaceChildren(signedIn ? "My account" : "Sign in");
-      signIn.setAttribute("aria-label", signedIn ? "Open my account" : "Sign in with Google");
-    }
-    const cta = root.querySelector<HTMLButtonElement>(".atd-modern__cta");
-    cta?.querySelector("span")?.replaceChildren("Explore Our Digital Solutions ↗");
-    cta?.setAttribute("aria-label", "Explore Our Digital Solutions");
-    cta?.setAttribute("data-conversion", "service_cta");
-    cta?.setAttribute("data-context", "navigation");
+        {/* Right Actions */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link
+            href="/account"
+            className="hidden sm:inline-flex text-[13px] font-medium text-[#62676D] hover:text-[#191B1D] px-3 py-1.5 transition-colors"
+          >
+            {signedIn ? "My account" : "Sign in"}
+          </Link>
 
-    const actions = root.querySelector<HTMLElement>(".atd-modern__actions");
-    if (actions) setActionTarget(actions);
-    root.dataset.kittyReady = "true";
+          <a
+            href="https://demo.thekittycorp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[13px] font-medium transition-all shadow-sm"
+            data-conversion="service_cta"
+            data-context="navigation"
+          >
+            <span>Digital Solutions</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+          </a>
 
-    const onCommandClick = (event: MouseEvent) => {
-      const target = event.target instanceof Element ? event.target : null;
-      if (!target) return;
-      if (target.closest(".atd-modern__brand")) {
-        event.preventDefault();
-        router.push("/");
-        return;
-      }
-      const navItem = target.closest<HTMLButtonElement>(".atd-modern__item");
-      if (navItem) {
-        const index = items.indexOf(navItem);
-        const destination = navigation[index];
-        if (destination) router.push(destination[1]);
-        return;
-      }
-      if (target.closest(".atd-modern__ghost")) {
-        router.push("/account");
-        return;
-      }
-      if (target.closest(".atd-modern__cta")) {
-        window.open("https://demo.thekittycorp.com", "_blank", "noopener,noreferrer");
-        return;
-      }
-    };
-    root.addEventListener("click", onCommandClick, true);
-    return () => root.removeEventListener("click", onCommandClick, true);
-  }, [pathname, router, signedIn]);
-
-  return <div className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-    <div className="site-header-navigation">
-      <div className="shader-frame kitty-command-shell" ref={commandBarRef}>
-        <AnimatedTopDock
-          variant="modern"
-          proximity={122}
-          spring={0.19}
-          damping={0.70}
-          widthGrowth={17}
-          heightGrowth={16}
-          drop={3.5}
-          className="kitty-command-bar"
-        />
+          {/* Mobile Menu Toggle Button */}
+          <button
+            type="button"
+            className="menu-toggle kitty-mobile-menu lg:hidden flex items-center justify-center w-11 h-11 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] transition-colors shadow-sm"
+            aria-label="Open navigation"
+            onClick={() => setOpen(true)}
+          >
+            <Menu className="w-5 h-5 text-[#191B1D]" />
+          </button>
+        </div>
       </div>
-      {actionTarget && createPortal(<>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild><button className="kitty-mobile-menu md:hidden" aria-label="Open navigation"><Menu size={20} /></button></DialogTrigger>
-          <DialogContent className="mobile-navigation">
-            <DialogTitle>KITTY CORP</DialogTitle>
-            <DialogDescription>Services, products and the people behind them.</DialogDescription>
-            <nav aria-label="Mobile navigation">
-              {navigation.map(([label, href]) => <Link onClick={() => setOpen(false)} href={href} key={label} aria-current={pathname === href || (href!=="/" && pathname.startsWith(href+"/")) ? "page" : undefined}>{label}</Link>)}
-              <a className="border rounded-full text-white inline-block px-3 py-1 text-xs" onClick={() => setOpen(false)} href="https://demo.thekittycorp.com/" target="_blank" rel="noopener noreferrer" data-conversion="portfolio_view" data-context="navigation">Explore Our Digital Solutions ↗</a>
-              <Link onClick={() => setOpen(false)} href="/account">Google sign-in</Link>
-              <Link onClick={() => setOpen(false)} href="/team">Full team</Link>
-              <Link onClick={() => setOpen(false)} href="/products#early-access">Join early access</Link>
+
+      {/* Mobile Navigation Drawer */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="mobile-navigation fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-[#FBFAF7] p-6 shadow-2xl border-l border-[#D9D6CF] flex flex-col justify-between overflow-y-auto">
+          <div>
+            <div className="flex items-center justify-between pb-6 border-b border-[#D9D6CF]">
+              <div className="flex items-center gap-2.5">
+                <Image
+                  unoptimized
+                  src="/brand/monogram-small-v1.webp"
+                  alt="KITTY CORP"
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
+                <DialogTitle className="font-[family-name:var(--font-display)] tracking-[0.2em] font-normal uppercase text-[15px] text-[#191B1D]">
+                  KITTY CORP
+                </DialogTitle>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-[#73777C] hover:text-[#191B1D] hover:bg-[#E9E6E0] transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5 text-[#191B1D]" />
+              </button>
+            </div>
+
+            <DialogDescription className="text-xs text-[#62676D] font-light mt-3 mb-6">
+              Warm minimalism × architectural precision × physical intelligence.
+            </DialogDescription>
+
+            <nav aria-label="Mobile navigation" className="flex flex-col space-y-1">
+              {navigation.map(([label, href]) => {
+                const isCurrent = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+                return (
+                  <Link
+                    key={label}
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center min-h-[48px] px-3 rounded-lg text-[16px] transition-colors ${
+                      isCurrent
+                        ? "bg-[#E9E6E0] font-semibold text-[#2457D6]"
+                        : "text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60"
+                    }`}
+                    aria-current={isCurrent ? "page" : undefined}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/agriyaan"
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
+              >
+                KITTY AgriYaan
+              </Link>
+              <Link
+                href="/urjaan"
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
+              >
+                KITTY Urjaan
+              </Link>
+              <Link
+                href="/support"
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
+              >
+                Support Our Research
+              </Link>
+              <Link
+                href="/team"
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60 transition-colors"
+              >
+                Team
+              </Link>
+              <Link
+                href="/account"
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60 transition-colors"
+              >
+                {signedIn ? "My Account" : "Sign In"}
+              </Link>
             </nav>
-          </DialogContent>
-        </Dialog>
-      </>, actionTarget)}
-    </div>
-  </div>;
+          </div>
+
+          <div className="pt-6 border-t border-[#D9D6CF] space-y-3">
+            <a
+              href="https://demo.thekittycorp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-full bg-[#2457D6] text-white text-[14px] font-medium shadow-sm hover:bg-[#1D46B0] transition-colors"
+            >
+              <span>Digital Solutions Studio</span>
+              <ArrowUpRight className="w-4 h-4 text-white" />
+            </a>
+            <p className="text-center text-[11px] font-mono text-[#73777C] uppercase tracking-wider">
+              India to the World
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </header>
+  );
 }
+
 export function FilmButton({ className = "" }: { className?: string }) {
-  return <Dialog><DialogTrigger asChild><button className={`film-button ${className}`}><Play size={13} /> Watch the identity film</button></DialogTrigger><DialogContent className="film-dialog"><DialogTitle>KITTY, in motion.</DialogTitle><DialogDescription>A short look at the KITTY CORP identity.</DialogDescription><video controls autoPlay playsInline preload="metadata" poster="/brand/wordmark-v1.webp"><source src="/brand/reveal.mp4" type="video/mp4" />Your browser cannot play this video. <a href="/brand/reveal.mp4">Download the film</a>.</video></DialogContent></Dialog>;
+  return (
+    <Dialog>
+      <DialogContent className="film-dialog max-w-2xl bg-[#FBFAF7] p-6 rounded-2xl border border-[#D9D6CF]">
+        <DialogTitle className="text-xl font-medium text-[#191B1D] mb-1">KITTY, in motion.</DialogTitle>
+        <DialogDescription className="text-sm text-[#62676D] mb-4 font-light">
+          A short look at the KITTY CORP identity.
+        </DialogDescription>
+        <div className="overflow-hidden rounded-xl border border-[#D9D6CF] bg-black aspect-video relative">
+          <video
+            controls
+            autoPlay
+            playsInline
+            preload="metadata"
+            poster="/brand/wordmark-v1.webp"
+            className="w-full h-full object-contain"
+          >
+            <source src="/brand/reveal.mp4" type="video/mp4" />
+            Your browser cannot play this video. <a href="/brand/reveal.mp4">Download the film</a>.
+          </video>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
 }

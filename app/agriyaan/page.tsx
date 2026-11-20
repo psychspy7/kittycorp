@@ -1,0 +1,242 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Cpu, Compass, Layers, ShieldCheck, CheckCircle2, ChevronRight } from "lucide-react";
+import { SiteHeader } from "@/components/kitty/site";
+import { SiteFooter } from "@/components/kitty/site-footer";
+import { pageMetadata } from "@/lib/site-metadata";
+
+export const metadata: Metadata = pageMetadata(
+  "KITTY AgriYaan • Agricultural Robotics & Field Autonomy",
+  "KITTY AgriYaan is an autonomous agricultural rover platform engineered to navigate harsh terrain, reduce soil compaction, and perform real-time crop inspection in India and developing agricultural ecosystems.",
+  "/agriyaan"
+);
+
+export default function AgriYaanPage() {
+  return (
+    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
+      <SiteHeader />
+
+      <main id="main">
+        {/* =========================================================================
+            HERO: KITTY AGRIYAAN
+            ========================================================================= */}
+        <section className="pt-24 pb-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-8 max-w-[94vw]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
+              <span className="truncate">Flagship Initiative 01 · Agricultural Robotics</span>
+            </div>
+
+            <h1 className="text-[clamp(32px,7.5vw,76px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
+              KITTY AgriYaan
+            </h1>
+
+            <p className="text-[20px] sm:text-[24px] font-light leading-[1.4] text-[#62676D] mb-8">
+              Autonomous field robotics engineered for unpredictable soil, dense canopies, and living environments.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#73777C] pb-4">
+              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
+                STATUS: KINEMATICS &amp; SIMULATION
+              </span>
+              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
+                DOMAIN: SOIL &amp; CANOPY AUTONOMY
+              </span>
+              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
+                ORIGIN: BHARAT TO GLOBAL FARMLANDS
+              </span>
+            </div>
+          </div>
+
+          {/* Cinematic Edge-Blended Imagery */}
+          <div className="relative mt-12 w-full rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#FBFAF7] aspect-[16/9] max-h-[520px] shadow-[0_4px_32px_rgba(0,0,0,0.03)]">
+            <Image
+              src="/photography/agriyaan-field-robot.webp"
+              alt="KITTY AgriYaan agricultural rover chassis navigating rugged field topography"
+              fill
+              priority
+              className="object-cover object-center cinematic-fade-edges"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-50" />
+            <div className="absolute bottom-6 left-6 text-xs font-mono text-[#191B1D] bg-[#FBFAF7]/95 px-3.5 py-1.5 rounded-full border border-[#D9D6CF] shadow-sm">
+              AgriYaan Mark-I Physical Chassis Test Rig · Multi-Terrain Articulation
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION 01: THE CHALLENGE IN THE LIVING FIELD
+            ========================================================================= */}
+        <section className="py-20 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
+          <div className="max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] text-[11px] font-mono tracking-widest text-[#62676D] uppercase mb-6">
+              <span>01 · Context &amp; Purpose</span>
+            </div>
+
+            <h2 className="text-[clamp(28px,3.8vw,46px)] font-[family-name:var(--font-display)] font-normal leading-[1.15] text-[#191B1D] mb-8">
+              Why agriculture demands physical-world intelligence.
+            </h2>
+
+            <div className="space-y-6 text-[17px] sm:text-[19px] leading-[1.8] text-[#292D31] font-light">
+              <p>
+                In India and agricultural economies globally, farming is caught between two unsustainable extremes: either reliance on intensive, backbreaking manual field labor during extreme heatwaves, or the deployment of heavy 3-to-5 ton diesel machinery that heavily compacts topsoil and destroys delicate microbial fungal networks.
+              </p>
+              <p>
+                Traditional automation tools assume manicured, asphalt-paved factory floors or perfectly leveled Western mega-farms. Smallholder plots across South Asia feature unpaved mud furrows, unpredictable water channels, shifting monsoonal topography, and irregular inter-crop spacing.
+              </p>
+              <p>
+                KITTY AgriYaan is conceived from the ground up for these exact real-world realities: lightweight robotics that tread softly, navigate autonomously through dense vegetative canopies, and assess plant health plant-by-plant without satellite latency.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION 02: CORE ARCHITECTURE PILLARS
+            ========================================================================= */}
+        <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
+          <div className="max-w-7xl mx-auto">
+            <div className="max-w-3xl mb-14">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
+                02 · Engineering Systems
+              </span>
+              <h2 className="text-[clamp(30px,4vw,48px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
+                Engineered for mud, dust, and living ecosystems.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              
+              {/* Card 1 */}
+              <div className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-5">
+                    <Layers className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
+                    Low-Compaction Lightweight Chassis
+                  </h3>
+                  <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
+                    Weighing under 45 kg, the rover’s articulated rocker-bogie kinematics distribute ground pressure evenly, allowing full mobility over wet mud furrows without damaging fragile rhizosphere root systems.
+                  </p>
+                </div>
+                <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
+                  KINEMATICS · SUB-45KG CLASS
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-5">
+                    <Cpu className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
+                    Multi-Spectral Edge Vision Stack
+                  </h3>
+                  <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
+                    Onboard low-power compute processes stereo RGB and narrow-band near-infrared (NIR) video streams directly on the rover, computing NDVI indexes and spotting early blight or pest infestations in milliseconds.
+                  </p>
+                </div>
+                <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
+                  PERCEPTION · ZERO CLOUD LATENCY
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-5">
+                    <Compass className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
+                    Canopy-Level Localized Navigation
+                  </h3>
+                  <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
+                    Under thick crop canopies where GPS reception frequently degrades, the navigation stack seamlessly fuses visual inertial odometry (VIO) with wheel encoders to maintain centimeter-accurate row traversal.
+                  </p>
+                </div>
+                <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
+                  AUTONOMY · VIO + STEREO SLAM
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION 03: CURRENT STAGE & HONEST DISCLOSURE
+            ========================================================================= */}
+        <section className="py-20 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#F5F2EA]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[11px] font-mono tracking-wider text-[#62676D] uppercase mb-5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#2457D6]" />
+                <span>Transparent Technical Milestone Status</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
+                Where AgriYaan stands today.
+              </h2>
+
+              <p className="text-[16px] leading-[1.75] text-[#292D31] font-light mb-6">
+                We believe in total honesty regarding early-stage deep-tech hardware. AgriYaan is currently in active physical prototyping and kinematics simulation. We are not selling commercial consumer farm units today.
+              </p>
+
+              <div className="space-y-3 font-mono text-xs text-[#62676D] border-t border-[#D9D6CF] pt-6">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#2457D6] shrink-0" />
+                  <span>Phase 1 Completed: Multi-terrain suspension simulation and CAD structural FEA stress models.</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-4 h-4 rounded-full border-2 border-[#2457D6] shrink-0" />
+                  <span className="text-[#191B1D] font-medium">Phase 2 Active: 1:1 scale chassis fabrication, brushless hub motor telemetry, and edge vision bench testing.</span>
+                </div>
+                <div className="flex items-center gap-3 text-[#73777C]">
+                  <span className="w-4 h-4 rounded-full border border-[#D9D6CF] shrink-0" />
+                  <span>Phase 3 Scheduled: Agrarian field trials across regional partner test plots in India.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION 04: COLLABORATION & INQUIRIES
+            ========================================================================= */}
+        <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA]">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-[clamp(28px,3.8vw,46px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-5">
+              Collaborate on agricultural robotics.
+            </h2>
+            <p className="text-[16px] sm:text-[18px] leading-[1.65] text-[#62676D] font-light max-w-2xl mx-auto mb-10">
+              We actively welcome agronomy researchers, roboticists, embedded systems engineers, and progressive agricultural operators interested in field test partnerships.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[14px] font-medium transition-colors shadow-sm"
+              >
+                <span>Partner on Field Trials</span>
+                <ArrowRight className="w-4 h-4 text-white" />
+              </Link>
+              <Link
+                href="/research"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] hover:bg-[#E9E6E0] text-[#191B1D] text-[14px] font-medium transition-colors"
+              >
+                <span>Explore Research Papers</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <SiteFooter />
+    </div>
+  );
+}

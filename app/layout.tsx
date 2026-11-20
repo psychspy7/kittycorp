@@ -29,6 +29,7 @@ import "../src/shaders/threeui.css";
 import "./ui-refresh.css";
 import "./gemini-home.css";
 import "./obsidian-home.css";
+import "./warm-architecture.css";
 
 const shareTitle = "KITTY CORP | Independent Technology Company";
 const shareDescription =
@@ -72,7 +73,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const country = (await headers()).get("x-vercel-ip-country") || "";
   return (
-    <html lang="en" data-theme="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" data-theme="warm" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <meta name="google-adsense-account" content="ca-pub-3607548169127113" />
         <link

@@ -264,32 +264,32 @@ await test("tier1", "F1.5", "dark editorial aesthetic consistency", () => {
   assert.ok(css.includes("--ink") || css.includes("--background"), "CSS must declare obsidian theme tokens");
 });
 
-// --- Feature 2: Obsidian Luxury Color Palette (F2.1 - F2.5) ---
-await test("tier1", "F2.1", "obsidian background token definition", () => {
+// --- Feature 2: Warm Minimalist Architectural Color Palette (F2.1 - F2.5) ---
+await test("tier1", "F2.1", "warm paper background token definition", () => {
   const css = readTextFile("app/globals.css");
   const bgMatch = css.match(/--(?:background|ink)\s*:\s*(#[0-9a-fA-F]{6})/);
   assert.ok(bgMatch, "Root CSS must define --background or --ink color token");
   const hex = bgMatch[1].toLowerCase();
   const lum = calculateLuminance(parseHexColor(hex));
-  assert.ok(lum < 0.05, `Background token ${hex} must have deep obsidian luminance (< 0.05, got ${lum.toFixed(4)})`);
+  assert.ok(lum > 0.7, `Background token ${hex} must have warm architectural luminance (> 0.7, got ${lum.toFixed(4)})`);
 });
 
-await test("tier1", "F2.2", "quiet dark surface card palette", () => {
+await test("tier1", "F2.2", "quiet alabaster surface card palette", () => {
   const css = readTextFile("app/globals.css");
   const cardMatch = css.match(/--card\s*:\s*(#[0-9a-fA-F]{6})/);
   assert.ok(cardMatch, "Root CSS must define --card surface color token");
   const hex = cardMatch[1].toLowerCase();
   const lum = calculateLuminance(parseHexColor(hex));
-  assert.ok(lum < 0.08, `Card surface ${hex} must be quiet dark surface (< 0.08, got ${lum.toFixed(4)})`);
+  assert.ok(lum > 0.8, `Card surface ${hex} must be quiet alabaster light surface (> 0.8, got ${lum.toFixed(4)})`);
 });
 
-await test("tier1", "F2.3", "crisp white typography token", () => {
+await test("tier1", "F2.3", "near-black high-contrast typography token", () => {
   const css = readTextFile("app/globals.css");
   const fgMatch = css.match(/--foreground\s*:\s*(#[0-9a-fA-F]{6})/);
   assert.ok(fgMatch, "Root CSS must define --foreground color token");
   const hex = fgMatch[1].toLowerCase();
   const lum = calculateLuminance(parseHexColor(hex));
-  assert.ok(lum > 0.8, `Foreground token ${hex} must be crisp bright off-white (> 0.8, got ${lum.toFixed(4)})`);
+  assert.ok(lum < 0.05, `Foreground token ${hex} must be crisp near-black (< 0.05, got ${lum.toFixed(4)})`);
 });
 
 await test("tier1", "F2.4", "hairline border subtlety utility", () => {
@@ -299,13 +299,12 @@ await test("tier1", "F2.4", "hairline border subtlety utility", () => {
   assert.ok(css.includes("1px solid") || css.includes("border-bottom:1px"), "Hairline 1px borders must be used");
 });
 
-await test("tier1", "F2.5", "champagne titanium accent token", () => {
+await test("tier1", "F2.5", "crisp cobalt blue technological accent token", () => {
   const css = readTextFile("app/globals.css");
-  const goldMatch = css.match(/--(?:gold|primary)\s*:\s*(#[0-9a-fA-F]{6})/);
-  assert.ok(goldMatch, "Luxury accent token (--gold or --primary) must be defined");
-  const hex = goldMatch[1].toLowerCase();
-  const rgb = parseHexColor(hex);
-  assert.ok(rgb.r > rgb.b && rgb.g > rgb.b, `Accent ${hex} must be warm champagne/gold tone`);
+  const accentMatch = css.match(/--(?:primary|accent)\s*:\s*(#[0-9a-fA-F]{6})/);
+  assert.ok(accentMatch, "Technological accent token (--primary or --accent) must be defined");
+  const hex = accentMatch[1].toLowerCase();
+  assert.ok(hex === "#2457d6", `Accent ${hex} must be crisp cobalt blue #2457D6`);
 });
 
 // --- Feature 3: Bespoke Luxury Typography (F3.1 - F3.5) ---
@@ -542,9 +541,9 @@ await test("tier1", "F8.1", "subpage routing structure and existence", () => {
   }
 });
 
-await test("tier1", "F8.2", "subpage shared obsidian design system integration", () => {
+await test("tier1", "F8.2", "subpage shared warm architectural design system integration", () => {
   const layout = readTextFile("app/layout.tsx");
-  assert.ok(layout.includes('data-theme="dark"'), "Root layout sets dark theme across all subpages");
+  assert.ok(layout.includes('data-theme="warm"'), "Root layout sets warm theme across all subpages");
   assert.ok(layout.includes("SiteThemeProvider"), "SiteThemeProvider wraps all subpages");
 });
 
@@ -552,7 +551,7 @@ await test("tier1", "F8.3", "elimination of plain unstyled subpage appearance", 
   const contactCode = readTextFile("app/contact/page.tsx");
   const companyCode = readTextFile("app/company/page.tsx");
   assert.ok(contactCode.includes("contact-page") || contactCode.includes("contact-grid"), "Contact subpage must use styled grid layout");
-  assert.ok(companyCode.includes("directory-page") || companyCode.includes("page-heading"), "Company subpage must use styled directory layout");
+  assert.ok(companyCode.includes("CompanyPage") || companyCode.includes("Leadership & Engineers") || companyCode.includes("Corporate Profile"), "Company subpage must use styled layout");
 });
 
 await test("tier1", "F8.4", "subpage navigation and footer integration", () => {
@@ -756,9 +755,9 @@ await test("tier2", "B1.1", "cyan hex and rgba case insensitivity boundary", () 
   }
 });
 
-await test("tier2", "B1.2", "color token isolation preserves gold accents", () => {
+await test("tier2", "B1.2", "color token isolation preserves cobalt accents", () => {
   const css = readTextFile("app/globals.css");
-  assert.ok(/--(?:gold|primary)\s*:\s*#(?:e4cca0|c5a880|d5ba7d)/i.test(css));
+  assert.ok(/--(?:primary|accent)\s*:\s*#(?:2457d6)/i.test(css));
 });
 
 await test("tier2", "B1.3", "dormant vector overlay classes boundary", () => {
@@ -1174,11 +1173,11 @@ await test("tier2", "B13.5", "network probe timeout and abort handling boundary"
 // TIER 3: CROSS-FEATURE COMBINATIONS (12 Pairwise Tests: P1 - P12)
 // ---------------------------------------------------------------------------
 
-await test("tier3", "P1", "cyan elimination plus obsidian palette integration (F1 + F2)", () => {
+await test("tier3", "P1", "cyan elimination plus warm architecture palette integration (F1 + F2)", () => {
   const css = readTextFile("app/globals.css");
   assert.equal(/#00e5ff/i.test(css), false);
   const bgMatch = css.match(/--(?:background|ink)\s*:\s*(#[0-9a-fA-F]{6})/);
-  assert.ok(calculateLuminance(parseHexColor(bgMatch[1])) < 0.05);
+  assert.ok(calculateLuminance(parseHexColor(bgMatch[1])) > 0.7);
 });
 
 await test("tier3", "P2", "obsidian palette plus luxury typography contrast (F2 + F3)", () => {

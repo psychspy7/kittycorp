@@ -1,12 +1,14 @@
 "use client";
+
 import { LocalPrice } from "./local-currency";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import type { User } from "firebase/auth";
-import { Check, ArrowUpRight, ShieldCheck, Sparkles, AlertCircle } from "lucide-react";
+import { Check, ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, AlertCircle, HeartHandshake, Layers } from "lucide-react";
 import { kittyCustomerAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "@/lib/kitty-customer";
 import type { MembershipCatalog } from "@/lib/membership-types";
 import { Turnstile } from "./turnstile";
+import Link from "next/link";
 
 type Callback = { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string };
 type AccountStatus = { paid: boolean; expiresAt: number; freeRemainingSeconds: number };
@@ -99,34 +101,36 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     setError("");
     try {
       const auth = await kittyCustomerAuth();
-      await signInWithPopup(auth, new GoogleAuthProvider());
-    } catch {
-      setError("Google sign-in could not finish. Check that this website is authorized in Firebase and try again.");
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      setError((e as Error).message || "Google sign-in could not be completed.");
     }
   }
 
   async function status() {
-    if (!pending || pending.uid !== current.current?.uid || lock.current) return;
+    if (!pending || lock.current) return;
     lock.current = true;
     setBusy(true);
     setError("");
-    const generation = epoch.current;
+    setMessage("");
     try {
-      const r = await request<{ active: boolean; testMode?: boolean; status?: string }>("status", { intentId: pending.id });
-      if (generation === epoch.current) {
+      const r = await request<{ active: boolean; paid: boolean; testMode?: boolean }>(
+        "status?intentId=" + encodeURIComponent(pending.id)
+      );
+      if (r.active && r.paid) {
+        setPending(null);
         setMessage(
-          r.active
-            ? r.testMode
-              ? "Test membership verified. This does not unlock production access."
-              : "Membership active. Verified patron credentials connected to your Google account."
-            : r.status === "authorized"
-            ? "Payment authorized; capture is pending. Please do not pay again."
-            : "No captured payment is confirmed yet. You can check again."
+          r.testMode
+            ? "Test membership verified. No production access or real charge."
+            : "KITTY ONE Membership is verified and active."
         );
-        if (r.active) setPending(null);
+      } else {
+        setMessage("Payment status: awaiting capture or bank clearance.");
       }
     } catch (e) {
-      if (generation === epoch.current) setError((e as Error).message);
+      setError((e as Error).message);
     } finally {
       lock.current = false;
       setBusy(false);
@@ -134,17 +138,17 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
   }
 
   async function pay(planId: string) {
-    if (lock.current || pending) return;
+    if (lock.current) return;
     if (!user) {
       await login();
       return;
     }
-    if (!window.Razorpay || !ready) {
-      setError("Checkout is still loading.");
+    if (!ready || typeof window.Razorpay !== "function") {
+      setError("Payment checkout is loading. Please wait a moment and try again.");
       return;
     }
     if (securityEnabled && !token) {
-      setError("Complete the security check first.");
+      setError("Please complete the verification check before proceeding.");
       return;
     }
     lock.current = true;
@@ -165,9 +169,9 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
         amount: order.amount,
         currency: order.currency,
         name: "KITTY CORP",
-        description: (order.testMode ? "TEST · " : "") + "1-Year Verified Patron Membership",
-        image: window.location.origin + "/brand/monogram-small-v1.webp",
-        theme: { color: "#070911" },
+        description: (order.testMode ? "TEST · " : "") + "KITTY ONE Annual Membership ($249 USD)",
+        image: window.location.origin + "/brand/monogram.png",
+        theme: { color: "#2457D6" },
         retry: { enabled: true },
         handler: (value: Callback) => {
           if (callbackUsed.current || generation !== epoch.current) return;
@@ -181,8 +185,8 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 setPending(null);
                 setMessage(
                   r.testMode
-                    ? "Test membership verified. No production access or real charge."
-                    : "Verified Patron Membership is active. Your credential is tied to this Google account."
+                    ? "Test membership verified. No production charge."
+                    : "KITTY ONE Membership is active. Welcome to our research patron network."
                 );
               } else setMessage("Payment is awaiting capture or reconciliation. Please do not pay again; check its status.");
             })
@@ -200,14 +204,14 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
             lock.current = false;
             setBusy(false);
             if (generation === epoch.current) {
-              setMessage("Checkout closed. No membership was activated. Check status if you attempted a payment.");
+              setMessage("Checkout closed. No membership was activated.");
               void request("cancel", { intentId: order.intentId }).catch(() => {});
             }
           },
         },
       });
       checkout.on("payment.failed", () => {
-        if (generation === epoch.current) setError("Payment failed. Retry in Razorpay or close checkout.");
+        if (generation === epoch.current) setError("Payment failed. Please retry in Razorpay or use an alternate method.");
       });
       checkout.open();
     } catch (e) {
@@ -220,113 +224,205 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     }
   }
 
-  // Find featured 1-year patron plan or fallback to default
   const featuredPlan = catalog.plans.find((p) => p.product === "kitty") || catalog.plans[0];
 
   return (
-    <>
-      <section className="membership-account" aria-label="Membership account">
-        <div>
-          <ShieldCheck size={19} className="text-[#38bdf8]" />
-          <span>{user ? "Patron Account: " + (user.email || "Signed-in account") : "Connect your Google account to manage verified credentials."}</span>
+    <div className="w-full">
+      {/* Account Verification Bar */}
+      <section className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] mb-10 shadow-sm" aria-label="Membership account">
+        <div className="flex items-center gap-3">
+          <ShieldCheck className="w-5 h-5 text-[#2457D6] shrink-0" />
+          <span className="text-sm font-medium text-[#191B1D]">
+            {user ? "Signed in as: " + (user.email || "Patron Account") : "Sign in with Google to tie membership credentials to your verified identity."}
+          </span>
         </div>
         {user ? (
-          <button disabled={busy} onClick={() => void kittyCustomerAuth().then(signOut)}>
-            Switch account
+          <button
+            disabled={busy}
+            onClick={() => void kittyCustomerAuth().then(signOut)}
+            className="text-xs font-mono px-4 py-2 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[#292D31] hover:bg-[#E9E6E0] transition-colors"
+          >
+            Switch Account
           </button>
         ) : (
-          <button onClick={() => void login()}>Sign in with Google</button>
+          <button
+            onClick={() => void login()}
+            className="text-xs font-medium px-5 py-2.5 rounded-full bg-[#191B1D] !text-white hover:bg-[#292D31] transition-all shrink-0 shadow-sm inline-flex items-center gap-2"
+          >
+            <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <path d="M12.24 10.285V13.4h6.887C18.2 16.14 15.645 18 12.24 18c-3.315 0-6-2.685-6-6s2.685-6 6-6c1.47 0 2.815.535 3.86 1.415l2.4-2.4C16.89 3.48 14.7 2.6 12.24 2.6 7.07 2.6 2.88 6.79 2.88 12s4.19 9.4 9.36 9.4c5.4 0 8.98-3.795 8.98-9.14 0-.61-.06-1.2-.18-1.74h-8.8v-.235z"/>
+            </svg>
+            <span className="!text-white">Sign in with Google</span>
+          </button>
         )}
       </section>
 
       {account && (
-        <p className="membership-current" role="status">
+        <div className="p-4 rounded-xl border border-[#2457D6]/30 bg-[#2457D6]/5 text-sm text-[#191B1D] mb-8" role="status">
           {account.paid
-            ? `Verified Patron Membership active until ${new Date(account.expiresAt).toLocaleDateString()}. Membership extends your research briefings access.`
-            : "Your account is connected. No active verified membership is on file."}
-        </p>
+            ? `KITTY ONE Active until ${new Date(account.expiresAt).toLocaleDateString()}. Your research access and website privilege are active.`
+            : "Account connected. No active membership on record."}
+        </div>
       )}
 
       {!catalog.purchasesEnabled && (
-        <p className="membership-paused" role="status">
-          Public patron intake is currently invitation-only while research batches are processed. You may submit an inquiry for private enrollment.
-        </p>
+        <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#E9E6E0] text-sm text-[#292D31] mb-8" role="status">
+          Public membership intake is currently invitation-only while hardware production runs are processed. You may submit an inquiry for private enrollment.
+        </div>
       )}
 
       {catalog.testMode && catalog.purchasesEnabled && (
-        <p className="membership-paused">TEST MODE · No real currency is charged. Test verification is isolated from production records.</p>
+        <div className="p-3 rounded-lg border border-[#D9D6CF] bg-[#FBFAF7] text-xs font-mono text-[#73777C] mb-6">
+          TEST MODE · No real currency is charged.
+        </div>
       )}
 
-      <div className="membership-grid">
-        {/* 1. Primary Architecture: 1-Year Verified Metallic Membership */}
-        <article className="membership-card is-featured">
-          <div className="flex items-center gap-2 text-zinc-400 font-mono text-[10px] uppercase tracking-wider">
-            <Sparkles size={14} className="text-[#38bdf8]" />
-            <span>VERIFIED PATRON CREDENTIALS</span>
-          </div>
-          <span className="eyebrow">KITTY CORP · PHYSICAL AI &amp; ROBOTICS</span>
-          <h2>1-Year Verified Membership</h2>
+      {/* =========================================================================
+          SINGLE FEATURED PLAN: KITTY ONE ($249 USD)
+          ========================================================================= */}
+      <div className="max-w-3xl mx-auto mb-16">
+        <article className="p-8 sm:p-12 rounded-3xl border-2 border-[#2457D6] bg-[#FBFAF7] shadow-[0_8px_40px_rgba(36,87,214,0.08)] relative">
           
-          <div className="membership-price">
-            {featuredPlan && featuredPlan.amount !== null
-              ? "₹" + (featuredPlan.amount / 100).toLocaleString("en-IN")
-              : "₹9,900"}
-            <small> / year · verified patron</small>
-          </div>
-          {featuredPlan && featuredPlan.amount !== null && <LocalPrice amount={featuredPlan.amount} />}
-
-          {/* 3D Metallic Card Preview on Architectural Pedestal */}
-          <div className="my-2 relative flex items-center justify-center p-3 rounded-xl bg-zinc-950/70 border border-zinc-800">
-            <div className="w-full h-36 rounded-xl bg-gradient-to-br from-zinc-800 via-zinc-900 to-black p-4 border border-zinc-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.8)] relative flex flex-col justify-between">
-              <div className="flex justify-between items-start">
-                <span className="text-white font-mono text-[10px] font-bold tracking-[0.2em]">KITTY CORP</span>
-                <span className="text-[9px] font-mono text-[#38bdf8] border border-[#38bdf8]/40 px-1.5 py-0.5 rounded">NFC</span>
-              </div>
-              <div className="text-center my-auto">
-                <div className="text-[11px] tracking-[0.25em] font-bold text-zinc-200 uppercase">MEMBERSHIP</div>
-                <div className="text-[9px] text-[#38bdf8] font-mono tracking-wider mt-0.5">RESEARCH PATRON</div>
-              </div>
-              <div className="flex justify-between items-end text-[8px] font-mono text-zinc-500 border-t border-zinc-800 pt-2">
-                <span>VERIFIED 1-YEAR</span>
-                <span>2026—2027</span>
-              </div>
-            </div>
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2457D6] text-white text-[11px] font-mono tracking-wider uppercase font-semibold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>SINGLE ANNUAL MEMBERSHIP</span>
+            </span>
+            <span className="text-xs font-mono text-[#73777C]">ANNUAL PATRON PASS</span>
           </div>
 
-          <p className="text-xs text-zinc-400">
-            Full annual patron credentials supporting physical-world AI and autonomous robotics engineering.
+          <h2 className="text-3xl sm:text-4xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-3">
+            KITTY ONE
+          </h2>
+
+          <p className="text-base sm:text-lg text-[#62676D] font-light mb-8">
+            Our exclusive annual patron membership supporting independent physical AI, agricultural robotics, and clean energy systems.
           </p>
 
-          <ul>
-            <li>
-              <Check size={16} />
-              <span><strong>Laser-Etched Metallic NFC Card</strong> (Delivered to verified patrons)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Cryptographic Digital Credential</strong> (Tied to your patron account)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Private Quarterly Engineering Briefings</strong> &amp; telemetry logs</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Early Whitepaper Access</strong> (01 AgriYaan &amp; 02 Green Energy)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Direct Updates from Virat Anand</strong> (Founder &amp; Chief Technologist)</span>
-            </li>
-          </ul>
-
-          <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 text-[11px] text-zinc-400 flex items-start gap-2">
-            <AlertCircle size={15} className="text-amber-400 shrink-0 mt-0.5" />
-            <span>Strict Non-Equity Disclosure: Voluntary research support. Confers no equity, voting shares, dividends, or financial profit participation.</span>
+          <div className="flex items-baseline gap-3 mb-8 pb-6 border-b border-[#D9D6CF]">
+            <span className="text-4xl sm:text-5xl font-normal font-[family-name:var(--font-display)] text-[#191B1D]">
+              $249
+            </span>
+            <span className="text-base text-[#73777C] font-light">USD / year</span>
+            <span className="text-sm font-mono text-[#2457D6] ml-2">
+              (approx. ₹20,900 INR)
+            </span>
           </div>
 
+          {/* =========================================================================
+              CSS MOCKUP: METALLIC NFC CARD (ANODIZED TITANIUM FINISH)
+              ========================================================================= */}
+          <div className="my-8 p-6 rounded-2xl bg-[#E9E6E0] border border-[#D9D6CF] flex flex-col items-center justify-center">
+            <div className="w-full max-w-sm aspect-[1.586/1] rounded-2xl p-6 relative overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.18)] border border-stone-600/40 bg-gradient-to-br from-[#1E2024] via-[#2A2E33] to-[#121315] text-stone-200 flex flex-col justify-between">
+              {/* Metallic Sheen Effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+              
+              <div className="flex items-start justify-between relative z-10">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-[#2457D6]" />
+                  <span className="font-mono text-xs tracking-[0.25em] font-semibold text-white uppercase">
+                    KITTY CORP
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded border border-white/20 text-[9px] font-mono text-stone-300">
+                  <span>NFC</span>
+                </div>
+              </div>
+
+              <div className="my-auto relative z-10 text-center">
+                <div className="text-[14px] sm:text-[16px] font-mono tracking-[0.3em] text-white font-medium uppercase">
+                  KITTY ONE
+                </div>
+                <div className="text-[9px] font-mono tracking-widest text-[#2457D6] uppercase mt-1">
+                  VERIFIED PATRON CREDENTIAL
+                </div>
+              </div>
+
+              <div className="flex items-end justify-between text-[9px] font-mono text-stone-400 border-t border-white/10 pt-3 relative z-10">
+                <span>RESEARCH ACCESS · 1-YEAR</span>
+                <span>PHYSICAL-WORLD INTELLIGENCE</span>
+              </div>
+            </div>
+
+            <p className="text-[12px] text-[#62676D] font-light text-center mt-4 max-w-md">
+              <strong className="text-[#191B1D] font-medium">Honest Physical Delivery Disclosure:</strong> The laser-etched metallic NFC card is scheduled for delivery upon inaugural batch fabrication. Digital research credentials and website build privileges activate immediately upon enrollment.
+            </p>
+          </div>
+
+          {/* =========================================================================
+              THE 5 DISTINCT BENEFITS
+              ========================================================================= */}
+          <div className="mb-10">
+            <h3 className="text-sm font-mono uppercase tracking-wider text-[#73777C] mb-4">
+              Included Annual Benefits
+            </h3>
+            
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#292D31]">
+                <div className="w-5 h-5 rounded-full bg-[#2457D6]/10 text-[#2457D6] flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <strong className="font-medium text-[#191B1D]">Laser-Etched Metallic NFC Card</strong>
+                  <p className="text-xs text-[#62676D] font-light mt-0.5">Custom-engraved physical membership card delivered upon production run completion.</p>
+                </div>
+              </li>
+
+              <li className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#292D31]">
+                <div className="w-5 h-5 rounded-full bg-[#2457D6]/10 text-[#2457D6] flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <strong className="font-medium text-[#191B1D]">Early Research Access</strong>
+                  <p className="text-xs text-[#62676D] font-light mt-0.5">Direct access to unpublished research whitepapers, kinematics simulation models, and telemetry logs.</p>
+                </div>
+              </li>
+
+              <li className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#292D31]">
+                <div className="w-5 h-5 rounded-full bg-[#2457D6]/10 text-[#2457D6] flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <strong className="font-medium text-[#191B1D]">Quarterly Engineering Briefings</strong>
+                  <p className="text-xs text-[#62676D] font-light mt-0.5">Private quarterly written briefings and engineering updates directly from founder Virat Anand.</p>
+                </div>
+              </li>
+
+              <li className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#292D31]">
+                <div className="w-5 h-5 rounded-full bg-[#2457D6]/10 text-[#2457D6] flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <strong className="font-medium text-[#191B1D]">Priority Allocations &amp; Future Surprises</strong>
+                  <p className="text-xs text-[#62676D] font-light mt-0.5">Priority allocations for upcoming experimental hardware runs and member invitations.</p>
+                </div>
+              </li>
+
+              <li className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#292D31]">
+                <div className="w-5 h-5 rounded-full bg-[#2457D6]/10 text-[#2457D6] flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <strong className="font-medium text-[#191B1D]">One Free Business Website</strong>
+                  <p className="text-xs text-[#62676D] font-light mt-0.5">
+                    Designed and built by our commercial Digital Solutions Studio (valued at $1,500+). Domain &amp; hosting separate.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal / Non-Equity Disclosure */}
+          <div className="p-4 rounded-xl bg-[#F5F2EA] border border-[#D9D6CF] text-xs text-[#62676D] flex items-start gap-3 mb-8">
+            <AlertCircle className="w-4 h-4 text-[#2457D6] shrink-0 mt-0.5" />
+            <span>
+              <strong>Strict Non-Equity Disclosure:</strong> KITTY ONE is a patron membership supporting independent research. It confers no equity shares, voting rights, dividends, or financial profit participation.
+            </span>
+          </div>
+
+          {/* Purchase Button */}
           <button
-            className="button button-gold"
+            className="w-full py-4 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] !text-white text-[15px] font-medium transition-all shadow-[0_4px_16px_rgba(36,87,214,0.25)] flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-wait"
             disabled={
               !catalog.purchasesEnabled ||
               busy ||
@@ -335,114 +431,73 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
             }
             onClick={() => void pay(featuredPlan?.id || "kitty-plus")}
           >
-            {!catalog.purchasesEnabled
-              ? "Private Enrollment (Inquire)"
-              : busy
-              ? "Processing verification…"
-              : user && (!ready || (securityEnabled && !token))
-              ? "Preparing secure checkout…"
-              : user
-              ? "Join 1-Year Verified Membership"
-              : "Sign in to Join Membership"}
+            <span className="!text-white font-medium">
+              {!catalog.purchasesEnabled
+                ? "Private Enrollment (Inquire)"
+                : busy
+                ? "Processing verification…"
+                : user && (!ready || (securityEnabled && !token))
+                ? "Preparing secure checkout…"
+                : user
+                ? "Join KITTY ONE — $249 / Year"
+                : "Sign in with Google to Join"}
+            </span>
+            <ArrowRight className="w-4 h-4 !text-white group-hover:translate-x-1 transition-transform" />
           </button>
         </article>
+      </div>
 
-        {/* 2. Voluntary Research Support Card */}
-        <article className="membership-card">
-          <div className="flex items-center gap-2 text-zinc-400 font-mono text-[10px] uppercase tracking-wider">
-            <ShieldCheck size={14} className="text-[#38bdf8]" />
-            <span>OPEN LAB PATRONAGE</span>
+      {/* =========================================================================
+          SEPARATE OFFERINGS: VOLUNTARY SUPPORT & DIGITAL STUDIO
+          ========================================================================= */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+        
+        {/* Support Callout */}
+        <div className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-4">
+              <HeartHandshake className="w-5 h-5" />
+            </div>
+            <h3 className="text-xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-2">
+              Voluntary Research Support
+            </h3>
+            <p className="text-sm text-[#62676D] font-light leading-relaxed mb-6">
+              Prefer not to join an annual membership? You can support our open robotics and clean energy research with any voluntary contribution amount.
+            </p>
           </div>
-          <span className="eyebrow">OPEN INNOVATION · LAB CONTRIBUTION</span>
-          <h2>Research Supporter</h2>
-          
-          <div className="membership-price">
-            Voluntary<small> · custom amount</small>
+          <Link
+            href="/support"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#2457D6] hover:underline"
+          >
+            <span>Support Our Research</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Digital Studio Callout */}
+        <div className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-4">
+              <Layers className="w-5 h-5" />
+            </div>
+            <h3 className="text-xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-2">
+              Digital Solutions Studio
+            </h3>
+            <p className="text-sm text-[#62676D] font-light leading-relaxed mb-6">
+              Need custom web software, business automation pipelines, or intelligent agent workflows built for your enterprise? Explore our commercial studio.
+            </p>
           </div>
-
-          <p className="text-xs text-zinc-400">
-            Directly accelerate open robotics research, agricultural rover chassis manufacturing, and clean energy control benchmarks.
-          </p>
-
-          <ul>
-            <li>
-              <Check size={16} />
-              <span><strong>Open Robotics Support</strong> (Chassis fabrication &amp; sensor acquisition)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Public Research Whitepaper Acknowledgments</strong> (Optional named attribution)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Direct Research Digest</strong> sent biannually to contributors</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Zero Corporate Overhead</strong> — 100% applied directly to lab R&amp;D</span>
-            </li>
-          </ul>
-
-          <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 text-[11px] text-zinc-400 flex items-start gap-2">
-            <AlertCircle size={15} className="text-zinc-500 shrink-0 mt-0.5" />
-            <span>Contributions are voluntary scientific donations and do not constitute commercial product purchases.</span>
-          </div>
-
-          <a className="button button-outline" href="/payments?purpose=donation">
-            Contribute to Research <ArrowUpRight size={16} />
-          </a>
-        </article>
-
-        {/* 3. Commercial Digital Studio Gateway */}
-        <article className="membership-card">
-          <div className="flex items-center gap-2 text-zinc-400 font-mono text-[10px] uppercase tracking-wider">
-            <ArrowUpRight size={14} className="text-[#38bdf8]" />
-            <span>COMMERCIAL STUDIO</span>
-          </div>
-          <span className="eyebrow">DIGITAL SOLUTIONS · SEPARATE STUDIO</span>
-          <h2>Digital Solutions Studio</h2>
-          
-          <div className="membership-price">
-            Commercial<small> · INR-first pricing</small>
-          </div>
-
-          <p className="text-xs text-zinc-400">
-            For businesses seeking tailored web design, business automation pipelines, and custom AI integration solutions.
-          </p>
-
-          <ul>
-            <li>
-              <Check size={16} />
-              <span><strong>Premium Websites</strong> (Tailored high-performance digital presence)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Business Automation</strong> (Custom workflow &amp; CRM pipelines)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>AI Solutions</strong> (Fine-tuned models &amp; intelligent assistants)</span>
-            </li>
-            <li>
-              <Check size={16} />
-              <span><strong>Fixed Scope &amp; Milestones</strong> with dedicated engineer support</span>
-            </li>
-          </ul>
-
-          <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 text-[11px] text-zinc-400 flex items-start gap-2">
-            <AlertCircle size={15} className="text-zinc-500 shrink-0 mt-0.5" />
-            <span>Note on Inclusions &amp; Exclusions: Membership inclusions cover 1 business website build, digital solution access, updates, and event eligibility. Legal exclusions apply to third-party compute, domain registrations, and advertising spend.</span>
-          </div>
-
           <a
-            className="button button-outline"
             href="https://demo.thekittycorp.com"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#2457D6] hover:underline"
           >
-            Explore Digital Studio <ArrowUpRight size={16} />
+            <span>Explore Studio Demos</span>
+            <ArrowUpRight className="w-4 h-4" />
           </a>
-        </article>
+        </div>
+
       </div>
 
       {catalog.plans.some((p) => p.purchasable) && (
@@ -458,20 +513,26 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
       )}
 
       {message && (
-        <p className="membership-result" role="status">
+        <div className="p-4 rounded-xl border border-green-300 bg-green-50 text-sm text-green-900 max-w-2xl mx-auto mb-6" role="status">
           {message}
-        </p>
+        </div>
       )}
       {error && (
-        <p className="membership-error" role="alert">
+        <div className="p-4 rounded-xl border border-red-300 bg-red-50 text-sm text-red-900 max-w-2xl mx-auto mb-6" role="alert">
           {error}
-        </p>
+        </div>
       )}
       {pending && (
-        <button className="button button-outline" disabled={busy} onClick={() => void status()}>
-          Check payment status
-        </button>
+        <div className="text-center mb-6">
+          <button
+            className="px-6 py-2.5 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-sm text-[#191B1D] hover:bg-[#E9E6E0] transition-colors"
+            disabled={busy}
+            onClick={() => void status()}
+          >
+            Check payment status
+          </button>
+        </div>
       )}
-    </>
+    </div>
   );
 }

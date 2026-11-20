@@ -1,9 +1,8 @@
 "use client";
 
 import { updateAnalyticsConsent } from "@/lib/site-analytics";
-
 import { useSyncExternalStore, useState } from "react";
-import { ShieldCheck, X } from "lucide-react";
+import { Shield, X } from "lucide-react";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
@@ -36,66 +35,67 @@ export function CookieConsent() {
     }
   }
 
-  // If already chosen or dismissed, show the cute minimized paw badge
+  // Minimized badge
   if (choice || closed) {
     return (
       <button
         type="button"
-        className="kitty-cookie-tab-minimized"
+        className="fixed bottom-4 left-4 z-40 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#D9D6CF] bg-[#FBFAF7]/95 backdrop-blur-sm text-[11px] font-mono text-[#62676D] hover:text-[#191B1D] hover:border-[#73777C] transition-all shadow-sm"
         onClick={() => {
           try {
             localStorage.removeItem("kitty_cookie_consent_choice");
             window.dispatchEvent(new Event("storage"));
-          } catch {
-            // safe
-          }
+          } catch {}
           setClosed(false);
         }}
-        aria-label="Manage cookie and privacy settings"
-        title="Cookie preferences 🐾"
+        aria-label="Manage privacy preferences"
       >
-        <span className="kitty-paw-icon" aria-hidden="true">🐾</span>
-        <span className="kitty-cookie-label">Cookies</span>
+        <Shield size={12} className="text-[#2457D6]" />
+        <span>Privacy</span>
       </button>
     );
   }
 
   return (
-    <aside className="kitty-cookie-card" role="region" aria-label="Cookie consent">
-      <div className="kitty-cookie-header">
-        <div className="kitty-cookie-title">
-          <span className="kitty-paw-badge" aria-hidden="true">🐾</span>
-          <strong>Cookie &amp; Experience Controls</strong>
+    <aside
+      aria-label="Privacy & cookie preferences"
+      className="fixed bottom-6 left-6 z-50 max-w-sm rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.08)] text-[#191B1D]"
+    >
+      <div className="flex items-center justify-between gap-3 mb-2">
+        <div className="flex items-center gap-2">
+          <Shield size={16} className="text-[#2457D6]" />
+          <span className="font-mono text-xs uppercase tracking-wider font-medium text-[#191B1D]">
+            Privacy &amp; Telemetry
+          </span>
         </div>
         <button
           type="button"
-          className="kitty-cookie-close"
           onClick={() => setClosed(true)}
-          aria-label="Minimize cookie preferences"
+          className="text-[#73777C] hover:text-[#191B1D] p-1 rounded transition-colors"
+          aria-label="Dismiss privacy banner"
         >
-          <X size={15} />
+          <X size={14} />
         </button>
       </div>
 
-      <p className="kitty-cookie-desc">
-        We use essential cookies to secure your sign-in, save dark mode preferences, and ensure optimal WebGL2 physical simulation rendering.
+      <p className="text-xs text-[#62676D] leading-relaxed mb-4">
+        We use essential cookies to maintain secure sessions and privacy-preserving site telemetry.
       </p>
 
-      <div className="kitty-cookie-actions">
+      <div className="flex items-center gap-2.5">
         <button
           type="button"
-          className="button button-gold kitty-cookie-accept"
           onClick={() => saveChoice("all")}
+          className="px-4 py-2 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-xs font-medium transition-colors shadow-sm"
         >
-          <span>Allow Cookies 🐾</span>
+          Accept
         </button>
         <button
           type="button"
-          className="button button-outline kitty-cookie-essential"
           onClick={() => saveChoice("essential")}
+          className="px-4 py-2 rounded-full border border-[#D9D6CF] bg-[#E9E6E0] hover:bg-[#D9D6CF] text-[#191B1D] text-xs font-medium transition-colors"
         >
-          <ShieldCheck size={14} />
-          <span>Essential Only</span>
+          Essential Only
         </button>
       </div>
     </aside>
