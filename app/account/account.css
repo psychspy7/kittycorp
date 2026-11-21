@@ -116,3 +116,50 @@ html[data-theme="dark"] .account-section .text-link,
 html[data-theme="dark"] .account-actions .text-link {
   color: #69dcf2 !important;
 }
+
+/* Account dashboard contrast hardening — readable in both themes */
+.account-membership p,.account-records p,.account-payments p,.account-connect p,
+.account-preview-grid p,.account-heading p,.account-welcome>p,.account-privacy-note,
+.account-loading { color: #53564f; }
+.account-membership h2,.account-section h2,.account-records h3,.account-payments strong,
+.account-connect h2,.account-preview-grid h2,.account-heading h1,.account-welcome h1 { color: #171914; }
+.account-empty { color: #53564f; background: #f7f7f4; border-color: #d8d9d2; }
+.account-records article { color: #242620; background: #fff; border-color: #d8d9d2; }
+.account-records p { color: #53564f; }
+.account-payments article { color: #242620; }
+.account-payments code { color: #3d4540; background: #f1f2ed; }
+.account-connect { color: #242620; background: #f7f7f4; border-color: #d8d9d2; }
+.account-connect p { color: #53564f; }
+.account-connect label { color: #343730; }
+.account-connect input,.account-connect select { background: #fff; color: #171914; border-color: #c8cbc3; }
+.account-connect input::placeholder { color: #6a6d66; }
+.account-membership { color: #242620; }
+.account-membership p { color: #53564f; }
+.account-section .text-link,.account-actions .text-link { color: #5b451b; }
+.account-privacy-note { color: #53564f; }
+html[data-theme="dark"] .account-membership p,
+html[data-theme="dark"] .account-records p,
+html[data-theme="dark"] .account-payments p,
+html[data-theme="dark"] .account-connect p,
+html[data-theme="dark"] .account-preview-grid p,
+html[data-theme="dark"] .account-heading p,
+html[data-theme="dark"] .account-welcome>p,
+html[data-theme="dark"] .account-privacy-note,
+html[data-theme="dark"] .account-loading { color: #c7ccdc !important; }
+html[data-theme="dark"] .account-membership h2,
+html[data-theme="dark"] .account-section h2,
+html[data-theme="dark"] .account-records h3,
+html[data-theme="dark"] .account-payments strong,
+html[data-theme="dark"] .account-connect h2,
+html[data-theme="dark"] .account-preview-grid h2,
+html[data-theme="dark"] .account-heading h1,
+html[data-theme="dark"] .account-welcome h1 { color: #f7f8ff !important; }
+html[data-theme="dark"] .account-empty { color: #d5daea !important; }
+html[data-theme="dark"] .account-records article,
+html[data-theme="dark"] .account-payments article,
+html[data-theme="dark"] .account-connect { color: #e5e8f3 !important; }
+html[data-theme="dark"] .account-connect label { color: #dce1f0 !important; }
+html[data-theme="dark"] .account-connect input::placeholder { color: #aab3ca !important; }
+html[data-theme="dark"] .account-membership { color: #e5e8f3 !important; }
+html[data-theme="dark"] .account-section .text-link,
+html[data-theme="dark"] .account-actions .text-link { color: #83e7f8 !important; }
