@@ -6,7 +6,6 @@ import { SiteHeader, FilmButton } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { TeamProfiles } from "@/components/kitty/home-sections";
 import { companySettings, companyTeam } from "@/lib/company-server";
-import { sitePageContent } from "@/lib/site-pages-server";
 
 export const dynamic = "force-dynamic";
 
