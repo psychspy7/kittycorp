@@ -1,8 +1,8 @@
 export const productPages = {
   "kitty-ai": {
-    name: "KITTY AI", label: "PERSONAL ARTIFICIAL INTELLIGENCE", status: "IN ACTIVE DEVELOPMENT", category: "AI", media: "Application screenshots & voice demos",
-    description: "Personal AI built around memory, voice, privacy and user control.",
-    intro: "We want an assistant that can keep context without taking control away from you. Memory that you can understand. Voice that feels natural. Privacy that is considered from the start.",
+    name: "KITTY AI", label: "EMBEDDED INTELLIGENCE", status: "IN ACTIVE DEVELOPMENT", category: "ROBOTICS", media: "Perception and control demonstrations",
+    description: "A vision-and-control software stack connecting spatial perception, edge inference and robotic actuator control.",
+    intro: "KITTY AI is being developed as the intelligence layer for physical systems, connecting perception, context and control. It is an active development effort, not a released consumer companion app.",
     principles: [
       ["Memory you can manage", "We’re exploring how an assistant can remember useful context, while letting you review, change and remove it."],
       ["A more natural conversation", "Continuous voice interaction is part of the direction. We want talking to an assistant to feel less like operating a form."],
