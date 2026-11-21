@@ -14,7 +14,6 @@ import {
   recordAuditEvent,
   verifyOrigin,
 } from "@/lib/kitty-server";
-import { verifyTurnstile } from "@/lib/turnstile-server";
 import {
   checkoutAmount,
   createOrderSchema,
@@ -56,7 +55,6 @@ export async function POST(request: Request) {
     if (hasQuote) {
       if (value.purpose !== "project" || !value.paymentChoice || config.testMode)
         throw new HttpError("A project quote requires live checkout and a payment schedule.", 400);
-      await verifyTurnstile(request, value.turnstileToken, "payment-order");
       if (value.accountQuoteId) {
         if (!customer) throw new HttpError("Sign in to open your project payment.", 401);
         const owned = (await action("read", {})) as ProjectQuote;
@@ -86,7 +84,6 @@ export async function POST(request: Request) {
     // Project totals are server controlled. A voluntary contribution may be selected
     // by the visitor; it never settles an invoice or triggers project delivery.
     const amount = checkoutAmount(value, config);
-    if (!hasQuote) await verifyTurnstile(request, value.turnstileToken, "payment-order");
     let order;
     const quoteReservation = reserved?.quote.reservation_id;
     const quoteReceipt = quoteReservation ? `quote_${quoteReservation.replaceAll("-", "")}` : "";
