@@ -80,7 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       })),
     ...journal
-      .filter((entry) => entry.kind === "article")
+      .filter((entry) => entry.kind === "article" && !["a-more-honest-home-for-kitty", "what-we-want-kitty-ai-to-remember", "privacy-needs-more-than-a-label"].includes(entry.slug))
       .map((entry) => ({
         url: `${origin}/build-log/${entry.slug}`,
         lastModified: entry.updated_at ? new Date(entry.updated_at) : undefined,
