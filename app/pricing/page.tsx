@@ -5,8 +5,8 @@ import { ServicePricing } from "@/components/kitty/service-pricing";
 import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata = pageMetadata(
-  "Commercial Software Pricing • Digital Solutions Studio",
-  "Transparent pricing packages for bespoke websites, cloud applications, and automated workflows from KITTY CORP Digital Solutions Studio.",
+  "KITTY CORP | Studio Pricing",
+  "Transparent pricing for KITTY CORP Digital Solutions Studio websites, custom applications, AI automation, software integrations and scoped business projects."
   "/pricing"
 );
 
