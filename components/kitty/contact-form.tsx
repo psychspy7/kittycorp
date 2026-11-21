@@ -1,12 +1,18 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { feedbackSchema } from "@/lib/kitty-validation";
 import { trackConversion } from "@/lib/site-analytics";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 import { Turnstile, type TurnstileStatus } from "./turnstile";
 
-export function ContactForm({ subject = "" }: { subject?: string }) {
+function ContactFormInner({ subject: initialSubject = "" }: { subject?: string }) {
+  const searchParams = useSearchParams();
+  const paramSubject = searchParams?.get("subject") || "";
+  const rawSubject = initialSubject || paramSubject;
+  const allowed = ["Kitty AI", "KITTY AI", "Partnership", "Privacy", "Review", "Feedback", "Reward code", "Terms", "Investors"];
+  const subject = allowed.includes(rawSubject) ? rawSubject : "";
   const [kind, setKind] = useState<"message" | "review">(subject === "Review" ? "review" : "message");
   const [values, setValues] = useState({
     name: "",
@@ -176,5 +182,13 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
         </button>
       </div>
     </form>
+  );
+}
+
+export function ContactForm(props: { subject?: string }) {
+  return (
+    <Suspense fallback={null}>
+      <ContactFormInner {...props} />
+    </Suspense>
   );
 }

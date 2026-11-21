@@ -74,7 +74,7 @@ Keep the original Android signing key backed up privately. Existing installation
 
 Prefer turning publishing off when you want to hide a release. Deleting a launch can also delete its unreferenced uploaded APK. Replacing an APK can leave earlier files in storage, so check references before any storage cleanup.
 
-The handover includes a checksum-verified copy of the **currently published SecretChat 1.6.1 APK** under `handover/public-assets/releases/`. The older 1.5.0 file in `public/downloads/` is a bundled fallback. The live website uses its current Supabase launch record, not that older fallback, when the published launch is available. Do not replace the current release with the fallback by accident.
+The handover includes verified copies of published assets under `handover/public-assets/releases/`. The live website uses its current Supabase launch record when the published launch is available.
 
 ## Manage founders and the full team
 
@@ -178,7 +178,7 @@ Read `handover/BACKUP-AND-RECOVERY.md` before moving to a new host or restoring 
 
 ## What this ZIP contains
 
-Complete website source and lockfile; public brand artwork/video; self-hosted fonts and licences; bundled APK/screenshots; Vercel configuration; API/Studio code; schema snapshots; this owner’s guide; technical handoff; live structural inventory; current published-content reference; and copies of the current SecretChat 1.6.1 APK and uploaded public icons.
+Complete website source and lockfile; public brand artwork/video; self-hosted fonts and licences; bundled assets; Vercel configuration; API/Studio code; schema snapshots; this owner’s guide; technical handoff; live structural inventory; current published-content reference; and uploaded public icons.
 
 `handover/public-assets/MANIFEST.json` records those copies and checksums. One external journal cover remains a URL reference because it was supplied as an external sharing link. Source-file checksums and the source baseline are in the release manifest. Read `START-HERE.md` for the shortest setup instructions.
 
@@ -224,13 +224,13 @@ In Studio → **Project quotes**, confirm scope, enter the agreed full price in 
 
 The legacy client invoice amount can remain 0; this does not close donation checkout. The homepage donation form is near the bottom and loads payment scripts only after it is opened. Product plans remain separate from services and contributions. The footer currency selector controls approximate local-price displays, while checkout states the actual charged currency.
 
-KITTY AI membership uses the app's own account, provider configuration and paid-access checks. LISA's planned US$100 access offer shows early-update and testing perks; paid preorders require delivery/refund terms before activation. Neither becomes active just by saving the service/donation Razorpay keys.
+KITTY AI membership uses the app's own account, provider configuration and paid-access checks.
 
 ## Latest payment release — 12 October 2026
 
 The redesigned homepage has two divisions: Digital Solutions and Intelligence & Robotics. Publicly listed robotics ideas are clearly labelled as concepts; products and shipped work stay in the Products directory. The former Vercel hostname redirects to the canonical domain, and official source links use `https://thekittycorp.com`.
 
-KITTY Plus is enabled at ₹99/calendar month, with manual renewal. LISA’s separate refundable preorder is at `/lisa-ai/preorder`: no delivery date is promised, and a full refund is available before early access. See Studio → **LISA preorders** for reservations and refund requests. Process actual refunds through Razorpay, then let the signed webhook reconcile the record. Do not mark early access provided until it has actually been supplied.
+KITTY Plus is enabled at ₹99/calendar month, with manual renewal.
 
 Use Studio → **Project quotes** for per-client pricing, scope approval and preview-ready status. KITTY AI can help analyze a brief, but automatic pricing waits for your actual base prices and rules. Leave the legacy project amount 0 when using individual quotes. Read **PROJECT-PAYMENTS-GUIDE.md** for discounts, exchange-rate estimates, exact charged currency and recovery.
 
@@ -239,10 +239,10 @@ Before advertising paid plans widely, complete your own real payment and fresh-p
 
 ## Customer Google accounts — 13 October 2026
 
-The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, separate LISA reservations and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.
+The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.
 
 ## 18 October 2026 commercial update
-Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read LISA-DISTRIBUTION-GUIDE.md before enabling instant LISA delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.
+Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Older split-payment notes describe historical terms, which remain attached to existing records.
 
 ## Business conversion release — 19 October 2026
 Read handover/BUSINESS-CONVERSION-RELEASE-2026-10-19.md and handover/CONTINUATION-PROMPT-2026-10-19.txt for historical acquisition flow and Hack in Hills records. The 1 November redesign replaces the earlier homepage positioning, removes Suvid AI from public pages, and directs the former Vercel host to the canonical domain.

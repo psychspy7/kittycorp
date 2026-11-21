@@ -4,6 +4,8 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 import { pageMetadata } from "@/lib/site-metadata";
 
+export const revalidate = 86400;
+
 export const metadata = pageMetadata(
   "KITTY CORP | Refunds & Cancellations",
   "Refund and cancellation guidance for KITTY CORP digital projects, memberships, supporter contributions, payment issues and customer support requests.",

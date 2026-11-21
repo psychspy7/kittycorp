@@ -1,13 +1,13 @@
 ## Current website source — 1 November 2026
 
 GitHub `main` contains the premium homepage and the latest responsive light/dark theme control. The site follows the visitor’s system appearance by default, remembers a manual theme choice, and matches Cloudflare Turnstile to the selected theme. `https://thekittycorp.com` is canonical; the former `kittycorp.vercel.app` hostname redirects while preserving paths. The production build, TypeScript check and lint pass; lint reports six existing warnings in untouched files. Confirm the official domain serves the new header before treating a Vercel preview as a production release.
-Read `handover/FINAL-STATUS-2026-10-15.md` for the verified SecretChat 2.0 website listing, current public links and remaining owner checks.
+Read `handover/FINAL-STATUS-2026-10-15.md` for current public links and remaining owner checks.
 
 # Kitty Corp website
 
 Read **OWNER-GUIDE.md** first for detailed instructions on every Studio task, updating the code yourself, handing work to another AI app, deployment and recovery.
 
-The archive contains the latest tested website source, brand assets, font licences, signed Android APKs, schema snapshots, hosting configuration and a complete handover folder. `handover/public-assets/` additionally contains the currently published SecretChat **1.6.1** APK and uploaded icons. `public/downloads/` retains the older bundled fallback; the live database chooses the current release.
+The archive contains the latest tested website source, brand assets, font licences, signed Android APKs, schema snapshots, hosting configuration and a complete handover folder.
 
 Use this package to continue working with the existing Supabase website project. Private credentials and live private records are excluded. It is not a full database backup. Start from the latest GitHub `main` if more updates have been made since 3 October 2026.
 
@@ -32,13 +32,13 @@ To run locally:
 
 Run `npm run build:next` for production. See `README.md` for general deployment instructions. Private environment files and credentials are excluded.
 
-SecretChat's download page is `/secretchat`. Open `/kitten` and sign in with the approved Google account, then open **Apps & websites** to upload future Android APKs, edit release notes, and publish or hide apps. These content updates require no GitHub push. The former ID/password login and `/admins` address are retired.
+Open `/kitten` and sign in with the approved Google account, then open **Apps & websites** to upload future Android APKs, edit release notes, and publish or hide apps. These content updates require no GitHub push. The former ID/password login and `/admins` address are retired.
 
 **Build log & updates** manages full articles and development-feed updates, including dates, categories, status and cover images. **Early access** manages the private email list and export. Existing Studio credentials are unchanged. See the README for the publication workflow and privacy behavior.
 
 Use trusted signed APKs and keep original app signing keys backed up privately. Never put filled-in environment files, administrator passwords, signing keys, or server credentials in GitHub.
 
-**Products** edits KITTY AI, LISA AI and Sentinel: separate icons, descriptions, stages and product notes. **Team** adds, edits, hides or removes real people, with photographs, roles and profile links. **Company & socials** edits official company links and the team introduction. Uploaded PNG, JPEG and WebP images (up to 3 MB) are optimized; save the entry, then refresh the website to see the newest image.
+**Products** edits core initiatives: separate icons, descriptions, stages and product notes. **Team** adds, edits, hides or removes real people, with photographs, roles and profile links. **Company & socials** edits official company links and the team introduction. Uploaded PNG, JPEG and WebP images (up to 3 MB) are optimized; save the entry, then refresh the website to see the newest image.
 
 The **Websites & applications** page lets visitors send project briefs. These appear as **Project enquiry** messages in the private **Project enquiries & inbox**, including the requested service, business name, budget, timing and message.
 
@@ -52,16 +52,16 @@ Read `HOSTING-AND-PERFORMANCE.md` for native Next.js hosting, safe public cachin
 
 ## Professional website and payment setup
 
-Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and the separate KITTY/LISA product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.
+Read `PAYMENT-PROVIDERS-SETUP.md` for encrypted Studio provider settings, approval gates, project payments, contributions and product access paths. `PROFESSIONAL-REFINEMENT-REPORT.md` records the combined local checks and preview. The source archive excludes private settings and live records.
 
 Read **PROJECT-PAYMENTS-GUIDE.md** for the latest per-client quote workflow, discounts, local-currency display and product-payment activation limits.
 
-The 12 October payment release includes live KITTY Plus setup and separate refundable LISA preorders. Read **PROJECT-PAYMENTS-GUIDE.md** and **RELEASE-2026-10-12.md** before continuing. Source archives exclude private configuration, live customer records and Git history; restore them only from their original services/backups.
+The payment release includes live KITTY Plus setup. Read **PROJECT-PAYMENTS-GUIDE.md** and **RELEASE-2026-10-12.md** before continuing. Source archives exclude private configuration, live customer records and Git history; restore them only from their original services/backups.
 
 
 ## Customer Google accounts — 13 October 2026
 
-The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, separate LISA reservations and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.
+The header now offers customer Google sign-in at `/account`, using the existing KITTY AI Firebase identity. Customers can track signed-in project requests, KITTY Plus access, and website payments. Guests remain supported; older records require their private link and matching Google email to connect. Studio remains separate at `/kitten`. Read **CUSTOMER-ACCOUNTS-GUIDE.md** for the owner workflow, privacy boundary, database migration and acceptance checks.
 
 ## Website email automation
 
@@ -72,7 +72,7 @@ Read **EMAIL-AUTOMATION-GUIDE.md** before deploying the new project/contact ackn
 The separate `kitty-corp-database-health` Worker runs a small read-only website database check at **08:30 AM IST daily**. Read **integrations/supabase-health/README.md** for Cloudflare logs, testing, deployment, disabling the schedule and Supabase Free-plan limitations. Private credentials are excluded from source archives.
 
 ## Commercial update — 18 October 2026
-Read handover/UPDATE-2026-10-18.md and handover/CONTINUATION-PROMPT-2026-10-18.txt for the current packages, appointments, game rewards, consent and LISA delivery limits.
+Read handover/UPDATE-2026-10-18.md and handover/CONTINUATION-PROMPT-2026-10-18.txt for the current packages, appointments, game rewards, and consent limits.
 
 ## Business conversion release — 19 October 2026
 Older business-conversion and domain-migration handovers are historical snapshots. The current public domain is `https://thekittycorp.com`; use the current Google Studio and payment guides for callback and webhook URLs.

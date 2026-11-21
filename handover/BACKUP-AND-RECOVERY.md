@@ -2,7 +2,7 @@
 
 ## What is backed up in this handover
 
-The ZIP contains complete source, bundled assets, configuration templates, SQL snapshots, current public-content references, current structural inventory and copies of two uploaded public icons plus the SecretChat 1.6.1 APK. The downloaded APK’s SHA-256 matched the live launch record during packaging.
+The ZIP contains complete source, bundled assets, configuration templates, SQL snapshots, current public-content references, current structural inventory and copies of two uploaded public icons plus the agriyaan 1.6.1 APK. The downloaded APK’s SHA-256 matched the live launch record during packaging.
 
 It does **not** contain private environment values, administrator passwords, Android signing keys, private enquiries, early-access emails, unpublished drafts, Supabase Auth accounts, secret-setting values or a complete Storage backup. The source snapshot is sufficient to continue coding against the existing backend; it cannot recreate that backend’s private state by itself.
 

@@ -6,12 +6,17 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { SecretChatDownload, AppIcon } from "@/components/kitty/launches";
-import { publishedLaunch } from "@/lib/launches-server";
+import { publishedLaunch, publishedLaunches } from "@/lib/launches-server";
 import { fileSize } from "@/lib/launches";
 import { mediaHref } from "@/lib/company-content";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const launches = await publishedLaunches().catch(() => []);
+  return launches.map((l) => ({ slug: l.slug }));
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

@@ -4,6 +4,8 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 
+export const revalidate = 86400;
+
 export const metadata = pageMetadata(
   "KITTY CORP | Terms of Service",
   "Terms for KITTY CORP website use, Digital Solutions Studio projects, quotes, software delivery, subscriptions, payments and customer responsibilities.",

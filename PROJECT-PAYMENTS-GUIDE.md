@@ -18,7 +18,7 @@ The homepage and `/payments` now separate product plans, client quotes and volun
 - The saved website LIVE Razorpay pair was accepted by Razorpay's read-only API, and an unpaid ₹1 donation checkout opened with UPI QR/cards. One unpaid live order was created for this check; no charge was completed.
 - Local preview had obsolete test keys in ignored `.env`. Empty overrides in `.env.local` allow current encrypted Studio keys to resolve without exposing them. Private files are excluded from Git and the clean ZIP.
 - Website service/contribution checkout does not grant KITTY AI access. The matching KITTY membership gateway can resolve from encrypted runtime or private server environment; KITTY Plus is now enabled on its LIVE backend at ₹99 per calendar month, 100 chat requests and 10 cloud-speech requests per day. Google account identity binds ownership. Renewal is manual; no automatic debit. Native membership webhook setup and signed payload checks passed. A real paid purchase and fresh-phone acceptance test remain owner steps.
-- LISA remains in development. Planned perks: early LISA updates, invitations to test future KITTY products, and team development news. The owner approved a refundable US$100 one-time preorder: no delivery date promised yet and a full refund before early access is provided. `/lisa-ai/preorder` freezes the exact INR charge using the current daily reference rate before checkout. The preorder is a website reservation; it does not activate the LISA app.
+- UrjaYaan remains in development. Planned perks: early UrjaYaan updates, invitations to test future KITTY products, and team development news. The owner approved a refundable US$100 one-time preorder: no delivery date promised yet and a full refund before early access is provided. `/urjayaan/preorder` freezes the exact INR charge using the current daily reference rate before checkout. The preorder is a website reservation; it does not activate the UrjaYaan app.
 - Local currency is a daily reference estimate with a manual currency selector. ExchangeRate-API is fetched on the server and cached for 24 hours; the browser gets only a converted estimate, not a raw rate dataset. Rates are attributed on price displays. Razorpay currently charges INR; bank conversion/fees may differ. Foreign-currency charging requires merchant approval/configuration, not just changing a symbol.
 - Customer quote pages, payment pages and Studio are excluded from public Analytics. The public `/projects` page is tracked without form content or fragments.
 
@@ -30,20 +30,20 @@ A timeout after provider creation may leave a reservation pending. Retry can rec
 
 Database security advisor reports the intended deny-all RLS design for private quote/payment tables and the existing leaked-password-protection warning. Studio remains Google-only with its existing owner identity and revocation checks. No unrelated auth setting was changed.
 
-## LISA refundable preorder
+## UrjaYaan refundable preorder
 
-1. Customer opens `/lisa-ai/preorder`, enters a contact name/email and accepts versioned terms. No mailing-list enrollment or charge occurs at this step.
+1. Customer opens `/urjayaan/preorder`, enters a contact name/email and accepts versioned terms. No mailing-list enrollment or charge occurs at this step.
 2. The server reads the Studio USD plan price, gets the daily reference conversion and stores the exact INR charge and accepted terms in a private reservation. Only a SHA-256 hash of the random access token is stored. Keep the fragment link private.
-3. Payment opens the separate LISA order endpoint. The server checks the frozen amount, mode, approval, challenge, reservation and provider receipt/notes. Retry reuses the same order, including recovery after uncertain creation; it never guesses by issuing a second order.
+3. Payment opens the separate UrjaYaan order endpoint. The server checks the frozen amount, mode, approval, challenge, reservation and provider receipt/notes. Retry reuses the same order, including recovery after uncertain creation; it never guesses by issuing a second order.
 4. Existing signed HttpOnly order sessions, callback HMAC and fetched captured payment checks record payment. Signed webhooks recover captures and verified full refunds. Only live, matching purpose/reference/amount/currency records count.
-5. Studio → LISA preorders shows the customer, accepted terms, exact charge, payment IDs and refund requests. It does not grant application entitlements. Mark early access provided only after the customer actually receives it. This is an irreversible delivery timestamp; unresolved refund requests block it.
+5. Studio → UrjaYaan preorders shows the customer, accepted terms, exact charge, payment IDs and refund requests. It does not grant application entitlements. Mark early access provided only after the customer actually receives it. This is an irreversible delivery timestamp; unresolved refund requests block it.
 6. Before access, customers can request a full refund from their private reservation link. The owner processes the full INR amount through the original Razorpay payment in the dashboard. The processed-refund webhook updates the status. This release does not automatically send money or refund on an anonymous button click.
 
-The website webhook is active for `payment.captured`, `order.paid`, and `refund.processed`; its existing secret was preserved. The separate membership webhook and KITTY provider vault are distinct. Never put provider secrets into client code or source archives. Run the additional `scripts/test-lisa-preorders.mjs` check through `npm run check:website`.
+The website webhook is active for `payment.captured`, `order.paid`, and `refund.processed`; its existing secret was preserved. The separate membership webhook and KITTY provider vault are distinct. Never put provider secrets into client code or source archives. Run the additional `scripts/test-UrjaYaan-preorders.mjs` check through `npm run check:website`.
 
 ## Current app download
 
 `/kitty-ai` links the verified current 1.8.0 Android release and Plus plans. The website bundles the already published APK under `public/downloads/kitty-ai-1.8.0.apk`; it preserves the same package/signing certificate. Future APKs can still be published through Studio. Bundled APK hashes must match their release metadata.
 
 ## 18 October 2026 commercial update
-Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read LISA-DISTRIBUTION-GUIDE.md before enabling instant LISA delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.
+Read handover/UPDATE-2026-10-18.md for current packages, appointments, stored quote discounts and reward redemption. Read UrjaYaan-DISTRIBUTION-GUIDE.md before enabling instant UrjaYaan delivery. Older preorder and split-payment notes describe historical terms, which remain attached to existing records.

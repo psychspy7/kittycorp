@@ -25,6 +25,6 @@ The previous Razorpay test checkout and offline signature/security tests are com
 
 ## Product memberships are separate
 
-This Studio configuration enables service payments and voluntary contributions. KITTY AI memberships require the KITTY AI owner console's provider setup, deployed membership database migration and private website gateway. LISA remains a planned USD100 access offer until its preorder and fulfillment flow is ready. Service/contribution payments do not grant app access.
+This Studio configuration enables service payments and voluntary contributions. KITTY AI memberships require the KITTY AI owner console's provider setup, deployed membership database migration and private website gateway. UrjaYaan remains a planned USD100 access offer until its preorder and fulfillment flow is ready. Service/contribution payments do not grant app access.
 
 Official guides: https://razorpay.com/docs/payments/dashboard/account-settings/api-keys/ and https://razorpay.com/docs/payments/dashboard/account-settings/webhooks/.

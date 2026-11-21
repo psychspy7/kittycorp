@@ -18,7 +18,7 @@ async function endpoint() {
 }
 export async function commerce<T=Record<string,unknown>>(path:string,method="GET",payload?:unknown,userToken?:string):Promise<T> {
  const {url,token}=await endpoint();
- const r=await fetch(url+"/api/"+path,{method,cache:"no-store",redirect:"error",signal:AbortSignal.timeout(15000),headers:{"Content-Type":"application/json","X-Kitty-Commerce-Token":token,...(userToken?{Authorization:"Bearer "+userToken}:{})},body:payload?JSON.stringify(payload):undefined});
+ const r=await fetch(url+"/api/"+path,{method,...(method==="GET"?{next:{revalidate:3600}}:{cache:"no-store" as const}),redirect:"error",signal:AbortSignal.timeout(15000),headers:{"Content-Type":"application/json","X-Kitty-Commerce-Token":token,...(userToken?{Authorization:"Bearer "+userToken}:{})},body:payload?JSON.stringify(payload):undefined});
  const text=await r.text();if(text.length>128000)throw new HttpError("Membership response was too large.",502);
  let data;try{data=JSON.parse(text);}catch{throw new HttpError("Membership service is temporarily unavailable.",502);}
  if(!r.ok)throw new HttpError(typeof data.error==="string"?data.error:"Membership request failed.",r.status);

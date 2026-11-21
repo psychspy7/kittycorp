@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { companyProducts, companyTeam } from "@/lib/company-server";
 import { publishedLaunches } from "@/lib/launches-server";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata = pageMetadata(
   "KITTY CORP | Partnerships & Research",

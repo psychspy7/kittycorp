@@ -1,6 +1,6 @@
 # Website performance verification — 11 October 2026
 
-Scope: KITTY CORP website only. Source: canonical `KITTY CORP STARTUP WEBSITE`; repository `psychspy7/kittycorp`. KITTY AI, LISA and SecretChat were not changed.
+Scope: KITTY CORP website only. Source: canonical `KITTY CORP STARTUP WEBSITE`; repository `psychspy7/kittycorp`. KITTY AI, UrjaYaan and agriyaan were not changed.
 
 ## Outcome and release state
 

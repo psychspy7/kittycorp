@@ -3,7 +3,6 @@ import {
   ArrowDownRight,
   ArrowUpRight,
   Bot,
-  Code2,
   Globe2,
   Leaf,
   Radio,

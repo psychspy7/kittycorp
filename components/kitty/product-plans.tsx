@@ -4,7 +4,7 @@ import { ArrowUpRight,Check } from "lucide-react";
 import type { CommerceSettings } from "@/lib/commerce";
 
 export function ProductPlans({settings,only}:{settings:CommerceSettings;only?:"kitty"}){
-  const plans = (["kitty"] as const).filter(key => (!only || key === only) && (settings.plans as Record<string, any>)[key]?.published);
+  const plans = (["kitty"] as const).filter(key => (!only || key === only) && settings.plans[key]?.published);
   if(!plans.length)return null;
   return (
     <section className="product-plans" aria-labelledby={only?`${only}-plans-heading`:"plans-heading"}>
@@ -17,7 +17,7 @@ export function ProductPlans({settings,only}:{settings:CommerceSettings;only?:"k
       </div>
       <div className={`plan-grid ${only?"single-plan":""}`}>
         {plans.map(key => {
-          const plan = (settings.plans as Record<string, any>)[key];
+          const plan = settings.plans[key];
           if (!plan) return null;
           return (
             <article className="product-plan" key={key}>

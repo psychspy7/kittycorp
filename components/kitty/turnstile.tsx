@@ -63,8 +63,10 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
     if (!enabled) { reportStatus("disabled"); return; }
     callback.current("");
     if (!activeSiteKey) {
-      setError("Security verification is being configured. Please try again shortly.");
-      reportStatus("error");
+      setTimeout(() => {
+        setError("Security verification is being configured. Please try again shortly.");
+        reportStatus("error");
+      }, 0);
       return;
     }
     if (!scriptReady) { reportStatus("loading"); return; }

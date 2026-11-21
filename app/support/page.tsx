@@ -6,6 +6,8 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { BottomSupport } from "@/components/kitty/bottom-support";
 import { pageMetadata } from "@/lib/site-metadata";
 
+export const revalidate = 86400;
+
 export const metadata: Metadata = pageMetadata(
   "Support Our Research • Voluntary Lab Patronage",
   "Voluntarily support KITTY CORP's independent physical AI, agricultural robotics (AgriYaan), and clean energy systems (UrjaYaan). Supporter recognition and open research updates.",

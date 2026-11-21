@@ -4,7 +4,7 @@ This task owns the KITTY Android/backend/admin membership integration, website a
 
 KITTY terms approved in this conversation: five elapsed free minutes per UTC day from first chat request, INR99 per calendar month; owner delegated finite limits, selected 100 chat and 10 cloud-speech requests/day with existing service-wide quota preserved. No automatic debits. Purchases remain paused. Credentials entered in KITTY owner console are encrypted; separate server commerce gateway is required. Razorpay provider status and signatures verified on website; Worker enforces ownership and idempotent entitlement reconciliation.
 
-The other website task owns service/donation providers, their payment ledger, professional site refinement and LISA presentation. Those files are preserved. Membership page now uses its ProductPlans only=lisa/getCommerce presentation. KITTY catalogue remains authoritative for KITTY limits and pricing. LISA checkout/access enforcement stays disabled in this task; its supplied planned pricing is presentation only.
+The other website task owns service/donation providers, their payment ledger, professional site refinement and UrjaYaan presentation. Those files are preserved. Membership page now uses its ProductPlans only=UrjaYaan/getCommerce presentation. KITTY catalogue remains authoritative for KITTY limits and pricing. UrjaYaan checkout/access enforcement stays disabled in this task; its supplied planned pricing is presentation only.
 
 The two reported Firebase/client JSON type errors are fixed. Existing lib/razorpay-server.ts exposes optional config to razorpayClient; membership reuses that client and signature utilities without changing service/donation fulfillment. Do not overwrite membership files with older copies.
 

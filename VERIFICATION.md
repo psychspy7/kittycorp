@@ -5,8 +5,8 @@
 - Studio sign-in, journal creation/editing/deletion, private drafts and future-dated publication were verified against the website backend. Temporary test entries were removed.
 - Early-access submissions, selected interests, duplicate handling, validation, private list access, anti-spam timing, cross-origin blocking and gateway authorization passed integration checks. The temporary signup was removed.
 - The new launch code passed targeted lint checks.
-- SecretChat 1.5.0 build 6 passed Android `apksigner` verification, package/label checks, release-mode checks, and the private-credential scan. SHA-256: `b32be6a4ac9555a1fe23943a90507a6e9d4583f9522e018162240268ca9de53b`.
-- HTTP checks passed for the homepage, SecretChat page, Studio, sitemap, and exact APK download. Download responses use the APK MIME type, attachment header, and immutable caching.
+- agriyaan 1.5.0 build 6 passed Android `apksigner` verification, package/label checks, release-mode checks, and the private-credential scan. SHA-256: `b32be6a4ac9555a1fe23943a90507a6e9d4583f9522e018162240268ca9de53b`.
+- HTTP checks passed for the homepage, agriyaan page, Studio, sitemap, and exact APK download. Download responses use the APK MIME type, attachment header, and immutable caching.
 - Administrator sign-in was verified without logging credentials.
 - A temporary launch exercised direct 5.3 MB upload, server-side SHA-256 verification, private drafts, public publishing, exact storage download, unpublishing, deletion, and logout. The temporary launch and file were removed afterward.
 - Anonymous requests cannot use launch management or upload endpoints. Cross-origin writes are blocked. Row-level security hides draft rows and APKs from anonymous visitors.
@@ -27,7 +27,7 @@ Final interface update: targeted ESLint checks, the Next.js production build and
 
 - Preserved the latest website-launch publishing flow and live/explore actions from GitHub.
 - Production build, TypeScript check and targeted lint passed. Archived source copies in `outputs/` and handover material are excluded from compilation.
-- Isolated browser checks passed on desktop (1440px) and mobile (390px): real EXAMIFY screenshot/live URL, Android release actions, two founder positions, tool links, mobile navigation, enquiry anchor, native FAQ and no client-side errors. Reduced motion was enabled for public-page checks.
+- Isolated browser checks passed on desktop (1440px) and mobile (390px): real AgriYaan screenshot/live URL, Android release actions, two founder positions, tool links, mobile navigation, enquiry anchor, native FAQ and no client-side errors. Reduced motion was enabled for public-page checks.
 - Studio sign-in and review draft create/list/edit/delete passed against the dedicated website backend. Publication without permission and unsafe source URLs returned 400. Unauthenticated reads/writes returned 401; cross-origin mutations returned 403.
 - Direct anonymous database insertion was denied with 42501. Private drafts were invisible to anonymous reads and the public homepage.
 - An uncommitted database fixture confirmed public reads see approved/published rows but not drafts; the transaction was rolled back. The separate Studio QA draft was deleted, and its isolated session signed out. No review was published for testing.

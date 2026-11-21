@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 
+export const revalidate = 86400;
+
 export const metadata = pageMetadata(
   "KITTY CORP | Privacy Policy",
   "Privacy information for KITTY CORP visitors, enquiries, accounts, subscriptions, analytics and payments, including how data is handled and your rights.",

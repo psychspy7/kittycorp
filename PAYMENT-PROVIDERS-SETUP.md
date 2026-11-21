@@ -47,11 +47,11 @@ The current draft presents five elapsed free minutes per UTC day and KITTY Plus 
 
 The separate service/donation provider panel does not change KITTY's membership catalogue. PayPal and Cashfree are prepared for services/contributions here; they do not grant KITTY AI membership access.
 
-## LISA planned access and real media
+## UrjaYaan planned access and real media
 
-In Studio **Payments & plans**, edit the draft LISA price, access period, description, feature list and gift note. Publishing the draft shows information only. It never opens a preorder checkout or grants LISA access.
+In Studio **Payments & plans**, edit the draft UrjaYaan price, access period, description, feature list and gift note. Publishing the draft shows information only. It never opens a preorder checkout or grants UrjaYaan access.
 
-The requested default is USD100 once, for lifetime access to the purchased version. Major paid upgrades are separate. Preorder gift contents, eligibility and delivery details must be confirmed before preorders open; the public copy makes this clear. LISA's licensing/fulfillment and payment-enabled preorder flow still need their separate implementation.
+The requested default is USD100 once, for lifetime access to the purchased version. Major paid upgrades are separate. Preorder gift contents, eligibility and delivery details must be confirmed before preorders open; the public copy makes this clear. UrjaYaan's licensing/fulfillment and payment-enabled preorder flow still need their separate implementation.
 
 Replace development images with real screenshots/renders through the gallery upload fields. Save captions that accurately describe the development stage. Versioned bundled images and UUID-named uploaded images prevent stale replacement icons/media. Existing Products, Team and Company & socials panels continue to manage icons, people and profile links.
 

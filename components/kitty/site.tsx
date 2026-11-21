@@ -4,7 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, Play, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { customerSignedIn, subscribeCustomerSession } from "@/lib/customer-session";
 
@@ -305,7 +305,7 @@ export function SiteHeader() {
 export function FilmButton({ className = "" }: { className?: string }) {
   return (
     <Dialog>
-      <DialogContent className="film-dialog max-w-2xl bg-[#FBFAF7] p-6 rounded-2xl border border-[#D9D6CF]">
+      <DialogContent className={`film-dialog max-w-2xl bg-[#FBFAF7] p-6 rounded-2xl border border-[#D9D6CF] ${className}`.trim()}>
         <DialogTitle className="text-xl font-medium text-[#191B1D] mb-1">KITTY, in motion.</DialogTitle>
         <DialogDescription className="text-sm text-[#62676D] mb-4 font-light">
           A short look at the KITTY CORP identity.

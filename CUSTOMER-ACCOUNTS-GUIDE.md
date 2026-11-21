@@ -6,20 +6,19 @@ Customers can choose **Sign in** in the website header, or open `/account`, and 
 
 - Project requests: submitted scope, review state, agreed quote, advance/balance and verified payment progress. Open a request to see its quote and payment choices.
 - KITTY AI: current free/Plus access, expiry and manual renewal. There is no automatic debit.
-- LISA: reservations, payment status, early-access delivery state and eligible refund requests. Website reservations do not activate the companion app automatically.
-- Website payments and voluntary contributions made while signed in, plus payments for connected projects and LISA reservations. KITTY membership access is reported by its existing backend separately.
+- Website payments and voluntary contributions made while signed in, plus payments for connected projects. KITTY membership access is reported by its existing backend separately.
 
-Sign in before sending a new project brief or creating a LISA reservation. The verified Google email is filled in for tracking. Guests can still use the original forms and checkout. Older guest records can be connected in **My account → Bring it into your account**: paste the complete private quote or reservation link, and use the Google account matching its original email. Knowing an email address or project ID alone cannot connect a record. Accounts cannot reassign an existing owner's records.
+Sign in before sending a new project brief. The verified Google email is filled in for tracking. Guests can still use the original forms and checkout. Older guest records can be connected in **My account → Bring it into your account**: paste the complete private quote link, and use the Google account matching its original email. Knowing an email address or project ID alone cannot connect a record. Accounts cannot reassign an existing owner's records.
 
 ## Owner workflow
 
-Project enquiries continue to appear in Studio's inbox and **Project quotes**. Approve the actual scope and price there; set preview ready when appropriate. Customers refresh their account to see changes. LISA delivery and refund requests remain in **LISA preorders**. Actual refunds are processed through Razorpay and reconciled by the existing signed webhook. Saving a refund request does not itself move money.
+Project enquiries continue to appear in Studio's inbox and **Project quotes**. Approve the actual scope and price there; set preview ready when appropriate. Customers refresh their account to see changes.
 
 Google customer sign-in uses Firebase project `kittyai-f743c`. Website and localhost are already authorized. If a new custom domain is introduced, authorize its hostname in Firebase Authentication and check the public Firebase configuration. Keep Studio's separate Supabase Google sign-in and administrator allowlist intact. A customer account never grants Studio access.
 
 ## Data and hosting
 
-`supabase/customer-accounts.sql` has been applied to the website project `mgkghnblbisubympudaa`. Do not run it against the private-chat database. For a new database, install existing base/schema, commerce payments, project quotes and LISA preorder extensions first, then customer accounts. The customer ownership table is private, has RLS enabled and exposes no direct visitor table access. Existing project/LISA submission functions attach verified ownership atomically.
+`supabase/customer-accounts.sql` has been applied to the website project `mgkghnblbisubympudaa`. For a new database, install existing base/schema, commerce payments, and project quotes extensions first, then customer accounts. The customer ownership table is private, has RLS enabled and exposes no direct visitor table access. Existing project submission functions attach verified ownership atomically.
 
 The server verifies each bearer token through the existing KITTY backend `/api/me`; that backend validates the Google Firebase session and revoked/disabled accounts. Supabase receives trusted server UID/email through the private gateway, never a user-supplied UID. Preserve existing `KITTY_MEMBERSHIP_BACKEND`, `KITTY_COMMERCE_GATEWAY_TOKEN`, website Supabase configuration and `FEEDBACK_GATEWAY_TOKEN`. No new private credentials are required.
 

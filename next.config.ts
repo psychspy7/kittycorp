@@ -47,6 +47,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+      {
         source: "/launches/exam-preparation",
         destination: "/",
         permanent: true,

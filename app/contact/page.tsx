@@ -11,18 +11,14 @@ import { companySettings } from "@/lib/company-server";
 import { sitePageContent } from "@/lib/site-pages-server";
 import "./contact.css";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata("KITTY CORP | Contact", "Contact KITTY CORP about robotics research, AgriYaan, UrjaYaan partnerships, Digital Solutions Studio projects, collaborations or general enquiries.", "/contact");
 }
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ subject?: string }>;
-}) {
-  const [{ subject }, settings, copy] = await Promise.all([searchParams, companySettings(), sitePageContent("contact")]);
+export default async function ContactPage() {
+  const [settings, copy] = await Promise.all([companySettings(), sitePageContent("contact")]);
   const companyLinkedIn = settings.socials.linkedin && !isFounderLinkedIn(settings.socials.linkedin)
     ? settings.socials.linkedin
     : null;
@@ -97,15 +93,7 @@ export default async function ContactPage({
           </div>
 
           <div className="contact-form-container">
-            <ContactForm
-              subject={
-                ["Kitty AI", "KITTY AI", "Partnership", "Privacy", "Review", "Feedback", "Reward code", "Terms", "Investors"].includes(
-                  subject || ""
-                )
-                  ? subject
-                  : ""
-              }
-            />
+            <ContactForm />
           </div>
         </div>
       </main>

@@ -11,10 +11,10 @@ Paths below are relative to the inner `kitty-corp` folder. Keep the folders toge
 | Desktop/mobile navigation and reusable identity | `components/kitty/site.tsx` |
 | Footer and company social links | `components/kitty/site-footer.tsx` |
 | Services page and enquiry form | `app/services/page.tsx`, `components/kitty/project-enquiry.tsx`, `lib/enquiries.ts`, `app/api/enquiries/route.ts` |
-| Product directory and details | `app/products/page.tsx`, `app/kitty-ai/`, `app/lisa-ai/`, `app/sentinel/`, `components/kitty/product-page.tsx` |
+| Product directory and details | `app/products/page.tsx`, `app/kitty-ai/`, `app/urjayaan/`, `app/sentinel/`, `components/kitty/product-page.tsx` |
 | Company and full team pages | `app/company/page.tsx`, `app/team/page.tsx` |
 | Content types, defaults, founder-selection rule and media addresses | `lib/company-content.ts`, `lib/company-server.ts` |
-| SecretChat page and bundled fallback information | `app/secretchat/page.tsx`, `components/kitty/secretchat.tsx`, `lib/secretchat.ts` |
+| agriyaan page and bundled fallback information | `app/agriyaan/page.tsx`, `components/kitty/agriyaan.tsx`, `lib/agriyaan.ts` |
 | General launch pages and release notice | `app/launches/[slug]/page.tsx`, `components/kitty/launches.tsx`, `components/kitty/launch-announcement.tsx`, `lib/launches.ts`, `lib/launches-server.ts` |
 | Published APK download authorization and redirect | `app/api/downloads/[slug]/route.ts` |
 | Build journal and articles | `app/build-log/`, `components/kitty/journal.tsx`, `lib/journal.ts`, `lib/journal-server.ts` |
@@ -33,7 +33,7 @@ Paths below are relative to the inner `kitty-corp` folder. Keep the folders toge
 | Image optimization and delivery | `app/api/admin/media/route.ts`, `app/api/media/[kind]/[file]/route.ts` |
 | Brand artwork and identity film | `public/brand/` |
 | Fonts and required licence notices | `public/fonts/` |
-| Bundled Android fallback and product screenshots | `public/downloads/`, `public/secretchat/` |
+| Bundled Android fallback and product screenshots | `public/downloads/`, `public/agriyaan/` |
 | Search crawler rules and XML sitemap | `app/robots.ts`, `app/sitemap.ts` |
 | Build commands and pinned installation | `package.json`, `package-lock.json`, `.npmrc` |
 | Native Next.js build/headers | `next.config.ts`, `vercel.json`, `tsconfig.json` |

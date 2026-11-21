@@ -6,7 +6,7 @@ import { companyProducts } from "@/lib/company-server";
 import { serviceSegments } from "@/lib/business-content";
 import { websiteOrigin } from "@/lib/site-metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = websiteOrigin();
