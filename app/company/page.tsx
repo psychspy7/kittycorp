@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/site-metadata";
+import { pageMetadata, jsonLd } from "@/lib/site-metadata";
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight, ShieldCheck, Cpu, Globe } from "lucide-react";
 import { SiteHeader, FilmButton } from "@/components/kitty/site";
@@ -11,8 +11,11 @@ import { sitePageContent } from "@/lib/site-pages-server";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const copy = await sitePageContent("company");
-  return pageMetadata(copy.seoTitle || "The Company • KITTY CORP", copy.seoDescription || "About KITTY CORP, our philosophy and the team building physical-world intelligence.", "/company");
+  return pageMetadata(
+    "KITTY CORP | Company & Mission",
+    "KITTY CORP is an Indian technology company building Physical-World Intelligence through AI robotics, AgriYaan, UrjaYaan and its Digital Solutions Studio.",
+    "/company"
+  );
 }
 
 export default async function CompanyPage() {
@@ -95,6 +98,14 @@ export default async function CompanyPage() {
           </div>
         </section>
 
+
+        <section className="mb-16 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] p-8 sm:p-10" aria-labelledby="company-faq-heading">
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [{"question":"What is KITTY CORP?","answer":"KITTY CORP is an India-founded technology company developing Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering."},{"question":"What is KITTY AgriYaan?","answer":"KITTY AgriYaan is an agricultural autonomous rover initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. Its current stage is simulation and kinematics."},{"question":"What is KITTY UrjaYaan?","answer":"KITTY UrjaYaan is a clean-energy intelligence initiative focused on solar monitoring, energy optimisation and predictive telemetry. Its current work includes algorithmic modelling."},{"question":"How does KITTY CORP generate revenue?","answer":"KITTY CORP generates commercial revenue through its Digital Solutions Studio, which delivers websites, applications, custom software, AI workflows and integrations for clients."}] }) }} />
+          <h2 id="company-faq-heading" className="text-2xl font-[family-name:var(--font-display)] mb-6">KITTY CORP — common questions</h2>
+          <div className="space-y-5">{[{"question":"What is KITTY CORP?","answer":"KITTY CORP is an India-founded technology company developing Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering."},{"question":"What is KITTY AgriYaan?","answer":"KITTY AgriYaan is an agricultural autonomous rover initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. Its current stage is simulation and kinematics."},{"question":"What is KITTY UrjaYaan?","answer":"KITTY UrjaYaan is a clean-energy intelligence initiative focused on solar monitoring, energy optimisation and predictive telemetry. Its current work includes algorithmic modelling."},{"question":"How does KITTY CORP generate revenue?","answer":"KITTY CORP generates commercial revenue through its Digital Solutions Studio, which delivers websites, applications, custom software, AI workflows and integrations for clients."}].map((item) => (
+            <article key={item.question}><h3 className="font-medium text-[#191B1D] mb-2">{item.question}</h3><p className="text-[#62676D] leading-relaxed font-light">{item.answer}</p></article>
+          ))}</div>
+        </section>
         {/* Team Section */}
         <section className="mb-20">
           <div className="max-w-3xl mb-12">
