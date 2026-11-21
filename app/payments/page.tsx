@@ -17,7 +17,6 @@ export default async function PaymentsPage({ searchParams }: { searchParams: Pro
   const rawPurpose = Array.isArray(query.purpose) ? query.purpose[0] : query.purpose;
   const rawPlan = Array.isArray(query.plan) ? query.plan[0] : query.plan;
   const rawAmount = Array.isArray(query.amount) ? query.amount[0] : query.amount;
-  const rawAmount = Array.isArray(query.amount) ? query.amount[0] : query.amount;
   const requestedDonationAmount = rawAmount && /^\d{1,7}(?:\.\d{1,2})?$/.test(rawAmount) ? Number(rawAmount) : undefined;
   const isSubscription = rawPurpose === "subscription" || rawPlan === "kitty-one";
   const purpose = isSubscription ? "subscription" : rawPurpose === "donation" ? "donation" : rawPurpose === "project" ? "project" : null;
