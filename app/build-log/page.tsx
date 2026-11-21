@@ -6,7 +6,7 @@ import { JournalCards, Currently } from "@/components/kitty/journal";
 import { publicJournal } from "@/lib/journal-server";
 import { journalCategories } from "@/lib/journal";
 export const dynamic="force-dynamic";
-export const metadata=pageMetadata('Build Log','Notes on AI, robotics, engineering and building KITTY CORP. Decisions, experiments and work in progress.','/build-log');
+export const metadata=pageMetadata('KITTY CORP | Engineering Build Log','Engineering notes from KITTY CORP on Physical-World Intelligence, AI robotics, AgriYaan, UrjaYaan, software delivery, experiments and work in progress.','/build-log');
 export default async function BuildLog({searchParams}:{searchParams:Promise<{category?:string}>}){
   const {category}=await searchParams;
   const selected=journalCategories.find(c=>c===category);
