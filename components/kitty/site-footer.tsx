@@ -87,6 +87,7 @@ export async function SiteFooter() {
             <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">
               Support Our Research
             </Link>
+            <span className="text-xs leading-relaxed text-[#C4C9D1] max-w-[15rem]">Any contribution is entirely voluntary. It is not a purchase, investment or membership and gives no ownership or equity.</span>
             <p className="max-w-[17rem] text-xs leading-relaxed text-[#D1D5DB]">
               Contributions are entirely voluntary and help support independent research. They are not a purchase, membership, investment or ownership interest.
             </p>
