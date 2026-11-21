@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const alt =
-  "KITTY CORP — Independent technology company building websites, software and AI workflows";
+  "KITTY CORP: Independent technology company building websites, software and AI workflows";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

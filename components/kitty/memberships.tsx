@@ -333,19 +333,19 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 <div className="text-[14px] sm:text-[16px] font-mono tracking-[0.3em] text-white font-medium uppercase">
                   KITTY ONE
                 </div>
-                <div className="text-[9px] font-mono tracking-widest text-[#2457D6] uppercase mt-1">
+                <div className="text-[10px] font-mono tracking-widest text-[#E5E7EB] uppercase mt-1">
                   VERIFIED PATRON CREDENTIAL
                 </div>
               </div>
 
-              <div className="flex items-end justify-between text-[9px] font-mono text-stone-400 border-t border-white/10 pt-3 relative z-10">
-                <span>RESEARCH ACCESS · 1-YEAR</span>
+              <div className="flex items-end justify-between text-[10px] font-mono text-[#E5E7EB] border-t border-white/20 pt-3 relative z-10">
+                <span>RESEARCH ACCESS 1/YEAR</span>
                 <span>PHYSICAL-WORLD INTELLIGENCE</span>
               </div>
             </div>
 
             <p className="text-[12px] text-[#62676D] font-light text-center mt-4 max-w-md">
-              <strong className="text-[#191B1D] font-medium">Honest Physical Delivery Disclosure:</strong> The laser-etched metallic NFC card is scheduled for delivery upon inaugural batch fabrication. Digital research credentials and website build privileges activate immediately upon enrollment.
+              Physical metallic NFC cards ship with the inaugural production batch. Digital research credentials and website build privileges activate immediately upon enrollment.
             </p>
           </div>
 
@@ -439,7 +439,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 : user && (!ready || (securityEnabled && !token))
                 ? "Preparing secure checkout…"
                 : user
-                ? "Join KITTY ONE — $249 / Year"
+                ? "Join KITTY ONE: $249 / Year"
                 : "Sign in with Google to Join"}
             </span>
             <ArrowRight className="w-4 h-4 !text-white group-hover:translate-x-1 transition-transform" />

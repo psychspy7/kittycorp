@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, ShieldCheck, Cpu, Leaf, Globe } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ShieldCheck, Cpu, Globe } from "lucide-react";
 import { SiteHeader, FilmButton } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
-import { CompanyIntro, WhyKitty, TeamProfiles } from "@/components/kitty/home-sections";
+import { TeamProfiles } from "@/components/kitty/home-sections";
 import { companySettings, companyTeam } from "@/lib/company-server";
 import { sitePageContent } from "@/lib/site-pages-server";
 
@@ -29,10 +29,9 @@ export default async function CompanyPage() {
         
         {/* Page Heading */}
         <div className="max-w-4xl mb-16">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-6 max-w-[94vw]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
-            <span className="truncate">03 · Corporate Profile &amp; Mission</span>
-          </div>
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-4">
+            Corporate Profile &amp; Mission
+          </span>
 
           <h1 className="text-[clamp(32px,7.5vw,72px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
             Building technology <br className="hidden sm:block" />
@@ -40,7 +39,7 @@ export default async function CompanyPage() {
           </h1>
 
           <p className="text-[18px] sm:text-[21px] leading-[1.65] text-[#292D31] font-light max-w-2xl mb-8">
-            KITTY CORP is an emerging technology company founded in India with a global outlook. We believe intelligence must leave the confines of glass screens and step directly into the physical world where food is grown, power is balanced, and systems interact with living environments.
+            KITTY CORP is an emerging technology company founded in India with a global outlook. We believe intelligence must extend beyond screens into the physical world where food is grown, power is balanced, and systems interact with living environments.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -63,10 +62,10 @@ export default async function CompanyPage() {
                 <Cpu className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
-                Physical Over Synthetic
+                Physical Engineering
               </h3>
               <p className="text-[#62676D] leading-relaxed font-light text-[15px]">
-                We avoid synthetic software gimmicks. Our focus is developing machines, algorithms, and sensory systems that solve concrete physical challenges in agriculture, energy, and robotics.
+                We focus on practical engineering. Our work centers on machines, algorithms, and sensory systems that solve concrete physical challenges in agriculture, clean energy, and robotics.
               </p>
             </div>
 
@@ -78,7 +77,7 @@ export default async function CompanyPage() {
                 India to the World
               </h3>
               <p className="text-[#62676D] leading-relaxed font-light text-[15px]">
-                India offers one of the world&apos;s most demanding testing grounds — complex agricultural topographies, monsoon variables, and rapid energy transitions. What is proven here works anywhere.
+                India offers one of the world&apos;s most demanding testing grounds, with complex agricultural topographies, monsoon variables, and rapid energy transitions. What is proven here works anywhere.
               </p>
             </div>
 
@@ -90,7 +89,7 @@ export default async function CompanyPage() {
                 Independent Stewardship
               </h3>
               <p className="text-[#62676D] leading-relaxed font-light text-[15px]">
-                By generating recurring commercial revenue through our Digital Solutions Studio, we maintain sovereign control over our long-term scientific roadmap and deep-tech prototypes.
+                By generating commercial revenue through our Digital Solutions Studio, we maintain direct stewardship over our long-term scientific roadmap and hardware prototypes.
               </p>
             </div>
           </div>

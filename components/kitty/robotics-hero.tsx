@@ -40,7 +40,7 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
   const isReducedMotion = useSyncExternalStore(subscribeReducedMotion, getReducedMotionSnapshot, () => false);
   const [webGLFailed, setWebGLFailed] = useState(false);
 
-  const heroSubtitle = copy?.heroDescription || "We are exploring the future of AI robotics — building intelligent systems for the physical world.";
+  const heroSubtitle = copy?.heroDescription || "We are exploring the future of AI robotics, building intelligent systems for the physical world.";
 
   // WebGL 3D Scene Controller
   useEffect(() => {
@@ -462,7 +462,7 @@ export function RoboticsHero({ copy }: { copy?: SitePageContent }) {
           <div className="w-full flex items-center justify-between border-t border-white/[0.08] pt-4 text-[11px] font-mono tracking-wider text-zinc-500 pointer-events-auto">
             <div className="flex items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-[#c5a880] animate-pulse" />
-              <span className="hidden sm:inline">ROBOTICS DIVISION — PROTOTYPE SEQUENCE 01</span>
+              <span className="hidden sm:inline">ROBOTICS DIVISION: PROTOTYPE SEQUENCE</span>
               <span className="sm:hidden">UNIT-01 ACTIVE</span>
             </div>
 
@@ -493,10 +493,10 @@ function RoboticsHUD({ progress, isReducedMotion }: { progress: number; isReduce
     <div className="absolute inset-0 z-5 pointer-events-none p-6 md:p-10 flex flex-col justify-between">
       {/* Top Right Obsidian Telemetry Box */}
       <div className="self-end max-w-[280px] bg-[#0c0d10]/80 backdrop-blur-md border border-white/[0.08] rounded-xl p-4 text-[#a1a1aa] font-mono text-[10px] space-y-2 hidden md:block shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
-        <div className="sr-only">KITTY CORP ROBOTICS DIVISION R&amp;D — 2027</div>
+        <div className="sr-only">KITTY CORP ROBOTICS DIVISION R&amp;D 2027</div>
         <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
           <span className="text-[#f8f8f9] font-medium tracking-wider">KITTY CORP</span>
-          <span className="text-zinc-500">R&amp;D — 2027</span>
+          <span className="text-zinc-500">R&amp;D 2027</span>
         </div>
         <p className="text-[11px] text-white font-medium tracking-wider">PHYSICAL INTELLIGENCE</p>
 

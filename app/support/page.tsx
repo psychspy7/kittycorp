@@ -51,7 +51,7 @@ export default function SupportPage() {
             <div className="p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#F5F2EA] shadow-[0_2px_16px_rgba(0,0,0,0.02)]">
               <div className="mb-8">
                 <span className="font-mono text-xs uppercase tracking-widest text-[#2457D6] block mb-2">
-                  01 · Make a Voluntary Contribution
+                  Make a Voluntary Contribution
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
                   Select your contribution level
@@ -96,7 +96,7 @@ export default function SupportPage() {
           <div className="max-w-7xl mx-auto">
             <div className="max-w-3xl mb-12">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
-                02 · Supporter Recognition
+                Supporter Recognition
               </span>
               <h2 className="text-[clamp(28px,3.8vw,46px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
                 How we acknowledge our scientific patrons.

@@ -57,11 +57,11 @@ export function IntelligenceShowcase() {
     </div>
     <div className="intelligence-grid">
       <article className="intelligence-card buddy-card">
-        <div className="intelligence-visual"><BuddyVisual/><span className="visual-note">01 · PRODUCT CONCEPT</span></div>
+        <div className="intelligence-visual"><BuddyVisual/><span className="visual-note">PRODUCT CONCEPT</span></div>
         <div className="intelligence-copy"><div className="intelligence-meta"><span>PERSONAL AI</span><span>IN DEVELOPMENT</span></div><h3>KITTY BUDDY</h3><p>A compact AI companion designed to be carried, worn or placed on a desk. A separate detachable wheel base is being explored to add movement when needed.</p><Link href="/projects" className="text-link">Discuss the project <ArrowUpRight size={15}/></Link></div>
       </article>
       <article className="intelligence-card agriyaan-card">
-        <div className="intelligence-visual"><AgriyaanVisual/><span className="visual-note">02 · RESEARCH CONCEPT</span></div>
+        <div className="intelligence-visual"><AgriyaanVisual/><span className="visual-note">RESEARCH CONCEPT</span></div>
         <div className="intelligence-copy"><div className="intelligence-meta"><span>AGRICULTURAL ROBOTICS</span><span>CONCEPT STAGE</span></div><h3>AGRIYAAN</h3><p>An agricultural AI rover being developed around the needs of farmers. We plan to present the concept to the Government of India and explore a path towards field testing.</p><Link href="/projects" className="text-link">Discuss the project <ArrowUpRight size={15}/></Link></div>
       </article>
     </div>

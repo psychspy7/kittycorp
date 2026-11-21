@@ -48,7 +48,7 @@ export default function PricingPage() {
 
           <ol className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 list-none p-0">
             <li className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA]">
-              <strong className="block text-lg font-medium text-[#191B1D] mb-2">01 · Full Advance</strong>
+              <strong className="block text-lg font-medium text-[#191B1D] mb-2">Full Advance</strong>
               <span className="text-sm text-[#62676D] font-light">2.5% discount applied across the agreed total project contract.</span>
             </li>
             <li className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA]">
@@ -56,7 +56,7 @@ export default function PricingPage() {
               <span className="text-sm text-[#62676D] font-light">1% discount. The second half is due only upon staging preview approval.</span>
             </li>
             <li className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA]">
-              <strong className="block text-lg font-medium text-[#191B1D] mb-2">03 · Consultation First</strong>
+              <strong className="block text-lg font-medium text-[#191B1D] mb-2">Consultation First</strong>
               <span className="text-sm text-[#62676D] font-light">Request an appointment to discuss architecture before committing.</span>
             </li>
           </ol>

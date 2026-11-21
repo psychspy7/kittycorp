@@ -142,7 +142,7 @@ export function ObsidianLab() {
     <section id="intelligence-robotics" className="obsidian-lab page-gutter" aria-labelledby="obsidian-lab-title" data-element="fire">
       <div className="obsidian-section-heading">
         <div><span className="obsidian-label obsidian-label-blue">02 / PRODUCTS IN DEVELOPMENT</span><h2 id="obsidian-lab-title">Ideas made<br /><em>to leave the screen.</em></h2></div>
-        <p>Three directions we&apos;re actively exploring across agriculture, energy and personal AI. Each project is shown at its current stage — no inflated launch claims.</p>
+        <p>Three directions we&apos;re actively exploring across agriculture, energy and personal AI. Each project is shown at its current stage, with no inflated launch claims.</p>
       </div>
       <div className="obsidian-lab-grid">
         {projects.map(({ number, name, discipline, status, icon: Icon, description, detail, tone }) => (

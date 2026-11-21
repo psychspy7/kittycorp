@@ -19,11 +19,28 @@ export default function AgriYaanPage() {
 
       <main id="main">
         {/* =========================================================================
-            HERO: KITTY AGRIYAAN — FULL-BLEED PHOTOGRAPHIC BACKGROUND INTEGRATION
+            HERO: KITTY AGRIYAAN: PHOTOGRAPHIC INTEGRATION & MOBILE-FIRST STACKING
             ========================================================================= */}
-        <section className="relative w-full overflow-hidden bg-[#F5F2EA] min-h-[640px] lg:min-h-[740px] flex items-center pt-32 pb-24 px-6 sm:px-10 lg:px-16 border-b border-[#D9D6CF]">
-          {/* Edge-to-Edge Background Photographic Layer */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
+        <section className="relative w-full overflow-hidden bg-[#F5F2EA] border-b border-[#D9D6CF]">
+          {/* Mobile Viewport: Image First */}
+          <div className="block lg:hidden px-6 pt-24 pb-4">
+            <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-[#D9D6CF]">
+              <Image
+                src="/photography/agriyaan-field-robot.webp"
+                alt="KITTY AgriYaan autonomous agricultural field robotics platform"
+                fill
+                priority
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <p className="mt-2 text-[11px] font-mono text-[#73777C] uppercase tracking-wider">
+              AgriYaan Physical Kinematics Rig · Mud &amp; Canopy Autonomy
+            </p>
+          </div>
+
+          {/* Desktop Photographic Background Layer */}
+          <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none">
             <Image
               src="/photography/agriyaan-field-robot.webp"
               alt="KITTY AgriYaan agricultural rover chassis navigating rugged field topography"
@@ -38,12 +55,11 @@ export default function AgriYaanPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EA] via-transparent via-15% to-[#F5F2EA]" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto w-full">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7]/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-8 max-w-[94vw]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
-                <span className="truncate">Flagship Initiative 01 · Agricultural Robotics</span>
-              </div>
+          <div className="relative z-10 max-w-7xl mx-auto w-full py-12 lg:py-32 px-6 sm:px-10 lg:px-16 flex items-center min-h-[580px] lg:min-h-[720px]">
+            <div className="max-w-3xl bg-[#F5F2EA]/95 lg:bg-transparent rounded-2xl p-2 lg:p-0">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
+                Precision Agriculture
+              </span>
 
               <h1 className="text-[clamp(36px,7.5vw,78px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
                 KITTY AgriYaan
@@ -55,13 +71,13 @@ export default function AgriYaanPage() {
 
               <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#73777C] pb-4">
                 <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#191B1D] font-medium">
-                  STATUS: KINEMATICS &amp; SIMULATION
+                  STAGE: SIMULATION &amp; KINEMATICS
                 </span>
                 <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#191B1D] font-medium">
                   DOMAIN: SOIL &amp; CANOPY AUTONOMY
                 </span>
                 <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#2457D6] font-medium">
-                  ORIGIN: BHARAT TO GLOBAL FARMLANDS
+                  ORIGIN: INDIA TO GLOBAL FARMLANDS
                 </span>
               </div>
             </div>
@@ -73,13 +89,13 @@ export default function AgriYaanPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 01: THE CHALLENGE IN THE LIVING FIELD
+            CONTEXT & PURPOSE: THE CHALLENGE IN THE LIVING FIELD
             ========================================================================= */}
         <section className="py-20 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
           <div className="max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] text-[11px] font-mono tracking-widest text-[#62676D] uppercase mb-6">
-              <span>01 · Context &amp; Purpose</span>
-            </div>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-4">
+              Context and Purpose
+            </span>
 
             <h2 className="text-[clamp(28px,3.8vw,46px)] font-[family-name:var(--font-display)] font-normal leading-[1.15] text-[#191B1D] mb-8">
               Why agriculture demands physical-world intelligence.
@@ -100,13 +116,13 @@ export default function AgriYaanPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 02: CORE ARCHITECTURE PILLARS
+            ENGINEERING SYSTEMS: CORE ARCHITECTURE PILLARS
             ========================================================================= */}
         <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-3xl mb-14">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
-                02 · Engineering Systems
+                Engineering Systems
               </span>
               <h2 className="text-[clamp(30px,4vw,48px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
                 Engineered for mud, dust, and living ecosystems.
@@ -125,7 +141,7 @@ export default function AgriYaanPage() {
                     Low-Compaction Lightweight Chassis
                   </h3>
                   <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
-                    Weighing under 45 kg, the rover’s articulated rocker-bogie kinematics distribute ground pressure evenly, allowing full mobility over wet mud furrows without damaging fragile rhizosphere root systems.
+                    Weighing under 45 kg, the rover's articulated rocker-bogie kinematics distribute ground pressure evenly, allowing full mobility over wet mud furrows without damaging fragile rhizosphere root systems.
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
@@ -174,14 +190,14 @@ export default function AgriYaanPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 03: CURRENT STAGE & HONEST DISCLOSURE
+            CURRENT STAGE: DEVELOPMENT ROADMAP
             ========================================================================= */}
         <section className="py-20 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
           <div className="max-w-4xl mx-auto">
             <div className="p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#F5F2EA]">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[11px] font-mono tracking-wider text-[#62676D] uppercase mb-5">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#2457D6]" />
-                <span>Transparent Technical Milestone Status</span>
+                <span>Technical Milestone Status</span>
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
@@ -189,7 +205,7 @@ export default function AgriYaanPage() {
               </h2>
 
               <p className="text-[16px] leading-[1.75] text-[#292D31] font-light mb-6">
-                We believe in total honesty regarding early-stage deep-tech hardware. AgriYaan is currently in active physical prototyping and kinematics simulation. We are not selling commercial consumer farm units today.
+                AgriYaan is currently in active physical prototyping and kinematics simulation. We are not selling commercial consumer farm units today.
               </p>
 
               <div className="space-y-3 font-mono text-xs text-[#62676D] border-t border-[#D9D6CF] pt-6">
@@ -211,7 +227,7 @@ export default function AgriYaanPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 04: COLLABORATION & INQUIRIES
+            COLLABORATION & INQUIRIES
             ========================================================================= */}
         <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA]">
           <div className="max-w-4xl mx-auto text-center">

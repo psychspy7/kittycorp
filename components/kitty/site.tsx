@@ -145,8 +145,8 @@ export function SiteHeader() {
               </button>
             </div>
 
-            <DialogDescription className="text-xs text-[#62676D] font-light mt-3 mb-6">
-              Warm minimalism × architectural precision × physical intelligence.
+            <DialogDescription className="text-xs text-[#62676D] font-light mt-2 mb-5">
+              Engineering intelligence for the physical world.
             </DialogDescription>
 
             <nav aria-label="Mobile navigation" className="flex flex-col space-y-1">
@@ -157,7 +157,7 @@ export function SiteHeader() {
                     key={label}
                     href={href}
                     onClick={() => setOpen(false)}
-                    className={`flex items-center min-h-[48px] px-3 rounded-lg text-[16px] transition-colors ${
+                    className={`flex items-center min-h-[44px] px-3.5 rounded-lg text-[15px] transition-colors ${
                       isCurrent
                         ? "bg-[#E9E6E0] font-semibold text-[#2457D6]"
                         : "text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60"
@@ -168,51 +168,60 @@ export function SiteHeader() {
                   </Link>
                 );
               })}
-              <Link
-                href="/agriyaan"
-                onClick={() => setOpen(false)}
-                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
-              >
-                KITTY AgriYaan
-              </Link>
-              <Link
-                href="/urjaan"
-                onClick={() => setOpen(false)}
-                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
-              >
-                KITTY Urjaan
-              </Link>
-              <Link
-                href="/support"
-                onClick={() => setOpen(false)}
-                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
-              >
-                Support Our Research
-              </Link>
-              <Link
-                href="/team"
-                onClick={() => setOpen(false)}
-                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60 transition-colors"
-              >
-                Team
-              </Link>
-              <Link
-                href="/account"
-                onClick={() => setOpen(false)}
-                className="flex items-center min-h-[48px] px-3 rounded-lg text-[16px] text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60 transition-colors"
-              >
-                {signedIn ? "My Account" : "Sign In"}
-              </Link>
+
+              <div className="pt-2 pb-1 border-t border-[#D9D6CF]/70 my-2">
+                <span className="px-3.5 text-[11px] font-mono uppercase tracking-widest text-[#73777C] block mb-1">
+                  Core Initiatives
+                </span>
+                <Link
+                  href="/agriyaan"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center min-h-[44px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
+                >
+                  KITTY AgriYaan
+                </Link>
+                <Link
+                  href="/urjaan"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center min-h-[44px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
+                >
+                  KITTY Urjaan
+                </Link>
+                <Link
+                  href="/buddy"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center min-h-[44px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
+                >
+                  KITTY Buddy
+                </Link>
+              </div>
+
+              <div className="pt-2 border-t border-[#D9D6CF]/70 my-2">
+                <Link
+                  href="/account"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center min-h-[44px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60 transition-colors"
+                >
+                  {signedIn ? "My Account" : "Sign In"}
+                </Link>
+                <Link
+                  href="/support"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center min-h-[44px] px-3.5 rounded-lg text-[15px] text-[#2457D6] hover:underline transition-colors"
+                >
+                  Support Our Research
+                </Link>
+              </div>
             </nav>
           </div>
 
-          <div className="pt-6 border-t border-[#D9D6CF] space-y-3">
+          <div className="pt-4 border-t border-[#D9D6CF] space-y-2">
             <a
               href="https://demo.thekittycorp.com"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-full bg-[#2457D6] text-white text-[14px] font-medium shadow-sm hover:bg-[#1D46B0] transition-colors"
+              className="flex items-center justify-center gap-2 w-full min-h-[44px] py-3 px-4 rounded-full bg-[#2457D6] text-white text-[14px] font-medium shadow-sm hover:bg-[#1D46B0] transition-colors"
             >
               <span>Digital Solutions Studio</span>
               <ArrowUpRight className="w-4 h-4 text-white" />

@@ -38,7 +38,7 @@ const shareDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
-    default: "KITTY CORP — Digital solutions & intelligent systems.",
+    default: "KITTY CORP • Digital solutions & intelligent systems.",
     template: "%s · Kitty Corp",
   },
   description: shareDescription,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image?v=20261104-v2",
         width: 1200,
         height: 630,
-        alt: "KITTY CORP — Independent technology company building websites, software and AI workflows",
+        alt: "KITTY CORP: Independent technology company building websites, software and AI workflows",
       },
     ],
   },
@@ -105,14 +105,7 @@ export default async function RootLayout({
           <Suspense fallback={null}>
             <GoogleAnalytics measurementId={googleAnalyticsId()} />
           </Suspense>
-          <Script
-            id="thunderbolt-widget"
-            src="https://widget.thunderbolt.com/embed.js"
-            data-id="83f8e69b9311ce4f8e4396a115e7cd14f1820d6d9dc35387b2cdaee634445fde"
-            strategy="lazyOnload"
-          />
           <SiteToaster />
-          <CookieConsent />
         </SiteThemeProvider>
       </body>
     </html>

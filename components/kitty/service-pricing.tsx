@@ -30,7 +30,7 @@ export function ServicePricing({ compact = false }: { compact?: boolean }) {
       <p><strong>Need a different fit?</strong> Custom work is welcome. Final features, timeline, charged currency, hosting, domain, AI usage and any recurring costs are confirmed in your quote. Free maintenance applies to eligible projects as agreed in writing; a successful paid referral adds three months to an eligible maintenance term.</p>
       {compact && <Link className="text-link" href="/pricing">See all packages and payment choices <ArrowUpRight size={16}/></Link>}
     </div>
-    <Link className="text-link pricing-game-link" href="/play">A little challenge: play Snake and earn 5–7% off an eligible order <ArrowUpRight size={15}/></Link>
+    <Link className="text-link pricing-game-link" href="/play">A little challenge: play Snake and earn 5% to 7% off an eligible order <ArrowUpRight size={15}/></Link>
   </section>;
 }
 

@@ -15,7 +15,7 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const launch = await publishedLaunch(slug);
-  return launch ? pageMetadata(`${launch.name} — ${launch.tagline}`,launch.description,slug==="secretchat"?"/secretchat":`/launches/${slug}`) : { title: "Launch unavailable", robots: { index: false } };
+  return launch ? pageMetadata(`${launch.name} • ${launch.tagline}`,launch.description,slug==="secretchat"?"/secretchat":`/launches/${slug}`) : { title: "Launch unavailable", robots: { index: false } };
 }
 export default async function LaunchPage({ params }: Props) {
   const { slug } = await params;

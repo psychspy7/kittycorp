@@ -4,17 +4,73 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 
-export const metadata = pageMetadata("Website & service terms", "How KITTY CORP handles project requests, quotes, delivery and payments.", "/terms");
+export const metadata = pageMetadata(
+  "Website and Service Terms",
+  "How KITTY CORP handles project requests, digital quotes, engineering delivery, and customer payments.",
+  "/terms"
+);
 
 export default function TermsPage() {
-  return <><SiteHeader/><main id="main" className="public-page wrap"><div className="article-header"><span className="eyebrow">WEBSITE & SERVICE TERMS</span><h1>Clear expectations<br/>make better work.</h1><p>Last updated 18 October 2026. Your written quote and product checkout provide the details for a purchase.</p></div><div className="article-main article-body">
-    <h2>Who we are</h2><p>KITTY CORP is an independent technology project. Contact <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> for project, purchase or support questions. We do not claim a particular company registration unless verified details are published.</p>
-    <h2>Project requests and appointments</h2><p>A first conversation, appointment request or project brief is free. A requested time is confirmed only when we reply. Submitting a brief does not oblige either side to proceed. We may decline work outside our capacity or expertise.</p>
-    <h2>Quotes and starting prices</h2><p>Basic Website starts at US$50, Premium Website at US$100 and AI Website at US$149. These are starting points; each project gets a written scope, deliverables, timeline, price, charged currency and any third-party or recurring costs before payment. The US$199 KITTY One subscription covers 1 Premium Website, 1 Basic Website, complete KITTY AI products access, future platform updates, and 6 months of free maintenance. We confirm delivery capacity and milestones before accepting payment.</p>
-    <h2>Payment choices</h2><p>Once we approve a private quote, full advance gives 2.5% off. A half-now, half-after-preview schedule gives 1% off new requests. Earlier quotes keep their original terms. You may discuss the work before paying. A quote is charged only in the currency stated at checkout.</p>
-    <h2>Delivery and support</h2><p>We agree on acceptance criteria, revisions, source handover, ownership of commissioned work and launch responsibilities in writing. Free maintenance applies where the quote states its coverage and duration. A successful paid referral adds three months to an eligible agreed maintenance term. New features, hosting, domains and third-party usage are separate unless included.</p>
-    <h2>Products and responsible use</h2><p>KITTY AI and LISA AI have separate software and access terms. A plan does not grant another product unless the offer says so. Development previews can differ from release builds. Use the website lawfully; do not abuse forms, share another person’s private data or access private project links without permission. The website assistant can make mistakes and is not professional advice.</p>
-    <h2>Payments, changes and privacy</h2><p>Payment providers handle card details; we keep verified order references. See <Link href="/refunds">refunds and cancellations</Link> and <Link href="/privacy">privacy</Link>. Public terms may change, but a later edit does not silently rewrite an agreed quote. Applicable consumer rights remain in force.</p>
-    <Link href="/contact?subject=Terms" className="button button-outline">Ask us about these terms</Link>
-  </div></main><SiteFooter/></>;
+  return (
+    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
+      <SiteHeader />
+      <main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+        <div className="mb-12">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
+            Terms of Service
+          </span>
+          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
+            Website and Service Terms
+          </h1>
+          <p className="text-[17px] text-[#62676D] font-light">
+            Clear expectations and engineering agreements for digital commissions and memberships.
+          </p>
+        </div>
+
+        <div className="space-y-10 text-[16px] leading-[1.75] text-[#292D31] font-light">
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Who We Are</h2>
+            <p>
+              KITTY CORP is an independent technology enterprise developing physical-world intelligence, autonomous robotics, clean energy systems, and commercial digital solutions. For inquiries, contact <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a>.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Project Requests and Briefs</h2>
+            <p>
+              Initial consultations, appointment requests, and project briefs are complimentary. A requested schedule is confirmed only upon written acknowledgment from our engineering team. Submitting a brief does not obligate either party to enter into a contract. We reserve the right to decline work outside our technical focus or operational capacity.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Commissioned Digital Solutions</h2>
+            <p>
+              Each commercial software commission receives a detailed written scope of work, confirmed deliverables, project milestones, pricing, and timeline before payment is initiated. All fees are charged in the currency confirmed at checkout.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Delivery and Intellectual Property</h2>
+            <p>
+              Deliverables, source code handover, revisions, and launch responsibilities are established in writing. Ownership of bespoke commissioned work transfers to the client upon full payment of the agreed project fees.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Memberships and Patron Access</h2>
+            <p className="mb-4">
+              KITTY ONE is an annual patron pass designed to support our independent physical AI and robotics research. Membership does not constitute equity, securities, or financial profit-sharing. Physical metallic NFC cards ship with inaugural production batches, while digital laboratory briefings and website privileges activate upon registration.
+            </p>
+            <Link
+              href="/contact?subject=Terms"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] hover:bg-[#E9E6E0] text-[#191B1D] text-[13px] font-medium transition-colors"
+            >
+              <span>Contact Us Regarding Terms</span>
+            </Link>
+          </section>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
 }

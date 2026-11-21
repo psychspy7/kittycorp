@@ -49,7 +49,7 @@ export function VentureShowcase() {
   return (
     <section className="venture-section" aria-labelledby="venture-heading">
       <div className="venture-wrap">
-        <div className="venture-topline"><span>01 · PRODUCT DEVELOPMENT</span><span>WORK IN PROGRESS</span></div>
+        <div className="venture-topline"><span>PRODUCT DEVELOPMENT</span><span>WORK IN PROGRESS</span></div>
         <div className="venture-heading">
           <div><p className="venture-kicker">BEYOND CLIENT PROJECTS</p><h2 id="venture-heading">Products we’re<br/><em>working on.</em></h2></div>
           <p>Alongside our client work, we are developing our own technology. These projects are at an early stage, and we’ll share more as they take shape.</p>

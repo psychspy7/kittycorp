@@ -3,25 +3,83 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 
-export const metadata=pageMetadata('Website privacy','How KITTY CORP uses website forms, early-access email addresses and website analytics.','/privacy');
+export const metadata = pageMetadata(
+  "Website Privacy Policy",
+  "How KITTY CORP handles website inquiries, early list subscriptions, customer data and analytics.",
+  "/privacy"
+);
 
 export default function Privacy() {
-  return <><SiteHeader/><main id="main" className="public-page wrap">
-    <div className="article-header"><span className="eyebrow">WEBSITE PRIVACY</span><h1>Your information.<br/>A clear purpose.</h1><p>How our website forms, early list and analytics work.</p></div>
-    <div className="article-main article-body">
-      <h2>The early list</h2><p>We save the email address and product interests you choose, along with the time you joined. New signups receive a confirmation email and join the list only after confirming. We send one welcome email and occasional product news or testing invitations. You can unsubscribe using the link in those emails. Joining does not guarantee access or a release date. We do not sell the list or use it for third-party advertising. Project and contact submissions do not subscribe you.</p>
-      <h2>Contact messages</h2><p>We save your name, email address and message so the team can read and respond. If you send a website or app enquiry, this includes the business name, budget, timeline and project details you choose to share. The forms are stored in our website’s Supabase project and are accessible through our private Studio. The full submission is emailed to KITTY CORP’s Gmail inbox through Google’s email service, and we email you an acknowledgement. We also receive a daily activity report. If email or reporting fails, the submission stays available for recovery.</p><p>For new contact and project form submissions, temporary copies are eligible for database removal after at least 72 hours, and only after both required emails and the daily report have been accepted. The Gmail copies remain subject to Google’s retention and your mailbox settings. Project quotes, payments, customer account records and reviews have separate purposes and are not removed by this temporary-data cleanup. Older form records are preserved for review rather than deleted automatically.</p>
-      <h2>Appointment requests</h2><p>When you ask for a conversation, we save your preferred local date and time, time zone and topic with your contact details in the private inbox and email notification flow. A submitted request is not a confirmed booking; we reply to arrange one.</p>
-      <h2>Visitor reviews</h2><p>Reviews submitted through our contact form stay private in Studio and email. Sending a review does not automatically publish it. We ask for permission before using your words and name on the public website.</p>
-      <h2>Payments and contributions</h2><p>The payment provider you choose — Razorpay, PayPal or Cashfree — processes your payment details. Our server stores order and payment references, amount, currency, purpose, environment and verification status in a private payment ledger. Project references are included in payment orders. Cashfree checkout also shares the email and phone number you enter with Cashfree. Voluntary contributions are separate from project payments and product access. Pages marked Test mode do not charge real money.</p>
-      <h2>Product accounts and access</h2><p>KITTY AI memberships use the KITTY AI service and its Firebase customer account. Signing in to a customer account does not grant Studio access. Verified product purchases and usage allowances are managed by the separate KITTY AI backend. LISA reservations use a separate flow. Reservation and payment availability depend on the published plan and server-side payment configuration. A reservation or payment does not automatically activate the LISA application; its data handling is described under LISA preorders below.</p>
-      <h2>Abuse prevention and hosting</h2><p>Our form service creates a keyed hash of the request’s IP address to limit repeated submissions. Form records store this hash, rather than a raw IP address. Our hosting and database providers may process IP addresses and request information in their operational logs.</p>
-      <h2>Website AI assistant</h2><p>The visitor-facing chat widget is provided by Thunderbolt, a Spaceship service. Thunderbolt processes messages using AI and stores conversations so KITTY CORP can review and respond. If you include contact details in a conversation, they are shared with KITTY CORP. Thunderbolt may also process technical data such as your IP address and browser. Thunderbolt says conversations are not used to train AI models; see its <a href="https://www.spaceship.com/thunderbolt/#privacy-policy" target="_blank" rel="noopener noreferrer">privacy policy</a> for its data sharing and retention details. Please do not send passwords, payment information or sensitive personal details.</p><h2>Project-brief AI helper</h2><p>The optional project-brief helper remains powered by KITTY AI. Your project description and selected service are sent through our website server for analysis; contact fields are not included. The website does not save the analysis conversation to your KITTY AI app account or read its private memories. We keep a keyed visitor hash and usage counters to limit abuse; website counters expire after a day and the separate AI service’s counters are removed after seven days. Provider operational logs may have separate retention. Studio instructions adjust the helper’s responses; they do not train model weights.</p>
-      <h2>Project quotes and payments</h2><p>Project briefs create a private quote record for the KITTY team. Your quote link is a private access link; anyone with it can view its scope and payment status, so keep it to yourself. It does not reveal your email or permit changes to your approved price. We store project payment references and verified provider transaction IDs, not card details. Prices are charged in the currency stated at checkout. Local-currency figures are reference estimates; your bank’s rate and fees may differ.</p><p>You can optionally ask KITTY AI to refine your project description. Only the description and service choice are sent for that analysis, not the contact fields in the form. We remember your chosen display currency in local browser storage.</p><h2>Customer accounts</h2><p>Google sign-in uses the same Firebase account as KITTY AI. The website verifies that identity through the existing KITTY backend before reading your private records. We store an account identifier and verified email alongside the requests and payments you connect. Signed-in requests are connected automatically. Older guest records require their private access link and a matching Google email; they are not automatically collected by email address.</p><p>Your account shows website projects, quotes, LISA reservations and linked payment status, plus KITTY AI membership access and expiry. It does not read your app conversations or memories and does not grant Studio access. Account pages are excluded from public Analytics. Firebase keeps its login session for the current browser session, and a local sign-in indicator only adjusts the navigation label. Sign out on shared devices. Contact us to request removal of your account-linked website information; transaction records may need to be retained for payment and refund administration.</p><h2>LISA preorders</h2><p>We store your reservation name, contact email, accepted terms, frozen checkout price and verified payment status in the private Studio. Your reservation link can view its status and request a refund before early access is provided; keep it private. We record when access is provided. Preparing a reservation does not subscribe you to marketing or activate LISA. Payment and reservation pages are excluded from our analytics page-view events. Refund requests are reviewed and processed by the team through Razorpay.</p><h2>Security verification</h2><p>Cloudflare Turnstile checks public forms and project-brief assistant requests when protection is enabled. Your browser communicates with Cloudflare to complete that check, and our server verifies the result before accepting the request. Studio sign-in does not use Turnstile; it is protected by Google identity verification for the approved administrator, same-origin checks and rate limits. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare’s privacy policy</a>.</p>
-      <h2 id="analytics">Website analytics</h2><p>Google Analytics 4 runs on public pages so we can understand which pages people visit and which links are useful. It may use cookies and process browser, device and visit information. Analytics is not loaded on Studio, account, API or checkout pages. We do not send form values, names, email addresses, project details or message contents as analytics events. Page paths are sent without query strings or fragments. Advertising storage, Google signals and ad personalization are disabled. You can manage third-party cookies in your browser settings. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy</a>.</p><h2>Optional discount game</h2><p>The Snake game uses a signed challenge that expires after 20 minutes and a keyed network hash to limit repeated rewards. We store code hashes, offer percentage, expiry and redemption details privately to administer the offer. You do not need to give a name or email to play. To claim a reward, you open our linked social profiles and self-confirm that you follow them. We do not connect to or read your social accounts, independently verify follows, or store your social handles in the reward record. Opening a profile takes you to that platform, whose own privacy policy applies. Hosting and security providers may keep operational logs as described above.</p><h2>Local browser storage</h2><p>The launch announcement uses session storage to remember that you’ve seen it during your visit. Studio sign-in uses a secure session cookie. Your display currency is stored in browser storage.</p>
-      <h2>Removing your information</h2><p>Use the unsubscribe link in a newsletter email to stop those updates. Contact us from the email you used to request removal of an early-list entry or a message. Some project and payment records may need to remain for delivery, accounting or refunds. Provider backups and Gmail copies may persist for their normal retention periods.</p>
-      <h2>SecretChat is separate</h2><p>SecretChat’s message handling, local history and security limits are described on its product page. This page covers the KITTY CORP website.</p>
-      <Link href="/contact?subject=Privacy" className="button button-outline">Contact us about privacy</Link>
+  return (
+    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
+      <SiteHeader />
+      <main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+        <div className="mb-12">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
+            Legal &amp; Privacy
+          </span>
+          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
+            Website Privacy Policy
+          </h1>
+          <p className="text-[17px] text-[#62676D] font-light">
+            How our website forms, inquiry queues, customer accounts, and analytics operate with technical rigor.
+          </p>
+        </div>
+
+        <div className="space-y-10 text-[16px] leading-[1.75] text-[#292D31] font-light">
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">The Early List</h2>
+            <p>
+              We save the email address and product interests you choose, along with the timestamp of enrollment. New signups receive a confirmation email and join the list only after confirmation. We send one welcome email and occasional engineering news or testing invitations. You can unsubscribe at any time using the link in those emails. We do not sell the list or use it for third-party advertising. Project and contact submissions do not subscribe you to marketing broadcasts.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Contact and Project Inquiries</h2>
+            <p className="mb-4">
+              We save your name, email address, and message so the engineering team can read and respond. If you send a digital solution inquiry, this includes the business name, estimated budget, timeline, and technical requirements you choose to share.
+            </p>
+            <p>
+              Inquiry submissions are stored securely within our cloud infrastructure and delivered directly to our official corporate email system. Temporary form records remain accessible to authorized engineers to ensure no messages are lost during network interruptions. Project quotes, payments, and customer account records are managed under separate administrative protocols.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Payments and Patron Transactions</h2>
+            <p>
+              Payment gateways, including Razorpay and Cashfree, process payment card and banking credentials securely on their certified infrastructure. Our servers store only order identifiers, payment references, amounts, currency, and verification status in a private ledger. We never receive or store raw card numbers, CVVs, or bank login credentials.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Security and Abuse Prevention</h2>
+            <p>
+              Our intake forms generate a keyed cryptographic hash of request IP addresses to prevent automated denial-of-service and submission abuse. Records store this irreversible hash rather than raw IP addresses. Cloudflare Turnstile assists in verifying human interaction without invasive biometric challenges.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Analytics</h2>
+            <p>
+              Google Analytics runs on public web pages to help us understand aggregate traffic patterns and link utility. Analytics is strictly disabled across authenticated account portals, administration dashboards, and checkout steps. We never transmit form values, customer names, email addresses, or message content to analytics endpoints.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Data Removal Requests</h2>
+            <p className="mb-4">
+              You may request removal of your early-list subscription or stored inquiry records at any time by contacting our team from the email address used during submission.
+            </p>
+            <Link
+              href="/contact?subject=Privacy"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] hover:bg-[#E9E6E0] text-[#191B1D] text-[13px] font-medium transition-colors"
+            >
+              <span>Contact Us Regarding Privacy</span>
+            </Link>
+          </section>
+        </div>
+      </main>
+      <SiteFooter />
     </div>
-  </main><SiteFooter/></>;
+  );
 }

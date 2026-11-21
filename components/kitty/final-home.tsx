@@ -37,14 +37,14 @@ export function FlagshipCollection({ launches, products }: { launches: Launch[];
     <div className="final-product-grid">
       <article className="final-product kitty-product">
         <div className="final-product-top"><span className="final-product-icon">{kitty ? <AppIcon launch={kitty} size={48} /> : icon(kittyProduct, <Cpu size={27} />)}</span><span className="quiet-status">{kitty ? `ANDROID · V${kitty.version}` : "ANDROID APP"}</span></div>
-        <span className="product-index">01 · PERSONAL AI</span><h3>KITTY AI</h3><p>{kittyProduct?.description || "A personal AI app for conversations, voice and the things you want it to remember."}</p>
+        <span className="product-index">PERSONAL AI</span><h3>KITTY AI</h3><p>{kittyProduct?.description || "A personal AI app for conversations, voice and the things you want it to remember."}</p>
         <ul><li><Check size={15} />Personal memory and saved context</li><li><Check size={15} />Chat history stays on your device</li><li><Check size={15} />A free daily window to get started</li></ul>
         <div className="final-product-actions"><Link className="button button-gold" href="/kitty-ai">Explore KITTY AI <ArrowUpRight size={16} /></Link><Link className="text-link" href="/memberships">Free &amp; Plus plans <ArrowUpRight size={16} /></Link></div>
         {kitty && <Link className="final-release-link" href={launchHref(kitty)}>Release notes &amp; Android download <ArrowUpRight size={14} /></Link>}
       </article>
       <article className="final-product lisa-product">
         <div className="final-product-top"><span className="final-product-icon">{icon(lisa, <AudioLines size={27} />)}</span><span className="quiet-status">WINDOWS COMPANION</span></div>
-        <span className="product-index">02 · ON-SCREEN AI</span><h3>LISA AI</h3><p>An illustrated AI character for your desktop, with conversation, voice and a room to explore. Meet LISA and see what the current build can do.</p>
+        <span className="product-index">ON-SCREEN AI</span><h3>LISA AI</h3><p>An illustrated AI character for your desktop, with conversation, voice and a room to explore. Meet LISA and see what the current build can do.</p>
         <div className="lisa-work-preview"><Image src="/lisa/lisa-character-2d-v1.webp" alt="Illustrated LISA character artwork" width={600} height={400} loading="lazy" /><span>LISA · 2D CHARACTER ART</span></div>
         <div className="final-product-actions"><Link className="button button-outline" href="/lisa-ai">Meet LISA <ArrowUpRight size={16} /></Link><Link className="text-link" href="/lisa-ai#lisa-plans-heading">$99 purchase details <ArrowUpRight size={16} /></Link></div>
       </article>

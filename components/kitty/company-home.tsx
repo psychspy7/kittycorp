@@ -63,7 +63,7 @@ export function CompanyHero({ copy }: { copy: SitePageContent }) {
       {copy.heroNote && <p className="company-hero-note">{copy.heroNote}</p>}
     </div>
     <aside className="company-hero-index" aria-label="KITTY CORP’s divisions and demo platform">
-      <div className="company-index-heading"><span className="company-kicker">ONE STUDIO · TWO DIVISIONS</span><span className="company-index-code">KC&nbsp; 01—03</span></div>
+      <div className="company-index-heading"><span className="company-kicker">ONE STUDIO · TWO DIVISIONS</span><span className="company-index-code">KC 01-03</span></div>
       <div className="company-hero-mark-stage">
         <span className="company-stage-coordinate">KITTY CORP · INDIA</span>
         <Image className="company-hero-mark" src="/brand/monogram-v1.webp" width={512} height={512} sizes="(max-width: 850px) 164px, 210px" loading="eager" alt="KITTY CORP blue and gold monogram" />
@@ -83,7 +83,7 @@ export function GeminiManifesto() {
   return <section className="gemini-manifesto page-gutter" data-element="water" aria-labelledby="gemini-manifesto-title">
     <div className="gemini-manifesto-meta"><span className="company-kicker">A NOTE FROM THE STUDIO</span><span>01 / THE WHY</span></div>
     <h2 id="gemini-manifesto-title">Technology should make the next step <em>feel possible.</em></h2>
-    <p>We design and build digital tools around real business needs — from a first website to custom software and practical AI workflows — while exploring how intelligent systems can help people in daily life, agriculture, and clean energy.</p>
+    <p>We design and build digital tools around real business needs, from a first website to custom software and practical AI workflows, while exploring how intelligent systems can help people in daily life, agriculture, and clean energy.</p>
   </section>;
 }
 

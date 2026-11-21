@@ -104,7 +104,7 @@ export function LiveDemoShowcase() {
           </h2>
         </div>
         <p className="live-demo-lead">
-          Before we write a single line of your custom code, explore fully interactive website concepts designed around real business workflows — including appointment booking, dynamic service catalogues, instant quotes, and customer enquiry systems across 18 major industries.
+          Before we write a single line of your custom code, explore fully interactive website concepts designed around real business workflows, including appointment booking, dynamic service catalogues, instant quotes, and customer enquiry systems across 18 major industries.
         </p>
       </div>
 

@@ -26,7 +26,7 @@ export default async function TeamPage() {
         <div className="max-w-4xl mb-16">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-6 max-w-[94vw]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
-            <span className="truncate">06 · Engineering Roster</span>
+            <span className="truncate">Engineering Roster</span>
           </div>
 
           <h1 className="text-[clamp(32px,7.5vw,72px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">

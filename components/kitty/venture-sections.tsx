@@ -122,7 +122,7 @@ export function VentureProjects() {
                   </div>
                   <div className="flex justify-between items-end text-[8px] font-mono text-zinc-500 border-t border-zinc-800 pt-2">
                     <span>VERIFIED 1-YEAR</span>
-                    <span>2026—2027</span>
+                    <span>2026-2027</span>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ export function FounderStorySection() {
             </h2>
 
             <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed mb-6 font-[family-name:var(--font-sans)]">
-              From everyday human collaboration to the deepest oceans and the furthest reaches of space — we dream bigger.
+              From everyday human collaboration to the deepest oceans and the furthest reaches of space, we dream bigger.
             </p>
 
             <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed mb-6 font-[family-name:var(--font-sans)]">
@@ -169,7 +169,7 @@ export function FounderStorySection() {
             </p>
 
             <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed mb-8 font-[family-name:var(--font-sans)]">
-              From autonomous machinery tending agricultural harvests to intelligent controls harmonizing renewable energy grids — we dream bigger, engineering machines that navigate the complex dynamics of the physical universe.
+              From autonomous machinery tending agricultural harvests to intelligent controls harmonizing renewable energy grids, we dream bigger, engineering machines that navigate the complex dynamics of the physical universe.
             </p>
 
             <div className="border-l-2 border-[#c5a880] pl-4 py-1 mb-8">

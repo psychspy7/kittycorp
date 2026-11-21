@@ -1,10 +1,8 @@
-import { CurrencySelector } from "./local-currency";
-import { LiveVisitorCounter } from "./live-visitor-counter";
 import Image from "next/image";
 import Link from "next/link";
 import { companySettings } from "@/lib/company-server";
 import { socialLabels, type SocialLinks } from "@/lib/company-content";
-import { CONTACT_EMAIL, FOUNDER_LINKEDIN, SOCIAL_EMAIL, SUPPORT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
+import { FOUNDER_LINKEDIN, SUPPORT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { canonicalSocialUrl, publicSiteHref } from "@/lib/site-metadata";
 
 export async function SiteFooter() {
@@ -17,13 +15,13 @@ export async function SiteFooter() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/photography/dark-earth-footer.webp"
-          alt="Dark Earth orbital curvature and sunrise horizon from orbit"
+          alt="Dark Earth orbital curvature and sunrise horizon from space"
           fill
-          className="object-cover object-[center_bottom] opacity-45"
+          className="object-cover object-[center_bottom] opacity-75"
           sizes="100vw"
         />
-        {/* Deep cosmic gradient overlay for perfect readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#07090E] via-[#07090E]/80 to-[#07090E]/95" />
+        {/* Balanced cosmic gradient overlay for contrast while preserving orbital clarity */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07090E]/92 via-[#07090E]/45 to-[#07090E]/85" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -44,10 +42,10 @@ export async function SiteFooter() {
                 KITTY CORP
               </span>
             </Link>
-            <p className="text-sm text-[#9CA3AF] font-light leading-relaxed max-w-sm mb-6">
-              Engineering intelligence for the physical world. Autonomous robotics, agricultural automation, and clean energy infrastructure from India to the world.
+            <p className="text-sm text-[#A1A1AA] font-light leading-relaxed max-w-sm mb-6">
+              Engineering intelligence for the physical world. Autonomous robotics, precision agricultural systems and clean energy software from India to global frontiers.
             </p>
-            <div className="footer-venture-pill inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-wider text-[#E2E5E8] backdrop-blur-sm">
+            <div className="footer-venture-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-wider text-[#E2E5E8] backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
               <span className="text-[#E2E5E8]">Independent Technology Venture</span>
             </div>
@@ -55,22 +53,25 @@ export async function SiteFooter() {
 
           {/* Technology & Initiatives */}
           <div className="flex flex-col space-y-2.5 text-sm">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#9CA3AF] font-medium mb-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#A1A1AA] font-medium mb-1">
               INITIATIVES
             </span>
-            <Link href="/agriyaan" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/agriyaan" className="text-[#D1D5DB] hover:text-white transition-colors">
               KITTY AgriYaan
             </Link>
-            <Link href="/urjaan" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/urjaan" className="text-[#D1D5DB] hover:text-white transition-colors">
               KITTY Urjaan
             </Link>
-            <Link href="/projects" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/buddy" className="text-[#D1D5DB] hover:text-white transition-colors">
+              KITTY Buddy
+            </Link>
+            <Link href="/projects" className="text-[#D1D5DB] hover:text-white transition-colors">
               All Research Projects
             </Link>
-            <Link href="/research" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/research" className="text-[#D1D5DB] hover:text-white transition-colors">
               Inside the Lab
             </Link>
-            <Link href="/memberships" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/memberships" className="text-[#D1D5DB] hover:text-white transition-colors">
               KITTY ONE Membership
             </Link>
             <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">
@@ -80,37 +81,37 @@ export async function SiteFooter() {
 
           {/* Commercial & Team */}
           <div className="flex flex-col space-y-2.5 text-sm">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#9CA3AF] font-medium mb-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#A1A1AA] font-medium mb-1">
               COMMERCIAL &amp; TEAM
             </span>
             <a
               href="https://demo.thekittycorp.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors"
+              className="text-[#D1D5DB] hover:text-white transition-colors"
             >
               Digital Solutions Studio ↗
             </a>
-            <Link href="/company" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/company" className="text-[#D1D5DB] hover:text-white transition-colors">
               Company Mission
             </Link>
-            <Link href="/team" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/team" className="text-[#D1D5DB] hover:text-white transition-colors">
               Engineering Team
             </Link>
-            <Link href="/investors" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/investors" className="text-[#D1D5DB] hover:text-white transition-colors">
               Investors &amp; Partnerships
             </Link>
-            <Link href="/contact" className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <Link href="/contact" className="text-[#D1D5DB] hover:text-white transition-colors">
               Contact &amp; Inquiries
             </Link>
-            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors">
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#D1D5DB] hover:text-white transition-colors">
               {SUPPORT_EMAIL}
             </a>
           </div>
 
           {/* Connect Elsewhere */}
           <div className="flex flex-col space-y-2.5 text-sm">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#9CA3AF] font-medium mb-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#A1A1AA] font-medium mb-1">
               CONNECT
             </span>
             {links.length ? (
@@ -120,7 +121,7 @@ export async function SiteFooter() {
                   key={key}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors"
+                  className="text-[#D1D5DB] hover:text-white transition-colors"
                 >
                   {key === "linkedin" && isFounderLinkedIn(url)
                     ? "Founder on LinkedIn"
@@ -128,14 +129,14 @@ export async function SiteFooter() {
                 </a>
               ))
             ) : (
-              <span className="text-xs text-[#9CA3AF]">Profiles updating</span>
+              <span className="text-xs text-[#A1A1AA]">Profiles updating</span>
             )}
             {!settings.socials.linkedin && (
               <a
                 href={FOUNDER_LINKEDIN}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#9CA3AF] hover:text-[#60A5FA] transition-colors"
+                className="text-[#D1D5DB] hover:text-white transition-colors"
               >
                 Founder on LinkedIn
               </a>
@@ -143,19 +144,8 @@ export async function SiteFooter() {
           </div>
         </div>
 
-        {/* Currency & Telemetry Controls */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-6 border-b border-white/10 text-xs">
-          <div className="footer-controls-row flex items-center gap-4">
-            <CurrencySelector />
-            <LiveVisitorCounter />
-          </div>
-          <span className="text-[#9CA3AF] font-mono text-[11px]">
-            ARCHITECTURAL SYSTEM · BOM1 REGION
-          </span>
-        </div>
-
         {/* Legal & Copyright */}
-        <div className="footer-bottom flex flex-wrap items-center justify-between gap-4 pt-6 text-xs text-[#9CA3AF]">
+        <div className="footer-bottom flex flex-wrap items-center justify-between gap-4 pt-8 text-xs text-[#A1A1AA]">
           <div className="flex items-center gap-3">
             <span>© {new Date().getFullYear()} KITTY CORP</span>
             <span>·</span>
@@ -166,13 +156,13 @@ export async function SiteFooter() {
               Support Our Research
             </Link>
             <Link href="/privacy" className="hover:text-white transition-colors">
-              Privacy
+              Privacy Policy
             </Link>
             <Link href="/terms" className="hover:text-white transition-colors">
-              Terms
+              Terms &amp; Conditions
             </Link>
             <Link href="/refunds" className="hover:text-white transition-colors">
-              Refunds
+              Refund Policy
             </Link>
           </div>
         </div>

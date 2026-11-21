@@ -93,7 +93,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
     <form className="contact-form" onSubmit={submit}>
       <div className="form-heading">
         <h2>{kind === "review" ? "Share your experience." : "Tell us what’s on your mind."}</h2>
-        <span>01 — START A CONVERSATION</span>
+        <span>START A CONVERSATION</span>
       </div>
       <div className="form-field"><label htmlFor="contact-kind">What would you like to send?</label><select id="contact-kind" value={kind} onChange={event => setKind(event.target.value as "message" | "review")}><option value="message">A message or question</option><option value="review">A review or feedback</option></select>{kind === "review" && <p className="contact-review-note">Your feedback goes privately to the team. We’ll ask before publishing your words or name.</p>}</div>
       <div className="form-field">

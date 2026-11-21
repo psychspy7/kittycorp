@@ -4,13 +4,69 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 import { pageMetadata } from "@/lib/site-metadata";
 
-export const metadata=pageMetadata("Refunds & cancellations","Help with KITTY CORP project payments, product access and reservations.","/refunds");
+export const metadata = pageMetadata(
+  "Refunds and Cancellations",
+  "Help with KITTY CORP digital project payments, patron memberships, and service cancellations.",
+  "/refunds"
+);
 
-export default function RefundsPage(){return <><SiteHeader/><main id="main" className="public-page wrap"><div className="article-header"><span className="eyebrow">REFUNDS & CANCELLATIONS</span><h1>Talk to us if something is wrong.</h1><p>Last updated 18 October 2026. Your accepted quote or checkout may give more specific terms. Applicable consumer rights remain in force.</p></div><div className="article-main article-body">
-  <h2>Contact us</h2><p>Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> from the address used for the order. Include the payment or project reference and explain the issue. Never send card numbers or passwords.</p>
-  <h2>Project work</h2><p>Consultations and briefs are free. If you cancel a paid project, we review the agreed scope, work completed and committed third-party costs. We explain any retained amount and address service failures under applicable law. A split balance is due only at the preview milestone in the quote.</p>
-  <h2>Product access</h2><p>KITTY AI access and renewal terms appear at checkout. The proposed 30-day website bundle is scoped individually before payment. If access fails or you were charged twice, contact us with the order reference.</p>
-  <h2>LISA</h2><p>Existing paid reservations retain their accepted refundable preorder terms. A full refund is available before early access is provided; request it through your reservation page. Direct purchase terms will be shown before a downloadable release is offered for sale.</p>
-  <h2>Processing</h2><p>Approved refunds normally return through the original payment provider. Timing depends on that provider and your bank. We explain any legally permitted difference due to fees, tax or exchange rates. Contact us promptly about mistaken or duplicate contributions.</p>
-  <p><Link href="/terms">Service terms</Link> · <Link href="/privacy">Privacy notice</Link></p>
-  </div></main><SiteFooter/></>;}
+export default function RefundsPage() {
+  return (
+    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
+      <SiteHeader />
+      <main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+        <div className="mb-12">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
+            Policies
+          </span>
+          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
+            Refunds &amp; Cancellations
+          </h1>
+          <p className="text-[17px] text-[#62676D] font-light">
+            Clear guidelines for digital project payments, revisions, and membership accounts.
+          </p>
+        </div>
+
+        <div className="space-y-10 text-[16px] leading-[1.75] text-[#292D31] font-light">
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Direct Support Channel</h2>
+            <p>
+              For all payment, cancellation, or refund questions, email <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a> from the email address associated with your order. Please reference your order number or project quote. Never include card details or banking passwords in correspondence.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Commissioned Digital Projects</h2>
+            <p>
+              Initial consultations and project scopes are free. If you cancel a commissioned project after work has commenced, we review the milestone deliverables completed and committed third-party server costs. Unused funds from milestone advances are refunded promptly in accordance with the signed agreement.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Patron Memberships</h2>
+            <p>
+              If a patron membership was purchased mistakenly or duplicate charges occurred, contact our team within 14 days of the transaction for a prompt, full refund through our payment processor.
+            </p>
+          </section>
+
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Refund Processing Timeline</h2>
+            <p className="mb-4">
+              Approved refunds are credited directly back to the original method of payment via Razorpay or Cashfree. Bank clearance typically takes 5 to 7 business days depending on your financial institution.
+            </p>
+            <div className="flex gap-4 pt-2">
+              <Link href="/terms" className="text-xs font-mono text-[#2457D6] hover:underline">
+                Service Terms
+              </Link>
+              <span className="text-xs text-[#D9D6CF]">·</span>
+              <Link href="/privacy" className="text-xs font-mono text-[#2457D6] hover:underline">
+                Privacy Notice
+              </Link>
+            </div>
+          </section>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
