@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   async redirects() {
     return [
+      { source: "/studio", destination: "/services", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "host", value: "kittycorp.vercel.app" }],
