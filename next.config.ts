@@ -47,6 +47,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/launches/exam-preparation",
+        destination: "/",
+        permanent: true,
+      },
+      {
         source: "/secretchat",
         destination: '/',
         permanent: true,
