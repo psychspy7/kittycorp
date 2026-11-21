@@ -1,28 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
-import { Turnstile } from "./turnstile";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export function FooterNewsletter() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [startedAt] = useState(() => Date.now() - 3000);
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const [verificationAttempt, setVerificationAttempt] = useState(0);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       setStatus("error");
       setMessage("Please enter a valid email address.");
-      return;
-    }
-
-    if (!turnstileToken) {
-      setStatus("error");
-      setMessage("Please complete the Cloudflare security verification below before subscribing.");
       return;
     }
 
@@ -38,12 +29,10 @@ export function FooterNewsletter() {
           interests: ["KITTY CORP updates"],
           website: "",
           startedAt: startedAt || Date.now() - 3000,
-          turnstileToken,
         }),
       });
 
       const data = (await response.json()) as { ok?: boolean; error?: string };
-
       if (!response.ok || !data.ok) {
         throw new Error(data.error || "Subscription could not be completed. Please try again.");
       }
@@ -54,9 +43,6 @@ export function FooterNewsletter() {
     } catch (err) {
       setStatus("error");
       setMessage(err instanceof Error ? err.message : "Subscription failed. Please try again.");
-    } finally {
-      setTurnstileToken("");
-      setVerificationAttempt((attempt) => attempt + 1);
     }
   }
 
@@ -97,24 +83,6 @@ export function FooterNewsletter() {
             </>
           )}
         </button>
-      </div>
-
-      {/* Cloudflare Turnstile Verification */}
-      <div className="pt-2 min-h-[65px]">
-        <Turnstile
-          siteKey="0x4AAAAAAGLsBpxKM1tCKvOx"
-          action="early-access"
-          appearance="always"
-          theme="dark"
-          onToken={(token) => {
-            setTurnstileToken(token);
-            if (status === "error" && message.includes("security")) {
-              setStatus("idle");
-              setMessage("");
-            }
-          }}
-          resetKey={verificationAttempt}
-        />
       </div>
 
       {status === "error" && (
