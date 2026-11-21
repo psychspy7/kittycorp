@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
   "Initiatives & Projects • Physical-World Intelligence",
-  "Explore KITTY CORP's initiatives: AgriYaan agricultural robotics, Urjaan clean energy optimization, Kitty AI embedded stack, KITTY Buddy companion robot, and commercial software operations.",
+  "Explore KITTY CORP's initiatives: AgriYaan agricultural robotics, UrjaYaan clean energy optimization, Kitty AI embedded stack, KITTY Buddy companion robot, and commercial software operations.",
   "/projects"
 );
 
@@ -73,7 +73,7 @@ export default function ProjectsPage() {
             </div>
           </article>
 
-          {/* Initiative: Urjaan */}
+          {/* Initiative: UrjaYaan */}
           <article className="rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] overflow-hidden shadow-sm flex flex-col justify-between">
             <div className="p-8 sm:p-10">
               <div className="flex items-center justify-between gap-4 mb-4">
@@ -83,7 +83,7 @@ export default function ProjectsPage() {
                 </span>
               </div>
               <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal text-[#191B1D] mb-2">
-                KITTY Urjaan
+                KITTY UrjaYaan
               </h2>
               <p className="text-sm font-medium text-[#292D31] mb-4">Clean Energy Management &amp; Solar Optimization</p>
               <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
@@ -103,8 +103,8 @@ export default function ProjectsPage() {
 
             <div className="p-6 border-t border-[#D9D6CF] bg-[#F5F2EA] flex items-center justify-between text-xs text-[#62676D]">
               <span className="font-mono">DOMAIN: CLEAN ENERGY SYSTEMS</span>
-              <Link href="/urjaan" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">
-                Read Urjaan Initiative <ArrowRight className="w-3.5 h-3.5" />
+              <Link href="/urjayaan" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">
+                Read UrjaYaan Initiative <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </article>

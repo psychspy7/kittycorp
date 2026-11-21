@@ -95,6 +95,16 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: "/urjaan",
+        destination: '/urjayaan',
+        permanent: true,
+      },
+      {
+        source: "/urjaan/:path*",
+        destination: '/urjayaan',
+        permanent: true,
+      },
     ];
   },
   async headers() {
@@ -112,6 +122,12 @@ const nextConfig: NextConfig = {
             value: "camera=(), microphone=(), geolocation=(), payment=(self 'https://checkout.razorpay.com')",
           },
           { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
+        ],
+      },
+      {
+        source: "/((?!api|kitten|abcdefghijklmnopqrstuvwxyz|account|_next).*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" },
         ],
       },
       {
@@ -147,6 +163,32 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
           { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/account/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/account",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate" },
+        ],
+      },
+      {
+        source: "/photography/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/brand/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
       { source: "/downloads/:file*.apk", headers: [

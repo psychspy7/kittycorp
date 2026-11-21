@@ -100,7 +100,7 @@ export default async function ContactPage({
           <div className="contact-form-container">
             <ContactForm
               subject={
-                ["Kitty AI", "KITTY AI", "Partnership", "Privacy", "Review", "LISA AI purchase", "Reward code", "Terms", "Investors"].includes(
+                ["Kitty AI", "KITTY AI", "Partnership", "Privacy", "Review", "Feedback", "Reward code", "Terms", "Investors"].includes(
                   subject || ""
                 )
                   ? subject

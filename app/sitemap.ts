@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     publicJournal().catch(() => []),
   ]);
 
-  const highPriority = new Set(["services", "products", "memberships", "projects", "pricing"]);
+  const highPriority = new Set(["services", "products", "memberships", "projects", "pricing", "agriyaan", "urjayaan", "buddy"]);
   const deprecatedSlugs = new Set([
     ["secret", "chat"].join(""),
     ["kitty", "-ai"].join(""),
@@ -26,18 +26,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const staticPages = [
-    "services",
-    "products",
-    "memberships",
+    "agriyaan",
+    "urjayaan",
+    "buddy",
     "projects",
-    "pricing",
+    "research",
+    "memberships",
     "company",
     "team",
-    "research",
-    "build-log",
     "contact",
-    "appointments",
+    "services",
+    "products",
+    "pricing",
     "investors",
+    "build-log",
+    "appointments",
     "privacy",
     "terms",
     "refunds",

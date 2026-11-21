@@ -184,10 +184,10 @@ export function EditorialHome() {
       </section>
 
       {/* =========================================================================
-          SECTION D: INITIATIVE : KITTY URJAAN
+          SECTION D: INITIATIVE : KITTY URJAYAAN
           Mobile-first image stacking + Desktop Photographic Background
           ========================================================================= */}
-      <section id="urjaan" className="relative w-full overflow-hidden bg-[#FBFAF7] border-t border-[#D9D6CF]">
+      <section id="urjayaan" className="relative w-full overflow-hidden bg-[#FBFAF7] border-t border-[#D9D6CF]">
         {/* Mobile Viewport: Image First */}
         <div className="block lg:hidden px-6 pt-12 pb-4">
           <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-[#D9D6CF]">
@@ -229,7 +229,7 @@ export function EditorialHome() {
             </span>
 
             <h2 className="text-[clamp(34px,5vw,60px)] font-[family-name:var(--font-display)] font-normal leading-[1.06] tracking-[-0.03em] text-[#191B1D] mb-4">
-              KITTY Urjaan
+              KITTY UrjaYaan
             </h2>
             
             <p className="text-[17px] sm:text-[19px] font-medium text-[#292D31] mb-6">
@@ -241,7 +241,7 @@ export function EditorialHome() {
                 Deploying renewable generation is only half of the energy transition. Solar panels degrade unevenly under intense heat and dust, while battery storage systems fail prematurely when subjected to volatile charging spikes.
               </p>
               <p>
-                KITTY Urjaan is developing predictive algorithms that monitor photovoltaic cell degradation in real time, forecast localized generation against industrial loads, and balance decentralized microgrids for community energy independence.
+                KITTY UrjaYaan is developing predictive algorithms that monitor photovoltaic cell degradation in real time, forecast localized generation against industrial loads, and balance decentralized microgrids for community energy independence.
               </p>
             </div>
 
@@ -258,10 +258,10 @@ export function EditorialHome() {
 
             <div className="flex flex-wrap items-center gap-4">
               <Link
-                href="/urjaan"
+                href="/urjayaan"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#191B1D] hover:bg-[#292D31] text-white text-[14px] font-medium transition-all shadow-sm group"
               >
-                <span>Read Full Urjaan Initiative</span>
+                <span>Read Full UrjaYaan Initiative</span>
                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -402,19 +402,19 @@ export function EditorialHome() {
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#60A5FA] font-medium flex items-center gap-2 mb-4">
                 <Waves className="w-3.5 h-3.5 text-[#60A5FA]" />
-                <span>Subsea Exploration</span>
+                <span>Human-Machine Frontiers · Subsea</span>
               </span>
 
               <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
-                From agricultural fields to ocean depths.
+                From agricultural soil to ocean depths.
               </h2>
 
               <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#D1D5DB] font-light mb-8">
                 <p>
-                  The physical world is not confined to land. From subsea thermal monitoring to marine current dynamics, extreme underwater environments present fundamental engineering challenges: high pressure, absence of GPS, and zero direct connectivity.
+                  Artificial intelligence is a dual-edged technological capability. Its ultimate value is decided not by compute scale or synthetic output, but by the discipline, humility and responsibility guiding how we direct and use it.
                 </p>
                 <p>
-                  We explore autonomous sensing systems engineered to operate reliably in the submerged environments that make up most of our planet.
+                  We believe humans and intelligent machines can work together productively to achieve things that would otherwise remain out of reach. In deep ocean environments, crushing hydrostatic pressure, absolute optical darkness and the total absence of GPS demand autonomous sensing systems capable of calculating and adapting in isolation, expanding what humanity can observe and protect.
                 </p>
               </div>
 
@@ -444,25 +444,25 @@ export function EditorialHome() {
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#60A5FA] font-medium flex items-center gap-2 mb-4">
                 <Orbit className="w-3.5 h-3.5 text-[#60A5FA]" />
-                <span>Planetary Observation</span>
+                <span>Planetary Observation &amp; Deep Space</span>
               </span>
 
               <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
-                To the frontiers of planetary observation.
+                Pushing the boundaries of what we can accomplish.
               </h2>
 
               <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#D1D5DB] font-light mb-8">
                 <p>
-                  We are building from India, but our technological outlook is universal. The kinematics and sensory perception required for an autonomous rover to navigate dense soil under monsoon conditions are the same principles needed to operate machines across harsh physical frontiers.
+                  The engineering principles that enable an autonomous rover to traverse dense, waterlogged soil under monsoon conditions are fundamentally connected to the physical autonomy required for planetary exploration.
                 </p>
                 <p>
-                  Intelligent physical machines will help humanity observe and understand environments where human physiology cannot safely tread.
+                  By pairing human intuition with resilient physical intelligence, we bridge the spectrum of exploration: from monitoring soil microbes in Indian farmlands to observing planetary atmospheres from orbit. We build with honesty, testing what works in real environments and directing technology toward challenges that genuinely matter to humanity.
                 </p>
               </div>
 
               <div className="font-mono text-xs text-[#9CA3AF] tracking-wider uppercase flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
-                <span>FRONTIER: Planetary Kinematics &amp; Extreme Terrains</span>
+                <span>FRONTIER: Planetary Kinematics &amp; Autonomous Telemetry</span>
               </div>
             </div>
           </div>

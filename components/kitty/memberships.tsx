@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { LocalPrice } from "./local-currency";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
@@ -313,34 +314,77 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
               CSS MOCKUP: METALLIC NFC CARD (ANODIZED TITANIUM FINISH)
               ========================================================================= */}
           <div className="my-8 p-6 rounded-2xl bg-[#E9E6E0] border border-[#D9D6CF] flex flex-col items-center justify-center">
-            <div className="w-full max-w-sm aspect-[1.586/1] rounded-2xl p-6 relative overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.18)] border border-stone-600/40 bg-gradient-to-br from-[#1E2024] via-[#2A2E33] to-[#121315] text-stone-200 flex flex-col justify-between">
-              {/* Metallic Sheen Effect */}
+            <div className="w-full max-w-sm aspect-[1.586/1] rounded-2xl p-6 relative overflow-hidden shadow-[0_20px_48px_rgba(0,0,0,0.35)] border border-stone-500/40 bg-gradient-to-br from-[#1C1E22] via-[#2D3136] to-[#121316] text-[#E2E5E8] flex flex-col justify-between select-none">
+              {/* Brushed Titanium Sheen Layer */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_70%)] pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
-              
+
+              {/* Top Header: Logo, Name & Contactless */}
               <div className="flex items-start justify-between relative z-10">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[#2457D6]" />
-                  <span className="font-mono text-xs tracking-[0.25em] font-semibold text-white uppercase">
-                    KITTY CORP
-                  </span>
+                <div className="flex items-center gap-2.5">
+                  <Image
+                    unoptimized
+                    src="/brand/monogram-small-v1.webp"
+                    alt="KITTY CORP"
+                    width={26}
+                    height={26}
+                    className="object-contain brightness-125"
+                  />
+                  <div>
+                    <span className="font-mono text-xs tracking-[0.24em] font-semibold text-white uppercase block">
+                      KITTY CORP
+                    </span>
+                    <span className="text-[8px] font-mono tracking-widest text-stone-400 uppercase">
+                      RESEARCH CREDENTIAL
+                    </span>
+                  </div>
                 </div>
+
+                {/* Contactless waves SVG */}
                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded border border-white/20 text-[9px] font-mono text-stone-300">
+                  <svg className="w-3.5 h-3.5 stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="2">
+                    <path d="M8.5 16.5a5 5 0 0 1 0-7" strokeLinecap="round" />
+                    <path d="M12 19a8.5 8.5 0 0 1 0-12" strokeLinecap="round" />
+                    <path d="M15.5 21.5a12 12 0 0 1 0-17" strokeLinecap="round" />
+                  </svg>
                   <span>NFC</span>
                 </div>
               </div>
 
-              <div className="my-auto relative z-10 text-center">
-                <div className="text-[14px] sm:text-[16px] font-mono tracking-[0.3em] text-white font-medium uppercase">
-                  KITTY ONE
+              {/* Middle Section: Smart Chip & Credential Info */}
+              <div className="relative z-10 flex items-center justify-between my-auto py-2">
+                {/* Smart Chip Contact Graphic */}
+                <div className="w-11 h-8 rounded-md bg-gradient-to-br from-[#D4AF37] via-[#F3E5AB] to-[#AA771C] p-[1px] shadow-sm relative overflow-hidden">
+                  <div className="w-full h-full rounded-[5px] bg-gradient-to-br from-[#E2B755] to-[#B8860B] grid grid-cols-3 grid-rows-2 gap-[1px] p-[2px]">
+                    <div className="border-r border-b border-[#7B5B00]/40 rounded-tl-[3px]" />
+                    <div className="border-b border-[#7B5B00]/40" />
+                    <div className="border-l border-b border-[#7B5B00]/40 rounded-tr-[3px]" />
+                    <div className="border-r border-[#7B5B00]/40 rounded-bl-[3px]" />
+                    <div className="" />
+                    <div className="border-l border-[#7B5B00]/40 rounded-br-[3px]" />
+                  </div>
                 </div>
-                <div className="text-[10px] font-mono tracking-widest text-[#E5E7EB] uppercase mt-1">
-                  VERIFIED PATRON CREDENTIAL
+
+                <div className="text-right">
+                  <div className="text-[13px] sm:text-[15px] font-mono tracking-[0.25em] text-white font-medium uppercase">
+                    KITTY ONE
+                  </div>
+                  <div className="text-[9px] font-mono tracking-widest text-[#E5E7EB] uppercase mt-0.5">
+                    ANNUAL RESEARCH PATRON
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-end justify-between text-[10px] font-mono text-[#E5E7EB] border-t border-white/20 pt-3 relative z-10">
-                <span>RESEARCH ACCESS 1/YEAR</span>
-                <span>PHYSICAL-WORLD INTELLIGENCE</span>
+              {/* Bottom Laser Engraved Info */}
+              <div className="flex items-end justify-between text-[9px] font-mono text-[#E5E7EB] border-t border-white/20 pt-2.5 relative z-10">
+                <div>
+                  <span className="block text-[7.5px] text-stone-400 uppercase tracking-widest">PATRON ID</span>
+                  <span className="tracking-wider text-white">KC-2026-PATRON</span>
+                </div>
+                <div className="text-right">
+                  <span className="block text-[7.5px] text-stone-400 uppercase tracking-widest">EDITION</span>
+                  <span className="tracking-wider text-stone-200">BATCH 01 · PHYSICAL AI</span>
+                </div>
               </div>
             </div>
 

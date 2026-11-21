@@ -4,6 +4,8 @@ import { companySettings } from "@/lib/company-server";
 import { socialLabels, type SocialLinks } from "@/lib/company-content";
 import { FOUNDER_LINKEDIN, SUPPORT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 import { canonicalSocialUrl, publicSiteHref } from "@/lib/site-metadata";
+import { LiveVisitorCounter } from "@/components/kitty/live-visitor-counter";
+import { FooterNewsletter } from "@/components/kitty/footer-newsletter";
 
 export async function SiteFooter() {
   const settings = await companySettings();
@@ -27,7 +29,7 @@ export async function SiteFooter() {
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-white/10">
           
-          {/* Identity Column */}
+          {/* Identity & Newsletter Column */}
           <div className="lg:col-span-2 pr-0 lg:pr-8">
             <Link className="brand inline-flex items-center gap-3 text-white mb-4" href="/">
               <Image
@@ -42,12 +44,20 @@ export async function SiteFooter() {
                 KITTY CORP
               </span>
             </Link>
-            <p className="text-sm text-[#A1A1AA] font-light leading-relaxed max-w-sm mb-6">
+            <p className="text-sm text-[#A1A1AA] font-light leading-relaxed max-w-sm mb-5">
               Engineering intelligence for the physical world. Autonomous robotics, precision agricultural systems and clean energy software from India to global frontiers.
             </p>
-            <div className="footer-venture-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-wider text-[#E2E5E8] backdrop-blur-sm">
+            <div className="footer-venture-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-wider text-[#E2E5E8] backdrop-blur-sm mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
               <span className="text-[#E2E5E8]">Independent Technology Venture</span>
+            </div>
+
+            {/* Newsletter Subscription Box */}
+            <div className="max-w-sm pt-2">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-[#A1A1AA] font-medium block mb-2">
+                Subscribe to Updates
+              </span>
+              <FooterNewsletter />
             </div>
           </div>
 
@@ -59,8 +69,8 @@ export async function SiteFooter() {
             <Link href="/agriyaan" className="text-[#D1D5DB] hover:text-white transition-colors">
               KITTY AgriYaan
             </Link>
-            <Link href="/urjaan" className="text-[#D1D5DB] hover:text-white transition-colors">
-              KITTY Urjaan
+            <Link href="/urjayaan" className="text-[#D1D5DB] hover:text-white transition-colors">
+              KITTY UrjaYaan
             </Link>
             <Link href="/buddy" className="text-[#D1D5DB] hover:text-white transition-colors">
               KITTY Buddy
@@ -102,7 +112,10 @@ export async function SiteFooter() {
               Investors &amp; Partnerships
             </Link>
             <Link href="/contact" className="text-[#D1D5DB] hover:text-white transition-colors">
-              Contact &amp; Inquiries
+              Contact Us
+            </Link>
+            <Link href="/contact?subject=Feedback" className="text-[#D1D5DB] hover:text-white transition-colors">
+              Send Feedback
             </Link>
             <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#D1D5DB] hover:text-white transition-colors">
               {SUPPORT_EMAIL}
@@ -144,17 +157,34 @@ export async function SiteFooter() {
           </div>
         </div>
 
-        {/* Legal & Copyright */}
-        <div className="footer-bottom flex flex-wrap items-center justify-between gap-4 pt-8 text-xs text-[#A1A1AA]">
+        {/* Telemetry & Controls Row */}
+        <div className="flex flex-wrap items-center justify-between gap-4 py-6 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <span>© {new Date().getFullYear()} KITTY CORP</span>
+            <LiveVisitorCounter />
+          </div>
+          <div className="flex items-center gap-4 text-xs text-[#A1A1AA]">
+            <Link href="/contact?subject=Feedback" className="hover:text-white transition-colors">
+              Send Feedback
+            </Link>
+            <span>·</span>
+            <Link href="/contact" className="hover:text-white transition-colors">
+              Inquiries
+            </Link>
+            <span>·</span>
+            <Link href="/support" className="text-[#60A5FA] hover:underline">
+              Support Research
+            </Link>
+          </div>
+        </div>
+
+        {/* Legal & Copyright */}
+        <div className="footer-bottom flex flex-wrap items-center justify-between gap-4 pt-6 text-xs text-[#A1A1AA]">
+          <div className="flex items-center gap-3">
+            <span>© 2026 KITTY CORP</span>
             <span>·</span>
             <span>Independent technology company</span>
           </div>
           <div className="flex items-center gap-5">
-            <Link href="/support" className="text-[#60A5FA] hover:underline">
-              Support Our Research
-            </Link>
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>

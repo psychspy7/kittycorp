@@ -1,9 +1,11 @@
 export const SUPPORT_EMAIL = "support@thekittycorp.com";
 export const SOCIAL_EMAIL = "social@thekittycorp.com";
-export const PRIMARY_ADMIN_EMAIL = "kittycorp.info@gmail.com";
+export const PRIMARY_ADMIN_EMAIL = "thekittycorp@gmail.com";
+export const SECONDARY_ADMIN_EMAIL = "kittycorp.info@gmail.com";
 export const CONTACT_EMAIL = SUPPORT_EMAIL;
 export const INTERNAL_NOTIFICATION_EMAILS = [
   PRIMARY_ADMIN_EMAIL,
+  SECONDARY_ADMIN_EMAIL,
   SOCIAL_EMAIL,
 ] as const;
 export const GOOGLE_CALENDAR_ACCOUNT = PRIMARY_ADMIN_EMAIL;

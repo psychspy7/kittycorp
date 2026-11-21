@@ -95,7 +95,7 @@ export default async function Investors() {
                 Physical-World Intelligence
               </h2>
               <p className="text-[#62676D] font-light leading-relaxed text-[15px] mb-6">
-                Pursuing long-term breakthroughs in agricultural robotics (AgriYaan) and clean energy telemetry (Urjaan). We maintain intellectual honesty: research prototypes are carefully benchmarked before committing to large-scale fabrication.
+                Pursuing long-term breakthroughs in agricultural robotics (AgriYaan) and clean energy telemetry (UrjaYaan). We maintain intellectual honesty: research prototypes are carefully benchmarked before committing to large-scale fabrication.
               </p>
             </div>
             <Link

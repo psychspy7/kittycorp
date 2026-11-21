@@ -58,10 +58,10 @@ export async function POST(request: Request) {
     if (error) throw error;
 
     const rawActive = Number((data as { active?: number })?.active ?? 0);
-    const rawTotal = Number((data as { total?: number })?.total ?? 10000);
+    const rawTotal = Number((data as { total?: number })?.total ?? 0);
 
-    const active = Math.max(1, rawActive);
-    const total = Math.max(rawTotal, 10000);
+    const active = Math.max(0, rawActive);
+    const total = Math.max(0, rawTotal);
 
     return Response.json(
       {
@@ -88,10 +88,10 @@ export async function GET() {
     if (error) throw error;
 
     const rawActive = Number((data as { active?: number })?.active ?? 0);
-    const rawTotal = Number((data as { total?: number })?.total ?? 10000);
+    const rawTotal = Number((data as { total?: number })?.total ?? 0);
 
-    const active = rawActive;
-    const total = Math.max(rawTotal, 10000);
+    const active = Math.max(0, rawActive);
+    const total = Math.max(0, rawTotal);
 
     return Response.json(
       {

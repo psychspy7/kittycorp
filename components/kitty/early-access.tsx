@@ -92,7 +92,6 @@ export function EarlyAccess() {
               {[
                 "KITTY AI",
                 "KITTY Sentinel",
-                "LISA AI",
                 "KITTY CORP updates",
               ].map((name) => (
                 <label key={name} className="interest-choice">

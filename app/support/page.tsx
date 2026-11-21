@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata(
   "Support Our Research • Voluntary Lab Patronage",
-  "Voluntarily support KITTY CORP's independent physical AI, agricultural robotics (AgriYaan), and clean energy systems (Urjaan). Supporter recognition and open research updates.",
+  "Voluntarily support KITTY CORP's independent physical AI, agricultural robotics (AgriYaan), and clean energy systems (UrjaYaan). Supporter recognition and open research updates.",
   "/support"
 );
 
@@ -151,7 +151,7 @@ export default function SupportPage() {
                     Biannual Research Digest
                   </h3>
                   <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
-                    Direct emails detailing experimental progress on the AgriYaan rover, Urjaan algorithms, and hardware milestones directly from our laboratory.
+                    Direct emails detailing experimental progress on the AgriYaan rover, UrjaYaan algorithms, and hardware milestones directly from our laboratory.
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">

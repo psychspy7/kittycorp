@@ -179,34 +179,34 @@ export default function BuddyPage() {
             <div className="space-y-4">
               <div className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Actuation System</span>
-                  <span className="text-base font-medium text-[#191B1D]">3-Axis Multi-Angle Kinematic Neck Assembly</span>
+                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Articulation &amp; Motion</span>
+                  <span className="text-base font-medium text-[#191B1D]">Multi-Axis Smooth Kinematic Motion</span>
                 </div>
-                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Silent Coreless Servos</span>
+                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Silent Precision Actuation</span>
               </div>
 
               <div className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Sensory Processing</span>
-                  <span className="text-base font-medium text-[#191B1D]">Low-Latency Proximity and Tactile Touch Sensing</span>
+                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Sensory Interaction</span>
+                  <span className="text-base font-medium text-[#191B1D]">Low-Latency Tactile &amp; Proximity Awareness</span>
                 </div>
-                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Local Capacitive Arrays</span>
+                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Local Surface Sensing</span>
               </div>
 
               <div className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Compute Infrastructure</span>
-                  <span className="text-base font-medium text-[#191B1D]">Embedded RISC-V Micro-controller with Kinematics Coprocessor</span>
+                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">System Processing</span>
+                  <span className="text-base font-medium text-[#191B1D]">Embedded Real-Time Control &amp; Behavioral Timing</span>
                 </div>
-                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Zero Cloud Dependency</span>
+                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Fully Local Execution</span>
               </div>
 
               <div className="p-6 rounded-2xl border border-[#D9D6CF] bg-[#F5F2EA] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Chassis Materials</span>
-                  <span className="text-base font-medium text-[#191B1D]">Matte Textured Polycarbonate with Anodised Aluminum Accents</span>
+                  <span className="font-mono text-xs text-[#73777C] uppercase block mb-1">Industrial Enclosure</span>
+                  <span className="text-base font-medium text-[#191B1D]">Precision-Machined Desktop Shell with Anodised Accents</span>
                 </div>
-                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Recyclable Composite</span>
+                <span className="text-xs font-mono text-[#2457D6] sm:text-right">Tactile Composite</span>
               </div>
             </div>
           </div>

@@ -29,8 +29,8 @@ const researchAreas = [
     icon: Sun,
     tag: "Stage: Algorithmic Modeling",
     domain: "CLEAN ENERGY SYSTEMS",
-    href: "/urjaan",
-    linkText: "Explore Urjaan Initiative",
+    href: "/urjayaan",
+    linkText: "Explore UrjaYaan Initiative",
     copy: "Developing predictive telemetry software to calculate solar panel degradation rates under extreme weather, optimize battery charge and discharge cycles during peak industrial demand, and dynamically balance decentralized rural microgrids.",
   },
   {
