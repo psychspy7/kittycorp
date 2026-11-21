@@ -33,7 +33,7 @@ import "./warm-architecture.css";
 
 const shareTitle = "KITTY CORP | Physical-World Intelligence";
 const shareDescription =
-  "KITTY CORP builds websites, custom software and practical AI workflows for businesses, while exploring robotics and intelligent systems.";
+  "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, solar energy intelligence and a Digital Solutions Studio.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
