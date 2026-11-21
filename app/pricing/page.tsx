@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata = pageMetadata(
   "KITTY CORP | Studio Pricing",
-  "Transparent pricing for KITTY CORP Digital Solutions Studio websites, custom applications, AI automation, software integrations and scoped business projects."
+  "Pricing for KITTY CORP Digital Solutions Studio websites, custom applications, AI automation, integrations, scoped projects and maintenance services."
   "/pricing"
 );
 
