@@ -5,8 +5,8 @@ import { pageMetadata } from "@/lib/site-metadata";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 
 export const metadata = pageMetadata(
-  "Website and Service Terms",
-  "How KITTY CORP handles project requests, digital quotes, engineering delivery, and customer payments.",
+  "KITTY CORP | Terms of Service",
+  "Terms for KITTY CORP website use, Digital Solutions Studio project scopes, quotes, software delivery, subscriptions, payments and customer responsibilities.",
   "/terms"
 );
 
