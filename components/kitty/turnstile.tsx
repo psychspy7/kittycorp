@@ -34,7 +34,7 @@ type Props = {
 
 export type TurnstileStatus = "loading" | "ready" | "verified" | "disabled" | "error";
 
-export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteKey, appearance = "interaction-only" }: Props) {
+export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteKey, appearance = "always" }: Props) {
   const element = useRef<HTMLDivElement>(null);
   const callback = useRef(onToken);
   const statusCallback = useRef(onStatusChange);
