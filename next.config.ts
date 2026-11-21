@@ -20,7 +20,7 @@ const cspDirectives = [
 const nextConfig: NextConfig = {
   experimental: {
     agentUpgrade: "security",
-  } as any,
+  } as unknown as NonNullable<NextConfig["experimental"]>,
   distDir: process.env.NEXT_DIST_DIR || ".next",
   turbopack: {
     root: process.cwd(),
