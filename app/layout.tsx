@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/opengraph-image?v=20261121-seo",
+        url: "/opengraph-image?v=20261121-physical-ai",
         width: 1200,
         height: 630,
         alt: "KITTY CORP — Physical-World Intelligence, AI Robotics and Digital Solutions Studio",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: shareTitle,
     description: shareDescription,
-    images: ["/opengraph-image?v=20261121-seo"],
+    images: ["/opengraph-image?v=20261121-physical-ai"],
   },
 };
 
