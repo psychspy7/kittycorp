@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
   "KITTY ONE | Research Support Membership",
-  "KITTY ONE is a voluntary annual supporter membership for KITTY CORP research, with briefings, updates and benefits. It is not equity or an investment."
+  "KITTY ONE is a voluntary annual supporter membership for KITTY CORP research, with briefings, updates and benefits. It is not equity or an investment." ,
   "/memberships"
 );
 
