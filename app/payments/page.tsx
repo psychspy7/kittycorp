@@ -12,10 +12,12 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 export const metadata = { title: "Plans & payments", robots: { index: false, follow: false } };
 
-export default async function PaymentsPage({ searchParams }: { searchParams: Promise<{ purpose?: string | string[]; plan?: string | string[] }> }) {
+export default async function PaymentsPage({ searchParams }: { searchParams: Promise<{ purpose?: string | string[]; plan?: string | string[]; amount?: string | string[] }> }) {
   const [query, options, security] = await Promise.all([searchParams, publicPaymentProviders(), turnstilePublicConfig()]);
   const rawPurpose = Array.isArray(query.purpose) ? query.purpose[0] : query.purpose;
   const rawPlan = Array.isArray(query.plan) ? query.plan[0] : query.plan;
+  const rawAmount = Array.isArray(query.amount) ? query.amount[0] : query.amount;
+  const requestedDonationAmount = rawAmount && /^\d{1,7}(?:\.\d{1,2})?$/.test(rawAmount) ? Number(rawAmount) : undefined;
   const isSubscription = rawPurpose === "subscription" || rawPlan === "kitty-one";
   const purpose = isSubscription ? "subscription" : rawPurpose === "donation" ? "donation" : rawPurpose === "project" ? "project" : null;
   if (!purpose) return <><SiteHeader/><main id="main" className="public-page payments-hub-page"><PaymentsOverview options={options} securityEnabled={security.enabled}/></main><SiteFooter/></>;
@@ -29,7 +31,7 @@ export default async function PaymentsPage({ searchParams }: { searchParams: Pro
       <nav className="payment-purpose-nav" aria-label="Payment type"><Link href="/payments?purpose=subscription&plan=kitty-one" aria-current={purpose === "subscription" ? "page" : undefined}>KITTY One ($199)</Link><Link href="/payments?purpose=project" aria-current={purpose === "project" ? "page" : undefined}>Project payment</Link><Link href="/payments?purpose=donation" aria-current={purpose === "donation" ? "page" : undefined}>Support KITTY</Link><Link href="/memberships">Product plans</Link></nav>
       <p className="payments-note">{purpose === "subscription" ? "Your KITTY One plan is registered to your Google account upon payment verification. Access your projects and tools anytime in My Account." : purpose === "donation" ? "Contributions are optional. They do not purchase a product, membership or ownership in KITTY CORP." : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}</p>
     </div>
-    {available.length ? <PaymentCheckout options={available} purpose={purpose} securityEnabled={security.enabled}/> : <section className="checkout-card">
+    {available.length ? <PaymentCheckout options={available} purpose={purpose} securityEnabled={security.enabled} initialDonationAmount={purpose === "donation" ? requestedDonationAmount : undefined}/> : <section className="checkout-card">
       <span className="checkout-mode">{purpose === "project" && options.length ? "QUOTE REQUIRED" : "CHECKOUT UNAVAILABLE"}</span>
       <h2>{purpose === "project" && options.length ? "Your quote comes first." : "Checkout is temporarily unavailable."}</h2>
       <p>{purpose === "project" && options.length ? "There is no active project amount right now. Tell us what you need and we’ll agree on scope, cost and a payment reference before you pay. Product pricing and donations are separate." : "Please contact KITTY CORP if you were expecting to make a payment. No payment has been taken."}</p>
