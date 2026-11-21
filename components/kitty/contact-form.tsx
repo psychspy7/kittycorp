@@ -4,7 +4,7 @@ import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { feedbackSchema } from "@/lib/kitty-validation";
 import { trackConversion } from "@/lib/site-analytics";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
-import { Turnstile } from "./turnstile";
+import { Turnstile, type TurnstileStatus } from "./turnstile";
 
 export function ContactForm({ subject = "" }: { subject?: string }) {
   const [kind, setKind] = useState<"message" | "review">(subject === "Review" ? "review" : "message");
@@ -17,6 +17,7 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileStatus, setTurnstileStatus] = useState<TurnstileStatus>("loading");
   const [verificationAttempt, setVerificationAttempt] = useState(0);
   const startedAt = useRef(0);
   const trap = useRef<HTMLInputElement>(null);
@@ -37,6 +38,10 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
     const valid = feedbackSchema.safeParse(payload);
     if (!valid.success) {
       setError(valid.error.issues[0]?.message || "Please check your entries.");
+      return;
+    }
+    if (turnstileStatus !== "verified" && turnstileStatus !== "disabled") {
+      setError(turnstileStatus === "error" ? "The security check is unavailable. Please refresh the page or email us instead." : "Please complete the security check before sending your message.");
       return;
     }
     setBusy(true);
@@ -154,14 +159,14 @@ export function ContactForm({ subject = "" }: { subject?: string }) {
           {error} <a href={`mailto:${CONTACT_EMAIL}`}>Email us instead</a>
         </p>
       )}
-      <Turnstile action="contact" onToken={setTurnstileToken} resetKey={verificationAttempt} />
+      <Turnstile action="contact" onToken={setTurnstileToken} onStatusChange={setTurnstileStatus} resetKey={verificationAttempt} />
       <div className="form-submit-row">
         <p>
           Your message goes straight to the KITTY team.
           <br />
           We’ll only use your email to reply.
         </p>
-        <button className="button button-gold" type="submit" disabled={busy}>
+        <button className="button button-gold" type="submit" disabled={busy || (turnstileStatus !== "verified" && turnstileStatus !== "disabled")}>
           {busy ? "Sending…" : "Send message"}
           {busy ? (
             <LoaderCircle size={18} className="animate-spin" />
