@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
     default: "KITTY CORP • Physical-World Intelligence & AI Robotics",
-    template: "%s · Kitty Corp",
+    template: "%s",
   },
   description: shareDescription,
   applicationName: "KITTY CORP",
