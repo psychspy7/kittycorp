@@ -7,8 +7,8 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata(
-  "KITTY UrjaYaan • AI-Driven Clean Energy & Solar Optimization",
-  "KITTY UrjaYaan develops predictive telemetry and machine learning models to monitor solar photovoltaic degradation, optimize battery lifecycle health, and balance decentralized clean energy microgrids.",
+  "KITTY UrjaYaan | Solar Intelligence",
+  "KITTY UrjaYaan develops solar intelligence for monitoring, energy optimisation, predictive telemetry and clean-energy infrastructure lifecycle management."
   "/urjayaan"
 );
 
