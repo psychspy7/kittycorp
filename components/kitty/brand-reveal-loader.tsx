@@ -14,7 +14,7 @@ export function BrandRevealLoader() {
           return;
         }
         sessionStorage.setItem("kc_brand_revealed", "true");
-        setVisible(true);
+        const revealFrame = window.requestAnimationFrame(() => setVisible(true));
 
         const fadeTimer = setTimeout(() => {
           setFading(true);
@@ -25,6 +25,7 @@ export function BrandRevealLoader() {
         }, 580);
 
         return () => {
+          window.cancelAnimationFrame(revealFrame);
           clearTimeout(fadeTimer);
           clearTimeout(removeTimer);
         };
