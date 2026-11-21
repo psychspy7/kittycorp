@@ -141,7 +141,7 @@ export default function AgriYaanPage() {
                     Low-Compaction Lightweight Chassis
                   </h3>
                   <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
-                    Weighing under 45 kg, the rover's articulated rocker-bogie kinematics distribute ground pressure evenly, allowing full mobility over wet mud furrows without damaging fragile rhizosphere root systems.
+                    Weighing under 45 kg, the rover&apos;s articulated rocker-bogie kinematics distribute ground pressure evenly, allowing full mobility over wet mud furrows without damaging fragile rhizosphere root systems.
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
