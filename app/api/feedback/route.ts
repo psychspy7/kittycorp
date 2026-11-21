@@ -10,7 +10,6 @@ import {
   verifyOrigin,
 } from "@/lib/kitty-server";
 import { feedbackSchema } from "@/lib/kitty-validation";
-import { verifyTurnstile } from "@/lib/turnstile-server";
 
 import { drainEmailQueue } from "@/lib/email-notifications";
 export const runtime = "nodejs";
@@ -29,11 +28,6 @@ export async function POST(request: Request) {
         "Please take a moment, then send your message again.",
         400,
       );
-    await verifyTurnstile(
-      request,
-      (body as Record<string, unknown>).turnstileToken,
-      "contact",
-    );
     const { data, error } = await database().rpc(
       "kitty_website_submit_communication",
       {
