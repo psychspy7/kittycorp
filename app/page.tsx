@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     ...pageMetadata(
       "AI Robotics • Physical-World Intelligence",
-      "KITTY CORP builds Physical-World Intelligence through AI robotics, AgriYaan agriculture, UrjaYaan solar intelligence, and a Digital Solutions Studio."
+      "KITTY CORP builds Physical-World Intelligence through AI robotics, AgriYaan agriculture, UrjaYaan solar intelligence, and a Digital Solutions Studio.",
       "/"
     ),
     title: "KITTY CORP | Physical-World Intelligence • AI Robotics",
