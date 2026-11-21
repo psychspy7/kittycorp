@@ -62,13 +62,23 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/launches/kitty-ai",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/launches/kitty-ai/:path*",
+        destination: "/research",
+        permanent: true,
+      },
+      {
         source: "/kitty-ai",
-        destination: '/',
+        destination: '/research',
         permanent: true,
       },
       {
         source: "/kitty-ai/:path*",
-        destination: '/',
+        destination: '/research',
         permanent: true,
       },
       {
