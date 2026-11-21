@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     ...pageMetadata(
       "AI Robotics • Physical-World Intelligence",
-      "KITTY CORP is an emerging technology company developing intelligent systems for the physical world, including agricultural robotics, clean energy automation, and physical intelligence.",
+      "KITTY CORP builds Physical-World Intelligence through AI robotics, AgriYaan agriculture, UrjaYaan solar intelligence, and a Digital Solutions Studio."
       "/"
     ),
     title: "KITTY CORP | Physical-World Intelligence • AI Robotics",
