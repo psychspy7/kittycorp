@@ -4,7 +4,7 @@ import { maintenanceState } from "@/lib/maintenance-state";
 import { maintenanceResponse } from "@/lib/maintenance-screen";
 
 export async function proxy(request: NextRequest) {
-  if (recoveryPath(request.nextUrl.pathname)) return NextResponse.next();
+  if (recoveryPath(request.nextUrl.pathname)) return NextResponse.next();\n  const host = request.nextUrl.hostname.toLowerCase();\n  const isVercelPreview = host.endsWith(".vercel.app") && host !== "kittycorp.vercel.app";
   let offline = true;
   try { offline = (await maintenanceState()).enabled; } catch {
     // A missing status must not silently reopen a site taken offline.
