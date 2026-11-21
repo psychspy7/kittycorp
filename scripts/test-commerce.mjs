@@ -14,7 +14,7 @@ const runtime=load("lib/runtime-configuration.ts",{react:{cache:fn=>fn},"./kitty
 const original={TURNSTILE_SITE_KEY:"fixture-site-key",TURNSTILE_SECRET_KEY:"fixture-turnstile-secret",KITTY_AI_WEBSITE_URL:"https://kitty-ai-v2.kitty-ai.workers.dev/api/website/chat",KITTY_AI_GATEWAY_TOKEN:"fixture-ai-gateway",PAYPAL_CLIENT_SECRET:"fixture-paypal-secret",WEBSITE_COMMERCE_SETTINGS:JSON.stringify(commerce.defaultCommerce)};
 const encrypted=await runtime.encryptRuntimeConfiguration(original);
 assert(!encrypted.includes(original.PAYPAL_CLIENT_SECRET));assert.notEqual(encrypted,await runtime.encryptRuntimeConfiguration(original));assert.deepEqual(JSON.parse(JSON.stringify(await runtime.decodeRuntimeConfiguration(encrypted))),original);
-const tampered=JSON.parse(encrypted);tampered.data="ff"+tampered.data.slice(2);await assert.rejects(runtime.decodeRuntimeConfiguration(JSON.stringify(tampered)));
+const tampered=JSON.parse(encrypted);tampered.data=(tampered.data.slice(0,2)==="ff"?"00":"ff")+tampered.data.slice(2);await assert.rejects(runtime.decodeRuntimeConfiguration(JSON.stringify(tampered)));
 await assert.rejects(runtime.decodeRuntimeConfiguration(JSON.stringify({...tampered,v:9})));
 let settings=structuredClone(commerce.defaultCommerce),keys={};
 const governance=load("lib/commerce-server.ts",{react:{cache:fn=>fn},"./commerce":commerce,"./kitty-server":server,"./runtime-configuration":{getRuntimeConfiguration:async()=>({...keys,WEBSITE_COMMERCE_SETTINGS:JSON.stringify(settings)})}});
