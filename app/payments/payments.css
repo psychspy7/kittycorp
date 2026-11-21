@@ -213,3 +213,13 @@ html[data-theme="dark"] .checkout-button.button-gold:hover {
   background: linear-gradient(135deg, #fce09a, #e2b75e) !important;
   box-shadow: 0 0 24px rgba(240, 201, 120, 0.45) !important;
 }
+
+
+/* Donation amount visibility and readable numeric entry across themes */
+.checkout-total > strong { display:inline-block; color:#20231f; font-variant-numeric:tabular-nums; opacity:1; }
+.checkout-field input { color:#20231f; -webkit-text-fill-color:#20231f; font-variant-numeric:tabular-nums; color-scheme:light; }
+.checkout-field input::placeholder { color:#74766f; opacity:1; }
+.checkout-field input:focus-visible { outline:3px solid rgba(37,87,214,.22); outline-offset:1px; border-color:#2557d6; }
+html[data-theme="dark"] .checkout-total > strong, html.dark .checkout-total > strong, [data-theme="dark"] .checkout-total > strong { color:#fff !important; -webkit-text-fill-color:#fff !important; opacity:1 !important; }
+html[data-theme="dark"] .checkout-field input, html.dark .checkout-field input, [data-theme="dark"] .checkout-field input { background:#0c1120 !important; color:#fff !important; -webkit-text-fill-color:#fff !important; border-color:rgba(169,158,255,.48) !important; color-scheme:dark; }
+html[data-theme="dark"] .checkout-field input::placeholder, html.dark .checkout-field input::placeholder, [data-theme="dark"] .checkout-field input::placeholder { color:#a5b0cb !important; -webkit-text-fill-color:#a5b0cb !important; }
