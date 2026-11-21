@@ -18,6 +18,9 @@ const cspDirectives = [
 
 
 const nextConfig: NextConfig = {
+  experimental: {
+    agentUpgrade: "security",
+  } as any,
   distDir: process.env.NEXT_DIST_DIR || ".next",
   turbopack: {
     root: process.cwd(),
