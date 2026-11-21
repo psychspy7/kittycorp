@@ -1,4 +1,4 @@
-import { pageMetadata } from "@/lib/site-metadata";
+import { pageMetadata, jsonLd } from "@/lib/site-metadata";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { JournalCards } from "@/components/kitty/journal";
@@ -9,8 +9,8 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
-  "AI & Robotics Research • Laboratory Directions",
-  "Explore KITTY CORP's research directions in physical intelligence, agricultural autonomous rovers, and intelligent clean energy management. Concepts clearly separated by development stage.",
+  "Physical AI & Robotics Research | KITTY CORP",
+  "Explore KITTY CORP research in AgriYaan agricultural robotics, UrjaYaan solar intelligence, KITTY AI perception and control, and embodied systems.",
   "/research"
 );
 
@@ -121,6 +121,19 @@ export default async function Research() {
           })}
         </div>
 
+
+        <section className="mb-16 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] p-8 sm:p-10" aria-labelledby="research-faq-heading">
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd([
+            { "@context": "https://schema.org", "@type": "ResearchProject", "@id": "https://thekittycorp.com/agriyaan#research-project", name: "KITTY AgriYaan", description: "Agricultural autonomous rover research exploring crop monitoring, terrain mobility, field sensing and edge computer vision.", url: "https://thekittycorp.com/agriyaan", additionalProperty: { "@type": "PropertyValue", name: "Development stage", value: "Simulation and kinematics" } },
+            { "@context": "https://schema.org", "@type": "ResearchProject", "@id": "https://thekittycorp.com/urjayaan#research-project", name: "KITTY UrjaYaan", description: "Clean-energy intelligence research focused on solar monitoring, predictive telemetry and energy optimisation.", url: "https://thekittycorp.com/urjayaan", additionalProperty: { "@type": "PropertyValue", name: "Development stage", value: "Algorithmic modelling" } },
+            { "@context": "https://schema.org", "@type": "ResearchProject", "@id": "https://thekittycorp.com/research#kitty-ai", name: "KITTY AI", description: "Vision-and-control software stack under development connecting spatial perception, edge inference and robotic actuators.", url: "https://thekittycorp.com/research", additionalProperty: { "@type": "PropertyValue", name: "Development stage", value: "Active development" } },
+            { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [{"question":"What is KITTY CORP?","answer":"KITTY CORP is an India-founded technology company developing Physical-World Intelligence through robotics, intelligent systems and commercial digital engineering."},{"question":"What is KITTY AgriYaan?","answer":"KITTY AgriYaan is an autonomous agricultural rover research initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. It is currently at simulation and kinematics stage."},{"question":"What is KITTY UrjaYaan?","answer":"KITTY UrjaYaan explores solar monitoring, clean-energy telemetry, energy optimisation and predictive management of solar infrastructure. Its current work includes algorithmic modelling."},{"question":"How does KITTY CORP generate revenue?","answer":"Client projects through the Digital Solutions Studio—websites, applications, custom software, AI automation and integrations—generate commercial revenue and support longer-term R&D."}] }
+          ]) }} />
+          <h2 id="research-faq-heading" className="text-2xl font-[family-name:var(--font-display)] mb-6">Research — common questions</h2>
+          <div className="space-y-5">{[{"question":"What is KITTY CORP?","answer":"KITTY CORP is an India-founded technology company developing Physical-World Intelligence through robotics, intelligent systems and commercial digital engineering."},{"question":"What is KITTY AgriYaan?","answer":"KITTY AgriYaan is an autonomous agricultural rover research initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. It is currently at simulation and kinematics stage."},{"question":"What is KITTY UrjaYaan?","answer":"KITTY UrjaYaan explores solar monitoring, clean-energy telemetry, energy optimisation and predictive management of solar infrastructure. Its current work includes algorithmic modelling."},{"question":"How does KITTY CORP generate revenue?","answer":"Client projects through the Digital Solutions Studio—websites, applications, custom software, AI automation and integrations—generate commercial revenue and support longer-term R&D."}].map((item) => (
+            <article key={item.question}><h3 className="font-medium text-[#191B1D] mb-2">{item.question}</h3><p className="text-[#62676D] leading-relaxed font-light">{item.answer}</p></article>
+          ))}</div>
+        </section>
         {/* Scientific Integrity Policy */}
         <div className="p-8 sm:p-10 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] mb-20">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#2457D6] font-medium block mb-2">
