@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata(
   "KITTY AgriYaan | Agricultural Robotics",
-  "KITTY AgriYaan explores crop monitoring, field sensing, terrain mobility and edge vision for Indian farming and autonomous agricultural systems."
+  "KITTY AgriYaan explores crop monitoring, field sensing, terrain mobility and edge vision for Indian farming and autonomous agricultural systems." ,
   "/agriyaan"
 );
 
