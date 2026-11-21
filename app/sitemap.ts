@@ -57,13 +57,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...staticPages.map((page) => ({
       url: `${origin}/${page}`,
-      lastModified: now,
+      
       changeFrequency: (highPriority.has(page) ? "daily" : "weekly") as "daily" | "weekly",
       priority: highPriority.has(page) ? 0.9 : 0.8,
     })),
     ...Object.keys(serviceSegments).map((segment) => ({
       url: `${origin}/services/${segment}`,
-      lastModified: now,
+      lastModified: launch.updated_at ? new Date(launch.updated_at) : undefined,
       changeFrequency: "weekly" as const,
       priority: 0.85,
     })),
@@ -71,12 +71,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((product) => !deprecatedSlugs.has(product.slug))
       .map((product) => ({
         url: `${origin}/${product.slug}`,
-        lastModified: product.updated_at ? new Date(product.updated_at) : now,
+        lastModified: product.updated_at ? new Date(product.updated_at) : undefined,
         changeFrequency: "weekly" as const,
         priority: 0.8,
       })),
     ...launches
-      .filter((launch) => !deprecatedSlugs.has(launch.slug))
+      .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat)/i.test(`${launch.slug} ${launch.name}`))
       .map((launch) => ({
         url: `${origin}${launchHref(launch)}`,
         lastModified: now,
@@ -87,7 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((entry) => entry.kind === "article")
       .map((entry) => ({
         url: `${origin}/build-log/${entry.slug}`,
-        lastModified: entry.updated_at ? new Date(entry.updated_at) : now,
+        lastModified: entry.updated_at ? new Date(entry.updated_at) : undefined,
         changeFrequency: "monthly" as const,
         priority: 0.7,
       })),
