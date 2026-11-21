@@ -9,8 +9,8 @@ import { publishedLaunches } from "@/lib/launches-server";
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
-  "Investors & Institutional Partnerships • KITTY CORP",
-  "An introduction to KITTY CORP's capital philosophy, commercial self-sustainability, and physical robotics research roadmap.",
+  "KITTY CORP | Partnerships & Research",
+  "KITTY CORP is an Indian technology company building Physical-World Intelligence through AI robotics, agricultural systems, clean-energy research and client-funded digital engineering.",
   "/investors"
 );
 
