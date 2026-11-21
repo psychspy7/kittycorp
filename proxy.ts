@@ -9,7 +9,7 @@ export async function proxy(request: NextRequest) {
   try { offline = (await maintenanceState()).enabled; } catch {
     // A missing status must not silently reopen a site taken offline.
   }
-  if (!offline) return NextResponse.next();
+  if (!offline) {\n    const response = NextResponse.next();\n    if (isVercelPreview) response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");\n    return response;\n  }
   if (request.nextUrl.pathname.startsWith("/api/"))
     return NextResponse.json({ error: "Site in maintenance. Please try again shortly." }, {
       status: 503, headers: { "Cache-Control": "no-store", "Retry-After": "60" },
