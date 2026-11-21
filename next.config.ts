@@ -47,19 +47,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-      {
         source: "/launches/exam-preparation",
         destination: "/",
         permanent: true,
       },
       {
         source: "/secretchat",
-        destination: '/',
+        destination: "/",
         permanent: true,
       },
       {
         source: "/secretchat/:path*",
-        destination: '/',
+        destination: "/",
         permanent: true,
       },
       {
@@ -72,33 +71,34 @@ const nextConfig: NextConfig = {
         destination: "/research",
         permanent: true,
       },
+      {
         source: "/kitty-ai",
-        destination: '/research',
+        destination: "/research",
         permanent: true,
       },
       {
         source: "/kitty-ai/:path*",
-        destination: '/research',
+        destination: "/research",
         permanent: true,
       },
       {
         source: "/play",
-        destination: '/',
+        destination: "/",
         permanent: true,
       },
       {
         source: "/play/:path*",
-        destination: '/',
+        destination: "/",
         permanent: true,
       },
       {
         source: "/urjaan",
-        destination: '/urjayaan',
+        destination: "/urjayaan",
         permanent: true,
       },
       {
         source: "/urjaan/:path*",
-        destination: '/urjayaan',
+        destination: "/urjayaan",
         permanent: true,
       },
     ];
