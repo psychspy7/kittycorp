@@ -46,12 +46,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "refunds",
   ];
 
-  const now = new Date();
-
   const entries: MetadataRoute.Sitemap = [
     {
       url: origin,
-      lastModified: undefined,
       changeFrequency: "daily",
       priority: 1.0,
     },
@@ -63,7 +60,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...Object.keys(serviceSegments).map((segment) => ({
       url: `${origin}/services/${segment}`,
-      lastModified: launch.updated_at ? new Date(launch.updated_at) : undefined,
       changeFrequency: "weekly" as const,
       priority: 0.85,
     })),
@@ -79,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat)/i.test(`${launch.slug} ${launch.name}`))
       .map((launch) => ({
         url: `${origin}${launchHref(launch)}`,
-        lastModified: now,
+        lastModified: launch.updated_at ? new Date(launch.updated_at) : undefined,
         changeFrequency: "weekly" as const,
         priority: 0.8,
       })),
