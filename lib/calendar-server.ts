@@ -113,7 +113,7 @@ export async function stageAppointmentCalendarEvent(
 
     const payload = {
       id: eventId.length >= 5 ? eventId : undefined,
-      summary: `[APPOINTMENT REQUEST] ${details.name} — KITTY CORP`,
+      summary: `[APPOINTMENT REQUEST] ${details.name} • KITTY CORP`,
       description: `Appointment Request Details\n\nClient Name: ${details.name}\nEmail: ${details.email}\nTopic: ${details.topic}\nReference: ${details.reference}\nPreferred Time: ${details.day} ${details.time} (${zone})\nGoogle Calendar Target Account: ${GOOGLE_CALENDAR_ACCOUNT}`,
       start: {
         dateTime: startIso.length === 19 ? `${startIso}+05:30` : startIso,

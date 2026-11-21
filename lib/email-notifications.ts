@@ -134,7 +134,7 @@ export async function sendTestEmail() {
     from: { name: "KITTY CORP", address: CONTACT_EMAIL },
     to: CONTACT_EMAIL,
     replyTo: CONTACT_EMAIL,
-    subject: "KITTY CORP — email automation test",
+    subject: "KITTY CORP: email automation test",
     text: `This is a test from your website email automation.\n\nStudio: ${emailSite()}/kitten\n\nSMTP acceptance is not guaranteed inbox delivery.`,
     html: `<h1>KITTY CORP</h1><p>Your website email automation test.</p><p>SMTP acceptance is not guaranteed inbox delivery.</p>`,
     disableFileAccess: true,
