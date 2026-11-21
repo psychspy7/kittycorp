@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
   "KITTY CORP | Partnerships & Research",
-  "KITTY CORP develops Physical-World Intelligence through AI robotics, AgriYaan, UrjaYaan and a commercial Digital Solutions Studio in India."
+  "KITTY CORP develops Physical-World Intelligence through AI robotics, AgriYaan, UrjaYaan and a commercial Digital Solutions Studio in India.",
   "/investors"
 );
 
