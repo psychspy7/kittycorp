@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
   "KITTY CORP | Partnerships & Research",
-  "KITTY CORP is an Indian technology company building Physical-World Intelligence through AI robotics, agricultural systems, clean-energy research and client-funded digital engineering.",
+  "KITTY CORP develops Physical-World Intelligence through AI robotics, AgriYaan, UrjaYaan and a commercial Digital Solutions Studio in India."
   "/investors"
 );
 
