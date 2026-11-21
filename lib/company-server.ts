@@ -7,7 +7,7 @@ import { PUBLIC_CONTENT_TAGS, publicContentCache, refreshPublicContent } from ".
 import { defaultProducts, defaultSettings, defaultTeam, MEDIA_BUCKET, mediaPathPattern, type CompanyProduct, type CompanySettings, type MediaKind, type TeamMember } from "./company-content";
 
 function isPublicProduct(product: Pick<CompanyProduct,"slug"|"name">) {
-  return !/(suvid|sentinel|examify|secretchat)/i.test(`${product.slug} ${product.name}`);
+  return !/(suvid|sentinel|examify|secretchat|kitty-ai)/i.test(`${product.slug} ${product.name}`);
 }
 
 const publicLink = z.string().trim().max(1000).refine(value => {
