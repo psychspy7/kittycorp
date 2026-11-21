@@ -5,8 +5,8 @@ import { CONTACT_EMAIL } from "@/lib/company-contact";
 import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata = pageMetadata(
-  "Refunds and Cancellations",
-  "Help with KITTY CORP digital project payments, patron memberships, and service cancellations.",
+  "KITTY CORP | Refunds & Cancellations",
+  "Refund and cancellation guidance for KITTY CORP digital projects, memberships, supporter contributions, payment issues and customer support requests.",
   "/refunds"
 );
 
