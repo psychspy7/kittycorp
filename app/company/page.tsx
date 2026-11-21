@@ -18,10 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CompanyPage() {
-  const [members, settings, copy] = await Promise.all([
+  const [members, settings] = await Promise.all([
     companyTeam(),
     companySettings(),
-    sitePageContent("company"),
   ]);
 
   return (
