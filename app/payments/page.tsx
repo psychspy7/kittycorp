@@ -11,7 +11,7 @@ export default function PaymentsPage() {
     <>
       <SiteHeader />
       <main id="main" className="public-page wrap payments-page">
-        <PaymentsClient options={[]} securityEnabled={true} />
+        <PaymentsClient options={[]} securityEnabled={false} />
       </main>
       <SiteFooter />
     </>
