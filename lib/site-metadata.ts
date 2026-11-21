@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 const canonicalHost = "thekittycorp.com";
-const socialPreviewImage = "/opengraph-image?v=20261121-seo";
+const socialPreviewImage = "/opengraph-image?v=20261121-physical-ai";
 export function canonicalSiteUrl(value: string) {
   try {
     const url = new URL(value);

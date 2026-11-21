@@ -72,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       })),
     ...launches
-      .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat)/i.test(`${launch.slug} ${launch.name}`))
+      .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat|lisa-ai)/i.test(`${launch.slug} ${launch.name}`))
       .map((launch) => ({
         url: `${origin}${launchHref(launch)}`,
         lastModified: launch.updated_at ? new Date(launch.updated_at) : undefined,
