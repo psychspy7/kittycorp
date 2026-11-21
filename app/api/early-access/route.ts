@@ -11,7 +11,6 @@ import {
   verifyOrigin,
 } from "@/lib/kitty-server";
 import { recordAuditEvent } from "@/lib/audit-logger";
-import { verifyTurnstile } from "@/lib/turnstile-server";
 import { drainEmailQueue } from "@/lib/email-notifications";
 
 export const runtime = "nodejs";
@@ -40,11 +39,6 @@ export async function POST(request: Request) {
     const elapsed = Date.now() - value.startedAt;
     if (elapsed < 2000 || elapsed > 86400000)
       throw new HttpError("Please take a moment, then try again.", 400);
-    await verifyTurnstile(
-      request,
-      (body as Record<string, unknown>).turnstileToken,
-      "early-access",
-    );
     const { data, error } = await database().rpc(
       "kitty_website_newsletter_action",
       {
