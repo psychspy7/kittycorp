@@ -29,7 +29,7 @@ function publicTeamBio(person: TeamMember) {
   if (/^Part of KITTY CORP since the beginning, contributing ideas, occasional brilliance, and showing up when it matters \(hopefully\)\.?$/i.test(bio)) {
     return "Working alongside Virat on KITTY CORP and its early products.";
   }
-  return bio;
+  return bio.replace(/[\u2014\u2013]/g, ": ");
 }
 
 export function TeamProfiles({members}:{members:TeamMember[]}){
