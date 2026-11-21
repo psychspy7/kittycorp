@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata(
   "KITTY Buddy | Physical AI Companion",
-  "KITTY Buddy is an exploratory physical AI companion concept for voice interaction, tactile feedback and privacy-conscious human-machine collaboration."
+  "KITTY Buddy is an exploratory physical AI companion concept for voice interaction, tactile feedback and privacy-conscious human-machine collaboration." ,
   "/buddy"
 );
 
