@@ -42,10 +42,10 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return data;
 }
 
-export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, preorderToken, preorderId, onLockChange }: {
-  preorderToken?: string; preorderId?:string;
+export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, preorderToken, preorderId, initialDonationAmount, onLockChange }: {
+  preorderToken?: string; preorderId?:string; initialDonationAmount?: number;
   quote?: {token?:string;id?:string;choice:"full"|"split"|"after_review";reference:string};
-  keyId: string; amount: number; currency?: string; testMode: boolean; securityEnabled: boolean; purpose?: PaymentPurpose; onLockChange?: (locked:boolean)=>void;
+  keyId: string; amount: number; currency?: string; testMode: boolean; securityEnabled: boolean; purpose?: PaymentPurpose; initialDonationAmount?: number; onLockChange?: (locked:boolean)=>void;
 }) {
   const [scriptReady, setScriptReady] = useState(false);
   const [scriptError, setScriptError] = useState("");
@@ -55,7 +55,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const [token, setToken] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [paymentId, setPaymentId] = useState("");
-  const [donation, setDonation] = useState("100");
+  const [donation, setDonation] = useState(String(initialDonationAmount ?? 100));
   const [reference, setReference] = useState("");
   const lock = useRef(false);
   const pending = useRef<PaymentResponse | null>(null);
