@@ -9,8 +9,8 @@ import { pageMetadata } from "@/lib/site-metadata";
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
-  "Initiatives & Projects • Physical-World Intelligence",
-  "Explore KITTY CORP's initiatives: AgriYaan agricultural robotics, UrjaYaan clean energy optimization, Kitty AI embedded stack, KITTY Buddy companion robot, and commercial software operations.",
+  "KITTY CORP | Robotics & Intelligence Projects",
+  "Explore KITTY CORP research in agricultural robotics, UrjaYaan clean-energy intelligence, KITTY AI perception and control, and physical AI concepts.",
   "/projects"
 );
 
