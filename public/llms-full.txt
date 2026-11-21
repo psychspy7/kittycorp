@@ -1,89 +1,75 @@
-# KITTY CORP — Comprehensive Knowledge Base & Technical Context
+# KITTY CORP — Official Company and Technical Context
 
-Official URL: https://thekittycorp.com
-Commercial Studio URL: https://demo.thekittycorp.com
-Headquarters: India
-Leadership: Virat Anand (Founder & Chief Technologist)
+Canonical website: https://thekittycorp.com
+Country of origin: India
+Commercial Digital Solutions Studio: https://demo.thekittycorp.com
+Company profile: https://thekittycorp.com/company
+Research: https://thekittycorp.com/research
+Projects: https://thekittycorp.com/projects
+Sitemap: https://thekittycorp.com/sitemap.xml
 
-## Company Overview
-KITTY CORP is an elite AI robotics venture exploring the future of physical-world intelligence. We research, design, and develop autonomous mechanical machines that bridge artificial intelligence with physical kinematics, real-world navigation, and planetary-scale operational challenges.
+## Company identity
 
----
+KITTY CORP is an early-stage Indian technology company focused on Physical-World Intelligence: systems that connect artificial intelligence, software, sensors and machines to real physical environments.
 
-## Strategic Architecture
+The company has two complementary areas:
+1. **Intelligence & Robotics** — research and development in AI robotics, agricultural field systems, clean-energy intelligence and embodied perception/control.
+2. **Digital Solutions Studio** — commercial websites, applications, custom software, AI workflows and integrations for clients.
 
-### 1. Official Corporate Property (thekittycorp.com)
-The primary institutional domain dedicated exclusively to advanced AI robotics research, engineering concepts, membership, and founder narrative.
-- **Hero Experience**: Scroll-driven procedural 3D WebGL exploded assembly demonstrating a calibrated humanoid cybernetic system converging across 10 mechanical axes.
-- **R&D Projects**: Early concept presentations for Project 01 (AgriYaan) and Project 02 (Green Energy).
-- **Membership**: 1-Year Verified Metallic Membership providing private access to engineering briefings, whitepapers, and research progress.
+## Research initiatives
 
-### 2. Commercial Digital Solutions Studio (demo.thekittycorp.com)
-Our dedicated commercial platform serving enterprises, startups, and institutions seeking premier digital engineering:
-- **Websites & Portals**: Custom high-conversion digital architectures and applications.
-- **Business Automation**: Algorithmic workflows, pipeline orchestration, and ERP integrations.
-- **Custom AI Solutions**: Domain-specific fine-tuned models, intelligent document processing, and autonomous agents.
+### KITTY AgriYaan
+An autonomous agricultural rover initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision for practical agricultural work. Current development stage: simulation and kinematics. No field-deployment claim is made.
 
----
+Official page: https://thekittycorp.com/agriyaan
 
-## Core Research Projects
+### KITTY UrjaYaan
+An intelligent solar and clean-energy initiative focused on solar monitoring, energy utilisation, predictive telemetry and optimisation of clean-energy infrastructure. Current development includes algorithmic modelling.
 
-### Project 01: AGRIYAAN
-- **Classification**: Autonomous Agricultural Field Robotics
-- **Badge**: Concept Exploration
-- **Mission**: AI for Smarter Agriculture.
-- **Technical Architecture**:
-  - Multi-spectral crop health assessment and computer vision diagnostics.
-  - High-torque all-terrain rocker-bogie chassis for rugged farmland traversal.
-  - Edge-compute neural inference for targeted weeding, variable-rate spraying, and harvest readiness detection.
-  - Solar-supplemented power architecture with autonomous base-station docking.
+Official page: https://thekittycorp.com/urjayaan
 
-### Project 02: GREEN ENERGY
-- **Classification**: Intelligent Clean Energy Automation
-- **Badge**: Concept Exploration
-- **Mission**: AI for a Sustainable Future.
-- **Technical Architecture**:
-  - Reinforcement learning for dynamic wind turbine pitch and yaw micro-adjustments.
-  - Computer vision and irradiance telemetry for high-precision dual-axis solar tracking.
-  - Predictive battery energy storage system (BESS) dispatch algorithms forecasting grid peak loads.
-  - Decentralized microgrid telemetry for resilient rural power distribution.
+### KITTY AI
+A vision-and-control software stack under active development. The intended architecture connects spatial perception, multi-sensor inputs, edge inference and robotic actuator control.
 
----
+Official page: https://thekittycorp.com/research
 
-## 1-Year Verified Membership Architecture
-- **Purpose**: Community and patron support for independent AI robotics and clean energy research.
-- **Credentials**: Bespoke laser-etched matte dark metallic card featuring embedded NFC telemetry.
-- **Key Inclusions**:
-  - Verified physical and digital membership credentials.
-  - Invitations to private technical research briefings and architecture townhalls.
-  - Early access to engineering whitepapers, telemetry datasets, and CAD schematics.
-  - Direct quarterly updates from founder Virat Anand.
-- **Explicit Disclosures**:
-  - Membership is strictly non-equity and confers no company ownership, financial dividends, or investment returns.
-  - Voluntary technological research support model.
-  - Distinct from commercial digital services contracted through the commercial studio.
-- **URL**: https://thekittycorp.com/memberships
+### KITTY Buddy
+An exploratory physical AI companion concept centred on voice interaction and tangible human-machine interaction. It is at concept-exploration stage.
 
----
+Official page: https://thekittycorp.com/buddy
 
-## Founder Narrative
-KITTY CORP was founded by Virat Anand with a singular vision: to push intelligence beyond digital screens and into physical reality. From everyday human collaboration to rugged agricultural fields, renewable energy networks, and planetary frontiers, KITTY CORP approaches engineering with unapologetic ambition and relentless scientific curiosity.
+## Digital Solutions Studio
 
----
+The Studio delivers client-facing digital engineering:
+- Business websites and web development
+- Web and Android applications
+- Custom software and internal tools
+- AI agents and workflow automation
+- API and business-system integrations
 
-## Technical & Security Infrastructure
-- **Framework**: Next.js 16 (App Router, Turbopack, React 19)
-- **3D Graphics Engine**: Three.js WebGL (procedural 10-subsystem kinematic model, ACESFilmic tonemapping, frame-rate independent exponential damping, zero external model latency).
-- **Database & State**: Supabase PostgreSQL with strict Row Level Security (RLS).
-- **Payment Clearing**: Razorpay with cryptographic HMAC SHA-256 signature verification.
-- **Security & Reliability**: Content Security Policy (CSP), strict HTTP Strict Transport Security (HSTS), Cloudflare Turnstile bot verification, and zero layout shift design.
+The Studio is a commercial activity intended to generate client revenue and support independent R&D. Demo platform: https://demo.thekittycorp.com
 
----
+## Revenue model
 
-## Contact & Corporate Information
-- **Corporate Inquiries**: contact@thekittycorp.com
-- **Founder & Chief Technologist**: Virat Anand
-- **Official Website**: https://thekittycorp.com
-- **Commercial Studio**: https://demo.thekittycorp.com
-- **Privacy Policy**: https://thekittycorp.com/privacy
-- **Terms of Service**: https://thekittycorp.com/terms
+KITTY CORP generates commercial revenue through scoped client projects in its Digital Solutions Studio, including website development, applications, custom software, AI automation and integrations. This is distinct from research initiatives.
+
+## Leadership
+
+- Virat Anand — Founder & CEO
+- Sarthak — Co-founder
+- Aman — Co-founder
+
+## Official information
+
+- Home: https://thekittycorp.com/
+- Company: https://thekittycorp.com/company
+- Research: https://thekittycorp.com/research
+- Projects: https://thekittycorp.com/projects
+- Services: https://thekittycorp.com/services
+- Contact: https://thekittycorp.com/contact
+- GitHub: https://github.com/psychspy7/kittycorp
+- Instagram: https://www.instagram.com/kittycorp.ai/
+
+## Technical approach
+
+KITTY CORP distinguishes concepts, simulations, active development and validated hardware. Public claims should reflect the actual stage of each initiative; no research concept should be described as a field-tested or commercially deployed system without evidence.

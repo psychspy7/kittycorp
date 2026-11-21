@@ -2,12 +2,13 @@ import type { MetadataRoute } from "next";
 import { websiteOrigin } from "@/lib/site-metadata";
 
 export default function robots(): MetadataRoute.Robots {
-  // User-agent rules
+  const allowedBots = ["Googlebot", "Google-Extended", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Bingbot"];
+  const privatePaths = ["/api/", "/account/", "/kitten/", "/abcdefghijklmnopqrstuvwxyz/"];
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
+    rules: [
+      { userAgent: "*", allow: "/", disallow: privatePaths },
+      ...allowedBots.map((userAgent) => ({ userAgent, allow: "/", disallow: privatePaths })),
+    ],
     host: websiteOrigin(),
     sitemap: `${websiteOrigin()}/sitemap.xml`,
   };

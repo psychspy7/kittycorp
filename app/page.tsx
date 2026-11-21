@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     ...pageMetadata(
       "AI Robotics • Physical-World Intelligence",
-      "KITTY CORP is an emerging technology company developing intelligent systems for the physical world, including agricultural robotics, clean energy automation, and physical intelligence.",
+      "KITTY CORP builds Physical-World Intelligence through AI robotics, AgriYaan agriculture, UrjaYaan solar intelligence, and a Digital Solutions Studio.",
       "/"
     ),
     title: "KITTY CORP | Physical-World Intelligence • AI Robotics",
@@ -49,7 +49,7 @@ export default async function Home() {
       caption: "KITTY CORP Monogram",
     },
     description:
-      "KITTY CORP is an emerging technology company developing intelligent systems that work alongside humans in physical environments.",
+      "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering.",
     founder: [
       {
         "@type": "Person",
@@ -78,7 +78,12 @@ export default async function Home() {
           "Commercial digital studio delivering bespoke web applications, business automation, and custom digital software.",
       },
     ],
-    sameAs,
+    sameAs: Array.from(new Set([
+      "https://github.com/psychspy7/kittycorp",
+      "https://www.instagram.com/kittycorp.ai/",
+      ...sameAs,
+    ])),
+    address: { "@type": "PostalAddress", addressCountry: "IN" },
     contactPoint: {
       "@type": "ContactPoint",
       email: CONTACT_EMAIL || "contact@thekittycorp.com",

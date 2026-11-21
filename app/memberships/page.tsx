@@ -12,8 +12,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
-  "KITTY ONE • Official Annual Membership ($249)",
-  "KITTY ONE is the exclusive annual patron membership for KITTY CORP. Includes laser-etched metallic NFC card, early research access, company briefings, and one complimentary business website.",
+  "KITTY ONE | Research Support Membership",
+  "KITTY ONE is a voluntary annual supporter membership for KITTY CORP research, with briefings, updates and benefits. It is not equity or an investment." ,
   "/memberships"
 );
 

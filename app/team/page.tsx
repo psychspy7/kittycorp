@@ -9,8 +9,8 @@ import { companySettings, companyTeam } from "@/lib/company-server";
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
-  "The Team • Engineering & Leadership",
-  "The people, engineers, and researchers building KITTY CORP physical-world intelligence.",
+  "KITTY CORP | Leadership",
+  "The KITTY CORP team builds Physical-World Intelligence across AI robotics, agricultural systems, solar energy research and commercial digital engineering." ,
   "/team"
 );
 

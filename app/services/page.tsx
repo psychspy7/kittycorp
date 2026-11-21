@@ -14,8 +14,11 @@ import { sitePageContent } from "@/lib/site-pages-server";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const copy = await sitePageContent("services");
-  return pageMetadata(copy.seoTitle, copy.seoDescription, "/services");
+  return pageMetadata(
+    "KITTY CORP | Digital Solutions Studio",
+    "KITTY CORP Digital Solutions Studio builds business websites, applications, custom software and AI automation for clients to support its robotics research.",
+    "/services"
+  );
 }
 
 function splitLines(value: string) {

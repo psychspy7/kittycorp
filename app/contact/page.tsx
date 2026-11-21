@@ -14,8 +14,7 @@ import "./contact.css";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const copy = await sitePageContent("contact");
-  return pageMetadata(copy.seoTitle || "Contact", copy.seoDescription || "Get in touch with KITTY CORP.", "/contact");
+  return pageMetadata("KITTY CORP | Contact", "Contact KITTY CORP about robotics research, AgriYaan, UrjaYaan partnerships, Digital Solutions Studio projects, collaborations or general enquiries.", "/contact");
 }
 
 export default async function ContactPage({

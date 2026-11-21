@@ -46,24 +46,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "refunds",
   ];
 
-  const now = new Date();
-
   const entries: MetadataRoute.Sitemap = [
     {
       url: origin,
-      lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
     },
     ...staticPages.map((page) => ({
       url: `${origin}/${page}`,
-      lastModified: now,
+      
       changeFrequency: (highPriority.has(page) ? "daily" : "weekly") as "daily" | "weekly",
       priority: highPriority.has(page) ? 0.9 : 0.8,
     })),
     ...Object.keys(serviceSegments).map((segment) => ({
       url: `${origin}/services/${segment}`,
-      lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.85,
     })),
@@ -71,23 +67,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((product) => !deprecatedSlugs.has(product.slug))
       .map((product) => ({
         url: `${origin}/${product.slug}`,
-        lastModified: product.updated_at ? new Date(product.updated_at) : now,
+        lastModified: product.updated_at ? new Date(product.updated_at) : undefined,
         changeFrequency: "weekly" as const,
         priority: 0.8,
       })),
     ...launches
-      .filter((launch) => !deprecatedSlugs.has(launch.slug))
+      .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat)/i.test(`${launch.slug} ${launch.name}`))
       .map((launch) => ({
         url: `${origin}${launchHref(launch)}`,
-        lastModified: now,
+        lastModified: launch.updated_at ? new Date(launch.updated_at) : undefined,
         changeFrequency: "weekly" as const,
         priority: 0.8,
       })),
     ...journal
-      .filter((entry) => entry.kind === "article")
+      .filter((entry) => entry.kind === "article" && !["a-more-honest-home-for-kitty", "what-we-want-kitty-ai-to-remember", "privacy-needs-more-than-a-label"].includes(entry.slug))
       .map((entry) => ({
         url: `${origin}/build-log/${entry.slug}`,
-        lastModified: entry.updated_at ? new Date(entry.updated_at) : now,
+        lastModified: entry.updated_at ? new Date(entry.updated_at) : undefined,
         changeFrequency: "monthly" as const,
         priority: 0.7,
       })),

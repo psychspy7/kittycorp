@@ -4,8 +4,8 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 
 export const metadata = pageMetadata(
-  "Website Privacy Policy",
-  "How KITTY CORP handles website inquiries, early list subscriptions, customer data and analytics.",
+  "KITTY CORP | Privacy Policy",
+  "Privacy information for KITTY CORP visitors, enquiries, accounts, subscriptions, analytics and payments, including how data is handled and your rights.",
   "/privacy"
 );
 

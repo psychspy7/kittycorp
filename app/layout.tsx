@@ -31,15 +31,15 @@ import "./gemini-home.css";
 import "./obsidian-home.css";
 import "./warm-architecture.css";
 
-const shareTitle = "KITTY CORP | Independent Technology Company";
+const shareTitle = "KITTY CORP | Physical-World Intelligence";
 const shareDescription =
-  "KITTY CORP builds websites, custom software and practical AI workflows for businesses, while exploring robotics and intelligent systems.";
+  "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, solar energy intelligence and a Digital Solutions Studio.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
-    default: "KITTY CORP • Digital solutions & intelligent systems.",
-    template: "%s · Kitty Corp",
+    default: "KITTY CORP • Physical-World Intelligence & AI Robotics",
+    template: "%s",
   },
   description: shareDescription,
   applicationName: "KITTY CORP",
@@ -53,10 +53,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/opengraph-image?v=20261104-v2",
+        url: "/opengraph-image?v=20261121-seo",
         width: 1200,
         height: 630,
-        alt: "KITTY CORP: Independent technology company building websites, software and AI workflows",
+        alt: "KITTY CORP — Physical-World Intelligence, AI Robotics and Digital Solutions Studio",
       },
     ],
   },
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: shareTitle,
     description: shareDescription,
-    images: ["/opengraph-image?v=20261104-v2"],
+    images: ["/opengraph-image?v=20261121-seo"],
   },
 };
 

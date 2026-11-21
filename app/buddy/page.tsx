@@ -7,8 +7,8 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata(
-  "KITTY Buddy • Physical Human-Machine Companion Concept",
-  "KITTY Buddy is an exploratory physical companion robot exploring non-intrusive tactile human-machine collaboration without screen fatigue or surveillance.",
+  "KITTY Buddy | Physical AI Companion",
+  "KITTY Buddy is an exploratory physical AI companion concept for voice interaction, tactile feedback and privacy-conscious human-machine collaboration." ,
   "/buddy"
 );
 

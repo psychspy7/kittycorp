@@ -7,8 +7,8 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata(
-  "KITTY AgriYaan • Agricultural Robotics & Field Autonomy",
-  "KITTY AgriYaan is an autonomous agricultural rover platform engineered to navigate harsh terrain, reduce soil compaction, and perform real-time crop inspection in India and developing agricultural ecosystems.",
+  "KITTY AgriYaan | Agricultural Robotics",
+  "KITTY AgriYaan explores crop monitoring, field sensing, terrain mobility and edge vision for Indian farming and autonomous agricultural systems." ,
   "/agriyaan"
 );
 

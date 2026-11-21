@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/site-metadata";
+import { pageMetadata, jsonLd } from "@/lib/site-metadata";
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight, ShieldCheck, Cpu, Globe } from "lucide-react";
 import { SiteHeader, FilmButton } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { TeamProfiles } from "@/components/kitty/home-sections";
 import { companySettings, companyTeam } from "@/lib/company-server";
-import { sitePageContent } from "@/lib/site-pages-server";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const copy = await sitePageContent("company");
-  return pageMetadata(copy.seoTitle || "The Company • KITTY CORP", copy.seoDescription || "About KITTY CORP, our philosophy and the team building physical-world intelligence.", "/company");
+  return pageMetadata(
+    "KITTY CORP | Company & Mission",
+    "KITTY CORP is an Indian technology company building Physical-World Intelligence through AI robotics, AgriYaan, UrjaYaan and its Digital Solutions Studio.",
+    "/company"
+  );
 }
 
 export default async function CompanyPage() {
-  const [members, settings, copy] = await Promise.all([
+  const [members, settings] = await Promise.all([
     companyTeam(),
     companySettings(),
-    sitePageContent("company"),
   ]);
 
   return (
@@ -95,6 +96,26 @@ export default async function CompanyPage() {
           </div>
         </section>
 
+
+        <section className="mb-16 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] p-8 sm:p-10" aria-labelledby="company-faq-heading">
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              { "@type": "Question", name: "What is KITTY CORP?", acceptedAnswer: { "@type": "Answer", text: "KITTY CORP is an India-founded technology company developing Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering." } },
+              { "@type": "Question", name: "What is KITTY AgriYaan?", acceptedAnswer: { "@type": "Answer", text: "KITTY AgriYaan is an agricultural autonomous rover initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. Its current stage is simulation and kinematics." } },
+              { "@type": "Question", name: "What is KITTY UrjaYaan?", acceptedAnswer: { "@type": "Answer", text: "KITTY UrjaYaan is a clean-energy intelligence initiative focused on solar monitoring, energy optimisation and predictive telemetry. Its current work includes algorithmic modelling." } },
+              { "@type": "Question", name: "How does KITTY CORP generate revenue?", acceptedAnswer: { "@type": "Answer", text: "KITTY CORP generates commercial revenue through its Digital Solutions Studio, which delivers websites, applications, custom software, AI workflows and integrations for clients." } }
+            ]
+          }) }} />
+          <h2 id="company-faq-heading" className="text-2xl font-[family-name:var(--font-display)] mb-6">KITTY CORP — common questions</h2>
+          <div className="space-y-5">
+            <article><h3 className="font-medium text-[#191B1D] mb-2">What is KITTY CORP?</h3><p className="text-[#62676D] leading-relaxed font-light">KITTY CORP is an India-founded technology company developing Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering.</p></article>
+            <article><h3 className="font-medium text-[#191B1D] mb-2">What is KITTY AgriYaan?</h3><p className="text-[#62676D] leading-relaxed font-light">KITTY AgriYaan is an agricultural autonomous rover initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. Its current stage is simulation and kinematics.</p></article>
+            <article><h3 className="font-medium text-[#191B1D] mb-2">What is KITTY UrjaYaan?</h3><p className="text-[#62676D] leading-relaxed font-light">KITTY UrjaYaan is a clean-energy intelligence initiative focused on solar monitoring, energy optimisation and predictive telemetry. Its current work includes algorithmic modelling.</p></article>
+            <article><h3 className="font-medium text-[#191B1D] mb-2">How does KITTY CORP generate revenue?</h3><p className="text-[#62676D] leading-relaxed font-light">KITTY CORP generates commercial revenue through its Digital Solutions Studio, which delivers websites, applications, custom software, AI workflows and integrations for clients.</p></article>
+          </div>
+        </section>
         {/* Team Section */}
         <section className="mb-20">
           <div className="max-w-3xl mb-12">

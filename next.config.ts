@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   async redirects() {
     return [
+      { source: "/studio", destination: "/services", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "host", value: "kittycorp.vercel.app" }],
@@ -43,6 +44,11 @@ const nextConfig: NextConfig = {
       {
         source: "/research/suvid-ai/:path*",
         destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/launches/exam-preparation",
+        destination: "/",
         permanent: true,
       },
       {
@@ -56,13 +62,23 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/launches/kitty-ai",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/launches/kitty-ai/:path*",
+        destination: "/research",
+        permanent: true,
+      },
+      {
         source: "/kitty-ai",
-        destination: '/',
+        destination: '/research',
         permanent: true,
       },
       {
         source: "/kitty-ai/:path*",
-        destination: '/',
+        destination: '/research',
         permanent: true,
       },
       {
