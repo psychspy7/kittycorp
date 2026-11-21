@@ -31,14 +31,14 @@ import "./gemini-home.css";
 import "./obsidian-home.css";
 import "./warm-architecture.css";
 
-const shareTitle = "KITTY CORP | Independent Technology Company";
+const shareTitle = "KITTY CORP | Physical-World Intelligence";
 const shareDescription =
   "KITTY CORP builds websites, custom software and practical AI workflows for businesses, while exploring robotics and intelligent systems.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
-    default: "KITTY CORP • Digital solutions & intelligent systems.",
+    default: "KITTY CORP • Physical-World Intelligence & AI Robotics",
     template: "%s · Kitty Corp",
   },
   description: shareDescription,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image?v=20261104-v2",
         width: 1200,
         height: 630,
-        alt: "KITTY CORP: Independent technology company building websites, software and AI workflows",
+        alt: "KITTY CORP — Physical-World Intelligence, AI Robotics and Digital Solutions Studio",
       },
     ],
   },
