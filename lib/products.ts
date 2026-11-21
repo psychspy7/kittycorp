@@ -4,9 +4,9 @@ export const productPages = {
     description: "A vision-and-control software stack connecting spatial perception, edge inference and robotic actuator control.",
     intro: "KITTY AI is being developed as the intelligence layer for physical systems, connecting perception, context and control. It is an active development effort, not a released consumer companion app.",
     principles: [
-      ["Memory you can manage", "We’re exploring how an assistant can remember useful context, while letting you review, change and remove it."],
-      ["A more natural conversation", "Continuous voice interaction is part of the direction. We want talking to an assistant to feel less like operating a form."],
-      ["Your context, your choice", "We’re considering local processing and explicit user controls. These are design goals, not promises about an unreleased product."],
+      ["Spatial perception", "Developing perception components that interpret sensor inputs and surroundings for embodied systems."],
+      ["Edge intelligence", "Exploring on-device inference and context-aware decision support for physical environments."],
+      ["Control interfaces", "Connecting software decisions with real-time robotic actuator control. These capabilities remain under development."],
     ],
   },
   "lisa-ai": {
