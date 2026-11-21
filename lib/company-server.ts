@@ -7,7 +7,7 @@ import { PUBLIC_CONTENT_TAGS, publicContentCache, refreshPublicContent } from ".
 import { defaultProducts, defaultSettings, defaultTeam, MEDIA_BUCKET, mediaPathPattern, type CompanyProduct, type CompanySettings, type MediaKind, type TeamMember } from "./company-content";
 
 function isPublicProduct(product: Pick<CompanyProduct,"slug"|"name">) {
-  return !/(suvid|sentinel|examify|secretchat|lisa-ai)/i.test(`${product.slug} ${product.name}`);
+  return !/(suvid|sentinel|examify|secretchat|lisa)/i.test(`${product.slug} ${product.name}`);
 }
 
 const publicLink = z.string().trim().max(1000).refine(value => {
@@ -38,7 +38,7 @@ export const companyProducts=cache(async():Promise<CompanyProduct[]>=>{
 });
 export const companyTeam=cache(async():Promise<TeamMember[]>=>{try{return await readTeam();}catch{return defaultTeam;}});
 export const companySettings=cache(async():Promise<CompanySettings>=>{try{return await readCompany();}catch{return defaultSettings;}});
-export function refreshCompany(){refreshPublicContent(PUBLIC_CONTENT_TAGS.company);for(const path of ["/","/products","/company","/team","/kitty-ai","/lisa-ai","/secretchat","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
+export function refreshCompany(){refreshPublicContent(PUBLIC_CONTENT_TAGS.company);for(const path of ["/","/products","/company","/team","/kitty-ai","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
 export async function verifyImage(db:ReturnType<typeof database>,path:string|null,kind:MediaKind){
   if(!path)return;
   if(!mediaPathPattern.test(path)||!path.startsWith(kind+"/"))throw new HttpError("Choose an image uploaded for this field.",400);

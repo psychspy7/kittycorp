@@ -96,7 +96,7 @@ export async function POST(request: Request) {
         provider: "razorpay",
         order_id: order.orderId,
         environment: config.testMode ? "sandbox" : "live",
-        purpose: order.purpose,
+        purpose: order.purpose as "project" | "donation" | "subscription" | "checkout",
         reference: order.reference,
         amount_minor: order.amount,
         currency: order.currency,

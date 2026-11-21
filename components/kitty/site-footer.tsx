@@ -34,7 +34,7 @@ export async function SiteFooter() {
             <Link className="brand inline-flex items-center gap-3 text-white mb-4" href="/">
               <Image
                 unoptimized
-                src="/brand/monogram-small-v1.webp"
+                src="/brand/monogram-small-v2.webp"
                 alt="KITTY CORP"
                 width={32}
                 height={32}
@@ -48,7 +48,7 @@ export async function SiteFooter() {
               Engineering intelligence for the physical world. Autonomous robotics, precision agricultural systems and clean energy software from India to global frontiers.
             </p>
             <div className="footer-venture-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-wider text-[#E2E5E8] backdrop-blur-sm mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
               <span className="text-[#E2E5E8]">Independent Technology Venture</span>
             </div>
 

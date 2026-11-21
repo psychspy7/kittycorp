@@ -6,7 +6,6 @@ import { MAX_APK_BYTES, RELEASE_BUCKET, type Launch } from "./launches";
 import { createHash } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import {kittyAppRelease} from "./kitty-app-release";
-import { legacySecretChatRelease, secretChat } from "./secretchat";
 import { z } from "zod";
 import { mediaPathPattern } from "./company-content";
 
@@ -64,7 +63,6 @@ export function refreshLaunchPages() {
   refreshPublicContent(PUBLIC_CONTENT_TAGS.launches);
   revalidatePath("/");
   revalidatePath("/products");
-  revalidatePath("/secretchat");
   revalidatePath("/launches/[slug]", "page");
   revalidatePath("/sitemap.xml");
 }
@@ -77,10 +75,6 @@ export async function verifyRelease(db: ReturnType<typeof database>, value: z.in
     return { apk_path: null, apk_sha256: null, apk_bytes: null };
   }
   if (value.slug === "kitty-ai" && value.apk_path === kittyAppRelease.apk) return {apk_path:kittyAppRelease.apk,apk_sha256:kittyAppRelease.sha256,apk_bytes:kittyAppRelease.bytes};
-  if (value.slug === "secretchat" && value.apk_path === secretChat.apk)
-    return { apk_path: secretChat.apk, apk_sha256: secretChat.sha256, apk_bytes: secretChat.bytes };
-  if (value.slug === "secretchat" && value.apk_path === legacySecretChatRelease.apk)
-    return { apk_path: legacySecretChatRelease.apk, apk_sha256: legacySecretChatRelease.sha256, apk_bytes: legacySecretChatRelease.bytes };
   if (!/^releases\/[0-9a-f-]{36}\/[0-9a-f-]{36}\.apk$/.test(value.apk_path)) throw new HttpError("Choose an APK uploaded through Studio.", 400);
   if (existing?.apk_path === value.apk_path) return { apk_path: existing.apk_path, apk_sha256: existing.apk_sha256, apk_bytes: existing.apk_bytes };
   const { data, error } = await db.storage.from(RELEASE_BUCKET).download(value.apk_path);

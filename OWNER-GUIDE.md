@@ -28,8 +28,8 @@ Use **Vercel settings** for private server configuration and your domain. Use **
 | What you want to change | Where to do it |
 | --- | --- |
 | Homepage, Services, Company or Contact copy and search preview | Studio → Page content |
-| SecretChat icon, version, APK or announcement | Studio → Apps & websites |
-| KITTY AI, LISA AI or Sentinel icon, details or stage | Studio → Products |
+| Published app icon, version, APK or announcement | Studio → Apps & websites |
+| Core product icon, details or stage | Studio → Products |
 | Founder photograph, biography or personal links | Studio → Team |
 | Add, hide, reorder or remove a real team member | Studio → Team |
 | Company social links and team introduction | Studio → Company & socials |
@@ -41,14 +41,14 @@ Use **Vercel settings** for private server configuration and your domain. Use **
 | Project-brief AI helper instructions and reply limits | Studio → KITTY AI & security |
 | Temporarily pause the public website | Studio → Site controls |
 | Page layout, navigation, or copy on pages outside the Page content editor | Website source in GitHub |
-| New development-product type beyond the existing three | Code and a reviewed database change |
+| New development-product type beyond the existing offerings | Code and a reviewed database change |
 | New Android app/download page | Studio → Apps & websites → New launch |
 | Password, another Studio administrator or security settings | Authentication/configuration work; not the Team editor |
 
 ## Update icons and product details
 
 1. Open Studio and sign in.
-2. For KITTY AI, LISA AI or Sentinel, open **Products** and choose **Edit product**. For SecretChat or another released app, open **Apps & websites** and edit that app.
+2. For products like KITTY AgriYaan, UrjaYaan, Buddy, KITTY AI or Sentinel, open **Products** and choose **Edit product**. For a released app, open **Apps & websites** and edit that app.
 3. Choose a separate PNG, JPEG or WebP icon, up to **3 MB**. Wait for the upload to finish. Icons are optimized to WebP, up to 512 pixels on their longest side.
 4. Update the description, stage, version or other fields you need.
 5. **Save the entry.** Uploading an image alone does not attach it permanently to the entry.
@@ -56,19 +56,19 @@ Use **Vercel settings** for private server configuration and your domain. Use **
 
 You can replace an app icon without uploading its APK again. Website icons do not automatically sync with the icon embedded inside an Android app. To change the icon on someone’s Android launcher, change the app itself, create a new signed APK, and publish that release too.
 
-The Products editor currently manages three existing development products. Their addresses are `/kitty-ai`, `/lisa-ai` and `/sentinel`. Changing a display name does not create a new page address. Adding a completely new development product requires extending the code and database validation. Apps & websites can create additional Android releases without this code change.
+The Products editor currently manages canonical products: KITTY AgriYaan, KITTY UrjaYaan, KITTY Buddy, KITTY AI, Digital Solutions Studio, and Research. Changing a display name does not create a new page address. Adding a completely new product requires extending the code and database validation. Apps & websites can create additional releases without this code change.
 
-## Publish a new Android app or update SecretChat
+## Publish a new Android app release
 
 1. Build and test a **signed release APK**. Test installation on an Android phone.
 2. Open **Apps & websites**. Edit the existing app for an update, or choose **New launch** for a different app.
-3. Enter its name, page address, headline, description, version, Android requirement and release notes. Keep SecretChat’s address `secretchat` so old links keep working.
+3. Enter its name, page address, headline, description, version, Android requirement and release notes.
 4. Upload the APK, up to **50 MB**. Wait until Studio says the APK is ready. Add or replace the separate website icon if needed.
 5. Leave **Publish on the website** off to save a private draft. Turn it on when ready to release.
 6. The business homepage no longer opens launch announcements. Visitors can find all published releases in **Products & shipped work**. The announcement field is retained for compatibility.
 7. Save, open the public app page, and check the download.
 
-The app’s usual public page is `/launches/<page-address>`; SecretChat also has `/secretchat`. The product directory, app page and download remain reachable without an announcement.
+The app’s usual public page is `/launches/<page-address>`. The product directory, app page and download remain reachable without an announcement.
 
 Keep the original Android signing key backed up privately. Existing installations generally need updates signed with that same key. Studio checks size, checksum and APK structure; it does not perform a full malware review. Installed copies cannot be recalled by hiding the website entry.
 

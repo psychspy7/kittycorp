@@ -6,7 +6,7 @@ import { publicJournal } from "@/lib/journal-server";
 import { Cpu, Leaf, Sun, Compass, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "Physical AI & Robotics Research | KITTY CORP",

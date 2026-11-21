@@ -339,10 +339,8 @@ html[data-theme="dark"] .site-header.is-scrolled { background: #080b18f2; border
   border-color: #a99cff38;
   background: #9d90ff12;
 }
-.business-home .kitty-product,
-.business-home .lisa-product { background: linear-gradient(145deg, #171a36, #101c2b); }
-.business-home .kitty-product .product-index,
-.business-home .lisa-product .product-index { color: #9c94dd; }
+.business-home .kitty-product { background: linear-gradient(145deg, #171a36, #101c2b); }
+.business-home .kitty-product .product-index { color: #9c94dd; }
 .business-home .final-product-top .quiet-status { color: #c3c1df; border-color: #a99cff45; }
 .business-home .final-product li { color: #c4c7da; }
 .business-home .final-product li svg { color: var(--refresh-cyan); }

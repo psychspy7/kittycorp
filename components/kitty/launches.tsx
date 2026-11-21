@@ -1,6 +1,23 @@
-import { ArrowUpRight } from "lucide-react";
-import { fileSize, launchHref, type Launch } from "@/lib/launches";
-import { AppIcon, SecretChatDownload } from "./secretchat";
+import { ArrowUpRight, Download, Rocket } from "lucide-react";
+import Image from "next/image";
+import { downloadHref, fileSize, launchHref, type Launch } from "@/lib/launches";
+import { mediaHref } from "@/lib/company-content";
+
+export function AppIcon({ launch, size = 72 }: { launch: Pick<Launch, "name" | "slug" | "icon_path">; size?: number }) {
+  if (launch.icon_path) {
+    return <Image className="launch-icon" unoptimized src={mediaHref(launch.icon_path)} alt={`${launch.name} icon`} width={size} height={size} />;
+  }
+  return <Rocket width={size} height={size} strokeWidth={1} aria-hidden="true" />;
+}
+
+export function SecretChatDownload({ launch, className = "" }: { launch: Launch; className?: string }) {
+  return (
+    <a className={`button button-gold ${className}`} href={downloadHref(launch)} download>
+      Download Android APK <Download size={18} aria-hidden="true" />
+    </a>
+  );
+}
+
 export function LaunchGrid({ launches }: { launches: Launch[] }) {
   if (!launches.length) return null;
   return <section className="section launch-catalog" aria-labelledby="launch-catalog-title">

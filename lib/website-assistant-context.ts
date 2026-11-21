@@ -8,11 +8,15 @@ import type { WebsiteAssistantSource } from "./website-assistant-types";
 
 const publicPages: WebsiteAssistantSource[] = [
   { label: "Start a project", href: "/projects" },
-  { label: "Our products", href: "/products" },
+  { label: "Our products & initiatives", href: "/projects" },
   { label: "KITTY AI", href: "/kitty-ai" },
+  { label: "KITTY AgriYaan", href: "/agriyaan" },
+  { label: "KITTY UrjaYaan", href: "/urjayaan" },
+  { label: "KITTY Buddy", href: "/buddy" },
+  { label: "Digital Solutions Studio", href: "https://demo.thekittycorp.com" },
+  { label: "Inside the Lab", href: "/research" },
   { label: "Meet the team", href: "/team" },
   { label: "Build log", href: "/build-log" },
-  { label: "Research & experiments", href: "/research" },
   { label: "Contact the team", href: "/contact" },
 ];
 
@@ -59,9 +63,13 @@ export function websiteAssistantSources(question: string): WebsiteAssistantSourc
   const selected: WebsiteAssistantSource[] = [];
   if (/website|business|client|build.{0,12}app|project|cost|price|maintain|support|service|develop/.test(text)) selected.push(publicPages[0]);
   if (/kitty.?ai|voice|memory|personal.?ai/.test(text)) selected.push(publicPages[2]);
-  if (/product|release|ship|try|download|secret.?chat|lisa|sentinel/.test(text)) selected.push(publicPages[1]);
-  if (/founder|team|virat|sarthak|company/.test(text)) selected.push(publicPages[3]);
-  if (/progress|log|update|building|research|experiment|robot/.test(text)) selected.push(publicPages[4]);
+  if (/product|initiative|release|ship|try|download/.test(text)) selected.push(publicPages[1]);
+  if (/agriyaan|agri|rover|farm|crop/.test(text)) selected.push(publicPages[3]);
+  if (/urjayaan|urjaan|energy|solar|photovoltaic/.test(text)) selected.push(publicPages[4]);
+  if (/buddy|companion|tactile/.test(text)) selected.push(publicPages[5]);
+  if (/digital.?solutions|studio|demo/.test(text)) selected.push(publicPages[6]);
+  if (/founder|team|virat|sarthak|company/.test(text)) selected.push(publicPages[8]);
+  if (/progress|log|update|building|research|experiment|robot/.test(text)) selected.push(publicPages[7], publicPages[9]);
   if (selected.length === 0) selected.push(publicPages[0], publicPages[1]);
   return selected.slice(0, 3);
 }

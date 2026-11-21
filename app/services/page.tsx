@@ -11,7 +11,7 @@ import { serviceOffers } from "@/lib/business-content";
 import { publishedLaunches } from "@/lib/launches-server";
 import { sitePageContent } from "@/lib/site-pages-server";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata(

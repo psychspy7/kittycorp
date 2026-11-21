@@ -146,7 +146,7 @@ export default function AdminLaunches() {
   const field = (key: "name" | "slug" | "tagline" | "version" | "android", label: string, max: number, min = 1) => (
     <div className="form-field">
       <label htmlFor={`launch-${key}`}>{label}</label>
-      <input id={`launch-${key}`} value={draft[key]} onChange={(event) => setDraft({ ...draft, [key]: event.target.value })} required minLength={min} maxLength={max} disabled={busy || uploading || (key === "slug" && editor !== "new" && editor?.slug === "secretchat")} />
+      <input id={`launch-${key}`} value={draft[key]} onChange={(event) => setDraft({ ...draft, [key]: event.target.value })} required minLength={min} maxLength={max} disabled={busy || uploading} />
     </div>
   );
 
@@ -189,7 +189,7 @@ export default function AdminLaunches() {
         <form onSubmit={save}>
           <div className="form-field">
             <label htmlFor="launch-type">Launch type</label>
-            <select id="launch-type" value={draft.launch_type} disabled={busy || uploading || (editor !== "new" && editor?.slug === "secretchat")} onChange={(event) => {
+            <select id="launch-type" value={draft.launch_type} disabled={busy || uploading} onChange={(event) => {
               const launch_type = event.target.value as Draft["launch_type"];
               setDraft(current => ({
                 ...current,

@@ -9,7 +9,7 @@ import { Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
 import "./memberships.css";
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "KITTY ONE | Research Support Membership",

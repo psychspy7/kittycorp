@@ -16,8 +16,6 @@ export async function PATCH(request: Request, context: Context) {
     if (!existing) throw new HttpError("This launch no longer exists.", 404);
     if (value.icon_path !== undefined && value.icon_path !== existing.icon_path) await verifyImage(db, value.icon_path, "icons");
     if (value.launch_type === "website" && value.screenshot_path !== existing.screenshot_path) await verifyImage(db, value.screenshot_path, "screenshots");
-    if (existing.slug === "secretchat" && value.slug !== "secretchat") throw new HttpError("Keep SecretChat’s page address so existing links continue to work.", 400);
-    if (existing.slug === "secretchat" && value.launch_type !== "app") throw new HttpError("SecretChat must remain an Android app launch.", 400);
     const release = await verifyRelease(db, value, existing as Launch);
     const { data, error } = await db.from("kitty_website_launches").update({ ...value, ...release, published_at: value.published ? (existing.published_at ?? new Date().toISOString()) : null, updated_at: new Date().toISOString() }).eq("id", id).select().single();
     if (error?.code === "23505") throw new HttpError("That page address is already in use.", 409);

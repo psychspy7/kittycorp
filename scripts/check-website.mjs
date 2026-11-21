@@ -11,7 +11,6 @@ const checks=[
   ["scripts/test-business-conversion.mjs"],
   ["scripts/test-discount-game.mjs"],
   ["scripts/test-customer-accounts.mjs"],
-  ["scripts/test-lisa-preorders.mjs"],
   ["scripts/test-memberships.mjs"],
   ["scripts/test-email-notifications.mjs"],
   ["scripts/verify-hosting.mjs","--static"],

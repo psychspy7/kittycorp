@@ -102,13 +102,13 @@
 .obsidian-lab-card { min-width:0; overflow:hidden; border:1px solid rgba(255,255,255,.11); border-radius:7px; background:#0c0d10; }
 .obsidian-lab-art { position:relative; display:grid; place-items:center; height:245px; overflow:hidden; background:radial-gradient(ellipse at 50% 48%,rgba(108,211,255,.13),transparent 62%),#0b1015; }
 .obsidian-lab-card.agri .obsidian-lab-art { background:radial-gradient(ellipse at 50% 48%,rgba(130,180,111,.17),transparent 62%),#0c1110; }
-.obsidian-lab-card.lisa .obsidian-lab-art { background:radial-gradient(ellipse at 50% 48%,rgba(226,184,107,.14),transparent 62%),#11100f; }
+.obsidian-lab-card.urja .obsidian-lab-art { background:radial-gradient(ellipse at 50% 48%,rgba(226,184,107,.14),transparent 62%),#11100f; }
 .lab-art-grid { position:absolute; inset:0; opacity:.22; background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px); background-size:34px 34px; mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent); }
 .lab-art-orbit { position:absolute; width:210px; aspect-ratio:1; border:1px solid rgba(108,211,255,.22); border-radius:50%; transform:rotate(-28deg) scaleY(.48); }
 .lab-art-orbit-b { width:160px; border-color:rgba(226,184,107,.28); transform:rotate(42deg) scaleY(.56); }
 .lab-art-symbol { position:relative; display:grid; place-items:center; width:106px; height:106px; border:1px solid rgba(108,211,255,.4); border-radius:28px; color:#6cd3ff; background:linear-gradient(145deg,rgba(108,211,255,.13),rgba(8,12,15,.8)); box-shadow:0 0 55px rgba(108,211,255,.09); }
 .agri .lab-art-symbol { color:#a9cb8a; border-color:rgba(169,203,138,.4); background:linear-gradient(145deg,rgba(169,203,138,.13),rgba(8,12,15,.8)); }
-.lisa .lab-art-symbol { color:#e2b86b; border-color:rgba(226,184,107,.4); background:linear-gradient(145deg,rgba(226,184,107,.13),rgba(8,12,15,.8)); }
+.urja .lab-art-symbol { color:#e2b86b; border-color:rgba(226,184,107,.4); background:linear-gradient(145deg,rgba(226,184,107,.13),rgba(8,12,15,.8)); }
 .lab-art-index,.lab-art-status { position:absolute; top:17px; color:#777d83; font:9px "JetBrains Mono",monospace; letter-spacing:.1em; }
 .lab-art-index { left:18px; }.lab-art-status { right:18px; color:#9eab9f; }
 .obsidian-lab-copy { padding:22px 22px 24px; }

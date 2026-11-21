@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { ProjectEnquiry } from "@/components/kitty/project-enquiry";
 import { pageMetadata } from "@/lib/site-metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "KITTY CORP | Robotics & Intelligence Projects",

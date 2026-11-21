@@ -47,6 +47,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+      {
         source: "/launches/exam-preparation",
         destination: "/",
         permanent: true,
@@ -71,7 +72,6 @@ const nextConfig: NextConfig = {
         destination: "/research",
         permanent: true,
       },
-      {
         source: "/kitty-ai",
         destination: '/research',
         permanent: true,
@@ -82,32 +82,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/examify",
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: "/examify/:path*",
-        destination: '/',
-        permanent: true,
-      },
-      {
         source: "/play",
         destination: '/',
         permanent: true,
       },
       {
         source: "/play/:path*",
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: "/lisa-ai",
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: "/lisa-ai/:path*",
         destination: '/',
         permanent: true,
       },
@@ -214,7 +194,6 @@ const nextConfig: NextConfig = {
       ] },
       { source: "/brand/:file*.webp", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       { source: "/ecosystem/:file*.svg", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
-      { source: "/lisa/:file*.webp", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       { source: "/fonts/:file*.woff2", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       { source: "/fonts/:file*.otf", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
     ];

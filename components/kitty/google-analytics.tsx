@@ -54,6 +54,53 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
     }
   }, [enabled, measurementId, pathname, tagReady]);
 
-  if (!enabled) return null;
+  const [loadScript, setLoadScript] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) return;
+    let loaded = false;
+    const triggerLoad = () => {
+      if (loaded) return;
+      loaded = true;
+      cleanupListeners();
+      setLoadScript(true);
+    };
+
+    const events = ["pointerdown", "keydown", "scroll", "touchstart"];
+    const cleanupListeners = () => {
+      events.forEach((evt) => window.removeEventListener(evt, triggerLoad));
+    };
+
+    events.forEach((evt) => window.addEventListener(evt, triggerLoad, { passive: true, once: true }));
+
+    // Fallback: load on idle after window load
+    let idleId: number | null = null;
+    let timerId: NodeJS.Timeout | null = null;
+    const onWindowLoad = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number })
+          .requestIdleCallback(triggerLoad, { timeout: 3500 });
+      } else {
+        timerId = setTimeout(triggerLoad, 2500);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      onWindowLoad();
+    } else {
+      window.addEventListener("load", onWindowLoad, { once: true });
+    }
+
+    return () => {
+      cleanupListeners();
+      window.removeEventListener("load", onWindowLoad);
+      if (idleId && "cancelIdleCallback" in window) {
+        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+      }
+      if (timerId) clearTimeout(timerId);
+    };
+  }, [enabled]);
+
+  if (!enabled || !loadScript) return null;
   return <Script id="kitty-google-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`} strategy="afterInteractive" onReady={() => setTagReady(true)} />;
 }

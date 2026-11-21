@@ -17,5 +17,5 @@ export async function PATCH(request:Request){try{
  const ciphertext=await encryptRuntimeConfiguration(stored);const updated_at=new Date().toISOString();
  const write=row?await db.from("kitty_website_runtime").update({ciphertext,updated_at}).eq("id","runtime").eq("updated_at",row.updated_at).select("updated_at").maybeSingle():await db.from("kitty_website_runtime").insert({id:"runtime",ciphertext,updated_at}).select("updated_at").single();
  if(write.error||!write.data)throw new HttpError("Couldn’t save. Reload the settings and try again.",409);
- revalidatePath("/");revalidatePath("/payments");revalidatePath("/memberships");revalidatePath("/lisa-ai");return privateJson({saved:true,version:write.data.updated_at});
+ revalidatePath("/");revalidatePath("/payments");revalidatePath("/memberships");return privateJson({saved:true,version:write.data.updated_at});
  }catch(error){return failure(error);}}

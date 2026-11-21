@@ -324,7 +324,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 <div className="flex items-center gap-2.5">
                   <Image
                     unoptimized
-                    src="/brand/monogram-small-v1.webp"
+                    src="/brand/monogram-small-v2.webp"
                     alt="KITTY CORP"
                     width={26}
                     height={26}

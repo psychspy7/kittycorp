@@ -20,7 +20,7 @@
 .business-destination>p { font-size: 15px; line-height: 1.8; color: #62645d; margin: 0 0 27px; max-width: 470px; }
 .destination-products { display: flex; flex-wrap: wrap; gap: 14px 19px; margin: auto 0 23px; }
 .destination-products>span { display: inline-flex; align-items: center; gap: 8px; font: 500 11px/1.5 Geist,sans-serif; color: #52554b; }
-.destination-products .secretchat-icon { flex-shrink: 0; width: 30px; height: 30px; object-fit: contain; }
+.destination-products .launch-icon { flex-shrink: 0; width: 30px; height: 30px; object-fit: contain; }
 .destination-product-icon { display: inline-flex; width: 30px; height: 30px; flex-shrink: 0; align-items: center; justify-content: center; color: #87672f; }
 .destination-product-icon>img { width: 30px; height: 30px; object-fit: contain; }
 .destination-product-icon>svg { width: 24px; height: 24px; }

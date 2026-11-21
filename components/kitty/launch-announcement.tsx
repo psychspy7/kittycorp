@@ -3,7 +3,7 @@
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { X, ArrowUpRight } from "lucide-react";
-import { AppIcon } from "./secretchat";
+import { AppIcon } from "./launches";
 import { downloadHref, launchHref, type Launch } from "@/lib/launches";
 
 export function LaunchAnnouncement({ launch }: { launch: Launch }) {

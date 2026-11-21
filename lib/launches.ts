@@ -23,7 +23,7 @@ export type Launch = {
 };
 export const RELEASE_BUCKET = "kitty-website-releases";
 export const MAX_APK_BYTES = 50 * 1024 * 1024;
-export const launchHref = (launch: Pick<Launch, "slug">) => launch.slug === "secretchat" ? "/secretchat" : `/launches/${launch.slug}`;
+export const launchHref = (launch: Pick<Launch, "slug">) => `/launches/${launch.slug}`;
 export const downloadHref = (launch: Pick<Launch, "slug">) => `/api/downloads/${launch.slug}`;
 export const isWebsiteLaunch = (launch: Pick<Launch, "launch_type">) => launch.launch_type === "website";
 export const fileSize = (bytes: number | null) => bytes ? `${(bytes / 1_000_000).toFixed(1)} MB` : "Android APK";

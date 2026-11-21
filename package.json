@@ -15,10 +15,12 @@
     "dev:next": "next dev --port 3000",
     "build:next": "next build",
     "start:next": "next start",
+    "tsc": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "test:performance": "node scripts/test-performance.mjs",
     "test:load": "node scripts/load-test-website.mjs",
     "check:website": "node scripts/check-website.mjs",
+    "test:e2e": "node scripts/test-e2e-suite.mjs",
     "check:hosting": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/verify-hosting.mjs"
   },
   "dependencies": {

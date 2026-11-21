@@ -52,19 +52,19 @@ const projects = [
 
 const ecosystem = [
   {
-    name: "Examify",
-    type: "EDUCATION",
-    note: "COMPLETELY FREE FOR STUDENTS",
-    description: "A simple place for students to prepare, practise and keep learning.",
-    href: "/products",
-    icon: Sparkles,
+    name: "KITTY AgriYaan",
+    type: "AGRICULTURAL ROBOTICS",
+    note: "AUTONOMOUS ROVER",
+    description: "An autonomous field-robotics platform exploring crop monitoring, terrain mobility and practical AI for agriculture.",
+    href: "/agriyaan",
+    icon: Leaf,
   },
   {
     name: "KITTY AI",
     type: "AI ASSISTANT",
     note: "INTELLIGENCE PLATFORM",
     description: "A conversational AI assistant built to make everyday digital tasks easier.",
-    href: "/kitty-ai",
+    href: "/services",
     icon: Bot,
   },
   {
@@ -76,12 +76,12 @@ const ecosystem = [
     icon: Radio,
   },
   {
-    name: "SecretChat",
-    type: "PRIVATE COMMUNICATION",
-    note: "MESSAGING PRODUCT",
-    description: "A privacy-minded messaging experience with a dedicated Android release.",
-    href: "/secretchat",
-    icon: Code2,
+    name: "KITTY UrjaYaan",
+    type: "CLEAN ENERGY & CHARGING",
+    note: "SOLAR MOBILITY INFRASTRUCTURE",
+    description: "Mobile solar generation and clean energy storage solutions for distributed power.",
+    href: "/urjayaan",
+    icon: Sun,
   },
 ];
 

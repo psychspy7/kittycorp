@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { isWebsiteLaunch, launchHref, type Launch } from "@/lib/launches";
 import { mediaHref } from "@/lib/company-content";
-import { AppIcon } from "./secretchat";
+import { AppIcon } from "./launches";
 import { ProjectEnquiry } from "./project-enquiry";
 import { serviceSegments } from "@/lib/business-content";
 

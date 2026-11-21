@@ -6,6 +6,8 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = pageMetadata(
   "KITTY UrjaYaan | Solar Intelligence",
   "KITTY UrjaYaan develops solar intelligence for monitoring, energy optimisation, predictive telemetry and clean-energy infrastructure lifecycle management." ,

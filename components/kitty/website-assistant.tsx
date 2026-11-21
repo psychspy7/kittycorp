@@ -99,7 +99,7 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
   return <aside className="website-assistant" aria-label="KITTY AI website guide">
     {open && <section id="kitty-website-assistant" className="website-assistant-panel" aria-labelledby="kitty-assistant-title">
       <header className="website-assistant-header">
-        <Image src="/brand/monogram-small-v1.webp" alt="" width={36} height={36} />
+        <Image src="/brand/monogram-small-v2.webp" alt="" width={36} height={36} />
         <div><h2 id="kitty-assistant-title">{settings.title}</h2><p>Your guide to KITTY CORP</p></div>
         <button type="button" onClick={reset} disabled={busy || messages.length === 0} className="website-assistant-icon" aria-label="Start a new conversation" title="Start a new conversation"><RotateCcw size={17} /></button>
         <button type="button" onClick={close} className="website-assistant-icon" aria-label="Close KITTY AI"><X size={19} /></button>
@@ -123,6 +123,6 @@ export function WebsiteAssistant({ settings, turnstileSiteKey }: { settings: Web
         <p className="website-assistant-disclosure">AI answers can be imperfect. Please don’t share private details. <Link href="/privacy">Privacy</Link></p>
       </div>
     </section>}
-    <button ref={trigger} type="button" className="website-assistant-trigger" aria-expanded={open} aria-controls="kitty-website-assistant" onClick={() => { if (open) close(); else setOpen(true); }}><Image src="/brand/monogram-small-v1.webp" alt="" width={25} height={25} /><span>{settings.title}</span>{open ? <X size={17} /> : <MessageCircle size={17} />}</button>
+    <button ref={trigger} type="button" className="website-assistant-trigger" aria-expanded={open} aria-controls="kitty-website-assistant" onClick={() => { if (open) close(); else setOpen(true); }}><Image src="/brand/monogram-small-v2.webp" alt="" width={25} height={25} /><span>{settings.title}</span>{open ? <X size={17} /> : <MessageCircle size={17} />}</button>
   </aside>;
 }

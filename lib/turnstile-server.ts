@@ -35,7 +35,7 @@ export async function verifyTurnstile(request: Request, token: unknown, action: 
   const expectedHost = process.env.SITE_URL
     ? new URL(websiteOrigin()).hostname
     : new URL(request.url).hostname;
-  const allowedHosts = new Set([expectedHost]);
+  const allowedHosts = new Set([expectedHost, "thekittycorp.com", "www.thekittycorp.com", "kittycorp.vercel.app"]);
   if (process.env.NODE_ENV !== "production") allowedHosts.add(new URL(request.url).hostname);
   let result: { success?: boolean; hostname?: string; action?: string };
   try {

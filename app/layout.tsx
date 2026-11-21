@@ -1,7 +1,5 @@
-import {headers} from "next/headers";
 import {LocalCurrencyProvider} from "@/components/kitty/local-currency";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/kitty/google-analytics";
 import { googleAnalyticsId } from "@/lib/analytics-config";
@@ -10,25 +8,8 @@ import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { websiteOrigin } from "@/lib/site-metadata";
 import { SiteThemeProvider } from "@/components/kitty/theme-provider";
 import { SiteToaster } from "@/components/kitty/site-toaster";
-import { CookieConsent } from "@/components/kitty/cookie-consent";
 import "./globals.css";
-import "./refined.css";
 import "./final.css";
-import "./credibility.css";
-import "./ecosystem.css";
-import "./business.css";
-import "./professional.css";
-import "./final-refinement.css";
-import "./commercial-update.css";
-import "./conversion.css";
-import "./product-research.css";
-import "./venture-showcase.css";
-import "./company-home.css";
-import "./system-theme.css";
-import "../src/shaders/threeui.css";
-import "./ui-refresh.css";
-import "./gemini-home.css";
-import "./obsidian-home.css";
 import "./warm-architecture.css";
 
 const shareTitle = "KITTY CORP | Physical-World Intelligence";
@@ -68,10 +49,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const country = (await headers()).get("x-vercel-ip-country") || "";
+  const country = "";
   return (
     <html lang="en" data-theme="warm" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
@@ -85,9 +66,9 @@ export default async function RootLayout({
         />
         <link
           rel="preload"
-          href="/fonts/runiga-v1.otf"
+          href="/fonts/runiga-v1.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
       </head>

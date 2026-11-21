@@ -16,11 +16,12 @@ type Props = {
   resetKey?: number;
   siteKey?: string;
   appearance?: "always" | "execute" | "interaction-only";
+  theme?: "light" | "dark" | "auto";
 };
 
 export type TurnstileStatus = "loading" | "ready" | "verified" | "disabled" | "error";
 
-export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteKey, appearance = "always" }: Props) {
+export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteKey, appearance = "always", theme: preferredTheme }: Props) {
   const element = useRef<HTMLDivElement>(null);
   const callback = useRef(onToken);
   const statusCallback = useRef(onStatusChange);
@@ -77,7 +78,9 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
       const render = () => {
         if (!active || !element.current || !window.turnstile) return;
         const size = element.current.clientWidth < 300 ? "compact" : "flexible";
-        const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+        const theme = preferredTheme && preferredTheme !== "auto"
+          ? preferredTheme
+          : (document.documentElement.dataset.theme === "dark" ? "dark" : "light");
         if (widget) window.turnstile.remove(widget);
         callback.current("");
         reportStatus("ready");
@@ -125,7 +128,7 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
       themeObserver?.disconnect();
       if (widget && window.turnstile) window.turnstile.remove(widget);
     };
-  }, [enabled, activeSiteKey, action, appearance, resetKey, reportStatus, scriptReady]);
+  }, [enabled, activeSiteKey, action, appearance, resetKey, preferredTheme, reportStatus, scriptReady]);
 
   if (enabled === false) return null;
   return (

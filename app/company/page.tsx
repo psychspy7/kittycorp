@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 import { TeamProfiles } from "@/components/kitty/home-sections";
 import { companySettings, companyTeam } from "@/lib/company-server";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata(

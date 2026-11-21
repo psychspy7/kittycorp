@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-const AdminLisaPreorders = dynamic(() => import("./admin-lisa-preorders"));
 const AdminProjectQuotes = dynamic(() => import("./admin-project-quotes"));
 const AdminRewards = dynamic(() => import("./admin-rewards"));
 const AdminProducts = dynamic(() => import("./admin-products"));
@@ -359,7 +358,6 @@ export function AdminDashboard() {
             <TabsTrigger value="maintenance">Site controls</TabsTrigger>
             <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
             <TabsTrigger value="email">Email alerts</TabsTrigger>
-            <TabsTrigger value="lisa-preorders">LISA preorders</TabsTrigger>
             <TabsTrigger value="project-quotes">Project quotes</TabsTrigger>
             <TabsTrigger value="rewards">Reward codes</TabsTrigger>
             <TabsTrigger value="commerce">Payments & plans</TabsTrigger>
@@ -372,7 +370,6 @@ export function AdminDashboard() {
             <TabsTrigger value="early-access">Early access</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
-          <TabsContent value="lisa-preorders" className="admin-panel"><AdminLisaPreorders/></TabsContent>
           <TabsContent value="project-quotes" className="admin-panel"><AdminProjectQuotes/></TabsContent>
           <TabsContent value="rewards" className="admin-panel"><AdminRewards/></TabsContent>
           <TabsContent value="commerce" className="admin-panel"><AdminCommerce/></TabsContent>
@@ -382,7 +379,7 @@ export function AdminDashboard() {
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
               <button onClick={() => setTab("pages")}><strong>Page content ↗</strong><span>Edit homepage, Services, Company and Contact copy and search previews.</span></button>
-              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["assistant","KITTY AI & security","Adjust your website guide, its greeting and published context. Private app chats stay separate."],["commerce","Payments & plans","Configure providers and manage product plans without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Edit KITTY AI, LISA AI and Sentinel. Change descriptions, status, artwork and visibility."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["assistant","KITTY AI & security","Adjust your website guide, its greeting and published context. Private app chats stay separate."],["commerce","Payments & plans","Configure providers and manage product plans without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Manage details, status, artwork and visibility for KITTY AgriYaan, UrjaYaan, Buddy, KITTY AI, Digital Solutions Studio, and Research."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>

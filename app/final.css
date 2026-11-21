@@ -7,7 +7,7 @@
 }
 @font-face {
   font-family: "Runiga";
-  src: url("/fonts/runiga-v1.otf") format("opentype");
+  src: url("/fonts/runiga-v1.woff2") format("woff2"), url("/fonts/runiga-v1.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -159,11 +159,8 @@ h1,h2,h3,h4 { color: var(--foreground); }
 .launch-dialog [data-slot=dialog-title],.launch-dialog em { color: #252720; }
 .launch-dialog [data-slot=dialog-description],.launch-dialog>.micro-label { color: #62645d; }
 .film-dialog { background: #f7f6f2; color: #252720; }
-.secretchat-product-art,.secretchat-preview { background: #eeeae0; border-radius: 10px; }
-.secretchat-product-art>span { color: #252720; }
-.secretchat-preview-facts>span,.secretchat-install-steps h3 { color: #44463e; }
-.secretchat-feature-grid article,.secretchat-release,.launch-card { background: #fffefa; }
-.secretchat-page code,.apk-upload code { background: #eeeae0; color: #44463e; }
+.launch-card { background: #fffefa; }
+.apk-upload code { background: #eeeae0; color: #44463e; }
 .admin-login { background: #f7f6f2; }
 .login-card { background: #fffefa; border-color: var(--border); box-shadow: 0 15px 70px #25272006; }
 .login-card h1 { color: #252720; }
@@ -432,8 +429,6 @@ html[data-theme="dark"] :is(
   .project-form,
   .contact-form,
   .contact-success,
-  .secretchat-feature-grid article,
-  .secretchat-release,
   .launch-card,
   .login-card
 ) {
@@ -448,8 +443,6 @@ html[data-theme="dark"] :is(
   .project-form,
   .contact-form,
   .contact-success,
-  .secretchat-feature-grid article,
-  .secretchat-release,
   .launch-card,
   .login-card
 ) :is(h1, h2, h3, h4, strong, b) {
@@ -461,19 +454,12 @@ html[data-theme="dark"] :is(
   .project-form,
   .contact-form,
   .contact-success,
-  .secretchat-feature-grid article,
-  .secretchat-release,
   .launch-card,
   .login-card
 ) :is(p, li, span:not(.micro-label):not(.quiet-status)) {
   color: #c4c9db !important;
 }
 html[data-theme="dark"] .real-media-placeholder {
-  background: #090d1c !important;
-  border: 1px solid rgba(169, 158, 255, 0.22) !important;
-}
-html[data-theme="dark"] .secretchat-product-art,
-html[data-theme="dark"] .secretchat-preview {
   background: #090d1c !important;
   border: 1px solid rgba(169, 158, 255, 0.22) !important;
 }

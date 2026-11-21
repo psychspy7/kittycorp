@@ -179,39 +179,37 @@ html[data-theme="dark"] :is(.public-page,.contact-page,.article-main,.article-he
   color: #f0efe9;
 }
 html[data-theme="dark"] :is(.public-page,.contact-page,.team-page,.account-page,.legal-page,.pricing-page,.payments-page,.projects-page,.services-page,.products-page) { background-color: #101210; }
-html[data-theme="dark"] :is(.directory-page,.memberships-page,.secretchat-page,.payments-hub-page,.appointments-page,.play-page,.journal-list-page) { background-color: #101210; color: #f0efe9; }
+html[data-theme="dark"] :is(.directory-page,.memberships-page,.payments-hub-page,.appointments-page,.play-page,.journal-list-page) { background-color: #101210; color: #f0efe9; }
 html[data-theme="dark"] :is(.page-heading > p,.article-header > p,.article-body p,.research-row p,.investor-grid p,.investor-grid li,.product-note,.product-page-principles p,.product-development p,.contact-copy > p,.public-note,.back-link,.empty-message,.quiet-empty) { color: #a7ada5; }
 html[data-theme="dark"] :is(.page-heading h1,.article-header h1,.article-body h2,.research-row h2,.investor-grid h2,.product-editorial h3,.product-description,.product-page-principles h2,.contact-copy h1) { color: #f0efe9; }
-html[data-theme="dark"] :is(.contact-form,.contact-success,.login-card,.admin-header,.admin-stats > div,.admin-panel,.editor-dialog,.contact-page .contact-card,.project-form,.payment-panel,.pricing-card,.plan-card,.account-panel,.early-access-card,.secretchat-feature-grid article,.secretchat-release,.launch-card,.secretchat-install,.secretchat-panel,.apk-upload) {
+html[data-theme="dark"] :is(.contact-form,.contact-success,.login-card,.admin-header,.admin-stats > div,.admin-panel,.editor-dialog,.contact-page .contact-card,.project-form,.payment-panel,.pricing-card,.plan-card,.account-panel,.early-access-card,.launch-card,.apk-upload) {
   color: #f0efe9;
   background-color: #171a18;
   border-color: #f0efe926;
 }
-html[data-theme="dark"] :is(.service-price-card,.product-plan,.lisa-plan,.appointment-form,.appointment-success,.membership-card,.quote-summary,.quote-payment-choices button,.checkout-card,.checkout-loading,.payment-path,.payment-path-contribution,.quote-pending,.quote-payment-ready,.project-ai-helper,.studio-provider-readiness,.preorder-form,.preorder-reservation,.secretchat-panel,.secretchat-feature-grid article,.secretchat-release,.launch-card,.secretchat-install,.directory-page .product-card,.team-profile,.team-card) {
+html[data-theme="dark"] :is(.service-price-card,.product-plan,.appointment-form,.appointment-success,.membership-card,.quote-summary,.quote-payment-choices button,.checkout-card,.checkout-loading,.payment-path,.payment-path-contribution,.quote-pending,.quote-payment-ready,.project-ai-helper,.studio-provider-readiness,.launch-card,.directory-page .product-card,.team-profile,.team-card) {
   color: #f0efe9;
   background-color: #171a18;
   border-color: #f0efe926;
   box-shadow: none;
 }
-html[data-theme="dark"] :is(.service-price-card:nth-child(4),.lisa-plan,.membership-paused,.quote-payment-choices button[aria-pressed="true"],.quote-pending,.quote-payment-ready,.project-ai-helper,.payment-path-contribution,.studio-provider-readiness) { background-color: #202421; }
-html[data-theme="dark"] :is(.service-price-card h3,.product-plan h3,.membership-card h2,.membership-price,.appointment-layout aside h2,.pricing-process h2,.product-plans h2,.lisa-development h2,.preorder-terms h2,.preorder-terms h3,.preorder-form h2,.preorder-reservation h2,.checkout-card h2,.payment-path h3,.quote-summary h2,.quote-payment-choices strong,.quote-payment-choices b,.secretchat-page h1,.secretchat-page h2,.secretchat-page h3,.directory-page h1,.directory-page h2,.directory-page h3) { color: #f0efe9; }
-html[data-theme="dark"] :is(.service-price-card > p,.service-price-card ul,.pricing-process p,.pricing-process li span,.appointment-layout aside ol,.appointment-layout aside p,.membership-lead,.membership-card p,.membership-help p,.product-plan > p,.plan-price span,.lisa-intro .page-heading > p,.lisa-intro-media figcaption,.lisa-gallery figcaption p,.preorder-terms p,.preorder-form p,.preorder-reservation p,.checkout-card > p,.checkout-card .checkout-methods,.quote-scope,.quote-payment-choices span,.quote-pending p,.quote-payment-ready > p,.project-start-grid aside > p,.project-flow,.project-ai-helper p,.payment-path-label,.payment-path p,.payment-hub-security,.secretchat-page p,.secretchat-page details,.secretchat-page code,.directory-page p,.directory-page .micro-label,.company-intro p,.company-story p,.secretchat-privacy p,.secretchat-section p) { color: #a7ada5; }
-html[data-theme="dark"] :is(.membership-account,.membership-help,.pricing-process,.appointment-layout aside,.project-flow,.project-start-grid aside li,.secretchat-release,.secretchat-page details,.investor-conversation,.product-page-intro,.product-page-principles,.product-development,.research-rows,.research-row,.article-end) { border-color: #f0efe926; }
+html[data-theme="dark"] :is(.service-price-card:nth-child(4),.membership-paused,.quote-payment-choices button[aria-pressed="true"],.quote-pending,.quote-payment-ready,.project-ai-helper,.payment-path-contribution,.studio-provider-readiness) { background-color: #202421; }
+html[data-theme="dark"] :is(.service-price-card h3,.product-plan h3,.membership-card h2,.membership-price,.appointment-layout aside h2,.pricing-process h2,.product-plans h2,.checkout-card h2,.payment-path h3,.quote-summary h2,.quote-payment-choices strong,.quote-payment-choices b,.directory-page h1,.directory-page h2,.directory-page h3) { color: #f0efe9; }
+html[data-theme="dark"] :is(.service-price-card > p,.service-price-card ul,.pricing-process p,.pricing-process li span,.appointment-layout aside ol,.appointment-layout aside p,.membership-lead,.membership-card p,.membership-help p,.product-plan > p,.plan-price span,.checkout-card > p,.checkout-card .checkout-methods,.quote-scope,.quote-payment-choices span,.quote-pending p,.quote-payment-ready > p,.project-start-grid aside > p,.project-flow,.project-ai-helper p,.payment-path-label,.payment-path p,.payment-hub-security,.directory-page p,.directory-page .micro-label,.company-intro p,.company-story p) { color: #a7ada5; }
+html[data-theme="dark"] :is(.membership-account,.membership-help,.pricing-process,.appointment-layout aside,.project-flow,.project-start-grid aside li,.investor-conversation,.product-page-intro,.product-page-principles,.product-development,.research-rows,.research-row,.article-end) { border-color: #f0efe926; }
 html[data-theme="dark"] :is(.membership-account button,.membership-error,.checkout-card .checkout-error) { color: #f0efe9; border-color: #f0efe936; background-color: #202421; }
 html[data-theme="dark"] .service-price-card:nth-child(5) { background: #202421; border-color: #f0efe926; }
 html[data-theme="dark"] .service-price-card:nth-child(5) :is(h3,p,li,.micro-label,.text-link) { color: #f0efe9; }
-html[data-theme="dark"] .lisa-intro-media img,
-html[data-theme="dark"] .lisa-gallery figure:first-child img { background: #202421; }
 html[data-theme="dark"] .membership-result { background: #202a20; color: #d5e5ce; }
 html[data-theme="dark"] .membership-error { color: #f2c5bf; }
-html[data-theme="dark"] :is(.form-field label,.form-heading h2,.contact-success h2,.admin-title h1,.admin-content-toolbar h2,.secretchat-feature-grid h3,.secretchat-release h2) { color: #f0efe9; }
+html[data-theme="dark"] :is(.form-field label,.form-heading h2,.contact-success h2,.admin-title h1,.admin-content-toolbar h2) { color: #f0efe9; }
 html[data-theme="dark"] :is(.form-field input,.form-field textarea,.form-field select,.quick-enquiry-form .form-field input,.quick-enquiry-form .form-field textarea,.quick-enquiry-form .form-field select,.apk-upload code) {
   color: #f0efe9;
   background-color: #101210;
   border-color: #f0efe936;
   color-scheme: dark;
 }
-html[data-theme="dark"] :is(.form-field input::placeholder,.form-field textarea::placeholder,.field-count,.form-heading > span,.form-submit-row > p,.contact-success p,.admin-title p,.admin-stats span,.admin-panel th,.panel-heading p,.admin-status,.table-date,.table-email,.message-excerpt,.secretchat-feature-grid p,.secretchat-install p,.secretchat-privacy p,.secretchat-release p,.launch-card > p,.download-meta) { color: #a7ada5; }
+html[data-theme="dark"] :is(.form-field input::placeholder,.form-field textarea::placeholder,.field-count,.form-heading > span,.form-submit-row > p,.contact-success p,.admin-title p,.admin-stats span,.admin-panel th,.panel-heading p,.admin-status,.table-date,.table-email,.message-excerpt,.launch-card > p,.download-meta) { color: #a7ada5; }
 html[data-theme="dark"] :is(.site-footer,.technology-ecosystem) { color: #e7e6df; background: #171a18; border-color: #f0efe91c; }
 html[data-theme="dark"] .site-footer :is(p,.micro-label,.footer-bottom,.footer-links a) { color: #a7ada5; }
 html[data-theme="dark"] .technology-ecosystem :is(h2,p,a,summary) { color: inherit; }
@@ -293,7 +291,7 @@ html[data-theme="light"] :is(
   .product-page-intro, .product-page-principles, .product-development,
   .team-page, .account-page, .legal-page, .pricing-page, .payments-page,
   .projects-page, .services-page, .products-page, .directory-page,
-  .memberships-page, .secretchat-page, .payments-hub-page, .appointments-page,
+  .memberships-page, .payments-hub-page, .appointments-page,
   .play-page, .journal-list-page, .journal-article, .article-end
 ) {
   color: var(--text-primary);
@@ -304,11 +302,9 @@ html[data-theme="light"] :is(
   .page-heading h1, .page-heading h2, .article-header h1, .article-body h2,
   .research-row h2, .investor-grid h2, .product-editorial h3,
   .product-description, .product-page-principles h2, .contact-copy h1,
-  .pricing-process h2, .product-plans h2, .lisa-development h2,
-  .preorder-terms h2, .preorder-terms h3, .preorder-form h2,
-  .preorder-reservation h2, .checkout-card h2, .payment-path h3,
-  .quote-summary h2, .secretchat-page h1, .secretchat-page h2,
-  .secretchat-page h3, .directory-page h1, .directory-page h2,
+  .pricing-process h2, .product-plans h2,
+  .checkout-card h2, .payment-path h3,
+  .quote-summary h2, .directory-page h1, .directory-page h2,
   .directory-page h3, .form-heading h2, .contact-success h2
 ) {
   color: var(--text-primary);
@@ -323,14 +319,12 @@ html[data-theme="light"] :is(
   .pricing-process li span, .appointment-layout aside ol,
   .appointment-layout aside p, .membership-lead, .membership-card p,
   .membership-help p, .product-plan > p, .plan-price span,
-  .preorder-terms p, .preorder-form p, .preorder-reservation p,
   .checkout-card > p, .checkout-card .checkout-methods, .quote-scope,
   .quote-payment-choices span, .quote-pending p, .quote-payment-ready > p,
   .project-start-grid aside > p, .project-flow, .project-ai-helper p,
   .payment-path-label, .payment-path p, .payment-hub-security,
-  .secretchat-page p, .secretchat-page details, .secretchat-page code,
   .directory-page p, .directory-page .micro-label, .company-intro p,
-  .company-story p, .secretchat-privacy p, .secretchat-section p,
+  .company-story p,
   .form-submit-row > p, .form-heading > span, .field-count,
   .contact-success p, .appointment-submit p, .existing-client-note
 ) {
@@ -341,14 +335,14 @@ html[data-theme="light"] :is(
   .contact-form, .contact-success, .login-card, .admin-header,
   .admin-stats > div, .admin-panel, .editor-dialog, .contact-card,
   .project-form, .payment-panel, .pricing-card, .plan-card,
-  .account-panel, .early-access-card, .secretchat-feature-grid article,
-  .secretchat-release, .launch-card, .secretchat-install, .secretchat-panel,
-  .apk-upload, .service-price-card, .product-plan, .lisa-plan,
+  .account-panel, .early-access-card,
+  .launch-card,
+  .apk-upload, .service-price-card, .product-plan,
   .appointment-form, .appointment-success, .membership-card,
   .quote-summary, .quote-payment-choices button, .checkout-card,
   .checkout-loading, .payment-path, .payment-path-contribution,
   .quote-pending, .quote-payment-ready, .project-ai-helper,
-  .studio-provider-readiness, .preorder-form, .preorder-reservation,
+  .studio-provider-readiness,
   .directory-page .product-card, .team-profile, .team-card,
   .business-proof-card, .quick-enquiry-form, .labs-summary-grid > a,
   .segment-links a, .project-start-grid aside, .membership-account,
@@ -361,7 +355,7 @@ html[data-theme="light"] :is(
 }
 
 html[data-theme="light"] :is(
-  .service-price-card:nth-child(4), .lisa-plan, .membership-paused,
+  .service-price-card:nth-child(4), .membership-paused,
   .quote-payment-choices button[aria-pressed="true"], .quote-pending,
   .quote-payment-ready, .project-ai-helper, .payment-path-contribution,
   .studio-provider-readiness, .product-plan, .appointment-success,
@@ -728,14 +722,6 @@ html[data-theme="dark"] :is(
   .home-process li p,
   .product-plan > p,
   .plan-price span,
-  .lisa-intro .page-heading > p,
-  .lisa-intro-media figcaption,
-  .lisa-gallery figcaption p,
-  .lisa-workbench p,
-  .lisa-development-note,
-  .preorder-terms p,
-  .preorder-form p,
-  .preorder-reservation p,
   .studio-commerce-form p,
   .studio-commerce-form label small,
   .studio-payment-records article p,

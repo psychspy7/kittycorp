@@ -18,11 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const highPriority = new Set(["services", "products", "memberships", "projects", "pricing", "agriyaan", "urjayaan", "buddy"]);
   const deprecatedSlugs = new Set([
-    ["secret", "chat"].join(""),
-    ["kitty", "-ai"].join(""),
-    ["lisa", "-ai"].join(""),
-    ["pl", "ay"].join(""),
-    ["exam", "ify"].join("")
+    "kitty-ai",
+    "play",
   ]);
 
   const staticPages = [

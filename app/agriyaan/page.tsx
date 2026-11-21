@@ -6,6 +6,8 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = pageMetadata(
   "KITTY AgriYaan | Agricultural Robotics",
   "KITTY AgriYaan explores crop monitoring, field sensing, terrain mobility and edge vision for Indian farming and autonomous agricultural systems." ,

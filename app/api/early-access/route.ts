@@ -21,7 +21,7 @@ const signup = z.object({
   email: z.string().trim().email("Enter a valid email address.").max(254),
   interests: z
     .array(
-      z.enum(["KITTY AI", "KITTY Sentinel", "LISA AI", "KITTY CORP updates"]),
+      z.enum(["KITTY AI", "KITTY AgriYaan", "KITTY UrjaYaan", "KITTY Buddy", "KITTY Sentinel", "KITTY CORP updates"]),
     )
     .max(4),
   website: z.string().max(300).optional().default(""),

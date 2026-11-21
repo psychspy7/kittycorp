@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Globe2, Smartphone, Workflow, Check } from "lucide-react";
 import { type Launch, isWebsiteLaunch, launchHref } from "@/lib/launches";
-import { AppIcon } from "./secretchat";
+import { AppIcon } from "./launches";
 export function ProfessionalHero({ launches }: { launches: Launch[] }) {
   const selected = launches.slice(0, 3);
   return <section className="professional-hero wrap" aria-labelledby="hero-title">

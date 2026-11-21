@@ -7,7 +7,7 @@ import { companySettings } from "@/lib/company-server";
 import { pageMetadata, websiteOrigin, jsonLd, canonicalSocialUrl } from "@/lib/site-metadata";
 import { CONTACT_EMAIL, isFounderLinkedIn } from "@/lib/company-contact";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -45,8 +45,8 @@ export default async function Home() {
     url: origin,
     logo: {
       "@type": "ImageObject",
-      url: `${origin}/brand/monogram.png`,
-      caption: "KITTY CORP Monogram",
+      url: `${origin}/brand/monogram-small-v2.webp`,
+      caption: "KITTY CORP Official Logo",
     },
     description:
       "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering.",

@@ -1102,7 +1102,6 @@ html[data-theme="dark"] :is(
   .service-faq,
   .delivery-support,
   .service-starting-price,
-  .lisa-purchase-card,
   .review-grid figure
 ) {
   background: #0c0d10 !important;
@@ -1116,16 +1115,14 @@ html[data-theme="dark"] :is(
 
 html[data-theme="dark"] :is(
   .service-offerings article,
-  .delivery-support,
-  .lisa-purchase-card
+  .delivery-support
 ) :is(h2, h3, strong) {
   color: #f4f5ff !important;
 }
 
 html[data-theme="dark"] :is(
   .service-offerings article,
-  .delivery-support,
-  .lisa-purchase-card
+  .delivery-support
 ) :is(p, li, span) {
   color: #d1d5e5 !important;
 }
@@ -1319,7 +1316,6 @@ html[data-theme="dark"] :is(
   .services-page,
   .products-page,
   .memberships-page,
-  .secretchat-page,
   .payments-hub-page,
   .appointments-page,
   .play-page,
@@ -1403,15 +1399,10 @@ html[data-theme="dark"] :is(
   .project-form,
   .customer-sign-in,
   .early-success,
-  .lisa-purchase-card,
-  .lisa-product,
   .studio-health-card,
   .business-home .home-service,
   .business-home .delivery-support,
-  .secretchat-feature-grid article,
-  .secretchat-release,
   .launch-card,
-  .secretchat-panel,
   .login-card,
   .product-summary,
   .product-page-principles article,
@@ -1461,7 +1452,6 @@ html[data-theme="dark"] :is(
   .project-form,
   .customer-sign-in,
   .early-success,
-  .lisa-purchase-card,
   .product-summary,
   .product-page-principles article,
   .quote-summary
@@ -1506,7 +1496,6 @@ html[data-theme="dark"] :is(
   .project-form,
   .customer-sign-in,
   .early-success,
-  .lisa-purchase-card,
   .product-summary,
   .product-page-principles article,
   .quote-summary

@@ -249,6 +249,12 @@ input, select, textarea {
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
 input:focus, select:focus, textarea:focus {
   border-color: var(--accent-cobalt) !important;
   box-shadow: 0 0 0 3px var(--accent-cobalt-focus) !important;
@@ -320,8 +326,8 @@ html body .site-footer .footer-venture-pill span {
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   padding-top: 24px !important;
   margin-top: 48px !important;
-  color: #6B7280 !important;
-  -webkit-text-fill-color: #6B7280 !important;
+  color: #9CA3AF !important;
+  -webkit-text-fill-color: #9CA3AF !important;
 }
 
 /* Dark section headings support (e.g., KITTY AI, Deep Ocean & Orbital Horizon) */
@@ -389,8 +395,8 @@ html body .dark-section h1, html body .dark-section h2, html body .dark-section 
 }
 
 .site-footer .currency-selector span {
-  color: #6B7280 !important;
-  -webkit-text-fill-color: #6B7280 !important;
+  color: #9CA3AF !important;
+  -webkit-text-fill-color: #9CA3AF !important;
 }
 
 /* =========================================================================

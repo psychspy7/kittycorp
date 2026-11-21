@@ -47,6 +47,15 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  // Close mobile drawer and restore body scroll on route change or navigation
+  useEffect(() => {
+    const closeTimer = setTimeout(() => {
+      setOpen(false);
+      document.body.style.overflow = "auto";
+    }, 0);
+    return () => clearTimeout(closeTimer);
+  }, [pathname]);
+
   return (
     <header
       className={`site-header sticky top-0 z-50 w-full transition-all duration-200 border-b ${
@@ -65,7 +74,7 @@ export function SiteHeader() {
           <div className="relative w-8 h-8 flex-shrink-0">
             <Image
               unoptimized
-              src="/brand/monogram-small-v1.webp"
+              src="/brand/monogram-small-v2.webp"
               alt="KITTY CORP"
               width={32}
               height={32}
@@ -125,7 +134,7 @@ export function SiteHeader() {
           {/* Mobile Menu Toggle Button: Active on mobile and tablet (< 1024px) */}
           <button
             type="button"
-            className="menu-toggle kitty-mobile-menu lg:hidden flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] active:scale-95 transition-all shadow-sm"
+            className="menu-toggle kitty-mobile-menu lg:hidden flex items-center justify-center w-12 h-12 min-w-[48px] min-h-[48px] rounded-full border border-[#B8B4AA] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2457D6] focus-visible:ring-offset-2 transition-all shadow-sm"
             aria-label={open ? "Close navigation" : "Open navigation"}
             aria-expanded={open}
             aria-controls="mobile-nav-panel"
@@ -152,7 +161,7 @@ export function SiteHeader() {
             role="dialog"
             aria-modal="true"
             aria-label="Site Navigation"
-            className="mobile-navigation fixed inset-y-0 right-0 z-50 w-[88vw] max-w-[360px] h-[100dvh] bg-[#FBFAF7] border-l border-[#D9D6CF] shadow-2xl flex flex-col justify-between overflow-y-auto"
+            className="mobile-navigation fixed inset-y-0 right-0 z-50 w-[88vw] max-w-[360px] h-[100dvh] bg-[#FBFAF7] border-l border-[#C2BEB5] shadow-2xl flex flex-col justify-between overflow-y-auto"
             style={{
               paddingTop: "max(1.5rem, env(safe-area-inset-top))",
               paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
@@ -162,11 +171,11 @@ export function SiteHeader() {
           >
             <div>
               {/* Header inside drawer */}
-              <div className="flex items-center justify-between pb-5 border-b border-[#D9D6CF]">
+              <div className="flex items-center justify-between pb-5 border-b border-[#C2BEB5]">
                 <div className="flex items-center gap-2.5">
                   <Image
                     unoptimized
-                    src="/brand/monogram-small-v1.webp"
+                    src="/brand/monogram-small-v2.webp"
                     alt="KITTY CORP"
                     width={28}
                     height={28}
@@ -179,14 +188,14 @@ export function SiteHeader() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-[#191B1D] bg-[#E9E6E0] hover:bg-[#D9D6CF] transition-colors"
+                  className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-full flex items-center justify-center text-[#191B1D] border border-[#B8B4AA] bg-[#FBFAF7] hover:bg-[#E9E6E0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2457D6] focus-visible:ring-offset-2 transition-colors"
                   aria-label="Close menu"
                 >
                   <X className="w-5 h-5 text-[#191B1D]" />
                 </button>
               </div>
 
-              <p className="text-xs text-[#62676D] font-light mt-3 mb-5">
+              <p className="text-xs text-[#191B1D] font-normal mt-3 mb-5">
                 Engineering intelligence for the physical world.
               </p>
 
@@ -199,10 +208,10 @@ export function SiteHeader() {
                       key={label}
                       href={href}
                       onClick={() => setOpen(false)}
-                      className={`flex items-center min-h-[48px] px-3.5 rounded-lg text-[15px] transition-colors ${
+                      className={`flex items-center min-h-[48px] rounded-lg text-[16px] transition-colors ${
                         isCurrent
-                          ? "bg-[#E9E6E0] font-semibold text-[#2457D6]"
-                          : "text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60"
+                          ? "bg-[#E9E6E0] font-bold text-[#1D46B0] border-l-4 border-[#2457D6] pl-3"
+                          : "text-[#191B1D] font-medium hover:text-[#1D46B0] hover:bg-[#E9E6E0]/80 pl-4"
                       }`}
                       aria-current={isCurrent ? "page" : undefined}
                     >
@@ -212,46 +221,57 @@ export function SiteHeader() {
                 })}
 
                 {/* Core Initiatives Group */}
-                <div className="pt-3 pb-1 border-t border-[#D9D6CF]/70 my-2">
-                  <span className="px-3.5 text-[11px] font-mono uppercase tracking-widest text-[#73777C] block mb-1.5">
+                <div className="pt-3 pb-1 border-t border-[#C2BEB5] my-2">
+                  <span className="px-3.5 text-[12px] font-mono uppercase tracking-widest text-[#191B1D] font-bold block mb-1.5">
                     Core Initiatives
                   </span>
-                  <Link
-                    href="/agriyaan"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center min-h-[48px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
-                  >
-                    KITTY AgriYaan
-                  </Link>
-                  <Link
-                    href="/urjayaan"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center min-h-[48px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
-                  >
-                    KITTY UrjaYaan
-                  </Link>
-                  <Link
-                    href="/buddy"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center min-h-[48px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#2457D6] hover:bg-[#E9E6E0]/60 transition-colors"
-                  >
-                    KITTY Buddy
-                  </Link>
+                  {[
+                    { href: "/agriyaan", label: "KITTY AgriYaan" },
+                    { href: "/urjayaan", label: "KITTY UrjaYaan" },
+                    { href: "/buddy", label: "KITTY Buddy" },
+                  ].map(({ href, label }) => {
+                    const isCurrent = pathname === href || pathname.startsWith(href + "/");
+                    return (
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={() => setOpen(false)}
+                        className={`flex items-center min-h-[48px] rounded-lg text-[15px] transition-colors ${
+                          isCurrent
+                            ? "bg-[#E9E6E0] font-bold text-[#1D46B0] border-l-4 border-[#2457D6] pl-3"
+                            : "text-[#191B1D] font-medium hover:text-[#1D46B0] hover:bg-[#E9E6E0]/80 pl-4"
+                        }`}
+                        aria-current={isCurrent ? "page" : undefined}
+                      >
+                        {label}
+                      </Link>
+                    );
+                  })}
                 </div>
 
                 {/* Account & Research Support */}
-                <div className="pt-2 border-t border-[#D9D6CF]/70 my-2">
+                <div className="pt-2 border-t border-[#C2BEB5] my-2">
                   <Link
                     href="/account"
                     onClick={() => setOpen(false)}
-                    className="flex items-center min-h-[48px] px-3.5 rounded-lg text-[15px] text-[#292D31] hover:text-[#191B1D] hover:bg-[#E9E6E0]/60 transition-colors"
+                    className={`flex items-center min-h-[48px] rounded-lg text-[15px] transition-colors ${
+                      pathname === "/account" || pathname.startsWith("/account/")
+                        ? "bg-[#E9E6E0] font-bold text-[#1D46B0] border-l-4 border-[#2457D6] pl-3"
+                        : "text-[#191B1D] font-medium hover:text-[#1D46B0] hover:bg-[#E9E6E0]/80 pl-4"
+                    }`}
+                    aria-current={pathname === "/account" || pathname.startsWith("/account/") ? "page" : undefined}
                   >
                     {signedIn ? "My Account" : "Sign In"}
                   </Link>
                   <Link
                     href="/support"
                     onClick={() => setOpen(false)}
-                    className="flex items-center min-h-[48px] px-3.5 rounded-lg text-[15px] text-[#2457D6] hover:underline transition-colors"
+                    className={`flex items-center min-h-[48px] rounded-lg text-[15px] transition-colors ${
+                      pathname === "/support" || pathname.startsWith("/support/")
+                        ? "bg-[#E9E6E0] font-bold text-[#1D46B0] border-l-4 border-[#2457D6] pl-3"
+                        : "text-[#191B1D] font-semibold hover:text-[#1D46B0] hover:bg-[#E9E6E0]/80 pl-4"
+                    }`}
+                    aria-current={pathname === "/support" || pathname.startsWith("/support/") ? "page" : undefined}
                   >
                     Support Our Research
                   </Link>
@@ -260,18 +280,18 @@ export function SiteHeader() {
             </div>
 
             {/* Bottom Actions inside drawer */}
-            <div className="pt-4 border-t border-[#D9D6CF] space-y-2 mt-6">
+            <div className="pt-4 border-t border-[#C2BEB5] space-y-2 mt-6">
               <a
                 href="https://demo.thekittycorp.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 px-4 rounded-full bg-[#2457D6] text-white text-[14px] font-medium shadow-sm hover:bg-[#1D46B0] transition-colors"
+                className="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 px-4 rounded-full bg-[#2457D6] text-white text-[14px] font-semibold shadow-sm hover:bg-[#1D46B0] transition-colors"
               >
                 <span>Digital Solutions Studio</span>
                 <ArrowUpRight className="w-4 h-4 text-white" />
               </a>
-              <p className="text-center text-[11px] font-mono text-[#73777C] uppercase tracking-wider">
+              <p className="text-center text-[11px] font-mono text-[#374151] font-semibold uppercase tracking-wider">
                 India to the World
               </p>
             </div>

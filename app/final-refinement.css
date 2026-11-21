@@ -50,7 +50,6 @@ body { color:var(--final-graphite); }
 .final-product-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .final-product { display:flex; flex-direction:column; padding:33px; border-radius:15px; border:1px solid #d9ddce; min-width:0; }
 .kitty-product { background:#eaf0e3; }
-.lisa-product { background:#eeebe4; }
 .final-product-top { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px; }
 .final-product-icon { display:flex; align-items:center; justify-content:center; width:56px; height:56px; background:#fffefa; border-radius:13px; color:#546246; border:1px solid #cad0bf; }
 .final-product-icon img { border-radius:9px; object-fit:contain; }
@@ -63,9 +62,6 @@ body { color:var(--final-graphite); }
 .final-product li svg { color:#647851; flex-shrink:0; }
 .final-product-actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px 17px; margin-top:auto; }
 .final-release-link { display:inline-flex; gap:8px; align-items:center; min-height:44px; margin-top:8px; color:#5c674f; font-size:11px; }
-.lisa-work-preview { overflow:hidden; border-radius:9px; border:1px solid #d4d0c6; margin:1px 0 23px; }
-.lisa-work-preview img { display:block; width:100%; height:150px; object-fit:cover; object-position:center; background:#e3e0d6; }
-.lisa-work-preview span { display:block; font:8px/1.6 Geist,Arial,sans-serif; letter-spacing:.08em; padding:9px 12px; color:#686557; background:#f7f4ed; }
 .final-destinations { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; padding-block:0 50px; }
 .final-destinations>a { display:flex; gap:14px; align-items:start; border-top:1px solid #d8d9ce; padding:21px 0; min-width:0; transition:border-color .2s; }
 .final-destinations>a:hover { border-color:#80632f; }
@@ -121,7 +117,6 @@ body { color:var(--final-graphite); }
 /* Dark Mode Obsidian Overrides */
 html[data-theme="dark"] :is(
   .business-home .home-service,
-  .lisa-product,
   .studio-health-card,
   .business-home .delivery-support
 ) {
@@ -133,8 +128,4 @@ html[data-theme="dark"] .final-product-icon {
   background: #090d1c !important;
   border-color: rgba(169, 158, 255, 0.25) !important;
   color: #69dcf2 !important;
-}
-html[data-theme="dark"] .lisa-work-preview span {
-  background: #090d1c !important;
-  color: #c4c9db !important;
 }

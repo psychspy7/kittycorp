@@ -14,12 +14,26 @@ export function EditorialHome() {
           ========================================================================= */}
       <section className="relative min-h-[75vh] flex flex-col justify-between pt-20 sm:pt-28 pb-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
         <div className="max-w-4xl pt-4 sm:pt-8">
+          {/* Official Brand Badge */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] mb-8 shadow-xs">
+            <Image
+              unoptimized
+              src="/brand/monogram-small-v2.webp"
+              alt="KITTY CORP"
+              width={22}
+              height={22}
+              className="object-contain"
+            />
+            <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#191B1D] font-semibold">
+              KITTY CORP · PHYSICAL-WORLD INTELLIGENCE
+            </span>
+          </div>
           <h1 className="text-[clamp(36px,7.5vw,86px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-8">
             Engineering intelligence <br className="hidden sm:block" />
-            <span className="font-light text-[#62676D]">for the physical world.</span>
+            <span className="font-normal text-[#191B1D]">for the physical world.</span>
           </h1>
 
-          <p className="text-[18px] sm:text-[22px] leading-[1.65] text-[#292D31] max-w-2xl font-light mb-10">
+          <p className="text-[18px] sm:text-[22px] leading-[1.65] text-[#191B1D] max-w-2xl font-normal mb-10">
             KITTY CORP develops autonomous robotics, precision agricultural systems and clean energy software from India, with a focus on practical engineering and global applications.
           </p>
 
@@ -47,19 +61,19 @@ export function EditorialHome() {
         {/* Telemetry Indicator Strip */}
         <div className="mt-16 pt-8 border-t border-[#D9D6CF] grid grid-cols-2 md:grid-cols-4 gap-6 text-xs">
           <div>
-            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">CORE FOCUS</span>
+            <span className="font-mono text-[10px] text-[#374151] uppercase tracking-wider block mb-1">CORE FOCUS</span>
             <span className="font-medium text-[#191B1D]">Autonomous Robotics &amp; Clean Energy</span>
           </div>
           <div>
-            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">FOUNDATION</span>
+            <span className="font-mono text-[10px] text-[#374151] uppercase tracking-wider block mb-1">FOUNDATION</span>
             <span className="font-medium text-[#191B1D]">Physical-World Intelligence</span>
           </div>
           <div>
-            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">ORIGIN</span>
+            <span className="font-mono text-[10px] text-[#374151] uppercase tracking-wider block mb-1">ORIGIN</span>
             <span className="font-medium text-[#191B1D]">India to Global Frontiers</span>
           </div>
           <div>
-            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">ARCHITECTURE</span>
+            <span className="font-mono text-[10px] text-[#374151] uppercase tracking-wider block mb-1">ARCHITECTURE</span>
             <span className="font-medium text-[#2457D6]">Embedded Edge Inference</span>
           </div>
         </div>
@@ -78,7 +92,7 @@ export function EditorialHome() {
             Intelligence should extend beyond screens into the physical world.
           </h2>
 
-          <div className="space-y-6 text-[17px] sm:text-[19px] leading-[1.8] text-[#292D31] font-light">
+          <div className="space-y-6 text-[17px] sm:text-[19px] leading-[1.8] text-[#191B1D] font-normal">
             <p>
               AI should do more than respond through a screen. It should help people understand their surroundings, operate physical systems and solve real problems in agriculture, clean energy and field operations.
             </p>
@@ -109,7 +123,7 @@ export function EditorialHome() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
-          <p className="mt-2 text-[11px] font-mono text-[#73777C] uppercase tracking-wider">
+          <p className="mt-2 text-[11px] font-mono text-[#374151] uppercase tracking-wider">
             AgriYaan Physical Kinematics Rig · Mud &amp; Canopy Autonomy
           </p>
         </div>
@@ -141,11 +155,11 @@ export function EditorialHome() {
               KITTY AgriYaan
             </h2>
             
-            <p className="text-[17px] sm:text-[19px] font-medium text-[#292D31] mb-6">
+            <p className="text-[17px] sm:text-[19px] font-medium text-[#191B1D] mb-6">
               Agricultural Robotics &amp; Autonomous Field Systems
             </p>
 
-            <div className="space-y-4 text-[16px] leading-[1.75] text-[#292D31] font-light mb-8 max-w-xl">
+            <div className="space-y-4 text-[16px] leading-[1.75] text-[#191B1D] font-normal mb-8 max-w-xl">
               <p>
                 Agriculture across India and developing farmlands faces an urgent convergence: climate volatility, unpredictable monsoons, soil compaction, and rural labor migration.
               </p>
@@ -156,11 +170,11 @@ export function EditorialHome() {
 
             <div className="grid grid-cols-2 gap-4 mb-8 pt-2 max-w-lg">
               <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#FBFAF7]/90 backdrop-blur-md">
-                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">DOMAIN</span>
+                <span className="font-mono text-[10px] text-[#374151] uppercase block mb-1">DOMAIN</span>
                 <span className="text-sm font-medium text-[#191B1D]">Precision Agriculture</span>
               </div>
               <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#FBFAF7]/90 backdrop-blur-md">
-                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">STAGE</span>
+                <span className="font-mono text-[10px] text-[#374151] uppercase block mb-1">STAGE</span>
                 <span className="text-sm font-medium text-[#2457D6]">Simulation &amp; Kinematics</span>
               </div>
             </div>
@@ -200,7 +214,7 @@ export function EditorialHome() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
-          <p className="mt-2 text-[11px] font-mono text-[#73777C] uppercase tracking-wider">
+          <p className="mt-2 text-[11px] font-mono text-[#374151] uppercase tracking-wider">
             Photovoltaic Thermal Telemetry · Inverter Degradation Forecasting
           </p>
         </div>
@@ -232,11 +246,11 @@ export function EditorialHome() {
               KITTY UrjaYaan
             </h2>
             
-            <p className="text-[17px] sm:text-[19px] font-medium text-[#292D31] mb-6">
+            <p className="text-[17px] sm:text-[19px] font-medium text-[#191B1D] mb-6">
               AI-Driven Clean Energy Management &amp; Solar Optimization
             </p>
 
-            <div className="space-y-4 text-[16px] leading-[1.75] text-[#292D31] font-light mb-8 max-w-xl">
+            <div className="space-y-4 text-[16px] leading-[1.75] text-[#191B1D] font-normal mb-8 max-w-xl">
               <p>
                 Deploying renewable generation is only half of the energy transition. Solar panels degrade unevenly under intense heat and dust, while battery storage systems fail prematurely when subjected to volatile charging spikes.
               </p>
@@ -247,11 +261,11 @@ export function EditorialHome() {
 
             <div className="grid grid-cols-2 gap-4 mb-8 pt-2 max-w-lg">
               <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#F5F2EA]/90 backdrop-blur-md">
-                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">DOMAIN</span>
+                <span className="font-mono text-[10px] text-[#374151] uppercase block mb-1">DOMAIN</span>
                 <span className="text-sm font-medium text-[#191B1D]">Clean Energy Systems</span>
               </div>
               <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#F5F2EA]/90 backdrop-blur-md">
-                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">STAGE</span>
+                <span className="font-mono text-[10px] text-[#374151] uppercase block mb-1">STAGE</span>
                 <span className="text-sm font-medium text-[#2457D6]">Algorithmic Modeling</span>
               </div>
             </div>
@@ -306,7 +320,7 @@ export function EditorialHome() {
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between gap-4 mb-6">
-                  <span className="font-mono text-xs text-[#9CA3AF] uppercase tracking-widest">ARCHITECTURE</span>
+                  <span className="font-mono text-xs text-[#D1D5DB] uppercase tracking-widest">ARCHITECTURE</span>
                   <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-white/20 text-[#E2E5E8] bg-white/10 backdrop-blur-sm">
                     Active Development
                   </span>
@@ -318,12 +332,12 @@ export function EditorialHome() {
                   KITTY AI
                 </h3>
                 <p className="text-sm font-medium text-[#E2E5E8] mb-3">Vision-language foundation for embodied autonomy</p>
-                <p className="text-[#D1D5DB] font-light leading-relaxed text-[15px] sm:text-[16px] max-w-lg">
+                <p className="text-[#F3F4F6] font-normal leading-relaxed text-[15px] sm:text-[16px] max-w-lg">
                   Our embedded neural software stack bridges multi-sensor spatial computer vision directly with real-time robotic actuator controllers, providing physical machines with offline edge inference, context-aware navigation and obstacle avoidance.
                 </p>
               </div>
 
-              <div className="relative z-10 pt-6 mt-8 border-t border-white/15 text-xs font-mono text-[#9CA3AF] flex items-center justify-between">
+              <div className="relative z-10 pt-6 mt-8 border-t border-white/15 text-xs font-mono text-[#D1D5DB] flex items-center justify-between">
                 <span>STAGE: EMBEDDED REAL-TIME INFERENCE</span>
                 <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
               </div>
@@ -345,8 +359,8 @@ export function EditorialHome() {
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between gap-4 mb-6">
-                  <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">INTERACTION PROTOTYPE</span>
-                  <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]/90 backdrop-blur-sm">
+                  <span className="font-mono text-xs text-[#374151] uppercase tracking-widest">INTERACTION PROTOTYPE</span>
+                  <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-[#D9D6CF] text-[#191B1D] bg-[#F5F2EA]/90 backdrop-blur-sm">
                     Concept Exploration
                   </span>
                 </div>
@@ -356,8 +370,8 @@ export function EditorialHome() {
                 <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-2">
                   KITTY Buddy
                 </h3>
-                <p className="text-sm font-medium text-[#292D31] mb-3">Physical human-machine companion</p>
-                <p className="text-[#62676D] font-light leading-relaxed text-[15px] sm:text-[16px] max-w-lg mb-6">
+                <p className="text-sm font-medium text-[#191B1D] mb-3">Physical human-machine companion</p>
+                <p className="text-[#191B1D] font-normal leading-relaxed text-[15px] sm:text-[16px] max-w-lg mb-6">
                   An exploration into tactile collaboration, testing non-intrusive companion devices that facilitate natural physical interaction without invasive biometric surveillance or screen fatigue.
                 </p>
                 <Link
@@ -369,7 +383,7 @@ export function EditorialHome() {
                 </Link>
               </div>
 
-              <div className="relative z-10 pt-6 mt-8 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C] flex items-center justify-between">
+              <div className="relative z-10 pt-6 mt-8 border-t border-[#D9D6CF] text-xs font-mono text-[#374151] flex items-center justify-between">
                 <span>STAGE: CONCEPT EXPLORATION</span>
                 <span className="w-2 h-2 rounded-full bg-[#2457D6]" />
               </div>
@@ -406,19 +420,19 @@ export function EditorialHome() {
               </span>
 
               <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
-                From agricultural soil to ocean depths.
+                From deep ocean to deep space.
               </h2>
 
-              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#D1D5DB] font-light mb-8">
+              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#F3F4F6] font-normal mb-8">
                 <p>
-                  Artificial intelligence is a dual-edged technological capability. Its ultimate value is decided not by compute scale or synthetic output, but by the discipline, humility and responsibility guiding how we direct and use it.
+                  We believe that when human ingenuity and artificial intelligence work together productively, we can accomplish things that were once thought impossible. Technology reaches its highest potential not when it isolates people behind screens, but when it extends human capability into frontiers no person could navigate alone.
                 </p>
                 <p>
-                  We believe humans and intelligent machines can work together productively to achieve things that would otherwise remain out of reach. In deep ocean environments, crushing hydrostatic pressure, absolute optical darkness and the total absence of GPS demand autonomous sensing systems capable of calculating and adapting in isolation, expanding what humanity can observe and protect.
+                  From the crushing hydrostatic pressures and pitch darkness of the deep ocean to the vacuum and radiation of orbital space, physical intelligence gives humanity new reach. Autonomous sensing, resilient edge compute, and kinematically adaptive robotics work hand in hand with human judgment to explore, understand, and protect what lies beyond our unaided grasp.
                 </p>
               </div>
 
-              <div className="font-mono text-xs text-[#9CA3AF] tracking-wider uppercase flex items-center gap-2">
+              <div className="font-mono text-xs text-[#D1D5DB] tracking-wider uppercase flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
                 <span>FRONTIER: Benthic Sensing &amp; Subsurface Robotics</span>
               </div>
@@ -451,16 +465,16 @@ export function EditorialHome() {
                 Pushing the boundaries of what we can accomplish.
               </h2>
 
-              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#D1D5DB] font-light mb-8">
+              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#F3F4F6] font-normal mb-8">
                 <p>
-                  The engineering principles that enable an autonomous rover to traverse dense, waterlogged soil under monsoon conditions are fundamentally connected to the physical autonomy required for planetary exploration.
+                  The engineering principles that guide an autonomous rover through dense, waterlogged soil under monsoon conditions are fundamentally connected to the physical intelligence required for planetary observation and orbital exploration.
                 </p>
                 <p>
-                  By pairing human intuition with resilient physical intelligence, we bridge the spectrum of exploration: from monitoring soil microbes in Indian farmlands to observing planetary atmospheres from orbit. We build with honesty, testing what works in real environments and directing technology toward challenges that genuinely matter to humanity.
+                  When human curiosity unites with disciplined machine autonomy, boundaries turn into milestones. By bridging physical extremes, from microbial soil analysis to orbital atmospheric sensing, we engineer tools that empower people and expand human horizons with safety, rigor, and purpose.
                 </p>
               </div>
 
-              <div className="font-mono text-xs text-[#9CA3AF] tracking-wider uppercase flex items-center gap-2">
+              <div className="font-mono text-xs text-[#D1D5DB] tracking-wider uppercase flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
                 <span>FRONTIER: Planetary Kinematics &amp; Autonomous Telemetry</span>
               </div>
@@ -483,7 +497,7 @@ export function EditorialHome() {
               <h3 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
                 Digital Solutions Studio
               </h3>
-              <p className="text-[#62676D] text-[15px] sm:text-[16px] leading-relaxed font-light">
+              <p className="text-[#191B1D] text-[15px] sm:text-[16px] leading-relaxed font-normal">
                 To independently finance our hardware prototypes without dilutive venture cycles, KITTY CORP operates a commercial engineering arm developing high-performance web applications, enterprise software, and workflow automation for growing businesses.
               </p>
             </div>
@@ -520,7 +534,7 @@ export function EditorialHome() {
             Support the research.
           </h2>
 
-          <p className="text-[15px] sm:text-[16px] leading-[1.65] text-[#62676D] font-light max-w-xl mx-auto mb-8">
+          <p className="text-[15px] sm:text-[16px] leading-[1.65] text-[#191B1D] font-normal max-w-xl mx-auto mb-8">
             Individuals who believe in our technological vision can voluntarily support our open robotics and clean energy research. Supporters receive a digital supporter badge and public recognition on our supporter roll.
           </p>
 
@@ -547,7 +561,7 @@ export function EditorialHome() {
             Building with researchers, engineers, and partners.
           </h2>
 
-          <p className="text-[16px] sm:text-[18px] leading-[1.65] text-[#62676D] font-light max-w-2xl mx-auto mb-10">
+          <p className="text-[16px] sm:text-[18px] leading-[1.65] text-[#191B1D] font-normal max-w-2xl mx-auto mb-10">
             We welcome conversations with robotics researchers, agricultural field operators, clean energy teams, and potential partners aligned with our technological direction.
           </p>
 

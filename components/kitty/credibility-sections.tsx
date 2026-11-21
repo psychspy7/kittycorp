@@ -4,7 +4,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { downloadHref, isWebsiteLaunch, launchHref, type Launch } from "@/lib/launches";
 import { mediaHref } from "@/lib/company-content";
 import type { Testimonial } from "@/lib/testimonials";
-import { AppIcon } from "./secretchat";
+import { AppIcon } from "./launches";
 
 function shortDescription(text: string) {
   if (text.length <= 220) return text;

@@ -112,8 +112,8 @@ The platform is engineered across a 5-tier modular topology ensuring rigorous is
 | `/payments` | **Financial Clearing** — Project payment processing, retainer settlements, voluntary support | Dynamic Server-Side | Razorpay Test & Production Gateway |
 | `/projects` | **Project Directory** — Commissioned client initiatives, engagement tracking, milestones | Static Prerendered | Public Portfolio |
 | `/play` | **Interactive Playground** — Computational graphics demos, algorithmic Snake engine, simulation trials | Static Prerendered | Client-Side WebGL / Canvas |
-| `/kitten` | **Executive Studio** — Content management, journal authoring, APK release approval, inbox management | Dynamic Server-Side | Google PKCE Authenticated Owner Only |
-| `/secretchat` | **Private Communications App** — Verified APK release 1.5.0, integrity guidelines, cryptography notes | Static Prerendered | Cryptographic SHA-256 Verified |
+| `/kitten` | **Executive Studio** — Content management, journal authoring, release approval, inbox management | Dynamic Server-Side | Google PKCE Authenticated Owner Only |
+| `/agriyaan` | **KITTY AgriYaan** — Autonomous field robotics and agricultural intelligence | Static Prerendered | Public Flagship |
 | `/build-log` | **Engineering Journal** — Technical dispatches, architecture post-mortems, category-filtered articles | Static Prerendered | Public Editorial |
 
 ---
@@ -217,8 +217,7 @@ npm run build:next
 | 9 | `test-business-conversion.mjs` | Brief submission sanitize filters, rate-limiting locks, honeypot traps |
 | 10 | `test-discount-game.mjs` | Algorithmic Snake game score validation, anti-cheat signature tokens |
 | 11 | `test-customer-accounts.mjs` | Verified identity state, session persistence, secure cookie attributes |
-| 12 | `test-lisa-preorders.mjs` | Hardware preorder allocation limits, idempotent state transitions |
-| 13 | `test-memberships.mjs` | Membership entitlement verification, role checks, access restrictions |
+| 12 | `test-memberships.mjs` | Membership entitlement verification, role checks, access restrictions |
 | 14 | `test-email-notifications.mjs` | Transactional email alert queues, retry logic, SMTP/API failover |
 | 15 | `verify-hosting.mjs` | Vercel production hosting configuration, `bom1` Mumbai region lock, route integrity |
 

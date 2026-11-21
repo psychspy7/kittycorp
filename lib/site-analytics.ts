@@ -7,8 +7,9 @@ type AnalyticsWindow = Window & {
 const initializedTags = new Set<string>();
 const publicPages = new Set([
   "/", "/services", "/products", "/memberships", "/company", "/team", "/kitty-ai",
-  "/lisa-ai", "/sentinel", "/secretchat", "/build-log", "/research",
+  "/build-log", "/research",
   "/investors", "/contact", "/privacy", "/projects", "/pricing", "/appointments", "/terms", "/refunds", "/play", "/services/coaching-centres", "/services/agencies",
+  "/agriyaan", "/urjayaan", "/urjaan", "/buddy", "/support", "/payments",
 ]);
 
 export function analyticsPublicPath(pathname: string | null) {
@@ -78,7 +79,7 @@ export function trackPageView(id: string, pathname: string, previous: string) {
 }
 
 export const conversionEvents = ["service_cta","project_form_start","enquiry_submit","form_error","contact_click","portfolio_view","investor_cta","investor_enquiry_submit","subscription_view","subscription_click"] as const;
-const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","investors","appointment","labs","navigation","memberships","footer"]);
+const conversionContexts = new Set(["home","services","projects","contact","coaching-centres","agencies","research","investors","appointment","labs","navigation","memberships","footer","agriyaan","urjayaan","urjaan","buddy","support","payments"]);
 const recentConversions = new Map<string,number>();
 export function trackConversion(event: string, context: string) {
   if(typeof window==="undefined")return;

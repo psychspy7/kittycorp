@@ -24,4 +24,4 @@ export const publicArticle = cache(async (slug: string): Promise<JournalEntry | 
   if(error) throw new HttpError("This article is temporarily unavailable.", 503);
   return data as JournalEntry | null;
 });
-export function refreshJournal() { refreshPublicContent(PUBLIC_CONTENT_TAGS.journal); for (const path of ["/", "/build-log", "/research", "/kitty-ai", "/sentinel", "/lisa-ai", "/sitemap.xml"]) revalidatePath(path); revalidatePath("/build-log/[slug]", "page"); }
+export function refreshJournal() { refreshPublicContent(PUBLIC_CONTENT_TAGS.journal); for (const path of ["/", "/build-log", "/research", "/kitty-ai", "/sitemap.xml"]) revalidatePath(path); revalidatePath("/build-log/[slug]", "page"); }
