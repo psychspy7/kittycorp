@@ -308,7 +308,7 @@ export function EditorialHome() {
       {/* =========================================================================
           SECTION F: THE HORIZON — CINEMATIC BLENDED COSMIC INTEGRATION
           ========================================================================= */}
-      <section className="py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA] relative overflow-hidden">
+      <section id="horizon" className="py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA] relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
