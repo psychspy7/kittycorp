@@ -87,6 +87,9 @@ export async function SiteFooter() {
             <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">
               Support Our Research
             </Link>
+            <p className="max-w-[17rem] text-xs leading-relaxed text-[#D1D5DB]">
+              Contributions are entirely voluntary and help support independent research. They are not a purchase, membership, investment or ownership interest.
+            </p>
           </div>
 
           {/* Commercial & Team */}
