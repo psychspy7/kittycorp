@@ -49,7 +49,7 @@ export default async function Home() {
       caption: "KITTY CORP Monogram",
     },
     description:
-      "KITTY CORP is an emerging technology company developing intelligent systems that work alongside humans in physical environments.",
+      "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering.",
     founder: [
       {
         "@type": "Person",
