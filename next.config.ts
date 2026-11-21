@@ -8,7 +8,7 @@ const cspDirectives = [
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://challenges.cloudflare.com https://apis.google.com https://*.firebaseapp.com https://widget.thunderbolt.com https://www.googletagmanager.com https://www.google-analytics.com",
   "style-src 'self' 'unsafe-inline'",
   "frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com https://challenges.cloudflare.com https://*.firebaseapp.com https://accounts.google.com https://widget.thunderbolt.com",
-  "connect-src 'self' https://mgkghnblbisubympudaa.supabase.co wss://mgkghnblbisubympudaa.supabase.co https://lumberjack.razorpay.com https://api.razorpay.com https://open.er-api.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com https://www.google-analytics.com https://*.thunderbolt.com",
+  "connect-src 'self' https://challenges.cloudflare.com https://mgkghnblbisubympudaa.supabase.co wss://mgkghnblbisubympudaa.supabase.co https://lumberjack.razorpay.com https://api.razorpay.com https://open.er-api.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com https://www.google-analytics.com https://*.thunderbolt.com",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https:",
   "worker-src 'self' blob:",
