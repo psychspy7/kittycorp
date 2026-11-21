@@ -1,0 +1,50 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /kitten/
+Disallow: /abcdefghijklmnopqrstuvwxyz/
+
+Sitemap: https://thekittycorp.com/sitemap.xml
