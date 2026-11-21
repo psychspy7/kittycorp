@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Script from "next/script";
 
 type WidgetAPI = {
   render: (container: HTMLElement, options: Record<string, unknown>) => string;
@@ -7,21 +8,6 @@ type WidgetAPI = {
   reset: (id: string) => void;
 };
 declare global { interface Window { turnstile?: WidgetAPI; } }
-
-let script: Promise<void> | undefined;
-function loadScript() {
-  if (window.turnstile) return Promise.resolve();
-  if (!script) script = new Promise<void>((resolve, reject) => {
-    const element = document.createElement("script");
-    element.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-    element.async = true;
-    element.setAttribute("data-cfasync", "false");
-    element.onload = () => resolve();
-    element.onerror = () => { script = undefined; reject(new Error("Security check could not load.")); };
-    document.head.appendChild(element);
-  });
-  return script;
-}
 
 type Props = {
   action: string;
@@ -42,9 +28,11 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
   useEffect(() => { statusCallback.current = onStatusChange; }, [onStatusChange]);
   const reportStatus = useCallback((status: TurnstileStatus) => statusCallback.current?.(status), []);
   const [config, setConfig] = useState<{ siteKey: string; enabled: boolean } | null>(siteKey ? { siteKey, enabled: true } : null);
+  const [scriptReady, setScriptReady] = useState(false);
   const [error, setError] = useState("");
   const enabled = siteKey ? true : config?.enabled;
   const activeSiteKey = siteKey || config?.siteKey || "";
+
   useEffect(() => {
     if (siteKey) return;
     const controller = new AbortController();
@@ -74,27 +62,23 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
     if (!enabled) { reportStatus("disabled"); return; }
     callback.current("");
     if (!activeSiteKey) {
+      setError("Security verification is being configured. Please try again shortly.");
       reportStatus("error");
       return;
     }
+    if (!scriptReady) { reportStatus("loading"); return; }
     let active = true;
     let widget: string | undefined;
-    let size: "compact" | "flexible" | undefined;
-    let theme: "light" | "dark" | undefined;
     let observer: ResizeObserver | undefined;
     let themeObserver: MutationObserver | undefined;
-    loadScript().then(() => {
-      if (!active) return;
-      if (!element.current || !window.turnstile) throw Error("Security check could not load.");
+    try {
+      if (!element.current || !window.turnstile) throw Error("Cloudflare verification did not initialise.");
       setError("");
       const render = () => {
         if (!active || !element.current || !window.turnstile) return;
-        const nextSize = element.current.clientWidth < 300 ? "compact" : "flexible";
-        const nextTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-        if (widget && nextSize === size && nextTheme === theme) return;
+        const size = element.current.clientWidth < 300 ? "compact" : "flexible";
+        const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
         if (widget) window.turnstile.remove(widget);
-        size = nextSize;
-        theme = nextTheme;
         callback.current("");
         reportStatus("ready");
         widget = window.turnstile.render(element.current, {
@@ -125,27 +109,45 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
         });
       };
       render();
-      observer = new ResizeObserver(render);
-      observer.observe(element.current);
+      if (typeof ResizeObserver !== "undefined" && element.current) {
+        observer = new ResizeObserver(render);
+        observer.observe(element.current);
+      }
       themeObserver = new MutationObserver(render);
       themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    }).catch(() => {
-      if (active) {
-        setError("Security check could not load. Please refresh and try again.");
-        reportStatus("error");
-      }
-    });
+    } catch {
+      setError("Security check could not initialise. Please refresh and try again.");
+      reportStatus("error");
+    }
     return () => {
       active = false;
       observer?.disconnect();
       themeObserver?.disconnect();
       if (widget && window.turnstile) window.turnstile.remove(widget);
     };
-  }, [enabled, activeSiteKey, action, appearance, resetKey, reportStatus]);
+  }, [enabled, activeSiteKey, action, appearance, resetKey, reportStatus, scriptReady]);
 
   if (enabled === false) return null;
-  return <div className="security-check" style={{ marginBlock: "12px", maxWidth: "100%" }}>
-    <div ref={element} />
-    {(error || (enabled && !activeSiteKey)) && <p className="form-error" role="alert">{error || "Security verification is being configured. Please try again shortly."}</p>}
-  </div>;
+  return (
+    <div className="security-check" style={{ marginBlock: "12px", maxWidth: "100%" }}>
+      {enabled && activeSiteKey && (
+        <Script
+          id="kitty-cloudflare-turnstile"
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          strategy="afterInteractive"
+          onReady={() => setScriptReady(true)}
+          onError={() => {
+            setScriptReady(false);
+            setError("Cloudflare security check could not load. Disable content blockers for this site or refresh and try again.");
+            reportStatus("error");
+          }}
+        />
+      )}
+      {enabled && !scriptReady && !error && (
+        <p className="text-xs text-[#62676D]" role="status">Loading security check…</p>
+      )}
+      <div ref={element} />
+      {error && <p className="form-error" role="alert">{error}</p>}
+    </div>
+  );
 }
