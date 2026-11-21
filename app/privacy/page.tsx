@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/kitty/site-footer";
 
 export const metadata = pageMetadata(
   "KITTY CORP | Privacy Policy",
-  "Privacy information for KITTY CORP website visitors, project enquiries, customer accounts, subscriptions, analytics and payment records, including data handling and your rights.",
+  "Privacy information for KITTY CORP visitors, enquiries, accounts, subscriptions, analytics and payments, including how data is handled and your rights.",
   "/privacy"
 );
 
