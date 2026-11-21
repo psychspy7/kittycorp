@@ -231,3 +231,14 @@ html[data-theme="dark"] .checkout-field input::placeholder, html.dark .checkout-
 .checkout-field input::placeholder { color: #777b80; opacity: 1; }
 html[data-theme="dark"] .checkout-total > strong { color: #ffffff !important; }
 html[data-theme="dark"] .checkout-field input { color: #ffffff !important; color-scheme: dark; }
+
+
+/* Ensure totals, input values and converted-price notes remain legible. */
+.checkout-total > strong { color: #252720; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.checkout-field input { color: #252720; caret-color: #2457D6; color-scheme: light; }
+.checkout-field input::placeholder { color: #777b80; opacity: 1; }
+.local-price { display: block; margin-top: 8px; color: #52565d; font-size: 12px; line-height: 1.6; }
+.local-price span { color: #626771; }
+html[data-theme="dark"] .checkout-total > strong { color: #ffffff !important; }
+html[data-theme="dark"] .checkout-field input { color: #ffffff !important; color-scheme: dark; }
+html[data-theme="dark"] .local-price, html[data-theme="dark"] .local-price span { color: #c4c9db !important; }
