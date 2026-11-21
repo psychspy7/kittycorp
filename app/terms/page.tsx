@@ -6,7 +6,7 @@ import { CONTACT_EMAIL } from "@/lib/company-contact";
 
 export const metadata = pageMetadata(
   "KITTY CORP | Terms of Service",
-  "Terms for KITTY CORP website use, Digital Solutions Studio project scopes, quotes, software delivery, subscriptions, payments and customer responsibilities.",
+  "Terms for KITTY CORP website use, Digital Solutions Studio projects, quotes, software delivery, subscriptions, payments and customer responsibilities.",
   "/terms"
 );
 
