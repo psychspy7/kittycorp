@@ -78,7 +78,12 @@ export default async function Home() {
           "Commercial digital studio delivering bespoke web applications, business automation, and custom digital software.",
       },
     ],
-    sameAs,
+    sameAs: Array.from(new Set([
+      "https://github.com/psychspy7/kittycorp",
+      "https://www.instagram.com/kittycorp.ai/",
+      ...sameAs,
+    ])),
+    address: { "@type": "PostalAddress", addressCountry: "IN" },
     contactPoint: {
       "@type": "ContactPoint",
       email: CONTACT_EMAIL || "contact@thekittycorp.com",
