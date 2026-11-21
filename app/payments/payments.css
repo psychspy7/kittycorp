@@ -223,3 +223,11 @@ html[data-theme="dark"] .checkout-button.button-gold:hover {
 html[data-theme="dark"] .checkout-total > strong, html.dark .checkout-total > strong, [data-theme="dark"] .checkout-total > strong { color:#fff !important; -webkit-text-fill-color:#fff !important; opacity:1 !important; }
 html[data-theme="dark"] .checkout-field input, html.dark .checkout-field input, [data-theme="dark"] .checkout-field input { background:#0c1120 !important; color:#fff !important; -webkit-text-fill-color:#fff !important; border-color:rgba(169,158,255,.48) !important; color-scheme:dark; }
 html[data-theme="dark"] .checkout-field input::placeholder, html.dark .checkout-field input::placeholder, [data-theme="dark"] .checkout-field input::placeholder { color:#a5b0cb !important; -webkit-text-fill-color:#a5b0cb !important; }
+
+
+/* Payment amount legibility in both themes. */
+.checkout-total > strong { color: #252720; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.checkout-field input { color: #252720; caret-color: #2457D6; color-scheme: light; }
+.checkout-field input::placeholder { color: #777b80; opacity: 1; }
+html[data-theme="dark"] .checkout-total > strong { color: #ffffff !important; }
+html[data-theme="dark"] .checkout-field input { color: #ffffff !important; color-scheme: dark; }
