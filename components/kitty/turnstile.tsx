@@ -113,7 +113,14 @@ export function Turnstile({ action, onToken, onStatusChange, resetKey = 0, siteK
       };
       render();
       if (typeof ResizeObserver !== "undefined" && element.current) {
-        observer = new ResizeObserver(render);
+        let lastWidth = element.current.clientWidth;
+        observer = new ResizeObserver(() => {
+          const nextWidth = element.current?.clientWidth ?? 0;
+          if (nextWidth !== lastWidth) {
+            lastWidth = nextWidth;
+            render();
+          }
+        });
         observer.observe(element.current);
       }
       themeObserver = new MutationObserver(render);
