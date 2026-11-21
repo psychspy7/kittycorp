@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Cpu, Leaf, Sun, Compass, HeartHandshake, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Cpu, Compass, HeartHandshake, Waves, Orbit } from "lucide-react";
 
 export function EditorialHome() {
   return (
@@ -12,20 +12,20 @@ export function EditorialHome() {
       {/* =========================================================================
           SECTION A: HERO — WARM MINIMALISM & ARCHITECTURAL PRECISION
           ========================================================================= */}
-      <section className="relative min-h-[88vh] flex flex-col justify-between pt-24 pb-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+      <section className="relative min-h-[82vh] flex flex-col justify-between pt-24 pb-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
         <div className="max-w-4xl pt-6 sm:pt-10">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#62676D] uppercase mb-8 max-w-[94vw]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
             <span className="truncate">Emerging Technology • India to the World</span>
           </div>
 
-          <h1 className="text-[clamp(30px,7.5vw,84px)] font-[family-name:var(--font-display)] font-normal leading-[1.06] tracking-[-0.03em] text-[#191B1D] mb-8">
+          <h1 className="text-[clamp(32px,7.5vw,86px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-8">
             Engineering <br className="sm:hidden" />
             intelligence <br className="hidden sm:block" />
             <span className="font-light text-[#62676D] block sm:inline mt-1 sm:mt-0">for the physical world.</span>
           </h1>
 
-          <p className="text-[18px] sm:text-[21px] leading-[1.6] text-[#292D31] max-w-2xl font-normal mb-10">
+          <p className="text-[18px] sm:text-[21px] leading-[1.65] text-[#292D31] max-w-2xl font-light mb-10">
             KITTY CORP develops autonomous machines, intelligent agricultural robotics, and clean energy infrastructure built to interact with living environments.
           </p>
 
@@ -50,26 +50,23 @@ export function EditorialHome() {
           </div>
         </div>
 
-        {/* Cinematic Blended Hero Visual: Autonomous Field Rover Chassis (Authentic Agricultural Rover) */}
-        <div className="relative mt-16 w-full rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#FBFAF7] shadow-[0_4px_32px_rgba(0,0,0,0.03)] aspect-[16/9] max-h-[520px]">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="/photography/agriyaan-field-robot.webp"
-              alt="Autonomous field robotics platform navigating physical farmland terrain"
-              fill
-              priority
-              className="object-cover object-center cinematic-fade-edges opacity-95"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-            {/* Subtle atmospheric gradient overlay to blend into warm paper */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-60" />
+        {/* Architectural Telemetry Matrix */}
+        <div className="mt-20 pt-8 border-t border-[#D9D6CF] grid grid-cols-2 md:grid-cols-4 gap-6 text-xs">
+          <div>
+            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">01 · CORE FOCUS</span>
+            <span className="font-medium text-[#191B1D]">Autonomous Robotics &amp; Clean Energy</span>
           </div>
-          
-          <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-10 pointer-events-none">
-            <div className="font-mono text-[11px] text-[#191B1D] bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] px-3.5 py-1.5 rounded-full w-fit tracking-wider uppercase flex items-center gap-2.5 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#2457D6]" />
-              <span>Autonomous Agricultural Robotics &amp; Field Kinematics Platform</span>
-            </div>
+          <div>
+            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">02 · MISSION</span>
+            <span className="font-medium text-[#191B1D]">Physical-World Intelligence</span>
+          </div>
+          <div>
+            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">03 · OUTLOOK</span>
+            <span className="font-medium text-[#191B1D]">India to the World</span>
+          </div>
+          <div>
+            <span className="font-mono text-[10px] text-[#73777C] uppercase tracking-wider block mb-1">04 · ARCHITECTURE</span>
+            <span className="font-medium text-[#2457D6]">Embedded Edge Inference</span>
           </div>
         </div>
       </section>
@@ -77,18 +74,18 @@ export function EditorialHome() {
       {/* =========================================================================
           SECTION B: OUR BELIEF — PHYSICAL-WORLD INTELLIGENCE
           ========================================================================= */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
+      <section className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
         <div className="max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] text-[11px] font-mono tracking-widest text-[#62676D] uppercase mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
             <span>01 · Philosophy</span>
           </div>
 
-          <h2 className="text-[clamp(32px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.12] tracking-[-0.025em] text-[#191B1D] mb-8">
+          <h2 className="text-[clamp(32px,4.5vw,56px)] font-[family-name:var(--font-display)] font-normal leading-[1.12] tracking-[-0.025em] text-[#191B1D] mb-8">
             Intelligence should not remain bounded by glass displays.
           </h2>
 
-          <div className="space-y-6 text-[17px] sm:text-[19px] leading-[1.75] text-[#292D31] font-light">
+          <div className="space-y-6 text-[17px] sm:text-[19px] leading-[1.8] text-[#292D31] font-light">
             <p>
               For decades, computing has advanced behind screens — optimizing language models, pixel rendering, and financial transactions. Yet the physical foundations that support civilization — food cultivation, clean electricity generation, and industrial maintenance — still rely on fragile manual methods.
             </p>
@@ -101,44 +98,61 @@ export function EditorialHome() {
 
       {/* =========================================================================
           SECTION C: FLAGSHIP INITIATIVE 01 — KITTY AGRIYAAN
+          Genuine Edge-to-Edge Photographic Background Integration
           ========================================================================= */}
-      <section id="agriyaan" className="py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section id="agriyaan" className="relative w-full overflow-hidden bg-[#F5F2EA] min-h-[680px] lg:min-h-[780px] flex items-center py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF]">
+        {/* Photographic Background Layer */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/photography/agriyaan-field-robot.webp"
+            alt="KITTY AgriYaan autonomous agricultural field robotics platform navigating crop terrain"
+            fill
+            priority
+            className="object-cover object-[70%_center] lg:object-[82%_center] opacity-90 lg:opacity-95"
+            sizes="100vw"
+          />
+          {/* Smooth horizontal gradient scrim: Solid warm paper on the left behind text, fading softly across to reveal the autonomous rover on the right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F2EA] via-[#F5F2EA]/95 via-45% to-transparent/15" />
+          {/* Vertical top and bottom fades: Seamless blend into neighboring sections without any hard borders */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EA] via-transparent via-15% to-[#F5F2EA]" />
+        </div>
+
+        {/* Foreground Content Layer */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7]/90 backdrop-blur-sm text-[11px] font-mono tracking-widest text-[#2457D6] uppercase mb-6">
+              <span>Flagship Initiative 01 · Agriculture</span>
+            </div>
+
+            <h2 className="text-[clamp(36px,5vw,64px)] font-[family-name:var(--font-display)] font-normal leading-[1.06] tracking-[-0.03em] text-[#191B1D] mb-4">
+              KITTY AgriYaan
+            </h2>
             
-            <div className="lg:col-span-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[11px] font-mono tracking-widest text-[#2457D6] uppercase mb-6">
-                <span>Flagship Initiative 01 · Agriculture</span>
-              </div>
+            <p className="text-[17px] sm:text-[19px] font-medium text-[#292D31] mb-6">
+              Agricultural Robotics &amp; Autonomous Field Systems
+            </p>
 
-              <h2 className="text-[clamp(36px,4.8vw,60px)] font-[family-name:var(--font-display)] font-normal leading-[1.08] tracking-[-0.025em] text-[#191B1D] mb-4">
-                KITTY AgriYaan
-              </h2>
-              
-              <p className="text-[16px] font-medium text-[#292D31] mb-6">
-                Agricultural Robotics &amp; Autonomous Field Systems
+            <div className="space-y-4 text-[16px] leading-[1.75] text-[#292D31] font-light mb-8 max-w-xl">
+              <p>
+                Agriculture across India and global developing farmlands faces an urgent convergence: climate volatility, unpredictable monsoons, soil compaction, and rural labor migration.
               </p>
+              <p>
+                KITTY AgriYaan explores an autonomous ground rover equipped with multi-spectral crop inspection cameras, soil compaction sensors, and low-power edge computer vision designed to navigate dense crop canopies and unpaved mud terrain without destroying delicate soil biology.
+              </p>
+            </div>
 
-              <div className="space-y-5 text-[16px] leading-[1.7] text-[#62676D] font-light mb-8">
-                <p>
-                  Agriculture in India and across the developing world faces an urgent convergence: climate volatility, unpredictable monsoons, soil compaction, and rural labor migration.
-                </p>
-                <p>
-                  KITTY AgriYaan explores an autonomous ground rover equipped with multi-spectral crop inspection cameras, soil compaction sensors, and low-power edge computer vision designed to navigate dense crop canopies and unpaved mud terrain without destroying delicate soil biology.
-                </p>
+            <div className="grid grid-cols-2 gap-4 mb-8 pt-2 max-w-lg">
+              <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#FBFAF7]/85 backdrop-blur-md">
+                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">DOMAIN</span>
+                <span className="text-sm font-medium text-[#191B1D]">Precision Agriculture</span>
               </div>
-
-              <div className="grid grid-cols-2 gap-4 mb-8 pt-2">
-                <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#FBFAF7]">
-                  <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">DOMAIN</span>
-                  <span className="text-sm font-medium text-[#191B1D]">Precision Agriculture</span>
-                </div>
-                <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#FBFAF7]">
-                  <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">CURRENT STATUS</span>
-                  <span className="text-sm font-medium text-[#2457D6]">Simulation &amp; Kinematics</span>
-                </div>
+              <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#FBFAF7]/85 backdrop-blur-md">
+                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">CURRENT STATUS</span>
+                <span className="text-sm font-medium text-[#2457D6]">Simulation &amp; Kinematics</span>
               </div>
+            </div>
 
+            <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/agriyaan"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#191B1D] hover:bg-[#292D31] text-white text-[14px] font-medium transition-all shadow-sm group"
@@ -147,85 +161,72 @@ export function EditorialHome() {
                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-
-            <div className="lg:col-span-6">
-              {/* Cinematic Edge-Blended Imagery */}
-              <div className="relative rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#FBFAF7] aspect-[4/3] shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
-                <Image
-                  src="/photography/agriyaan-field-robot.webp"
-                  alt="KITTY AgriYaan autonomous agricultural field rover prototype navigating soil terrain"
-                  fill
-                  className="object-cover object-center cinematic-fade-edges"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-40" />
-                <div className="absolute bottom-5 left-6 text-[11px] font-mono text-[#191B1D] bg-[#FBFAF7]/90 px-3 py-1 rounded-full border border-[#D9D6CF]">
-                  AgriYaan Autonomous Platform · Farmland Navigation Rig
-                </div>
-              </div>
-            </div>
-
           </div>
+        </div>
+
+        {/* Environmental Caption Tag */}
+        <div className="hidden lg:block absolute bottom-8 right-10 z-10 font-mono text-[11px] text-[#191B1D] bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-sm">
+          AgriYaan Physical Kinematics Rig · Mud &amp; Canopy Autonomy
         </div>
       </section>
 
       {/* =========================================================================
           SECTION D: FLAGSHIP INITIATIVE 02 — KITTY URJAAN
+          Genuine Edge-to-Edge Photographic Background Integration
           ========================================================================= */}
-      <section id="urjaan" className="py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section id="urjaan" className="relative w-full overflow-hidden bg-[#FBFAF7] min-h-[680px] lg:min-h-[780px] flex items-center py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF]">
+        {/* Photographic Background Layer */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/photography/thermal-solar-inspection.webp"
+            alt="Thermal inspection drone over utility-scale solar photovoltaic array with thermal telemetry"
+            fill
+            priority
+            className="object-cover object-[25%_center] lg:object-[28%_center] opacity-90 lg:opacity-95"
+            sizes="100vw"
+          />
+          {/* Smooth horizontal gradient scrim: Solar arrays and thermal drone on the left, fading softly into Alabaster #FBFAF7 on the right behind text */}
+          <div className="absolute inset-0 bg-gradient-to-l from-[#FBFAF7] via-[#FBFAF7]/95 via-45% to-transparent/15" />
+          {/* Vertical top and bottom fades: Seamless blend into neighboring sections */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] via-transparent via-15% to-[#FBFAF7]" />
+        </div>
+
+        {/* Foreground Content Layer */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex justify-end">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA]/90 backdrop-blur-sm text-[11px] font-mono tracking-widest text-[#2457D6] uppercase mb-6">
+              <span>Flagship Initiative 02 · Clean Energy</span>
+            </div>
+
+            <h2 className="text-[clamp(36px,5vw,64px)] font-[family-name:var(--font-display)] font-normal leading-[1.06] tracking-[-0.03em] text-[#191B1D] mb-4">
+              KITTY Urjaan
+            </h2>
             
-            <div className="lg:col-span-6 order-2 lg:order-1">
-              {/* Cinematic Edge-Blended Solar Imagery */}
-              <div className="relative rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#F5F2EA] aspect-[4/3] shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
-                <Image
-                  src="/photography/clean-energy-systems.webp"
-                  alt="Solar photovoltaic array and intelligent clean energy microgrid infrastructure"
-                  fill
-                  className="object-cover object-center cinematic-fade-edges"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-40" />
-                <div className="absolute bottom-5 left-6 text-[11px] font-mono text-[#191B1D] bg-[#FBFAF7]/90 px-3 py-1 rounded-full border border-[#D9D6CF]">
-                  Urjaan Solar Optimization &amp; Storage Telemetry
-                </div>
+            <p className="text-[17px] sm:text-[19px] font-medium text-[#292D31] mb-6">
+              AI-Driven Clean Energy Management &amp; Solar Optimization
+            </p>
+
+            <div className="space-y-4 text-[16px] leading-[1.75] text-[#292D31] font-light mb-8 max-w-xl">
+              <p>
+                Deploying renewable generation is only half of the energy transition. Solar panels degrade unevenly under intense heat and dust, while battery storage systems fail prematurely when subjected to volatile charging spikes.
+              </p>
+              <p>
+                KITTY Urjaan is developing predictive algorithms that monitor photovoltaic cell degradation in real time, forecast localized generation against industrial loads, and balance decentralized microgrids for community energy independence.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-8 pt-2 max-w-lg">
+              <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#F5F2EA]/85 backdrop-blur-md">
+                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">DOMAIN</span>
+                <span className="text-sm font-medium text-[#191B1D]">Clean Energy Infrastructure</span>
+              </div>
+              <div className="p-4 rounded-xl border border-[#D9D6CF]/80 bg-[#F5F2EA]/85 backdrop-blur-md">
+                <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">CURRENT STATUS</span>
+                <span className="text-sm font-medium text-[#2457D6]">Algorithmic Modeling</span>
               </div>
             </div>
 
-            <div className="lg:col-span-6 order-1 lg:order-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] text-[11px] font-mono tracking-widest text-[#2457D6] uppercase mb-6">
-                <span>Flagship Initiative 02 · Clean Energy</span>
-              </div>
-
-              <h2 className="text-[clamp(36px,4.8vw,60px)] font-[family-name:var(--font-display)] font-normal leading-[1.08] tracking-[-0.025em] text-[#191B1D] mb-4">
-                KITTY Urjaan
-              </h2>
-              
-              <p className="text-[16px] font-medium text-[#292D31] mb-6">
-                AI-Driven Clean Energy Management &amp; Solar Optimization
-              </p>
-
-              <div className="space-y-5 text-[16px] leading-[1.7] text-[#62676D] font-light mb-8">
-                <p>
-                  Deploying renewable generation is only half of the energy transition. Solar panels degrade unevenly under intense heat and dust, while battery storage systems fail prematurely when subjected to volatile charging spikes.
-                </p>
-                <p>
-                  KITTY Urjaan is developing predictive algorithms that monitor photovoltaic cell degradation in real time, forecast localized generation against industrial loads, and balance decentralized microgrids for community energy independence.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 mb-8 pt-2">
-                <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#F5F2EA]">
-                  <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">DOMAIN</span>
-                  <span className="text-sm font-medium text-[#191B1D]">Clean Energy Infrastructure</span>
-                </div>
-                <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#F5F2EA]">
-                  <span className="font-mono text-[10px] text-[#73777C] uppercase block mb-1">CURRENT STATUS</span>
-                  <span className="text-sm font-medium text-[#2457D6]">Algorithmic Modeling</span>
-                </div>
-              </div>
-
+            <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/urjaan"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#191B1D] hover:bg-[#292D31] text-white text-[14px] font-medium transition-all shadow-sm group"
@@ -234,122 +235,209 @@ export function EditorialHome() {
                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-
           </div>
+        </div>
+
+        {/* Environmental Caption Tag */}
+        <div className="hidden lg:block absolute bottom-8 left-10 z-10 font-mono text-[11px] text-[#191B1D] bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-sm">
+          Photovoltaic Thermal Telemetry · Inverter Degradation Forecasting
         </div>
       </section>
 
       {/* =========================================================================
           SECTION E: TECHNOLOGY FOUNDATIONS (KITTY AI & KITTY BUDDY)
+          Genuine Photographic Background Integration
           ========================================================================= */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
+      <section id="platforms" className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-14">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
               03 · Core Platforms
             </span>
-            <h2 className="text-[clamp(30px,4vw,48px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
+            <h2 className="text-[clamp(30px,4vw,50px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
               Foundational intelligence &amp; physical interaction.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 sm:p-10 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-4">
-                  <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">ARCHITECTURE</span>
-                  <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+            
+            {/* Platform 1: KITTY AI with Neural Core Background Integration */}
+            <div className="dark-section relative overflow-hidden rounded-3xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-8 sm:p-12 border border-[#292D31]/40 bg-[#0A0D12] shadow-lg group">
+              {/* Background Neural Network Imagery */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                  src="/photography/kitty-ai-neural-core.webp"
+                  alt="KITTY AI neural network architecture visualization"
+                  fill
+                  className="object-cover object-center opacity-70 group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                {/* Dark obsidian gradient overlay ensuring 100% text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D12] via-[#0A0D12]/80 to-[#0A0D12]/40" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <span className="font-mono text-xs text-[#9CA3AF] uppercase tracking-widest">ARCHITECTURE</span>
+                  <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-white/20 text-[#E2E5E8] bg-white/10 backdrop-blur-sm">
                     Active Development
                   </span>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-5">
-                  <Cpu className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-[#60A5FA] mb-6 border border-white/15">
+                  <Cpu className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
+                <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-white mb-3">
                   KITTY AI
                 </h3>
-                <p className="text-sm font-medium text-[#292D31] mb-2">Vision-Actuator Neural Controller Stack</p>
-                <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
-                  Our software platform bridging 3D spatial computer vision directly with real-time robotic actuator controllers, providing physical machines with context-aware navigation and obstacle avoidance.
+                <p className="text-sm font-medium text-[#E2E5E8] mb-3">Vision-Actuator Neural Controller Stack</p>
+                <p className="text-[#D1D5DB] font-light leading-relaxed text-[15px] sm:text-[16px] max-w-lg">
+                  Our proprietary software stack bridging high-frame-rate 3D spatial computer vision directly with real-time robotic actuator controllers, providing physical machines with context-aware navigation and obstacle avoidance.
                 </p>
               </div>
-              <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
-                CORE STACK · EMBEDDED REAL-TIME INFERENCE
+
+              <div className="relative z-10 pt-6 mt-8 border-t border-white/15 text-xs font-mono text-[#9CA3AF] flex items-center justify-between">
+                <span>CORE STACK · EMBEDDED REAL-TIME INFERENCE</span>
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
               </div>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-4">
+            {/* Platform 2: KITTY BUDDY with Desktop Companion Robot Background Integration */}
+            <div className="relative overflow-hidden rounded-3xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-8 sm:p-12 border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm group">
+              {/* Background Companion Robot Imagery */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                  src="/photography/kitty-buddy-companion.webp"
+                  alt="KITTY BUDDY physical desktop companion robot prototype with Kitty branding"
+                  fill
+                  className="object-cover object-[80%_center] opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                {/* Soft warm paper gradient scrim from left to right */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#FBFAF7] via-[#FBFAF7]/95 via-50% to-transparent/25" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-50" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between gap-4 mb-6">
                   <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">INTERACTION PROTOTYPE</span>
-                  <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">
+                  <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]/90 backdrop-blur-sm">
                     Concept Exploration
                   </span>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-5">
-                  <Compass className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-6 border border-[#D9D6CF]">
+                  <Compass className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
+                <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-3">
                   KITTY Buddy
                 </h3>
-                <p className="text-sm font-medium text-[#292D31] mb-2">Physical Human-Machine Companion Concept</p>
-                <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
+                <p className="text-sm font-medium text-[#292D31] mb-3">Physical Human-Machine Companion Concept</p>
+                <p className="text-[#62676D] font-light leading-relaxed text-[15px] sm:text-[16px] max-w-lg">
                   An exploration into physical collaboration, testing tactile, non-intrusive companion devices that facilitate natural interaction without invasive biometric surveillance or screen fatigue.
                 </p>
               </div>
-              <div className="pt-6 mt-6 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C]">
-                EXPLORATION · TACTILE INTERACTION
+
+              <div className="relative z-10 pt-6 mt-8 border-t border-[#D9D6CF] text-xs font-mono text-[#73777C] flex items-center justify-between">
+                <span>EXPLORATION · TACTILE INTERACTION</span>
+                <span className="w-2 h-2 rounded-full bg-[#2457D6]" />
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION F: THE HORIZON — CINEMATIC BLENDED COSMIC INTEGRATION
+          SECTION F: THE HORIZON — DUAL EXPLORATION (DEEP OCEAN & SPACE HORIZON)
+          Genuine Full-Bleed Photographic Background Integrations
           ========================================================================= */}
-      <section id="horizon" className="py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[11px] font-mono tracking-widest text-[#2457D6] uppercase mb-6">
-                <span>04 · The Horizon</span>
+      <section id="horizon" className="border-t border-[#D9D6CF] bg-[#F5F2EA]">
+        
+        {/* Horizon Part I: Deep Ocean Exploration */}
+        <div className="dark-section relative w-full overflow-hidden bg-[#071322] min-h-[560px] lg:min-h-[640px] flex items-center py-20 sm:py-28 px-6 sm:px-10 lg:px-16 text-white">
+          {/* Deep Ocean Photographic Background */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image
+              src="/photography/deep-ocean-exploration.webp"
+              alt="Sunbeams piercing abyssal deep ocean waters"
+              fill
+              className="object-cover object-center opacity-85"
+              sizes="100vw"
+            />
+            {/* Sapphire ocean gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#071322] via-[#071322]/90 via-45% to-transparent/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EA] via-transparent via-15% to-transparent" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-widest text-[#60A5FA] uppercase mb-6 backdrop-blur-sm">
+                <Waves className="w-3.5 h-3.5 text-[#60A5FA]" />
+                <span>04 · The Horizon: Part I</span>
               </div>
 
-              <h2 className="text-[clamp(32px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.12] tracking-[-0.025em] text-[#191B1D] mb-6">
-                From Indian fields to the frontiers of exploration.
+              <h2 className="text-[clamp(32px,4.5vw,56px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
+                From Indian fields to the ocean depths.
               </h2>
 
-              <div className="space-y-6 text-[16px] sm:text-[18px] leading-[1.75] text-[#292D31] font-light">
+              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#D1D5DB] font-light mb-8">
+                <p>
+                  The physical world is not confined to land. From deep subsea thermal vents to ocean current monitoring, extreme underwater environments present the same fundamental engineering challenges: extreme pressure, absence of GPS, and zero direct connectivity.
+                </p>
+                <p>
+                  We explore autonomous submersibles and acoustic sensing systems engineered to operate reliably in the unseen 70% of our planet.
+                </p>
+              </div>
+
+              <div className="font-mono text-xs text-[#9CA3AF] tracking-wider uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
+                <span>FRONTIER: Abyssal Sensing &amp; Benthic Robotics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Horizon Part II: Planetary Observation & Orbital Horizon */}
+        <div className="dark-section relative w-full overflow-hidden bg-[#0A101C] min-h-[560px] lg:min-h-[640px] flex items-center py-20 sm:py-28 px-6 sm:px-10 lg:px-16 text-white border-t border-white/10">
+          {/* Orbital Earth Horizon Photographic Background */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image
+              src="/photography/earth-orbital-horizon.webp"
+              alt="Earth atmospheric limb and daylight curved horizon viewed from orbit"
+              fill
+              className="object-cover object-center opacity-85"
+              sizes="100vw"
+            />
+            {/* Orbital space gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A101C] via-[#0A101C]/90 via-45% to-transparent/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F5F2EA]" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/10 text-[11px] font-mono tracking-widest text-[#60A5FA] uppercase mb-6 backdrop-blur-sm">
+                <Orbit className="w-3.5 h-3.5 text-[#60A5FA]" />
+                <span>04 · The Horizon: Part II</span>
+              </div>
+
+              <h2 className="text-[clamp(32px,4.5vw,56px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
+                To the frontiers of planetary observation.
+              </h2>
+
+              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#D1D5DB] font-light mb-8">
                 <p>
                   We are building from India, but our technological outlook is universal. The kinematics and sensory perception required for an autonomous rover to navigate dense soil under monsoon heat are the very principles needed to operate machines across harsh frontiers on Earth and beyond.
                 </p>
                 <p>
-                  From monitoring deep ocean currents to exploring remote planetary surfaces, intelligent physical machines will help humanity observe environments that human physiology cannot safely enter.
+                  Intelligent physical machines will help humanity observe and understand environments where human physiology cannot safely tread.
                 </p>
               </div>
-            </div>
 
-            <div className="lg:col-span-6">
-              {/* Cinematic Radial Mask: Dissolves cosmos into warm paper */}
-              <div className="relative rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#FBFAF7] aspect-[4/3] shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
-                <Image
-                  src="/photography/earth-cinematic-horizon.webp"
-                  alt="Earth viewed from orbital observatory with blue atmospheric limb"
-                  fill
-                  className="object-cover object-center cinematic-blend-mask"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-30" />
-                <div className="absolute bottom-5 left-6 text-[11px] font-mono text-[#191B1D] bg-[#FBFAF7]/90 px-3 py-1 rounded-full border border-[#D9D6CF]">
-                  Orbital Perspective · Physical World Exploration
-                </div>
+              <div className="font-mono text-xs text-[#9CA3AF] tracking-wider uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
+                <span>PERSPECTIVE: Planetary Kinematics &amp; Extreme Terrains</span>
               </div>
             </div>
-
           </div>
         </div>
+
       </section>
 
       {/* =========================================================================
@@ -386,7 +474,7 @@ export function EditorialHome() {
       </section>
 
       {/* =========================================================================
-          SECTION H: VOLUNTARY RESEARCH SUPPORT INVITATION (SEPARATE FROM MEMBERSHIP)
+          SECTION H: VOLUNTARY RESEARCH SUPPORT INVITATION
           ========================================================================= */}
       <section className="py-20 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
         <div className="max-w-4xl mx-auto text-center">
@@ -417,11 +505,11 @@ export function EditorialHome() {
       </section>
 
       {/* =========================================================================
-          SECTION I: COLLABORATION & CONTACT
+          SECTION I: COLLABORATION & CONTACT — SEAMLESS TRANSITION TO ORBITAL FOOTER
           ========================================================================= */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#FBFAF7]">
+      <section className="pt-24 pb-32 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-gradient-to-b from-[#FBFAF7] via-[#FBFAF7] via-55% to-[#07090E] relative">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] text-[11px] font-mono tracking-widest text-[#62676D] uppercase mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA] text-[11px] font-mono tracking-widest text-[#62676D] uppercase mb-4 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
             <span>05 · Inquiries</span>
           </div>

@@ -275,33 +275,122 @@ input:focus, select:focus, textarea:focus {
   -webkit-mask-composite: source-in;
 }
 
-/* Footer Styling: Seamless Architectural Stone Integration */
+/* Footer Styling: Dark Earth Orbital Background Integration */
 .site-footer {
-  background-color: var(--bg-stone) !important;
-  border-top: 1px solid var(--border-warm) !important;
-  color: var(--text-primary) !important;
-  padding: 64px 0 32px !important;
+  position: relative !important;
+  background-color: #07090E !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #E2E5E8 !important;
+  padding: 72px 0 40px !important;
 }
 
 .site-footer .brand {
-  color: var(--text-primary) !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+.site-footer h1, .site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5,
+html body .site-footer h1, html body .site-footer h2, html body .site-footer h3, html body .site-footer h4 {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
 }
 
 .site-footer p,
 .site-footer .micro-label,
 .site-footer .footer-bottom,
-.site-footer .footer-links a {
-  color: var(--text-secondary) !important;
+.site-footer .footer-links a,
+.site-footer a:not(.brand) {
+  color: #9CA3AF !important;
+  -webkit-text-fill-color: #9CA3AF !important;
 }
 
-.site-footer .footer-links a:hover {
-  color: var(--accent-cobalt) !important;
+.site-footer .footer-venture-pill,
+.site-footer .footer-venture-pill *,
+html body .site-footer .footer-venture-pill span {
+  color: #E2E5E8 !important;
+  -webkit-text-fill-color: #E2E5E8 !important;
+}
+
+.site-footer a:hover {
+  color: #60A5FA !important;
+  -webkit-text-fill-color: #60A5FA !important;
 }
 
 .site-footer .footer-bottom {
-  border-top: 1px solid var(--border-warm) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   padding-top: 24px !important;
   margin-top: 48px !important;
+  color: #6B7280 !important;
+  -webkit-text-fill-color: #6B7280 !important;
+}
+
+/* Dark section headings support (e.g., KITTY AI, Deep Ocean & Orbital Horizon) */
+.dark-section h1, .dark-section h2, .dark-section h3, .dark-section h4,
+html body .dark-section h1, html body .dark-section h2, html body .dark-section h3, html body .dark-section h4 {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+.dark-section p, html body .dark-section p {
+  color: #D1D5DB !important;
+  -webkit-text-fill-color: #D1D5DB !important;
+}
+
+.dark-section span, html body .dark-section span {
+  color: inherit;
+}
+
+/* Site footer controls row & telemetry dark mode styling */
+.site-footer .live-visitor-counter,
+.site-footer .kc-telemetry-badge {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #9CA3AF !important;
+  -webkit-text-fill-color: #9CA3AF !important;
+}
+
+.site-footer .live-visitor-counter:hover,
+.site-footer .kc-telemetry-badge:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.site-footer #kc-active-count,
+.site-footer #kc-total-count {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+.site-footer .kc-telemetry-label {
+  color: #9CA3AF !important;
+  -webkit-text-fill-color: #9CA3AF !important;
+}
+
+.site-footer .kc-telemetry-sep {
+  color: rgba(255, 255, 255, 0.2) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.site-footer .currency-selector label {
+  color: #9CA3AF !important;
+  -webkit-text-fill-color: #9CA3AF !important;
+}
+
+.site-footer .currency-selector select {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.site-footer .currency-selector select option {
+  background: #111827 !important;
+  color: #FFFFFF !important;
+}
+
+.site-footer .currency-selector span {
+  color: #6B7280 !important;
+  -webkit-text-fill-color: #6B7280 !important;
 }
 
 /* =========================================================================

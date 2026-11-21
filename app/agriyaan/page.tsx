@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Cpu, Compass, Layers, ShieldCheck, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, Cpu, Compass, Layers, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
@@ -19,50 +19,56 @@ export default function AgriYaanPage() {
 
       <main id="main">
         {/* =========================================================================
-            HERO: KITTY AGRIYAAN
+            HERO: KITTY AGRIYAAN — FULL-BLEED PHOTOGRAPHIC BACKGROUND INTEGRATION
             ========================================================================= */}
-        <section className="pt-24 pb-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-8 max-w-[94vw]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
-              <span className="truncate">Flagship Initiative 01 · Agricultural Robotics</span>
-            </div>
-
-            <h1 className="text-[clamp(32px,7.5vw,76px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
-              KITTY AgriYaan
-            </h1>
-
-            <p className="text-[20px] sm:text-[24px] font-light leading-[1.4] text-[#62676D] mb-8">
-              Autonomous field robotics engineered for unpredictable soil, dense canopies, and living environments.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#73777C] pb-4">
-              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
-                STATUS: KINEMATICS &amp; SIMULATION
-              </span>
-              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
-                DOMAIN: SOIL &amp; CANOPY AUTONOMY
-              </span>
-              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
-                ORIGIN: BHARAT TO GLOBAL FARMLANDS
-              </span>
-            </div>
-          </div>
-
-          {/* Cinematic Edge-Blended Imagery */}
-          <div className="relative mt-12 w-full rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#FBFAF7] aspect-[16/9] max-h-[520px] shadow-[0_4px_32px_rgba(0,0,0,0.03)]">
+        <section className="relative w-full overflow-hidden bg-[#F5F2EA] min-h-[640px] lg:min-h-[740px] flex items-center pt-32 pb-24 px-6 sm:px-10 lg:px-16 border-b border-[#D9D6CF]">
+          {/* Edge-to-Edge Background Photographic Layer */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <Image
               src="/photography/agriyaan-field-robot.webp"
               alt="KITTY AgriYaan agricultural rover chassis navigating rugged field topography"
               fill
               priority
-              className="object-cover object-center cinematic-fade-edges"
-              sizes="(max-width: 1280px) 100vw, 1280px"
+              className="object-cover object-[75%_center] lg:object-[82%_center] opacity-90 lg:opacity-95"
+              sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-50" />
-            <div className="absolute bottom-6 left-6 text-xs font-mono text-[#191B1D] bg-[#FBFAF7]/95 px-3.5 py-1.5 rounded-full border border-[#D9D6CF] shadow-sm">
-              AgriYaan Mark-I Physical Chassis Test Rig · Multi-Terrain Articulation
+            {/* Seamless horizontal gradient scrim */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#F5F2EA] via-[#F5F2EA]/95 via-45% to-transparent/15" />
+            {/* Seamless top and bottom vertical gradient fades */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EA] via-transparent via-15% to-[#F5F2EA]" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7]/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-8 max-w-[94vw]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
+                <span className="truncate">Flagship Initiative 01 · Agricultural Robotics</span>
+              </div>
+
+              <h1 className="text-[clamp(36px,7.5vw,78px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
+                KITTY AgriYaan
+              </h1>
+
+              <p className="text-[20px] sm:text-[24px] font-light leading-[1.4] text-[#292D31] mb-8 max-w-2xl">
+                Autonomous field robotics engineered for unpredictable soil, dense canopies, and living environments.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#73777C] pb-4">
+                <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#191B1D] font-medium">
+                  STATUS: KINEMATICS &amp; SIMULATION
+                </span>
+                <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#191B1D] font-medium">
+                  DOMAIN: SOIL &amp; CANOPY AUTONOMY
+                </span>
+                <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#2457D6] font-medium">
+                  ORIGIN: BHARAT TO GLOBAL FARMLANDS
+                </span>
+              </div>
             </div>
+          </div>
+
+          <div className="hidden lg:block absolute bottom-8 right-10 z-10 font-mono text-[11px] text-[#191B1D] bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-sm">
+            AgriYaan Physical Chassis Rig · Multi-Terrain Articulation
           </div>
         </section>
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Sun, Zap, BatteryCharging, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Sun, Zap, BatteryCharging, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
@@ -19,50 +19,56 @@ export default function UrjaanPage() {
 
       <main id="main">
         {/* =========================================================================
-            HERO: KITTY URJAAN
+            HERO: KITTY URJAAN — FULL-BLEED PHOTOGRAPHIC BACKGROUND INTEGRATION
             ========================================================================= */}
-        <section className="pt-24 pb-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-8 max-w-[94vw]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
-              <span className="truncate">Flagship Initiative 02 · Clean Energy &amp; Storage</span>
-            </div>
+        <section className="relative w-full overflow-hidden bg-[#FBFAF7] min-h-[640px] lg:min-h-[740px] flex items-center pt-32 pb-24 px-6 sm:px-10 lg:px-16 border-b border-[#D9D6CF]">
+          {/* Edge-to-Edge Background Photographic Layer */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image
+              src="/photography/thermal-solar-inspection.webp"
+              alt="Thermal inspection drone over utility-scale solar photovoltaic array with thermal telemetry"
+              fill
+              priority
+              className="object-cover object-[25%_center] lg:object-[28%_center] opacity-90 lg:opacity-95"
+              sizes="100vw"
+            />
+            {/* Seamless horizontal gradient scrim */}
+            <div className="absolute inset-0 bg-gradient-to-l from-[#FBFAF7] via-[#FBFAF7]/95 via-45% to-transparent/15" />
+            {/* Seamless top and bottom vertical gradient fades */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FBFAF7] via-transparent via-15% to-[#FBFAF7]" />
+          </div>
 
-            <h1 className="text-[clamp(32px,7.5vw,76px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
-              KITTY Urjaan
-            </h1>
+          <div className="relative z-10 max-w-7xl mx-auto w-full flex justify-end">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full border border-[#D9D6CF] bg-[#F5F2EA]/90 backdrop-blur-sm text-[10px] sm:text-[11px] font-mono tracking-tight sm:tracking-widest text-[#2457D6] uppercase mb-8 max-w-[94vw]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6] shrink-0" />
+                <span className="truncate">Flagship Initiative 02 · Clean Energy &amp; Storage</span>
+              </div>
 
-            <p className="text-[20px] sm:text-[24px] font-light leading-[1.4] text-[#62676D] mb-8">
-              Predictive intelligence for photovoltaic asset health, battery longevity, and resilient microgrids.
-            </p>
+              <h1 className="text-[clamp(36px,7.5vw,78px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-6">
+                KITTY Urjaan
+              </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#73777C] pb-4">
-              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
-                STATUS: ALGORITHMIC MODELING &amp; TELEMETRY
-              </span>
-              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
-                DOMAIN: SOLAR PV &amp; BESS LIFECYCLE
-              </span>
-              <span className="px-3 py-1.5 rounded-md bg-[#FBFAF7] border border-[#D9D6CF]">
-                GOAL: REAL-WORLD ENERGY INDEPENDENCE
-              </span>
+              <p className="text-[20px] sm:text-[24px] font-light leading-[1.4] text-[#292D31] mb-8 max-w-2xl">
+                Predictive intelligence for photovoltaic asset health, battery longevity, and resilient microgrids.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#73777C] pb-4">
+                <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#191B1D] font-medium">
+                  STATUS: ALGORITHMIC MODELING &amp; TELEMETRY
+                </span>
+                <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#191B1D] font-medium">
+                  DOMAIN: SOLAR PV &amp; BESS LIFECYCLE
+                </span>
+                <span className="px-3.5 py-1.5 rounded-lg bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] text-[#2457D6] font-medium">
+                  GOAL: REAL-WORLD ENERGY INDEPENDENCE
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Cinematic Edge-Blended Imagery */}
-          <div className="relative mt-12 w-full rounded-3xl overflow-hidden border border-[#D9D6CF] bg-[#FBFAF7] aspect-[16/9] max-h-[520px] shadow-[0_4px_32px_rgba(0,0,0,0.03)]">
-            <Image
-              src="/photography/clean-energy-systems.webp"
-              alt="Intelligent solar photovoltaic infrastructure and battery energy storage telemetry"
-              fill
-              priority
-              className="object-cover object-center cinematic-fade-edges"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-50" />
-            <div className="absolute bottom-6 left-6 text-xs font-mono text-[#191B1D] bg-[#FBFAF7]/95 px-3.5 py-1.5 rounded-full border border-[#D9D6CF] shadow-sm">
-              Urjaan Photovoltaic Inverter &amp; Microgrid Telemetry Architecture
-            </div>
+          <div className="hidden lg:block absolute bottom-8 left-10 z-10 font-mono text-[11px] text-[#191B1D] bg-[#FBFAF7]/90 backdrop-blur-md border border-[#D9D6CF] px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-sm">
+            Photovoltaic Thermal Telemetry · Inverter Degradation Forecasting
           </div>
         </section>
 
