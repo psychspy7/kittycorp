@@ -42,7 +42,7 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return data;
 }
 
-export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, onLockChange }: {
+export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, securityEnabled, purpose = "checkout", quote, initialDonationAmount, onLockChange }: {
   quote?: {token?:string;id?:string;choice:"full"|"split"|"after_review";reference:string};
   keyId: string; amount: number; currency?: string; testMode: boolean; securityEnabled: boolean; purpose?: PaymentPurpose; initialDonationAmount?: number; onLockChange?: (locked:boolean)=>void;
 }) {
