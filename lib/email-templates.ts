@@ -106,7 +106,7 @@ export function renderEmail(job: EmailJob, site: string) {
         site +
         "/newsletter/confirm#" +
         newsletterToken("confirm", job.signup_id!, job.nonce!);
-      text = `Hi there,\n\nPlease confirm that you'd like occasional KITTY CORP product and development updates.\n\nConfirm your email: ${url}\n\nThis link expires after 48 hours. If you didn't request this, you can ignore it or unsubscribe: ${unsub}\n\nTeam KITTY CORP`;
+      text = `Hi there,\n\nPlease confirm that you'd like occasional KITTY CORP product and development updates.\n\nConfirm your email: ${url}\n\nThis link expires after 48 hours. If you didn't request this, you can ignore it or unsubscribe: ${unsub}\n\nTo unsubscribe by email, contact social@thekittycorp.com.\n\nTeam KITTY CORP`;
       body =
         paragraph(
           "Please confirm that you'd like occasional KITTY CORP product and development updates.",
@@ -117,8 +117,8 @@ export function renderEmail(job: EmailJob, site: string) {
         );
     } else {
       subject = "Welcome to KITTY CORP";
-      text = `Hey there,\n\nWelcome to KITTY CORP.\n\nWe're an independent technology startup working on AI, software, applications and ideas we're genuinely excited about.\n\nYou'll occasionally hear from us about new projects, product launches and the things we're building.\n\nThanks for joining us.\n\nTeam KITTY CORP\n\nUnsubscribe: ${unsub}`;
-      body = paragraph(text.split("\n\nUnsubscribe:")[0]);
+      text = `Hey there,\n\nWelcome to KITTY CORP.\n\nWe're an independent technology startup working on AI, software, applications and ideas we're genuinely excited about.\n\nYou'll occasionally hear from us about new projects, product launches and the things we're building.\n\nThanks for joining us.\n\nTeam KITTY CORP\n\nUnsubscribe: ${unsub}\nEmail unsubscribe requests: social@thekittycorp.com`;
+      body = paragraph(text.split("\n\nUnsubscribe:")[0]) + `<p style="font-size:12px">Unsubscribe: <a href="${escapeHtml(unsub)}">${escapeHtml(unsub)}</a> or email <a href="mailto:social@thekittycorp.com">social@thekittycorp.com</a>.</p>`;
     }
     body += `<p style="font-size:12px"><a href="${escapeHtml(unsub)}">Unsubscribe</a></p>`;
   } else {
