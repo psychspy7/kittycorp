@@ -500,3 +500,6 @@ html[data-theme="dark"] .real-media-placeholder {
 .mobile-navigation .text-white,
 .mobile-navigation [class*="text-white"] { color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; }
 @media (prefers-reduced-motion: reduce) { .mobile-navigation, .kitty-mobile-menu { transition: none !important; } }
+
+/* Header brand mark: prevent the global logo rule from shrinking or rounding the monogram. */
+.site-header .brand img { width: 44px; height: 44px; border-radius: 0; object-fit: contain; flex-shrink: 0; }
