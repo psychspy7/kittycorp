@@ -58,12 +58,7 @@ export async function POST(request: Request) {
     if (error) throw error;
 
     const rawActive = Number((data as { active?: number })?.active ?? 0);
-    let rawTotal = Number((data as { total?: number })?.total ?? 0);
-
-    // Defense-in-depth: If backend database is still returning the legacy 10,000 seed, sanitize it
-    if (rawTotal >= 10000) {
-      rawTotal = rawTotal - 10000;
-    }
+    const rawTotal = Number((data as { total?: number })?.total ?? 0);
 
     const active = Math.max(0, rawActive);
     const total = Math.max(0, rawTotal);
@@ -93,12 +88,7 @@ export async function GET() {
     if (error) throw error;
 
     const rawActive = Number((data as { active?: number })?.active ?? 0);
-    let rawTotal = Number((data as { total?: number })?.total ?? 0);
-
-    // Defense-in-depth: If backend database is still returning the legacy 10,000 seed, sanitize it
-    if (rawTotal >= 10000) {
-      rawTotal = rawTotal - 10000;
-    }
+    const rawTotal = Number((data as { total?: number })?.total ?? 0);
 
     const active = Math.max(0, rawActive);
     const total = Math.max(0, rawTotal);
