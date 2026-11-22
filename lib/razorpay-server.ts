@@ -33,7 +33,7 @@ const contextSchema = z.object({
   currency: z.literal("INR"),
   keyId: z.string(),
   expires: z.number().int().positive(),
-  purpose: z.enum(["checkout", "project", "donation", "subscription"]).optional().default("checkout"),
+  purpose: z.enum(["checkout", "project", "donation"]).optional().default("checkout"),
   reference: z.string().max(80).optional().default(""),
 }).strict();
 export type OrderContext = z.infer<typeof contextSchema>;
