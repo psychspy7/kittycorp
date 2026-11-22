@@ -12,11 +12,11 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   return {
     ...pageMetadata(
-      "AI Robotics • Physical-World Intelligence",
-      "KITTY CORP builds Physical-World Intelligence through AI robotics, AgriYaan agriculture, UrjaYaan solar intelligence, and a Digital Solutions Studio.",
+      "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
+      "KITTY CORP builds autonomous robotics, intelligent systems and digital solutions for a better and safer future.",
       "/"
     ),
-    title: "KITTY CORP | Physical-World Intelligence • AI Robotics",
+    title: "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
   };
 }
 
@@ -45,7 +45,7 @@ export default async function Home() {
     url: origin,
     logo: {
       "@type": "ImageObject",
-      url: `${origin}/brand/monogram-small-v2.webp`,
+      url: `${origin}/brand/kitty-corp-logo-transparent.png`,
       caption: "KITTY CORP Official Logo",
     },
     description:
