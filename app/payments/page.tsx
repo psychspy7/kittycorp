@@ -6,7 +6,7 @@ import { turnstilePublicConfig } from "@/lib/turnstile-server";
 import "./payments.css";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Payments & support", robots: { index: false, follow: false } };
+export const metadata = { title: "Payments & support | KITTY CORP", robots: { index: false, follow: false } };
 
 export default async function PaymentsPage() {
   const [options, security] = await Promise.all([
