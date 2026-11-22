@@ -175,7 +175,7 @@ export function SiteHeader() {
                 <div className="flex items-center gap-2.5">
                   <Image
                     unoptimized
-                    src="/brand/monogram-small-v2.webp"
+                    src="/brand/monogram-v2.webp"
                     alt="KITTY CORP"
                     width={28}
                     height={28}

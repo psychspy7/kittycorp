@@ -97,7 +97,7 @@ export function BottomSupport() {
             Encrypted Razorpay checkout (UPI, Cards, NetBanking)
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-[#2457D6]" />
+            <Coffee className="w-4 h-4 text-[#2457D6]" />
             Separate purchase · no membership benefits
           </span>
         </div>
