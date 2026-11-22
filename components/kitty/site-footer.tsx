@@ -53,7 +53,7 @@ export async function SiteFooter() {
             </div>
 
             {/* Newsletter Subscription Box */}
-            <div className="max-w-sm pt-2">
+            <div id="newsletter" className="max-w-sm pt-2">
               <span className="font-mono text-[11px] uppercase tracking-widest text-[#A1A1AA] font-medium block mb-2">
                 Subscribe to Updates
               </span>
