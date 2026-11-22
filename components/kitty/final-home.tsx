@@ -1,9 +1,10 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Check, Cpu, FolderOpen, FlaskConical, UserRound, ShieldCheck } from "lucide-react";
 import { mediaHref, type CompanyProduct } from "@/lib/company-content";
 
-export function FinalHero() {
+export function FinalHero(_props?: { assistantEnabled?: boolean }) {
   return <section className="final-hero wrap" aria-labelledby="hero-title">
     <div className="final-hero-copy">
       <span className="eyebrow">KITTY CORP · PHYSICAL-WORLD ENGINEERING</span>
@@ -23,10 +24,10 @@ export function FinalHero() {
   </section>;
 }
 
-export function FlagshipCollection({ products }: { products: CompanyProduct[] }) {
+export function FlagshipCollection({ products }: { products: CompanyProduct[]; launches?: unknown[] }) {
   const agriyaanProduct = products.find(item => item.slug === "agriyaan");
   const urjayaanProduct = products.find(item => item.slug === "urjayaan");
-  const icon = (product: CompanyProduct | undefined, fallback: React.ReactNode) => product?.icon_path ? <Image unoptimized src={mediaHref(product.icon_path)} width={48} height={48} alt="" /> : fallback;
+  const icon = (product: CompanyProduct | undefined, fallback: ReactNode) => product?.icon_path ? <Image unoptimized src={mediaHref(product.icon_path)} width={48} height={48} alt="" /> : fallback;
   return <section id="initiatives" className="final-products wrap" aria-labelledby="flagship-heading">
     <div className="section-heading"><div><span className="eyebrow">OUR ENGINEERING INITIATIVES</span><h2 id="flagship-heading">Physical-world systems.</h2></div><Link className="text-link" href="/projects">Explore initiatives <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
     <div className="final-product-grid">
