@@ -1,7 +1,7 @@
 "use client";
 import { useCallback,useEffect,useState } from "react";
 import { toast } from "sonner";
-import { credentialLabels,providerFields,providerNames,providers,type CommerceCredential,type CommerceSettings,type ProviderReadiness,type PaymentProvider } from "@/lib/commerce";
+import { credentialLabels,providerFields,providerNames,type CommerceCredential,type CommerceSettings,type ProviderReadiness,type PaymentProvider } from "@/lib/commerce";
 import type { LedgerOrder } from "@/lib/payment-ledger";
 import { studioRequest } from "./studio-content-helpers";
 type Reply={readiness:Record<PaymentProvider,ProviderReadiness>;settings:CommerceSettings;version:string|null;configured:Record<CommerceCredential,boolean>;overridden:CommerceCredential[]};
