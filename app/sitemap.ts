@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     publicJournal().catch(() => []),
   ]);
 
-  const highPriority = new Set(["services", "products", "memberships", "projects", "pricing", "agriyaan", "urjayaan", "buddy"]);
+  const highPriority = new Set(["services", "projects", "pricing", "agriyaan", "urjayaan"]);
   const deprecatedSlugs = new Set([
     "kitty-ai",
     "play",
@@ -25,15 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = [
     "agriyaan",
     "urjayaan",
-    "buddy",
     "projects",
     "research",
-    "memberships",
     "company",
     "team",
     "contact",
     "services",
-    "products",
     "pricing",
     "investors",
     "build-log",
@@ -61,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     })),
     ...products
-      .filter((product) => !deprecatedSlugs.has(product.slug))
+      .filter((product) => !deprecatedSlugs.has(product.slug) && !/(kitty-ai|buddy|secretchat|examify|chat)/i.test(`${product.slug} ${product.name}`))
       .map((product) => ({
         url: `${origin}/${product.slug}`,
         lastModified: product.updated_at ? new Date(product.updated_at) : undefined,
@@ -69,7 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       })),
     ...launches
-      .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat)/i.test(`${launch.slug} ${launch.name}`))
+      .filter((launch) => !deprecatedSlugs.has(launch.slug) && !/(examify|secretchat|kitty-ai|buddy|chat)/i.test(`${launch.slug} ${launch.name}`))
       .map((launch) => ({
         url: `${origin}${launchHref(launch)}`,
         lastModified: launch.updated_at ? new Date(launch.updated_at) : undefined,
