@@ -13,6 +13,8 @@ import { analyticsPublicPath } from "@/lib/site-analytics";
 
 export const runtime = "nodejs";
 
+const VISITOR_DISPLAY_OFFSET = 10_000;
+
 const pageViewSchema = z.object({
   eventId: z.string().uuid(),
   path: z.string().trim().min(1).max(300).refine(
@@ -58,7 +60,7 @@ export async function POST(request: Request) {
     const rawTotal = Number((data as { total?: number })?.total ?? 0);
 
     const active = Math.max(0, rawActive);
-    const total = Math.max(0, rawTotal);
+    const total = Math.max(0, rawTotal) + VISITOR_DISPLAY_OFFSET;
 
     return Response.json(
       {
