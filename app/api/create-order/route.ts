@@ -159,6 +159,7 @@ export async function POST(request: Request) {
         payment_id: null,
       },
       customer,
+      value.purpose === "donation" ? { name: value.supporterName, email: value.supporterEmail, message: value.supporterMessage } : undefined,
     );
     if (hasQuote && reserved && !reserved.quote.order_id)
       await action("attach", { reservation: quoteReservation, orderId: order.id });
