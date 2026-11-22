@@ -20,9 +20,9 @@ const signup = z.object({
   email: z.string().trim().email("Enter a valid email address.").max(254),
   interests: z
     .array(
-      z.enum(["KITTY AI", "KITTY AgriYaan", "KITTY UrjaYaan", "KITTY Buddy", "KITTY Sentinel", "KITTY CORP updates"]),
+      z.literal("KITTY CORP updates"),
     )
-    .max(4),
+    .max(1),
   website: z.string().max(300).optional().default(""),
   startedAt: z.number().finite(),
 });
