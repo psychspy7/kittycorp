@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 export const metadata = pageMetadata(
   "KITTY CORP | Refunds & Cancellations",
-  "Refund and cancellation guidance for KITTY CORP digital projects, memberships, supporter contributions, payment issues and customer support requests.",
+  "Refund and cancellation guidance for KITTY CORP digital projects, KITTY ONE memberships, Fuel Us purchases and payment issues.",
   "/refunds"
 );
 
@@ -25,7 +25,7 @@ export default function RefundsPage() {
             Refunds &amp; Cancellations
           </h1>
           <p className="text-[17px] text-[#62676D] font-light">
-            Clear guidelines for digital project payments, revisions, and membership accounts.
+            Clear guidelines for digital project payments, revisions, memberships, and Fuel Us purchases.
           </p>
         </div>
 
@@ -45,9 +45,9 @@ export default function RefundsPage() {
           </section>
 
           <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Patron Memberships</h2>
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">KITTY ONE Membership</h2>
             <p>
-              If a patron membership was purchased mistakenly or duplicate charges occurred, contact our team within 14 days of the transaction for a prompt, full refund through our payment processor.
+              If a KITTY ONE membership was purchased mistakenly or duplicate charges occurred, contact our team within 14 days of the transaction. We will verify the charge and process an eligible refund through the payment processor. Fuel Us purchases are separate from memberships; contact us promptly about duplicate or incorrect charges.
             </p>
           </section>
 

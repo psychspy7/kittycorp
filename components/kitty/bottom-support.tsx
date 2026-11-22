@@ -2,25 +2,25 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Heart, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Coffee, ShieldCheck } from "lucide-react";
 
-const QUICK_AMOUNTS = [500, 1000, 2500, 5000, 10000];
+const QUICK_AMOUNTS = [49, 99, 199, 499, 999];
 
 export function BottomSupport() {
   const [amount, setAmount] = useState<string>("1000");
   const [custom, setCustom] = useState(false);
 
-  const parsedAmount = Math.min(10000, Math.max(1, Number(amount) || 1));
+  const parsedAmount = Math.min(9999, Math.max(49, Number(amount) || 49));
 
   return (
     <div id="support-kitty" className="w-full" aria-labelledby="support-kitty-heading">
       <div className="flex flex-col gap-6">
         <div>
           <h3 id="support-kitty-heading" className="text-xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-1">
-            Custom contribution amount
+            Coffee purchase amount
           </h3>
           <p className="text-sm text-[#62676D] font-light">
-            Choose a preset or type any custom amount in INR. All contributions directly support physical hardware prototyping.
+            Choose a preset or enter a custom coffee purchase amount in INR. This purchase is separate from KITTY ONE and project payments.
           </p>
         </div>
 
@@ -64,15 +64,15 @@ export function BottomSupport() {
             </span>
             <input
               type="number"
-              min="1"
-              max="10000"
+              min="49"
+              max="9999"
               step="0.01"
               value={amount}
               onChange={(e) => {
                 setAmount(e.target.value);
                 setCustom(true);
               }}
-              aria-label="Enter desired support amount in INR"
+              aria-label="Enter coffee purchase amount in INR"
               placeholder="Enter amount"
               className="w-full pl-8 pr-16 py-3.5 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] text-[#191B1D] font-mono text-base focus:border-[#2457D6] focus:ring-2 focus:ring-[#2457D6]/20 transition-all outline-none"
             />
@@ -85,7 +85,7 @@ export function BottomSupport() {
             href={`/payments?purpose=donation&amount=${parsedAmount}`}
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[14px] font-medium transition-all shadow-[0_2px_12px_rgba(36,87,214,0.2)] shrink-0 group"
           >
-            <span>Proceed to Support ₹{parsedAmount.toLocaleString("en-IN")}</span>
+            <span>Buy Us a Coffee ₹{parsedAmount.toLocaleString("en-IN")}</span>
             <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -98,7 +98,7 @@ export function BottomSupport() {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Sparkles className="w-4 h-4 text-[#2457D6]" />
-            100% directly allocated to lab hardware &amp; research
+            Separate purchase · no membership benefits
           </span>
         </div>
       </div>

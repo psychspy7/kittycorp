@@ -5,7 +5,7 @@ import {customerAuthorization} from "@/lib/customer-request";
 import {LocalPrice} from "./local-currency";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
-import { Check, CreditCard, LoaderCircle, ShieldCheck } from "lucide-react";
+import { Check, Download, CreditCard, LoaderCircle, ShieldCheck } from "lucide-react";
 import { Turnstile } from "./turnstile";
 import type { PaymentPurpose } from "@/lib/razorpay-server";
 
@@ -24,7 +24,7 @@ const paymentDisplay = {
 type Options = {
   key: string; order_id: string; amount: number; currency: string; name: string; description: string;
   image: string; theme: { color: string }; handler: (value: PaymentResponse) => void;
-  modal: { ondismiss: () => void }; retry: { enabled: boolean };
+  modal: { ondismiss: () => void }; retry: { enabled: boolean }; prefill?: { name?: string; email?: string };
   config?: typeof paymentDisplay;
 };
 type Checkout = { open: () => void; on: (event: "payment.failed", callback: () => void) => void };
@@ -54,7 +54,9 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const [token, setToken] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [paymentId, setPaymentId] = useState("");
-  const [donation, setDonation] = useState(String(initialDonationAmount ?? 100));
+  const [donation, setDonation] = useState(String(initialDonationAmount ?? 49));
+  const [supporterEmail, setSupporterEmail] = useState("");
+  const [supporterMessage, setSupporterMessage] = useState("");
   const [reference, setReference] = useState("");
   const [supporterName, setSupporterName] = useState("");
   const [paidAt, setPaidAt] = useState<Date | null>(null);
@@ -64,7 +66,8 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const busy = phase === "creating" || phase === "open" || phase === "verifying";
   useEffect(()=>{onLockChange?.(busy || phase === "pending" || phase === "unconfirmed" || phase === "paid");},[busy,phase,onLockChange]);
   const selectedAmount = purpose === "donation" ? Math.round(Number(donation) * 100) : amount;
-  const validAmount = Number.isSafeInteger(selectedAmount) && selectedAmount >= 100 && selectedAmount <= (purpose === "donation" ? 1_000_000 : 100_000_000) && (purpose !== "donation" || /^\d+(\.\d{1,2})?$/.test(donation));
+  const validAmount = Number.isSafeInteger(selectedAmount) && selectedAmount >= (purpose === "donation" ? 4_900 : 100) && selectedAmount <= (purpose === "donation" ? 999_900 : 100_000_000) && (purpose !== "donation" || /^\d+(\.\d{1,2})?$/.test(donation));
+  const validSupporter = supporterName.trim().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(supporterEmail.trim()) && supporterMessage.length <= 180;
   const formattedAmount = new Intl.NumberFormat("en-IN", { style: "currency", currency }).format((Number.isFinite(selectedAmount) ? selectedAmount : 0) / 100);
 
   function resetSecurity() { setToken(""); setAttempt(value => value + 1); }
@@ -79,7 +82,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       if (result.paid === true && result.success === true && result.status === "captured") {
         setPhase("paid"); setPaidAt(new Date()); pending.current = null;
         
-        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Thank you for supporting KITTY CORP. Your contribution was received." : "Payment received. Please keep your payment reference.");
+        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Your coffee purchase is confirmed. Thank you for fueling KITTY CORP." : "Payment received. Please keep your payment reference.");
       } else if (result.paid === false && result.status === "authorized") {
         setPhase("pending");
         setMessage("Your payment is authorized and awaiting capture. Please don’t pay again. You can check its status below.");
@@ -94,23 +97,30 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   function downloadSupportReceipt() {
     const escapeXml = (value: string) => value.replace(/[&<>"']/g, character => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[character] || character));
     const dateText = (paidAt || new Date()).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
-    const donor = supporterName.trim() || "Supporter";
+    const donor = supporterName.trim();
+    const email = supporterEmail.trim();
+    const note = supporterMessage.trim();
     const svg = [
-      '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">',
-      '<rect width="1000" height="700" rx="36" fill="#f7f8f5"/><rect x="40" y="40" width="920" height="620" rx="28" fill="#fff" stroke="#e3e8e2"/>',
-      '<circle cx="500" cy="170" r="68" fill="#e6f7eb"/><path d="M466 171l23 23 48-53" fill="none" stroke="#18864b" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>',
-      '<text x="500" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">' + (testMode ? 'Test payment complete' : 'Thank you for your support') + '</text>',
-      '<text x="500" y="335" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#59665c">' + escapeXml(donor) + '</text>',
-      '<text x="500" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="700" fill="#17251b">' + escapeXml(formattedAmount) + '</text>',
-      '<text x="500" y="450" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#59665c">' + (testMode ? 'Test checkout · no real money charged' : 'Voluntary contribution to KITTY CORP') + '</text>',
-      '<line x1="130" y1="500" x2="870" y2="500" stroke="#e3e8e2"/>',
-      '<text x="140" y="550" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Payment reference</text><text x="140" y="582" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(paymentId) + '</text>',
-      '<text x="860" y="550" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Date</text><text x="860" y="582" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(dateText) + '</text>',
-      '<text x="500" y="625" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#849087">Payment confirmation for your records · Not a tax receipt</text></svg>'
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760">',
+      '<rect width="1000" height="760" rx="36" fill="#f7f8f5"/><rect x="40" y="40" width="920" height="680" rx="28" fill="#fff" stroke="#e3e8e2"/>',
+      '<circle cx="500" cy="155" r="68" fill="#e6f7eb"/><path d="M466 156l23 23 48-53" fill="none" stroke="#18864b" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<text x="500" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">' + (testMode ? 'Test payment complete' : 'Coffee purchase confirmed') + '</text>',
+      '<text x="500" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#59665c">' + escapeXml(donor) + '</text>',
+      '<text x="500" y="355" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#59665c">' + escapeXml(email) + '</text>',
+      '<text x="500" y="425" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="700" fill="#17251b">' + escapeXml(formattedAmount) + '</text>',
+      '<text x="500" y="470" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#59665c">' + (testMode ? 'Test checkout · no real money charged' : 'Fuel Us ☕ · KITTY CORP') + '</text>',
+      note ? '<text x="500" y="510" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#59665c" textLength="740" lengthAdjust="spacingAndGlyphs">' + escapeXml(note) + '</text>' : '',
+      '<line x1="130" y1="550" x2="870" y2="550" stroke="#e3e8e2"/>',
+      '<text x="140" y="595" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Payment reference</text><text x="140" y="628" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(paymentId) + '</text>',
+      '<text x="860" y="595" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Date</text><text x="860" y="628" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(dateText) + '</text>',
+      '<text x="500" y="685" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#849087">Payment confirmation for your records · Not an invoice</text></svg>'
     ].join("");
     const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement("a"); link.href = url; link.download = "kitty-corp-support-" + (paymentId || "receipt") + ".svg"; link.click();
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "kitty-corp-coffee-" + (paymentId || "receipt") + ".svg";
+    link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
@@ -118,18 +128,19 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     if (lock.current || pending.current || phase === "paid") return;
     if (!window.Razorpay) { setError("Checkout is still loading. Please wait a moment or refresh this page."); return; }
     if (securityEnabled && !token) { setError("Please complete the security check first."); return; }
-    if (purpose === "donation" && !validAmount) { setError("Enter an amount between ₹1 and ₹10,000, with up to two decimal places."); return; }
+    if (purpose === "donation" && !validAmount) { setError("Enter an amount between ₹49 and ₹9,999, with up to two decimal places."); return; }
+    if (purpose === "donation" && !validSupporter) { setError("Enter your name and a valid email. The optional message must be 180 characters or fewer."); return; }
     if (purpose === "project" && !testMode && !reference.trim() && !quote) { setError("Enter your project or invoice reference first."); return; }
     lock.current = true; callbackStarted.current = false;
     setPhase("creating"); setError(""); setMessage("");
     try {
-      const order = await post<Order>("/api/create-order", { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(quote?{...(quote.id?{accountQuoteId:quote.id}:{quoteToken:quote.token}),paymentChoice:quote.choice}:{}), turnstileToken: token });
+      const order = await post<Order>("/api/create-order", { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(purpose === "donation" ? { supporterName: supporterName.trim(), supporterEmail: supporterEmail.trim(), supporterMessage: supporterMessage.trim() } : {}),...(quote?{...(quote.id?{accountQuoteId:quote.id}:{quoteToken:quote.token}),paymentChoice:quote.choice}:{}), turnstileToken: token });
       if (!/^order_[A-Za-z0-9]{6,64}$/.test(order.order_id) || order.amount !== selectedAmount || order.currency !== currency) {
         throw new Error("The order details could not be verified. Refresh the page and try again.");
       }
       const checkout = new window.Razorpay({
         key: keyId, order_id: order.order_id, amount: order.amount, currency: order.currency,
-        name: "KITTY CORP", description: `${testMode ? "Test: " : ""}${purpose === "donation" ? "Voluntary contribution" : purpose === "project" ? `Project payment${reference ? ` · ${reference}` : ""}` : "KITTY CORP payment"}`,
+        name: "KITTY CORP", description: `${testMode ? "Test: " : ""}${purpose === "donation" ? "Fuel Us coffee purchase" : purpose === "project" ? `Project payment${reference ? ` · ${reference}` : ""}` : "KITTY CORP payment"}`, prefill: purpose === "donation" ? { name: supporterName.trim(), email: supporterEmail.trim() } : undefined,
         image: `${window.location.origin}/brand/monogram-small-v2.webp`, theme: { color: "#252720" },
         retry: { enabled: true },
         config: paymentDisplay,
@@ -161,22 +172,26 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       onError={() => setScriptError("Checkout could not load. Check your connection and refresh this page.")} />
     {purpose === "donation" && phase === "paid" ? <div className="support-complete" role="status" aria-live="polite">
       <div className="support-complete-check" aria-hidden="true"><svg viewBox="0 0 64 64"><circle className="support-check-circle" cx="32" cy="32" r="29"/><path className="support-check-mark" d="M18 33l9 9 20-21"/></svg></div>
-      <span className="support-complete-eyebrow">{testMode ? "TEST PAYMENT COMPLETE" : "CONTRIBUTION CONFIRMED"}</span>
+      <span className="support-complete-eyebrow">{testMode ? "TEST PAYMENT COMPLETE" : "COFFEE PURCHASE CONFIRMED"}</span>
       <h2>{testMode ? "Test checkout complete." : "Thank you" + (supporterName.trim() ? ", " + supporterName.trim() : "") + "."}</h2>
-      <p>{testMode ? "No real money was charged. This was a test transaction." : "Your support means a lot to KITTY CORP. It helps us keep building and researching independently."}</p>
-      <div className="support-complete-amount"><span>{testMode ? "Test amount" : "Contribution"}</span><strong>{formattedAmount}</strong></div>
+      <p>{testMode ? "No real money was charged. This was a test transaction." : "Thank you for fueling KITTY CORP. Your purchase is confirmed and the details below are yours to save."}</p>
+      <p className="support-complete-contact"><strong>{supporterName.trim()}</strong><br/>{supporterEmail.trim()}</p>
+      {supporterMessage.trim() && <p className="support-complete-message">{supporterMessage.trim()}</p> }
+      <div className="support-complete-amount"><span>{testMode ? "Test amount" : "Purchase amount"}</span><strong>{formattedAmount}</strong></div>
       <div className="support-complete-reference"><span>Payment reference</span><code>{paymentId}</code></div>
-      <button type="button" className="button button-gold checkout-button" onClick={downloadSupportReceipt}><CreditCard size={17}/> Download confirmation</button>
+      <button type="button" className="button button-gold checkout-button" onClick={downloadSupportReceipt}><Download size={17}/> Download confirmation</button>
       <a className="support-complete-home" href="/">Back to KITTY CORP</a>
-      <p className="support-complete-note">{testMode ? "Test confirmation only · No real contribution received." : "This downloadable confirmation is for your records and is not a tax receipt."}</p>
+      <p className="support-complete-note">{testMode ? "Test confirmation only · No real contribution received." : "This downloadable payment confirmation is for your records; it is not an invoice."}</p>
     </div> : <>
-    {!quote?.id&&phase==="idle"&&<CustomerSignIn disabled={busy}/ >}
+    {purpose !== "donation" && !quote?.id && phase === "idle" && <CustomerSignIn disabled={busy} /> }
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
-    <h2 id="checkout-title">{purpose === "donation" ? "Choose your contribution." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
-    <p>{testMode ? "This checkout is in test mode. No real money changes hands." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
+    <h2 id="checkout-title">{purpose === "donation" ? "Buy us a coffee." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
+    <p>{testMode ? "This checkout is in test mode. No real money changes hands." : purpose === "donation" ? "This is a separate coffee purchase. Enter your details, choose an amount, and complete secure checkout." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
     {purpose === "project" && !quote && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
-    {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-name">Name (optional)</label><input id="supporter-name" type="text" autoComplete="name" maxLength={80} value={supporterName} onChange={event => setSupporterName(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Your name"/><span>Your name can appear on your downloadable confirmation.</span></div>}
-    {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Contribution in rupees</label><div className="donation-presets">{[100, 250, 500, 1000].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="1" max="10000" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>₹1 minimum · Suggested amounts help make the contribution meaningful. Entirely voluntary.</span></div>}
+    {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-name">Your name <span aria-hidden="true">*</span></label><input id="supporter-name" type="text" autoComplete="name" maxLength={80} required value={supporterName} onChange={event => setSupporterName(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Name"/><span>Shown on your confirmation.</span></div>}
+    {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-email">Email <span aria-hidden="true">*</span></label><input id="supporter-email" type="email" autoComplete="email" maxLength={254} required value={supporterEmail} onChange={event => setSupporterEmail(event.target.value)} disabled={busy || phase !== "idle"} placeholder="you@example.com"/><span>Required for your purchase confirmation. It is recorded in the payment order notes.</span></div>}
+    {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-message">Message (optional)</label><textarea id="supporter-message" maxLength={180} rows={3} value={supporterMessage} onChange={event => setSupporterMessage(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Leave a note for KITTY CORP"/><span>{supporterMessage.length}/180</span></div> }
+    {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Coffee purchase amount (INR)</label><div className="fuel-presets">{[49, 99, 199, 499, 999].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="49" max="9999" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>Minimum ₹49 · Maximum ₹9,999.</span></div> }
     <div className="checkout-total"><span>{testMode ? "Test amount" : "Payment amount"}</span><strong>{formattedAmount}</strong></div>
     <LocalPrice amount={Number.isFinite(selectedAmount)?selectedAmount:0}/><p className="checkout-methods">Choose UPI, cards or another available method in checkout.</p>
     {testMode && <p className="checkout-upi-note">UPI QR and payment-app options depend on Razorpay’s account settings and may not appear in test mode.</p>}
@@ -188,7 +203,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     {paymentId && <p className="checkout-reference">Payment reference <code>{paymentId}</code></p>}
     {(phase === "pending" || phase === "unconfirmed") ? <button className="button button-gold checkout-button" onClick={() => { if (pending.current && !lock.current) void verify(pending.current); }}>Check payment status</button>
       : <button className="button button-gold checkout-button" onClick={() => void pay()}
-        disabled={!scriptReady || Boolean(scriptError) || busy || phase === "paid" || (securityEnabled && !token) || (purpose === "donation" && !validAmount)}>
+        disabled={!scriptReady || Boolean(scriptError) || busy || phase === "paid" || (securityEnabled && !token) || (purpose === "donation" && (!validAmount || !validSupporter))}>
         {busy && <LoaderCircle size={17} className="checkout-spinner" aria-hidden="true"/>}
         {phase === "paid" ? "Payment complete" : phase === "creating" ? "Preparing checkout…" : phase === "open" ? "Checkout open…" : phase === "verifying" ? "Verifying payment…" : !scriptReady ? "Loading checkout…" : securityEnabled && !token ? "Checking security…" : `${testMode ? "Pay test" : "Pay"} ${formattedAmount}`}
       </button>}

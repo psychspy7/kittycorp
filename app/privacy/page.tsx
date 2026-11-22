@@ -49,7 +49,7 @@ export default function Privacy() {
           <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
             <h2 className="text-xl font-medium text-[#191B1D] mb-3">Payments and Patron Transactions</h2>
             <p>
-              Payment gateways, including Razorpay and Cashfree, process payment card and banking credentials securely on their certified infrastructure. Our servers store only order identifiers, payment references, amounts, currency, and verification status in a private ledger. We never receive or store raw card numbers, CVVs, or bank login credentials.
+              Payment gateways, including Razorpay and Cashfree, process payment card and banking credentials securely on their certified infrastructure. Our private ledger stores order identifiers, payment references, amounts, currency, and verification status. Fuel Us checkout also sends the name, email, and optional message you provide to Razorpay in the payment order notes for purchase records. We never receive or store raw card numbers, CVVs, or bank login credentials.
             </p>
           </section>
 

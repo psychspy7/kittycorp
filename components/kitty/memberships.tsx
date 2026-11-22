@@ -5,7 +5,7 @@ import { LocalPrice } from "./local-currency";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import type { User } from "firebase/auth";
-import { Check, ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, AlertCircle, HeartHandshake, Layers } from "lucide-react";
+import { Check, ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, AlertCircle, Coffee, Layers } from "lucide-react";
 import { kittyCustomerAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "@/lib/kitty-customer";
 import type { MembershipCatalog } from "@/lib/membership-types";
 import { Turnstile } from "./turnstile";
@@ -492,7 +492,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
       </div>
 
       {/* =========================================================================
-          SEPARATE OFFERINGS: VOLUNTARY SUPPORT & DIGITAL STUDIO
+          SEPARATE OFFERINGS: FUEL US & DIGITAL STUDIO
           ========================================================================= */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
         
@@ -500,20 +500,20 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
         <div className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] flex flex-col justify-between">
           <div>
             <div className="w-10 h-10 rounded-xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-4">
-              <HeartHandshake className="w-5 h-5" />
+              <Coffee className="w-5 h-5" />
             </div>
             <h3 className="text-xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-2">
-              Voluntary Research Support
+              Fuel Us ☕
             </h3>
             <p className="text-sm text-[#62676D] font-light leading-relaxed mb-6">
-              Prefer not to join an annual membership? You can support our open robotics and clean energy research with any voluntary contribution amount.
+              Want to support KITTY CORP without joining KITTY ONE? Buy us a coffee. This is a separate purchase
             </p>
           </div>
           <Link
             href="/support"
             className="inline-flex items-center gap-2 text-sm font-medium text-[#2457D6] hover:underline"
           >
-            <span>Support Our Research</span>
+            <span>Buy Us a Coffee</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

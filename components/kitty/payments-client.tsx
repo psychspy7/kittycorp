@@ -27,7 +27,7 @@ function PaymentsClientInner({
     return <PaymentsOverview options={options} securityEnabled={securityEnabled} />;
   }
 
-  const available = paymentOptionsForPurpose(options, purpose);
+  const available = purpose === "donation" ? options.filter(option => option.provider === "razorpay") : paymentOptionsForPurpose(options, purpose);
 
   return (
     <div className="payments-page-content">
@@ -38,10 +38,10 @@ function PaymentsClientInner({
         </Link>
         <span className="eyebrow">
           KITTY CORP ·{" "}
-          {purpose === "donation" ? "SUPPORT" : "PROJECT PAYMENTS"}
+          {purpose === "donation" ? "FUEL US ☕" : "PROJECT PAYMENTS"}
         </span>
-        <h1>{purpose === "donation" ? "Support the independent work." : "For the work we’re building together."}</h1>
-        <p>{purpose === "donation" ? "Make a voluntary contribution to our robotics and clean-energy research. Choose your amount, then continue to secure checkout." : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}</p>
+        <h1>{purpose === "donation" ? "Buy us a coffee." : "For the work we’re building together."}</h1>
+        <p>{purpose === "donation" ? "Choose a coffee purchase amount from ₹49 to ₹9,999, add your name and email, then complete secure checkout." : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}</p>
         <nav className="payment-purpose-nav" aria-label="Payment type">
           <Link
             href="/payments?purpose=project"
@@ -53,10 +53,10 @@ function PaymentsClientInner({
             href="/payments?purpose=donation"
             aria-current={purpose === "donation" ? "page" : undefined}
           >
-            Support KITTY
+            Fuel Us ☕
           </Link>
         </nav>
-        <p className="payments-note">{purpose === "donation" ? "Contributions are optional. They do not purchase a product, membership or ownership in KITTY CORP." : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}</p>
+        <p className="payments-note">{purpose === "donation" ? "Fuel Us is a separate purchase. KITTY ONE membership and project payments remain separate." : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}</p>
       </div>
 
       {available.length ? (

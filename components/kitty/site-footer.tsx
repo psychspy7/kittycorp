@@ -79,10 +79,10 @@ export async function SiteFooter() {
               Inside the Lab
             </Link>
             <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">
-              Support Our Research
+              Fuel Us ☕
             </Link>
             <p className="max-w-[17rem] text-xs leading-relaxed text-[#D1D5DB]">
-              Contributions are entirely voluntary and help support independent research. They are not a purchase, membership, investment or ownership interest.
+              Buy KITTY CORP a coffee through a separate purchase. KITTY ONE membership and project payments are separate.
             </p>
           </div>
 
@@ -169,7 +169,7 @@ export async function SiteFooter() {
             </Link>
             <span>·</span>
             <Link href="/support" className="text-[#60A5FA] hover:underline">
-              Support Research
+              Fuel Us
             </Link>
           </div>
         </div>

@@ -91,8 +91,6 @@ const nextConfig: NextConfig = {
       { source: "/projects/quote/:path*", destination: "https://demo.thekittycorp.com", permanent: true },
       { source: "/buddy", destination: "/projects", permanent: true },
       { source: "/buddy/:path*", destination: "/projects", permanent: true },
-      { source: "/memberships", destination: "/support", permanent: true },
-      { source: "/memberships/:path*", destination: "/support", permanent: true },
       { source: "/products", destination: "/projects", permanent: true },
       { source: "/products/:path*", destination: "/projects", permanent: true },
       { source: "/examify", destination: "/projects", permanent: true },

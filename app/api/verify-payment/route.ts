@@ -131,6 +131,9 @@ export async function POST(request: Request) {
       currency: order.currency,
       purpose: order.purpose,
       reference: order.reference,
+      supporterName: order.supporterName,
+      supporterEmail: order.supporterEmail,
+      supporterMessage: order.supporterMessage,
     });
   } catch (error) {
     return failure(error);

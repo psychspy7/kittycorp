@@ -129,11 +129,13 @@ await expectStatus(create, "create-order", { ...valid, purpose: "unknown" }, 400
 await expectStatus(create, "create-order", { ...valid, purpose: "project", amount: 200, reference: "KITTY-01" }, 400);
 await expectStatus(create, "create-order", { ...valid, purpose: "project", reference: "<script>" }, 400);
 await expectStatus(create, "create-order", { ...valid, purpose: "project", reference: "x".repeat(81) }, 400);
-await expectStatus(create, "create-order", { ...valid, purpose: "donation", amount: 1_000_001 }, 400);
-const donation = await expectStatus(create, "create-order", { ...valid, purpose: "donation", amount: 25000 }, 200);
+await expectStatus(create, "create-order", { ...valid, purpose: "donation", amount: 999_901, supporterName: "Fixture", supporterEmail: "fixture@example.invalid" }, 400);
+await expectStatus(create, "create-order", { ...valid, purpose: "donation", amount: 4_899, supporterName: "Fixture", supporterEmail: "fixture@example.invalid" }, 400);
+await expectStatus(create, "create-order", { ...valid, purpose: "donation", amount: 4_900 }, 400);
+const donation = await expectStatus(create, "create-order", { ...valid, purpose: "donation", amount: 4900, supporterName: "Fixture Supporter", supporterEmail: "fixture@example.invalid", supporterMessage: "Testing Fuel Us" }, 200);
 const donationContext = helpers.readOrder(jar.get(helpers.orderCookieName(donation.order_id)), env.RAZORPAY_KEY_SECRET, env.RAZORPAY_KEY_ID);
-assert.equal(donationContext.purpose, "donation"); assert.equal(donationContext.amount, 25000);
-payment = { id: paymentId, order_id: donation.order_id, amount: 25000, currency: "INR", amount_refunded: 0, captured: true, status: "captured" };
+assert.equal(donationContext.purpose, "donation"); assert.equal(donationContext.amount, 4900); assert.equal(donationContext.supporterName, "Fixture Supporter"); assert.equal(donationContext.supporterEmail, "fixture@example.invalid"); assert.equal(donationContext.supporterMessage, "Testing Fuel Us");
+payment = { id: paymentId, order_id: donation.order_id, amount: 4900, currency: "INR", amount_refunded: 0, captured: true, status: "captured" };
 const donationCallback = { ...callback, razorpay_order_id: donation.order_id,
   razorpay_signature: createHmac("sha256", env.RAZORPAY_KEY_SECRET).update(`${donation.order_id}|${paymentId}`).digest("hex") };
 assert.equal((await expectStatus(verify, "verify-payment", donationCallback, 200)).purpose, "donation");
@@ -163,4 +165,4 @@ await expectStatus(create,"create-order",{...accountQuoteBody,amount:200},409);a
 const ownedOrder=await expectStatus(create,"create-order",accountQuoteBody,200);assert.equal(calls,beforeAccount+1);assert.equal(ownedActions.at(-1),"attach");
 assert.equal((await expectStatus(create,"create-order",accountQuoteBody,200)).order_id,ownedOrder.order_id);assert.equal(calls,beforeAccount+1);
 accountCustomer=null;
-console.log("Razorpay checks passed: original safeguards, server-controlled project totals/references, bounded voluntary contributions and signed purpose binding.");
+console.log("Razorpay checks passed: original safeguards, server-controlled project totals/references, bounded Fuel Us purchases and signed purpose binding.");

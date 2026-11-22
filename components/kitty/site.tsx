@@ -74,7 +74,7 @@ export function SiteHeader() {
           <div className="relative w-14 h-14 flex-shrink-0 overflow-visible">
             <Image
               unoptimized
-              src="/brand/monogram-small-v2.webp"
+              src="/brand/monogram-v2.webp"
               alt="KITTY CORP"
               width={56}
               height={56}
@@ -272,7 +272,7 @@ export function SiteHeader() {
                     }`}
                     aria-current={pathname === "/support" || pathname.startsWith("/support/") ? "page" : undefined}
                   >
-                    Support Our Research
+                    Fuel Us ☕
                   </Link>
                 </div>
               </nav>

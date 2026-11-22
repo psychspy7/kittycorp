@@ -5,7 +5,7 @@ import { z } from "zod";
 import { HttpError } from "./kitty-server";
 
 const MAX_AMOUNT = 100_000_000;
-export const MAX_DONATION_PAISE = 1_000_000;
+export const MAX_DONATION_PAISE = 999_900;
 export type PaymentPurpose = "checkout" | "project" | "donation";
 export const ORDER_LIFETIME_SECONDS = 3600;
 export const ORDER_COOKIE_PREFIX = "kitty_rzp_";
@@ -20,7 +20,17 @@ export const createOrderSchema = z.object({
   turnstileToken: z.string().max(2048).optional(),
   purpose: z.enum(["checkout", "project", "donation"]).optional().default("checkout"),
   reference: z.string().trim().max(80).regex(/^[\p{L}\p{N} ._\/-]*$/u, "Use letters, numbers, spaces or a simple project reference.").optional().default(""),
-}).strict();
+  supporterName: z.string().trim().min(1).max(80).optional(),
+  supporterEmail: z.string().trim().email().max(254).optional(),
+  supporterMessage: z.string().trim().max(180).optional(),
+}).strict().superRefine((value, ctx) => {
+  if (value.purpose === "donation") {
+    if (!value.supporterName) ctx.addIssue({ code: "custom", path: ["supporterName"], message: "Enter your name." });
+    if (!value.supporterEmail) ctx.addIssue({ code: "custom", path: ["supporterEmail"], message: "Enter a valid email." });
+  } else if (value.supporterName || value.supporterEmail || value.supporterMessage) {
+    ctx.addIssue({ code: "custom", message: "Supporter details are only accepted for Fuel Us checkout." });
+  }
+});
 export const verifyPaymentSchema = z.object({
   razorpay_order_id: orderIdSchema,
   razorpay_payment_id: z.string().regex(/^pay_[A-Za-z0-9]{6,64}$/, "Invalid payment ID."),
@@ -35,6 +45,9 @@ const contextSchema = z.object({
   expires: z.number().int().positive(),
   purpose: z.enum(["checkout", "project", "donation", "subscription"]).optional().default("checkout"),
   reference: z.string().max(80).optional().default(""),
+  supporterName: z.string().max(80).optional(),
+  supporterEmail: z.string().max(254).optional(),
+  supporterMessage: z.string().max(180).optional(),
 }).strict();
 export type OrderContext = z.infer<typeof contextSchema>;
 
@@ -60,7 +73,7 @@ export function razorpayClient(config = paymentConfiguration()) {
 
 export function checkoutAmount(value: z.infer<typeof createOrderSchema>, config: ReturnType<typeof paymentConfiguration>) {
   if (value.purpose === "donation") {
-    if (value.amount > MAX_DONATION_PAISE) throw new HttpError("Please choose a contribution between ₹1 and ₹10,000.", 400);
+    if (value.amount < 4_900 || value.amount > MAX_DONATION_PAISE) throw new HttpError("Fuel Us purchases must be between ₹49 and ₹9,999.", 400);
     return value.amount;
   }
   if (value.purpose === "project" && !config.testMode && !value.reference) {

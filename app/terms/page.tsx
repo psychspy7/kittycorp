@@ -25,7 +25,7 @@ export default function TermsPage() {
             Website and Service Terms
           </h1>
           <p className="text-[17px] text-[#62676D] font-light">
-            Clear expectations and engineering agreements for digital commissions and memberships.
+            Clear expectations for digital commissions, KITTY ONE membership, Fuel Us purchases, and customer responsibilities.
           </p>
         </div>
 
@@ -59,9 +59,9 @@ export default function TermsPage() {
           </section>
 
           <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Memberships and Patron Access</h2>
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">KITTY ONE Membership</h2>
             <p className="mb-4">
-              KITTY ONE is an annual patron pass designed to support our independent physical AI and robotics research. Membership does not constitute equity, securities, or financial profit-sharing. Physical metallic NFC cards ship with inaugural production batches, while digital laboratory briefings and website privileges activate upon registration.
+              KITTY ONE is an annual membership designed to support our independent physical AI and robotics research. Membership does not constitute equity, securities, or financial profit-sharing. Physical metallic NFC cards ship with inaugural production batches, while digital laboratory briefings and website privileges activate upon registration.
             </p>
             <Link
               href="/contact?subject=Terms"
@@ -70,6 +70,13 @@ export default function TermsPage() {
               <span>Contact Us Regarding Terms</span>
             </Link>
           </section>
+          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Fuel Us Coffee Purchase</h2>
+            <p>
+              Fuel Us is a separate coffee purchase with an amount selected at checkout. It is not KITTY ONE membership, a client project payment, an investment, or an entitlement to products or services. Purchase details are confirmed through the payment provider.
+            </p>
+          </section>
+
         </div>
       </main>
       <SiteFooter />

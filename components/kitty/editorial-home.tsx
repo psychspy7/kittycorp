@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Cpu, Compass, HeartHandshake, Waves, Orbit } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Cpu, Compass, Coffee, Waves, Orbit } from "lucide-react";
 
 export function EditorialHome() {
   return (
@@ -371,31 +371,24 @@ export function EditorialHome() {
       </section>
 
       {/* =========================================================================
-          SECTION H: VOLUNTARY RESEARCH SUPPORT INVITATION
+          SECTION H: FUEL US COFFEE PURCHASE
           ========================================================================= */}
       <section className="py-16 sm:py-20 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
         <div className="max-w-4xl mx-auto text-center">
           <div className="w-10 h-10 rounded-xl bg-[#FBFAF7] flex items-center justify-center text-[#2457D6] mx-auto mb-4 border border-[#D9D6CF]">
-            <HeartHandshake className="w-5 h-5" />
+            <Coffee className="w-5 h-5" />
           </div>
-          
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
-            Open Exploration
+            A Small Purchase · A Little Fuel
           </span>
-
           <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
-            Support the research.
+            Fuel Us ☕
           </h2>
-
           <p className="text-[15px] sm:text-[16px] leading-[1.65] text-[#191B1D] font-normal max-w-xl mx-auto mb-8">
-            Individuals who believe in our technological vision can voluntarily support our open robotics and clean energy research. Supporters receive a digital supporter badge and public recognition on our supporter roll.
+            Buy KITTY CORP a coffee. It is a simple purchase, separate from KITTY ONE membership and project payments.
           </p>
-
-          <Link
-            href="/support"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] hover:bg-[#D9D6CF] text-[#191B1D] text-[13px] font-medium transition-colors"
-          >
-            <span>Learn About Voluntary Support</span>
+          <Link href="/support" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] hover:bg-[#D9D6CF] text-[#191B1D] text-[13px] font-medium transition-colors">
+            <span>Buy Us a Coffee</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#2457D6]" />
           </Link>
         </div>

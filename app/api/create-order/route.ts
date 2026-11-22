@@ -81,8 +81,8 @@ export async function POST(request: Request) {
       config = { ...config, amount: reserved.amount };
       value.reference = reserved.reference;
     }
-    // Project totals are server controlled. A voluntary contribution may be selected
-    // by the visitor; it never settles an invoice or triggers project delivery.
+    // Project totals are server controlled. Fuel Us is a separate purchase and never
+    // settles an invoice or triggers project delivery.
     const amount = checkoutAmount(value, config);
     let order;
     const quoteReservation = reserved?.quote.reservation_id;
@@ -106,10 +106,12 @@ export async function POST(request: Request) {
               partial_payment: false,
               notes: {
                 purpose: value.purpose,
-                project_reference:
-                  value.purpose === "project"
-                    ? value.reference
-                    : "",
+                project_reference: value.purpose === "project" ? value.reference : "",
+                ...(value.purpose === "donation" ? {
+                  supporter_name: value.supporterName || "",
+                  supporter_email: value.supporterEmail || "",
+                  supporter_message: value.supporterMessage || "",
+                } : {}),
                 ...(quoteReservation ? { quote_reservation: quoteReservation } : {}),
               },
             });
@@ -185,10 +187,8 @@ export async function POST(request: Request) {
           currency: config.currency,
           keyId: config.keyId,
           purpose: value.purpose,
-          reference:
-            value.purpose === "project"
-              ? value.reference
-              : "",
+          reference: value.purpose === "project" ? value.reference : "",
+          ...(value.purpose === "donation" ? { supporterName: value.supporterName, supporterEmail: value.supporterEmail, supporterMessage: value.supporterMessage } : {}),
           expires: Date.now() + ORDER_LIFETIME_SECONDS * 1000,
         },
         config.keySecret,
