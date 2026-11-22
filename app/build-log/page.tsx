@@ -33,8 +33,7 @@ export default async function BuildLog() {
             <span className="eyebrow">THE KITTY ENGINEERING JOURNAL</span>
             <h1>Work, in the open.</h1>
             <p>
-              Notes from building personal AI, autonomous systems and a company. The decisions, the experiments, and
-              the things we’re still figuring out.
+              Notes from engineering autonomous systems, agricultural robotics, clean energy and embedded technology. The decisions, experiments, and things we’re still figuring out.
             </p>
           </div>
           <nav className="journal-filters" aria-label="Build log categories">
