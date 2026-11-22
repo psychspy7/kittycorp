@@ -3,7 +3,6 @@ import { publishedLaunches } from "@/lib/launches-server";
 import { launchHref } from "@/lib/launches";
 import { publicJournal } from "@/lib/journal-server";
 import { companyProducts } from "@/lib/company-server";
-import { serviceSegments } from "@/lib/business-content";
 import { websiteOrigin } from "@/lib/site-metadata";
 
 export const revalidate = 3600;
@@ -16,9 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     publicJournal().catch(() => []),
   ]);
 
-  const highPriority = new Set(["services", "projects", "pricing", "agriyaan", "urjayaan"]);
+  const highPriority = new Set(["projects", "agriyaan", "urjayaan"]);
   const deprecatedSlugs = new Set([
-    "kitty-ai",
     "play",
   ]);
 
@@ -27,14 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "urjayaan",
     "projects",
     "research",
+    "support",
     "company",
     "team",
     "contact",
-    "services",
-    "pricing",
     "investors",
     "build-log",
-    "appointments",
     "privacy",
     "terms",
     "refunds",
@@ -51,11 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       
       changeFrequency: (highPriority.has(page) ? "daily" : "weekly") as "daily" | "weekly",
       priority: highPriority.has(page) ? 0.9 : 0.8,
-    })),
-    ...Object.keys(serviceSegments).map((segment) => ({
-      url: `${origin}/services/${segment}`,
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
     })),
     ...products
       .filter((product) => !deprecatedSlugs.has(product.slug) && !/(kitty-ai|buddy|secretchat|examify|chat)/i.test(`${product.slug} ${product.name}`))
