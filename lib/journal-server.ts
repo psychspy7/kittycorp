@@ -19,9 +19,9 @@ const readJournal = publicContentCache("journal", PUBLIC_CONTENT_TAGS.journal, a
 });
 export const publicJournal = cache(readJournal);
 export const publicArticle = cache(async (slug: string): Promise<JournalEntry | null> => {
-  if (/suvid/i.test(slug)) return null;
+  if (/(suvid|kitty-ai|secretchat|examify|buddy|what-we-want-kitty-ai-to-remember|a-more-honest-home-for-kitty|privacy-needs-more-than-a-label)/i.test(slug)) return null;
   const { data, error } = await database().from("kitty_website_journal").select("*").abortSignal(AbortSignal.timeout(5000)).eq("slug", slug).eq("kind", "article").eq("published", true).lte("entry_date", new Date().toISOString().slice(0,10)).maybeSingle();
   if(error) throw new HttpError("This article is temporarily unavailable.", 503);
   return data as JournalEntry | null;
 });
-export function refreshJournal() { refreshPublicContent(PUBLIC_CONTENT_TAGS.journal); for (const path of ["/", "/build-log", "/research", "/kitty-ai", "/sitemap.xml"]) revalidatePath(path); revalidatePath("/build-log/[slug]", "page"); }
+export function refreshJournal() { refreshPublicContent(PUBLIC_CONTENT_TAGS.journal); for (const path of ["/", "/build-log", "/research", "/sitemap.xml"]) revalidatePath(path); revalidatePath("/build-log/[slug]", "page"); }
