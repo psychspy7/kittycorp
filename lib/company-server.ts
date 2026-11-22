@@ -7,7 +7,7 @@ import { PUBLIC_CONTENT_TAGS, publicContentCache, refreshPublicContent } from ".
 import { defaultProducts, defaultSettings, defaultTeam, MEDIA_BUCKET, mediaPathPattern, type CompanyProduct, type CompanySettings, type MediaKind, type TeamMember } from "./company-content";
 
 function isPublicProduct(product: Pick<CompanyProduct,"slug"|"name">) {
-  return !/(suvid|sentinel|examify|secretchat|lisa)/i.test(`${product.slug} ${product.name}`);
+  return !/(suvid|sentinel|examify|secretchat|lisa|kitty-ai|buddy)/i.test(`${product.slug} ${product.name}`);
 }
 
 const publicLink = z.string().trim().max(1000).refine(value => {
@@ -34,11 +34,11 @@ const readCompany = publicContentCache("company", PUBLIC_CONTENT_TAGS.company, a
 // Failures are handled outside the persistent cache; fallback content is not saved.
 export const companyProducts=cache(async():Promise<CompanyProduct[]>=>{
   const products=await readProducts().catch(()=>defaultProducts);
-  return products.filter(isPublicProduct).map(product=>product.slug==="kitty-ai"?{...product,label:"EMBEDDED INTELLIGENCE",status:"IN ACTIVE DEVELOPMENT",category:"ROBOTICS",media:"Perception and control demonstrations",description:"A vision-and-control software stack connecting spatial perception, edge inference and robotic actuator control.",intro:"KITTY AI is being developed as the intelligence layer for physical systems, connecting perception, context and control. It is an active development effort, not a released consumer companion app.",principles:[["Spatial perception","Developing perception components that interpret sensor inputs and surroundings for embodied systems."],["Edge intelligence","Exploring on-device inference and context-aware decision support for physical environments."],["Control interfaces","Connecting software decisions with real-time robotic actuator control. These capabilities remain under development."]]} as CompanyProduct:product);
+  return products.filter(isPublicProduct);
 });
 export const companyTeam=cache(async():Promise<TeamMember[]>=>{try{return await readTeam();}catch{return defaultTeam;}});
 export const companySettings=cache(async():Promise<CompanySettings>=>{try{return await readCompany();}catch{return defaultSettings;}});
-export function refreshCompany(){refreshPublicContent(PUBLIC_CONTENT_TAGS.company);for(const path of ["/","/products","/company","/team","/kitty-ai","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
+export function refreshCompany(){refreshPublicContent(PUBLIC_CONTENT_TAGS.company);for(const path of ["/","/projects","/company","/team","/research","/services","/contact","/investors","/privacy","/build-log","/sitemap.xml"])revalidatePath(path);revalidatePath("/", "layout");}
 export async function verifyImage(db:ReturnType<typeof database>,path:string|null,kind:MediaKind){
   if(!path)return;
   if(!mediaPathPattern.test(path)||!path.startsWith(kind+"/"))throw new HttpError("Choose an image uploaded for this field.",400);
