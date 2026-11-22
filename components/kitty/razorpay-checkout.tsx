@@ -99,10 +99,10 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">',
       '<rect width="1000" height="700" rx="36" fill="#f7f8f5"/><rect x="40" y="40" width="920" height="620" rx="28" fill="#fff" stroke="#e3e8e2"/>',
       '<circle cx="500" cy="170" r="68" fill="#e6f7eb"/><path d="M466 171l23 23 48-53" fill="none" stroke="#18864b" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>',
-      '<text x="500" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">Thank you for your support</text>',
+      '<text x="500" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">' + (testMode ? 'Test payment complete' : 'Thank you for your support') + '</text>',
       '<text x="500" y="335" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#59665c">' + escapeXml(donor) + '</text>',
       '<text x="500" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="700" fill="#17251b">' + escapeXml(formattedAmount) + '</text>',
-      '<text x="500" y="450" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#59665c">Voluntary contribution to KITTY CORP</text>',
+      '<text x="500" y="450" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#59665c">' + (testMode ? 'Test checkout · no real money charged' : 'Voluntary contribution to KITTY CORP') + '</text>',
       '<line x1="130" y1="500" x2="870" y2="500" stroke="#e3e8e2"/>',
       '<text x="140" y="550" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Payment reference</text><text x="140" y="582" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(paymentId) + '</text>',
       '<text x="860" y="550" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Date</text><text x="860" y="582" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(dateText) + '</text>',
@@ -160,14 +160,14 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       onError={() => setScriptError("Checkout could not load. Check your connection and refresh this page.")} />
     {purpose === "donation" && phase === "paid" ? <div className="support-complete" role="status" aria-live="polite">
       <div className="support-complete-check" aria-hidden="true"><svg viewBox="0 0 64 64"><circle className="support-check-circle" cx="32" cy="32" r="29"/><path className="support-check-mark" d="M18 33l9 9 20-21"/></svg></div>
-      <span className="support-complete-eyebrow">CONTRIBUTION CONFIRMED</span>
-      <h2>Thank you{supporterName.trim() ? ", " + supporterName.trim() : ""}.</h2>
-      <p>Your support means a lot to KITTY CORP. It helps us keep building and researching independently.</p>
-      <div className="support-complete-amount"><span>Contribution</span><strong>{formattedAmount}</strong></div>
+      <span className="support-complete-eyebrow">{testMode ? "TEST PAYMENT COMPLETE" : "CONTRIBUTION CONFIRMED"}</span>
+      <h2>{testMode ? "Test checkout complete." : "Thank you" + (supporterName.trim() ? ", " + supporterName.trim() : "") + "."}</h2>
+      <p>{testMode ? "No real money was charged. This was a test transaction." : "Your support means a lot to KITTY CORP. It helps us keep building and researching independently."}</p>
+      <div className="support-complete-amount"><span>{testMode ? "Test amount" : "Contribution"}</span><strong>{formattedAmount}</strong></div>
       <div className="support-complete-reference"><span>Payment reference</span><code>{paymentId}</code></div>
       <button type="button" className="button button-gold checkout-button" onClick={downloadSupportReceipt}><CreditCard size={17}/> Download confirmation</button>
       <a className="support-complete-home" href="/">Back to KITTY CORP</a>
-      <p className="support-complete-note">This downloadable confirmation is for your records and is not a tax receipt.</p>
+      <p className="support-complete-note">{testMode ? "Test confirmation only · No real contribution received." : "This downloadable confirmation is for your records and is not a tax receipt."}</p>
     </div> : <>
     {!quote?.id&&phase==="idle"&&<CustomerSignIn disabled={busy}/ >}
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
