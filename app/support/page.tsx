@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, HeartHandshake, ShieldCheck, Sparkles, Check, Users, Award } from "lucide-react";
+import { HeartHandshake, ShieldCheck, Sparkles, Check, Users, Award } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { BottomSupport } from "@/components/kitty/bottom-support";
@@ -201,39 +201,6 @@ export default function SupportPage() {
                   {name}
                 </span>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            SECTION 04: LOOKING FOR MEMBERSHIP OR COMMERCIAL SERVICES?
-            ========================================================================= */}
-        <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA]">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-[clamp(28px,3.8vw,44px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
-              Looking for our structured membership?
-            </h2>
-            <p className="text-[16px] leading-[1.65] text-[#62676D] font-light max-w-2xl mx-auto mb-8">
-              If you seek our official metallic NFC card, early access to confidential research papers, and a complimentary custom business website, explore KITTY ONE.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/memberships"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[14px] font-medium transition-colors shadow-sm"
-              >
-                <span>Explore KITTY ONE ($249)</span>
-                <ArrowRight className="w-4 h-4 text-white" />
-              </Link>
-              <a
-                href="https://demo.thekittycorp.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-[#D9D6CF] bg-[#FBFAF7] hover:bg-[#E9E6E0] text-[#191B1D] text-[14px] font-medium transition-colors"
-              >
-                <span>Digital Solutions Studio</span>
-                <ArrowUpRight className="w-4 h-4 text-[#2457D6]" />
-              </a>
             </div>
           </div>
         </section>
