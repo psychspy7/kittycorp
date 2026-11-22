@@ -71,14 +71,14 @@ export function SiteHeader() {
           className="brand flex items-center gap-3 text-[#191B1D] hover:opacity-85 transition-opacity"
           aria-label="KITTY CORP home"
         >
-          <div className="relative w-8 h-8 flex-shrink-0">
+          <div className="relative w-11 h-11 flex-shrink-0 overflow-visible">
             <Image
               unoptimized
               src="/brand/monogram-small-v2.webp"
               alt="KITTY CORP"
-              width={32}
-              height={32}
-              className="object-contain"
+              width={44}
+              height={44}
+              className="object-contain w-full h-full"
             />
           </div>
           <span className="font-[family-name:var(--font-display)] tracking-[0.22em] font-normal uppercase text-[15px] sm:text-[16px] text-[#191B1D]">
@@ -134,7 +134,7 @@ export function SiteHeader() {
           {/* Mobile Menu Toggle Button: Active on mobile and tablet (< 1024px) */}
           <button
             type="button"
-            className="menu-toggle kitty-mobile-menu lg:hidden flex items-center justify-center w-12 h-12 min-w-[48px] min-h-[48px] rounded-full border border-[#B8B4AA] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2457D6] focus-visible:ring-offset-2 transition-all shadow-sm"
+            className="menu-toggle kitty-mobile-menu lg:hidden flex items-center justify-center w-12 h-12 min-w-[48px] min-h-[48px] rounded-full border border-[#B8B4AA] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2457D6] focus-visible:ring-offset-2 transition-all shadow-sm relative z-[60] ml-auto flex-shrink-0"
             aria-label={open ? "Close navigation" : "Open navigation"}
             aria-expanded={open}
             aria-controls="mobile-nav-panel"
@@ -161,7 +161,7 @@ export function SiteHeader() {
             role="dialog"
             aria-modal="true"
             aria-label="Site Navigation"
-            className="mobile-navigation fixed inset-y-0 right-0 z-50 w-[88vw] max-w-[360px] h-[100dvh] bg-[#FBFAF7] border-l border-[#C2BEB5] shadow-2xl flex flex-col justify-between overflow-y-auto"
+            className="mobile-navigation fixed inset-y-0 right-0 z-[60] w-[88vw] max-w-[360px] h-[100dvh] bg-[#FBFAF7] border-l border-[#C2BEB5] shadow-2xl flex flex-col justify-between overflow-y-auto"
             style={{
               paddingTop: "max(1.5rem, env(safe-area-inset-top))",
               paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
