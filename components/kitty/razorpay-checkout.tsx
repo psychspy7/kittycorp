@@ -185,7 +185,6 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     {error && <p className="checkout-error" role="alert">{error}</p>}
     {message && <p className={phase === "paid" ? "checkout-success" : "checkout-message"} role="status">{phase === "paid" && <Check size={17} aria-hidden="true"/>}{message}</p>}
     {paymentId && <p className="checkout-reference">Payment reference <code>{paymentId}</code></p>}
-}
     {(phase === "pending" || phase === "unconfirmed") ? <button className="button button-gold checkout-button" onClick={() => { if (pending.current && !lock.current) void verify(pending.current); }}>Check payment status</button>
       : <button className="button button-gold checkout-button" onClick={() => void pay()}
         disabled={!scriptReady || Boolean(scriptError) || busy || phase === "paid" || (securityEnabled && !token) || (purpose === "donation" && !validAmount)}>
