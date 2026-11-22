@@ -10,7 +10,7 @@ export function BottomSupport() {
   const [amount, setAmount] = useState<string>("1000");
   const [custom, setCustom] = useState(false);
 
-  const parsedAmount = Math.max(10, parseInt(amount, 10) || 1000);
+  const parsedAmount = Math.min(10000, Math.max(1, Number(amount) || 1));
 
   return (
     <div id="support-kitty" className="w-full" aria-labelledby="support-kitty-heading">
@@ -64,9 +64,9 @@ export function BottomSupport() {
             </span>
             <input
               type="number"
-              min="10"
-              max="1000000"
-              step="10"
+              min="1"
+              max="10000"
+              step="0.01"
               value={amount}
               onChange={(e) => {
                 setAmount(e.target.value);
