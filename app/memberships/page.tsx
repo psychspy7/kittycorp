@@ -3,9 +3,10 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { Memberships } from "@/components/kitty/memberships";
 import { draftMemberships } from "@/lib/membership-types";
+import { turnstilePublicConfig } from "@/lib/turnstile-server";
 import "./memberships.css";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata(
   "KITTY ONE | Research Support Membership",
@@ -13,7 +14,8 @@ export const metadata = pageMetadata(
   "/memberships"
 );
 
-export default function MembershipsPage() {
+export default async function MembershipsPage() {
+  const security = await turnstilePublicConfig();
   return (
     <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
       <SiteHeader />
@@ -33,7 +35,7 @@ export default function MembershipsPage() {
           </p>
         </div>
 
-        <Memberships catalog={draftMemberships} securityEnabled={true} />
+        <Memberships catalog={draftMemberships} securityEnabled={security.enabled && Boolean(security.siteKey)} />
 
         <section className="mt-16 p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7]">
           <h2 className="text-2xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">

@@ -104,7 +104,7 @@ export function PaymentsClient(props: { options: PublicProvider[]; securityEnabl
       fallback={
         <div className="payments-intro">
           <span className="eyebrow">KITTY CORP · PAYMENTS</span>
-          <h1>Payments & support</h1>
+          <h1>Payments</h1>
           <p>Loading secure payment options…</p>
         </div>
       }
