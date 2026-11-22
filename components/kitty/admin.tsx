@@ -13,11 +13,8 @@ const AdminPages = dynamic(() => import("./admin-pages"), { loading: () => <p cl
 const AdminCommerce = dynamic(() => import("./admin-commerce"), { loading: () => <p className="empty-message">Opening payment setup…</p> });
 const AdminHealth = dynamic(() => import("./admin-health"));
 const AdminEmail = dynamic(() => import("./admin-email"));
-const AdminAI = dynamic(() => import("./admin-ai"));
 const AdminMaintenance = dynamic(() => import("./admin-maintenance"));
-const AdminLaunches = dynamic(() => import("./admin-launches"), { loading: () => <p className="empty-message">Opening launches…</p> });
 const AdminJournal = dynamic(() => import("./admin-journal"), { loading: () => <p className="empty-message">Opening journal…</p> });
-const AdminEarlyAccess = dynamic(() => import("./admin-early-access"), { loading: () => <p className="empty-message">Opening early access…</p> });
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -356,18 +353,15 @@ export function AdminDashboard() {
             <TabsTrigger value="pages">Page content</TabsTrigger>
             <TabsTrigger value="health">Health & handover</TabsTrigger>
             <TabsTrigger value="maintenance">Site controls</TabsTrigger>
-            <TabsTrigger value="assistant">KITTY AI & security</TabsTrigger>
             <TabsTrigger value="email">Email alerts</TabsTrigger>
             <TabsTrigger value="project-quotes">Project quotes</TabsTrigger>
             <TabsTrigger value="rewards">Reward codes</TabsTrigger>
             <TabsTrigger value="commerce">Payments & plans</TabsTrigger>
-            <TabsTrigger value="launches">Apps & websites</TabsTrigger>
 <TabsTrigger value="products">Products</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
 <TabsTrigger value="company">Company & socials</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
             <TabsTrigger value="journal">Build log & updates</TabsTrigger>
-            <TabsTrigger value="early-access">Early access</TabsTrigger>
             <TabsTrigger value="notices">Legacy notices</TabsTrigger>
           </TabsList>
           <TabsContent value="project-quotes" className="admin-panel"><AdminProjectQuotes/></TabsContent>
@@ -379,21 +373,18 @@ export function AdminDashboard() {
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
               <button onClick={() => setTab("pages")}><strong>Page content ↗</strong><span>Edit homepage, Services, Company and Contact copy and search previews.</span></button>
-              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["assistant","KITTY AI & security","Adjust your website guide, its greeting and published context. Private app chats stay separate."],["commerce","Payments & plans","Configure providers and manage product plans without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["launches","Apps & websites","Publish Android APK releases or launch a website with its icon, screenshot, live link and details."],["products","Product details & icons","Manage details, status, artwork and visibility for KITTY AgriYaan, UrjaYaan, Buddy, KITTY AI, Digital Solutions Studio, and Research."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["commerce","Payments & plans","Configure providers and manage product plans without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website and app briefs from the Start a project form, plus contact messages."],["products","Initiatives","Manage the public details and artwork for AgriYaan, UrjaYaan and research."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],["early-access","Early access","Review and export the list of people interested in future products."]].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
-            <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/products" target="_blank" rel="noreferrer">Preview products</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
+            <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/projects" target="_blank" rel="noreferrer">Preview projects</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>
           <TabsContent value="pages" className="admin-panel"><AdminPages /></TabsContent>
           <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
           <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
-          <TabsContent value="assistant" className="admin-panel"><AdminAI /></TabsContent>
 <TabsContent value="team" className="admin-panel"><AdminTeam /></TabsContent>
 <TabsContent value="company" className="admin-panel"><AdminCompany /></TabsContent>
           <TabsContent value="reviews" className="admin-panel"><AdminTestimonials /></TabsContent>
-<TabsContent value="launches" className="admin-panel"><AdminLaunches /></TabsContent>
           <TabsContent value="journal" className="admin-panel"><AdminJournal /></TabsContent>
-          <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
-          <TabsContent value="notices" className="admin-panel">
+                    <TabsContent value="notices" className="admin-panel">
             <p className="public-note">Existing notices are kept here. Use Build journal for the new homepage development feed and full articles.</p>
             <button className="button button-outline" onClick={() => edit()}><Plus size={17} /> New legacy notice</button>
             <div className="panel-heading">
