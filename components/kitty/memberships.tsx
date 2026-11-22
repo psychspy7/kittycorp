@@ -187,7 +187,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 setMessage(
                   r.testMode
                     ? "Test membership verified. No production charge."
-                    : "KITTY ONE Membership is active. Welcome to our research patron network."
+                    : Thank you for purchasing and supporting KITTY CORP. We’ll email you membership updates soon.
                 );
               } else setMessage("Payment is awaiting capture or reconciliation. Please do not pay again; check its status.");
             })
@@ -212,7 +212,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
         },
       });
       checkout.on("payment.failed", () => {
-        if (generation === epoch.current) setError("Payment failed. Please retry in Razorpay or use an alternate method.");
+        if (generation === epoch.current) setError("Oops — payment failed. Please retry in Razorpay or use an alternate method.");
       });
       checkout.open();
     } catch (e) {
@@ -268,7 +268,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
 
       {!catalog.purchasesEnabled && (
         <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#E9E6E0] text-sm text-[#292D31] mb-8" role="status">
-          Public membership intake is currently invitation-only while hardware production runs are processed. You may submit an inquiry for private enrollment.
+          KITTY ONE is available to purchase. Membership updates will follow by email after payment confirmation.
         </div>
       )}
 
@@ -468,7 +468,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
           <button
             className="w-full py-4 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] !text-white text-[15px] font-medium transition-all shadow-[0_4px_16px_rgba(36,87,214,0.25)] flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-wait"
             disabled={
-              !catalog.purchasesEnabled ||
+              
               busy ||
               !!pending ||
               (!!user && (!ready || (securityEnabled && !token)))
@@ -476,15 +476,13 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
             onClick={() => void pay(featuredPlan?.id || "kitty-plus")}
           >
             <span className="!text-white font-medium">
-              {!catalog.purchasesEnabled
-                ? "Private Enrollment (Inquire)"
-                : busy
+              {busy
                 ? "Processing verification…"
                 : user && (!ready || (securityEnabled && !token))
                 ? "Preparing secure checkout…"
                 : user
-                ? "Join KITTY ONE: $249 / Year"
-                : "Sign in with Google to Join"}
+                ? "Purchase KITTY ONE — $249 / Year"
+                : "Sign in to Purchase KITTY ONE"}
             </span>
             <ArrowRight className="w-4 h-4 !text-white group-hover:translate-x-1 transition-transform" />
           </button>
@@ -558,7 +556,9 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
 
       {message && (
         <div className="p-4 rounded-xl border border-green-300 bg-green-50 text-sm text-green-900 max-w-2xl mx-auto mb-6" role="status">
-          {message}
+          <Check size={24} className="mx-auto mb-3" />
+          <strong>{message}</strong>
+          {!catalog.testMode && <p className="mt-2">Membership updates will be sent to {user?.email || "your email"} soon.</p>}
         </div>
       )}
       {error && (

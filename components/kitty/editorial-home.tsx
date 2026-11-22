@@ -289,52 +289,199 @@ export function EditorialHome() {
       </section>
 
       {/* =========================================================================
-          SECTION E: ENGINEERING CAPABILITIES
+          SECTION E: CORE PLATFORMS (KITTY AI & KITTY BUDDY)
+          Architectural Layouts with Photography
           ========================================================================= */}
-      <section id="engineering" className="py-20 sm:py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
+      <section id="platforms" className="py-20 sm:py-28 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#E9E6E0]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-12">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
-              Engineering Capabilities
+              Foundational Systems
             </span>
             <h2 className="text-[clamp(30px,4vw,50px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
-              From sensing to useful action.
+              Foundational intelligence and physical interaction.
             </h2>
-            <p className="text-[16px] sm:text-[18px] leading-relaxed text-[#292D31] mt-5 max-w-2xl">
-              Our work connects software, sensors and physical systems. We focus on the engineering foundations needed to make autonomous machines useful outside controlled environments.
-            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { icon: Cpu, title: "Embedded systems", body: "Hardware-aware software, edge computing and interfaces between sensors, processors and actuators." },
-              { icon: Compass, title: "Autonomous operation", body: "Navigation, perception and control approaches for robots operating in changing terrain and conditions." },
-              { icon: Orbit, title: "Field-ready engineering", body: "Testing, reliability and practical design constraints for agricultural and clean-energy environments." },
-            ].map(({icon:Icon,title,body}) => <article key={title} className="rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] p-7 sm:p-8">
-              <div className="w-11 h-11 rounded-xl bg-[#E9E6E0] border border-[#D9D6CF] flex items-center justify-center text-[#2457D6] mb-5"><Icon className="w-5 h-5" /></div>
-              <h3 className="text-xl font-[family-name:var(--font-display)] text-[#191B1D] mb-3">{title}</h3>
-              <p className="text-[15px] leading-relaxed text-[#292D31]">{body}</p>
-            </article>)}
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+            
+            {/* Platform 1: KITTY AI */}
+            <div className="dark-section relative overflow-hidden rounded-3xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-8 sm:p-12 border border-[#292D31]/40 bg-[#0A0D12] shadow-lg group">
+              {/* Background Neural Network Imagery */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                  src="/photography/kitty-ai-neural-core.webp"
+                  alt="KITTY AI neural network architecture visualization"
+                  fill
+                  className="object-cover object-center opacity-70 group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D12] via-[#0A0D12]/80 to-[#0A0D12]/40" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <span className="font-mono text-xs text-[#D1D5DB] uppercase tracking-widest">ARCHITECTURE</span>
+                  <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-white/20 text-[#E2E5E8] bg-white/10 backdrop-blur-sm">
+                    Active Development
+                  </span>
+                </div>
+                <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-[#60A5FA] mb-6 border border-white/15">
+                  <Cpu className="w-6 h-6" />
+                </div>
+                <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-white mb-2">
+                  KITTY AI
+                </h3>
+                <p className="text-sm font-medium text-[#E2E5E8] mb-3">Vision-language foundation for embodied autonomy</p>
+                <p className="text-[#F3F4F6] font-normal leading-relaxed text-[15px] sm:text-[16px] max-w-lg">
+                  Our embedded neural software stack bridges multi-sensor spatial computer vision directly with real-time robotic actuator controllers, providing physical machines with offline edge inference, context-aware navigation and obstacle avoidance.
+                </p>
+              </div>
+
+              <div className="relative z-10 pt-6 mt-8 border-t border-white/15 text-xs font-mono text-[#D1D5DB] flex items-center justify-between">
+                <span>STAGE: EMBEDDED REAL-TIME INFERENCE</span>
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
+              </div>
+            </div>
+
+            {/* Platform 2: KITTY BUDDY */}
+            <div className="relative overflow-hidden rounded-3xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-8 sm:p-12 border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm group">
+              {/* Background Companion Robot Imagery */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                  src="/photography/kitty-buddy-companion.webp"
+                  alt="KITTY BUDDY physical desktop companion robot prototype with Kitty branding"
+                  fill
+                  className="object-cover object-[80%_center] opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#FBFAF7] via-[#FBFAF7]/95 via-50% to-transparent/25" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-50" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <span className="font-mono text-xs text-[#374151] uppercase tracking-widest">INTERACTION PROTOTYPE</span>
+                  <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-[#D9D6CF] text-[#191B1D] bg-[#F5F2EA]/90 backdrop-blur-sm">
+                    Concept Exploration
+                  </span>
+                </div>
+                <div className="w-12 h-12 rounded-2xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-6 border border-[#D9D6CF]">
+                  <Compass className="w-6 h-6" />
+                </div>
+                <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-2">
+                  KITTY Buddy
+                </h3>
+                <p className="text-sm font-medium text-[#191B1D] mb-3">Physical human-machine companion</p>
+                <p className="text-[#191B1D] font-normal leading-relaxed text-[15px] sm:text-[16px] max-w-lg mb-6">
+                  An exploration into tactile collaboration, testing non-intrusive companion devices that facilitate natural physical interaction without invasive biometric surveillance or screen fatigue.
+                </p>
+                <Link
+                  href="/buddy"
+                  className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#2457D6] hover:text-[#1D46B0] transition-colors"
+                >
+                  <span>Explore KITTY Buddy Details</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="relative z-10 pt-6 mt-8 border-t border-[#D9D6CF] text-xs font-mono text-[#374151] flex items-center justify-between">
+                <span>STAGE: CONCEPT EXPLORATION</span>
+                <span className="w-2 h-2 rounded-full bg-[#2457D6]" />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION F: RESEARCH & TESTING
+          SECTION F: THE HORIZON : DUAL EXPLORATION (DEEP OCEAN & SPACE HORIZON)
           ========================================================================= */}
-      <section id="research" className="py-20 sm:py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div>
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-4">Research &amp; Development</span>
-            <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-[#191B1D] mb-6">Test ideas. Build prototypes. Measure what works.</h2>
-            <p className="text-[16px] sm:text-[18px] leading-[1.75] text-[#191B1D] font-normal mb-5">Our engineering process moves from models and simulations to bench testing and field evaluation. We document limitations and the stage of each initiative instead of presenting concepts as finished systems.</p>
-            <Link href="/research" className="inline-flex items-center gap-2 text-[#2457D6] font-medium hover:underline">Inside the lab <ArrowRight className="w-4 h-4"/></Link>
+      <section id="horizon" className="border-t border-[#D9D6CF] bg-[#F5F2EA]">
+        
+        {/* Horizon Part I: Deep Ocean Exploration */}
+        <div className="dark-section relative w-full overflow-hidden bg-[#071322] min-h-[540px] lg:min-h-[620px] flex items-center py-16 sm:py-24 px-6 sm:px-10 lg:px-16 text-white">
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image
+              src="/photography/deep-ocean-exploration.webp"
+              alt="Sunbeams piercing abyssal deep ocean waters"
+              fill
+              className="object-cover object-center opacity-85"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#071322] via-[#071322]/90 via-45% to-transparent/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EA] via-transparent via-15% to-transparent" />
           </div>
-          <div className="rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7] p-8 sm:p-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[["01","Simulation","Modeling mobility, sensing and system behavior."],["02","Prototype","Integrating hardware, firmware and software."],["03","Test","Evaluating performance under real constraints."],["04","Iterate","Publishing progress and refining the design."]].map(([n,title,body])=><div key={n} className="border-t border-[#D9D6CF] pt-4"><span className="font-mono text-xs text-[#2457D6]">{n}</span><h3 className="text-xl font-[family-name:var(--font-display)] text-[#191B1D] mt-2 mb-2">{title}</h3><p className="text-sm leading-relaxed text-[#62676D]">{body}</p></div>)}
+
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="max-w-2xl">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#60A5FA] font-medium flex items-center gap-2 mb-4">
+                <Waves className="w-3.5 h-3.5 text-[#60A5FA]" />
+                <span>Human-Machine Frontiers · Subsea</span>
+              </span>
+
+              <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
+                From deep ocean to deep space.
+              </h2>
+
+              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#F3F4F6] font-normal mb-8">
+                <p>
+                  We believe that when human ingenuity and artificial intelligence work together productively, we can accomplish things that were once thought impossible. Technology reaches its highest potential not when it isolates people behind screens, but when it extends human capability into frontiers no person could navigate alone.
+                </p>
+                <p>
+                  From the crushing hydrostatic pressures and pitch darkness of the deep ocean to the vacuum and radiation of orbital space, physical intelligence gives humanity new reach. Autonomous sensing, resilient edge compute, and kinematically adaptive robotics work hand in hand with human judgment to explore, understand, and protect what lies beyond our unaided grasp.
+                </p>
+              </div>
+
+              <div className="font-mono text-xs text-[#D1D5DB] tracking-wider uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
+                <span>FRONTIER: Benthic Sensing &amp; Subsurface Robotics</span>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Horizon Part II: Planetary Observation & Orbital Horizon */}
+        <div className="dark-section relative w-full overflow-hidden bg-[#0A101C] min-h-[540px] lg:min-h-[620px] flex items-center py-16 sm:py-24 px-6 sm:px-10 lg:px-16 text-white border-t border-white/10">
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image
+              src="/photography/earth-orbital-horizon.webp"
+              alt="Earth atmospheric limb and daylight curved horizon viewed from orbit"
+              fill
+              className="object-cover object-center opacity-85"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A101C] via-[#0A101C]/90 via-45% to-transparent/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F5F2EA]" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="max-w-2xl">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#60A5FA] font-medium flex items-center gap-2 mb-4">
+                <Orbit className="w-3.5 h-3.5 text-[#60A5FA]" />
+                <span>Planetary Observation &amp; Deep Space</span>
+              </span>
+
+              <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
+                Pushing the boundaries of what we can accomplish.
+              </h2>
+
+              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#F3F4F6] font-normal mb-8">
+                <p>
+                  The engineering principles that guide an autonomous rover through dense, waterlogged soil under monsoon conditions are fundamentally connected to the physical intelligence required for planetary observation and orbital exploration.
+                </p>
+                <p>
+                  When human curiosity unites with disciplined machine autonomy, boundaries turn into milestones. By bridging physical extremes, from microbial soil analysis to orbital atmospheric sensing, we engineer tools that empower people and expand human horizons with safety, rigor, and purpose.
+                </p>
+              </div>
+
+              <div className="font-mono text-xs text-[#D1D5DB] tracking-wider uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
+                <span>FRONTIER: Planetary Kinematics &amp; Autonomous Telemetry</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       {/* =========================================================================

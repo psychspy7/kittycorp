@@ -315,7 +315,7 @@ export function FilmButton({ className = "" }: { className?: string }) {
             autoPlay
             playsInline
             preload="metadata"
-            poster="/brand/wordmark-v1.webp"
+            poster="/brand/kitty-corp-logo-transparent.png"
             className="w-full h-full object-contain"
           >
             <source src="/brand/reveal.mp4" type="video/mp4" />

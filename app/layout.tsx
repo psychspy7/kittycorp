@@ -13,14 +13,14 @@ import "./globals.css";
 import "./final.css";
 import "./warm-architecture.css";
 
-const shareTitle = "KITTY CORP | Physical-World Intelligence";
+const shareTitle = "KITTY CORP — Beyond Intelligence | For a Better & Safer Future";
 const shareDescription =
-  "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, solar energy intelligence and a Digital Solutions Studio.";
+  "KITTY CORP — Beyond Intelligence. Building for a better and safer future through robotics, AI, autonomous systems and digital solutions.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
-    default: "KITTY CORP • Physical-World Intelligence & AI Robotics",
+    default: "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
     template: "%s",
   },
   description: shareDescription,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/opengraph-image?v=20261121-seo",
+        url: "/opengraph-image?v=20261122-beyond-intelligence",
         width: 1200,
         height: 630,
         alt: "KITTY CORP — Physical-World Intelligence, AI Robotics and Digital Solutions Studio",

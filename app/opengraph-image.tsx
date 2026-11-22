@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const alt =
-  "KITTY CORP: Independent technology company building websites, software and AI workflows";
+  "KITTY CORP — Beyond Intelligence | For a Better & Safer Future";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -67,7 +67,7 @@ export default async function Image() {
               KITTY CORP
             </span>
             <span style={{ fontSize: 11, letterSpacing: 2, color: "#69dcf2", fontWeight: 600 }}>
-              INDEPENDENT TECHNOLOGY COMPANY
+              BEYOND INTELLIGENCE
             </span>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default async function Image() {
             color: "#ffffff",
           }}
         >
-          Built for business.
+          Beyond Intelligence.
         </span>
         <span
           style={{
@@ -123,7 +123,7 @@ export default async function Image() {
             color: "#69dcf2",
           }}
         >
-          Curious about what’s next.
+          For a Better & Safer Future.
         </span>
         <span
           style={{
@@ -134,7 +134,7 @@ export default async function Image() {
             maxWidth: 920,
           }}
         >
-          Websites, full-stack software and AI workflows for modern business, alongside forward research in robotics and intelligent systems.
+          AI, robotics, autonomous systems and engineering for a better and safer future.
         </span>
       </div>
 

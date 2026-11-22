@@ -171,7 +171,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       onReady={() => { setScriptReady(true); setScriptError(""); }}
       onError={() => setScriptError("Checkout could not load. Check your connection and refresh this page.")} />
     {purpose === "donation" && phase === "paid" ? <div className="support-complete" role="status" aria-live="polite">
-      <div className="support-complete-check" aria-hidden="true"><svg viewBox="0 0 64 64"><circle className="support-check-circle" cx="32" cy="32" r="29"/><path className="support-check-mark" d="M18 33l9 9 20-21"/></svg></div>
+      <div className="support-complete-check" aria-hidden="true"><svg viewBox="0 0 64 64"><circle className="support-check-circle" cx="32" cy="32" r="29"/><path className="support-check-mark" d="M18 33l9 9 20-21"/></svg><img className="support-complete-logo" src="/brand/kitty-corp-logo-transparent.png" alt="" /></div>
       <span className="support-complete-eyebrow">{testMode ? "TEST PAYMENT COMPLETE" : "COFFEE PURCHASE CONFIRMED"}</span>
       <h2>{testMode ? "Test checkout complete." : "Thank you" + (supporterName.trim() ? ", " + supporterName.trim() : "") + "."}</h2>
       <p>{testMode ? "No real money was charged. This was a test transaction." : "Thank you for fueling KITTY CORP. Your purchase is confirmed and the details below are yours to save."}</p>

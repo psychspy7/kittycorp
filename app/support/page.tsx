@@ -29,7 +29,7 @@ export default async function SupportPage() {
         <div className="payments-intro">
           <span className="eyebrow">A SMALL PURCHASE · A LITTLE FUEL</span>
           <h1>Fuel Us ☕</h1>
-          <p>Buy KITTY CORP a coffee. Choose an amount from ₹49 to ₹9,999, add your name and email, and complete secure checkout.</p>
+          <p>Fuel our engineers. ₹49–₹4,999 includes a custom thank-you message, supporter badge and wallpapers. ₹5,000–₹9,999 includes all of that plus a conversation with our team.</p>
           <p className="payments-note">This is a separate purchase. KITTY ONE membership and client project payments are handled separately.</p>
         </div>
         {options.length ? (

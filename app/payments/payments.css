@@ -272,3 +272,12 @@ html[data-theme=dark] .checkout-total>strong{color:#f4f5ff}html[data-theme=dark]
 html[data-theme="dark"] .checkout-field textarea{background:#0c1120!important;color:#fff!important;border-color:rgba(169,158,255,.48)!important}
 .support-complete-contact,.support-complete-message{color:#59665c!important;font-size:14px!important;line-height:1.65!important}
 .support-complete-message{padding:12px 16px;border:1px solid #e3e8e2;border-radius:8px;background:#f7f8f5;overflow-wrap:anywhere}
+
+.support-complete-check{position:relative}
+.support-complete-logo{position:absolute;inset:20px;width:48px;height:48px;object-fit:contain;opacity:0;transform:scale(.55);animation:fuel-mark-reveal .45s ease-out 1s forwards}
+.support-check-circle{animation:support-circle .65s ease-out .1s forwards,fuel-circle-soften .4s ease-out 1.05s forwards}
+.support-check-mark{animation:support-tick .38s ease-out .55s forwards,fuel-tick-fade .25s ease-out 1.05s forwards}
+@keyframes fuel-mark-reveal{to{opacity:1;transform:scale(1)}}
+@keyframes fuel-circle-soften{to{stroke:#148346;fill:#e5f7eb;stroke-width:2}}
+@keyframes fuel-tick-fade{to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.support-complete-logo{animation:none;opacity:1;transform:none}.support-check-mark{opacity:1}}
