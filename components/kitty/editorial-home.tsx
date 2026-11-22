@@ -25,7 +25,7 @@ export function EditorialHome() {
               className="object-contain"
             />
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#191B1D] font-semibold">
-              KITTY CORP · PHYSICAL-WORLD INTELLIGENCE
+              Independent engineering · India
             </span>
           </div>
           <h1 className="text-[clamp(36px,7.5vw,86px)] font-[family-name:var(--font-display)] font-normal leading-[1.05] tracking-[-0.03em] text-[#191B1D] mb-8">
