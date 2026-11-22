@@ -319,94 +319,22 @@ export function EditorialHome() {
       </section>
 
       {/* =========================================================================
-          SECTION F: THE HORIZON : DUAL EXPLORATION (DEEP OCEAN & SPACE HORIZON)
+          SECTION F: RESEARCH & TESTING
           ========================================================================= */}
-      <section id="horizon" className="border-t border-[#D9D6CF] bg-[#F5F2EA]">
-        
-        {/* Horizon Part I: Deep Ocean Exploration */}
-        <div className="dark-section relative w-full overflow-hidden bg-[#071322] min-h-[540px] lg:min-h-[620px] flex items-center py-16 sm:py-24 px-6 sm:px-10 lg:px-16 text-white">
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <Image
-              src="/photography/deep-ocean-exploration.webp"
-              alt="Sunbeams piercing abyssal deep ocean waters"
-              fill
-              className="object-cover object-center opacity-85"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#071322] via-[#071322]/90 via-45% to-transparent/20" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EA] via-transparent via-15% to-transparent" />
+      <section id="research" className="py-20 sm:py-24 px-6 sm:px-10 lg:px-16 border-t border-[#D9D6CF] bg-[#F5F2EA]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-4">Research &amp; Development</span>
+            <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-[#191B1D] mb-6">Test ideas. Build prototypes. Measure what works.</h2>
+            <p className="text-[16px] sm:text-[18px] leading-[1.75] text-[#191B1D] font-normal mb-5">Our engineering process moves from models and simulations to bench testing and field evaluation. We document limitations and the stage of each initiative instead of presenting concepts as finished systems.</p>
+            <Link href="/research" className="inline-flex items-center gap-2 text-[#2457D6] font-medium hover:underline">Inside the lab <ArrowRight className="w-4 h-4"/></Link>
           </div>
-
-          <div className="relative z-10 max-w-7xl mx-auto w-full">
-            <div className="max-w-2xl">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#60A5FA] font-medium flex items-center gap-2 mb-4">
-                <Waves className="w-3.5 h-3.5 text-[#60A5FA]" />
-                <span>Human-Machine Frontiers · Subsea</span>
-              </span>
-
-              <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
-                From deep ocean to deep space.
-              </h2>
-
-              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#F3F4F6] font-normal mb-8">
-                <p>
-                  We believe that when human ingenuity and artificial intelligence work together productively, we can accomplish things that were once thought impossible. Technology reaches its highest potential not when it isolates people behind screens, but when it extends human capability into frontiers no person could navigate alone.
-                </p>
-                <p>
-                  From the crushing hydrostatic pressures and pitch darkness of the deep ocean to the vacuum and radiation of orbital space, physical intelligence gives humanity new reach. Autonomous sensing, resilient edge compute, and kinematically adaptive robotics work hand in hand with human judgment to explore, understand, and protect what lies beyond our unaided grasp.
-                </p>
-              </div>
-
-              <div className="font-mono text-xs text-[#D1D5DB] tracking-wider uppercase flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
-                <span>FRONTIER: Benthic Sensing &amp; Subsurface Robotics</span>
-              </div>
+          <div className="rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7] p-8 sm:p-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[["01","Simulation","Modeling mobility, sensing and system behavior."],["02","Prototype","Integrating hardware, firmware and software."],["03","Test","Evaluating performance under real constraints."],["04","Iterate","Publishing progress and refining the design."]].map(([n,title,body])=><div key={n} className="border-t border-[#D9D6CF] pt-4"><span className="font-mono text-xs text-[#2457D6]">{n}</span><h3 className="text-xl font-[family-name:var(--font-display)] text-[#191B1D] mt-2 mb-2">{title}</h3><p className="text-sm leading-relaxed text-[#62676D]">{body}</p></div>)}
             </div>
           </div>
         </div>
-
-        {/* Horizon Part II: Planetary Observation & Orbital Horizon */}
-        <div className="dark-section relative w-full overflow-hidden bg-[#0A101C] min-h-[540px] lg:min-h-[620px] flex items-center py-16 sm:py-24 px-6 sm:px-10 lg:px-16 text-white border-t border-white/10">
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <Image
-              src="/photography/earth-orbital-horizon.webp"
-              alt="Earth atmospheric limb and daylight curved horizon viewed from orbit"
-              fill
-              className="object-cover object-center opacity-85"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A101C] via-[#0A101C]/90 via-45% to-transparent/20" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F5F2EA]" />
-          </div>
-
-          <div className="relative z-10 max-w-7xl mx-auto w-full">
-            <div className="max-w-2xl">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#60A5FA] font-medium flex items-center gap-2 mb-4">
-                <Orbit className="w-3.5 h-3.5 text-[#60A5FA]" />
-                <span>Planetary Observation &amp; Deep Space</span>
-              </span>
-
-              <h2 className="text-[clamp(30px,4.5vw,54px)] font-[family-name:var(--font-display)] font-normal leading-[1.1] tracking-[-0.025em] text-white mb-6">
-                Pushing the boundaries of what we can accomplish.
-              </h2>
-
-              <div className="space-y-4 text-[16px] sm:text-[18px] leading-[1.75] text-[#F3F4F6] font-normal mb-8">
-                <p>
-                  The engineering principles that guide an autonomous rover through dense, waterlogged soil under monsoon conditions are fundamentally connected to the physical intelligence required for planetary observation and orbital exploration.
-                </p>
-                <p>
-                  When human curiosity unites with disciplined machine autonomy, boundaries turn into milestones. By bridging physical extremes, from microbial soil analysis to orbital atmospheric sensing, we engineer tools that empower people and expand human horizons with safety, rigor, and purpose.
-                </p>
-              </div>
-
-              <div className="font-mono text-xs text-[#D1D5DB] tracking-wider uppercase flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
-                <span>FRONTIER: Planetary Kinematics &amp; Autonomous Telemetry</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </section>
 
       {/* =========================================================================
