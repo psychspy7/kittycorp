@@ -188,9 +188,7 @@ export async function POST(request: Request) {
           reference:
             value.purpose === "project"
               ? value.reference
-              : value.purpose === "subscription"
-                ? "KITTY-ONE"
-                : "",
+              : "",
           expires: Date.now() + ORDER_LIFETIME_SECONDS * 1000,
         },
         config.keySecret,
