@@ -17,19 +17,11 @@ function PaymentsClientInner({
 }) {
   const searchParams = useSearchParams();
   const rawPurpose = searchParams?.get("purpose");
-  const rawPlan = searchParams?.get("plan");
   const rawAmount = searchParams?.get("amount");
 
   const requestedDonationAmount =
     rawAmount && /^\d{1,7}(?:\.\d{1,2})?$/.test(rawAmount) ? Number(rawAmount) : undefined;
-  const isSubscription = rawPurpose === "subscription" || rawPlan === "kitty-one";
-  const purpose = isSubscription
-    ? "subscription"
-    : rawPurpose === "donation"
-    ? "donation"
-    : rawPurpose === "project"
-    ? "project"
-    : null;
+  const purpose = rawPurpose === "donation" ? "donation" : rawPurpose === "project" ? "project" : null;
 
   if (!purpose) {
     return <PaymentsOverview options={options} securityEnabled={securityEnabled} />;
@@ -42,37 +34,15 @@ function PaymentsClientInner({
       <div className="payments-intro">
         <Link href="/payments" className="text-link">
           <ArrowLeft size={15} aria-hidden="true" />
-          All plans & payments
+          All payments
         </Link>
         <span className="eyebrow">
           KITTY CORP ·{" "}
-          {purpose === "subscription"
-            ? "FLAGSHIP ALL-ACCESS"
-            : purpose === "donation"
-            ? "SUPPORT"
-            : "PROJECT PAYMENTS"}
+          {purpose === "donation" ? "SUPPORT" : "PROJECT PAYMENTS"}
         </span>
-        <h1>
-          {purpose === "subscription"
-            ? "KITTY One All-Access ($199 USD)"
-            : purpose === "donation"
-            ? "Support the independent work."
-            : "For the work we’re building together."}
-        </h1>
-        <p>
-          {purpose === "subscription"
-            ? "Two websites, complete AI products, and 6 months free maintenance. Complete your subscription below to activate your plan immediately."
-            : purpose === "donation"
-            ? "Make a voluntary contribution towards our products and experiments. Choose your amount, then continue to secure checkout."
-            : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}
-        </p>
+        <h1>{purpose === "donation" ? "Support the independent work." : "For the work we’re building together."}</h1>
+        <p>{purpose === "donation" ? "Make a voluntary contribution to our robotics and clean-energy research. Choose your amount, then continue to secure checkout." : "Start with a project brief. Your private quote offers full advance, a 50/50 schedule or review-first payment. Already have a quote link? Open it to see your agreed amount."}</p>
         <nav className="payment-purpose-nav" aria-label="Payment type">
-          <Link
-            href="/payments?purpose=subscription&plan=kitty-one"
-            aria-current={purpose === "subscription" ? "page" : undefined}
-          >
-            KITTY One ($199)
-          </Link>
           <Link
             href="/payments?purpose=project"
             aria-current={purpose === "project" ? "page" : undefined}
@@ -85,15 +55,8 @@ function PaymentsClientInner({
           >
             Support KITTY
           </Link>
-          <Link href="/memberships">Product plans</Link>
         </nav>
-        <p className="payments-note">
-          {purpose === "subscription"
-            ? "Your KITTY One plan is registered to your Google account upon payment verification. Access your projects and tools anytime in My Account."
-            : purpose === "donation"
-            ? "Contributions are optional. They do not purchase a product, membership or ownership in KITTY CORP."
-            : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}
-        </p>
+        <p className="payments-note">{purpose === "donation" ? "Contributions are optional. They do not purchase a product, membership or ownership in KITTY CORP." : "Check the total against your quote before paying. Contact us if it differs. Payment is recorded separately from project delivery."}</p>
       </div>
 
       {available.length ? (
