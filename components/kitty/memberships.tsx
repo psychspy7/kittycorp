@@ -303,9 +303,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
               $249
             </span>
             <span className="text-base text-[#73777C] font-light">USD / year</span>
-            <span className="text-sm font-mono text-[#2457D6] ml-2">
-              (approx. ₹20,900 INR)
-            </span>
+            <LocalPrice amount={249} base="USD" charged={true} />
           </div>
 
           {/* =========================================================================
