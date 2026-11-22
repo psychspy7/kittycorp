@@ -40,7 +40,7 @@ async function provider() {
 export async function createMembership(request:Request,value:unknown) {
  const input=z.object({id:uuid,planId:z.string().regex(/^[a-zA-Z0-9-]{1,80}$/)}).strict().parse(value),token=customerToken(request);
  const intent=await commerce<Intent>("commerce/intents","POST",input,token);
- // Never open Razorpay if the commerce backend returns the stale ₹99 amount.
+ // Never open Razorpay unless the commerce backend returns exactly $249 USD.
  if(intent.terms?.amount!==24_900)throw new HttpError("KITTY ONE checkout is misconfigured. Expected $249 USD/year, but the payment service returned "+(Number(intent.terms?.amount||0)/100).toLocaleString("en-US",{style:"currency",currency:"USD"})+". Checkout is blocked to prevent an incorrect charge. Please contact KITTY CORP.",409);
  const {p,client}=await provider();
  if(!p.enabled)throw new HttpError("Membership checkout is paused.",503);
@@ -48,11 +48,11 @@ export async function createMembership(request:Request,value:unknown) {
  let order;
  if(intent.provider_order_id)order={id:intent.provider_order_id,amount:intent.terms.amount,currency:"USD"};
  else {
-  try {order=await client.orders.create({amount:intent.terms.amount,currency:"INR",receipt:"member_"+intent.id.replaceAll("-",""),partial_payment:false,notes:{purpose:"membership",product:intent.product,intent_id:intent.id}});}catch(error){providerFailure(error);}
+  try {order=await client.orders.create({amount:intent.terms.amount,currency:"USD",receipt:"member_"+intent.id.replaceAll("-",""),partial_payment:false,notes:{purpose:"membership",product:intent.product,intent_id:intent.id}});}catch(error){providerFailure(error);}
   if(!orderIdSchema.safeParse(order.id).success||Number(order.amount)!==intent.terms.amount||order.currency!=="USD")throw new HttpError("The provider returned an invalid membership order.",502);
-  await commerce("commerce/intents/"+intent.id,"PUT",{orderId:order.id,amount:Number(order.amount),currency:"INR"},token);
+  await commerce("commerce/intents/"+intent.id,"PUT",{orderId:order.id,amount:Number(order.amount),currency:"USD"},token);
  }
- return {intentId:intent.id,keyId:p.keyId,orderId:order.id,amount:Number(order.amount),currency:"INR",testMode:p.testMode};
+ return {intentId:intent.id,keyId:p.keyId,orderId:order.id,amount:Number(order.amount),currency:"USD",testMode:p.testMode};
 }
 type Payment={id:string;order_id?:string;amount:number|string;currency:string;status:string;captured:boolean;amount_refunded?:number|string};
 function paymentMatches(payment:Payment,orderId:string,amount:number) {
