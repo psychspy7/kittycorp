@@ -242,3 +242,7 @@ html[data-theme="dark"] .checkout-field input { color: #ffffff !important; color
 html[data-theme="dark"] .checkout-total > strong { color: #ffffff !important; }
 html[data-theme="dark"] .checkout-field input { color: #ffffff !important; color-scheme: dark; }
 html[data-theme="dark"] .local-price, html[data-theme="dark"] .local-price span { color: #c4c9db !important; }
+
+/* Contribution checkout amount visibility in both themes. */
+.checkout-total>strong{font-size:clamp(28px,4vw,36px);font-weight:600;letter-spacing:-.8px;color:#191b1d}.checkout-field input[type=number]{color:#191b1d;background:#fffefa;border-color:#b8b6ad;font-weight:500}.checkout-field input[type=number]:focus{outline:2px solid #2457d6;outline-offset:2px}.donation-presets button{background:#252720;color:#fffefa;border:1px solid #252720}.donation-presets button[aria-pressed=true]{background:#2457d6;border-color:#2457d6;color:#fff}.donation-presets button:focus-visible{outline:2px solid #2457d6;outline-offset:2px}
+html[data-theme=dark] .checkout-total>strong{color:#f4f5ff}.html[data-theme=dark] .checkout-field input[type=number],html[data-theme=dark] .checkout-field input[type=number]{background:#0d1422;color:#f4f5ff;border-color:#46536b}.html[data-theme=dark] .donation-presets button,html[data-theme=dark] .donation-presets button{background:#1b2538;color:#f4f5ff;border-color:#46536b}.html[data-theme=dark] .donation-presets button[aria-pressed=true],html[data-theme=dark] .donation-presets button[aria-pressed=true]{background:#2457d6;border-color:#69dcf2;color:#fff}
