@@ -13,6 +13,7 @@ const navigation = [
   ["About", "/company"],
   ["Research", "/research"],
   ["Projects", "/projects"],
+  ["Membership", "/memberships"],
   ["Contact", "/contact"],
 ];
 
