@@ -78,7 +78,7 @@ function PaymentsClientInner({
           </h2>
           <p>
             {purpose === "project" && options.length
-              ? "There is no active project amount right now. Tell us what you need and we’ll agree on scope, cost and a payment reference before you pay. Product pricing and donations are separate."
+              ? "There is no active project amount right now. Tell us what you need and we’ll agree on scope, cost and a payment reference before you pay. Project payments and voluntary support are separate."
               : "Please contact KITTY CORP if you were expecting to make a payment. No payment has been taken."}
           </p>
           <Link
@@ -104,7 +104,7 @@ export function PaymentsClient(props: { options: PublicProvider[]; securityEnabl
       fallback={
         <div className="payments-intro">
           <span className="eyebrow">KITTY CORP · PAYMENTS</span>
-          <h1>Plans & payments</h1>
+          <h1>Payments & support</h1>
           <p>Loading secure payment options…</p>
         </div>
       }
