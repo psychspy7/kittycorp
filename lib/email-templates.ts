@@ -106,10 +106,10 @@ export function renderEmail(job: EmailJob, site: string) {
         site +
         "/newsletter/confirm#" +
         newsletterToken("confirm", job.signup_id!, job.nonce!);
-      text = `Hi there,\n\nPlease confirm that you'd like occasional KITTY CORP product and development updates.\n\nConfirm your email: ${url}\n\nThis link expires after 48 hours. If you didn't request this, you can ignore it or unsubscribe: ${unsub}\n\nTo unsubscribe by email, contact social@thekittycorp.com.\n\nTeam KITTY CORP`;
+      text = `Hi there,\n\nPlease confirm that you'd like occasional KITTY CORP engineering and research updates.\n\nConfirm your email: ${url}\n\nThis link expires after 48 hours. If you didn't request this, you can ignore it or unsubscribe: ${unsub}\n\nTo unsubscribe by email, contact social@thekittycorp.com.\n\nTeam KITTY CORP`;
       body =
         paragraph(
-          "Please confirm that you'd like occasional KITTY CORP product and development updates.",
+          "Please confirm that you'd like occasional KITTY CORP engineering and research updates.",
         ) +
         button("Confirm my email", url) +
         paragraph(
