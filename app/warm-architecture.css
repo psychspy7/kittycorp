@@ -126,6 +126,30 @@ strong, b {
 
 .site-header .brand {
   color: var(--text-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+}
+
+.site-header .brand img {
+  width: 36px !important;
+  height: 36px !important;
+  max-width: 36px !important;
+  max-height: 36px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+@media (min-width: 640px) {
+  .site-header .brand img {
+    width: 44px !important;
+    height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+  }
 }
 
 .site-header nav a {

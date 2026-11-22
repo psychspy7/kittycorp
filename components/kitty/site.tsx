@@ -66,7 +66,21 @@ export function SiteHeader() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-20 flex items-center justify-between gap-4">
         {/* Brand Identity */}
-        <Link href="/" className="brand flex items-center hover:opacity-85 transition-opacity" aria-label="KITTY CORP home"><Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={440} height={112} className="object-contain w-[min(22vw,84px)] h-6 sm:w-[220px] sm:h-14"/></Link>
+        <Link
+          href="/"
+          className="brand flex items-center flex-shrink-0 hover:opacity-85 transition-opacity"
+          aria-label="KITTY CORP home"
+        >
+          <Image
+            unoptimized
+            src="/brand/kitty-corp-logo-transparent.png?v=3"
+            alt="KITTY CORP"
+            width={44}
+            height={44}
+            className="object-contain w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0"
+            priority
+          />
+        </Link>
 
         {/* Desktop Primary Navigation */}
         <nav className="navigation hidden xl:flex items-center gap-5 text-[13px] font-medium tracking-wide">
@@ -154,7 +168,16 @@ export function SiteHeader() {
             <div>
               {/* Header inside drawer */}
               <div className="flex items-center justify-between pb-5 border-b border-[#C2BEB5]">
-                <div className="flex items-center"><Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={360} height={92} className="object-contain w-[100px] h-6"/></div>
+                <div className="flex items-center flex-shrink-0">
+                  <Image
+                    unoptimized
+                    src="/brand/kitty-corp-logo-transparent.png?v=3"
+                    alt="KITTY CORP"
+                    width={36}
+                    height={36}
+                    className="object-contain w-9 h-9 flex-shrink-0"
+                  />
+                </div>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
