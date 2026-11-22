@@ -109,9 +109,7 @@ export async function POST(request: Request) {
                 project_reference:
                   value.purpose === "project"
                     ? value.reference
-                    : value.purpose === "subscription"
-                      ? "KITTY-ONE"
-                      : "",
+                    : "",
                 ...(quoteReservation ? { quote_reservation: quoteReservation } : {}),
               },
             });
@@ -152,9 +150,7 @@ export async function POST(request: Request) {
         reference:
           value.purpose === "project"
             ? value.reference
-            : value.purpose === "subscription"
-              ? "KITTY-ONE"
-              : "",
+            : "",
         amount_minor: amount,
         currency: config.currency,
         status: "created",
