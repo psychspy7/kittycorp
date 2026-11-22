@@ -193,5 +193,6 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
         {phase === "paid" ? "Payment complete" : phase === "creating" ? "Preparing checkout…" : phase === "open" ? "Checkout open…" : phase === "verifying" ? "Verifying payment…" : !scriptReady ? "Loading checkout…" : securityEnabled && !token ? "Checking security…" : `${testMode ? "Pay test" : "Pay"} ${formattedAmount}`}
       </button>}
     <p className="checkout-security"><ShieldCheck size={14} aria-hidden="true"/>Payment details are handled by Razorpay.</p>
-  </>}\n  </section>;
+  </>}
+  </section>;
 }
