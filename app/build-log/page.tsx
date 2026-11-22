@@ -9,7 +9,7 @@ import { journalCategories } from "@/lib/journal";
 export const revalidate = 3600;
 export const metadata = pageMetadata(
   "KITTY CORP | Engineering Build Log",
-  "Engineering notes from KITTY CORP on Physical-World Intelligence, AI robotics, AgriYaan, UrjaYaan, software delivery, experiments and work in progress.",
+  "Engineering notes from KITTY CORP on autonomous robotics, AgriYaan, UrjaYaan, embedded systems, clean energy and work in progress.",
   "/build-log"
 );
 
