@@ -117,7 +117,7 @@ export function renderEmail(job: EmailJob, site: string) {
         );
     } else {
       subject = "Welcome to KITTY CORP";
-      text = `Hey there,\n\nWelcome to KITTY CORP.\n\nWe're an independent technology startup working on AI, software, applications and ideas we're genuinely excited about.\n\nYou'll occasionally hear from us about new projects, product launches and the things we're building.\n\nThanks for joining us.\n\nTeam KITTY CORP\n\nUnsubscribe: ${unsub}\nEmail unsubscribe requests: social@thekittycorp.com`;
+      text = `Hey there,\n\nWelcome to KITTY CORP.\n\nWe're an independent engineering startup working on autonomous robotics, agricultural systems and clean-energy technology.\n\nYou'll occasionally hear from us about research updates, project milestones and the things we're building.\n\nThanks for joining us.\n\nTeam KITTY CORP\n\nUnsubscribe: ${unsub}\nEmail unsubscribe requests: social@thekittycorp.com`;
       body = paragraph(text.split("\n\nUnsubscribe:")[0]) + `<p style="font-size:12px">Unsubscribe: <a href="${escapeHtml(unsub)}">${escapeHtml(unsub)}</a> or email <a href="mailto:social@thekittycorp.com">social@thekittycorp.com</a>.</p>`;
     }
     body += `<p style="font-size:12px"><a href="${escapeHtml(unsub)}">Unsubscribe</a></p>`;
