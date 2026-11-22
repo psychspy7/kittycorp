@@ -69,7 +69,7 @@ export async function SiteFooter() {
               Inside the Lab
             </Link>
             <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">Buy Us a Coffee ☕</Link>
-            <Link href="/memberships" className="text-[#D1D5DB] font-medium hover:text-white transition-colors">KITTY ONE Membership · $249/year</Link>
+            <Link href="/memberships" className="inline-flex items-center min-h-9 text-[#60A5FA] font-semibold hover:text-white transition-colors">KITTY ONE Membership · $249/year</Link>
             <p className="max-w-[17rem] text-xs leading-relaxed text-[#D1D5DB]">
               Buy KITTY CORP a coffee through a separate purchase. KITTY ONE membership and project payments are separate.
             </p>
@@ -157,7 +157,7 @@ export async function SiteFooter() {
               Inquiries
             </Link>
             <span>·</span>
-            <Link href="/support" className="text-[#60A5FA] hover:underline">Buy Us a Coffee</Link><span>·</span><Link href="/memberships" className="text-[#D1D5DB] hover:text-white">KITTY ONE</Link>
+            <Link href="/support" className="text-[#60A5FA] hover:underline">Buy Us a Coffee</Link><span>·</span><Link href="/memberships" className="font-semibold text-[#60A5FA] hover:text-white">KITTY ONE Membership · $249/year</Link>
           </div>
         </div>
 
