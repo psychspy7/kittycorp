@@ -8,6 +8,7 @@ import { MaintenanceWatcher } from "@/components/kitty/maintenance-watcher";
 import { websiteOrigin } from "@/lib/site-metadata";
 import { SiteThemeProvider } from "@/components/kitty/theme-provider";
 import { SiteToaster } from "@/components/kitty/site-toaster";
+import { RouteProgress } from "@/components/kitty/route-progress";
 import "./globals.css";
 import "./final.css";
 import "./warm-architecture.css";
@@ -73,6 +74,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <RouteProgress />
         <SiteThemeProvider>
           <a className="skip-link" href="#main">
             Skip to content
