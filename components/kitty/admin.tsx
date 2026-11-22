@@ -350,20 +350,21 @@ export function AdminDashboard() {
         <Tabs value={tab} onValueChange={setTab} className="studio-workspace">
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="feedback">Inbox & Enquiries</TabsTrigger>
-            <TabsTrigger value="pages">Page content</TabsTrigger>
-            <TabsTrigger value="health">Health & handover</TabsTrigger>
-            <TabsTrigger value="maintenance">Site controls</TabsTrigger>
-            <TabsTrigger value="email">Email alerts</TabsTrigger>
-            <TabsTrigger value="project-quotes">Project quotes</TabsTrigger>
-            <TabsTrigger value="rewards">Reward codes</TabsTrigger>
+            <TabsTrigger value="feedback">Inbox</TabsTrigger>
+            <TabsTrigger value="pages">Pages</TabsTrigger>
+            <TabsTrigger value="health">Health</TabsTrigger>
+            <TabsTrigger value="maintenance">Site</TabsTrigger>
+            <TabsTrigger value="email">Email</TabsTrigger>
+            <TabsTrigger value="project-quotes">Quotes</TabsTrigger>
+            <TabsTrigger value="rewards">Rewards</TabsTrigger>
             <TabsTrigger value="commerce">Payments</TabsTrigger>
 <TabsTrigger value="products">Initiatives</TabsTrigger>
+<TabsTrigger value="early-access">Newsletter</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
-<TabsTrigger value="company">Company & socials</TabsTrigger>
+<TabsTrigger value="company">Company</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
-            <TabsTrigger value="journal">Build log & updates</TabsTrigger>
-            <TabsTrigger value="notices">Legacy notices</TabsTrigger>
+            <TabsTrigger value="journal">Journal</TabsTrigger>
+            <TabsTrigger value="notices">Archive</TabsTrigger>
           </TabsList>
           <TabsContent value="project-quotes" className="admin-panel"><AdminProjectQuotes/></TabsContent>
           <TabsContent value="rewards" className="admin-panel"><AdminRewards/></TabsContent>
