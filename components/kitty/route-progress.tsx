@@ -11,6 +11,7 @@ export function RouteProgress() {
   }, [pathname]);
 
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | undefined;
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = event.target instanceof Element ? event.target.closest("a[href]") as HTMLAnchorElement | null : null;
@@ -21,10 +22,12 @@ export function RouteProgress() {
         const url = new URL(href, window.location.href);
         if (url.origin !== window.location.origin || (url.pathname === window.location.pathname && url.search === window.location.search)) return;
         setActive(true);
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => setActive(false), 15000);
       } catch {}
     };
     window.addEventListener("click", onClick, true);
-    return () => window.removeEventListener("click", onClick, true);
+    return () => { window.removeEventListener("click", onClick, true); if (timeout) clearTimeout(timeout); };
   }, []);
 
   if (!active) return null;
