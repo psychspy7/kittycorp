@@ -154,19 +154,7 @@ export function SiteHeader() {
             <div>
               {/* Header inside drawer */}
               <div className="flex items-center justify-between pb-5 border-b border-[#C2BEB5]">
-                <div className="flex items-center gap-2.5">
-                  <Image
-                    unoptimized
-                    src="/brand/monogram-v2.webp"
-                    alt="KITTY CORP"
-                    width={28}
-                    height={28}
-                    className="object-contain"
-                  />
-                  <span className="font-[family-name:var(--font-display)] tracking-[0.2em] font-normal uppercase text-[15px] text-[#191B1D]">
-                    KITTY CORP
-                  </span>
-                </div>
+                <div className="flex items-center"><Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={360} height={92} className="object-contain w-[190px] h-12"/></div>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}

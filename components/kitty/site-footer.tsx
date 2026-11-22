@@ -32,17 +32,7 @@ export async function SiteFooter() {
           {/* Identity & Newsletter Column */}
           <div className="lg:col-span-2 pr-0 lg:pr-8">
             <Link className="brand inline-flex items-center text-white mb-4" href="/">
-              <Image
-                unoptimized
-                src="/brand/monogram-small-v2.webp"
-                alt="KITTY CORP"
-                width={32}
-                height={32}
-                className="object-contain brightness-110"
-              />
-              <span className="font-[family-name:var(--font-display)] tracking-[0.22em] font-normal uppercase text-[15px] text-white">
-                KITTY CORP
-              </span>
+              <Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={440} height={112} className="object-contain w-[220px] h-14 brightness-110"/>
             </Link>
             <p className="text-sm text-[#A1A1AA] font-light leading-relaxed max-w-sm mb-5">
               Engineering intelligence for the physical world. Autonomous robotics, precision agricultural systems and clean energy software from India to global frontiers.
