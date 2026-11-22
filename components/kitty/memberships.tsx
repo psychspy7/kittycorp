@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { LocalPrice } from "./local-currency";
+import { LocalPrice, CurrencyContext, detectLocalCurrency } from "./local-currency";
 import Script from "next/script";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import type { User } from "firebase/auth";
 import { Check, ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, AlertCircle, Coffee, Layers } from "lucide-react";
 import { kittyCustomerAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "@/lib/kitty-customer";
 import type { MembershipCatalog } from "@/lib/membership-types";
 import { Turnstile } from "./turnstile";
 import Link from "next/link";
+import { PaymentStatusModal, type PaymentModalState } from "./payment-status-modal";
 
 type Callback = { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string };
 type AccountStatus = { paid: boolean; expiresAt: number; freeRemainingSeconds: number };
@@ -29,6 +30,7 @@ async function accountStatus(user: User, signal: AbortSignal) {
 type Order = { intentId: string; keyId: string; orderId: string; amount: number; currency: string; testMode: boolean };
 
 export function Memberships({ catalog, securityEnabled }: { catalog: MembershipCatalog; securityEnabled: boolean }) {
+  const { currency: contextCurrency } = useContext(CurrencyContext);
   const [account, setAccount] = useState<AccountStatus | null>(null);
   const [user, setUser] = useState<User | null>(null),
     [busy, setBusy] = useState(false),
@@ -38,6 +40,12 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     [token, setToken] = useState(""),
     [revision, setRevision] = useState(0);
   const [pending, setPending] = useState<{ id: string; uid: string } | null>(null);
+  const [modalState, setModalState] = useState<PaymentModalState>("idle");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalAmount, setModalAmount] = useState("");
+  const [modalReference, setModalReference] = useState("");
+  const [modalError, setModalError] = useState("");
   const epoch = useRef(0),
     lock = useRef(false),
     current = useRef<User | null>(null),
@@ -156,23 +164,61 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     setBusy(true);
     setError("");
     setMessage("");
+    setModalError("");
+    setModalState("pending");
+    setModalTitle("Preparing Secure Checkout...");
+    setModalMessage("Fetching live exchange rates and configuring your annual research patron credentials...");
     callbackUsed.current = false;
     const generation = epoch.current,
       uid = user.uid,
       id = crypto.randomUUID();
     try {
-      const order = await request<Order>("order", { id, planId, turnstileToken: token });
+      // Base subscription price: $249 USD
+      // Fetch live exchange rate to convert $249 USD to user's detected local currency
+      const detectedCurrency = contextCurrency || detectLocalCurrency("INR");
+      let targetCurrency = detectedCurrency;
+      let convertedAmount = 24_900; // default 24900 cents
+
+      if (targetCurrency !== "USD") {
+        try {
+          const estRes = await fetch(`/api/price-estimate?amount=24900&base=USD&currency=${encodeURIComponent(targetCurrency)}`);
+          if (estRes.ok) {
+            const estData = (await estRes.json()) as { amount?: number; currency?: string };
+            if (estData.amount && Number.isFinite(estData.amount)) {
+              convertedAmount = Math.round(estData.amount * 100);
+            }
+          }
+        } catch {
+          targetCurrency = "USD";
+          convertedAmount = 24_900;
+        }
+      }
+
+      const order = await request<Order>("order", {
+        id,
+        planId: "kitty-one",
+        currency: targetCurrency,
+        amount: convertedAmount,
+        turnstileToken: token,
+      });
+
       if (generation !== epoch.current) return;
-      // Payment-critical guard: KITTY ONE is exactly $249 USD, never an INR fallback.
-      if (order.currency !== "USD" || order.amount !== 24_900) throw new Error("Checkout amount verification failed. KITTY ONE is $249 USD/year; the payment service returned " + new Intl.NumberFormat("en-US", { style: "currency", currency: order.currency || "USD" }).format((Number(order.amount) || 0) / 100) + ". Payment has been blocked. Please contact KITTY CORP.");
+
+      const formattedTotal = new Intl.NumberFormat(undefined, {
+        style: "currency",
+        currency: order.currency,
+      }).format(order.amount / 100);
+
       setPending({ id: order.intentId, uid });
+      setModalState("idle");
+
       const checkout = new window.Razorpay({
         key: order.keyId,
         order_id: order.orderId,
         amount: order.amount,
         currency: order.currency,
         name: "KITTY CORP",
-        description: (order.testMode ? "TEST · " : "") + "KITTY ONE Annual Membership ($249 USD)",
+        description: (order.testMode ? "TEST | " : "") + `KITTY ONE Annual Membership ($249 USD · ${formattedTotal})`,
         image: window.location.origin + "/brand/monogram.png",
         theme: { color: "#2457D6" },
         retry: { enabled: true },
@@ -181,20 +227,48 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
           callbackUsed.current = true;
           lock.current = true;
           setBusy(true);
-          void request<{ active: boolean; paid: boolean; testMode?: boolean }>("verify", { ...value, intentId: order.intentId })
+          setModalState("pending");
+          setModalTitle("Verifying Payment...");
+          setModalMessage("Confirming your transaction with banking networks. Please do not close this window...");
+
+          void request<{ active: boolean; paid: boolean; testMode?: boolean; paymentId?: string }>("verify", { ...value, intentId: order.intentId })
             .then((r) => {
               if (generation !== epoch.current) return;
               if (r.active && r.paid) {
                 setPending(null);
+                try {
+                  localStorage.setItem("kitty_subscription_plan", "kitty-one");
+                } catch {}
+                setModalState("success");
+                setModalTitle("Thank You for Joining KITTY ONE!");
+                setModalMessage(
+                  r.testMode
+                    ? "Test membership verified. No real charge was made. Your test patron credentials are active."
+                    : "You are officially an inaugural research patron of KITTY CORP! Your membership credentials are confirmed, and our engineers and robots are doing a happy dance! 🐾✨"
+                );
+                setModalAmount(formattedTotal);
+                setModalReference(r.paymentId || value.razorpay_payment_id);
                 setMessage(
                   r.testMode
                     ? "Test membership verified. No production charge."
                     : "Thank you for purchasing and supporting KITTY CORP. We’ll email you membership updates soon."
                 );
-              } else setMessage("Payment is awaiting capture or reconciliation. Please do not pay again; check its status.");
+              } else {
+                setModalState("failed");
+                setModalTitle("Oopsy! Payment Incomplete");
+                setModalMessage("Your payment is awaiting capture or reconciliation. Please check your account status shortly before paying again.");
+                setMessage("Payment is awaiting capture or reconciliation. Please do not pay again; check its status.");
+              }
             })
             .catch((e) => {
-              if (generation === epoch.current) setError((e as Error).message);
+              if (generation === epoch.current) {
+                const errText = (e as Error).message || "Payment verification failed.";
+                setError(errText);
+                setModalState("failed");
+                setModalTitle("Oopsy! Verification Error");
+                setModalMessage("We could not confirm the payment with the gateway. Please check your account or retry.");
+                setModalError(errText);
+              }
             })
             .finally(() => {
               lock.current = false;
@@ -207,18 +281,37 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
             lock.current = false;
             setBusy(false);
             if (generation === epoch.current) {
+              setModalState("failed");
+              setModalTitle("Oopsy! Payment Cancelled");
+              setModalMessage("You closed the payment gateway before completing your purchase. No membership was activated and no charge was captured.");
+              setModalError("Checkout was closed before payment completion.");
               setMessage("Checkout closed. No membership was activated.");
               void request("cancel", { intentId: order.intentId }).catch(() => {});
             }
           },
         },
       });
+
       checkout.on("payment.failed", () => {
-        if (generation === epoch.current) setError("Oops — payment failed. Please retry in Razorpay or use an alternate method.");
+        if (generation === epoch.current) {
+          setModalState("failed");
+          setModalTitle("Oopsy! Payment Failed");
+          setModalMessage("Razorpay reported that this payment attempt failed. Please retry in Razorpay or choose an alternate payment method.");
+          setModalError("Transaction was declined by payment gateway or bank.");
+          setError("Oops: payment failed. Please retry in Razorpay or use an alternate method.");
+        }
       });
+
       checkout.open();
     } catch (e) {
-      if (generation === epoch.current) setError((e as Error).message);
+      if (generation === epoch.current) {
+        const errText = (e as Error).message || "Checkout could not open.";
+        setError(errText);
+        setModalState("failed");
+        setModalTitle("Oopsy! Checkout Error");
+        setModalMessage("Could not initialize the payment gateway. Please check your connection and retry.");
+        setModalError(errText);
+      }
       lock.current = false;
       setBusy(false);
     } finally {
@@ -469,7 +562,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
               !!pending ||
               (!!user && (!ready || (securityEnabled && !token)))
             }
-            onClick={() => void pay(featuredPlan?.id || "kitty-plus")}
+            onClick={() => void pay("kitty-one")}
           >
             <span className="!text-white font-medium">
               {busy
@@ -477,7 +570,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 : user && (!ready || (securityEnabled && !token))
                 ? "Preparing secure checkout…"
                 : user
-                ? "Purchase KITTY ONE — $249 / Year"
+                ? "Purchase KITTY ONE | $249 / Year"
                 : "Sign in to Purchase KITTY ONE"}
             </span>
             <ArrowRight className="w-4 h-4 !text-white group-hover:translate-x-1 transition-transform" />
@@ -573,6 +666,28 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
           </button>
         </div>
       )}
+
+      <PaymentStatusModal
+        state={modalState}
+        title={modalTitle}
+        message={modalMessage}
+        amount={modalAmount}
+        reference={modalReference}
+        error={modalError}
+        onRetry={() => {
+          setModalState("idle");
+          void pay("kitty-one");
+        }}
+        onClose={() => setModalState("idle")}
+        actionLabel={modalState === "success" ? "View My Account" : undefined}
+        onAction={
+          modalState === "success"
+            ? () => {
+                window.location.href = "/account";
+              }
+            : undefined
+        }
+      />
     </div>
   );
 }

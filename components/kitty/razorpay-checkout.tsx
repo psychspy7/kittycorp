@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Download, CreditCard, LoaderCircle, ShieldCheck } from "lucide-react";
 import { Turnstile } from "./turnstile";
 import type { PaymentPurpose } from "@/lib/razorpay-server";
+import { PaymentStatusModal, type PaymentModalState } from "./payment-status-modal";
 
 type PaymentResponse = { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string };
 type Order = { order_id: string; amount: number; currency: string };
@@ -49,6 +50,10 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const [scriptReady, setScriptReady] = useState(false);
   const [scriptError, setScriptError] = useState("");
   const [phase, setPhase] = useState<"idle" | "creating" | "open" | "verifying" | "pending" | "paid" | "unconfirmed">("idle");
+  const [modalState, setModalState] = useState<PaymentModalState>("idle");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalError, setModalError] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
@@ -76,20 +81,39 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     setPhase("verifying"); setError(""); setMessage("");
     setPaymentId(value.razorpay_payment_id);
     pending.current = value;
+    setModalState("pending");
+    setModalTitle("Verifying Payment...");
+    setModalMessage("Confirming your transaction with banking networks. Please keep this tab open...");
     try {
       const result = await post<Verification>("/api/verify-payment", value);
       if (result.verified !== true) throw new Error("The payment could not be verified.");
       if (result.paid === true && result.success === true && result.status === "captured") {
         setPhase("paid"); setPaidAt(new Date()); pending.current = null;
-        
+        setModalState("success");
+        setModalTitle(testMode ? "Test Payment Complete!" : purpose === "donation" ? "Thank You for Fueling KITTY CORP!" : "Payment Confirmed!");
+        setModalMessage(
+          testMode
+            ? "Test payment verified. No real currency was charged."
+            : purpose === "donation"
+            ? "Your purchase is confirmed! Thank you for fueling our engineers at KITTY CORP. Every coffee powers physical robotics testing! ☕🐾✨"
+            : "Payment received successfully. Thank you for your business."
+        );
         setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Your purchase is confirmed. Thank you for fueling our engineers at KITTY CORP. We’ll email you updates soon." : "Payment received. Please keep your payment reference.");
       } else if (result.paid === false && result.status === "authorized") {
         setPhase("pending");
+        setModalState("pending");
+        setModalTitle("Payment Authorized");
+        setModalMessage("Your payment is authorized and awaiting capture. Please don’t pay again. You can check its status below.");
         setMessage("Your payment is authorized and awaiting capture. Please don’t pay again. You can check its status below.");
       } else { throw new Error("The payment is not confirmed. Please check its status before trying another payment."); }
     } catch (failure) {
       setPhase("unconfirmed");
-      setError(failure instanceof Error ? failure.message : "We couldn’t confirm the payment. Please check its status.");
+      const errText = failure instanceof Error ? failure.message : "We couldn’t confirm the payment. Please check its status.";
+      setError(errText);
+      setModalState("failed");
+      setModalTitle("Oopsy! Verification Incomplete");
+      setModalMessage("We could not confirm the payment status with the gateway. Please check its status or retry.");
+      setModalError(errText);
     } finally { lock.current = false; }
   }
 
@@ -165,12 +189,21 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
         modal: { ondismiss: () => {
           if (callbackStarted.current) return;
           lock.current = false; setPhase("idle");
+          setModalState("failed");
+          setModalTitle("Oopsy! Payment Cancelled");
+          setModalMessage("Checkout was closed before completing your coffee purchase. No money was charged.");
+          setModalError("The checkout modal was dismissed.");
           setMessage("Checkout closed. No payment was confirmed.");
         } },
       });
       checkout.on("payment.failed", () => {
-        // Razorpay keeps the modal open so the visitor can retry there.
-        if (!callbackStarted.current) setError("Oops — payment failed. Try another payment method in checkout, or close it and try again.");
+        if (!callbackStarted.current) {
+          setError("Oops: payment failed. Try another payment method in checkout, or close it and try again.");
+          setModalState("failed");
+          setModalTitle("Oopsy! Payment Failed");
+          setModalMessage("Razorpay reported that this payment attempt failed. Please retry or use another payment method.");
+          setModalError("Transaction was declined by payment gateway or bank.");
+        }
       });
       setPhase("open"); checkout.open();
     } catch (failure) {
@@ -201,7 +234,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     {purpose !== "donation" && !quote?.id && phase === "idle" && <CustomerSignIn disabled={busy} /> }
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
     <h2 id="checkout-title">{purpose === "donation" ? "Buy us a coffee." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
-    <p>{testMode ? "This checkout is in test mode. No real money changes hands." : purpose === "donation" ? "Fuel our engineers. ₹49–₹5,000 includes a custom thank-you message, supporter badge and wallpapers. ₹5,000–₹9,999 includes all of that plus a conversation with our team." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
+    <p>{testMode ? "This checkout is in test mode. No real money changes hands." : purpose === "donation" ? "Fuel our engineers. ₹49 to ₹5,000 includes a custom thank-you message, supporter badge and wallpapers. ₹5,000 to ₹9,999 includes all of that plus a conversation with our team." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
     {purpose === "project" && !quote && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-name">Your name <span aria-hidden="true">*</span></label><input id="supporter-name" type="text" autoComplete="name" maxLength={80} required value={supporterName} onChange={event => setSupporterName(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Name"/><span>Shown on your confirmation.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-email">Email <span aria-hidden="true">*</span></label><input id="supporter-email" type="email" autoComplete="email" maxLength={254} required value={supporterEmail} onChange={event => setSupporterEmail(event.target.value)} disabled={busy || phase !== "idle"} placeholder="you@example.com"/><span>Required for your purchase confirmation. It is recorded in the payment order notes.</span></div>}
@@ -224,5 +257,20 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       </button>}
     <p className="checkout-security"><ShieldCheck size={14} aria-hidden="true"/>Payment details are handled by Razorpay.</p>
   </>}
+  <PaymentStatusModal
+    state={modalState}
+    title={modalTitle}
+    message={modalMessage}
+    amount={formattedAmount}
+    reference={paymentId}
+    error={modalError}
+    onRetry={() => {
+      setModalState("idle");
+      void pay();
+    }}
+    onClose={() => setModalState("idle")}
+    actionLabel={purpose === "donation" && modalState === "success" ? "Download Confirmation" : undefined}
+    onAction={purpose === "donation" && modalState === "success" ? downloadSupportReceipt : undefined}
+  />
   </section>;
 }

@@ -2,7 +2,19 @@
 import {createContext,useContext,useEffect,useId,useState} from "react";
 const options=["INR","USD","EUR","GBP","AUD","CAD","JPY","AED","SGD","CHF","CNY","HKD","NZD","ZAR","BRL","MXN","KRW","IDR","MYR","PHP","THB","BDT","PKR","NPR","LKR","SAR","QAR","KWD","NGN","TRY","SEK","NOK","DKK","PLN"];
 const countries:Record<string,string>={IN:"INR",US:"USD",GB:"GBP",AU:"AUD",CA:"CAD",JP:"JPY",AE:"AED",SG:"SGD",CH:"CHF",CN:"CNY",HK:"HKD",NZ:"NZD",ZA:"ZAR",BR:"BRL",MX:"MXN",KR:"KRW",ID:"IDR",MY:"MYR",PH:"PHP",TH:"THB",BD:"BDT",PK:"PKR",NP:"NPR",LK:"LKR",SA:"SAR",QA:"QAR",KW:"KWD",NG:"NGN",TR:"TRY",SE:"SEK",NO:"NOK",DK:"DKK",PL:"PLN",DE:"EUR",FR:"EUR",IT:"EUR",ES:"EUR",NL:"EUR",IE:"EUR",PT:"EUR",BE:"EUR",AT:"EUR",FI:"EUR",GR:"EUR",EE:"EUR",LT:"EUR",LV:"EUR",CY:"EUR",MT:"EUR",SK:"EUR",SI:"EUR",HR:"EUR",LU:"EUR"};
-const CurrencyContext=createContext({currency:"",choose:(value:string)=>{void value;}});
+export const CurrencyContext=createContext({currency:"",choose:(value:string)=>{void value;}});
+export function detectLocalCurrency(fallback = "INR"): string {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const saved = window.localStorage.getItem("kitty-display-currency");
+    if (saved && options.includes(saved)) return saved;
+  } catch {}
+  try {
+    const region = new Intl.Locale(navigator.language).region || "";
+    if (region && countries[region]) return countries[region];
+  } catch {}
+  return fallback;
+}
 export function LocalCurrencyProvider({country,children}:{country:string;children:React.ReactNode}){
  const [currency,setCurrency]=useState("");
  useEffect(()=>{let selected="";try{selected=window.localStorage.getItem("kitty-display-currency")||"";}catch{}if(!options.includes(selected)){let region=country;try{region||=new Intl.Locale(navigator.language).region||"";}catch{}selected=countries[region]||"USD";}Promise.resolve().then(()=>setCurrency(selected));},[country]);

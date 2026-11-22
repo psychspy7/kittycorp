@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Cpu, Compass } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
@@ -9,7 +9,7 @@ export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "KITTY CORP | Robotics & Intelligence Projects",
-  "Explore KITTY CORP initiatives in agricultural robotics, clean-energy systems and physical-world engineering.",
+  "Explore KITTY CORP initiatives in agricultural robotics, clean-energy systems, foundational AI and physical companion machines.",
   "/projects"
 );
 
@@ -29,11 +29,22 @@ export default function ProjectsPage() {
             <span className="font-light text-[#62676D] block sm:inline mt-1 sm:mt-0">for physical environments.</span>
           </h1>
           <p className="text-[18px] sm:text-[21px] leading-[1.65] text-[#292D31] font-light max-w-2xl">
-            We are pursuing systems that operate in real physical conditions, from agricultural fields to decentralized clean-energy infrastructure.
+            We are pursuing systems that operate in real physical conditions, from agricultural fields to decentralized clean-energy infrastructure and tactile companion robotics.
           </p>
         </div>
 
-        {/* Primary Initiatives Showcase: 4 Core Projects */}
+        {/* =========================================================================
+            SECTION 1: PHYSICAL FIELD INITIATIVES (AgriYaan & UrjaYaan)
+            ========================================================================= */}
+        <div className="mb-6">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#73777C] font-semibold block mb-2">
+            FIELD ROBOTICS &amp; ENERGY
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
+            Autonomous Field Systems
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
           
           {/* Initiative: AgriYaan */}
@@ -110,6 +121,110 @@ export default function ProjectsPage() {
 
         </div>
 
+        {/* =========================================================================
+            SECTION 2: CORE PLATFORMS (KITTY AI & KITTY BUDDY)
+            Synchronized with Homepage Architectural Layouts
+            ========================================================================= */}
+        <div className="mb-6">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-semibold block mb-2">
+            FOUNDATIONAL PLATFORMS
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D]">
+            Intelligence and Physical Interaction
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+          
+          {/* Platform 1: KITTY AI */}
+          <div className="dark-section relative overflow-hidden rounded-3xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-8 sm:p-12 border border-[#292D31]/40 bg-[#0A0D12] shadow-lg group">
+            {/* Background Neural Network Imagery */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Image
+                src="/photography/kitty-ai-neural-core.webp"
+                alt="KITTY AI neural network architecture visualization"
+                fill
+                className="object-cover object-center opacity-70 group-hover:scale-105 transition-transform duration-700 ease-out"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D12] via-[#0A0D12]/80 to-[#0A0D12]/40" />
+            </div>
+
+            <div className="relative z-10">
+              <div className="flex items-center justify-between gap-4 mb-6">
+                <span className="font-mono text-xs text-[#D1D5DB] uppercase tracking-widest">ARCHITECTURE</span>
+                <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-white/20 text-[#E2E5E8] bg-white/10 backdrop-blur-sm">
+                  Active Development
+                </span>
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-[#60A5FA] mb-6 border border-white/15">
+                <Cpu className="w-6 h-6" />
+              </div>
+              <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-white mb-2">
+                KITTY AI
+              </h3>
+              <p className="text-sm font-medium text-[#E2E5E8] mb-3">Vision-language foundation for embodied autonomy</p>
+              <p className="text-[#F3F4F6] font-normal leading-relaxed text-[15px] sm:text-[16px] max-w-lg">
+                Our embedded neural software stack bridges multi-sensor spatial computer vision directly with real-time robotic actuator controllers, providing physical machines with offline edge inference, context-aware navigation and obstacle avoidance.
+              </p>
+            </div>
+
+            <div className="relative z-10 pt-6 mt-8 border-t border-white/15 text-xs font-mono text-[#D1D5DB] flex items-center justify-between">
+              <span>STAGE: EMBEDDED REAL-TIME INFERENCE</span>
+              <span className="w-2 h-2 rounded-full bg-[#60A5FA]" />
+            </div>
+          </div>
+
+          {/* Platform 2: KITTY BUDDY */}
+          <div className="relative overflow-hidden rounded-3xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-8 sm:p-12 border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm group">
+            {/* Background Companion Robot Imagery */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Image
+                src="/photography/kitty-buddy-companion.webp"
+                alt="KITTY BUDDY physical desktop companion robot prototype with Kitty branding"
+                fill
+                className="object-cover object-[80%_center] opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#FBFAF7] via-[#FBFAF7]/95 via-50% to-transparent/25" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-transparent opacity-50" />
+            </div>
+
+            <div className="relative z-10">
+              <div className="flex items-center justify-between gap-4 mb-6">
+                <span className="font-mono text-xs text-[#374151] uppercase tracking-widest">INTERACTION PROTOTYPE</span>
+                <span className="text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-[#D9D6CF] text-[#191B1D] bg-[#F5F2EA]/90 backdrop-blur-sm">
+                  Concept Exploration
+                </span>
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-[#E9E6E0] flex items-center justify-center text-[#2457D6] mb-6 border border-[#D9D6CF]">
+                <Compass className="w-6 h-6" />
+              </div>
+              <h3 className="text-3xl font-normal font-[family-name:var(--font-display)] text-[#191B1D] mb-2">
+                KITTY Buddy
+              </h3>
+              <p className="text-sm font-medium text-[#191B1D] mb-3">Physical human-machine companion</p>
+              <p className="text-[#191B1D] font-normal leading-relaxed text-[15px] sm:text-[16px] max-w-lg mb-6">
+                An exploration into tactile collaboration, testing non-intrusive companion devices that facilitate natural physical interaction without invasive biometric surveillance or screen fatigue.
+              </p>
+              <Link
+                href="/buddy"
+                className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#2457D6] hover:text-[#1D46B0] transition-colors"
+              >
+                <span>Explore KITTY Buddy Details</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="relative z-10 pt-6 mt-8 border-t border-[#D9D6CF] text-xs font-mono text-[#374151] flex items-center justify-between">
+              <span>STAGE: CONCEPT EXPLORATION</span>
+              <span className="w-2 h-2 rounded-full bg-[#2457D6]" />
+            </div>
+          </div>
+
+        </div>
+
+        {/* Commercial Studio Callout */}
         <section className="mb-20 p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm">
           <div className="max-w-3xl">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Commercial Digital Solutions</span>
