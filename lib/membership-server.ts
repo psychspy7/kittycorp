@@ -7,7 +7,7 @@ import {razorpayClient,validPaymentSignature,constantTimeHexEqual,orderIdSchema,
 import {draftMemberships,type MembershipCatalog} from "./membership-types";
 const uuid=z.string().uuid();
 const providerSchema=z.object({keyId:z.string().regex(/^rzp_(test|live)_[A-Za-z0-9]+$/),keySecret:z.string().min(8),webhookSecret:z.string().min(16),previousWebhookSecret:z.string().optional(),testMode:z.boolean(),enabled:z.boolean()});
-type Intent={id:string;uid:string;product:string;plan_id:string;provider_order_id?:string;provider_key_id:string;status:string;terms:{amount:number;months:number;chatLimit:number;speechLimit:number}};
+type Intent={id:string;uid:string;product:string;plan_id:string;provider_order_id?:string;provider_key_id:string;status:string;terms:{amount:number;currency:"INR"|"USD";months:number;chatLimit:number;speechLimit:number}};
 async function endpoint() {
  const runtime=await getRuntimeConfiguration();
  const value=runtime.KITTY_MEMBERSHIP_BACKEND?.trim(),token=runtime.KITTY_COMMERCE_GATEWAY_TOKEN?.trim();
@@ -18,7 +18,7 @@ async function endpoint() {
 }
 export async function commerce<T=Record<string,unknown>>(path:string,method="GET",payload?:unknown,userToken?:string):Promise<T> {
  const {url,token}=await endpoint();
- const r=await fetch(url+"/api/"+path,{method,...(method==="GET"?{next:{revalidate:3600}}:{cache:"no-store" as const}),redirect:"error",signal:AbortSignal.timeout(15000),headers:{"Content-Type":"application/json","X-Kitty-Commerce-Token":token,...(userToken?{Authorization:"Bearer "+userToken}:{})},body:payload?JSON.stringify(payload):undefined});
+ const r=await fetch(url+"/api/"+path,{method,...(method==="GET"&&path==="memberships/catalog"&&!userToken?{next:{revalidate:300}}:{cache:"no-store" as const}),redirect:"error",signal:AbortSignal.timeout(15000),headers:{"Content-Type":"application/json","X-Kitty-Commerce-Token":token,...(userToken?{Authorization:"Bearer "+userToken}:{})},body:payload?JSON.stringify(payload):undefined});
  const text=await r.text();if(text.length>128000)throw new HttpError("Membership response was too large.",502);
  let data;try{data=JSON.parse(text);}catch{throw new HttpError("Membership service is temporarily unavailable.",502);}
  if(!r.ok)throw new HttpError(typeof data.error==="string"?data.error:"Membership request failed.",r.status);
@@ -40,8 +40,8 @@ async function provider() {
 export async function createMembership(request:Request,value:unknown) {
  const input=z.object({id:uuid,planId:z.string().regex(/^[a-zA-Z0-9-]{1,80}$/)}).strict().parse(value),token=customerToken(request);
  const intent=await commerce<Intent>("commerce/intents","POST",input,token);
- // Never open Razorpay unless the commerce backend returns exactly $249 USD.
- if(intent.terms?.amount!==24_900||intent.terms?.months!==12)throw new HttpError("KITTY ONE checkout is misconfigured. Expected $249 USD for 12 months. Checkout is blocked to prevent an incorrect charge or membership term. Please contact KITTY CORP.",409);
+ // Never open Razorpay unless this is the separate KITTY ONE patron plan at exactly $249 USD/year.
+ if(intent.product!=="kitty-one"||intent.plan_id!=="kitty-one"||intent.terms?.amount!==24_900||intent.terms?.currency!=="USD"||intent.terms?.months!==12)throw new HttpError("KITTY ONE checkout is misconfigured. Expected $249 USD for 12 months. Checkout is blocked to prevent an incorrect charge or membership term. Please contact KITTY CORP.",409);
  const {p,client}=await provider();
  if(!p.enabled)throw new HttpError("Membership checkout is paused.",503);
  if(intent.provider_key_id!==p.keyId)throw new HttpError("This checkout uses an older payment configuration. Please contact KITTY CORP.",409);

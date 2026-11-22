@@ -9,7 +9,7 @@ export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "KITTY CORP | Robotics & Intelligence Projects",
-  "Explore KITTY CORP initiatives in agricultural robotics, clean-energy systems and physical-world engineering.",
+  "Explore KITTY CORP initiatives in personal AI, embodied companions, agricultural robotics, clean-energy systems and physical-world engineering.",
   "/projects"
 );
 
@@ -108,6 +108,43 @@ export default function ProjectsPage() {
             </div>
           </article>
 
+          <article className="rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] overflow-hidden shadow-sm flex flex-col justify-between">
+            <div className="p-8 sm:p-10">
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">PERSONAL AI PLATFORM</span>
+                <span className="text-[11px] font-mono uppercase tracking-wider px-3 py-1 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">Live platform</span>
+              </div>
+              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal text-[#191B1D] mb-2">KITTY AI</h2>
+              <p className="text-sm font-medium text-[#292D31] mb-4">Personal AI companion &amp; cloud intelligence</p>
+              <p className="text-[#62676D] font-light leading-relaxed text-[15px]">A personal AI companion with an Android app and cloud backend, built around verified accounts, private server-side integrations, conversational memory and voice experiences. The platform continues to evolve.</p>
+            </div>
+            <div className="relative h-72 w-full overflow-hidden bg-[#E9E6E0]">
+              <Image src="/photography/kitty-ai-neural-core.webp" alt="KITTY AI neural core artwork" fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+            <div className="p-6 border-t border-[#D9D6CF] bg-[#F5F2EA] flex items-center justify-between text-xs text-[#62676D]">
+              <span className="font-mono">DOMAIN: PERSONAL INTELLIGENCE</span>
+              <a href="https://kitty-ai-v2.kitty-ai.workers.dev" target="_blank" rel="noopener noreferrer" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">Explore KITTY AI <ArrowUpRight className="w-3.5 h-3.5" /></a>
+            </div>
+          </article>
+
+          <article className="rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] overflow-hidden shadow-sm flex flex-col justify-between">
+            <div className="p-8 sm:p-10">
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">EMBODIED AI</span>
+                <span className="text-[11px] font-mono uppercase tracking-wider px-3 py-1 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">Concept exploration</span>
+              </div>
+              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal text-[#191B1D] mb-2">KITTY Buddy</h2>
+              <p className="text-sm font-medium text-[#292D31] mb-4">Pocket AI companion with optional mobility</p>
+              <p className="text-[#62676D] font-light leading-relaxed text-[15px]">A compact, voice-first companion concept built around KITTY Core and an optional detachable KITTY Wheels base. Hardware, enclosure, movement and privacy controls remain under development.</p>
+            </div>
+            <div className="relative h-72 w-full overflow-hidden bg-[#E9E6E0]">
+              <Image src="/photography/kitty-buddy-companion.webp" alt="KITTY Buddy pocket AI companion concept" fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+            <div className="p-6 border-t border-[#D9D6CF] bg-[#F5F2EA] flex items-center justify-between text-xs text-[#62676D]">
+              <span className="font-mono">DOMAIN: EMBODIED AI</span>
+              <Link href="/buddy" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">Explore KITTY Buddy <ArrowRight className="w-3.5 h-3.5" /></Link>
+            </div>
+          </article>
         </div>
 
         <section className="mb-20 p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm">

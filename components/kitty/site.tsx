@@ -66,7 +66,7 @@ export function SiteHeader() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-20 flex items-center justify-between gap-4">
         {/* Brand Identity */}
-        <Link href="/" className="brand flex items-center hover:opacity-85 transition-opacity" aria-label="KITTY CORP home"><Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={440} height={112} className="object-contain w-[min(22vw,84px)] h-6 sm:w-[220px] sm:h-14"/></Link>
+        <Link href="/" className="brand flex flex-shrink-0 items-center justify-start hover:opacity-85 transition-opacity" aria-label="KITTY CORP home"><Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={440} height={112} className="object-contain object-left w-[74px] h-5 sm:w-[220px] sm:h-14"/></Link>
 
         {/* Desktop Primary Navigation */}
         <nav className="navigation hidden xl:flex items-center gap-5 text-[13px] font-medium tracking-wide">

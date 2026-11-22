@@ -10,9 +10,11 @@ import { kittyCustomerAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuth
 import type { MembershipCatalog } from "@/lib/membership-types";
 import { Turnstile } from "./turnstile";
 import Link from "next/link";
+import { PaymentResult } from "./payment-result";
 
 type Callback = { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string };
-type AccountStatus = { paid: boolean; expiresAt: number; freeRemainingSeconds: number };
+type AccountStatus = { paid: boolean; expiresAt: number; patronPaid: boolean; patronExpiresAt: number; freeRemainingSeconds: number };
+type PaymentOutcome = { status: "success" | "failure"; title: string; description: string; reference?: string };
 
 async function accountStatus(user: User, signal: AbortSignal) {
   const bearer = await user.getIdToken();
@@ -36,12 +38,23 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     [message, setMessage] = useState(""),
     [error, setError] = useState(""),
     [token, setToken] = useState(""),
-    [revision, setRevision] = useState(0);
+    [revision, setRevision] = useState(0),
+    [outcome, setOutcome] = useState<PaymentOutcome | null>(null);
   const [pending, setPending] = useState<{ id: string; uid: string } | null>(null);
   const epoch = useRef(0),
     lock = useRef(false),
     current = useRef<User | null>(null),
-    callbackUsed = useRef(false);
+    callbackUsed = useRef(false),
+    outcomeRef = useRef<PaymentOutcome | null>(null);
+
+  const featuredPlan = catalog.plans.find((p) => p.id === "kitty-one" && p.product === "kitty-one");
+  const checkoutReady = Boolean(featuredPlan?.purchasable && featuredPlan.amount === 24_900 && featuredPlan.currency === "USD" && featuredPlan.months === 12);
+  function publishOutcome(next: PaymentOutcome) {
+    outcomeRef.current = next;
+    setOutcome(next);
+    setMessage("");
+    setError("");
+  }
 
   useEffect(() => {
     let unlisten: (() => void) | undefined,
@@ -54,6 +67,8 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
             epoch.current++;
             setMessage("");
             setError("");
+            outcomeRef.current = null;
+            setOutcome(null);
             setPending(null);
             setAccount(null);
           }
@@ -116,17 +131,15 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     setBusy(true);
     setError("");
     setMessage("");
+    outcomeRef.current = null;
+    setOutcome(null);
     try {
       const r = await request<{ active: boolean; paid: boolean; testMode?: boolean }>(
         "status?intentId=" + encodeURIComponent(pending.id)
       );
       if (r.active && r.paid) {
         setPending(null);
-        setMessage(
-          r.testMode
-            ? "Test membership verified. No production access or real charge."
-            : "KITTY ONE Membership is verified and active."
-        );
+        publishOutcome({ status: "success", title: r.testMode ? "Test payment verified" : "KITTY ONE is active", description: r.testMode ? "No production access or real charge was created." : "Your annual patron membership is verified and active. Membership details will be sent to " + (user?.email || "your email") + "." });
       } else {
         setMessage("Payment status: awaiting capture or bank clearance.");
       }
@@ -140,6 +153,10 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
 
   async function pay(planId: string) {
     if (lock.current) return;
+    if (!checkoutReady) {
+      setError("KITTY ONE checkout is temporarily unavailable or its annual USD terms do not match. No payment has been taken.");
+      return;
+    }
     if (!user) {
       await login();
       return;
@@ -156,6 +173,8 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     setBusy(true);
     setError("");
     setMessage("");
+    outcomeRef.current = null;
+    setOutcome(null);
     callbackUsed.current = false;
     const generation = epoch.current,
       uid = user.uid,
@@ -186,15 +205,11 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
               if (generation !== epoch.current) return;
               if (r.active && r.paid) {
                 setPending(null);
-                setMessage(
-                  r.testMode
-                    ? "Test membership verified. No production charge."
-                    : "Thank you for purchasing and supporting KITTY CORP. We’ll email you membership updates soon."
-                );
+                publishOutcome({ status: "success", title: r.testMode ? "Test payment complete" : "KITTY ONE activated", description: r.testMode ? "No real money was charged and no production membership was granted." : "Thank you for joining KITTY ONE. Your annual patron membership is active. We’ll email membership details to " + (user.email || "your account") + ".", reference: value.razorpay_payment_id });
               } else setMessage("Payment is awaiting capture or reconciliation. Please do not pay again; check its status.");
             })
             .catch((e) => {
-              if (generation === epoch.current) setError((e as Error).message);
+              if (generation === epoch.current) publishOutcome({ status: "failure", title: "Payment could not be confirmed", description: (e as Error).message + " If your bank shows a debit, do not pay again. Check payment status or contact KITTY CORP.", reference: value.razorpay_payment_id });
             })
             .finally(() => {
               lock.current = false;
@@ -207,18 +222,23 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
             lock.current = false;
             setBusy(false);
             if (generation === epoch.current) {
-              setMessage("Checkout closed. No membership was activated.");
+              setPending(null);
+              if (outcomeRef.current?.status !== "failure") setMessage("Checkout closed. No membership was activated.");
               void request("cancel", { intentId: order.intentId }).catch(() => {});
             }
           },
         },
       });
       checkout.on("payment.failed", () => {
-        if (generation === epoch.current) setError("Oops — payment failed. Please retry in Razorpay or use an alternate method.");
+        if (generation === epoch.current) {
+          publishOutcome({ status: "failure", title: "Oops! Payment failed", description: "Razorpay could not complete this attempt. You can retry using another payment method." });
+          setPending(null);
+          void request("cancel", { intentId: order.intentId }).catch(() => {});
+        }
       });
       checkout.open();
     } catch (e) {
-      if (generation === epoch.current) setError((e as Error).message);
+      if (generation === epoch.current) publishOutcome({ status: "failure", title: "Checkout could not start", description: (e as Error).message || "Please try again in a moment." });
       lock.current = false;
       setBusy(false);
     } finally {
@@ -226,8 +246,6 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
       setRevision((x) => x + 1);
     }
   }
-
-  const featuredPlan = catalog.plans.find((p) => p.product === "kitty") || catalog.plans[0];
 
   return (
     <div className="w-full">
@@ -262,9 +280,9 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
 
       {account && (
         <div className="p-4 rounded-xl border border-[#2457D6]/30 bg-[#2457D6]/5 text-sm text-[#191B1D] mb-8" role="status">
-          {account.paid
-            ? `KITTY ONE Active until ${new Date(account.expiresAt).toLocaleDateString()}. Your research access and website privilege are active.`
-            : "Account connected. No active membership on record."}
+          {account.patronPaid
+            ? `KITTY ONE Active until ${new Date(account.patronExpiresAt).toLocaleDateString()}. Your research access and website privilege are active.`
+            : "Account connected. No active KITTY ONE membership on record."}
         </div>
       )}
 
@@ -467,13 +485,16 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
               
               busy ||
               !!pending ||
+              !checkoutReady ||
               (!!user && (!ready || (securityEnabled && !token)))
             }
-            onClick={() => void pay(featuredPlan?.id || "kitty-plus")}
+            onClick={() => void pay(featuredPlan?.id || "kitty-one")}
           >
             <span className="!text-white font-medium">
               {busy
                 ? "Processing verification…"
+                : !checkoutReady
+                ? "Checkout temporarily unavailable"
                 : user && (!ready || (securityEnabled && !token))
                 ? "Preparing secure checkout…"
                 : user
@@ -538,7 +559,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
 
       </div>
 
-      {catalog.plans.some((p) => p.purchasable) && (
+      {checkoutReady && (
         <>
           <Script
             src="https://checkout.razorpay.com/v1/checkout.js"
@@ -550,17 +571,12 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
         </>
       )}
 
-      {message && (
-        <div className="p-4 rounded-xl border border-green-300 bg-green-50 text-sm text-green-900 max-w-2xl mx-auto mb-6" role="status">
-          <Check size={24} className="mx-auto mb-3" />
-          <strong>{message}</strong>
-          {!catalog.testMode && <p className="mt-2">Membership updates will be sent to {user?.email || "your email"} soon.</p>}
-        </div>
+      {outcome && <div className="max-w-2xl mx-auto mb-6"><PaymentResult {...outcome} /></div>}
+      {!outcome && message && (
+        <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#FBFAF7] text-sm text-[#191B1D] max-w-2xl mx-auto mb-6" role="status">{message}</div>
       )}
-      {error && (
-        <div className="p-4 rounded-xl border border-red-300 bg-red-50 text-sm text-red-900 max-w-2xl mx-auto mb-6" role="alert">
-          {error}
-        </div>
+      {!outcome && error && (
+        <div className="p-4 rounded-xl border border-red-300 bg-red-50 text-sm text-red-900 max-w-2xl mx-auto mb-6" role="alert">{error}</div>
       )}
       {pending && (
         <div className="text-center mb-6">

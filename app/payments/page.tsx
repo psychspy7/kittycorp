@@ -4,6 +4,8 @@ import { PaymentsClient } from "@/components/kitty/payments-client";
 import { publicPaymentProviders } from "@/lib/commerce-server";
 import { turnstilePublicConfig } from "@/lib/turnstile-server";
 import "./payments.css";
+import "@/components/kitty/payment-result.css";
+import "@/components/kitty/payment-result.css";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Payments | KITTY CORP", robots: { index: false, follow: false } };

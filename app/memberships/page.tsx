@@ -2,9 +2,11 @@ import { pageMetadata } from "@/lib/site-metadata";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { Memberships } from "@/components/kitty/memberships";
-import { draftMemberships } from "@/lib/membership-types";
+import { membershipCatalog } from "@/lib/membership-server";
 import { turnstilePublicConfig } from "@/lib/turnstile-server";
 import "./memberships.css";
+import "@/components/kitty/payment-result.css";
+import "@/components/kitty/payment-result.css";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +17,7 @@ export const metadata = pageMetadata(
 );
 
 export default async function MembershipsPage() {
-  const security = await turnstilePublicConfig();
+  const [security, catalog] = await Promise.all([turnstilePublicConfig(), membershipCatalog()]);
   return (
     <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
       <SiteHeader />
@@ -35,7 +37,7 @@ export default async function MembershipsPage() {
           </p>
         </div>
 
-        <Memberships catalog={draftMemberships} securityEnabled={security.enabled && Boolean(security.siteKey)} />
+        <Memberships catalog={catalog} securityEnabled={security.enabled && Boolean(security.siteKey)} />
 
         <section className="mt-16 p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7]">
           <h2 className="text-2xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">

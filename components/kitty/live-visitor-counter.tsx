@@ -133,15 +133,15 @@ export function LiveVisitorCounter() {
       className="kc-telemetry-badge"
       role="status"
       aria-live="polite"
-      aria-label={`${activeDisplay} visitors active now, ${totalDisplay} total visitors`}
-      title={`${activeDisplay} active online • ${totalDisplay} total recorded visitors`}
+      aria-label={`${activeDisplay} visitors active now, ${totalDisplay} tracked visitor sessions`}
+      title={`${activeDisplay} active online • ${totalDisplay} unique recorded visitor sessions`}
     >
       <span className="kc-pulse-dot" aria-hidden="true" />
       <span id="kc-active-count">{activeDisplay}</span>
       <span className="kc-telemetry-label">active now</span>
       <span className="kc-telemetry-sep">•</span>
       <span id="kc-total-count">{totalDisplay}</span>
-      <span className="kc-telemetry-label">total visitors</span>
+      <span className="kc-telemetry-label">tracked visitors</span>
     </div>
   );
 }

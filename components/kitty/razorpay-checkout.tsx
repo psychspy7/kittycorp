@@ -8,10 +8,12 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Download, CreditCard, LoaderCircle, ShieldCheck } from "lucide-react";
 import { Turnstile } from "./turnstile";
 import type { PaymentPurpose } from "@/lib/razorpay-server";
+import { PaymentResult } from "./payment-result";
 
 type PaymentResponse = { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string };
 type Order = { order_id: string; amount: number; currency: string };
 type Verification = { success: boolean; verified: boolean; paid: boolean; status: string; payment_id: string };
+type PaymentOutcome = { status: "success" | "failure"; title: string; description: string; reference?: string };
 const paymentDisplay = {
   display: {
     blocks: { upi: { name: "Pay via UPI", instruments: [{ method: "upi" }] } },
@@ -54,6 +56,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const [token, setToken] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [paymentId, setPaymentId] = useState("");
+  const [outcome, setOutcome] = useState<PaymentOutcome | null>(null);
   const [donation, setDonation] = useState(String(initialDonationAmount ?? 49));
   const [supporterEmail, setSupporterEmail] = useState("");
   const [supporterMessage, setSupporterMessage] = useState("");
@@ -63,6 +66,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const lock = useRef(false);
   const pending = useRef<PaymentResponse | null>(null);
   const callbackStarted = useRef(false);
+  const outcomeRef = useRef<PaymentOutcome | null>(null);
   const busy = phase === "creating" || phase === "open" || phase === "verifying";
   useEffect(()=>{onLockChange?.(busy || phase === "pending" || phase === "unconfirmed" || phase === "paid");},[busy,phase,onLockChange]);
   const selectedAmount = purpose === "donation" ? Math.round(Number(donation) * 100) : amount;
@@ -71,6 +75,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const formattedAmount = new Intl.NumberFormat("en-IN", { style: "currency", currency }).format((Number.isFinite(selectedAmount) ? selectedAmount : 0) / 100);
 
   function resetSecurity() { setToken(""); setAttempt(value => value + 1); }
+  function publishOutcome(next: PaymentOutcome) { outcomeRef.current = next; setOutcome(next); setError(""); setMessage(""); }
   async function verify(value: PaymentResponse) {
     lock.current = true;
     setPhase("verifying"); setError(""); setMessage("");
@@ -81,15 +86,15 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       if (result.verified !== true) throw new Error("The payment could not be verified.");
       if (result.paid === true && result.success === true && result.status === "captured") {
         setPhase("paid"); setPaidAt(new Date()); pending.current = null;
-        
-        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Your purchase is confirmed. Thank you for fueling our engineers at KITTY CORP. We’ll email you updates soon." : "Payment received. Please keep your payment reference.");
+        publishOutcome({ status: "success", title: testMode ? "Test payment complete" : "Payment successful", description: testMode ? "No real money was charged. This was a test transaction." : purpose === "donation" ? "Your Fuel Us purchase is confirmed. Thank you for fueling our engineers at KITTY CORP." : "Payment received. Please keep this payment reference for your records.", reference: value.razorpay_payment_id });
       } else if (result.paid === false && result.status === "authorized") {
         setPhase("pending");
+        outcomeRef.current = null; setOutcome(null);
         setMessage("Your payment is authorized and awaiting capture. Please don’t pay again. You can check its status below.");
       } else { throw new Error("The payment is not confirmed. Please check its status before trying another payment."); }
     } catch (failure) {
       setPhase("unconfirmed");
-      setError(failure instanceof Error ? failure.message : "We couldn’t confirm the payment. Please check its status.");
+      publishOutcome({ status: "failure", title: "Payment could not be confirmed", description: (failure instanceof Error ? failure.message : "We couldn’t confirm the payment.") + " If your bank shows a debit, do not pay again. Check payment status or contact KITTY CORP.", reference: value.razorpay_payment_id });
     } finally { lock.current = false; }
   }
 
@@ -145,6 +150,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     if (purpose === "donation" && !validSupporter) { setError("Enter your name and a valid email. The optional message must be 180 characters or fewer."); return; }
     if (purpose === "project" && !testMode && !reference.trim() && !quote) { setError("Enter your project or invoice reference first."); return; }
     lock.current = true; callbackStarted.current = false;
+    outcomeRef.current = null; setOutcome(null);
     setPhase("creating"); setError(""); setMessage("");
     try {
       const order = await post<Order>("/api/create-order", { amount: selectedAmount, currency, purpose, reference:quote?.reference||reference,...(purpose === "donation" ? { supporterName: supporterName.trim(), supporterEmail: supporterEmail.trim(), supporterMessage: supporterMessage.trim() } : {}),...(quote?{...(quote.id?{accountQuoteId:quote.id}:{quoteToken:quote.token}),paymentChoice:quote.choice}:{}), turnstileToken: token });
@@ -165,17 +171,17 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
         modal: { ondismiss: () => {
           if (callbackStarted.current) return;
           lock.current = false; setPhase("idle");
-          setMessage("Checkout closed. No payment was confirmed.");
+          if (outcomeRef.current?.status !== "failure") setMessage("Checkout closed. No payment was confirmed.");
         } },
       });
       checkout.on("payment.failed", () => {
-        // Razorpay keeps the modal open so the visitor can retry there.
-        if (!callbackStarted.current) setError("Oops — payment failed. Try another payment method in checkout, or close it and try again.");
+        // Razorpay keeps the modal open so the visitor can retry there; the animated result remains after it closes.
+        if (!callbackStarted.current) publishOutcome({ status: "failure", title: "Oops! Payment failed", description: "Razorpay could not complete this attempt. Try another payment method in checkout, or close it and try again." });
       });
       setPhase("open"); checkout.open();
     } catch (failure) {
       lock.current = false; setPhase("idle");
-      setError(failure instanceof Error ? failure.message : "Checkout could not open. Please try again.");
+      publishOutcome({ status: "failure", title: "Checkout could not start", description: failure instanceof Error ? failure.message : "Checkout could not open. Please try again." });
     } finally { resetSecurity(); }
   }
 
@@ -197,7 +203,8 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       {Number(donation)>=5000 && <a className="button button-outline checkout-button" href="/contact">Talk with our team</a>}
       <a className="support-complete-home" href="/">Back to KITTY CORP</a>
       <p className="support-complete-note">{testMode ? "Test confirmation only · No real contribution received." : "This downloadable payment confirmation is for your records; it is not an invoice."}</p>
-    </div> : <>
+    </div> : outcome?.status === "success" ? <PaymentResult {...outcome} /> : <>
+    {outcome?.status === "failure" && <PaymentResult {...outcome} />}
     {purpose !== "donation" && !quote?.id && phase === "idle" && <CustomerSignIn disabled={busy} /> }
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
     <h2 id="checkout-title">{purpose === "donation" ? "Buy us a coffee." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
@@ -213,8 +220,8 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     {securityEnabled && (phase === "idle" || phase === "creating" || phase === "open") && <Turnstile action="payment-order" onToken={setToken} resetKey={attempt}/>}
     {phase === "idle" && !scriptError && (!scriptReady || (securityEnabled && !token)) && <p className="checkout-loading-status" role="status">{!scriptReady ? "Loading Razorpay securely…" : "Checking your connection securely… This usually takes a moment."}</p>}
     {scriptError && <p className="checkout-error" role="alert">{scriptError}</p>}
-    {error && <p className="checkout-error" role="alert">{error}</p>}
-    {message && <p className={phase === "paid" ? "checkout-success" : "checkout-message"} role="status">{phase === "paid" && <Check size={17} aria-hidden="true"/>}{message}</p>}
+    {error && !outcome && <p className="checkout-error" role="alert">{error}</p>}
+    {message && !outcome && <p className={phase === "paid" ? "checkout-success" : "checkout-message"} role="status">{phase === "paid" && <Check size={17} aria-hidden="true"/>}{message}</p>}
     {paymentId && <p className="checkout-reference">Payment reference <code>{paymentId}</code></p>}
     {(phase === "pending" || phase === "unconfirmed") ? <button className="button button-gold checkout-button" onClick={() => { if (pending.current && !lock.current) void verify(pending.current); }}>Check payment status</button>
       : <button className="button button-gold checkout-button" onClick={() => void pay()}
