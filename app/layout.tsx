@@ -9,6 +9,7 @@ import { websiteOrigin } from "@/lib/site-metadata";
 import { SiteThemeProvider } from "@/components/kitty/theme-provider";
 import { SiteToaster } from "@/components/kitty/site-toaster";
 import { RouteProgress } from "@/components/kitty/route-progress";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./final.css";
 import "./warm-architecture.css";
@@ -90,6 +91,7 @@ export default function RootLayout({
           </Suspense>
           <SiteToaster />
         </SiteThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
