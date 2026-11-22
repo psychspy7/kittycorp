@@ -56,6 +56,8 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
   const [paymentId, setPaymentId] = useState("");
   const [donation, setDonation] = useState(String(initialDonationAmount ?? 100));
   const [reference, setReference] = useState("");
+  const [supporterName, setSupporterName] = useState("");
+  const [paidAt, setPaidAt] = useState<Date | null>(null);
   const lock = useRef(false);
   const pending = useRef<PaymentResponse | null>(null);
   const callbackStarted = useRef(false);
@@ -75,7 +77,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       const result = await post<Verification>("/api/verify-payment", value);
       if (result.verified !== true) throw new Error("The payment could not be verified.");
       if (result.paid === true && result.success === true && result.status === "captured") {
-        setPhase("paid"); pending.current = null;
+        setPhase("paid"); setPaidAt(new Date()); pending.current = null;
         
         setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Thank you for supporting KITTY CORP. Your contribution was received." : "Payment received. Please keep your payment reference.");
       } else if (result.paid === false && result.status === "authorized") {
@@ -88,7 +90,30 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     } finally { lock.current = false; }
   }
 
-  async function pay() {
+
+  function downloadSupportReceipt() {
+    const escapeXml = (value: string) => value.replace(/[&<>"']/g, character => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[character] || character));
+    const dateText = (paidAt || new Date()).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+    const donor = supporterName.trim() || "Supporter";
+    const svg = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">',
+      '<rect width="1000" height="700" rx="36" fill="#f7f8f5"/><rect x="40" y="40" width="920" height="620" rx="28" fill="#fff" stroke="#e3e8e2"/>',
+      '<circle cx="500" cy="170" r="68" fill="#e6f7eb"/><path d="M466 171l23 23 48-53" fill="none" stroke="#18864b" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<text x="500" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">Thank you for your support</text>',
+      '<text x="500" y="335" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#59665c">' + escapeXml(donor) + '</text>',
+      '<text x="500" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="700" fill="#17251b">' + escapeXml(formattedAmount) + '</text>',
+      '<text x="500" y="450" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#59665c">Voluntary contribution to KITTY CORP</text>',
+      '<line x1="130" y1="500" x2="870" y2="500" stroke="#e3e8e2"/>',
+      '<text x="140" y="550" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Payment reference</text><text x="140" y="582" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(paymentId) + '</text>',
+      '<text x="860" y="550" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#66716a">Date</text><text x="860" y="582" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#17251b">' + escapeXml(dateText) + '</text>',
+      '<text x="500" y="625" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#849087">Payment confirmation for your records · Not a tax receipt</text></svg>'
+    ].join("");
+    const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a"); link.href = url; link.download = "kitty-corp-support-" + (paymentId || "receipt") + ".svg"; link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+\n  async function pay() {
     if (lock.current || pending.current || phase === "paid") return;
     if (!window.Razorpay) { setError("Checkout is still loading. Please wait a moment or refresh this page."); return; }
     if (securityEnabled && !token) { setError("Please complete the security check first."); return; }
@@ -133,11 +158,23 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive"
       onReady={() => { setScriptReady(true); setScriptError(""); }}
       onError={() => setScriptError("Checkout could not load. Check your connection and refresh this page.")} />
-    {!quote?.id&&phase==="idle"&&<CustomerSignIn disabled={busy}/>}
+    {purpose === "donation" && phase === "paid" ? <div className="support-complete" role="status" aria-live="polite">
+      <div className="support-complete-check" aria-hidden="true"><svg viewBox="0 0 64 64"><circle className="support-check-circle" cx="32" cy="32" r="29"/><path className="support-check-mark" d="M18 33l9 9 20-21"/></svg></div>
+      <span className="support-complete-eyebrow">CONTRIBUTION CONFIRMED</span>
+      <h2>Thank you{supporterName.trim() ? ", " + supporterName.trim() : ""}.</h2>
+      <p>Your support means a lot to KITTY CORP. It helps us keep building and researching independently.</p>
+      <div className="support-complete-amount"><span>Contribution</span><strong>{formattedAmount}</strong></div>
+      <div className="support-complete-reference"><span>Payment reference</span><code>{paymentId}</code></div>
+      <button type="button" className="button button-gold checkout-button" onClick={downloadSupportReceipt}><CreditCard size={17}/> Download confirmation</button>
+      <a className="support-complete-home" href="/">Back to KITTY CORP</a>
+      <p className="support-complete-note">This downloadable confirmation is for your records and is not a tax receipt.</p>
+    </div> : <>
+    {!quote?.id&&phase==="idle"&&<CustomerSignIn disabled={busy}/ >}
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
     <h2 id="checkout-title">{purpose === "donation" ? "Choose your contribution." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
     <p>{testMode ? "This checkout is in test mode. No real money changes hands." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
     {purpose === "project" && !quote && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
+    {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-name">Name (optional)</label><input id="supporter-name" type="text" autoComplete="name" maxLength={80} value={supporterName} onChange={event => setSupporterName(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Your name"/><span>Your name can appear on your downloadable confirmation.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Contribution in rupees</label><div className="donation-presets">{[100, 250, 500, 1000].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="1" max="10000" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>₹1 minimum · Suggested amounts help make the contribution meaningful. Entirely voluntary.</span></div>}
     <div className="checkout-total"><span>{testMode ? "Test amount" : "Payment amount"}</span><strong>{formattedAmount}</strong></div>
     <LocalPrice amount={Number.isFinite(selectedAmount)?selectedAmount:0}/><p className="checkout-methods">Choose UPI, cards or another available method in checkout.</p>
@@ -156,5 +193,5 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
         {phase === "paid" ? "Payment complete" : phase === "creating" ? "Preparing checkout…" : phase === "open" ? "Checkout open…" : phase === "verifying" ? "Verifying payment…" : !scriptReady ? "Loading checkout…" : securityEnabled && !token ? "Checking security…" : `${testMode ? "Pay test" : "Pay"} ${formattedAmount}`}
       </button>}
     <p className="checkout-security"><ShieldCheck size={14} aria-hidden="true"/>Payment details are handled by Razorpay.</p>
-  </section>;
+  </>}\n  </section>;
 }
