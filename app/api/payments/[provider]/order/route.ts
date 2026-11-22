@@ -2,7 +2,7 @@ import {optionalCustomer} from "@/lib/customer-account-server";
 import {recordPayment} from "@/lib/payment-ledger";
 import { cookies } from "next/headers";
 import { z } from "zod";
-import { failure,privateJson,readBody,verifyOrigin } from "@/lib/kitty-server";
+import { failure,HttpError,privateJson,readBody,verifyOrigin } from "@/lib/kitty-server";
 import { providerConfiguration } from "@/lib/commerce-server";
 import { alternativeOrderSchema,alternateCookie,createAlternative,sealAlternative } from "@/lib/alternative-payments";
 export const runtime="nodejs";
