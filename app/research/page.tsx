@@ -3,14 +3,14 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { JournalCards } from "@/components/kitty/journal";
 import { publicJournal } from "@/lib/journal-server";
-import { Cpu, Leaf, Sun, Compass, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Cpu, Leaf, Sun, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "Physical AI & Robotics Research | KITTY CORP",
-  "Explore KITTY CORP research in AgriYaan agricultural robotics, UrjaYaan solar intelligence, KITTY AI perception and control, and embodied systems.",
+  "Explore KITTY CORP research in agricultural robotics, clean-energy systems, embedded computing and physical-world engineering.",
   "/research"
 );
 
@@ -34,22 +34,13 @@ const researchAreas = [
     copy: "Developing predictive telemetry software to calculate solar panel degradation rates under extreme weather, optimize battery charge and discharge cycles during peak industrial demand, and dynamically balance decentralized rural microgrids.",
   },
   {
-    title: "Physical Intelligence & Actuator Control",
+    title: "Embedded Robotics & Control",
     icon: Cpu,
-    tag: "Stage: Active Development",
-    domain: "EMBEDDED INTELLIGENCE",
-    href: "/contact?subject=KittyAI",
-    linkText: "Academic Collaboration",
-    copy: "Research into closed-loop neural architectures that bridge spatial 3D vision with real-time robotic motor kinematics, enabling physical machines to perceive, reason about, and adapt to unstructured real-world terrain.",
-  },
-  {
-    title: "Tactile Human-Machine Interaction",
-    icon: Compass,
-    tag: "Stage: Concept Exploration",
-    domain: "EMBODIED COMPANIONSHIP",
-    href: "/buddy",
-    linkText: "Explore Buddy Concept",
-    copy: "Exploring non-intrusive companion devices that give physical, tangible presence to intelligent assistants, prioritizing physical privacy, tactile feedback, and natural collaboration without intrusive surveillance.",
+    tag: "Stage: Research & Prototyping",
+    domain: "ROBOTIC SYSTEMS",
+    href: "/projects",
+    linkText: "Explore Engineering Projects",
+    copy: "Research into embedded computing, sensor fusion, perception, navigation and closed-loop control for machines operating in physical environments.",
   },
 ];
 
@@ -126,7 +117,6 @@ export default async function Research() {
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd([
             { "@context": "https://schema.org", "@type": "ResearchProject", "@id": "https://thekittycorp.com/agriyaan#research-project", name: "KITTY AgriYaan", description: "Agricultural autonomous rover research exploring crop monitoring, terrain mobility, field sensing and edge computer vision.", url: "https://thekittycorp.com/agriyaan", additionalProperty: { "@type": "PropertyValue", name: "Development stage", value: "Simulation and kinematics" } },
             { "@context": "https://schema.org", "@type": "ResearchProject", "@id": "https://thekittycorp.com/urjayaan#research-project", name: "KITTY UrjaYaan", description: "Clean-energy intelligence research focused on solar monitoring, predictive telemetry and energy optimisation.", url: "https://thekittycorp.com/urjayaan", additionalProperty: { "@type": "PropertyValue", name: "Development stage", value: "Algorithmic modelling" } },
-            { "@context": "https://schema.org", "@type": "ResearchProject", "@id": "https://thekittycorp.com/research#kitty-ai", name: "KITTY AI", description: "Vision-and-control software stack under development connecting spatial perception, edge inference and robotic actuators.", url: "https://thekittycorp.com/research", additionalProperty: { "@type": "PropertyValue", name: "Development stage", value: "Active development" } },
             { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [
               { "@type": "Question", name: "What is KITTY CORP?", acceptedAnswer: { "@type": "Answer", text: "KITTY CORP is an India-founded technology company developing Physical-World Intelligence through robotics, intelligent systems and commercial digital engineering." } },
               { "@type": "Question", name: "What is KITTY AgriYaan?", acceptedAnswer: { "@type": "Answer", text: "KITTY AgriYaan is an autonomous agricultural rover research initiative exploring crop monitoring, field sensing, terrain mobility and edge computer vision. It is currently at simulation and kinematics stage." } },
