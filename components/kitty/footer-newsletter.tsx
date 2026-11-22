@@ -69,7 +69,7 @@ export function FooterNewsletter() {
           required
           disabled={status === "loading"}
           aria-label="Email address for research and project updates"
-          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-[14px] text-white placeholder-[#D1D5DB] focus:outline-none focus:border-[#2457D6] focus:bg-white/15 transition-all shadow-inner"
+          className="w-full px-4 py-3 rounded-xl bg-[#FBFAF7] border border-[#D9D6CF] text-[14px] text-[#191B1D] placeholder-[#62676D] focus:outline-none focus:border-[#2457D6] focus:ring-2 focus:ring-[#2457D6]/20 transition-all shadow-inner"
         />
         <button
           type="submit"
@@ -84,6 +84,8 @@ export function FooterNewsletter() {
           )}
         </button>
       </div>
+
+      <p className="text-[11px] leading-relaxed text-[#D1D5DB]">By subscribing, you agree to receive occasional KITTY CORP updates. Unsubscribe anytime by email at <a href="mailto:social@thekittycorp.com" className="underline underline-offset-2 text-white">social@thekittycorp.com</a>.</p>
 
       {status === "error" && (
         <p className="text-[12px] text-[#FCA5A5] font-medium bg-red-950/40 border border-red-500/30 px-3 py-2 rounded-lg" role="alert">
