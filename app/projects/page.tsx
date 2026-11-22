@@ -3,7 +3,6 @@ import Image from "next/image";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
-import { ProjectEnquiry } from "@/components/kitty/project-enquiry";
 import { pageMetadata } from "@/lib/site-metadata";
 
 export const revalidate = 3600;
@@ -111,62 +110,14 @@ export default function ProjectsPage() {
 
         </div>
 
-        {/* Commercial Operations & Client Software Studio */}
         <section className="mb-20 p-8 sm:p-12 rounded-3xl border border-[#D9D6CF] bg-[#FBFAF7] shadow-sm">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-12 pb-10 border-b border-[#D9D6CF]">
-            <div className="max-w-2xl">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
-                Commercial Engineering Arm
-              </span>
-              <h2 className="text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-3">
-                Digital Solutions Studio
-              </h2>
-              <p className="text-[#62676D] text-[15px] sm:text-[16px] leading-relaxed font-light">
-                To independently fund our hardware research without premature dilutive capital, KITTY CORP operates a commercial digital studio building bespoke web applications, automated workflows, and digital products for businesses globally.
-              </p>
-            </div>
-            <a
-              href="https://demo.thekittycorp.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[14px] font-medium transition-all shadow-[0_2px_12px_rgba(36,87,214,0.2)]"
-            >
-              <span>Explore Studio Demos</span>
-              <ArrowUpRight className="w-4 h-4 text-white" />
-            </a>
-          </div>
-
-          {/* Project Enquiry Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-5">
-              <h3 className="text-2xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
-                Commission a digital build.
-              </h3>
-              <p className="text-[#62676D] font-light text-sm leading-relaxed mb-6">
-                Tell us about your organization and the digital product, customer web application, or automated workflow you require. We confirm deliverables, price, and timeline before work begins.
-              </p>
-              <div className="space-y-3 text-xs text-[#73777C] font-mono">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
-                  <span>Fixed-scope agreements &amp; milestone reviews</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
-                  <span>Direct founder &amp; engineering communication</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2457D6]" />
-                  <span>Revenue directly funds physical robotics research</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 bg-[#F5F2EA] p-6 sm:p-8 rounded-2xl border border-[#D9D6CF]">
-              <ProjectEnquiry />
-            </div>
+          <div className="max-w-3xl">
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Commercial Digital Solutions</span>
+            <h2 className="text-3xl font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">A separate studio for business software.</h2>
+            <p className="text-[#62676D] text-[15px] sm:text-[16px] leading-relaxed font-light mb-7">Our commercial digital solutions work has its own website. Visit the demo to explore services, examples and business enquiries.</p>
+            <a href="https://demo.thekittycorp.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[14px] font-medium transition-all shadow-[0_2px_12px_rgba(36,87,214,0.2)]">Visit Digital Solutions Studio <ArrowUpRight size={16}/></a>
           </div>
         </section>
-
       </main>
       <SiteFooter />
     </div>
