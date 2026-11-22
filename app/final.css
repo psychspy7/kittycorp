@@ -463,3 +463,40 @@ html[data-theme="dark"] .real-media-placeholder {
   background: #090d1c !important;
   border: 1px solid rgba(169, 158, 255, 0.22) !important;
 }
+
+/* Mobile header and navigation contrast/position hardening */
+@media (max-width: 1023px) {
+  .site-header { width: 100%; padding: 0 16px !important; height: 76px !important; }
+  .site-header > div { width: 100%; padding-left: 0 !important; padding-right: 0 !important; height: 76px !important; }
+  .site-header .brand { min-width: 0; gap: 10px; }
+  .site-header .brand > div { width: 44px !important; height: 44px !important; flex: 0 0 44px !important; overflow: visible !important; }
+  .site-header .brand img { width: 100% !important; height: 100% !important; object-fit: contain !important; object-position: center !important; }
+  .site-header .brand span { font-size: 14px !important; letter-spacing: .12em !important; white-space: nowrap !important; }
+  .site-header .kitty-mobile-menu { display: flex !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 61 !important; margin-left: auto !important; }
+}
+.mobile-navigation {
+  background: #FBFAF7 !important;
+  background-color: #FBFAF7 !important;
+  color: #191B1D !important;
+  border-color: #C2BEB5 !important;
+  opacity: 1 !important;
+  isolation: isolate;
+}
+.mobile-navigation nav a,
+.mobile-navigation nav a:visited,
+.mobile-navigation .mobile-navigation-link {
+  color: #191B1D !important;
+  -webkit-text-fill-color: #191B1D !important;
+  opacity: 1 !important;
+}
+.mobile-navigation nav a[aria-current="page"] {
+  color: #1D46B0 !important;
+  -webkit-text-fill-color: #1D46B0 !important;
+  background: #E9E6E0 !important;
+}
+.mobile-navigation nav a:hover { background: #E9E6E0 !important; color: #1D46B0 !important; -webkit-text-fill-color: #1D46B0 !important; }
+.mobile-navigation p,
+.mobile-navigation span { color: #191B1D !important; -webkit-text-fill-color: #191B1D !important; }
+.mobile-navigation .text-white,
+.mobile-navigation [class*="text-white"] { color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; }
+@media (prefers-reduced-motion: reduce) { .mobile-navigation, .kitty-mobile-menu { transition: none !important; } }
