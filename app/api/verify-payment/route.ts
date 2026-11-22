@@ -102,7 +102,7 @@ export async function POST(request: Request) {
         currency: order.currency,
         status: "paid",
         payment_id: payment.id,
-      });
+      }, undefined, order.purpose === "donation" ? { name: order.supporterName, email: order.supporterEmail, message: order.supporterMessage } : undefined);
 
     recordAuditEvent({
       action: "payment.verified",
