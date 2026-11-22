@@ -16,7 +16,7 @@ export const providerFields:Record<PaymentProvider,CommerceCredential[]>={razorp
 export type PublicProvider={provider:PaymentProvider;name:string;currency:"INR"|"USD";testMode:boolean;amount:number;clientId:string};
 
 // A zero client quote closes only project checkout, never voluntary contributions.
-export function paymentOptionsForPurpose(options: PublicProvider[], purpose: "project" | "donation" {
+export function paymentOptionsForPurpose(options: PublicProvider[], purpose: "project" | "donation") {
   return purpose === "donation" ? options : options.filter(option => option.amount >= 100);
 }
 export type ProviderReadiness = { available: boolean; mode: "off" | "sandbox" | "live"; projectReady: boolean; message: string };
