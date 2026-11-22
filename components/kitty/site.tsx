@@ -13,7 +13,6 @@ const navigation = [
   ["About", "/company"],
   ["Research", "/research"],
   ["Projects", "/projects"],
-  ["Membership", "/memberships"],
   ["Contact", "/contact"],
 ];
 
@@ -228,7 +227,6 @@ export function SiteHeader() {
                   {[
                     { href: "/agriyaan", label: "KITTY AgriYaan" },
                     { href: "/urjayaan", label: "KITTY UrjaYaan" },
-                    { href: "/buddy", label: "KITTY Buddy" },
                   ].map(({ href, label }) => {
                     const isCurrent = pathname === href || pathname.startsWith(href + "/");
                     return (
