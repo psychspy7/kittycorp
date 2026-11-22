@@ -187,7 +187,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
                 setMessage(
                   r.testMode
                     ? "Test membership verified. No production charge."
-                    : Thank you for purchasing and supporting KITTY CORP. We’ll email you membership updates soon.
+                    : "Thank you for purchasing and supporting KITTY CORP. We’ll email you membership updates soon."
                 );
               } else setMessage("Payment is awaiting capture or reconciliation. Please do not pay again; check its status.");
             })
@@ -266,11 +266,7 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
         </div>
       )}
 
-      {!catalog.purchasesEnabled && (
-        <div className="p-4 rounded-xl border border-[#D9D6CF] bg-[#E9E6E0] text-sm text-[#292D31] mb-8" role="status">
-          KITTY ONE is available to purchase. Membership updates will follow by email after payment confirmation.
-        </div>
-      )}
+      {}
 
       {catalog.testMode && catalog.purchasesEnabled && (
         <div className="p-3 rounded-lg border border-[#D9D6CF] bg-[#FBFAF7] text-xs font-mono text-[#73777C] mb-6">

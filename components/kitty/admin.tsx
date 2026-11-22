@@ -3,14 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-const AdminProjectQuotes = dynamic(() => import("./admin-project-quotes"));
-const AdminRewards = dynamic(() => import("./admin-rewards"));
-const AdminProducts = dynamic(() => import("./admin-products"));
 const AdminEarlyAccess = dynamic(() => import("./admin-early-access"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
-const AdminPages = dynamic(() => import("./admin-pages"), { loading: () => <p className="empty-message">Opening page editor…</p> });
 const AdminCommerce = dynamic(() => import("./admin-commerce"), { loading: () => <p className="empty-message">Opening payment setup…</p> });
 const AdminHealth = dynamic(() => import("./admin-health"));
 const AdminEmail = dynamic(() => import("./admin-email"));
@@ -300,7 +296,7 @@ export function AdminDashboard() {
     <>
       <header className="admin-header">
         <Link className="brand" href="/">
-          <Image unoptimized src="/brand/monogram-small-v1.webp" width="40" height="40" alt="" />
+          <Image unoptimized src="/brand/kitty-corp-logo-transparent.png" width="200" height="60" alt="KITTY CORP" style={{width:200,height:60,objectFit:"contain"}}/>
           <span>
             KITTY CORP <small>STUDIO</small>
           </span>
@@ -351,14 +347,13 @@ export function AdminDashboard() {
           <TabsList className="admin-tabs">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="feedback">Inbox</TabsTrigger>
-            <TabsTrigger value="pages">Pages</TabsTrigger>
+
             <TabsTrigger value="health">Health</TabsTrigger>
             <TabsTrigger value="maintenance">Site</TabsTrigger>
             <TabsTrigger value="email">Email</TabsTrigger>
-            <TabsTrigger value="project-quotes">Quotes</TabsTrigger>
-            <TabsTrigger value="rewards">Rewards</TabsTrigger>
+
             <TabsTrigger value="commerce">Payments</TabsTrigger>
-<TabsTrigger value="products">Initiatives</TabsTrigger>
+
 <TabsTrigger value="early-access">Newsletter</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
 <TabsTrigger value="company">Company</TabsTrigger>
@@ -366,21 +361,19 @@ export function AdminDashboard() {
             <TabsTrigger value="journal">Journal</TabsTrigger>
             <TabsTrigger value="notices">Archive</TabsTrigger>
           </TabsList>
-          <TabsContent value="project-quotes" className="admin-panel"><AdminProjectQuotes/></TabsContent>
-          <TabsContent value="rewards" className="admin-panel"><AdminRewards/></TabsContent>
+
           <TabsContent value="commerce" className="admin-panel"><AdminCommerce/></TabsContent>
           <TabsContent value="health" className="admin-panel"><AdminHealth/></TabsContent>
           <TabsContent value="email" className="admin-panel"><AdminEmail/></TabsContent>
           <TabsContent value="overview" className="admin-panel">
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
-              <button onClick={() => setTab("pages")}><strong>Page content ↗</strong><span>Edit homepage, Services, Company and Contact copy and search previews.</span></button>
-              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["commerce","Payments","Configure PayPal and Razorpay without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website project briefs and contact messages."],["products","Initiatives","Manage the public details and artwork for AgriYaan, UrjaYaan and research."],["early-access","Newsletter subscribers","View confirmed newsletter signups, dates, status and export subscriber details."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+
+              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["commerce","Payments","Configure PayPal and Razorpay without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website project briefs and contact messages."],["early-access","Newsletter subscribers","View confirmed newsletter signups, dates, status and export subscriber details."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/projects" target="_blank" rel="noreferrer">Preview projects</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>
-          <TabsContent value="pages" className="admin-panel"><AdminPages /></TabsContent>
-          <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
+
           <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
           <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
 <TabsContent value="team" className="admin-panel"><AdminTeam /></TabsContent>

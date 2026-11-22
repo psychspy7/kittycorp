@@ -281,3 +281,12 @@ html[data-theme="dark"] .checkout-field textarea{background:#0c1120!important;co
 @keyframes fuel-circle-soften{to{stroke:#148346;fill:#e5f7eb;stroke-width:2}}
 @keyframes fuel-tick-fade{to{opacity:0}}
 @media(prefers-reduced-motion:reduce){.support-complete-logo{animation:none;opacity:1;transform:none}.support-check-mark{opacity:1}}
+
+.support-complete-check{position:relative}
+.support-complete-logo{position:absolute;inset:20px;width:48px;height:48px;object-fit:contain;opacity:0;transform:scale(.55);animation:fuel-mark-reveal .45s ease-out 1s forwards}
+.support-check-circle{animation:support-circle .65s ease-out .1s forwards,fuel-circle-soften .4s ease-out 1.05s forwards}
+.support-check-mark{animation:support-tick .38s ease-out .55s forwards,fuel-tick-fade .25s ease-out 1.05s forwards}
+@keyframes fuel-mark-reveal{to{opacity:1;transform:scale(1)}}
+@keyframes fuel-circle-soften{to{stroke:#148346;fill:#e5f7eb;stroke-width:2}}
+@keyframes fuel-tick-fade{to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.support-complete-logo{animation:none;opacity:1;transform:none}.support-check-mark{opacity:1}}

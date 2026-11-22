@@ -82,7 +82,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       if (result.paid === true && result.success === true && result.status === "captured") {
         setPhase("paid"); setPaidAt(new Date()); pending.current = null;
         
-        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Your coffee purchase is confirmed. Thank you for fueling KITTY CORP." : "Payment received. Please keep your payment reference.");
+        setMessage(testMode ? "Test payment complete. No real money was charged." : purpose === "donation" ? "Your purchase is confirmed. Thank you for fueling our engineers at KITTY CORP. We’ll email you updates soon." : "Payment received. Please keep your payment reference.");
       } else if (result.paid === false && result.status === "authorized") {
         setPhase("pending");
         setMessage("Your payment is authorized and awaiting capture. Please don’t pay again. You can check its status below.");
@@ -104,7 +104,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760">',
       '<rect width="1000" height="760" rx="36" fill="#f7f8f5"/><rect x="40" y="40" width="920" height="680" rx="28" fill="#fff" stroke="#e3e8e2"/>',
       '<circle cx="500" cy="155" r="68" fill="#e6f7eb"/><path d="M466 156l23 23 48-53" fill="none" stroke="#18864b" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>',
-      '<text x="500" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">' + (testMode ? 'Test payment complete' : 'Coffee purchase confirmed') + '</text>',
+      '<text x="500" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#17251b">' + (testMode ? 'Test payment complete' : 'Fuel Us purchase confirmed') + '</text>',
       '<text x="500" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#59665c">' + escapeXml(donor) + '</text>',
       '<text x="500" y="355" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#59665c">' + escapeXml(email) + '</text>',
       '<text x="500" y="425" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="700" fill="#17251b">' + escapeXml(formattedAmount) + '</text>',
@@ -122,6 +122,19 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     link.download = "kitty-corp-coffee-" + (paymentId || "receipt") + ".svg";
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function downloadFuelPerks() {
+    const escapeXml = (value:string) => value.replace(/[&<>"']/g, character => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[character] || character));
+    const name = escapeXml(supporterName.trim() || "KITTY CORP supporter");
+    const note = escapeXml(supporterMessage.trim() || "Fueling ideas into reality.");
+    const badge = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101820"/><stop offset="1" stop-color="#173f2a"/></linearGradient></defs><rect width="1200" height="700" rx="56" fill="url(#g)"/><circle cx="950" cy="130" r="240" fill="#23a45b" opacity=".12"/><text x="80" y="110" fill="#91d5a8" font-family="Arial,sans-serif" font-size="28" letter-spacing="8">KITTY CORP · FUEL US</text><text x="80" y="285" fill="#fff" font-family="Arial,sans-serif" font-size="82" font-weight="700">Thank you,</text><text x="80" y="390" fill="#fff" font-family="Arial,sans-serif" font-size="68">${name}</text><text x="80" y="480" fill="#b9e8c8" font-family="Arial,sans-serif" font-size="36">${note}</text><text x="80" y="610" fill="#91d5a8" font-family="Arial,sans-serif" font-size="24">A LITTLE FUEL. A LOT OF CURIOSITY. ☕</text></svg>`;
+    const mobile = `<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="2560" viewBox="0 0 1440 2560"><defs><linearGradient id="w" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070b12"/><stop offset=".55" stop-color="#102b20"/><stop offset="1" stop-color="#071018"/></linearGradient><radialGradient id="r"><stop stop-color="#2ba45b" stop-opacity=".4"/><stop offset="1" stop-color="#2ba45b" stop-opacity="0"/></radialGradient></defs><rect width="1440" height="2560" fill="url(#w)"/><circle cx="1200" cy="400" r="850" fill="url(#r)"/><text x="110" y="250" fill="#9bd7ad" font-family="Arial,sans-serif" font-size="30" letter-spacing="8">KITTY CORP</text><text x="110" y="1050" fill="#fff" font-family="Arial,sans-serif" font-size="100" font-weight="700">Beyond</text><text x="110" y="1170" fill="#fff" font-family="Arial,sans-serif" font-size="100" font-weight="700">Intelligence.</text><text x="110" y="1350" fill="#b8d9c4" font-family="Arial,sans-serif" font-size="46">For a better &amp; safer future.</text><text x="110" y="2240" fill="#9bd7ad" font-family="Arial,sans-serif" font-size="34">THANK YOU, ${name.toUpperCase()}</text><text x="110" y="2320" fill="#b8d9c4" font-family="Arial,sans-serif" font-size="28">${note}</text></svg>`;
+    const desktop = `<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440"><defs><linearGradient id="w" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070b12"/><stop offset=".55" stop-color="#102b20"/><stop offset="1" stop-color="#071018"/></linearGradient><radialGradient id="r"><stop stop-color="#2ba45b" stop-opacity=".4"/><stop offset="1" stop-color="#2ba45b" stop-opacity="0"/></radialGradient></defs><rect width="2560" height="1440" fill="url(#w)"/><circle cx="2200" cy="350" r="1000" fill="url(#r)"/><text x="180" y="180" fill="#9bd7ad" font-family="Arial,sans-serif" font-size="34" letter-spacing="8">KITTY CORP</text><text x="180" y="600" fill="#fff" font-family="Arial,sans-serif" font-size="150" font-weight="700">Beyond Intelligence.</text><text x="180" y="780" fill="#b8d9c4" font-family="Arial,sans-serif" font-size="66">For a better &amp; safer future.</text><text x="180" y="1260" fill="#9bd7ad" font-family="Arial,sans-serif" font-size="40">THANK YOU, ${name.toUpperCase()} · ☕</text><text x="180" y="1340" fill="#b8d9c4" font-family="Arial,sans-serif" font-size="34">${note}</text></svg>`;
+    for (const [file,content] of [["kitty-corp-supporter-badge.svg",badge],["kitty-corp-wallpaper-mobile.svg",mobile],["kitty-corp-wallpaper-desktop.svg",desktop]]) {
+      const url=URL.createObjectURL(new Blob([content],{type:"image/svg+xml;charset=utf-8"}));
+      const a=document.createElement("a");a.href=url;a.download=file;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    }
   }
 
   async function pay() {
@@ -157,7 +170,7 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       });
       checkout.on("payment.failed", () => {
         // Razorpay keeps the modal open so the visitor can retry there.
-        if (!callbackStarted.current) setError("The payment failed. Try another payment method in checkout, or close it and try again.");
+        if (!callbackStarted.current) setError("Oops — payment failed. Try another payment method in checkout, or close it and try again.");
       });
       setPhase("open"); checkout.open();
     } catch (failure) {
@@ -174,24 +187,26 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
       <div className="support-complete-check" aria-hidden="true"><svg viewBox="0 0 64 64"><circle className="support-check-circle" cx="32" cy="32" r="29"/><path className="support-check-mark" d="M18 33l9 9 20-21"/></svg><img className="support-complete-logo" src="/brand/kitty-corp-logo-transparent.png" alt="" /></div>
       <span className="support-complete-eyebrow">{testMode ? "TEST PAYMENT COMPLETE" : "COFFEE PURCHASE CONFIRMED"}</span>
       <h2>{testMode ? "Test checkout complete." : "Thank you" + (supporterName.trim() ? ", " + supporterName.trim() : "") + "."}</h2>
-      <p>{testMode ? "No real money was charged. This was a test transaction." : "Thank you for fueling KITTY CORP. Your purchase is confirmed and the details below are yours to save."}</p>
+      <p>{testMode ? "No real money was charged. This was a test transaction." : "Thank you for fueling our engineers at KITTY CORP. Your purchase is confirmed. We’ll email you updates soon."}</p>
       <p className="support-complete-contact"><strong>{supporterName.trim()}</strong><br/>{supporterEmail.trim()}</p>
       {supporterMessage.trim() && <p className="support-complete-message">{supporterMessage.trim()}</p> }
       <div className="support-complete-amount"><span>{testMode ? "Test amount" : "Purchase amount"}</span><strong>{formattedAmount}</strong></div>
       <div className="support-complete-reference"><span>Payment reference</span><code>{paymentId}</code></div>
-      <button type="button" className="button button-gold checkout-button" onClick={downloadSupportReceipt}><Download size={17}/> Download confirmation</button>
+      <button type="button" className="button button-gold checkout-button" onClick={downloadSupportReceipt}><Download size={17}/> Download payment confirmation</button>
+      {Number(donation)>=49 && <button type="button" className="button button-outline checkout-button" onClick={downloadFuelPerks}><Download size={17}/> Download supporter badge &amp; wallpapers</button>}
+      {Number(donation)>=5000 && <a className="button button-outline checkout-button" href="/contact">Talk with our team</a>
       <a className="support-complete-home" href="/">Back to KITTY CORP</a>
       <p className="support-complete-note">{testMode ? "Test confirmation only · No real contribution received." : "This downloadable payment confirmation is for your records; it is not an invoice."}</p>
     </div> : <>
     {purpose !== "donation" && !quote?.id && phase === "idle" && <CustomerSignIn disabled={busy} /> }
     <div className="checkout-card-top"><CreditCard size={22} aria-hidden="true"/><span className="checkout-mode">{testMode ? "TEST MODE" : "SECURE CHECKOUT"}</span></div>
     <h2 id="checkout-title">{purpose === "donation" ? "Buy us a coffee." : purpose === "project" ? "Your project payment." : testMode ? "Try the checkout." : "Complete your payment."}</h2>
-    <p>{testMode ? "This checkout is in test mode. No real money changes hands." : purpose === "donation" ? "This is a separate coffee purchase. Enter your details, choose an amount, and complete secure checkout." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
+    <p>{testMode ? "This checkout is in test mode. No real money changes hands." : purpose === "donation" ? "Fuel our engineers. ₹49–₹5,000 includes a custom thank-you message, supporter badge and wallpapers. ₹5,000–₹9,999 includes all of that plus a conversation with our team." : "Review the amount, then continue to Razorpay to choose your payment method."}</p>
     {purpose === "project" && !quote && <div className="checkout-field"><label htmlFor="project-reference">Project or invoice reference{testMode ? " (optional in test mode)" : ""}</label><input id="project-reference" value={reference} maxLength={80} placeholder="e.g. KITTY-2026-01" onChange={event => setReference(event.target.value)} disabled={busy || phase !== "idle"}/><span>Use the reference provided by the KITTY team.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-name">Your name <span aria-hidden="true">*</span></label><input id="supporter-name" type="text" autoComplete="name" maxLength={80} required value={supporterName} onChange={event => setSupporterName(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Name"/><span>Shown on your confirmation.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-email">Email <span aria-hidden="true">*</span></label><input id="supporter-email" type="email" autoComplete="email" maxLength={254} required value={supporterEmail} onChange={event => setSupporterEmail(event.target.value)} disabled={busy || phase !== "idle"} placeholder="you@example.com"/><span>Required for your purchase confirmation. It is recorded in the payment order notes.</span></div>}
     {purpose === "donation" && <div className="checkout-field"><label htmlFor="supporter-message">Message (optional)</label><textarea id="supporter-message" maxLength={180} rows={3} value={supporterMessage} onChange={event => setSupporterMessage(event.target.value)} disabled={busy || phase !== "idle"} placeholder="Leave a note for KITTY CORP"/><span>{supporterMessage.length}/180</span></div> }
-    {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Coffee purchase amount (INR)</label><div className="fuel-presets">{[49, 99, 199, 499, 999].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="49" max="9999" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>Minimum ₹49 · Maximum ₹9,999.</span></div> }
+    {purpose === "donation" && <div className="checkout-field"><label htmlFor="donation-amount">Coffee purchase amount (INR)</label><div className="fuel-presets">{[49, 500, 1000, 5000, 9999].map(value => <button type="button" key={value} aria-pressed={donation === String(value)} disabled={busy || phase !== "idle"} onClick={() => setDonation(String(value))}>₹{value}</button>)}</div><input id="donation-amount" type="number" inputMode="decimal" min="49" max="9999" step="0.01" value={donation} onChange={event => setDonation(event.target.value)} disabled={busy || phase !== "idle"}/><span>Minimum ₹49 · Maximum ₹9,999.</span></div> }
     <div className="checkout-total"><span>{testMode ? "Test amount" : "Payment amount"}</span><strong>{formattedAmount}</strong></div>
     <LocalPrice amount={Number.isFinite(selectedAmount)?selectedAmount:0}/><p className="checkout-methods">Choose UPI, cards or another available method in checkout.</p>
     {testMode && <p className="checkout-upi-note">UPI QR and payment-app options depend on Razorpay’s account settings and may not appear in test mode.</p>}
