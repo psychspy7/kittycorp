@@ -113,7 +113,8 @@ export function RazorpayCheckout({ keyId, amount, currency = "INR", testMode, se
     const link = document.createElement("a"); link.href = url; link.download = "kitty-corp-support-" + (paymentId || "receipt") + ".svg"; link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-\n  async function pay() {
+
+  async function pay() {
     if (lock.current || pending.current || phase === "paid") return;
     if (!window.Razorpay) { setError("Checkout is still loading. Please wait a moment or refresh this page."); return; }
     if (securityEnabled && !token) { setError("Please complete the security check first."); return; }
