@@ -63,20 +63,20 @@ export function SiteHeader() {
           : "bg-[#FBFAF7] border-[#D9D6CF]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-20 flex items-center justify-between gap-4">
         {/* Brand Identity */}
         <Link
           href="/"
           className="brand flex items-center gap-3 text-[#191B1D] hover:opacity-85 transition-opacity"
           aria-label="KITTY CORP home"
         >
-          <div className="relative w-11 h-11 flex-shrink-0 overflow-visible">
+          <div className="relative w-14 h-14 flex-shrink-0 overflow-visible">
             <Image
               unoptimized
               src="/brand/monogram-small-v2.webp"
               alt="KITTY CORP"
-              width={44}
-              height={44}
+              width={56}
+              height={56}
               className="object-contain w-full h-full"
             />
           </div>
@@ -86,7 +86,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop Primary Navigation */}
-        <nav className="navigation hidden lg:flex items-center gap-8 text-[13px] font-medium tracking-wide">
+        <nav className="navigation hidden xl:flex items-center gap-5 text-[13px] font-medium tracking-wide">
           {navigation.map(([label, href]) => {
             const isCurrent = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
             return (
@@ -113,7 +113,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
             href="/account"
-            className="hidden sm:inline-flex text-[13px] font-medium text-[#62676D] hover:text-[#191B1D] px-3 py-1.5 transition-colors"
+            className="hidden xl:inline-flex text-[13px] font-medium text-[#62676D] hover:text-[#191B1D] px-3 py-1.5 transition-colors"
           >
             {signedIn ? "My account" : "Sign in"}
           </Link>
@@ -122,7 +122,7 @@ export function SiteHeader() {
             href="https://demo.thekittycorp.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[13px] font-medium transition-all shadow-sm"
+            className="hidden xl:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2457D6] hover:bg-[#1D46B0] text-white text-[13px] font-medium transition-all shadow-sm"
             data-conversion="service_cta"
             data-context="navigation"
           >
@@ -133,7 +133,7 @@ export function SiteHeader() {
           {/* Mobile Menu Toggle Button: Active on mobile and tablet (< 1024px) */}
           <button
             type="button"
-            className="menu-toggle kitty-mobile-menu lg:hidden flex items-center justify-center w-12 h-12 min-w-[48px] min-h-[48px] rounded-full border border-[#B8B4AA] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2457D6] focus-visible:ring-offset-2 transition-all shadow-sm relative z-[60] ml-auto flex-shrink-0"
+            className="menu-toggle kitty-mobile-menu xl:hidden flex items-center justify-center w-12 h-12 min-w-[48px] min-h-[48px] rounded-full border border-[#B8B4AA] bg-[#FBFAF7] text-[#191B1D] hover:bg-[#E9E6E0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2457D6] focus-visible:ring-offset-2 transition-all shadow-sm relative z-[60] ml-auto flex-shrink-0"
             aria-label={open ? "Close navigation" : "Open navigation"}
             aria-expanded={open}
             aria-controls="mobile-nav-panel"
