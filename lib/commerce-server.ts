@@ -15,7 +15,7 @@ export async function providerConfiguration(provider:PaymentProvider,reconcileEn
  if(!reconcileEnvironment&&configured.mode==="live"&&!webhook)throw new HttpError("Complete webhook setup before enabling live payments.",503);
  return {provider,clientId,secret,webhook:webhook||"",testMode:configured.mode==="sandbox",currency:provider==="paypal"?"USD" as const:"INR" as const,amount:configured.projectAmountMinor,mode:configured.mode};
 }
-export async function publicPaymentProviders(){const options:PublicProvider[]=[];for(const provider of ["razorpay","paypal"] as const{try{const config=await providerConfiguration(provider);options.push({provider,name:{razorpay:"Razorpay",paypal:"PayPal",cashfree:"Cashfree"}[provider],currency:config.currency,testMode:config.testMode,amount:config.amount,clientId:config.clientId});}catch{/* Only explicitly configured providers appear. */}}return options;}
+export async function publicPaymentProviders(){const options:PublicProvider[]=[];for(const provider of ["razorpay","paypal"] as const){try{const config=await providerConfiguration(provider);options.push({provider,name:{razorpay:"Razorpay",paypal:"PayPal",cashfree:"Cashfree"}[provider],currency:config.currency,testMode:config.testMode,amount:config.amount,clientId:config.clientId});}catch{/* Only explicitly configured providers appear. */}}return options;}
 
 export async function paymentProviderReadiness() {
  const {settings,runtime}=await getCommerce();
