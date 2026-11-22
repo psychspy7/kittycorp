@@ -72,17 +72,11 @@ export async function SiteFooter() {
             <Link href="/urjayaan" className="text-[#D1D5DB] hover:text-white transition-colors">
               KITTY UrjaYaan
             </Link>
-            <Link href="/buddy" className="text-[#D1D5DB] hover:text-white transition-colors">
-              KITTY Buddy
-            </Link>
             <Link href="/projects" className="text-[#D1D5DB] hover:text-white transition-colors">
               All Research Projects
             </Link>
             <Link href="/research" className="text-[#D1D5DB] hover:text-white transition-colors">
               Inside the Lab
-            </Link>
-            <Link href="/memberships" className="text-[#D1D5DB] hover:text-white transition-colors">
-              KITTY ONE Membership
             </Link>
             <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">
               Support Our Research
