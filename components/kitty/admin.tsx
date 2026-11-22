@@ -356,8 +356,8 @@ export function AdminDashboard() {
             <TabsTrigger value="email">Email alerts</TabsTrigger>
             <TabsTrigger value="project-quotes">Project quotes</TabsTrigger>
             <TabsTrigger value="rewards">Reward codes</TabsTrigger>
-            <TabsTrigger value="commerce">Payments & plans</TabsTrigger>
-<TabsTrigger value="products">Products</TabsTrigger>
+            <TabsTrigger value="commerce">Payments</TabsTrigger>
+<TabsTrigger value="products">Initiatives</TabsTrigger>
 <TabsTrigger value="team">Team</TabsTrigger>
 <TabsTrigger value="company">Company & socials</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
