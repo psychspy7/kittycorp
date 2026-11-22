@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Cpu, Compass } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { ProjectEnquiry } from "@/components/kitty/project-enquiry";
@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata = pageMetadata(
   "KITTY CORP | Robotics & Intelligence Projects",
-  "Explore KITTY CORP research in agricultural robotics, UrjaYaan clean-energy intelligence, KITTY AI perception and control, and physical AI concepts.",
+  "Explore KITTY CORP initiatives in agricultural robotics, clean-energy systems and physical-world engineering.",
   "/projects"
 );
 
@@ -30,7 +30,7 @@ export default function ProjectsPage() {
             <span className="font-light text-[#62676D] block sm:inline mt-1 sm:mt-0">for physical environments.</span>
           </h1>
           <p className="text-[18px] sm:text-[21px] leading-[1.65] text-[#292D31] font-light max-w-2xl">
-            We are pursuing systems that operate in real physical conditions, from agricultural soil and decentralized power grids to companion robotics and commercial software platforms that independently fund our laboratory.
+            We are pursuing systems that operate in real physical conditions, from agricultural fields to decentralized clean-energy infrastructure.
           </p>
         </div>
 
@@ -105,78 +105,6 @@ export default function ProjectsPage() {
               <span className="font-mono">DOMAIN: CLEAN ENERGY SYSTEMS</span>
               <Link href="/urjayaan" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">
                 Read UrjaYaan Initiative <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </article>
-
-          {/* Initiative: KITTY AI */}
-          <article className="rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] overflow-hidden shadow-sm flex flex-col justify-between">
-            <div className="p-8 sm:p-10">
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">EMBEDDED INTELLIGENCE</span>
-                <span className="text-[11px] font-mono uppercase tracking-wider px-3 py-1 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">
-                  Stage: Active Development
-                </span>
-              </div>
-              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal text-[#191B1D] mb-2">
-                KITTY AI
-              </h2>
-              <p className="text-sm font-medium text-[#292D31] mb-4">Vision-Actuator Neural Controller Stack</p>
-              <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
-                Our proprietary software stack bridging multi-sensor spatial computer vision directly with real-time robotic actuator controllers, providing physical machines with offline edge inference and context-aware navigation.
-              </p>
-            </div>
-
-            <div className="relative h-72 w-full overflow-hidden bg-[#0A0D12]">
-              <Image
-                src="/photography/kitty-ai-neural-core.webp"
-                alt="KITTY AI neural network architecture visualization"
-                fill
-                className="object-cover object-center opacity-85"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-
-            <div className="p-6 border-t border-[#D9D6CF] bg-[#F5F2EA] flex items-center justify-between text-xs text-[#62676D]">
-              <span className="font-mono">STACK: EMBEDDED EDGE INFERENCE</span>
-              <Link href="/research" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">
-                Read Research Directions <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </article>
-
-          {/* Initiative: KITTY Buddy */}
-          <article className="rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7] overflow-hidden shadow-sm flex flex-col justify-between">
-            <div className="p-8 sm:p-10">
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <span className="font-mono text-xs text-[#73777C] uppercase tracking-widest">HUMAN-MACHINE COLLABORATION</span>
-                <span className="text-[11px] font-mono uppercase tracking-wider px-3 py-1 rounded-full border border-[#D9D6CF] text-[#62676D] bg-[#F5F2EA]">
-                  Stage: Concept Exploration
-                </span>
-              </div>
-              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal text-[#191B1D] mb-2">
-                KITTY Buddy
-              </h2>
-              <p className="text-sm font-medium text-[#292D31] mb-4">Physical Desktop Companion Robot</p>
-              <p className="text-[#62676D] font-light leading-relaxed text-[15px]">
-                An exploration into physical collaboration, testing non-intrusive companion devices that facilitate natural interaction through micro-gestures and physical articulation without surveillance or screen fatigue.
-              </p>
-            </div>
-
-            <div className="relative h-72 w-full overflow-hidden bg-[#E9E6E0]">
-              <Image
-                src="/photography/kitty-buddy-companion.webp"
-                alt="KITTY Buddy physical desktop companion robot prototype"
-                fill
-                className="object-cover object-[80%_center]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-
-            <div className="p-6 border-t border-[#D9D6CF] bg-[#F5F2EA] flex items-center justify-between text-xs text-[#62676D]">
-              <span className="font-mono">DOMAIN: TACTILE INTERACTION</span>
-              <Link href="/buddy" className="text-[#2457D6] font-medium flex items-center gap-1 hover:translate-x-0.5 transition-transform">
-                Read Buddy Concept <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </article>
