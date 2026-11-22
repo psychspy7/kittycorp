@@ -61,7 +61,7 @@ export default function AdminEarlyAccess() {
     try {
       await api(`/api/admin/early-access/${entry.id}`, { method: "DELETE" });
       setEntries((list) => list.filter((e) => e.id !== entry.id));
-      toast.success("Removed from the early list.");
+      toast.success("Removed from the subscriber list.");
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Couldn’t remove.");
     } finally {
@@ -84,7 +84,7 @@ export default function AdminEarlyAccess() {
     );
     const a = document.createElement("a");
     a.href = url;
-    a.download = "kitty-early-access.csv";
+    a.download = "kitty-corp-subscribers.csv";
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -92,7 +92,7 @@ export default function AdminEarlyAccess() {
     <>
       <div className="admin-content-toolbar">
         <div>
-          <h2>Early access</h2>
+          <h2>Newsletter subscribers</h2>
           <p>
             People who asked to follow the work. Only active entries have
             completed email confirmation. Legacy entries are preserved and are
@@ -108,7 +108,7 @@ export default function AdminEarlyAccess() {
           Export {entries.length} loaded entries
         </button>
       </div>
-      {loading && <p className="empty-message">Opening the early list…</p>}
+      {loading && <p className="empty-message">Opening the subscriber list…</p>}
       {error && (
         <p className="form-error" role="alert">
           {error}
@@ -151,7 +151,7 @@ export default function AdminEarlyAccess() {
       )}
       {!loading && !error && !entries.length && (
         <p className="empty-message">
-          Signups will appear here as people join.
+          New newsletter subscribers will appear here after email confirmation.
         </p>
       )}
       {cursor && (
