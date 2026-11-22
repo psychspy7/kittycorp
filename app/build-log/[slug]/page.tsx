@@ -63,7 +63,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
             <ArticleBody body={entry.body} />
             <div className="article-end">
               <p>A note from KITTY CORP. The work is still in progress.</p>
-              <Link href="/#early-access" className="text-link">
+              <Link href="/#newsletter" className="text-link">
                 Follow what comes next
               </Link>
             </div>
