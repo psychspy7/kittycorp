@@ -63,7 +63,9 @@ export function paymentConfiguration() {
   return { keyId, keySecret, amount, currency: "INR" as const, testMode: keyId.startsWith("rzp_test_") };
 }
 
-export function razorpayClient(config = paymentConfiguration()) {
+type RazorpayClientConfig = Omit<ReturnType<typeof paymentConfiguration>, "currency"> & { currency: "INR" | "USD" };
+
+export function razorpayClient(config: RazorpayClientConfig = paymentConfiguration()) {
   const { keyId, keySecret } = config;
   const client = new Razorpay({ key_id: keyId, key_secret: keySecret });
   // The pinned SDK uses Axios internally but does not expose a timeout option.
