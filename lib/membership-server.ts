@@ -229,6 +229,7 @@ export async function createMembership(request: Request, value: unknown) {
         payment_id: null,
       },
       customerIdentity,
+      { email: customerIdentity?.email },
     );
   } catch {}
 
