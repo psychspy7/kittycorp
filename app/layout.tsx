@@ -13,15 +13,15 @@ import "./globals.css";
 import "./final.css";
 import "./warm-architecture.css";
 
-const shareTitle = "KITTY CORP — Beyond Intelligence | For a Better & Safer Future";
+const shareTitle = "KITTY CORP | For a Better Future | Building with Purpose";
 const shareDescription =
-  "KITTY CORP — Beyond Intelligence. Building for a better and safer future through robotics, AI, autonomous systems and digital solutions.";
+  "Building with purpose | Thinking beyond today. Building a safer, brighter future.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(websiteOrigin()),
   title: {
-    default: "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
-    template: "%s",
+    default: "KITTY CORP | For a Better Future | Building with Purpose",
+    template: "%s | KITTY CORP",
   },
   description: shareDescription,
   applicationName: "KITTY CORP",
@@ -35,18 +35,28 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/opengraph-image?v=20261122-beyond-intelligence",
+        url: "https://thekittycorp.com/brand/opengraph-preview.jpg?v=20261123-future",
+        secureUrl: "https://thekittycorp.com/brand/opengraph-preview.jpg?v=20261123-future",
         width: 1200,
         height: 630,
-        alt: "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
+        type: "image/jpeg",
+        alt: "THE KITTY CORP | For a Better Future | Building with purpose, thinking beyond today.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@KittyCorphq",
+    creator: "@KittyCorphq",
     title: shareTitle,
     description: shareDescription,
-    images: ["/opengraph-image?v=20261122-beyond-intelligence"],
+    images: ["https://thekittycorp.com/brand/opengraph-preview.jpg?v=20261123-future"],
+  },
+  other: {
+    "geo.region": "IN",
+    "geo.placename": "India",
+    "geo.position": "28.6139;77.2090",
+    ICBM: "28.6139, 77.2090",
   },
 };
 

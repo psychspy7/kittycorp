@@ -12,11 +12,11 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   return {
     ...pageMetadata(
-      "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
-      "KITTY CORP builds autonomous robotics, intelligent systems and digital solutions for a better and safer future.",
+      "KITTY CORP | For a Better Future | Building with Purpose",
+      "Building with purpose | Thinking beyond today. Building a safer, brighter future.",
       "/"
     ),
-    title: "KITTY CORP — Beyond Intelligence | For a Better & Safer Future",
+    title: "KITTY CORP | For a Better Future | Building with Purpose",
   };
 }
 
@@ -49,7 +49,8 @@ export default async function Home() {
       caption: "KITTY CORP Official Logo",
     },
     description:
-      "KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering.",
+      "Building with purpose | Thinking beyond today. Building a safer, brighter future. KITTY CORP develops Physical-World Intelligence through AI robotics, agricultural systems, clean-energy intelligence and commercial digital engineering.",
+    slogan: "Building with purpose | Thinking beyond today. Building a safer, brighter future.",
     founder: [
       {
         "@type": "Person",
@@ -103,7 +104,7 @@ export default async function Home() {
     },
     inLanguage: "en-US",
     description:
-      "Official website of KITTY CORP • Physical-World Intelligence, Agricultural Robotics & Clean Energy Systems.",
+      "Building with purpose | Thinking beyond today. Building a safer, brighter future.",
   };
 
   return (
