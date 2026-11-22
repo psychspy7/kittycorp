@@ -6,6 +6,7 @@ import Image from "next/image";
 const AdminProjectQuotes = dynamic(() => import("./admin-project-quotes"));
 const AdminRewards = dynamic(() => import("./admin-rewards"));
 const AdminProducts = dynamic(() => import("./admin-products"));
+const AdminEarlyAccess = dynamic(() => import("./admin-early-access"));
 const AdminTestimonials = dynamic(() => import("./admin-testimonials"), { loading: () => <p className="empty-message">Opening reviews…</p> });
 const AdminTeam = dynamic(() => import("./admin-team"));
 const AdminCompany = dynamic(() => import("./admin-company"));
@@ -373,12 +374,13 @@ export function AdminDashboard() {
             <div className="panel-heading"><h2>What would you like to update?</h2><p>Choose a section. Save your changes, then refresh the public page to see them.</p></div>
             <div className="studio-overview-grid">
               <button onClick={() => setTab("pages")}><strong>Page content ↗</strong><span>Edit homepage, Services, Company and Contact copy and search previews.</span></button>
-              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["commerce","Payments","Configure PayPal and Razorpay without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website project briefs and contact messages."],["products","Initiatives","Manage the public details and artwork for AgriYaan, UrjaYaan and research."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
+              {[["health","Health & handover","Check the database, integration setup and daily worker; prepare for a study break."],["commerce","Payments","Configure PayPal and Razorpay without exposing credentials."],["email","Email alerts","Test Gmail delivery and recover queued notifications."],["feedback","Project enquiries & inbox","Website project briefs and contact messages."],["products","Initiatives","Manage the public details and artwork for AgriYaan, UrjaYaan and research."],["early-access","Newsletter subscribers","View confirmed newsletter signups, dates, status and export subscriber details."],["team","Team profiles","Add photographs, roles and social links. The homepage shows Virat Anand; /team shows the full published team."],["company","Company & socials","Update official social links, the team introduction and company story."],["reviews","Reviews & testimonials","Add genuine quotes with attribution, a source link and permission to publish. Drafts stay private."],["journal","Build log & updates","Publish development updates or full articles. Drafts stay private."],].map(([value,title,description])=><button key={value} onClick={()=>setTab(value)}><strong>{title} ↗</strong><span>{description}</span></button>)}
             </div>
             <p className="studio-publishing-note">Icons and photographs are uploaded independently of APK files. <a href="/" target="_blank" rel="noreferrer">Preview homepage</a> · <a href="/projects" target="_blank" rel="noreferrer">Preview projects</a> · <a href="/team" target="_blank" rel="noreferrer">Preview full team</a></p>
           </TabsContent>
           <TabsContent value="pages" className="admin-panel"><AdminPages /></TabsContent>
           <TabsContent value="products" className="admin-panel"><AdminProducts /></TabsContent>
+          <TabsContent value="early-access" className="admin-panel"><AdminEarlyAccess /></TabsContent>
           <TabsContent value="maintenance" className="admin-panel"><AdminMaintenance /></TabsContent>
 <TabsContent value="team" className="admin-panel"><AdminTeam /></TabsContent>
 <TabsContent value="company" className="admin-panel"><AdminCompany /></TabsContent>
