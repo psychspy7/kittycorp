@@ -246,3 +246,24 @@ html[data-theme="dark"] .local-price, html[data-theme="dark"] .local-price span 
 /* Contribution checkout amount visibility in both themes. */
 .checkout-total>strong{font-size:clamp(28px,4vw,36px);font-weight:600;letter-spacing:-.8px;color:#191b1d}.checkout-field input[type=number]{color:#191b1d;background:#fffefa;border-color:#b8b6ad;font-weight:500}.checkout-field input[type=number]:focus{outline:2px solid #2457d6;outline-offset:2px}.donation-presets button{background:#252720;color:#fffefa;border:1px solid #252720}.donation-presets button[aria-pressed=true]{background:#2457d6;border-color:#2457d6;color:#fff}.donation-presets button:focus-visible{outline:2px solid #2457d6;outline-offset:2px}
 html[data-theme=dark] .checkout-total>strong{color:#f4f5ff}html[data-theme=dark] .checkout-field input[type=number]{background:#0d1422;color:#f4f5ff;border-color:#46536b}html[data-theme=dark] .donation-presets button{background:#1b2538;color:#f4f5ff;border-color:#46536b}html[data-theme=dark] .donation-presets button[aria-pressed=true]{background:#2457d6;border-color:#69dcf2;color:#fff}
+
+/* Donation success: clear, celebratory, and printable/downloadable. */
+.support-complete{padding:18px 2px 4px;text-align:center;animation:support-enter .45s ease-out both}
+.support-complete-check{width:88px;height:88px;margin:8px auto 24px}
+.support-complete-check svg{width:100%;height:100%;overflow:visible}
+.support-check-circle{fill:#e8f7ec;stroke:#21a45b;stroke-width:3;stroke-dasharray:183;stroke-dashoffset:183;animation:support-circle .65s ease-out .1s forwards}
+.support-check-mark{fill:none;stroke:#168747;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:support-tick .38s ease-out .55s forwards}
+.support-complete-eyebrow{display:block;font-size:10px;letter-spacing:1.5px;font-weight:600;color:#18864b;margin-bottom:12px}
+.support-complete h2{font-size:clamp(27px,3vw,36px);line-height:1.2;letter-spacing:-.8px;margin:0 0 12px;color:#17251b}
+.support-complete>p:not(.support-complete-note){font-size:14px;line-height:1.7;color:#59665c;max-width:430px;margin:0 auto 22px}
+.support-complete-amount{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-block:1px solid #e3e8e2;margin:24px 0 16px;text-align:left}
+.support-complete-amount span,.support-complete-reference span{font-size:13px;color:#66716a}
+.support-complete-amount strong{font-size:28px;color:#17251b}
+.support-complete-reference{text-align:left;margin:0 0 22px}
+.support-complete-reference code{display:block;overflow-wrap:anywhere;margin-top:7px;font-size:12px;color:#25372b}
+.support-complete-home{display:inline-block;margin-top:18px;font-size:13px;color:#2457d6;text-decoration:underline;text-underline-offset:3px}
+.support-complete-note{font-size:10px!important;color:#8b948d!important;line-height:1.6!important;margin-top:18px!important}
+@keyframes support-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes support-circle{to{stroke-dashoffset:0}}
+@keyframes support-tick{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.support-complete,.support-check-circle,.support-check-mark{animation:none;stroke-dashoffset:0}}
