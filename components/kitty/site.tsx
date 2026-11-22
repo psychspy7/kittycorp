@@ -66,25 +66,7 @@ export function SiteHeader() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-20 flex items-center justify-between gap-4">
         {/* Brand Identity */}
-        <Link
-          href="/"
-          className="brand flex items-center gap-3 text-[#191B1D] hover:opacity-85 transition-opacity"
-          aria-label="KITTY CORP home"
-        >
-          <div className="relative w-14 h-14 flex-shrink-0 overflow-visible">
-            <Image
-              unoptimized
-              src="/brand/monogram-v2.webp"
-              alt="KITTY CORP"
-              width={56}
-              height={56}
-              className="object-contain w-full h-full"
-            />
-          </div>
-          <span className="font-[family-name:var(--font-display)] tracking-[0.22em] font-normal uppercase text-[15px] sm:text-[16px] text-[#191B1D]">
-            KITTY CORP
-          </span>
-        </Link>
+        <Link href="/" className="brand flex items-center hover:opacity-85 transition-opacity" aria-label="KITTY CORP home"><Image unoptimized src="/brand/kitty-corp-logo-transparent.png" alt="KITTY CORP" width={440} height={112} className="object-contain w-[min(42vw,220px)] sm:w-[220px] h-12 sm:h-14"/></Link>
 
         {/* Desktop Primary Navigation */}
         <nav className="navigation hidden xl:flex items-center gap-5 text-[13px] font-medium tracking-wide">

@@ -31,7 +31,7 @@ export async function SiteFooter() {
           
           {/* Identity & Newsletter Column */}
           <div className="lg:col-span-2 pr-0 lg:pr-8">
-            <Link className="brand inline-flex items-center gap-3 text-white mb-4" href="/">
+            <Link className="brand inline-flex items-center text-white mb-4" href="/">
               <Image
                 unoptimized
                 src="/brand/monogram-small-v2.webp"
@@ -78,9 +78,8 @@ export async function SiteFooter() {
             <Link href="/research" className="text-[#D1D5DB] hover:text-white transition-colors">
               Inside the Lab
             </Link>
-            <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">
-              Fuel Us ☕
-            </Link>
+            <Link href="/support" className="text-[#60A5FA] font-medium hover:underline transition-colors">Buy Us a Coffee ☕</Link>
+            <Link href="/memberships" className="text-[#D1D5DB] font-medium hover:text-white transition-colors">KITTY ONE Membership · $249/year</Link>
             <p className="max-w-[17rem] text-xs leading-relaxed text-[#D1D5DB]">
               Buy KITTY CORP a coffee through a separate purchase. KITTY ONE membership and project payments are separate.
             </p>
@@ -168,9 +167,7 @@ export async function SiteFooter() {
               Inquiries
             </Link>
             <span>·</span>
-            <Link href="/support" className="text-[#60A5FA] hover:underline">
-              Fuel Us
-            </Link>
+            <Link href="/support" className="text-[#60A5FA] hover:underline">Buy Us a Coffee</Link><span>·</span><Link href="/memberships" className="text-[#D1D5DB] hover:text-white">KITTY ONE</Link>
           </div>
         </div>
 

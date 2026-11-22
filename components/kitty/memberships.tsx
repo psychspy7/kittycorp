@@ -163,6 +163,8 @@ export function Memberships({ catalog, securityEnabled }: { catalog: MembershipC
     try {
       const order = await request<Order>("order", { id, planId, turnstileToken: token });
       if (generation !== epoch.current) return;
+      // Payment-critical guard: KITTY ONE is ₹20,900, never a ₹99 checkout.
+      if (order.currency !== "INR" || order.amount !== 2_090_000) throw new Error("Checkout amount verification failed. KITTY ONE is ₹20,900/year; the payment service returned " + new Intl.NumberFormat("en-IN", { style: "currency", currency: order.currency || "INR" }).format((Number(order.amount) || 0) / 100) + ". Payment has been blocked. Please contact KITTY CORP.");
       setPending({ id: order.intentId, uid });
       const checkout = new window.Razorpay({
         key: order.keyId,

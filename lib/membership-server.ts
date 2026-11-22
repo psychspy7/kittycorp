@@ -34,12 +34,14 @@ export function customerToken(request:Request) {
 }
 async function provider() {
  const p=providerSchema.parse(await commerce("commerce/provider"));
- const config={keyId:p.keyId,keySecret:p.keySecret,amount:100,currency:"INR" as const,testMode:p.testMode};
+ const config={keyId:p.keyId,keySecret:p.keySecret,amount:2_090_000,currency:"INR" as const,testMode:p.testMode};
  return {p,client:razorpayClient(config)};
 }
 export async function createMembership(request:Request,value:unknown) {
  const input=z.object({id:uuid,planId:z.string().regex(/^[a-zA-Z0-9-]{1,80}$/)}).strict().parse(value),token=customerToken(request);
  const intent=await commerce<Intent>("commerce/intents","POST",input,token);
+ // Never open Razorpay if the commerce backend returns the stale ₹99 amount.
+ if(intent.terms?.amount!==2_090_000)throw new HttpError("KITTY ONE checkout is misconfigured. Expected ₹20,900/year, but the payment service returned ₹"+(Number(intent.terms?.amount||0)/100).toLocaleString("en-IN")+". Checkout is blocked to prevent an incorrect charge. Please contact KITTY CORP.",409);
  const {p,client}=await provider();
  if(!p.enabled)throw new HttpError("Membership checkout is paused.",503);
  if(intent.provider_key_id!==p.keyId)throw new HttpError("This checkout uses an older payment configuration. Please contact KITTY CORP.",409);
