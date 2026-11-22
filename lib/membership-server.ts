@@ -56,7 +56,7 @@ export async function createMembership(request:Request,value:unknown) {
 }
 type Payment={id:string;order_id?:string;amount:number|string;currency:string;status:string;captured:boolean;amount_refunded?:number|string};
 function paymentMatches(payment:Payment,orderId:string,amount:number) {
- if(payment.order_id!==orderId||Number(payment.amount)!==amount||payment.currency!=="INR"||!/^pay_[A-Za-z0-9]{6,64}$/.test(payment.id))throw new HttpError("Payment does not match this membership order.",409);
+ if(payment.order_id!==orderId||Number(payment.amount)!==amount||payment.currency!=="USD"||!/^pay_[A-Za-z0-9]{6,64}$/.test(payment.id))throw new HttpError("Payment does not match this membership order.",409);
 }
 async function record(payment:Payment,eventId?:string) {
  return commerce("commerce/reconcile","POST",{orderId:payment.order_id,paymentId:payment.id,amount:Number(payment.amount),currency:payment.currency,captured:payment.captured===true,refunded:Number(payment.amount_refunded||0),status:payment.status,...(eventId?{eventId}:{})});
