@@ -143,7 +143,7 @@ export default async function CompanyPage() {
               "KITTY CORP was founded as a startup on 26 January 2026 by Virat Anand alongside co-founders Sarthak and Aman. Following its founding, the team began researching and building toward its vision of bringing intelligent computing into the physical world, with initiatives across agricultural robotics, solar telemetry, and high-performance commercial software."}
           </p>
           <p className="text-[#62676D] text-[16px] leading-[1.75] font-light max-w-3xl mb-8">
-            KITTY CORP was founded on 26 January 2026.
+            KITTY CORP began its journey on 26 January 2026, starting with research, exploration, and the development of ideas that would shape our vision for technology, intelligence, and innovation.
           </p>
 
           <Link
