@@ -3,80 +3,18 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { pageMetadata } from "@/lib/site-metadata";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
-
 export const revalidate = 86400;
-
-export const metadata = pageMetadata(
-  "KITTY CORP | Terms & Conditions",
-  "Terms for using KITTY CORP websites, digital services, software, subscriptions, project engagements, payments and customer responsibilities.",
-  "/terms"
-);
-
-const sections = [
-  {
-    title: "1. About KITTY CORP",
-    body: <>KITTY CORP is an independent technology venture developing software, AI tools and research projects, and providing digital services. These terms apply to this website and purchases or services offered through it. Contact <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a> with questions. A separate written agreement or product terms may apply to a specific engagement; where they conflict, the specific agreement governs that engagement.</>,
-  },
-  {
-    title: "2. Website use",
-    body: <>Use the website lawfully and do not interfere with its operation, attempt unauthorized access, submit malicious code, abuse forms, impersonate others, or upload content you do not have permission to share. We may restrict access where reasonably necessary to protect the site, users or our systems. Website content is provided for general information and may change as products and projects evolve.</>,
-  },
-  {
-    title: "3. Enquiries, quotes and project agreements",
-    body: <>Initial enquiries, project briefs and appointment requests are free and do not commit either party. A request is not a confirmed appointment until we confirm it in writing. Before paid work begins, we will confirm the scope, deliverables, timeline, price and currency, payment schedule, revision limits, handover and any hosting, domain, third-party or recurring charges in a written quote or agreement. We may decline work that is outside our capacity or expertise.</>,
-  },
-  {
-    title: "4. Payments and delivery",
-    body: <>Pay only through the payment instructions or checkout associated with your accepted quote or purchase. Payment-provider fees, taxes, currency conversion and bank charges will be disclosed where applicable. Delivery milestones and acceptance criteria are defined in the quote. You are responsible for providing accurate information, timely feedback and lawful materials needed for the work. Delays caused by missing inputs, third-party services or events outside our reasonable control may affect the agreed timeline.</>,
-  },
-  {
-    title: "5. Changes, revisions and intellectual property",
-    body: <>Changes outside the agreed scope may require a revised quote and timeline. Unless the agreement says otherwise, bespoke deliverables created specifically for you transfer to you after full payment. Our pre-existing tools, reusable components, know-how, libraries and third-party or open-source materials remain subject to their respective rights and licences. We will identify any material third-party dependencies or usage costs included in your scope.</>,
-  },
-  {
-    title: "6. Products, subscriptions and digital access",
-    body: <>Product features, availability, limits, price, access period and renewal or cancellation conditions are shown at the relevant checkout or product page. Access may depend on a compatible device, account, internet connection or third-party service. We do not promise that a product in development will be released on a particular date. Subscription renewal is not assumed; any recurring charge and how to cancel it will be disclosed before purchase.</>,
-  },
-  {
-    title: "7. AI and experimental technology",
-    body: <>AI outputs can be inaccurate, incomplete or unsuitable. Review outputs before relying on them, especially for financial, legal, medical, safety-critical or consequential decisions. Research prototypes and demonstrations may be unstable, incomplete or change without notice. They are not a substitute for qualified professional advice or a certified safety system.</>,
-  },
-  {
-    title: "8. Third-party services",
-    body: <>Our services may depend on hosting, payment, analytics, AI, communications or other third-party providers. Their services are subject to their own terms and availability. Unless expressly included in your quote, third-party subscriptions, usage charges, domains and hosting are your responsibility.</>,
-  },
-  {
-    title: "9. Refunds, cancellation and liability",
-    body: <>The specific Refund &amp; Cancellation Policy at <Link href="/refunds" className="text-[#2457D6] underline">/refunds</Link> forms part of these terms. Nothing here limits rights that cannot legally be excluded. To the extent permitted by law, KITTY CORP is not liable for indirect or consequential losses, loss of profits, data or business arising from use of the website or services. Any liability for a paid engagement is subject to its written agreement and applicable law.</>,
-  },
-  {
-    title: "10. Privacy, updates and governing law",
-    body: <>Our <Link href="/privacy" className="text-[#2457D6] underline">Privacy Policy</Link> explains how information is handled. We may update these terms by publishing a revised version with a new effective date; changes do not silently alter an already accepted project agreement. These terms are governed by the laws of India, subject to mandatory consumer protections and the jurisdiction of competent courts.</>,
-  },
-];
-
-export default function TermsPage() {
-  return (
-    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
-      <SiteHeader />
-      <main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <div className="mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Legal</span>
-          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal mb-4">Terms &amp; Conditions</h1>
-          <p className="text-[17px] text-[#62676D] font-light">Clear terms for website use, project work, software, subscriptions and purchases.</p>
-          <p className="mt-4 text-sm text-[#62676D]">Effective date: 23 November 2026</p>
-        </div>
-        <div className="space-y-6 text-[16px] leading-[1.75] text-[#292D31] font-light">
-          {sections.map((section) => (
-            <section key={section.title} className="p-7 sm:p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-              <h2 className="text-xl font-medium text-[#191B1D] mb-3">{section.title}</h2>
-              <p>{section.body}</p>
-            </section>
-          ))}
-          <p className="text-sm text-[#62676D]">Questions about these terms? Contact <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a>.</p>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}
+export const metadata = pageMetadata("KITTY CORP | Terms & Conditions", "Terms for KITTY CORP website use, digital services, memberships, purchases, payments, and customer responsibilities.", "/terms");
+const box = "p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]";
+export default function TermsPage() { return <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]"><SiteHeader/><main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20"><div className="mb-12"><span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Legal</span><h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal mb-4">Terms &amp; Conditions</h1><p className="text-[17px] text-[#62676D] font-light">Terms governing access to our website and the purchase or use of KITTY CORP services and products.</p><p className="text-sm text-[#62676D] mt-3">Effective date: 23 November 2026</p></div><div className="space-y-6 text-[16px] leading-[1.75] text-[#292D31] font-light">
+<section className={box}><h2 className="text-xl font-medium mb-3">1. About KITTY CORP</h2><p>KITTY CORP is an independent technology venture working on physical-world intelligence, AI, robotics, agricultural systems, clean-energy technology, and commercial digital solutions. These terms apply to this website and purchases or services offered through it. Specific written agreements may add to or override these terms for a particular project.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">2. Website use</h2><p>You agree to use the website lawfully and not attempt to disrupt, probe, misuse, or gain unauthorized access to our systems, accounts, services, or data. Website content is provided for general information and may change without notice. We may restrict access to protect the site or its users.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">3. Enquiries and project engagements</h2><p>Submitting a contact form, brief, or appointment request is not an acceptance of work or a binding booking. Consultations and initial scoping are complimentary unless we clearly state otherwise. A project begins only after the scope, deliverables, fees, schedule, payment milestones, and relevant terms are agreed in writing by both parties.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">4. Payments, taxes and third-party costs</h2><p>Prices, currency, applicable taxes, payment schedule, and any third-party costs will be communicated before checkout or written project acceptance. Payments are handled by the payment provider shown at checkout. Customers are responsible for providing accurate payment and billing information. Hosting, domains, APIs, licenses, and other external services are included only when expressly stated in the agreed scope.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">5. Delivery, revisions and ownership</h2><p>Project timelines depend on timely customer feedback, access, materials, and approvals. Revision limits and handover requirements are defined in the project agreement. Unless otherwise agreed in writing, bespoke deliverable ownership transfers after full payment; pre-existing tools, reusable components, third-party software, and their licenses remain subject to their respective rights and terms.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">6. KITTY ONE membership</h2><p>Membership benefits, duration, pricing, activation, and any physical items are described at purchase. Membership is not equity, an investment, a security, or a promise of financial return. Cancellation and refund requests are governed by our <Link className="text-[#2457D6] underline" href="/refunds">Refund &amp; Cancellation Policy</Link> and any terms presented at checkout.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">7. Fuel Us purchase</h2><p>Fuel Us is a separate purchase, not a donation, membership, investment, project payment, or promise of a product or service. The amount and transaction details are shown before payment. Refunds are handled under the published refund policy, including duplicate or erroneous transactions.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">8. Availability and disclaimers</h2><p>We work to keep the website and services available and accurate, but do not guarantee uninterrupted access, error-free operation, or that information is complete or current. Experimental research, prototypes, and AI-generated outputs may be incomplete or inaccurate and should not be relied upon as professional, safety-critical, medical, legal, or financial advice. Any warranties for paid deliverables are stated in the applicable written agreement.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">9. Liability</h2><p>To the extent permitted by applicable law, KITTY CORP is not liable for indirect, incidental, special, or consequential losses arising from use of the website or services. Nothing in these terms excludes liability that cannot legally be excluded or limits statutory consumer rights.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">10. Governing law and contact</h2><p>These terms are governed by the laws of India, subject to applicable consumer protections and mandatory law. Contact us at <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a>. Read the <Link className="text-[#2457D6] underline" href="/privacy">Privacy Policy</Link> and <Link className="text-[#2457D6] underline" href="/refunds">Refund &amp; Cancellation Policy</Link> too.</p></section>
+</div></main><SiteFooter/></div>;}
