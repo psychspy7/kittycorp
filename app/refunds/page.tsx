@@ -3,72 +3,15 @@ import { SiteHeader } from "@/components/kitty/site";
 import { SiteFooter } from "@/components/kitty/site-footer";
 import { CONTACT_EMAIL } from "@/lib/company-contact";
 import { pageMetadata } from "@/lib/site-metadata";
-
 export const revalidate = 86400;
-
-export const metadata = pageMetadata(
-  "KITTY CORP | Refunds & Cancellation Policy",
-  "Clear refund and cancellation rules for KITTY CORP project work, subscriptions, digital access, memberships and purchases.",
-  "/refunds"
-);
-
-const sections = [
-  {
-    title: "1. How to request a refund or cancellation",
-    body: <>Email <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a> from the email used for the purchase. Include the order, payment or project reference, date, amount and a short explanation. Never send card numbers, CVVs or banking passwords. We will acknowledge the request and explain the review or next step.</>,
-  },
-  {
-    title: "2. Project work and deposits",
-    body: <>Enquiries, planning calls and project briefs are free. Before paid work starts, the quote states the scope and payment milestones. If you cancel before work begins, payments for work not started are refundable. After work has started, we may retain only the reasonable value of work completed and unavoidable third-party costs already committed, as permitted by law and the agreed quote. We will provide an explanation and refund any unused balance. A milestone balance is due only when the agreed milestone is reached.</>,
-  },
-  {
-    title: "3. Digital products, access and memberships",
-    body: <>If a digital product or membership has not been activated or access provided, contact us promptly to request cancellation and a refund review. Once digital access or deliverables have been provided, refunds are generally not available for change of mind or use, except where required by law or where the product is materially unavailable, defective, or the purchase was duplicated or unauthorized. Any renewal, cancellation deadline and recurring billing terms are shown before purchase; cancellation stops future renewal where applicable and does not automatically refund a completed billing period.</>,
-  },
-  {
-    title: "4. KITTY ONE and other bundled services",
-    body: <>Bundled offers may include website work, software access, updates or maintenance. The accepted offer or checkout defines which components have started or been delivered. If a bundle is cancelled, we assess delivered components and committed costs under the accepted terms and applicable law; any refundable unused portion will be calculated and explained. Maintenance does not include new features, third-party fees or work outside the written scope unless stated.</>,
-  },
-  {
-    title: "5. Buy Us a Coffee / Fuel Us purchases",
-    body: <>Fuel Us is a voluntary coffee purchase, not a donation, investment, membership or promise of a product. If you made a duplicate, incorrect or accidental payment, contact us as soon as possible. We review the transaction and can refund mistaken or duplicate payments where appropriate and legally permitted. Because the purchase is immediately completed and has no ongoing service, change-of-mind refunds are not guaranteed.</>,
-  },
-  {
-    title: "6. Failed, duplicate or unauthorized payments",
-    body: <>If a payment failed but money was debited, or you see a duplicate or unauthorized charge, send the payment reference and transaction date. We will check provider records and assist with reversal or refund where applicable. Do not share sensitive payment credentials. For an unauthorized payment, also contact your bank or payment provider promptly.</>,
-  },
-  {
-    title: "7. Refund processing",
-    body: <>Approved refunds are normally sent through the original payment method. The payment provider and bank control the final crediting time; it may take several business days after the refund is issued. Currency conversion, taxes or provider charges may affect the amount where permitted by law. We will confirm the refund amount and status by email.</>,
-  },
-  {
-    title: "8. Your statutory rights",
-    body: <>This policy does not remove or restrict any rights you have under applicable consumer law. If a term here conflicts with a mandatory legal right, that right takes precedence.</>,
-  },
-];
-
-export default function RefundsPage() {
-  return (
-    <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]">
-      <SiteHeader />
-      <main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <div className="mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Customer Policy</span>
-          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal mb-4">Refunds &amp; Cancellation Policy</h1>
-          <p className="text-[17px] text-[#62676D] font-light">A clear process for project cancellations, digital purchases, memberships and payment issues.</p>
-          <p className="mt-4 text-sm text-[#62676D]">Effective date: 23 November 2026</p>
-        </div>
-        <div className="space-y-6 text-[16px] leading-[1.75] text-[#292D31] font-light">
-          {sections.map((section) => (
-            <section key={section.title} className="p-7 sm:p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-              <h2 className="text-xl font-medium text-[#191B1D] mb-3">{section.title}</h2>
-              <p>{section.body}</p>
-            </section>
-          ))}
-          <p className="text-sm text-[#62676D]">Related: <Link href="/terms" className="text-[#2457D6] underline">Terms &amp; Conditions</Link> · <Link href="/privacy" className="text-[#2457D6] underline">Privacy Policy</Link>.</p>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}
+export const metadata = pageMetadata("KITTY CORP | Refund & Cancellation Policy", "Clear refund, cancellation, and payment-dispute guidance for KITTY CORP digital projects, memberships, and Fuel Us purchases.", "/refunds");
+const box = "p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]";
+export default function RefundsPage() { return <div className="min-h-screen bg-[#F5F2EA] text-[#191B1D]"><SiteHeader/><main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20"><div className="mb-12"><span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Policies</span><h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal mb-4">Refund &amp; Cancellation Policy</h1><p className="text-[17px] text-[#62676D] font-light">The conditions and process for cancelling an order or requesting a refund.</p><p className="text-sm text-[#62676D] mt-3">Effective date: 23 November 2026</p></div><div className="space-y-6 text-[16px] leading-[1.75] text-[#292D31] font-light">
+<section className={box}><h2 className="text-xl font-medium mb-3">How to request a cancellation or refund</h2><p>Contact <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a> from the email address associated with the order. Include the order/payment reference, purchase date, amount, and reason. Never send card details, CVVs, or banking passwords. We will acknowledge your request and may ask for reasonable information to verify the transaction.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">1. Digital projects and custom services</h2><ul className="list-disc pl-6 space-y-2"><li><strong>Before work begins:</strong> cancellation requests are eligible for a full refund of payments received, except any clearly disclosed, non-recoverable third-party charges already authorized by you.</li><li><strong>After work begins:</strong> we calculate the amount due for work completed, accepted milestones, and documented non-recoverable costs under the written project scope. Any unearned balance is refunded.</li><li><strong>Completed milestones or delivered work:</strong> payments allocated to completed, delivered milestones are generally non-refundable, except where the agreement or applicable law provides otherwise.</li><li>Project-specific terms, milestone schedules, and cancellation provisions agreed in writing take precedence where lawful.</li></ul></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">2. KITTY ONE membership</h2><p>Membership cancellation stops future renewal where recurring renewal is offered; it does not automatically reverse a completed payment. If a purchase was accidental, duplicate, or materially mischarged, contact us within 14 days of the transaction. We review requests individually, including whether digital benefits were activated or physical items dispatched. Refunds required by applicable law will be honored.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">3. Fuel Us purchase</h2><p>Fuel Us is a standalone purchase, not a donation or a service subscription. Completed purchases are generally not refundable simply because the purchaser changes their mind. We will review and refund duplicate transactions, payment errors, unauthorized transactions reported promptly, or other cases where a refund is required by law.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">4. Payment errors and duplicate charges</h2><p>If a payment was deducted but the order shows failed, or you were charged more than once, contact us with the payment reference. We will verify the transaction with the payment provider and arrange a refund or correction for confirmed errors.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">5. Refund method and timing</h2><p>Approved refunds are initiated to the original payment method through the payment provider where possible. We aim to initiate approved refunds within 7 business days; the bank or provider may take additional time to reflect the credit. We will share confirmation or a reference when available.</p></section>
+<section className={box}><h2 className="text-xl font-medium mb-3">6. Consumer rights and contact</h2><p>This policy does not limit rights that cannot be waived under applicable law. For questions, email <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a>. See <Link className="text-[#2457D6] underline" href="/terms">Terms &amp; Conditions</Link> and <Link className="text-[#2457D6] underline" href="/privacy">Privacy Policy</Link>.</p></section>
+</div></main><SiteFooter/></div>;}
