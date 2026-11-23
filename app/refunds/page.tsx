@@ -7,10 +7,45 @@ import { pageMetadata } from "@/lib/site-metadata";
 export const revalidate = 86400;
 
 export const metadata = pageMetadata(
-  "KITTY CORP | Refunds & Cancellations",
-  "Refund and cancellation guidance for KITTY CORP digital projects, KITTY ONE memberships, Fuel Us purchases and payment issues.",
+  "KITTY CORP | Refunds & Cancellation Policy",
+  "Clear refund and cancellation rules for KITTY CORP project work, subscriptions, digital access, memberships and purchases.",
   "/refunds"
 );
+
+const sections = [
+  {
+    title: "1. How to request a refund or cancellation",
+    body: <>Email <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a> from the email used for the purchase. Include the order, payment or project reference, date, amount and a short explanation. Never send card numbers, CVVs or banking passwords. We will acknowledge the request and explain the review or next step.</>,
+  },
+  {
+    title: "2. Project work and deposits",
+    body: <>Enquiries, planning calls and project briefs are free. Before paid work starts, the quote states the scope and payment milestones. If you cancel before work begins, payments for work not started are refundable. After work has started, we may retain only the reasonable value of work completed and unavoidable third-party costs already committed, as permitted by law and the agreed quote. We will provide an explanation and refund any unused balance. A milestone balance is due only when the agreed milestone is reached.</>,
+  },
+  {
+    title: "3. Digital products, access and memberships",
+    body: <>If a digital product or membership has not been activated or access provided, contact us promptly to request cancellation and a refund review. Once digital access or deliverables have been provided, refunds are generally not available for change of mind or use, except where required by law or where the product is materially unavailable, defective, or the purchase was duplicated or unauthorized. Any renewal, cancellation deadline and recurring billing terms are shown before purchase; cancellation stops future renewal where applicable and does not automatically refund a completed billing period.</>,
+  },
+  {
+    title: "4. KITTY ONE and other bundled services",
+    body: <>Bundled offers may include website work, software access, updates or maintenance. The accepted offer or checkout defines which components have started or been delivered. If a bundle is cancelled, we assess delivered components and committed costs under the accepted terms and applicable law; any refundable unused portion will be calculated and explained. Maintenance does not include new features, third-party fees or work outside the written scope unless stated.</>,
+  },
+  {
+    title: "5. Buy Us a Coffee / Fuel Us purchases",
+    body: <>Fuel Us is a voluntary coffee purchase, not a donation, investment, membership or promise of a product. If you made a duplicate, incorrect or accidental payment, contact us as soon as possible. We review the transaction and can refund mistaken or duplicate payments where appropriate and legally permitted. Because the purchase is immediately completed and has no ongoing service, change-of-mind refunds are not guaranteed.</>,
+  },
+  {
+    title: "6. Failed, duplicate or unauthorized payments",
+    body: <>If a payment failed but money was debited, or you see a duplicate or unauthorized charge, send the payment reference and transaction date. We will check provider records and assist with reversal or refund where applicable. Do not share sensitive payment credentials. For an unauthorized payment, also contact your bank or payment provider promptly.</>,
+  },
+  {
+    title: "7. Refund processing",
+    body: <>Approved refunds are normally sent through the original payment method. The payment provider and bank control the final crediting time; it may take several business days after the refund is issued. Currency conversion, taxes or provider charges may affect the amount where permitted by law. We will confirm the refund amount and status by email.</>,
+  },
+  {
+    title: "8. Your statutory rights",
+    body: <>This policy does not remove or restrict any rights you have under applicable consumer law. If a term here conflicts with a mandatory legal right, that right takes precedence.</>,
+  },
+];
 
 export default function RefundsPage() {
   return (
@@ -18,54 +53,19 @@ export default function RefundsPage() {
       <SiteHeader />
       <main id="main" className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <div className="mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">
-            Policies
-          </span>
-          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal text-[#191B1D] mb-4">
-            Refunds &amp; Cancellations
-          </h1>
-          <p className="text-[17px] text-[#62676D] font-light">
-            Clear guidelines for digital project payments, revisions, memberships, and Fuel Us purchases.
-          </p>
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#2457D6] font-medium block mb-3">Customer Policy</span>
+          <h1 className="text-[clamp(32px,5vw,56px)] font-[family-name:var(--font-display)] font-normal mb-4">Refunds &amp; Cancellation Policy</h1>
+          <p className="text-[17px] text-[#62676D] font-light">A clear process for project cancellations, digital purchases, memberships and payment issues.</p>
+          <p className="mt-4 text-sm text-[#62676D]">Effective date: 23 November 2026</p>
         </div>
-
-        <div className="space-y-10 text-[16px] leading-[1.75] text-[#292D31] font-light">
-          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Direct Support Channel</h2>
-            <p>
-              For all payment, cancellation, or refund questions, email <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2457D6] underline">{CONTACT_EMAIL}</a> from the email address associated with your order. Please reference your order number or project quote. Never include card details or banking passwords in correspondence.
-            </p>
-          </section>
-
-          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Commissioned Digital Projects</h2>
-            <p>
-              Initial consultations and project scopes are free. If you cancel a commissioned project after work has commenced, we review the milestone deliverables completed and committed third-party server costs. Unused funds from milestone advances are refunded promptly in accordance with the signed agreement.
-            </p>
-          </section>
-
-          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-            <h2 className="text-xl font-medium text-[#191B1D] mb-3">KITTY ONE Membership</h2>
-            <p>
-              If a KITTY ONE membership was purchased mistakenly or duplicate charges occurred, contact our team within 14 days of the transaction. We will verify the charge and process an eligible refund through the payment processor. Fuel Us purchases are separate from memberships; contact us promptly about duplicate or incorrect charges.
-            </p>
-          </section>
-
-          <section className="p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
-            <h2 className="text-xl font-medium text-[#191B1D] mb-3">Refund Processing Timeline</h2>
-            <p className="mb-4">
-              Approved refunds are credited directly back to the original method of payment via Razorpay or Cashfree. Bank clearance typically takes 5 to 7 business days depending on your financial institution.
-            </p>
-            <div className="flex gap-4 pt-2">
-              <Link href="/terms" className="text-xs font-mono text-[#2457D6] hover:underline">
-                Service Terms
-              </Link>
-              <span className="text-xs text-[#D9D6CF]">·</span>
-              <Link href="/privacy" className="text-xs font-mono text-[#2457D6] hover:underline">
-                Privacy Notice
-              </Link>
-            </div>
-          </section>
+        <div className="space-y-6 text-[16px] leading-[1.75] text-[#292D31] font-light">
+          {sections.map((section) => (
+            <section key={section.title} className="p-7 sm:p-8 rounded-2xl border border-[#D9D6CF] bg-[#FBFAF7]">
+              <h2 className="text-xl font-medium text-[#191B1D] mb-3">{section.title}</h2>
+              <p>{section.body}</p>
+            </section>
+          ))}
+          <p className="text-sm text-[#62676D]">Related: <Link href="/terms" className="text-[#2457D6] underline">Terms &amp; Conditions</Link> · <Link href="/privacy" className="text-[#2457D6] underline">Privacy Policy</Link>.</p>
         </div>
       </main>
       <SiteFooter />
